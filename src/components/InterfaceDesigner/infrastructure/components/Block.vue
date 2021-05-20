@@ -43,12 +43,12 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import BlockDTO from '../../domain/model/BlockDTO'
+import BlockDTO from '../../domain/model/BlockDTO.ts'
 import BlockManager from '@/components/InterfaceDesigner/application/service/BlockManager.ts'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
-import BlockRepository from '@/components/InterfaceDesigner/infrastructure/domain/repository/BlockRepository'
+import BlockRepository from '@/components/InterfaceDesigner/infrastructure/domain/repository/BlockRepository.ts'
 
 library.add(faAngleDown)
 

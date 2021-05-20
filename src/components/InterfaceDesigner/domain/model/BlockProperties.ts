@@ -1,5 +1,5 @@
-import { Sticky } from '@/components/InterfaceDesigner/domain/model/Sticky'
-import BlockDTO from '@/components/InterfaceDesigner/domain/model/BlockDTO'
+import { Sticky } from '@/components/InterfaceDesigner/domain/model/Sticky.ts'
+import BlockDTO from '@/components/InterfaceDesigner/domain/model/BlockDTO.ts'
 
 export interface BlockProperties {
   width: number,

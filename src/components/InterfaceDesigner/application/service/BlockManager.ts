@@ -1,9 +1,9 @@
-import BlockDTO from '@/components/InterfaceDesigner/domain/model/BlockDTO'
-import CustomMouseEvent from '@/components/InterfaceDesigner/domain/model/CustomMouseEvent'
-import CustomDomRect from '@/components/InterfaceDesigner/domain/model/CustomDomRect'
-import BreakpointsFactory from '@/components/InterfaceDesigner/domain/service/BreakpointsFactory'
-import { Breakpoints } from '@/components/InterfaceDesigner/domain/model/Breakpoints'
-import { BlockRepositoryInterface } from '@/components/InterfaceDesigner/domain/repository/BlockRepositoryInterface'
+import BlockDTO from '@/components/InterfaceDesigner/domain/model/BlockDTO.ts'
+import CustomMouseEvent from '@/components/InterfaceDesigner/domain/model/CustomMouseEvent.ts'
+import CustomDomRect from '@/components/InterfaceDesigner/domain/model/CustomDomRect.ts'
+import BreakpointsFactory from '@/components/InterfaceDesigner/domain/service/BreakpointsFactory.ts'
+import { Breakpoints } from '@/components/InterfaceDesigner/domain/model/Breakpoints.ts'
+import { BlockRepositoryInterface } from '@/components/InterfaceDesigner/domain/repository/BlockRepositoryInterface.ts'
 
 export default class BlockManager {
   [index: string]: any;

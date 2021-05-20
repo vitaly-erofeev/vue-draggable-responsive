@@ -1,8 +1,8 @@
 import Vuex, { Module } from 'vuex'
 import { InterfaceState, initialState } from './state'
-import { actions } from '@/components/InterfaceDesigner/infrastructure/store/actions'
-import { mutations } from '@/components/InterfaceDesigner/infrastructure/store/mutations'
-import { getters } from '@/components/InterfaceDesigner/infrastructure/store/getters'
+import { actions } from '@/components/InterfaceDesigner/infrastructure/store/actions.ts'
+import { mutations } from '@/components/InterfaceDesigner/infrastructure/store/mutations.ts'
+import { getters } from '@/components/InterfaceDesigner/infrastructure/store/getters.ts'
 import Vue from 'vue'
 
 Vue.use(Vuex)

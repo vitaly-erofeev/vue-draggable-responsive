@@ -16,8 +16,8 @@
 <script lang="ts">
 import Block from '@/components/InterfaceDesigner/infrastructure/components/Block.vue'
 import Vue from 'vue'
-import { Sticky } from '@/components/InterfaceDesigner/domain/model/Sticky'
-import { ADD_BLOCK } from '@/components/InterfaceDesigner/infrastructure/store/action-types'
+import { Sticky } from '@/components/InterfaceDesigner/domain/model/Sticky.ts'
+import { ADD_BLOCK } from '@/components/InterfaceDesigner/infrastructure/store/action-types.ts'
 
 export default Vue.extend({
   name: 'InterfaceDesigner',

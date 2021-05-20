@@ -1,4 +1,4 @@
-import { BlockProperties } from '@/components/InterfaceDesigner/domain/model/BlockProperties'
+import { BlockProperties } from '@/components/InterfaceDesigner/domain/model/BlockProperties.ts'
 
 export interface InterfaceState {
   blocks: BlockProperties[];

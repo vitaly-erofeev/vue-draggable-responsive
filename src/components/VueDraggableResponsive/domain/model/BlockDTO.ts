@@ -1,5 +1,5 @@
 import { Sticky } from './Sticky'
-import { BlockProperties } from '@/components/InterfaceDesigner/domain/model/BlockProperties.ts'
+import { BlockProperties } from '@/components/VueDraggableResponsive/domain/model/BlockProperties'
 
 export default class BlockDTO {
   [index: string]: any;

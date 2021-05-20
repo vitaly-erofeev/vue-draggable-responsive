@@ -1,6 +1,6 @@
 <template>
   <div id="app" style="height: 100%">
-    <interface-designer
+    <vue-draggable-responsive
         ref="designer"
         style="height: 500px;width: 1059px;display: inline-block"
         :step="1"
@@ -17,12 +17,12 @@
 </template>
 
 <script>
-import InterfaceDesigner from './components/InterfaceDesigner'
+import VueDraggableResponsive from './components/VueDraggableResponsive/index.vue'
 
 export default {
   name: 'App',
   components: {
-    InterfaceDesigner
+    VueDraggableResponsive
   },
   data () {
     return {

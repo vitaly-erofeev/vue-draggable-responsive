@@ -14,13 +14,18 @@
 </template>
 
 <script lang="ts">
-import Block from '@/components/InterfaceDesigner/infrastructure/components/Block.vue'
+import Block from '@/components/VueDraggableResponsive/infrastructure/components/Block.vue'
 import Vue from 'vue'
-import { Sticky } from '@/components/InterfaceDesigner/domain/model/Sticky.ts'
-import { ADD_BLOCK } from '@/components/InterfaceDesigner/infrastructure/store/action-types.ts'
+import { Sticky } from '@/components/VueDraggableResponsive/domain/model/Sticky'
+import { ADD_BLOCK } from '@/components/VueDraggableResponsive/infrastructure/store/action-types'
+import store from '@/components/VueDraggableResponsive/infrastructure/store'
+// eslint-disable-next-line no-unused-vars
+import { Store } from 'vuex'
+// eslint-disable-next-line no-unused-vars
+import { InterfaceState } from '@/components/VueDraggableResponsive/infrastructure/store/state'
 
 export default Vue.extend({
-  name: 'InterfaceDesigner',
+  name: 'VueDraggableResponsive',
   components: { Block },
   props: {
     step: {
@@ -32,14 +37,15 @@ export default Vue.extend({
       default: () => []
     }
   },
-  data (): { blocksArray: object[] } {
+  data (): { blocksArray: object[], store: Store<InterfaceState> } {
     return {
+      store: store,
       blocksArray: this.blocks
     }
   },
   methods: {
     getBlocks (): [] {
-      return this.$store.getters.blocksAsList
+      return this.store.getters.blocksAsList
     },
     addBlock (
       {
@@ -54,7 +60,7 @@ export default Vue.extend({
         parentGuid = null
       }
     ): void {
-      this.$store.dispatch(ADD_BLOCK, {
+      this.store.dispatch(ADD_BLOCK, {
         width,
         height,
         top,
@@ -69,7 +75,7 @@ export default Vue.extend({
   },
   computed: {
     _blocks (): [] {
-      return this.$store.getters.blocksAsTree
+      return this.store.getters.blocksAsTree
     }
   }
 })

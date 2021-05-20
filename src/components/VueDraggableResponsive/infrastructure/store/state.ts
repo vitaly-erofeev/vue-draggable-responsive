@@ -1,4 +1,4 @@
-import { BlockProperties } from '@/components/InterfaceDesigner/domain/model/BlockProperties.ts'
+import { BlockProperties } from '@/components/VueDraggableResponsive/domain/model/BlockProperties'
 
 export interface InterfaceState {
   blocks: BlockProperties[];

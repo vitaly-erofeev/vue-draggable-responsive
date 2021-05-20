@@ -1,7 +1,7 @@
 import { GetterTree } from 'vuex'
 import { InterfaceState } from './state'
-import BlockDTO from '@/components/InterfaceDesigner/domain/model/BlockDTO.ts'
-import { BlockProperties } from '@/components/InterfaceDesigner/domain/model/BlockProperties.ts'
+import BlockDTO from '@/components/VueDraggableResponsive/domain/model/BlockDTO'
+import { BlockProperties } from '@/components/VueDraggableResponsive/domain/model/BlockProperties'
 
 class Map {
   [index: string]: any

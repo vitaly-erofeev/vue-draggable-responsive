@@ -1,10 +1,11 @@
 {
   "name": "interface_designer",
   "version": "0.1.0",
-  "main": "src/components/InterfaceDesigner",
+  "main": "dist/vue-draggable-responsive.umd.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build-bundle": "vue-cli-service build --target lib --name vue-draggable-responsive ./src/components/VueDraggableResponsive/index.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

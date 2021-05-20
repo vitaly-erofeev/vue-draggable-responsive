@@ -43,12 +43,17 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import BlockDTO from '../../domain/model/BlockDTO.ts'
-import BlockManager from '@/components/InterfaceDesigner/application/service/BlockManager.ts'
+import BlockDTO from '../../domain/model/BlockDTO'
+import BlockManager from '@/components/VueDraggableResponsive/application/service/BlockManager'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
-import BlockRepository from '@/components/InterfaceDesigner/infrastructure/domain/repository/BlockRepository.ts'
+import BlockRepository from '@/components/VueDraggableResponsive/infrastructure/domain/repository/BlockRepository'
+import store from '@/components/VueDraggableResponsive/infrastructure/store'
+// eslint-disable-next-line no-unused-vars
+import { Store } from 'vuex'
+// eslint-disable-next-line no-unused-vars
+import { InterfaceState } from '@/components/VueDraggableResponsive/infrastructure/store/state'
 
 library.add(faAngleDown)
 
@@ -66,6 +71,7 @@ export default Vue.extend({
     }
   },
   data (): {
+    store: Store<InterfaceState>,
     blockManager: undefined | BlockManager,
     isResizing: boolean,
     isDragging: boolean,
@@ -77,6 +83,7 @@ export default Vue.extend({
     }
     } {
     return {
+      store: store,
       blockManager: undefined,
       isResizing: false,
       isDragging: false,
@@ -139,7 +146,7 @@ export default Vue.extend({
       if (typeof this.blockManager === 'undefined') {
         this.blockManager = new BlockManager(
           this.block,
-          new BlockRepository(this.$store),
+          new BlockRepository(this.store),
             this.$refs.draggableContainer as Element,
             this.step
         )

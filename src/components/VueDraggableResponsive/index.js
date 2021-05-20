@@ -1,11 +1,6 @@
-import Vue from 'vue'
 import VueDraggableResponsive from '../VueDraggableResponsive/index.vue'
-
-const Components = {
-  VueDraggableResponsive
+export default {
+  install (Vue, options) {
+    Vue.component('vue-draggable-responsive', VueDraggableResponsive)
+  }
 }
-Object.keys(Components).forEach(name => {
-  Vue.use(name, Components[name])
-})
-
-export default Components

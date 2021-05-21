@@ -58,10 +58,11 @@ export default Vue.extend({
       left: SizeTypes
     }): { top: number, right: number, bottom: number, left: number } {
       const elPosition = this.$el.getBoundingClientRect()
-      const top = sizeTypes.top === SizeTypes.PIXEL ? event.clientY : event.clientY / (elPosition.height / 100) - 2
-      const left = sizeTypes.left === SizeTypes.PIXEL ? event.clientX : event.clientX / (elPosition.width / 100) - 2
-      const right = sizeTypes.left === SizeTypes.PIXEL ? elPosition.width - event.clientX : 100 - (event.clientX / (elPosition.width / 100) + 2)
-      const bottom = sizeTypes.top === SizeTypes.PIXEL ? elPosition.height - event.clientY : 100 - (event.clientY / (elPosition.height / 100) + 2)
+      console.log(elPosition)
+      const top = sizeTypes.top === SizeTypes.PIXEL ? event.clientY - elPosition.top : (event.clientY - elPosition.top) / (elPosition.height / 100) - 2
+      const left = sizeTypes.left === SizeTypes.PIXEL ? event.clientX - elPosition.left : (event.clientX - elPosition.left) / (elPosition.width / 100) - 2
+      const right = sizeTypes.left === SizeTypes.PIXEL ? elPosition.width - event.clientX + elPosition.left : 100 - (event.clientX / (elPosition.width / 100) + 2)
+      const bottom = sizeTypes.top === SizeTypes.PIXEL ? elPosition.height - event.clientY + elPosition.top : 100 - (event.clientY / (elPosition.height / 100) + 2)
 
       return {
         top: Math.floor(top),

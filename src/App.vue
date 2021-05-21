@@ -8,6 +8,7 @@
     />
     <div style="width: 20%;display:inline-block;float: right;height: 100%; overflow: auto">
       <button @click="addContainer">add</button>
+      <button @click="interactiveAddBlock">addT</button>
       <button @click="addChildren">addChild</button>
       <button @click="addSticky">addSticky</button>
       <button @click="get">get</button>
@@ -47,6 +48,14 @@ export default {
           stickyToGuid: this.activeBlock.guid
         })
       }
+    },
+    interactiveAddBlock (event) {
+      this.$refs.designer.interactiveAddBlock({
+        width: 70,
+        height: 10,
+        sticky: 'tl',
+        event: event
+      })
     },
     addContainer () {
       this.$refs.designer.addBlock({

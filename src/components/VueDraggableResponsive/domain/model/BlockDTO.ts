@@ -1,5 +1,6 @@
 import { Sticky } from './Sticky'
 import { BlockProperties } from '@/components/VueDraggableResponsive/domain/model/BlockProperties'
+import { SizeTypes } from '@/components/VueDraggableResponsive/domain/model/SizeTypes'
 
 export default class BlockDTO {
   [index: string]: any;
@@ -11,7 +12,7 @@ export default class BlockDTO {
   bottom: number
   left: number
   sticky: Sticky
-  types: { [index: string]: any; width: string; height: string; top: string; right: string; bottom: string; left: string }
+  sizeTypes: { [index: string]: any; width: SizeTypes; height: SizeTypes; top: SizeTypes; right: SizeTypes; bottom: SizeTypes; left: SizeTypes }
   children: BlockDTO[]
   guid: string
   stickyToGuid: null | string
@@ -27,13 +28,13 @@ export default class BlockDTO {
       bottom = 0,
       left = 0,
       sticky = Sticky.TL,
-      types = {
-        width: '%',
-        height: '%',
-        top: '%',
-        right: '%',
-        bottom: '%',
-        left: '%'
+      sizeTypes = {
+        width: SizeTypes.PERCENT,
+        height: SizeTypes.PERCENT,
+        top: SizeTypes.PERCENT,
+        right: SizeTypes.PERCENT,
+        bottom: SizeTypes.PERCENT,
+        left: SizeTypes.PERCENT
       },
       guid,
       stickyToGuid = null,
@@ -48,7 +49,7 @@ export default class BlockDTO {
     this.bottom = bottom
     this.left = left
     this.sticky = sticky
-    this.types = types
+    this.sizeTypes = sizeTypes
     this.debug = debug
     this.guid = guid
     this.stickyToGuid = stickyToGuid
@@ -63,7 +64,7 @@ export default class BlockDTO {
       bottom: this.bottom,
       left: this.left,
       sticky: this.sticky,
-      types: this.types,
+      sizeTypes: this.sizeTypes,
       guid: this.guid,
       stickyToGuid: this.stickyToGuid
     }

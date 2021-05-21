@@ -7,6 +7,9 @@ import { BlockProperties } from '@/components/VueDraggableResponsive/domain/mode
 export const actions: ActionTree<InterfaceState, any> = {
   [ADD_BLOCK] ({ commit, state }, block: BlockProperties) {
     block.guid = GuidGenerator.generate()
-    commit(ADD_BLOCK, block)
+    return new Promise((resolve: (guid: string) => void) => {
+      commit(ADD_BLOCK, block)
+      resolve(block.guid)
+    })
   }
 }

@@ -1,5 +1,6 @@
 import { Sticky } from '@/components/VueDraggableResponsive/domain/model/Sticky'
 import BlockDTO from '@/components/VueDraggableResponsive/domain/model/BlockDTO'
+import { SizeTypes } from '@/components/VueDraggableResponsive/domain/model/SizeTypes'
 
 export interface BlockProperties {
   width: number,
@@ -9,13 +10,13 @@ export interface BlockProperties {
   bottom: number,
   left: number,
   sticky: Sticky,
-  types?: {
-    width: string,
-    height: string,
-    top: string,
-    right: string,
-    bottom: string,
-    left: string
+  sizeTypes?: {
+    width: SizeTypes,
+    height: SizeTypes,
+    top: SizeTypes,
+    right: SizeTypes,
+    bottom: SizeTypes,
+    left: SizeTypes
   },
   debug?: any,
   guid: string,

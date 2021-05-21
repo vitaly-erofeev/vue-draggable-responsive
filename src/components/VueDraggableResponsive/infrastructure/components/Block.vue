@@ -7,7 +7,7 @@
   >
     <slot :block="block" :is-resizing="isResizing" :is-dragging="isDragging">
       <div class="block_info" v-show="isResizing">
-        {{block.width}}{{block.types.width}} x {{block.height}}{{block.types.height}}
+        {{block.width}}{{block.sizeTypes.width}} x {{block.height}}{{block.sizeTypes.height}}
       </div>
     </slot>
       <div
@@ -15,14 +15,14 @@
           class="position_line left"
            :style="`left: calc(-${currentPosition.left}px - 1px);width:calc(${currentPosition.left}px - 1px)`"
       >
-        <span>{{block.left}}{{block.types.left}}</span>
+        <span>{{block.left}}{{block.sizeTypes.left}}</span>
       </div>
       <div
           v-show="isDragging"
           class="position_line top"
           :style="`top: -${currentPosition.top}px;height:${currentPosition.top}px`"
       >
-        <span>{{block.top}}{{block.types.top}}</span>
+        <span>{{block.top}}{{block.sizeTypes.top}}</span>
       </div>
     <block
         v-for="(_block, index) in block.children"
@@ -101,38 +101,38 @@ export default Vue.extend({
       switch (this.block.sticky) {
         case 'tl':
           position = {
-            top: this.block.top + this.block.types.top,
-            left: this.block.left + this.block.types.left
+            top: this.block.top + this.block.sizeTypes.top,
+            left: this.block.left + this.block.sizeTypes.left
           }
           break
         case 'tr':
           position = {
-            top: this.block.top + this.block.types.top,
-            right: this.block.right + this.block.types.right
+            top: this.block.top + this.block.sizeTypes.top,
+            right: this.block.right + this.block.sizeTypes.right
           }
           break
         case 'bl':
           position = {
-            bottom: this.block.bottom + this.block.types.bottom,
-            left: this.block.left + this.block.types.left
+            bottom: this.block.bottom + this.block.sizeTypes.bottom,
+            left: this.block.left + this.block.sizeTypes.left
           }
           break
         case 'br':
           position = {
-            bottom: this.block.bottom + this.block.types.bottom,
-            right: this.block.right + this.block.types.right
+            bottom: this.block.bottom + this.block.sizeTypes.bottom,
+            right: this.block.right + this.block.sizeTypes.right
           }
           break
         default:
           position = {
-            top: this.block.top + this.block.types.top,
-            left: this.block.left + this.block.types.left
+            top: this.block.top + this.block.sizeTypes.top,
+            left: this.block.left + this.block.sizeTypes.left
           }
           break
       }
       return Object.assign(position, {
-        width: this.block.width + this.block.types.width,
-        height: this.block.height + this.block.types.height
+        width: this.block.width + this.block.sizeTypes.width,
+        height: this.block.height + this.block.sizeTypes.height
       })
     }
   },

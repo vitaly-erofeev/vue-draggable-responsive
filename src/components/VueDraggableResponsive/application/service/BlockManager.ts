@@ -4,6 +4,7 @@ import CustomDomRect from '@/components/VueDraggableResponsive/domain/model/Cust
 import BreakpointsFactory from '@/components/VueDraggableResponsive/domain/service/BreakpointsFactory'
 import { Breakpoints } from '@/components/VueDraggableResponsive/domain/model/Breakpoints'
 import { BlockRepositoryInterface } from '@/components/VueDraggableResponsive/domain/repository/BlockRepositoryInterface'
+import { SizeTypes } from '@/components/VueDraggableResponsive/domain/model/SizeTypes'
 
 export default class BlockManager {
   [index: string]: any;
@@ -63,22 +64,22 @@ export default class BlockManager {
   }
 
   private setWidth (event: MouseEvent): void {
-    switch (this.block.types.width) {
-      case 'px':
+    switch (this.block.sizeTypes.width) {
+      case SizeTypes.PIXEL:
         this.setAbsolutePosition(Breakpoints.W, event)
         break
-      case '%':
+      case SizeTypes.PERCENT:
         this.setRelativePosition(Breakpoints.W)
         break
     }
   }
 
   private setHeight (event: MouseEvent): void {
-    switch (this.block.types.height) {
-      case 'px':
+    switch (this.block.sizeTypes.height) {
+      case SizeTypes.PIXEL:
         this.setAbsolutePosition(Breakpoints.H, event)
         break
-      case '%':
+      case SizeTypes.PERCENT:
         this.setRelativePosition(Breakpoints.H)
         break
     }
@@ -99,11 +100,11 @@ export default class BlockManager {
 
   private setYPosition (event: MouseEvent): void {
     const breakpoints = BreakpointsFactory.build(Breakpoints.Y, this.block.sticky)
-    switch (this.block.types[breakpoints.offset]) {
-      case 'px':
+    switch (this.block.sizeTypes[breakpoints.offset]) {
+      case SizeTypes.PIXEL:
         this.setAbsolutePosition(Breakpoints.Y, event)
         break
-      case '%':
+      case SizeTypes.PERCENT:
         this.setRelativePosition(Breakpoints.Y)
         break
     }
@@ -111,11 +112,11 @@ export default class BlockManager {
 
   private setXPosition (event: MouseEvent): void {
     const breakpoints = BreakpointsFactory.build(Breakpoints.X, this.block.sticky)
-    switch (this.block.types[breakpoints.offset]) {
-      case 'px':
+    switch (this.block.sizeTypes[breakpoints.offset]) {
+      case SizeTypes.PIXEL:
         this.setAbsolutePosition(Breakpoints.X, event)
         break
-      case '%':
+      case SizeTypes.PERCENT:
         this.setRelativePosition(Breakpoints.X)
         break
     }

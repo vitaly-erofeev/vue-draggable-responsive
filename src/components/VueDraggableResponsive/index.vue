@@ -56,7 +56,7 @@ export default Vue.extend({
       right: SizeTypes,
       bottom: SizeTypes,
       left: SizeTypes
-    }): {top:Number, right: Number, bottom: Number, left: Number} {
+    }): { top: number, right: number, bottom: number, left: number } {
       const elPosition = this.$el.getBoundingClientRect()
       const top = sizeTypes.top === SizeTypes.PIXEL ? event.clientY : event.clientY / (elPosition.height / 100) - 2
       const left = sizeTypes.left === SizeTypes.PIXEL ? event.clientX : event.clientX / (elPosition.width / 100) - 2
@@ -84,7 +84,22 @@ export default Vue.extend({
         bottom: SizeTypes.PERCENT,
         left: SizeTypes.PERCENT
       },
-      event = null
+      event
+    }: {
+      width: number,
+      height: number,
+      sticky: Sticky,
+      stickyToGuid: string | null,
+      parentGuid: string | null,
+      sizeTypes: {
+        width: SizeTypes,
+        height: SizeTypes,
+        top: SizeTypes,
+        right: SizeTypes,
+        bottom: SizeTypes,
+        left: SizeTypes
+      },
+      event: MouseEvent
     }) {
       const {
         top,
@@ -104,9 +119,10 @@ export default Vue.extend({
         stickyToGuid,
         parentGuid
       })
-
-      this.$refs[guid][0].onDrag()
-      this.$refs[guid][0].dragStart(event)
+      const refs: any = this.$refs
+      const block: any = refs[guid][0]
+      block.onDrag()
+      block.dragStart(event)
     },
     async addBlock (
       {
@@ -127,7 +143,25 @@ export default Vue.extend({
           bottom: SizeTypes.PERCENT,
           left: SizeTypes.PERCENT
         }
-      }
+      }: {
+          width: number,
+          height: number,
+          sticky: Sticky,
+          stickyToGuid: string | null,
+          parentGuid: string | null,
+          top: number,
+          right: number,
+          bottom: number,
+          left: number,
+          sizeTypes: {
+            width: SizeTypes,
+            height: SizeTypes,
+            top: SizeTypes,
+            right: SizeTypes,
+            bottom: SizeTypes,
+            left: SizeTypes
+          }
+        }
     ): Promise<string> {
       const guid = await this.store.dispatch(ADD_BLOCK, {
         width,
@@ -156,8 +190,8 @@ export default Vue.extend({
 @import url('https://rsms.me/inter/inter.css');
 
 .container {
-  background-image: linear-gradient(rgba(128, 128, 128, 0.1)  1px, transparent 1px),
-  linear-gradient(90deg, rgba(128, 128, 128, 0.1)  1px, transparent 1px);
+  background-image: linear-gradient(rgba(128, 128, 128, 0.1) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(128, 128, 128, 0.1) 1px, transparent 1px);
   background-size: 1% 1%;
   position: relative;
 }

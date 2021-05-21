@@ -1,7 +1,7 @@
 {
   "name": "interface_designer",
   "version": "0.1.0",
-  "main": "dist/vue-draggable-responsive.umd.js",
+  "main": "dist/vue-draggable-responsive.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",

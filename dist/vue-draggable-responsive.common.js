@@ -13752,11 +13752,7 @@ var VueDraggableResponsive_component = normalizeComponent(
 /* harmony default export */ var VueDraggableResponsive = (VueDraggableResponsive_component.exports);
 // CONCATENATED MODULE: ./src/components/VueDraggableResponsive/index.js
 
-/* harmony default export */ var components_VueDraggableResponsive = ({
-  install: function install(Vue, options) {
-    Vue.component('vue-draggable-responsive', VueDraggableResponsive);
-  }
-});
+/* harmony default export */ var components_VueDraggableResponsive = (VueDraggableResponsive);
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-lib.js
 
 

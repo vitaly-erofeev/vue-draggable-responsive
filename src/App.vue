@@ -5,7 +5,11 @@
         style="height: 500px;width: 1059px;display: inline-block"
         :step="1"
         @start-drag="onStartDrag"
-    />
+    >
+      <template v-slot:content="{ block }">
+        {{ block }}
+      </template>
+    </vue-draggable-responsive>
     <div style="width: 20%;display:inline-block;float: right;height: 100%; overflow: auto">
       <button @click="addContainer">add</button>
       <button @click="interactiveAddBlock">addT</button>

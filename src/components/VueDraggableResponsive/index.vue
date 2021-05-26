@@ -10,6 +10,9 @@
         @stop-drag="$emit('stop-drag', $event)"
         @dragging="$emit('dragging', $event)"
     >
+      <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
+        <slot :name="name" v-bind="data"></slot>
+      </template>
     </block>
   </div>
 </template>
@@ -58,7 +61,6 @@ export default Vue.extend({
       left: SizeTypes
     }): { top: number, right: number, bottom: number, left: number } {
       const elPosition = this.$el.getBoundingClientRect()
-      console.log(elPosition)
       const top = sizeTypes.top === SizeTypes.PIXEL ? event.clientY - elPosition.top : (event.clientY - elPosition.top) / (elPosition.height / 100) - 2
       const left = sizeTypes.left === SizeTypes.PIXEL ? event.clientX - elPosition.left : (event.clientX - elPosition.left) / (elPosition.width / 100) - 2
       const right = sizeTypes.left === SizeTypes.PIXEL ? elPosition.width - event.clientX + elPosition.left : 100 - (event.clientX / (elPosition.width / 100) + 2)

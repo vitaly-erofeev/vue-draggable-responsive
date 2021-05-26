@@ -5,25 +5,26 @@
       ref="draggableContainer"
       @mousedown.stop="dragStart"
   >
-    <slot :block="block" :is-resizing="isResizing" :is-dragging="isDragging">
+    <slot :block="block" :is-resizing="isResizing" :is-dragging="isDragging" name="info">
       <div class="block_info" v-show="isResizing">
-        {{block.width}}{{block.sizeTypes.width}} x {{block.height}}{{block.sizeTypes.height}}
+        {{ block.width }}{{ block.sizeTypes.width }} x {{ block.height }}{{ block.sizeTypes.height }}
       </div>
-    </slot>
       <div
           v-show="isDragging"
           class="position_line left"
-           :style="`left: calc(-${currentPosition.left}px - 1px);width:calc(${currentPosition.left}px - 1px)`"
+          :style="`left: calc(-${currentPosition.left}px - 1px);width:calc(${currentPosition.left}px - 1px)`"
       >
-        <span>{{block.left}}{{block.sizeTypes.left}}</span>
+        <span>{{ block.left }}{{ block.sizeTypes.left }}</span>
       </div>
       <div
           v-show="isDragging"
           class="position_line top"
           :style="`top: -${currentPosition.top}px;height:${currentPosition.top}px`"
       >
-        <span>{{block.top}}{{block.sizeTypes.top}}</span>
+        <span>{{ block.top }}{{ block.sizeTypes.top }}</span>
       </div>
+    </slot>
+    <slot :block="block" name="content"></slot>
     <block
         v-for="(_block, index) in block.children"
         :key="index"
@@ -54,6 +55,7 @@ import store from '@/components/VueDraggableResponsive/infrastructure/store'
 import { Store } from 'vuex'
 // eslint-disable-next-line no-unused-vars
 import { InterfaceState } from '@/components/VueDraggableResponsive/infrastructure/store/state'
+import { Sticky } from '@/components/VueDraggableResponsive/domain/model/Sticky'
 
 library.add(faAngleDown)
 
@@ -77,7 +79,7 @@ export default Vue.extend({
     isDragging: boolean,
     currentPosition: {
       left: number,
-      top:number,
+      top: number,
       right: number,
       bottom: number
     }
@@ -99,25 +101,25 @@ export default Vue.extend({
     positionStyle (): object {
       let position = {}
       switch (this.block.sticky) {
-        case 'tl':
+        case Sticky.TL:
           position = {
             top: this.block.top + this.block.sizeTypes.top,
             left: this.block.left + this.block.sizeTypes.left
           }
           break
-        case 'tr':
+        case Sticky.TR:
           position = {
             top: this.block.top + this.block.sizeTypes.top,
             right: this.block.right + this.block.sizeTypes.right
           }
           break
-        case 'bl':
+        case Sticky.BL:
           position = {
             bottom: this.block.bottom + this.block.sizeTypes.bottom,
             left: this.block.left + this.block.sizeTypes.left
           }
           break
-        case 'br':
+        case Sticky.BR:
           position = {
             bottom: this.block.bottom + this.block.sizeTypes.bottom,
             right: this.block.right + this.block.sizeTypes.right
@@ -219,14 +221,17 @@ export default Vue.extend({
   bottom: -3px;
   right: 0;
 }
+
 .block {
   outline: 1px dashed #539FFF;
   position: absolute;
 }
+
 .block.highlight {
   outline: 1px solid #539FFF;
   cursor: pointer;
 }
+
 .block .block_info {
   font-size: 12px;
   font-family: "Inter";
@@ -240,6 +245,7 @@ export default Vue.extend({
   color: white;
   font-weight: 400;
 }
+
 .block .position_line {
   position: absolute;
   background: red;
@@ -247,10 +253,12 @@ export default Vue.extend({
   font-family: "Inter";
   font-weight: 400;
 }
+
 .block .position_line.left {
   top: calc(50% - 1px);
   height: 1px;
 }
+
 .block .position_line span {
   background: #539FFF;
   border-radius: 3px;
@@ -259,14 +267,17 @@ export default Vue.extend({
   display: inline-block;
   position: absolute;
 }
+
 .block .position_line.left span {
   right: 3px;
   top: 3px;
 }
+
 .block .position_line.top span {
   bottom: 3px;
   left: 3px;
 }
+
 .block .position_line.top {
   left: calc(50% - 1px);
   width: 1px;

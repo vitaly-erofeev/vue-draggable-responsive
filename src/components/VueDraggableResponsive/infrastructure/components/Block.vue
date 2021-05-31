@@ -163,10 +163,10 @@ export default Vue.extend({
       document.addEventListener('mousemove', this.elementDrag)
       document.addEventListener('mouseup', this.dragStop)
     },
-    dragStart (event: MouseEvent): void {
+    dragStart (event: MouseEvent, isInteractive: boolean = false): void {
       event.preventDefault()
       this.$emit('start-drag', this.block)
-      this.getBlockManager().startDrag(event, 'drag')
+      this.getBlockManager().startDrag(event, 'drag', isInteractive)
       this.isDragging = true
       document.addEventListener('mousemove', this.elementDrag)
       document.addEventListener('mouseup', this.dragStop)

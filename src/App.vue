@@ -1,5 +1,13 @@
 <template>
   <div id="app" style="height: 100%">
+    <div style="width: 20%;display:inline-block;float: left;height: 100%; overflow: auto">
+      <button @click="addContainer">add</button>
+      <button @click="interactiveAddBlock">addT</button>
+      <button @click="addChildren">addChild</button>
+      <button @click="addSticky">addSticky</button>
+      <button @click="get">get</button>
+      <pre>{{ activeBlock }}</pre>
+    </div>
     <vue-draggable-responsive
         ref="designer"
         style="height: 500px;width: 1059px;display: inline-block"
@@ -10,14 +18,6 @@
         {{ block }}
       </template>
     </vue-draggable-responsive>
-    <div style="width: 20%;display:inline-block;float: right;height: 100%; overflow: auto">
-      <button @click="addContainer">add</button>
-      <button @click="interactiveAddBlock">addT</button>
-      <button @click="addChildren">addChild</button>
-      <button @click="addSticky">addSticky</button>
-      <button @click="get">get</button>
-      <pre>{{ activeBlock }}</pre>
-    </div>
   </div>
 </template>
 

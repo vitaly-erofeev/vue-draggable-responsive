@@ -11,7 +11,7 @@ export default class BlockRepository implements BlockRepositoryInterface {
   }
 
   change (block: BlockDTO, property: string, value: any): void {
-    const blockModel = this.store.getters.findModelByGuid(block.guid)
+    const blockModel = this.store.getters.getByGuid(block.guid)
     blockModel[property] = value
   }
 }

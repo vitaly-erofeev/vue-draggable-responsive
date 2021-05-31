@@ -17,6 +17,7 @@ export default class BlockDTO {
   guid: string
   stickyToGuid: null | string
   debug: any
+  parentGuid: null | string
 
   constructor (
     {
@@ -38,35 +39,58 @@ export default class BlockDTO {
       },
       guid,
       stickyToGuid = null,
-      debug = null
+      debug = null,
+      parentGuid = null
     }: BlockProperties
   ) {
+    const {
+      _top, _right, _bottom, _left
+    } = BlockDTO.getPreparedSizes({
+      top,
+      right,
+      bottom,
+      left,
+      sticky
+    })
+    this.top = _top
+    this.right = _right
+    this.bottom = _bottom
+    this.left = _left
+
+    this.sticky = sticky
+    this.sizeTypes = sizeTypes
     this.children = children
     this.width = width
     this.height = height
-    this.top = top
-    this.right = right
-    this.bottom = bottom
-    this.left = left
-    this.sticky = sticky
-    this.sizeTypes = sizeTypes
     this.debug = debug
     this.guid = guid
     this.stickyToGuid = stickyToGuid
+    this.parentGuid = parentGuid
   }
 
-  toJson (): object {
+  private static getPreparedSizes ({
+    top, right, bottom, left, sticky
+  }: {
+    top: number,
+    right: number,
+    bottom: number,
+    left: number,
+    sticky: Sticky
+  }): { _top: number, _right: number, _bottom: number, _left: number } {
+    let _top, _right, _bottom, _left
+    _top = top
+    _left = left
+    _bottom = bottom
+    _right = right
+    if (sticky === Sticky.TL) {
+      _top = top < 0 ? 0 : top
+      _left = left < 0 ? 0 : left
+    }
     return {
-      width: this.width,
-      height: this.height,
-      top: this.top,
-      right: this.right,
-      bottom: this.bottom,
-      left: this.left,
-      sticky: this.sticky,
-      sizeTypes: this.sizeTypes,
-      guid: this.guid,
-      stickyToGuid: this.stickyToGuid
+      _top,
+      _right,
+      _bottom,
+      _left
     }
   }
 }

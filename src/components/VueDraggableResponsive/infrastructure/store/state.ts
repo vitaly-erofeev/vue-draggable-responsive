@@ -1,7 +1,7 @@
-import { BlockProperties } from '@/components/VueDraggableResponsive/domain/model/BlockProperties'
+import BlockDTO from '@/components/VueDraggableResponsive/domain/model/BlockDTO'
 
 export interface InterfaceState {
-  blocks: BlockProperties[];
+  blocks: BlockDTO[];
 }
 
 export const initialState = (): InterfaceState => {

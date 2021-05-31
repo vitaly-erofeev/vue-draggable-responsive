@@ -27,11 +27,16 @@ export default class BlockManager {
     this.blockElement = blockElement
   }
 
-  public startDrag (event: MouseEvent, type: string): void {
+  public startDrag (event: MouseEvent, type: string, isInteractive: boolean = false): void {
+    this.blockElementRect = this.getBlockElementRect()
     this.clientX = event.clientX
     this.clientY = event.clientY
     this.type = type
-    this.blockElementRect = this.getBlockElementRect()
+
+    if (isInteractive) {
+      this.clientX += this.blockElementRect.x
+      this.clientY += this.blockElementRect.y
+    }
   }
 
   private getBlockElementRect (): CustomDomRect {

@@ -10,7 +10,7 @@ export interface BlockProperties {
   bottom: number,
   left: number,
   sticky: Sticky,
-  sizeTypes?: {
+  sizeTypes: {
     width: SizeTypes,
     height: SizeTypes,
     top: SizeTypes,
@@ -18,9 +18,9 @@ export interface BlockProperties {
     bottom: SizeTypes,
     left: SizeTypes
   },
-  debug?: any,
+  debug: any,
   guid: string,
-  stickyToGuid?: null | string
-  children?: BlockDTO[],
-  parentGuid?: string
+  stickyToGuid: null | string
+  children: BlockDTO[],
+  parentGuid: null | string
 }

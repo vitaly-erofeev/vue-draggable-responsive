@@ -103,7 +103,7 @@ export default Vue.extend({
         left: SizeTypes
       },
       event: MouseEvent
-    }) {
+    }): Promise<string> {
       const {
         top,
         right,
@@ -125,7 +125,8 @@ export default Vue.extend({
       const refs: any = this.$refs
       const block: any = refs[guid][0]
       block.onDrag()
-      block.dragStart(event)
+      block.dragStart(event, true)
+      return guid
     },
     async addBlock (
       {
@@ -156,7 +157,7 @@ export default Vue.extend({
           right: number,
           bottom: number,
           left: number,
-          sizeTypes: {
+          sizeTypes?: {
             width: SizeTypes,
             height: SizeTypes,
             top: SizeTypes,
@@ -183,7 +184,7 @@ export default Vue.extend({
   },
   computed: {
     _blocks (): [] {
-      return this.store.getters.blocksAsTree
+      return this.store.getters.blocks
     }
   }
 })

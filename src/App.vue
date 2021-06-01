@@ -1,8 +1,8 @@
 <template>
   <div id="app" style="height: 100%">
     <div style="width: 20%;display:inline-block;float: left;height: 100%; overflow: auto">
-      <button @click="addContainer">add</button>
-      <button @click="interactiveAddBlock">addT</button>
+      <button @click="addContainer(0)">add</button>
+      <button @click="addContainer(1, $event)">addT</button>
       <button @click="addChildren">addChild</button>
       <button @click="addSticky">addSticky</button>
       <button @click="get">get</button>
@@ -53,21 +53,15 @@ export default {
         })
       }
     },
-    interactiveAddBlock (event) {
-      this.$refs.designer.interactiveAddBlock({
-        width: 70,
-        height: 10,
-        sticky: 'tl',
-        event: event
-      })
-    },
-    addContainer () {
+    addContainer (type, event) {
       this.$refs.designer.addBlock({
         width: 70,
         height: 10,
         top: 30,
         right: 0,
-        sticky: 'tl'
+        sticky: 'tl',
+        type,
+        event
       })
     },
     addChildren () {

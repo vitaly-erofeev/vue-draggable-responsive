@@ -224,13 +224,6 @@ module.exports = !DESCRIPTORS && !fails(function () {
 
 /***/ }),
 
-/***/ "1042":
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
 /***/ "14c3":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2069,6 +2062,13 @@ module.exports = !!Object.getOwnPropertySymbols && !fails(function () {
 
 /***/ }),
 
+/***/ "49e2":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "4d64":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2616,6 +2616,17 @@ module.exports = [
   'toString',
   'valueOf'
 ];
+
+
+/***/ }),
+
+/***/ "7a48":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_47fc78c6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("49e2");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_47fc78c6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_47fc78c6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
 
 
 /***/ }),
@@ -3858,17 +3869,6 @@ exports.BROKEN_CARET = fails(function () {
   re.lastIndex = 2;
   return re.exec('str') != null;
 });
-
-
-/***/ }),
-
-/***/ "a348":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_d01b32d2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("1042");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_d01b32d2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_d01b32d2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
 
 
 /***/ }),
@@ -8193,12 +8193,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7e8adf26-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VueDraggableResponsive/index.vue?vue&type=template&id=d01b32d2&scoped=true&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7e8adf26-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VueDraggableResponsive/index.vue?vue&type=template&id=47fc78c6&scoped=true&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"container"},_vm._l((_vm._blocks),function(block,index){return _c('block',{key:index,ref:block.guid,refInFor:true,attrs:{"block":block,"step":_vm.step},on:{"start-drag":function($event){return _vm.$emit('start-drag', $event)},"stop-drag":function($event){return _vm.$emit('stop-drag', $event)},"dragging":function($event){return _vm.$emit('dragging', $event)}},scopedSlots:_vm._u([_vm._l((_vm.$scopedSlots),function(index,name){return {key:name,fn:function(data){return [_vm._t(name,null,null,data)]}}})],null,true)})}),1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/VueDraggableResponsive/index.vue?vue&type=template&id=d01b32d2&scoped=true&
+// CONCATENATED MODULE: ./src/components/VueDraggableResponsive/index.vue?vue&type=template&id=47fc78c6&scoped=true&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.number.constructor.js
 var es_number_constructor = __webpack_require__("a9e3");
@@ -8596,8 +8596,8 @@ var BlockManager_BlockManager = /*#__PURE__*/function () {
       this.type = type;
 
       if (isInteractive) {
-        this.clientX += this.blockElementRect.x;
-        this.clientY += this.blockElementRect.y;
+        this.clientX = this.blockElementRect.x + 15;
+        this.clientY = this.blockElementRect.y + 15;
       }
     }
   }, {
@@ -15188,7 +15188,15 @@ var component = normalizeComponent(
 )
 
 /* harmony default export */ var Block = (component.exports);
+// CONCATENATED MODULE: ./src/components/VueDraggableResponsive/domain/model/AddBlockType.ts
+var AddBlockType;
+
+(function (AddBlockType) {
+  AddBlockType[AddBlockType["DEFAULT"] = 0] = "DEFAULT";
+  AddBlockType[AddBlockType["INTERACTIVE"] = 1] = "INTERACTIVE";
+})(AddBlockType || (AddBlockType = {}));
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VueDraggableResponsive/index.vue?vue&type=script&lang=ts&
+
 
 
 
@@ -15238,75 +15246,35 @@ var component = normalizeComponent(
         left: Math.floor(left)
       };
     },
-    interactiveAddBlock: function interactiveAddBlock(_ref) {
+    addBlock: function addBlock(_ref) {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var _ref$width, width, _ref$height, height, _ref$sticky, sticky, _ref$stickyToGuid, stickyToGuid, _ref$parentGuid, parentGuid, _ref$sizeTypes, sizeTypes, event, _this$getMousePositio, top, right, bottom, left, guid, refs, block;
+        var _ref$width, width, _ref$height, height, _ref$top, top, _ref$right, right, _ref$bottom, bottom, _ref$left, left, _ref$sticky, sticky, _ref$stickyToGuid, stickyToGuid, _ref$parentGuid, parentGuid, _ref$sizeTypes, sizeTypes, _ref$event, event, _ref$type, type, position, guid, refs, block;
 
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _ref$width = _ref.width, width = _ref$width === void 0 ? 0 : _ref$width, _ref$height = _ref.height, height = _ref$height === void 0 ? 0 : _ref$height, _ref$sticky = _ref.sticky, sticky = _ref$sticky === void 0 ? Sticky.TL : _ref$sticky, _ref$stickyToGuid = _ref.stickyToGuid, stickyToGuid = _ref$stickyToGuid === void 0 ? null : _ref$stickyToGuid, _ref$parentGuid = _ref.parentGuid, parentGuid = _ref$parentGuid === void 0 ? null : _ref$parentGuid, _ref$sizeTypes = _ref.sizeTypes, sizeTypes = _ref$sizeTypes === void 0 ? {
+                _ref$width = _ref.width, width = _ref$width === void 0 ? 0 : _ref$width, _ref$height = _ref.height, height = _ref$height === void 0 ? 0 : _ref$height, _ref$top = _ref.top, top = _ref$top === void 0 ? undefined : _ref$top, _ref$right = _ref.right, right = _ref$right === void 0 ? undefined : _ref$right, _ref$bottom = _ref.bottom, bottom = _ref$bottom === void 0 ? undefined : _ref$bottom, _ref$left = _ref.left, left = _ref$left === void 0 ? undefined : _ref$left, _ref$sticky = _ref.sticky, sticky = _ref$sticky === void 0 ? Sticky.TL : _ref$sticky, _ref$stickyToGuid = _ref.stickyToGuid, stickyToGuid = _ref$stickyToGuid === void 0 ? null : _ref$stickyToGuid, _ref$parentGuid = _ref.parentGuid, parentGuid = _ref$parentGuid === void 0 ? null : _ref$parentGuid, _ref$sizeTypes = _ref.sizeTypes, sizeTypes = _ref$sizeTypes === void 0 ? {
                   width: SizeTypes.PERCENT,
                   height: SizeTypes.PERCENT,
                   top: SizeTypes.PERCENT,
                   right: SizeTypes.PERCENT,
                   bottom: SizeTypes.PERCENT,
                   left: SizeTypes.PERCENT
-                } : _ref$sizeTypes, event = _ref.event;
-                _this$getMousePositio = _this.getMousePosition(event, sizeTypes), top = _this$getMousePositio.top, right = _this$getMousePositio.right, bottom = _this$getMousePositio.bottom, left = _this$getMousePositio.left;
+                } : _ref$sizeTypes, _ref$event = _ref.event, event = _ref$event === void 0 ? undefined : _ref$event, _ref$type = _ref.type, type = _ref$type === void 0 ? AddBlockType.DEFAULT : _ref$type;
+
+                if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
+                  position = _this.getMousePosition(event, sizeTypes);
+                  top = position.top;
+                  right = position.right;
+                  bottom = position.bottom;
+                  left = position.left;
+                }
+
                 _context.next = 4;
-                return _this.addBlock({
-                  width: width,
-                  height: height,
-                  top: top,
-                  right: right,
-                  bottom: bottom,
-                  sizeTypes: sizeTypes,
-                  left: left,
-                  sticky: sticky,
-                  stickyToGuid: stickyToGuid,
-                  parentGuid: parentGuid
-                });
-
-              case 4:
-                guid = _context.sent;
-                refs = _this.$refs;
-                block = refs[guid][0];
-                block.onDrag();
-                block.dragStart(event, true);
-                return _context.abrupt("return", guid);
-
-              case 10:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    addBlock: function addBlock(_ref2) {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-        var _ref2$width, width, _ref2$height, height, _ref2$top, top, _ref2$right, right, _ref2$bottom, bottom, _ref2$left, left, _ref2$sticky, sticky, _ref2$stickyToGuid, stickyToGuid, _ref2$parentGuid, parentGuid, _ref2$sizeTypes, sizeTypes, guid;
-
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _ref2$width = _ref2.width, width = _ref2$width === void 0 ? 0 : _ref2$width, _ref2$height = _ref2.height, height = _ref2$height === void 0 ? 0 : _ref2$height, _ref2$top = _ref2.top, top = _ref2$top === void 0 ? 0 : _ref2$top, _ref2$right = _ref2.right, right = _ref2$right === void 0 ? 0 : _ref2$right, _ref2$bottom = _ref2.bottom, bottom = _ref2$bottom === void 0 ? 0 : _ref2$bottom, _ref2$left = _ref2.left, left = _ref2$left === void 0 ? 0 : _ref2$left, _ref2$sticky = _ref2.sticky, sticky = _ref2$sticky === void 0 ? Sticky.TL : _ref2$sticky, _ref2$stickyToGuid = _ref2.stickyToGuid, stickyToGuid = _ref2$stickyToGuid === void 0 ? null : _ref2$stickyToGuid, _ref2$parentGuid = _ref2.parentGuid, parentGuid = _ref2$parentGuid === void 0 ? null : _ref2$parentGuid, _ref2$sizeTypes = _ref2.sizeTypes, sizeTypes = _ref2$sizeTypes === void 0 ? {
-                  width: SizeTypes.PERCENT,
-                  height: SizeTypes.PERCENT,
-                  top: SizeTypes.PERCENT,
-                  right: SizeTypes.PERCENT,
-                  bottom: SizeTypes.PERCENT,
-                  left: SizeTypes.PERCENT
-                } : _ref2$sizeTypes;
-                _context2.next = 3;
-                return _this2.store.dispatch(ADD_BLOCK, {
+                return _this.store.dispatch(ADD_BLOCK, {
                   width: width,
                   height: height,
                   top: top,
@@ -15319,16 +15287,24 @@ var component = normalizeComponent(
                   sizeTypes: sizeTypes
                 });
 
-              case 3:
-                guid = _context2.sent;
-                return _context2.abrupt("return", guid);
+              case 4:
+                guid = _context.sent;
 
-              case 5:
+                if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
+                  refs = _this.$refs;
+                  block = refs[guid][0];
+                  block.onDrag();
+                  block.dragStart(event, true);
+                }
+
+                return _context.abrupt("return", guid);
+
+              case 7:
               case "end":
-                return _context2.stop();
+                return _context.stop();
             }
           }
-        }, _callee2);
+        }, _callee);
       }))();
     }
   },
@@ -15340,8 +15316,8 @@ var component = normalizeComponent(
 }));
 // CONCATENATED MODULE: ./src/components/VueDraggableResponsive/index.vue?vue&type=script&lang=ts&
  /* harmony default export */ var components_VueDraggableResponsivevue_type_script_lang_ts_ = (VueDraggableResponsivevue_type_script_lang_ts_); 
-// EXTERNAL MODULE: ./src/components/VueDraggableResponsive/index.vue?vue&type=style&index=0&id=d01b32d2&scoped=true&lang=css&
-var VueDraggableResponsivevue_type_style_index_0_id_d01b32d2_scoped_true_lang_css_ = __webpack_require__("a348");
+// EXTERNAL MODULE: ./src/components/VueDraggableResponsive/index.vue?vue&type=style&index=0&id=47fc78c6&scoped=true&lang=css&
+var VueDraggableResponsivevue_type_style_index_0_id_47fc78c6_scoped_true_lang_css_ = __webpack_require__("7a48");
 
 // CONCATENATED MODULE: ./src/components/VueDraggableResponsive/index.vue
 
@@ -15358,7 +15334,7 @@ var VueDraggableResponsive_component = normalizeComponent(
   staticRenderFns,
   false,
   null,
-  "d01b32d2",
+  "47fc78c6",
   null
   
 )

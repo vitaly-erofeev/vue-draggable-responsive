@@ -34,8 +34,8 @@ export default class BlockManager {
     this.type = type
 
     if (isInteractive) {
-      this.clientX += this.blockElementRect.x
-      this.clientY += this.blockElementRect.y
+      this.clientX = this.blockElementRect.x + 15
+      this.clientY = this.blockElementRect.y + 15
     }
   }
 

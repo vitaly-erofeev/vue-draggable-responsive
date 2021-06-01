@@ -28,6 +28,7 @@ import { Store } from 'vuex'
 // eslint-disable-next-line no-unused-vars
 import { InterfaceState } from '@/components/VueDraggableResponsive/infrastructure/store/state'
 import { SizeTypes } from '@/components/VueDraggableResponsive/domain/model/SizeTypes'
+import { AddBlockType } from '@/components/VueDraggableResponsive/domain/model/AddBlockType'
 
 export default Vue.extend({
   name: 'VueDraggableResponsive',
@@ -73,69 +74,14 @@ export default Vue.extend({
         left: Math.floor(left)
       }
     },
-    async interactiveAddBlock ({
-      width = 0,
-      height = 0,
-      sticky = Sticky.TL,
-      stickyToGuid = null,
-      parentGuid = null,
-      sizeTypes = {
-        width: SizeTypes.PERCENT,
-        height: SizeTypes.PERCENT,
-        top: SizeTypes.PERCENT,
-        right: SizeTypes.PERCENT,
-        bottom: SizeTypes.PERCENT,
-        left: SizeTypes.PERCENT
-      },
-      event
-    }: {
-      width: number,
-      height: number,
-      sticky: Sticky,
-      stickyToGuid: string | null,
-      parentGuid: string | null,
-      sizeTypes: {
-        width: SizeTypes,
-        height: SizeTypes,
-        top: SizeTypes,
-        right: SizeTypes,
-        bottom: SizeTypes,
-        left: SizeTypes
-      },
-      event: MouseEvent
-    }): Promise<string> {
-      const {
-        top,
-        right,
-        bottom,
-        left
-      } = this.getMousePosition(event, sizeTypes)
-      const guid = await this.addBlock({
-        width,
-        height,
-        top,
-        right,
-        bottom,
-        sizeTypes,
-        left,
-        sticky,
-        stickyToGuid,
-        parentGuid
-      })
-      const refs: any = this.$refs
-      const block: any = refs[guid][0]
-      block.onDrag()
-      block.dragStart(event, true)
-      return guid
-    },
     async addBlock (
       {
         width = 0,
         height = 0,
-        top = 0,
-        right = 0,
-        bottom = 0,
-        left = 0,
+        top = undefined,
+        right = undefined,
+        bottom = undefined,
+        left = undefined,
         sticky = Sticky.TL,
         stickyToGuid = null,
         parentGuid = null,
@@ -146,17 +92,19 @@ export default Vue.extend({
           right: SizeTypes.PERCENT,
           bottom: SizeTypes.PERCENT,
           left: SizeTypes.PERCENT
-        }
+        },
+        event = undefined,
+        type = AddBlockType.DEFAULT
       }: {
           width: number,
           height: number,
           sticky: Sticky,
           stickyToGuid: string | null,
           parentGuid: string | null,
-          top: number,
-          right: number,
-          bottom: number,
-          left: number,
+          top?: number | undefined,
+          right?: number | undefined,
+          bottom?: number | undefined,
+          left?: number | undefined,
           sizeTypes?: {
             width: SizeTypes,
             height: SizeTypes,
@@ -164,9 +112,18 @@ export default Vue.extend({
             right: SizeTypes,
             bottom: SizeTypes,
             left: SizeTypes
-          }
+          },
+          event?: MouseEvent | undefined,
+          type: AddBlockType
         }
     ): Promise<string> {
+      if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
+        const position: {top: number, right: number, bottom: number, left: number} = this.getMousePosition(event, sizeTypes)
+        top = position.top
+        right = position.right
+        bottom = position.bottom
+        left = position.left
+      }
       const guid = await this.store.dispatch(ADD_BLOCK, {
         width,
         height,
@@ -179,6 +136,12 @@ export default Vue.extend({
         parentGuid,
         sizeTypes
       })
+      if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
+        const refs: any = this.$refs
+        const block: any = refs[guid][0]
+        block.onDrag()
+        block.dragStart(event, true)
+      }
       return guid
     }
   },

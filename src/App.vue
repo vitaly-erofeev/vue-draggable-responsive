@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import VueDraggableResponsive from './components/VueDraggableResponsive/index.vue'
+import VueDraggableResponsive from './index.vue'
 
 export default {
   name: 'App',

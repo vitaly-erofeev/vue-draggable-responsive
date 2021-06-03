@@ -30,6 +30,8 @@
         :key="index"
         :block="_block"
         :step="step"
+        :ref="block.guid"
+        :style="block.style"
         @start-drag="$emit('start-drag', $event)"
         @stop-drag="$emit('stop-drag', $event)"
         @dragging="$emit('dragging', $event)"
@@ -43,20 +45,18 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+// eslint-disable-next-line no-unused-vars
+import Vue_, { VueConstructor } from 'vue'
 import BlockDTO from '../../domain/model/BlockDTO'
-import BlockManager from '@/components/VueDraggableResponsive/application/service/BlockManager'
+import BlockManager from '@/application/service/BlockManager'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
-import BlockRepository from '@/components/VueDraggableResponsive/infrastructure/domain/repository/BlockRepository'
-import store from '@/components/VueDraggableResponsive/infrastructure/store'
+import { Sticky } from '@/domain/model/Sticky'
 // eslint-disable-next-line no-unused-vars
-import { Store } from 'vuex'
-// eslint-disable-next-line no-unused-vars
-import { InterfaceState } from '@/components/VueDraggableResponsive/infrastructure/store/state'
-import { Sticky } from '@/components/VueDraggableResponsive/domain/model/Sticky'
+import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
 
+const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 library.add(faAngleDown)
 
 export default Vue.extend({
@@ -72,8 +72,8 @@ export default Vue.extend({
       type: Number
     }
   },
+  inject: ['getStore'],
   data (): {
-    store: Store<InterfaceState>,
     blockManager: undefined | BlockManager,
     isResizing: boolean,
     isDragging: boolean,
@@ -85,7 +85,6 @@ export default Vue.extend({
     }
     } {
     return {
-      store: store,
       blockManager: undefined,
       isResizing: false,
       isDragging: false,
@@ -148,7 +147,7 @@ export default Vue.extend({
       if (typeof this.blockManager === 'undefined') {
         this.blockManager = new BlockManager(
           this.block,
-          new BlockRepository(this.store),
+          this.getStore(),
             this.$refs.draggableContainer as Element,
             this.step
         )
@@ -200,6 +199,7 @@ export default Vue.extend({
   transform: rotate(-45deg);
   cursor: se-resize;
   color: #539FFF;
+  z-index: 999;
 }
 
 .resize-handler.tl {

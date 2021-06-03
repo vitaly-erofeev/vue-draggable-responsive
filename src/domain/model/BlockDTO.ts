@@ -1,23 +1,23 @@
 import { Sticky } from './Sticky'
-import { BlockProperties } from '@/components/VueDraggableResponsive/domain/model/BlockProperties'
-import { SizeTypes } from '@/components/VueDraggableResponsive/domain/model/SizeTypes'
+import { BlockProperties } from '@/domain/model/BlockProperties'
+import { SizeTypes } from '@/domain/model/SizeTypes'
 
 export default class BlockDTO {
   [index: string]: any;
 
   width: number
   height: number
-  top: number
-  right: number
-  bottom: number
-  left: number
+  top?: number
+  right?: number
+  bottom?: number
+  left?: number
   sticky: Sticky
   sizeTypes: { [index: string]: any; width: SizeTypes; height: SizeTypes; top: SizeTypes; right: SizeTypes; bottom: SizeTypes; left: SizeTypes }
   children: BlockDTO[]
   guid: string
-  stickyToGuid: null | string
-  debug: any
-  parentGuid: null | string
+  stickyToGuid?: string
+  parentGuid?: string
+  style?: string
 
   constructor (
     {
@@ -37,10 +37,9 @@ export default class BlockDTO {
         bottom: SizeTypes.PERCENT,
         left: SizeTypes.PERCENT
       },
-      guid,
-      stickyToGuid = null,
-      debug = null,
-      parentGuid = null
+      guid = 'guid',
+      stickyToGuid,
+      parentGuid
     }: BlockProperties
   ) {
     const {
@@ -62,7 +61,6 @@ export default class BlockDTO {
     this.children = children
     this.width = width
     this.height = height
-    this.debug = debug
     this.guid = guid
     this.stickyToGuid = stickyToGuid
     this.parentGuid = parentGuid

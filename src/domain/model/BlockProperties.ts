@@ -1,0 +1,25 @@
+import { Sticky } from '@/domain/model/Sticky'
+import BlockDTO from '@/domain/model/BlockDTO'
+import { SizeTypes } from '@/domain/model/SizeTypes'
+
+export interface BlockProperties {
+  width: number,
+  height: number,
+  top?: number,
+  right?: number,
+  bottom?: number,
+  left?: number,
+  sticky: Sticky,
+  sizeTypes: {
+    width: SizeTypes,
+    height: SizeTypes,
+    top: SizeTypes,
+    right: SizeTypes,
+    bottom: SizeTypes,
+    left: SizeTypes
+  },
+  guid?: string,
+  stickyToGuid?: string,
+  children?: BlockDTO[],
+  parentGuid?: string
+}

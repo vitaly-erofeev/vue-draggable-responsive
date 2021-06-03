@@ -1,10 +1,10 @@
-import BlockDTO from '@/components/VueDraggableResponsive/domain/model/BlockDTO'
-import CustomMouseEvent from '@/components/VueDraggableResponsive/domain/model/CustomMouseEvent'
-import CustomDomRect from '@/components/VueDraggableResponsive/domain/model/CustomDomRect'
-import BreakpointsFactory from '@/components/VueDraggableResponsive/domain/service/BreakpointsFactory'
-import { Breakpoints } from '@/components/VueDraggableResponsive/domain/model/Breakpoints'
-import { BlockRepositoryInterface } from '@/components/VueDraggableResponsive/domain/repository/BlockRepositoryInterface'
-import { SizeTypes } from '@/components/VueDraggableResponsive/domain/model/SizeTypes'
+import BlockDTO from '@/domain/model/BlockDTO'
+import CustomMouseEvent from '@/domain/model/CustomMouseEvent'
+import CustomDomRect from '@/domain/model/CustomDomRect'
+import BreakpointsFactory from '@/domain/service/BreakpointsFactory'
+import { Breakpoints } from '@/domain/model/Breakpoints'
+import { BlockRepositoryInterface } from '@/domain/repository/BlockRepositoryInterface'
+import { SizeTypes } from '@/domain/model/SizeTypes'
 
 export default class BlockManager {
   [index: string]: any;

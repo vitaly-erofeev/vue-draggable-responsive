@@ -6,6 +6,7 @@
         :block="block"
         :step="step"
         :ref="block.guid"
+        :style="block.style"
         @start-drag="$emit('start-drag', $event)"
         @stop-drag="$emit('stop-drag', $event)"
         @dragging="$emit('dragging', $event)"
@@ -18,17 +19,21 @@
 </template>
 
 <script lang="ts">
-import Block from '@/components/VueDraggableResponsive/infrastructure/components/Block.vue'
-import Vue from 'vue'
-import { Sticky } from '@/components/VueDraggableResponsive/domain/model/Sticky'
-import { ADD_BLOCK } from '@/components/VueDraggableResponsive/infrastructure/store/action-types'
-import store from '@/components/VueDraggableResponsive/infrastructure/store'
+import Block from '@/infrastructure/components/Block.vue'
 // eslint-disable-next-line no-unused-vars
-import { Store } from 'vuex'
+import Vue_, { VueConstructor } from 'vue'
+import { Sticky } from '@/domain/model/Sticky'
+import { SizeTypes } from '@/domain/model/SizeTypes'
+import { AddBlockType } from '@/domain/model/AddBlockType'
 // eslint-disable-next-line no-unused-vars
-import { InterfaceState } from '@/components/VueDraggableResponsive/infrastructure/store/state'
-import { SizeTypes } from '@/components/VueDraggableResponsive/domain/model/SizeTypes'
-import { AddBlockType } from '@/components/VueDraggableResponsive/domain/model/AddBlockType'
+import { BlockRepositoryInterface } from '@/domain/repository/BlockRepositoryInterface'
+import BlockRepository from '@/infrastructure/domain/repository/BlockRepository'
+// eslint-disable-next-line no-unused-vars
+import BlockDTO from '@/domain/model/BlockDTO'
+// eslint-disable-next-line no-unused-vars
+import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
+
+const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 
 export default Vue.extend({
   name: 'VueDraggableResponsive',
@@ -43,15 +48,23 @@ export default Vue.extend({
       default: () => []
     }
   },
-  data (): { blocksArray: object[], store: Store<InterfaceState> } {
+  provide () {
     return {
-      store: store,
+      getStore: this.getStore
+    }
+  },
+  data (): { blocksArray: object[], store: BlockRepositoryInterface } {
+    return {
+      store: new BlockRepository(),
       blocksArray: this.blocks
     }
   },
   methods: {
-    getBlocks (): [] {
-      return this.store.getters.blocksAsList
+    getStore (): BlockRepositoryInterface {
+      return this.store
+    },
+    getBlocks (): BlockDTO[] {
+      return this.store.get()
     },
     getMousePosition (event: MouseEvent, sizeTypes: {
       width: SizeTypes,
@@ -74,7 +87,7 @@ export default Vue.extend({
         left: Math.floor(left)
       }
     },
-    async addBlock (
+    addBlock (
       {
         width = 0,
         height = 0,
@@ -83,8 +96,8 @@ export default Vue.extend({
         bottom = undefined,
         left = undefined,
         sticky = Sticky.TL,
-        stickyToGuid = null,
-        parentGuid = null,
+        stickyToGuid = undefined,
+        parentGuid = undefined,
         sizeTypes = {
           width: SizeTypes.PERCENT,
           height: SizeTypes.PERCENT,
@@ -99,12 +112,12 @@ export default Vue.extend({
           width: number,
           height: number,
           sticky: Sticky,
-          stickyToGuid: string | null,
-          parentGuid: string | null,
-          top?: number | undefined,
-          right?: number | undefined,
-          bottom?: number | undefined,
-          left?: number | undefined,
+          stickyToGuid?: string,
+          parentGuid?: string,
+          top?: number,
+          right?: number,
+          bottom?: number,
+          left?: number,
           sizeTypes?: {
             width: SizeTypes,
             height: SizeTypes,
@@ -113,10 +126,10 @@ export default Vue.extend({
             bottom: SizeTypes,
             left: SizeTypes
           },
-          event?: MouseEvent | undefined,
+          event?: MouseEvent,
           type: AddBlockType
         }
-    ): Promise<string> {
+    ): string {
       if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
         const position: {top: number, right: number, bottom: number, left: number} = this.getMousePosition(event, sizeTypes)
         top = position.top
@@ -124,7 +137,8 @@ export default Vue.extend({
         bottom = position.bottom
         left = position.left
       }
-      const guid = await this.store.dispatch(ADD_BLOCK, {
+
+      const guid = this.store.add({
         width,
         height,
         top,
@@ -137,17 +151,19 @@ export default Vue.extend({
         sizeTypes
       })
       if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
-        const refs: any = this.$refs
-        const block: any = refs[guid][0]
-        block.onDrag()
-        block.dragStart(event, true)
+        this.$nextTick(() => {
+          const refs: any = this.$refs
+          const block: any = refs[guid][0]
+          block.onDrag()
+          block.dragStart(event, true)
+        })
       }
       return guid
     }
   },
   computed: {
-    _blocks (): [] {
-      return this.store.getters.blocks
+    _blocks (): BlockDTO[] {
+      return this.store.get()
     }
   }
 })

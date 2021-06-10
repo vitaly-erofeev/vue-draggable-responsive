@@ -36,7 +36,7 @@ import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInje
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 
 export default Vue.extend({
-  name: 'VueDraggableResponsive',
+  name: 'VueDraggableResponsiveDesigner',
   components: { Block },
   props: {
     step: {
@@ -159,6 +159,9 @@ export default Vue.extend({
         })
       }
       return guid
+    },
+    removeBlock (guid: string):void {
+      this.store.remove(guid)
     }
   },
   computed: {

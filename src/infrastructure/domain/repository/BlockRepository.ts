@@ -43,4 +43,20 @@ export default class BlockRepository implements BlockRepositoryInterface {
   get (): BlockDTO[] {
     return this.blocks
   }
+
+  remove (guid: string): void {
+    const block = this.getByGuid(guid)
+    if (!block) {
+      return
+    }
+    if (block.parentGuid) {
+      const parent = this.getByGuid(block.parentGuid)
+      if (!parent) {
+        return
+      }
+      parent.children = parent.children.filter((item) => item.guid !== guid)
+      return
+    }
+    this.blocks = this.blocks.filter((item) => item.guid !== guid)
+  }
 }

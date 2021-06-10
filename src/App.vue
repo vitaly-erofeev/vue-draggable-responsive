@@ -6,6 +6,8 @@
       <button @click="addChildren">addChild</button>
       <button @click="addSticky">addSticky</button>
       <button @click="get">get</button>
+      <button @click="preview = !preview">preview: {{ preview }}</button>
+      <button @click="remove">remove active</button>
       <pre>{{ activeBlock }}</pre>
     </div>
     <vue-draggable-responsive
@@ -13,28 +15,54 @@
         style="height: 500px;width: 1059px;display: inline-block"
         :step="1"
         @start-drag="onStartDrag"
+        v-show="!preview"
     >
       <template v-slot:content="{ block }">
         {{ block }}
       </template>
     </vue-draggable-responsive>
+    <vue-draggable-responsive-previewer
+        v-show="preview"
+        :blocks="blocks"
+        style="height: 500px;width: 1059px;display: inline-block"
+    >
+      <template v-slot:content="{ block }">
+        {{ block }}
+      </template>
+    </vue-draggable-responsive-previewer>
   </div>
 </template>
 
 <script>
 import VueDraggableResponsive from './index.vue'
+import VueDraggableResponsivePreviewer from '@/previewer'
 
 export default {
   name: 'App',
   components: {
+    VueDraggableResponsivePreviewer,
     VueDraggableResponsive
   },
   data () {
     return {
-      activeBlock: null
+      activeBlock: null,
+      preview: false,
+      blocks: []
+    }
+  },
+  watch: {
+    preview (value) {
+      if (value) {
+        this.blocks = this.$refs.designer.getBlocks()
+      }
     }
   },
   methods: {
+    remove () {
+      if (this.activeBlock) {
+        this.$refs.designer.removeBlock(this.activeBlock.guid)
+      }
+    },
     get () {
       console.log(this.$refs.designer.getBlocks())
     },

@@ -7,4 +7,6 @@ export interface BlockRepositoryInterface {
   add(block: BlockProperties): string
 
   get(): BlockDTO[]
+
+  remove(guid: string): void
 }

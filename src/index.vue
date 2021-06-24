@@ -6,7 +6,6 @@
         :block="block"
         :step="step"
         :ref="block.guid"
-        :style="block.style"
         @start-drag="$emit('start-drag', $event)"
         @stop-drag="$emit('stop-drag', $event)"
         @dragging="$emit('dragging', $event)"
@@ -107,7 +106,8 @@ export default Vue.extend({
           left: SizeTypes.PERCENT
         },
         event = undefined,
-        type = AddBlockType.DEFAULT
+        type = AddBlockType.DEFAULT,
+        isStretched = false
       }: {
           width: number,
           height: number,
@@ -127,7 +127,8 @@ export default Vue.extend({
             left: SizeTypes
           },
           event?: MouseEvent,
-          type: AddBlockType
+          type: AddBlockType,
+          isStretched: boolean
         }
     ): string {
       if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
@@ -148,7 +149,8 @@ export default Vue.extend({
         sticky,
         stickyToGuid,
         parentGuid,
-        sizeTypes
+        sizeTypes,
+        isStretched
       })
       if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
         this.$nextTick(() => {

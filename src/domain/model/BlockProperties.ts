@@ -18,6 +18,7 @@ export interface BlockProperties {
     bottom: SizeTypes,
     left: SizeTypes
   },
+  isStretched: boolean,
   guid?: string,
   stickyToGuid?: string,
   children?: BlockDTO[],

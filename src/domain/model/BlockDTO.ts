@@ -15,6 +15,7 @@ export default class BlockDTO {
   sizeTypes: { [index: string]: any; width: SizeTypes; height: SizeTypes; top: SizeTypes; right: SizeTypes; bottom: SizeTypes; left: SizeTypes }
   children: BlockDTO[]
   guid: string
+  isStretched: boolean = false
   stickyToGuid?: string
   parentGuid?: string
   style?: string
@@ -39,7 +40,8 @@ export default class BlockDTO {
       },
       guid = 'guid',
       stickyToGuid,
-      parentGuid
+      parentGuid,
+      isStretched
     }: BlockProperties
   ) {
     const {
@@ -64,6 +66,8 @@ export default class BlockDTO {
     this.guid = guid
     this.stickyToGuid = stickyToGuid
     this.parentGuid = parentGuid
+    this.isStretched = isStretched
+    this.style = 'background: #' + Math.floor(Math.random() * 16777215).toString(16)
   }
 
   private static getPreparedSizes ({

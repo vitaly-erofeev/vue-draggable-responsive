@@ -24,18 +24,19 @@
         <span>{{ block.top }}{{ block.sizeTypes.top }}</span>
       </div>
     </slot>
-    <slot :block="block" name="content"></slot>
-    <block
-        v-for="(_block, index) in block.children"
-        :key="index"
-        :block="_block"
-        :step="step"
-        :ref="block.guid"
-        :style="block.style"
-        @start-drag="$emit('start-drag', $event)"
-        @stop-drag="$emit('stop-drag', $event)"
-        @dragging="$emit('dragging', $event)"
-    ></block>
+    <div class="content" :style="block.style">
+      <slot :block="block" name="content"></slot>
+      <block
+          v-for="(_block, index) in block.children"
+          :key="index"
+          :block="_block"
+          :step="step"
+          :ref="block.guid"
+          @start-drag="$emit('start-drag', $event)"
+          @stop-drag="$emit('stop-drag', $event)"
+          @dragging="$emit('dragging', $event)"
+      ></block>
+    </div>
     <font-awesome-icon
         icon="angle-down"
         class="resize-handler"
@@ -82,7 +83,9 @@ export default Vue.extend({
       top: number,
       right: number,
       bottom: number
-    }
+    },
+    parentBlock?: BlockDTO,
+    parentElement?: Element
     } {
     return {
       blockManager: undefined,
@@ -93,7 +96,9 @@ export default Vue.extend({
         top: 0,
         right: 0,
         bottom: 0
-      }
+      },
+      parentBlock: undefined,
+      parentElement: undefined
     }
   },
   computed: {
@@ -281,5 +286,12 @@ export default Vue.extend({
 .block .position_line.top {
   left: calc(50% - 1px);
   width: 1px;
+}
+
+.block .content {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: auto;
 }
 </style>

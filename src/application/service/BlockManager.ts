@@ -49,8 +49,24 @@ export default class BlockManager {
     blockRect.left -= parentElementRect.left
     blockRect.top -= parentElementRect.top
 
+    blockRect.left += parentElement.scrollLeft
+    blockRect.top += parentElement.scrollTop
+
     blockRect.right = parentElementRect.width - (blockRect.left + blockRect.width)
     blockRect.bottom = parentElementRect.height - (blockRect.top + blockRect.height)
+
+    return blockRect
+  }
+
+  public static getAbsoluteSizesByParent (block: BlockDTO, blockElement: Element): CustomDomRect {
+    let blockRect = new CustomDomRect()
+    const parentElement = blockElement.parentElement
+    if (!parentElement) {
+      return blockRect
+    }
+    const parentElementRect = parentElement.getBoundingClientRect()
+    blockRect.height = parentElementRect.height / 100 * block.height
+    blockRect.width = parentElementRect.width / 100 * block.width
 
     return blockRect
   }

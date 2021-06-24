@@ -8,5 +8,7 @@ export interface BlockRepositoryInterface {
 
   get(): BlockDTO[]
 
+  getByGuid (guid: string): BlockDTO | undefined
+
   remove(guid: string): void
 }

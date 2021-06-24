@@ -6,6 +6,10 @@ import { BlockProperties } from '@/domain/model/BlockProperties'
 export default class BlockRepository implements BlockRepositoryInterface {
   private blocks: BlockDTO[] = [];
 
+  constructor (blocks: BlockDTO[] = []) {
+    this.blocks = blocks
+  }
+
   change (block: BlockDTO, property: string, value: any): void {
     const blockModel = this.getByGuid(block.guid)
     if (typeof blockModel !== 'undefined') {

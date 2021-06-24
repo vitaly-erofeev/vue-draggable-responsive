@@ -3,6 +3,7 @@
     <div style="width: 20%;display:inline-block;float: left;height: 100%; overflow: auto">
       <button @click="addContainer(0)">add</button>
       <button @click="addContainer(1, $event)">addT</button>
+      <button @click="addContainer(1, $event, true)">addStretched</button>
       <button @click="addChildren">addChild</button>
       <button @click="addSticky">addSticky</button>
       <button @click="get">get</button>
@@ -14,6 +15,7 @@
         ref="designer"
         style="height: 500px;width: 1059px;display: inline-block"
         :step="1"
+        :active-block-guid="(activeBlock || {}).guid"
         @start-drag="onStartDrag"
         v-show="!preview"
     >
@@ -22,7 +24,7 @@
       </template>
     </vue-draggable-responsive>
     <vue-draggable-responsive-previewer
-        v-show="preview"
+        v-if="preview"
         :blocks="blocks"
         style="height: 500px;width: 1059px;display: inline-block"
     >
@@ -45,7 +47,7 @@ export default {
   },
   data () {
     return {
-      activeBlock: null,
+      activeBlock: undefined,
       preview: false,
       blocks: []
     }
@@ -61,6 +63,7 @@ export default {
     remove () {
       if (this.activeBlock) {
         this.$refs.designer.removeBlock(this.activeBlock.guid)
+        this.activeBlock = undefined
       }
     },
     get () {
@@ -81,7 +84,7 @@ export default {
         })
       }
     },
-    addContainer (type, event) {
+    addContainer (type, event, isStretched = false) {
       this.$refs.designer.addBlock({
         width: 70,
         height: 10,
@@ -89,7 +92,8 @@ export default {
         right: 0,
         sticky: 'tl',
         type,
-        event
+        event,
+        isStretched
       })
     },
     addChildren () {

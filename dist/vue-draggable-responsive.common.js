@@ -10311,7 +10311,8 @@ var BlockDTO = /*#__PURE__*/function () {
         guid = _ref$guid === void 0 ? 'guid' : _ref$guid,
         stickyToGuid = _ref.stickyToGuid,
         parentGuid = _ref.parentGuid,
-        isStretched = _ref.isStretched;
+        isStretched = _ref.isStretched,
+        style = _ref.style;
 
     Object(_Users_vitalyerofeev_PhpstormProjects_InterfaceDesigner_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(this, BlockDTO);
 
@@ -10344,6 +10345,7 @@ var BlockDTO = /*#__PURE__*/function () {
     this.stickyToGuid = stickyToGuid;
     this.parentGuid = parentGuid;
     this.isStretched = isStretched;
+    this.style = style;
   }
 
   Object(_Users_vitalyerofeev_PhpstormProjects_InterfaceDesigner_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])(BlockDTO, null, [{

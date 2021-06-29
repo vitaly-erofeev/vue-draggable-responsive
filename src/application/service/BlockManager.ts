@@ -18,6 +18,7 @@ export default class BlockManager {
   private type: string = 'drag'
   private blockElement: Element
   private blockElementRect: CustomDomRect = new CustomDomRect()
+  private parentElement: HTMLElement | null
   private readonly step: number
 
   constructor (block: BlockDTO, repository: BlockRepositoryInterface, blockElement: Element, step: number = 0.5) {
@@ -25,6 +26,7 @@ export default class BlockManager {
     this.block = block
     this.step = step
     this.blockElement = blockElement
+    this.parentElement = this.blockElement.parentElement
   }
 
   public startDrag (event: MouseEvent, type: string, isInteractive: boolean = false): void {
@@ -39,18 +41,22 @@ export default class BlockManager {
     }
   }
 
+  public changeParent () {
+    this.parentElement = this.blockElement.closest('.block')
+    this.blockElementRect = this.getBlockElementRect()
+  }
+
   private getBlockElementRect (): CustomDomRect {
     const blockRect: CustomDomRect = CustomDomRect.fromDocRect(this.blockElement.getBoundingClientRect())
-    const parentElement = this.blockElement.parentElement
-    if (!parentElement) {
+    if (!this.parentElement) {
       return blockRect
     }
-    const parentElementRect = parentElement.getBoundingClientRect()
+    const parentElementRect = this.parentElement.getBoundingClientRect()
     blockRect.left -= parentElementRect.left
     blockRect.top -= parentElementRect.top
 
-    blockRect.left += parentElement.scrollLeft
-    blockRect.top += parentElement.scrollTop
+    blockRect.left += this.parentElement.scrollLeft
+    blockRect.top += this.parentElement.scrollTop
 
     blockRect.right = parentElementRect.width - (blockRect.left + blockRect.width)
     blockRect.bottom = parentElementRect.height - (blockRect.top + blockRect.height)
@@ -144,12 +150,11 @@ export default class BlockManager {
   }
 
   private setRelativePosition (type: Breakpoints): void {
-    const parentElement = this.blockElement.parentElement
     const breakpoints = BreakpointsFactory.build(type, this.block.sticky)
-    if (!parentElement || Math.abs(this[breakpoints.movement]) < 2) {
+    if (!this.parentElement || Math.abs(this[breakpoints.movement]) < 2) {
       return
     }
-    const parentElementPositions: CustomDomRect = parentElement.getBoundingClientRect()
+    const parentElementPositions: CustomDomRect = this.parentElement.getBoundingClientRect()
     let currentPosition
     if (breakpoints.inverse) {
       currentPosition = Math.floor(this.blockElementRect[breakpoints.offset]) + this[breakpoints.movement]

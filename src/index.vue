@@ -31,6 +31,8 @@ import BlockRepository from '@/infrastructure/domain/repository/BlockRepository'
 import BlockDTO from '@/domain/model/BlockDTO'
 // eslint-disable-next-line no-unused-vars
 import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
+// eslint-disable-next-line no-unused-vars
+import { BlockProperties } from '@/domain/model/BlockProperties'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 
@@ -59,11 +61,17 @@ export default Vue.extend({
     }
   },
   methods: {
+    setActiveBlock (guid: string): void {
+      this.store.setActiveBlock(guid)
+    },
     getStore (): BlockRepositoryInterface {
       return this.store
     },
     getBlocks (): BlockDTO[] {
       return this.store.get()
+    },
+    setBlocks (blocks: BlockProperties[]): void {
+      this.store.set(blocks)
     },
     getMousePosition (event: MouseEvent, sizeTypes: {
       width: SizeTypes,

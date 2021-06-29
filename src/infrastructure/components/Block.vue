@@ -1,7 +1,11 @@
 <template>
   <div
       :style="positionStyle"
-      :class="{ 'block': true, 'highlight' : isResizing || isDragging }"
+      :class="{
+        'block': true,
+        'highlight' : isResizing || isDragging,
+        'active': block.isActive,
+        'active_parent': block.isActiveAsParent }"
       ref="draggableContainer"
       @mousedown.stop="dragStart"
   >
@@ -9,6 +13,9 @@
       <div class="block_info" v-show="isResizing">
         {{ block.width }}{{ block.sizeTypes.width }} x {{ block.height }}{{ block.sizeTypes.height }}
       </div>
+<!--      <div class="block_info" v-show="ctrlPressed">
+        CTRL
+      </div>-->
       <div
           v-show="isDragging"
           class="position_line left"
@@ -85,7 +92,8 @@ export default Vue.extend({
       bottom: number
     },
     parentBlock?: BlockDTO,
-    parentElement?: Element
+    parentElement?: Element,
+    ctrlPressed: boolean
     } {
     return {
       blockManager: undefined,
@@ -98,7 +106,8 @@ export default Vue.extend({
         bottom: 0
       },
       parentBlock: undefined,
-      parentElement: undefined
+      parentElement: undefined,
+      ctrlPressed: false
     }
   },
   computed: {
@@ -174,10 +183,17 @@ export default Vue.extend({
       this.isDragging = true
       document.addEventListener('mousemove', this.elementDrag)
       document.addEventListener('mouseup', this.dragStop)
+      document.addEventListener('keydown', this.keyDown)
+      document.addEventListener('keyup', this.keyUp)
     },
     elementDrag (event: MouseEvent): void {
       event.preventDefault()
       this.$emit('dragging', this.block)
+      /* if (this.ctrlPressed) {
+        if (this.block.parentGuid) {
+          this.getBlockManager().changeParent()
+        }
+      } */
       this.getBlockManager().change(event)
       if (this.isDragging) {
         this.$nextTick(() => {
@@ -185,12 +201,25 @@ export default Vue.extend({
         })
       }
     },
+    keyDown (event: KeyboardEvent) {
+      if (event.ctrlKey) {
+        this.ctrlPressed = true
+      }
+    },
+    keyUp (event: KeyboardEvent) {
+      if (event.key === 'Control') {
+        this.ctrlPressed = false
+      }
+    },
     dragStop (): void {
       this.$emit('stop-drag', this.block)
       this.isResizing = false
       this.isDragging = false
+      this.ctrlPressed = false
       document.removeEventListener('mousemove', this.elementDrag)
       document.removeEventListener('mouseup', this.dragStop)
+      document.removeEventListener('keydown', this.keyDown)
+      document.removeEventListener('keyup', this.keyUp)
     }
   }
 })
@@ -249,6 +278,7 @@ export default Vue.extend({
   padding: 3px;
   color: white;
   font-weight: 400;
+  z-index: 9999;
 }
 
 .block .position_line {
@@ -293,5 +323,13 @@ export default Vue.extend({
   height: 100%;
   position: absolute;
   overflow: auto;
+}
+
+.block.active {
+  outline: 3px solid #539FFF;
+}
+
+.block.active_parent {
+  outline: 3px solid green;
 }
 </style>

@@ -19,6 +19,8 @@ export default class BlockDTO {
   stickyToGuid?: string
   parentGuid?: string
   style?: string
+  isActive: boolean = false
+  isActiveAsParent: boolean = false
 
   constructor (
     {
@@ -67,7 +69,6 @@ export default class BlockDTO {
     this.stickyToGuid = stickyToGuid
     this.parentGuid = parentGuid
     this.isStretched = isStretched
-    this.style = 'background: #' + Math.floor(Math.random() * 16777215).toString(16)
   }
 
   private static getPreparedSizes ({

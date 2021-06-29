@@ -10,6 +10,13 @@ export default class BlockRepository implements BlockRepositoryInterface {
     this.blocks = blocks
   }
 
+  set (blocks: BlockProperties[]): void {
+    this.resetActiveBlock()
+    this.blocks = blocks.map((block) => {
+      return new BlockDTO(block)
+    })
+  }
+
   change (block: BlockDTO, property: string, value: any): void {
     const blockModel = this.getByGuid(block.guid)
     if (typeof blockModel !== 'undefined') {
@@ -62,5 +69,30 @@ export default class BlockRepository implements BlockRepositoryInterface {
       return
     }
     this.blocks = this.blocks.filter((item) => item.guid !== guid)
+  }
+
+  private resetActiveBlock ():void {
+    JSON.stringify(this.blocks, (_, nestedValue) => {
+      if (nestedValue && typeof nestedValue.isActive !== 'undefined') {
+        nestedValue.isActive = false
+        nestedValue.isActiveAsParent = false
+      }
+      return nestedValue
+    })
+  }
+  setActiveBlock (guid: string): void {
+    this.resetActiveBlock()
+    const block = this.getByGuid(guid)
+    if (typeof block === 'undefined') {
+      return
+    }
+
+    block.isActive = true
+    if (block.parentGuid) {
+      const parent = this.getByGuid(block.parentGuid)
+      if (typeof parent !== 'undefined') {
+        parent.isActiveAsParent = true
+      }
+    }
   }
 }

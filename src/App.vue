@@ -73,6 +73,7 @@ export default {
           'height': 20,
           'sticky': 'tl',
           'children': [],
+          'style': 'background:red',
           'sizeTypes': {
             'top': '%',
             'left': '%',

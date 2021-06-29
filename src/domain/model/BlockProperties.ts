@@ -22,5 +22,6 @@ export interface BlockProperties {
   guid?: string,
   stickyToGuid?: string,
   children?: BlockDTO[],
-  parentGuid?: string
+  parentGuid?: string,
+  style?: string
 }

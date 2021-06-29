@@ -43,7 +43,8 @@ export default class BlockDTO {
       guid = 'guid',
       stickyToGuid,
       parentGuid,
-      isStretched
+      isStretched,
+      style
     }: BlockProperties
   ) {
     const {
@@ -69,6 +70,7 @@ export default class BlockDTO {
     this.stickyToGuid = stickyToGuid
     this.parentGuid = parentGuid
     this.isStretched = isStretched
+    this.style = style
   }
 
   private static getPreparedSizes ({

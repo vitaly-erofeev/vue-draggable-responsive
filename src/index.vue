@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <block
-        v-for="(block, index) in _blocks"
-        :key="index"
+        v-for="block in _blocks"
+        :key="block.guid"
         :block="block"
         :step="step"
         :ref="block.guid"

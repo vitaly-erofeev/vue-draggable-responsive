@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <preview-block
-        v-for="(block, index) in blocks"
-        :key="index"
+        v-for="block in blocks"
+        :key="block.guid"
         :block="block"
         :ref="block.guid"
         :style="block.style"

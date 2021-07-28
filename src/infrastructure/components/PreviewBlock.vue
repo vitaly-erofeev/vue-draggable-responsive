@@ -4,15 +4,39 @@
       ref="draggableContainer"
       class="block"
   >
+    <div
+        v-if="isTabsContainer"
+        :class="{
+          'tabs_container' : true,
+          'position_top': block.tabs.position === 'top',
+          'position_right': block.tabs.position === 'right',
+          'position_bottom': block.tabs.position === 'bottom',
+          'position_left': block.tabs.position === 'left',
+        }"
+    >
+      <div
+          v-for="tab in block.tabs.list"
+          :key="tab.guid"
+          :class="{'tab': true, 'active': tab.guid === activeTabGuid}"
+          @click="activeTabGuid = tab.guid"
+      >
+        <span class="label">{{ tab.name }}</span>
+      </div>
+    </div>
     <div class="content" :style="block.style" ref="container">
-      <slot :block="block" name="content"></slot>
+      <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
       <preview-block
           v-for="_block in block.children"
+          v-show="!(block.tabs || {}).use || _block.parentTabGuid === activeTabGuid"
           :key="_block.guid"
           :block="_block"
           :ref="block.guid"
           :style="block.style"
-      ></preview-block>
+      >
+        <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
+          <slot :name="name" v-bind="data"></slot>
+        </template>
+      </preview-block>
     </div>
   </div>
 </template>
@@ -36,6 +60,9 @@ export default Vue.extend({
   },
   inject: ['getStore'],
   computed: {
+    isTabsContainer (): boolean {
+      return this.block.tabs?.use || false
+    },
     positionStyle (): object {
       let position = {}
       let top: string
@@ -111,18 +138,23 @@ export default Vue.extend({
     this.setParent()
     this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
     this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
+    if (this.block?.tabs?.use && this.block?.tabs?.list?.length > 0) {
+      this.activeTabGuid = this.block.tabs.list[0].guid
+    }
   },
   data (): {
       parentBlock?: BlockDTO,
       parentElement?: Element,
       scrollHeight?: number,
-      scrollWidth?: number
+      scrollWidth?: number,
+      activeTabGuid?: string
       } {
     return {
       parentBlock: undefined,
       parentElement: undefined,
       scrollHeight: undefined,
-      scrollWidth: undefined
+      scrollWidth: undefined,
+      activeTabGuid: undefined
     }
   },
   methods: {
@@ -143,5 +175,27 @@ export default Vue.extend({
   height: 100%;
   position: absolute;
   overflow: auto;
+}
+.block .tabs_container {
+  position: absolute;
+  display: flex;
+}
+
+.block .tabs_container.position_top {
+  bottom: 100%;
+}
+
+.block .tabs_container.position_right {
+  left: 100%;
+  flex-direction: column;
+}
+
+.block .tabs_container.position_bottom {
+  top: 100%;
+}
+
+.block .tabs_container.position_left {
+  right: 100%;
+  flex-direction: column;
 }
 </style>

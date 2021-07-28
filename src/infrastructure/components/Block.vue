@@ -22,6 +22,7 @@
       <div
           v-for="tab in block.tabs.list"
           :key="tab.guid"
+          :style="`${block.tabs.style};${tab.guid === activeTabGuid ? block.tabs.activeStyle :''}`"
           :class="{'tab': true, 'active': tab.guid === activeTabGuid}"
           @click="onTabClick(tab.guid)"
       >
@@ -53,7 +54,8 @@
     <div class="content" :style="block.style">
       <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
       <block
-          v-for="_block in children"
+          v-for="_block in block.children"
+          v-show="!(block.tabs || {}).use || _block.parentTabGuid === activeTabGuid"
           :key="_block.guid"
           :block="_block"
           :step="step"
@@ -141,7 +143,7 @@ export default Vue.extend({
     },
     'block.tabs.list': {
       handler () {
-        if (!this.block.tabs?.list.filter(item => item.guid === this.activeTabGuid)) {
+        if (!this.block.tabs?.list.find(item => item.guid === this.activeTabGuid)) {
           if (this.block.tabs?.list[0].guid) {
             this.onTabClick(this.block.tabs?.list[0].guid)
           }
@@ -150,15 +152,6 @@ export default Vue.extend({
     }
   },
   computed: {
-    children (): BlockDTO[] {
-      if (this.block.tabs?.use) {
-        return this.block.children.filter((block: BlockDTO) => {
-          return block.parentTabGuid === this.activeTabGuid
-        })
-      }
-
-      return this.block.children
-    },
     isTabsContainer (): boolean {
       return this.block.tabs?.use || false
     },
@@ -398,27 +391,20 @@ export default Vue.extend({
 }
 
 .block .tabs_container.position_top {
-  top: -36px;
+  bottom: 100%;
 }
 
 .block .tabs_container.position_right {
-  top: -36px;
+  left: 100%;
+  flex-direction: column;
 }
 
 .block .tabs_container.position_bottom {
-  top: -36px;
+  top: 100%;
 }
 
 .block .tabs_container.position_left {
-  top: -36px;
-}
-
-.block .tabs_container .tab {
-  padding: 8px;
-  cursor: pointer;
-}
-
-.block .tabs_container .tab.active .label {
-  color: red;
+  right: 100%;
+  flex-direction: column;
 }
 </style>

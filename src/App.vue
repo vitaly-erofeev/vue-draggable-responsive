@@ -9,6 +9,7 @@
       <button @click="addSticky">addSticky</button>
       <button @click="get">get</button>
       <button @click="addWithTabs(1, $event)">addWithTabs</button>
+      <button @click="removeTab">removeTab</button>
       <button @click="preview = !preview">preview: {{ preview }}</button>
       <button @click="remove">remove active</button>
       <pre>{{ activeBlock }}</pre>
@@ -61,6 +62,13 @@ export default {
     }
   },
   methods: {
+    removeTab () {
+      if (this.activeBlock) {
+        if (this.activeBlock.tabs?.use) {
+          this.activeBlock.tabs.list.splice(0, 1)
+        }
+      }
+    },
     addWithTabs (type, event) {
       this.$refs.designer.addBlock({
         width: 70,
@@ -72,6 +80,8 @@ export default {
         event,
         tabs: {
           use: true,
+          style: 'color:red',
+          activeStyle: 'color:green',
           list: [
             {
               guid: 'asdasdas',

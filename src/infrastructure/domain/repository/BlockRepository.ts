@@ -13,7 +13,14 @@ export default class BlockRepository implements BlockRepositoryInterface {
 
   set (blocks: BlockProperties[]): void {
     this.resetActiveBlock()
-    this.blocks = blocks.map((block) => {
+    this.blocks = this.prepareBlocks(blocks)
+  }
+
+  private prepareBlocks (blocks: BlockProperties[]): BlockDTO[] {
+    return blocks.map((block) => {
+      if (typeof block.children !== 'undefined' && block.children.length > 0) {
+        block.children = this.prepareBlocks(block.children)
+      }
       return new BlockDTO(block)
     })
   }

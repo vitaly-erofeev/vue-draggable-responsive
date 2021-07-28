@@ -61,7 +61,11 @@
           @start-drag="$emit('start-drag', $event)"
           @stop-drag="$emit('stop-drag', $event)"
           @dragging="$emit('dragging', $event)"
-      ></block>
+      >
+        <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
+          <slot :name="name" v-bind="data"></slot>
+        </template>
+      </block>
     </div>
     <font-awesome-icon
         icon="angle-down"
@@ -134,6 +138,15 @@ export default Vue.extend({
   watch: {
     activeTabGuid (guid) {
       this.getStore().setActiveTab(this.block.guid, guid)
+    },
+    'block.tabs.list': {
+      handler () {
+        if (!this.block.tabs?.list.filter(item => item.guid === this.activeTabGuid)) {
+          if (this.block.tabs?.list[0].guid) {
+            this.onTabClick(this.block.tabs?.list[0].guid)
+          }
+        }
+      }
     }
   },
   computed: {

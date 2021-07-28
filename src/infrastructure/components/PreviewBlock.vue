@@ -13,10 +13,12 @@
           'position_bottom': block.tabs.position === 'bottom',
           'position_left': block.tabs.position === 'left',
         }"
+        :style="block.tabs.containerStyle"
     >
       <div
           v-for="tab in block.tabs.list"
           :key="tab.guid"
+          :style="`${block.tabs.tabStyle};${tab.guid === activeTabGuid ? block.tabs.activeTabStyle :''}`"
           :class="{'tab': true, 'active': tab.guid === activeTabGuid}"
           @click="activeTabGuid = tab.guid"
       >

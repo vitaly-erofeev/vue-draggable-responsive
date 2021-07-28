@@ -80,8 +80,9 @@ export default {
         event,
         tabs: {
           use: true,
-          style: 'color:red',
-          activeStyle: 'color:green',
+          containerStyle: 'background: grey',
+          tabStyle: 'color:red',
+          activeTabStyle: 'color:green',
           list: [
             {
               guid: 'asdasdas',

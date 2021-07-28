@@ -8,6 +8,7 @@
       <button @click="load">load</button>
       <button @click="addSticky">addSticky</button>
       <button @click="get">get</button>
+      <button @click="addWithTabs(1, $event)">addWithTabs</button>
       <button @click="preview = !preview">preview: {{ preview }}</button>
       <button @click="remove">remove active</button>
       <pre>{{ activeBlock }}</pre>
@@ -60,6 +61,31 @@ export default {
     }
   },
   methods: {
+    addWithTabs (type, event) {
+      this.$refs.designer.addBlock({
+        width: 70,
+        height: 10,
+        top: 30,
+        right: 0,
+        sticky: 'tl',
+        type,
+        event,
+        tabs: {
+          use: true,
+          list: [
+            {
+              guid: 'asdasdas',
+              name: 'test'
+            },
+            {
+              guid: 'asdasdas2',
+              name: 'test2'
+            }
+          ],
+          position: 'right'
+        }
+      })
+    },
     load () {
       this.activeBlock = undefined
       this.$refs.designer.setBlocks([

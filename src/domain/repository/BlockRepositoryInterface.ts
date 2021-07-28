@@ -15,4 +15,6 @@ export interface BlockRepositoryInterface {
   setActiveBlock (guid: string): void
 
   set (blocks: BlockProperties[]): void
+
+  setActiveTab (blockGuid: string, guid: string): void
 }

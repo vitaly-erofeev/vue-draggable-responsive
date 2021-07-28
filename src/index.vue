@@ -33,6 +33,8 @@ import BlockDTO from '@/domain/model/BlockDTO'
 import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
 // eslint-disable-next-line no-unused-vars
 import { BlockProperties } from '@/domain/model/BlockProperties'
+// eslint-disable-next-line no-unused-vars
+import { TabProperties } from '@/domain/model/TabProperties'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 
@@ -115,7 +117,8 @@ export default Vue.extend({
         },
         event = undefined,
         type = AddBlockType.DEFAULT,
-        isStretched = false
+        isStretched = false,
+        tabs = undefined
       }: {
           width: number,
           height: number,
@@ -136,7 +139,8 @@ export default Vue.extend({
           },
           event?: MouseEvent,
           type: AddBlockType,
-          isStretched: boolean
+          isStretched: boolean,
+          tabs?: TabProperties
         }
     ): string {
       if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
@@ -158,7 +162,8 @@ export default Vue.extend({
         stickyToGuid,
         parentGuid,
         sizeTypes,
-        isStretched
+        isStretched,
+        tabs
       })
       if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
         this.$nextTick(() => {

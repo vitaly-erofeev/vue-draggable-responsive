@@ -2,6 +2,7 @@ import { BlockRepositoryInterface } from '@/domain/repository/BlockRepositoryInt
 import BlockDTO from '@/domain/model/BlockDTO'
 import GuidGenerator from '@/infrastructure/service/GuidGenerator'
 import { BlockProperties } from '@/domain/model/BlockProperties'
+import Block from '@/infrastructure/components/Block.vue'
 
 export default class BlockRepository implements BlockRepositoryInterface {
   private blocks: BlockDTO[] = [];
@@ -42,6 +43,9 @@ export default class BlockRepository implements BlockRepositoryInterface {
     if (block.parentGuid) {
       parent = this.getByGuid(block.parentGuid)
       if (typeof parent !== 'undefined') {
+        if (parent.tabs?.use && parent.tabs?.activeGuid) {
+          block.parentTabGuid = parent.tabs.activeGuid
+        }
         parent.children.push(new BlockDTO(block))
       }
     } else {
@@ -93,6 +97,15 @@ export default class BlockRepository implements BlockRepositoryInterface {
       if (typeof parent !== 'undefined') {
         parent.isActiveAsParent = true
       }
+    }
+  }
+  setActiveTab (blockGuid: string, guid: string): void {
+    const block = this.getByGuid(blockGuid)
+    if (typeof block === 'undefined') {
+      return
+    }
+    if (block.tabs && block.tabs.use) {
+      block.tabs.activeGuid = guid
     }
   }
 }

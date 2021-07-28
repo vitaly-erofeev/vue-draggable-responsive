@@ -1,6 +1,7 @@
 import { Sticky } from './Sticky'
 import { BlockProperties } from '@/domain/model/BlockProperties'
 import { SizeTypes } from '@/domain/model/SizeTypes'
+import { TabPosition, TabProperties } from '@/domain/model/TabProperties'
 
 export default class BlockDTO {
   [index: string]: any;
@@ -21,6 +22,12 @@ export default class BlockDTO {
   style?: string
   isActive: boolean = false
   isActiveAsParent: boolean = false
+  tabs?: TabProperties = {
+    use: false,
+    list: [],
+    position: TabPosition.TOP
+  }
+  parentTabGuid?: string
 
   constructor (
     {
@@ -44,7 +51,9 @@ export default class BlockDTO {
       stickyToGuid,
       parentGuid,
       isStretched,
-      style
+      style,
+      tabs,
+      parentTabGuid
     }: BlockProperties
   ) {
     const {
@@ -71,6 +80,8 @@ export default class BlockDTO {
     this.parentGuid = parentGuid
     this.isStretched = isStretched
     this.style = style
+    this.tabs = tabs
+    this.parentTabGuid = parentTabGuid
   }
 
   private static getPreparedSizes ({

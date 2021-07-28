@@ -1,6 +1,7 @@
 import { Sticky } from '@/domain/model/Sticky'
 import BlockDTO from '@/domain/model/BlockDTO'
 import { SizeTypes } from '@/domain/model/SizeTypes'
+import { TabProperties } from '@/domain/model/TabProperties'
 
 export interface BlockProperties {
   width: number,
@@ -23,5 +24,7 @@ export interface BlockProperties {
   stickyToGuid?: string,
   children?: BlockDTO[],
   parentGuid?: string,
-  style?: string
+  style?: string,
+  tabs?: TabProperties,
+  parentTabGuid?: string
 }

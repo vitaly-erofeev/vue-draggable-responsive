@@ -7,8 +7,8 @@
     <div class="content" :style="block.style" ref="container">
       <slot :block="block" name="content"></slot>
       <preview-block
-          v-for="(_block, index) in block.children"
-          :key="index"
+          v-for="_block in block.children"
+          :key="_block.guid"
           :block="_block"
           :ref="block.guid"
           :style="block.style"

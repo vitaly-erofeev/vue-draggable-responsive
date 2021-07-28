@@ -9,13 +9,32 @@
       ref="draggableContainer"
       @mousedown.stop="dragStart"
   >
+    <div
+        v-if="isTabsContainer"
+        :class="{
+          'tabs_container' : true,
+          'position_top': block.tabs.position === 'top',
+          'position_right': block.tabs.position === 'right',
+          'position_bottom': block.tabs.position === 'bottom',
+          'position_left': block.tabs.position === 'left',
+        }"
+    >
+      <div
+          v-for="tab in block.tabs.list"
+          :key="tab.guid"
+          :class="{'tab': true, 'active': tab.guid === activeTabGuid}"
+          @click="onTabClick(tab.guid)"
+      >
+        <span class="label">{{ tab.name }}</span>
+      </div>
+    </div>
     <slot :block="block" :is-resizing="isResizing" :is-dragging="isDragging" name="info">
       <div class="block_info" v-show="isResizing">
         {{ block.width }}{{ block.sizeTypes.width }} x {{ block.height }}{{ block.sizeTypes.height }}
       </div>
-<!--      <div class="block_info" v-show="ctrlPressed">
-        CTRL
-      </div>-->
+      <!--      <div class="block_info" v-show="ctrlPressed">
+              CTRL
+            </div>-->
       <div
           v-show="isDragging"
           class="position_line left"
@@ -32,10 +51,10 @@
       </div>
     </slot>
     <div class="content" :style="block.style">
-      <slot :block="block" name="content"></slot>
+      <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
       <block
-          v-for="(_block, index) in block.children"
-          :key="index"
+          v-for="_block in children"
+          :key="_block.guid"
           :block="_block"
           :step="step"
           :ref="block.guid"
@@ -93,7 +112,8 @@ export default Vue.extend({
     },
     parentBlock?: BlockDTO,
     parentElement?: Element,
-    ctrlPressed: boolean
+    ctrlPressed: boolean,
+    activeTabGuid?: string
     } {
     return {
       blockManager: undefined,
@@ -107,10 +127,28 @@ export default Vue.extend({
       },
       parentBlock: undefined,
       parentElement: undefined,
-      ctrlPressed: false
+      ctrlPressed: false,
+      activeTabGuid: undefined
+    }
+  },
+  watch: {
+    activeTabGuid (guid) {
+      this.getStore().setActiveTab(this.block.guid, guid)
     }
   },
   computed: {
+    children (): BlockDTO[] {
+      if (this.block.tabs?.use) {
+        return this.block.children.filter((block: BlockDTO) => {
+          return block.parentTabGuid === this.activeTabGuid
+        })
+      }
+
+      return this.block.children
+    },
+    isTabsContainer (): boolean {
+      return this.block.tabs?.use || false
+    },
     positionStyle (): object {
       let position = {}
       switch (this.block.sticky) {
@@ -151,7 +189,15 @@ export default Vue.extend({
       })
     }
   },
+  mounted () {
+    if (this.block?.tabs?.use && this.block?.tabs?.list?.length > 0) {
+      this.activeTabGuid = this.block.tabs.list[0].guid
+    }
+  },
   methods: {
+    onTabClick (guid: string) {
+      this.activeTabGuid = guid
+    },
     onDrag (): void {
       const el: HTMLElement = this.$refs.draggableContainer as HTMLElement
       this.currentPosition.left = el.offsetLeft
@@ -331,5 +377,35 @@ export default Vue.extend({
 
 .block.active_parent {
   outline: 3px solid green;
+}
+
+.block .tabs_container {
+  position: absolute;
+  display: flex;
+}
+
+.block .tabs_container.position_top {
+  top: -36px;
+}
+
+.block .tabs_container.position_right {
+  top: -36px;
+}
+
+.block .tabs_container.position_bottom {
+  top: -36px;
+}
+
+.block .tabs_container.position_left {
+  top: -36px;
+}
+
+.block .tabs_container .tab {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.block .tabs_container .tab.active .label {
+  color: red;
 }
 </style>

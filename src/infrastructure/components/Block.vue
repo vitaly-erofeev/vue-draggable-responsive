@@ -145,8 +145,8 @@ export default Vue.extend({
     'block.tabs.list': {
       handler () {
         if (!this.block.tabs?.list.find(item => item.guid === this.activeTabGuid)) {
-          if (this.block.tabs?.list[0].guid) {
-            this.onTabClick(this.block.tabs?.list[0].guid)
+          if (this.block.tabs?.list[0]?.guid) {
+            this.onTabClick(this.block.tabs.list[0].guid)
           }
         }
       }

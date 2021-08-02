@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <preview-block
-        v-for="block in blocks"
+        v-for="block in _blocks"
         :key="block.guid"
         :block="block"
         :ref="block.guid"
@@ -25,20 +25,16 @@ import { BlockRepositoryInterface } from '@/domain/repository/BlockRepositoryInt
 import BlockDTO from '@/domain/model/BlockDTO'
 // eslint-disable-next-line no-unused-vars
 import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
+// eslint-disable-next-line no-unused-vars
+import { BlockProperties } from '@/domain/model/BlockProperties'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 export default Vue.extend({
   name: 'VueDraggableResponsivePreviewer',
   components: { PreviewBlock },
-  props: {
-    blocks: {
-      type: Array as Vue.PropType<BlockDTO[]>,
-      default: () => []
-    }
-  },
   data (): { store: BlockRepositoryInterface } {
     return {
-      store: new BlockRepository(this.blocks)
+      store: new BlockRepository()
     }
   },
   provide (): { getStore: Function } {
@@ -46,9 +42,17 @@ export default Vue.extend({
       getStore: this.getStore
     }
   },
+  computed: {
+    _blocks (): BlockDTO[] {
+      return this.store.get()
+    }
+  },
   methods: {
     getStore (): BlockRepositoryInterface {
       return this.store
+    },
+    setBlocks (blocks: BlockProperties[]): void {
+      this.store.set(blocks)
     }
   }
 })

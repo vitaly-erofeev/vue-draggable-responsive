@@ -27,7 +27,7 @@
     </vue-draggable-responsive>
     <vue-draggable-responsive-previewer
         v-if="preview"
-        :blocks="blocks"
+        ref="previewer"
         style="height: 500px;width: 1059px;display: inline-block"
     >
       <template v-slot:content="{ block }">
@@ -58,6 +58,9 @@ export default {
     preview (value) {
       if (value) {
         this.blocks = this.$refs.designer.getBlocks()
+        this.$nextTick(() => {
+          this.$refs.previewer.setBlocks(this.blocks)
+        })
       }
     }
   },

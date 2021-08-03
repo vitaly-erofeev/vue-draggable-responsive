@@ -5,7 +5,6 @@
         :key="block.guid"
         :block="block"
         :ref="block.guid"
-        :style="block.style"
     >
       <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
         <slot :name="name" v-bind="data"></slot>

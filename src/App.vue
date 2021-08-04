@@ -20,6 +20,7 @@
         :step="1"
         @start-drag="onStartDrag"
         v-show="!preview"
+        @contextmenu="oncontext"
     >
       <template v-slot:content="{ block }">
         {{ block }}
@@ -65,6 +66,9 @@ export default {
     }
   },
   methods: {
+    oncontext (a) {
+      console.log(a)
+    },
     removeTab () {
       if (this.activeBlock) {
         if (this.activeBlock.tabs?.use) {
@@ -201,14 +205,16 @@ export default {
         isStretched
       })
     },
-    addChildren () {
+    addChildren (event) {
       this.$refs.designer.addBlock(
         {
           width: 70,
           height: 10,
           top: 30,
           left: 20,
-          parentGuid: this.activeBlock.guid
+          parentGuid: this.activeBlock.guid,
+          type: 1,
+          event: event
         }
       )
     }

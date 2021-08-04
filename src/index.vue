@@ -9,6 +9,7 @@
         @start-drag="$emit('start-drag', $event)"
         @stop-drag="$emit('stop-drag', $event)"
         @dragging="$emit('dragging', $event)"
+        @contextmenu="$emit('contextmenu', $event)"
     >
       <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
         <slot :name="name" v-bind="data"></slot>
@@ -63,6 +64,22 @@ export default Vue.extend({
     }
   },
   methods: {
+    getAllBlockRefs (): { [index: string]: Vue; } {
+      let answer: { [index: string]: Vue; } = {}
+
+      this.getRefs(this._blocks, this, answer)
+      return answer
+    },
+    getRefs (blocks: BlockDTO[], context: Vue, object: { [index: string]: Vue; }): void {
+      blocks.forEach((item: BlockDTO) => {
+        const refs: any = context.$refs[item.guid]
+        const block: Vue = refs[0]
+        object[item.guid] = block
+        if (item.children?.length > 0) {
+          this.getRefs(item.children, block, object)
+        }
+      })
+    },
     setActiveBlock (guid: string): void {
       this.store.setActiveBlock(guid)
     },
@@ -144,7 +161,7 @@ export default Vue.extend({
         }
     ): string {
       if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
-        const position: {top: number, right: number, bottom: number, left: number} = this.getMousePosition(event, sizeTypes)
+        const position: { top: number, right: number, bottom: number, left: number } = this.getMousePosition(event, sizeTypes)
         top = position.top
         right = position.right
         bottom = position.bottom
@@ -167,15 +184,14 @@ export default Vue.extend({
       })
       if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
         this.$nextTick(() => {
-          const refs: any = this.$refs
-          const block: any = refs[guid][0]
+          const block: any = this.getAllBlockRefs()[guid]
           block.onDrag()
           block.dragStart(event, true)
         })
       }
       return guid
     },
-    removeBlock (guid: string):void {
+    removeBlock (guid: string): void {
       this.store.remove(guid)
     }
   },

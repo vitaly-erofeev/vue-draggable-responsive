@@ -8,6 +8,7 @@
         'active_parent': block.isActiveAsParent }"
       ref="draggableContainer"
       @mousedown.stop="dragStart"
+      @contextmenu.stop="$emit('contextmenu', {block: block, event: $event})"
   >
     <div
         v-if="isTabsContainer"
@@ -60,10 +61,11 @@
           :key="_block.guid"
           :block="_block"
           :step="step"
-          :ref="block.guid"
+          :ref="_block.guid"
           @start-drag="$emit('start-drag', $event)"
           @stop-drag="$emit('stop-drag', $event)"
           @dragging="$emit('dragging', $event)"
+          @contextmenu="$emit('contextmenu', $event)"
       >
         <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
           <slot :name="name" v-bind="data"></slot>

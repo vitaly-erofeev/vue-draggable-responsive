@@ -120,10 +120,18 @@ export default Vue.extend({
           }
           break
       }
+
+      if (this.block.widthCalc && this.block.widthCalc.type && this.block.widthCalc.value) {
+        width = `calc(${width} ${this.block.widthCalc.type} ${this.block.widthCalc.value}px)`
+      }
+      if (this.block.heightCalc && this.block.heightCalc.type && this.block.heightCalc.value) {
+        height = `calc(${height} ${this.block.heightCalc.type} ${this.block.heightCalc.value}px)`
+      }
+
       if (this.block.isStretched) {
         position = Object.assign(position, {
-          minWidth: this.block.width + this.block.sizeTypes.width,
-          minHeight: this.block.height + this.block.sizeTypes.height,
+          minWidth: width,
+          minHeight: height,
           height: this.scrollHeight + 'px',
           width: this.scrollWidth + 'px'
         })

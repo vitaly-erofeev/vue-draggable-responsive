@@ -35,15 +35,27 @@ export default class BlockManager {
     this.clientY = event.clientY
     this.type = type
 
+    if (this.type === 'resize') {
+      if (this.block.widthCalc && this.block.widthCalc.type && this.block.widthCalc.value) {
+        if (this.block.widthCalc.type === '-') {
+          this.clientX = this.clientX - this.block.widthCalc.value
+        } else {
+          this.clientX = this.clientX + this.block.widthCalc.value
+        }
+      }
+      if (this.block.heightCalc && this.block.heightCalc.type && this.block.heightCalc.value) {
+        if (this.block.heightCalc.type === '-') {
+          this.clientY = this.clientY - this.block.heightCalc.value
+        } else {
+          this.clientY = this.clientY + this.block.heightCalc.value
+        }
+      }
+    }
+
     if (isInteractive) {
       this.clientX = this.blockElementRect.x + 15
       this.clientY = this.blockElementRect.y + 15
     }
-  }
-
-  public changeParent () {
-    this.parentElement = this.blockElement.closest('.block')
-    this.blockElementRect = this.getBlockElementRect()
   }
 
   private getBlockElementRect (): CustomDomRect {

@@ -192,9 +192,19 @@ export default Vue.extend({
           }
           break
       }
+      let width = this.block.width + this.block.sizeTypes.width
+      let height = this.block.height + this.block.sizeTypes.height
+
+      if (this.block.widthCalc && this.block.widthCalc.type && this.block.widthCalc.value) {
+        width = `calc(${width} ${this.block.widthCalc.type} ${this.block.widthCalc.value}px)`
+      }
+      if (this.block.heightCalc && this.block.heightCalc.type && this.block.heightCalc.value) {
+        height = `calc(${height} ${this.block.heightCalc.type} ${this.block.heightCalc.value}px)`
+      }
+
       return Object.assign(position, {
-        width: this.block.width + this.block.sizeTypes.width,
-        height: this.block.height + this.block.sizeTypes.height
+        width: width,
+        height: height
       })
     }
   },

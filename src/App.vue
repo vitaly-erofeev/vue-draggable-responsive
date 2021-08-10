@@ -12,6 +12,7 @@
       <button @click="removeTab">removeTab</button>
       <button @click="preview = !preview">preview: {{ preview }}</button>
       <button @click="remove">remove active</button>
+      <button @click="clearActive">clear active</button>
       <pre>{{ activeBlock }}</pre>
     </div>
     <vue-draggable-responsive
@@ -66,6 +67,10 @@ export default {
     }
   },
   methods: {
+    clearActive () {
+      this.$refs.designer.clearActiveBlock()
+      this.activeBlock = undefined
+    },
     oncontext (a) {
       console.log(a)
     },

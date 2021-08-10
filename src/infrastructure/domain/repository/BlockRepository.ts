@@ -82,7 +82,7 @@ export default class BlockRepository implements BlockRepositoryInterface {
     this.blocks = this.blocks.filter((item) => item.guid !== guid)
   }
 
-  private resetActiveBlock ():void {
+  resetActiveBlock (): void {
     JSON.stringify(this.blocks, (_, nestedValue) => {
       if (nestedValue && typeof nestedValue.isActive !== 'undefined') {
         nestedValue.isActive = false

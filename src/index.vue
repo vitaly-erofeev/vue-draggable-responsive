@@ -83,6 +83,9 @@ export default Vue.extend({
     setActiveBlock (guid: string): void {
       this.store.setActiveBlock(guid)
     },
+    clearActiveBlock (): void {
+      this.store.resetActiveBlock()
+    },
     getStore (): BlockRepositoryInterface {
       return this.store
     },

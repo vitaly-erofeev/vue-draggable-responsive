@@ -113,11 +113,15 @@ export default {
           'left': 24,
           'right': 37,
           'width': 20,
+          'widthCalc': {
+            type: '-',
+            value: 200
+          },
           'bottom': 85,
           'height': 20,
           'sticky': 'tl',
           'children': [],
-          'style': 'background:red',
+          'style': 'background:green',
           'sizeTypes': {
             'top': '%',
             'left': '%',

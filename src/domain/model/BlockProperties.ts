@@ -2,8 +2,11 @@ import { Sticky } from '@/domain/model/Sticky'
 import BlockDTO from '@/domain/model/BlockDTO'
 import { SizeTypes } from '@/domain/model/SizeTypes'
 import { TabProperties } from '@/domain/model/TabProperties'
+import { CalcProperties } from '@/domain/model/CalcProperties'
 
 export interface BlockProperties {
+  widthCalc?: CalcProperties
+  heightCalc?: CalcProperties
   width: number,
   height: number,
   top?: number,

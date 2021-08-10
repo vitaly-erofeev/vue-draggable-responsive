@@ -10628,7 +10628,9 @@ var BlockDTO_BlockDTO = /*#__PURE__*/function () {
         isStretched = _ref.isStretched,
         style = _ref.style,
         tabs = _ref.tabs,
-        parentTabGuid = _ref.parentTabGuid;
+        parentTabGuid = _ref.parentTabGuid,
+        widthCalc = _ref.widthCalc,
+        heightCalc = _ref.heightCalc;
 
     Object(classCallCheck["a" /* default */])(this, BlockDTO);
 
@@ -10640,6 +10642,8 @@ var BlockDTO_BlockDTO = /*#__PURE__*/function () {
       list: [],
       position: TabPosition.TOP
     };
+    this.widthCalc = widthCalc;
+    this.heightCalc = heightCalc;
 
     var _BlockDTO$getPrepared = BlockDTO.getPreparedSizes({
       top: top,

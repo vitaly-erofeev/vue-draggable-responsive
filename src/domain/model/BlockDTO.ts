@@ -55,9 +55,13 @@ export default class BlockDTO {
       isStretched,
       style,
       tabs,
-      parentTabGuid
+      parentTabGuid,
+      widthCalc,
+      heightCalc
     }: BlockProperties
   ) {
+    this.widthCalc = widthCalc
+    this.heightCalc = heightCalc
     const {
       _top, _right, _bottom, _left
     } = BlockDTO.getPreparedSizes({

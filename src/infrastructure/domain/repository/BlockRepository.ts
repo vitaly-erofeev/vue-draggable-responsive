@@ -16,7 +16,7 @@ export default class BlockRepository implements BlockRepositoryInterface {
     this.blocks = this.prepareBlocks(blocks)
   }
 
-  private prepareBlocks (blocks: BlockProperties[]): BlockDTO[] {
+  prepareBlocks (blocks: BlockProperties[]): BlockDTO[] {
     return blocks.map((block) => {
       if (typeof block.children !== 'undefined' && block.children.length > 0) {
         block.children = this.prepareBlocks(block.children)

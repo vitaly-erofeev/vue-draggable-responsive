@@ -19,4 +19,10 @@ export interface BlockRepositoryInterface {
   setActiveTab (blockGuid: string, guid: string): void
 
   resetActiveBlock (): void
+
+  addRef (guid: string, ref: Vue): void
+
+  removeRef (guid: string): void
+
+  getRefByGuid(guid: string): Vue | undefined
 }

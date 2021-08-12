@@ -91,6 +91,7 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 import { Sticky } from '@/domain/model/Sticky'
 // eslint-disable-next-line no-unused-vars
 import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
+import { StickyToType } from '@/domain/model/StickyTo'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 library.add(faAngleDown)
@@ -159,7 +160,9 @@ export default Vue.extend({
       return this.block.tabs?.use || false
     },
     positionStyle (): object {
-      let position = {}
+      let position: {
+        top?: string, left?: string, right?: string, bottom?: string
+      } = {}
       switch (this.block.sticky) {
         case Sticky.TL:
           position = {
@@ -192,6 +195,22 @@ export default Vue.extend({
           }
           break
       }
+      if (this.block.stickyTo?.guid && this.block.stickyTo?.type) {
+        const stickyToBlock = this.getStore().getByGuid(this.block.stickyTo.guid)
+        const stickyToElement = this.getStore().getRefByGuid(this.block.stickyTo.guid) as unknown as {
+          positionStyle: {
+            top: string, height: string
+          }
+        }
+        if (stickyToBlock && stickyToBlock.parentGuid === this.block.parentGuid && stickyToElement) {
+          switch (this.block.stickyTo.type) {
+            case StickyToType.TOP:
+              position.top =
+                  `calc(${stickyToElement.positionStyle.height} + ${stickyToElement.positionStyle.top} + ${position.top})`
+              break
+          }
+        }
+      }
       let width = this.block.width + this.block.sizeTypes.width
       let height = this.block.height + this.block.sizeTypes.height
 
@@ -212,6 +231,10 @@ export default Vue.extend({
     if (this.block?.tabs?.use && this.block?.tabs?.list?.length > 0) {
       this.activeTabGuid = this.block.tabs.list[0].guid
     }
+    this.getStore().addRef(this.block.guid, this)
+  },
+  beforeDestroy () {
+    this.getStore().removeRef(this.block.guid)
   },
   methods: {
     onTabClick (guid: string) {

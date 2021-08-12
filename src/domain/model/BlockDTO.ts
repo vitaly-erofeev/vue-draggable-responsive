@@ -3,6 +3,7 @@ import { BlockProperties } from '@/domain/model/BlockProperties'
 import { SizeTypes } from '@/domain/model/SizeTypes'
 import { TabPosition, TabProperties } from '@/domain/model/TabProperties'
 import { CalcProperties } from '@/domain/model/CalcProperties'
+import { StickyTo } from '@/domain/model/StickyTo'
 
 export default class BlockDTO {
   [index: string]: any;
@@ -19,7 +20,7 @@ export default class BlockDTO {
   children: BlockDTO[]
   guid: string
   isStretched: boolean = false
-  stickyToGuid?: string
+  stickyTo?: StickyTo
   parentGuid?: string
   style?: string
   isActive: boolean = false
@@ -57,11 +58,13 @@ export default class BlockDTO {
       tabs,
       parentTabGuid,
       widthCalc,
-      heightCalc
+      heightCalc,
+      stickyTo
     }: BlockProperties
   ) {
     this.widthCalc = widthCalc
     this.heightCalc = heightCalc
+    this.stickyTo = stickyTo
     const {
       _top, _right, _bottom, _left
     } = BlockDTO.getPreparedSizes({

@@ -3,6 +3,7 @@ import BlockDTO from '@/domain/model/BlockDTO'
 import { SizeTypes } from '@/domain/model/SizeTypes'
 import { TabProperties } from '@/domain/model/TabProperties'
 import { CalcProperties } from '@/domain/model/CalcProperties'
+import { StickyTo } from '@/domain/model/StickyTo'
 
 export interface BlockProperties {
   widthCalc?: CalcProperties
@@ -22,6 +23,7 @@ export interface BlockProperties {
     bottom: SizeTypes,
     left: SizeTypes
   },
+  stickyTo?: StickyTo,
   isStretched: boolean,
   guid?: string,
   stickyToGuid?: string,

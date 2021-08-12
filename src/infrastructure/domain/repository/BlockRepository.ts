@@ -6,6 +6,10 @@ import Block from '@/infrastructure/components/Block.vue'
 
 export default class BlockRepository implements BlockRepositoryInterface {
   private blocks: BlockDTO[] = [];
+  private refs: {
+    guid: string,
+    element: Vue
+  }[] = []
 
   constructor (blocks: BlockDTO[] = []) {
     this.blocks = blocks
@@ -35,7 +39,8 @@ export default class BlockRepository implements BlockRepositoryInterface {
   getByGuid (guid: string): BlockDTO | undefined {
     let answer: BlockDTO | undefined
     JSON.stringify(this.blocks, (_, nestedValue) => {
-      if (nestedValue && nestedValue.guid === guid) {
+      if (nestedValue && nestedValue.guid === guid &&
+        typeof nestedValue.sticky !== 'undefined') {
         answer = nestedValue
       }
       return nestedValue
@@ -114,5 +119,28 @@ export default class BlockRepository implements BlockRepositoryInterface {
     if (block.tabs && block.tabs.use) {
       block.tabs.activeGuid = guid
     }
+  }
+
+  addRef (guid: string, ref: Vue): void {
+    this.refs.push({
+      guid: guid,
+      element: ref
+    })
+  }
+
+  getRefByGuid (guid: string): Vue | undefined {
+    const element = this.refs.find((item) => {
+      return item.guid === guid
+    })
+
+    if (element) {
+      return element.element
+    }
+
+    return undefined
+  }
+
+  removeRef (guid: string): void {
+    this.refs = this.refs.filter((item) => item.guid !== guid)
   }
 }

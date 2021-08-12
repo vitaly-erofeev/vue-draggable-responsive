@@ -36,6 +36,8 @@ import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInje
 import { BlockProperties } from '@/domain/model/BlockProperties'
 // eslint-disable-next-line no-unused-vars
 import { TabProperties } from '@/domain/model/TabProperties'
+// eslint-disable-next-line no-unused-vars
+import { StickyTo } from '@/domain/model/StickyTo'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 
@@ -125,7 +127,7 @@ export default Vue.extend({
         bottom = undefined,
         left = undefined,
         sticky = Sticky.TL,
-        stickyToGuid = undefined,
+        stickyTo = undefined,
         parentGuid = undefined,
         sizeTypes = {
           width: SizeTypes.PERCENT,
@@ -143,7 +145,7 @@ export default Vue.extend({
           width: number,
           height: number,
           sticky: Sticky,
-          stickyToGuid?: string,
+          stickyTo?: StickyTo,
           parentGuid?: string,
           top?: number,
           right?: number,
@@ -179,7 +181,7 @@ export default Vue.extend({
         bottom,
         left,
         sticky,
-        stickyToGuid,
+        stickyTo,
         parentGuid,
         sizeTypes,
         isStretched,

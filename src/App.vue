@@ -42,6 +42,7 @@
 <script>
 import VueDraggableResponsive from './index.vue'
 import VueDraggableResponsivePreviewer from '@/previewer'
+import { StickyToType } from '@/domain/model/StickyTo'
 
 export default {
   name: 'App',
@@ -198,7 +199,10 @@ export default {
           top: 10,
           left: 20,
           sticky: 'tl',
-          stickyToGuid: this.activeBlock.guid
+          stickyTo: {
+            guid: this.activeBlock.guid,
+            type: StickyToType.TOP
+          }
         })
       }
     },

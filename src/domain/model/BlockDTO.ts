@@ -31,6 +31,7 @@ export default class BlockDTO {
     position: TabPosition.TOP
   }
   parentTabGuid?: string
+  isEditing?: boolean
 
   constructor (
     {
@@ -91,6 +92,7 @@ export default class BlockDTO {
     this.style = style
     this.tabs = tabs
     this.parentTabGuid = parentTabGuid
+    this.isEditing = false
   }
 
   private static getPreparedSizes ({

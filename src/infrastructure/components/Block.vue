@@ -31,13 +31,13 @@
         <span class="label">{{ tab.name }}</span>
       </div>
     </div>
+    <div class="block_info">
+      <slot :block="block" name="help_text"></slot>
+    </div>
     <slot :block="block" :is-resizing="isResizing" :is-dragging="isDragging" name="info">
       <div class="block_info" v-show="isResizing">
         {{ block.width }}{{ block.sizeTypes.width }} x {{ block.height }}{{ block.sizeTypes.height }}
       </div>
-      <!--      <div class="block_info" v-show="ctrlPressed">
-              CTRL
-            </div>-->
       <div
           v-show="isDragging"
           class="position_line left"
@@ -265,6 +265,9 @@ export default Vue.extend({
       document.addEventListener('mouseup', this.dragStop)
     },
     dragStart (event: MouseEvent, isInteractive: boolean = false): void {
+      if (this.block.isEditing) {
+        return
+      }
       event.preventDefault()
       this.$emit('start-drag', this.block)
       this.getBlockManager().startDrag(event, 'drag', isInteractive)
@@ -367,6 +370,10 @@ export default Vue.extend({
   color: white;
   font-weight: 400;
   z-index: 9999;
+}
+
+.block .block_info:empty {
+  display: none;
 }
 
 .block .position_line {

@@ -128,7 +128,7 @@ export default Vue.extend({
         const stickyToBlock = this.getStore().getByGuid(this.block.stickyTo.guid)
         const stickyToElement = this.getStore().getRefByGuid(this.block.stickyTo.guid) as unknown as {
           positionStyle: {
-            top: string, height: string
+            top: string, height: string, left: string, width: string
           }
         }
         if (stickyToBlock && stickyToBlock.parentGuid === this.block.parentGuid && stickyToElement) {
@@ -136,6 +136,10 @@ export default Vue.extend({
             case StickyToType.TOP:
               position.top =
                   `calc(${stickyToElement.positionStyle.height} + ${stickyToElement.positionStyle.top} + ${position.top})`
+              break
+            case StickyToType.LEFT:
+              position.left =
+                  `calc(${stickyToElement.positionStyle.width} + ${stickyToElement.positionStyle.left} + ${position.left})`
               break
           }
         }
@@ -171,6 +175,7 @@ export default Vue.extend({
     if (this.block?.tabs?.use && this.block?.tabs?.list?.length > 0) {
       this.activeTabGuid = this.block.tabs.list[0].guid
     }
+    this.prepareReplication()
     this.getStore().addRef(this.block.guid, this)
   },
   beforeDestroy () {
@@ -192,6 +197,39 @@ export default Vue.extend({
     }
   },
   methods: {
+    prepareReplication (): void {
+      if (!this.block.replication?.function) {
+        return
+      }
+      const blocksData = this.block.replication?.function()
+      blocksData.shift()
+      let me = this
+      let lastGuid = me.block.guid
+      let lastRowGuid = me.block.guid
+      let lastRowTop = me.block.top
+      let columns = me.block.replication?.columns || 1
+      blocksData.forEach((item, index) => {
+        const newBlock = JSON.parse(JSON.stringify(me.block))
+        newBlock.replication = undefined
+        console.log(index, columns, (index + 1) % columns === 0)
+        if ((index + 1) % columns !== 0) {
+          newBlock.left = me.block.replication?.horizontalMargin || 0
+          newBlock.top = lastRowTop
+          newBlock.stickyTo = {
+            type: 'left',
+            guid: lastGuid
+          }
+          lastGuid = me.getStore().add(newBlock)
+        } else {
+          newBlock.top = me.block.replication?.verticalMargin || 0
+          newBlock.stickyTo = {
+            type: 'top',
+            guid: lastRowGuid
+          }
+          lastGuid = lastRowGuid = me.getStore().add(newBlock)
+        }
+      })
+    },
     setParent (): void {
       this.parentBlock = this.block.parentGuid ? this.getStore().getByGuid(this.block.parentGuid) : undefined
       this.parentElement = this.block.parentGuid ? this.$parent.$refs.draggableContainer as Element : undefined

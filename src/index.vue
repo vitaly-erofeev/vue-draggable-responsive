@@ -38,6 +38,8 @@ import { BlockProperties } from '@/domain/model/BlockProperties'
 import { TabProperties } from '@/domain/model/TabProperties'
 // eslint-disable-next-line no-unused-vars
 import { StickyTo } from '@/domain/model/StickyTo'
+// eslint-disable-next-line no-unused-vars
+import { ReplicationProperties } from '@/domain/model/ReplicationProperties'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 
@@ -140,7 +142,8 @@ export default Vue.extend({
         event = undefined,
         type = AddBlockType.DEFAULT,
         isStretched = false,
-        tabs = undefined
+        tabs = undefined,
+        replication = undefined
       }: {
           width: number,
           height: number,
@@ -162,7 +165,8 @@ export default Vue.extend({
           event?: MouseEvent,
           type: AddBlockType,
           isStretched: boolean,
-          tabs?: TabProperties
+          tabs?: TabProperties,
+          replication?: ReplicationProperties
         }
     ): string {
       if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
@@ -185,7 +189,8 @@ export default Vue.extend({
         parentGuid,
         sizeTypes,
         isStretched,
-        tabs
+        tabs,
+        replication
       })
       if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
         this.$nextTick(() => {

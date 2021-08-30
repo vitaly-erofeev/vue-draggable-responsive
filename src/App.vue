@@ -13,6 +13,7 @@
       <button @click="preview = !preview">preview: {{ preview }}</button>
       <button @click="remove">remove active</button>
       <button @click="clearActive">clear active</button>
+      <button @click="addReplication(1, $event)">add replication</button>
       <pre>{{ activeBlock }}</pre>
     </div>
     <vue-draggable-responsive
@@ -68,6 +69,22 @@ export default {
     }
   },
   methods: {
+    addReplication (type, event) {
+      this.$refs.designer.addBlock({
+        width: 70,
+        height: 10,
+        top: 30,
+        right: 0,
+        sticky: 'tl',
+        type,
+        event,
+        replication: {
+          columns: 3,
+          function: () => [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }],
+          verticalMargin: 10
+        }
+      })
+    },
     clearActive () {
       this.$refs.designer.clearActiveBlock()
       this.activeBlock = undefined
@@ -201,7 +218,7 @@ export default {
           sticky: 'tl',
           stickyTo: {
             guid: this.activeBlock.guid,
-            type: StickyToType.TOP
+            type: StickyToType.LEFT
           }
         })
       }

@@ -4,6 +4,7 @@ import { SizeTypes } from '@/domain/model/SizeTypes'
 import { TabPosition, TabProperties } from '@/domain/model/TabProperties'
 import { CalcProperties } from '@/domain/model/CalcProperties'
 import { StickyTo } from '@/domain/model/StickyTo'
+import { ReplicationProperties } from '@/domain/model/ReplicationProperties'
 
 export default class BlockDTO {
   [index: string]: any;
@@ -32,6 +33,7 @@ export default class BlockDTO {
   }
   parentTabGuid?: string
   isEditing?: boolean
+  replication?: ReplicationProperties
 
   constructor (
     {
@@ -60,7 +62,8 @@ export default class BlockDTO {
       parentTabGuid,
       widthCalc,
       heightCalc,
-      stickyTo
+      stickyTo,
+      replication
     }: BlockProperties
   ) {
     this.widthCalc = widthCalc
@@ -93,6 +96,7 @@ export default class BlockDTO {
     this.tabs = tabs
     this.parentTabGuid = parentTabGuid
     this.isEditing = false
+    this.replication = replication
   }
 
   private static getPreparedSizes ({

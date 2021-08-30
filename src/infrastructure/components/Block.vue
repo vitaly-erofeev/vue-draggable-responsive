@@ -199,7 +199,7 @@ export default Vue.extend({
         const stickyToBlock = this.getStore().getByGuid(this.block.stickyTo.guid)
         const stickyToElement = this.getStore().getRefByGuid(this.block.stickyTo.guid) as unknown as {
           positionStyle: {
-            top: string, height: string
+            top: string, height: string, left: string, width: string
           }
         }
         if (stickyToBlock && stickyToBlock.parentGuid === this.block.parentGuid && stickyToElement) {
@@ -207,6 +207,10 @@ export default Vue.extend({
             case StickyToType.TOP:
               position.top =
                   `calc(${stickyToElement.positionStyle.height} + ${stickyToElement.positionStyle.top} + ${position.top})`
+              break
+            case StickyToType.LEFT:
+              position.left =
+                  `calc(${stickyToElement.positionStyle.width} + ${stickyToElement.positionStyle.left} + ${position.left})`
               break
           }
         }

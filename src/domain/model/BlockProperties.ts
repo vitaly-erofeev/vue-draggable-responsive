@@ -4,6 +4,7 @@ import { SizeTypes } from '@/domain/model/SizeTypes'
 import { TabProperties } from '@/domain/model/TabProperties'
 import { CalcProperties } from '@/domain/model/CalcProperties'
 import { StickyTo } from '@/domain/model/StickyTo'
+import { ReplicationProperties } from '@/domain/model/ReplicationProperties'
 
 export interface BlockProperties {
   widthCalc?: CalcProperties
@@ -31,5 +32,6 @@ export interface BlockProperties {
   parentGuid?: string,
   style?: string,
   tabs?: TabProperties,
-  parentTabGuid?: string
+  parentTabGuid?: string,
+  replication?: ReplicationProperties
 }

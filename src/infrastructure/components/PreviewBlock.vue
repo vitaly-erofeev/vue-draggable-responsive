@@ -19,7 +19,7 @@
           v-for="tab in block.tabs.list"
           :key="tab.guid"
           :style="`${block.tabs.tabStyle};${tab.guid === activeTabGuid ? block.tabs.activeTabStyle :''}`"
-          :class="{'tab': true, 'active': tab.guid === activeTabGuid}"
+          :class="{'tab': true, 'active': tab.guid === activeTabGuid, [block.tabs.class]: true}"
           @click="activeTabGuid = tab.guid"
       >
         <span class="label">{{ tab.name }}</span>
@@ -208,7 +208,7 @@ export default Vue.extend({
       let lastRowGuid = me.block.guid
       let lastRowTop = me.block.top
       let columns = me.block.replication?.columns || 1
-      blocksData.forEach((item, index) => {
+      blocksData.forEach((item: object, index: number) => {
         const newBlock = JSON.parse(JSON.stringify(me.block))
         newBlock.replication = undefined
         console.log(index, columns, (index + 1) % columns === 0)

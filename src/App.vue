@@ -109,6 +109,7 @@ export default {
         type,
         event,
         tabs: {
+          class: 'test',
           use: true,
           containerStyle: 'background: grey',
           tabStyle: 'color:red',

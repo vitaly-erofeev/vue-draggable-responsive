@@ -8,7 +8,8 @@ export interface TabProperties {
   position: TabPosition,
   containerStyle?: string,
   tabStyle?: string,
-  activeTabStyle?: string
+  activeTabStyle?: string,
+  class?: string
 }
 export enum TabPosition {
   TOP = 'top',

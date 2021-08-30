@@ -25,7 +25,7 @@
           v-for="tab in block.tabs.list"
           :key="tab.guid"
           :style="`${block.tabs.tabStyle};${tab.guid === activeTabGuid ? block.tabs.activeTabStyle :''}`"
-          :class="{'tab': true, 'active': tab.guid === activeTabGuid}"
+          :class="{'tab': true, 'active': tab.guid === activeTabGuid, [block.tabs.class]: true}"
           @click="onTabClick(tab.guid)"
       >
         <span class="label">{{ tab.name }}</span>

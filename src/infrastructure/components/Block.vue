@@ -156,6 +156,20 @@ export default Vue.extend({
     }
   },
   computed: {
+    zIndex (): number {
+      const startIndex = 101
+      if (!this.block.parentGuid) {
+        return startIndex
+      }
+      let parentRef = this.getStore().getRefByGuid(this.block.parentGuid) as unknown as {
+        zIndex: number
+      }
+      if (!parentRef) {
+        return startIndex
+      }
+
+      return parentRef.zIndex + 1
+    },
     isTabsContainer (): boolean {
       return this.block.tabs?.use || false
     },
@@ -227,7 +241,8 @@ export default Vue.extend({
 
       return Object.assign(position, {
         width: width,
-        height: height
+        height: height,
+        zIndex: this.zIndex
       })
     }
   },

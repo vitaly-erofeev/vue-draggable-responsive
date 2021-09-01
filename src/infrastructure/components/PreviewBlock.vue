@@ -63,6 +63,20 @@ export default Vue.extend({
   },
   inject: ['getStore'],
   computed: {
+    zIndex (): number {
+      const startIndex = 101
+      if (!this.block.parentGuid) {
+        return startIndex + (this.block.tabs?.use ? 1 : 0)
+      }
+      let parentRef = this.getStore().getRefByGuid(this.block.parentGuid) as unknown as {
+        zIndex: number
+      }
+      if (!parentRef) {
+        return startIndex
+      }
+
+      return parentRef.zIndex + 1 + (this.block.tabs?.use ? 1 : 0)
+    },
     isTabsContainer (): boolean {
       return this.block.tabs?.use || false
     },
@@ -165,7 +179,9 @@ export default Vue.extend({
           height: height
         })
       }
-      return position
+      return Object.assign(position, {
+        zIndex: this.zIndex
+      })
     }
   },
   mounted () {

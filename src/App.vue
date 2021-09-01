@@ -124,7 +124,7 @@ export default {
               name: 'test2'
             }
           ],
-          position: 'right'
+          position: 'top'
         }
       })
     },

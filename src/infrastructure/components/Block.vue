@@ -159,7 +159,7 @@ export default Vue.extend({
     zIndex (): number {
       const startIndex = 101
       if (!this.block.parentGuid) {
-        return startIndex
+        return startIndex + (this.block.tabs?.use ? 1 : 0)
       }
       let parentRef = this.getStore().getRefByGuid(this.block.parentGuid) as unknown as {
         zIndex: number
@@ -168,7 +168,7 @@ export default Vue.extend({
         return startIndex
       }
 
-      return parentRef.zIndex + 1
+      return parentRef.zIndex + 1 + (this.block.tabs?.use ? 1 : 0)
     },
     isTabsContainer (): boolean {
       return this.block.tabs?.use || false

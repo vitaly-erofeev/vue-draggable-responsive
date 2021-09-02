@@ -34,6 +34,7 @@ export default class BlockDTO {
   parentTabGuid?: string
   isEditing?: boolean
   replication?: ReplicationProperties
+  isHidden: boolean = false
 
   constructor (
     {

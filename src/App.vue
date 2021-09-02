@@ -6,7 +6,7 @@
       <button @click="addContainer(1, $event, true)">addStretched</button>
       <button @click="addChildren">addChild</button>
       <button @click="load">load</button>
-      <button @click="addSticky">addSticky</button>
+      <button @click="addSticky($event)">addSticky</button>
       <button @click="get">get</button>
       <button @click="addWithTabs(1, $event)">addWithTabs</button>
       <button @click="removeTab">removeTab</button>
@@ -14,6 +14,7 @@
       <button @click="remove">remove active</button>
       <button @click="clearActive">clear active</button>
       <button @click="addReplication(1, $event)">add replication</button>
+      <button @click="toggleHide">toggle hide</button>
       <pre>{{ activeBlock }}</pre>
     </div>
     <vue-draggable-responsive
@@ -69,6 +70,11 @@ export default {
     }
   },
   methods: {
+    toggleHide () {
+      if (this.activeBlock) {
+        this.activeBlock.isHidden = !this.activeBlock.isHidden
+      }
+    },
     addReplication (type, event) {
       this.$refs.designer.addBlock({
         width: 70,
@@ -108,6 +114,7 @@ export default {
         sticky: 'tl',
         type,
         event,
+        isStretched: true,
         tabs: {
           class: 'test',
           use: true,
@@ -209,7 +216,7 @@ export default {
       this.activeBlock = block
       this.$refs.designer.setActiveBlock(block.guid)
     },
-    addSticky () {
+    addSticky (event) {
       if (this.activeBlock) {
         this.$refs.designer.addBlock({
           width: 40,
@@ -220,7 +227,9 @@ export default {
           stickyTo: {
             guid: this.activeBlock.guid,
             type: StickyToType.LEFT
-          }
+          },
+          event,
+          type: 1
         })
       }
     },

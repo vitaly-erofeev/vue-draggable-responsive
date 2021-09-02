@@ -186,8 +186,10 @@ export default Vue.extend({
   },
   mounted () {
     this.setParent()
-    this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
-    this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
+    this.$nextTick(() => {
+      this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
+      this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
+    })
     if (this.block?.tabs?.use && this.block?.tabs?.list?.length > 0) {
       this.activeTabGuid = this.block.tabs.list[0].guid
     }
@@ -196,6 +198,16 @@ export default Vue.extend({
   },
   beforeDestroy () {
     this.getStore().removeRef(this.block.guid)
+  },
+  watch: {
+    activeTabGuid () {
+      this.scrollHeight = 0
+      this.scrollWidth = 0
+      this.$nextTick(() => {
+        this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
+        this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
+      })
+    }
   },
   data (): {
       parentBlock?: BlockDTO,

@@ -156,7 +156,10 @@ export default Vue.extend({
       }
     },
     'block.sizeTypes.width': {
-      handler (value: SizeTypes) {
+      handler (value: SizeTypes, old: SizeTypes) {
+        if (value === old || !value) {
+          return
+        }
         if (!this.$el.parentElement) {
           return
         }
@@ -167,7 +170,10 @@ export default Vue.extend({
       deep: true
     },
     'block.sizeTypes.height': {
-      handler (value: SizeTypes) {
+      handler (value: SizeTypes, old: SizeTypes) {
+        if (value === old || !value) {
+          return
+        }
         if (!this.$el.parentElement) {
           return
         }
@@ -178,7 +184,10 @@ export default Vue.extend({
       deep: true
     },
     'block.sizeTypes.top': {
-      handler (value: SizeTypes) {
+      handler (value: SizeTypes, old: SizeTypes) {
+        if (value === old || !value) {
+          return
+        }
         if (!this.$el.parentElement) {
           return
         }
@@ -192,7 +201,10 @@ export default Vue.extend({
       deep: true
     },
     'block.sizeTypes.left': {
-      handler (value: SizeTypes) {
+      handler (value: SizeTypes, old: SizeTypes) {
+        if (value === old || !value) {
+          return
+        }
         if (!this.$el.parentElement) {
           return
         }

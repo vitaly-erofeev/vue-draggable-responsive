@@ -92,6 +92,7 @@ import { Sticky } from '@/domain/model/Sticky'
 // eslint-disable-next-line no-unused-vars
 import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
 import { StickyToType } from '@/domain/model/StickyTo'
+import { SizeTypes } from '@/domain/model/SizeTypes'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 library.add(faAngleDown)
@@ -153,6 +154,56 @@ export default Vue.extend({
           }
         }
       }
+    },
+    'block.sizeTypes.width': {
+      handler (value: SizeTypes) {
+        if (!this.$el.parentElement) {
+          return
+        }
+        let parentSize = this.$el.parentElement.offsetWidth
+        const oldValue = this.block.width
+        this.block.width = this.calcSwitchedSizes(value, parentSize, oldValue)
+      },
+      deep: true
+    },
+    'block.sizeTypes.height': {
+      handler (value: SizeTypes) {
+        if (!this.$el.parentElement) {
+          return
+        }
+        let parentSize = this.$el.parentElement.offsetHeight
+        const oldValue = this.block.height
+        this.block.height = this.calcSwitchedSizes(value, parentSize, oldValue)
+      },
+      deep: true
+    },
+    'block.sizeTypes.top': {
+      handler (value: SizeTypes) {
+        if (!this.$el.parentElement) {
+          return
+        }
+        let parentSize = this.$el.parentElement.offsetTop
+        const oldValue = this.block.top
+        if (!oldValue) {
+          return
+        }
+        this.block.top = this.calcSwitchedSizes(value, parentSize, oldValue)
+      },
+      deep: true
+    },
+    'block.sizeTypes.left': {
+      handler (value: SizeTypes) {
+        if (!this.$el.parentElement) {
+          return
+        }
+        let parentSize = this.$el.parentElement.offsetLeft
+        const oldValue = this.block.left
+        if (!oldValue) {
+          return
+        }
+        this.block.left = this.calcSwitchedSizes(value, parentSize, oldValue)
+      },
+      deep: true
     }
   },
   computed: {
@@ -256,6 +307,13 @@ export default Vue.extend({
     this.getStore().removeRef(this.block.guid)
   },
   methods: {
+    calcSwitchedSizes (type: SizeTypes, parentSize: number, oldValue: number): number {
+      if (type === SizeTypes.PIXEL) {
+        return Math.round(parentSize / 100 * oldValue)
+      } else {
+        return Math.round(oldValue / (parentSize / 100))
+      }
+    },
     onTabClick (guid: string) {
       this.activeTabGuid = guid
     },
@@ -263,6 +321,9 @@ export default Vue.extend({
       const el: HTMLElement = this.$refs.draggableContainer as HTMLElement
       this.currentPosition.left = el.offsetLeft
       this.currentPosition.top = el.offsetTop
+      /* if (this.block.stickyTo?.guid) {
+        this.currentPosition.top =
+      } */
     },
     getBlockManager (): BlockManager {
       if (typeof this.blockManager === 'undefined') {

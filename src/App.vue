@@ -15,6 +15,7 @@
       <button @click="clearActive">clear active</button>
       <button @click="addReplication(1, $event)">add replication</button>
       <button @click="toggleHide">toggle hide</button>
+      <button @click="switchWidth">switch width</button>
       <pre>{{ activeBlock }}</pre>
     </div>
     <vue-draggable-responsive
@@ -45,6 +46,7 @@
 import VueDraggableResponsive from './index.vue'
 import VueDraggableResponsivePreviewer from '@/previewer'
 import { StickyToType } from '@/domain/model/StickyTo'
+import { SizeTypes } from '@/domain/model/SizeTypes'
 
 export default {
   name: 'App',
@@ -104,6 +106,13 @@ export default {
           this.activeBlock.tabs.list.splice(0, 1)
         }
       }
+    },
+    switchWidth () {
+      if (!this.activeBlock) {
+        return false
+      }
+      this.activeBlock.sizeTypes.width = this.activeBlock.sizeTypes.width ===
+      SizeTypes.PERCENT ? SizeTypes.PIXEL : SizeTypes.PERCENT
     },
     addWithTabs (type, event) {
       this.$refs.designer.addBlock({
@@ -249,7 +258,13 @@ export default {
       this.$refs.designer.addBlock(
         {
           width: 70,
-          height: 10,
+          height: 100,
+          sizeTypes: {
+            width: '%',
+            height: 'px',
+            top: '%',
+            left: '%'
+          },
           top: 30,
           left: 20,
           parentGuid: this.activeBlock.guid,

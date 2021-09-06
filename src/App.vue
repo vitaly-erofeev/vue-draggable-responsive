@@ -118,7 +118,7 @@ export default {
       if (!this.activeBlock) {
         return false
       }
-      this.activeBlock.sizeTypes.width = this.activeBlock.sizeTypes.width ===
+      this.activeBlock.sizeTypes.left = this.activeBlock.sizeTypes.left ===
       SizeTypes.PERCENT ? SizeTypes.PIXEL : SizeTypes.PERCENT
     },
     addWithTabs (type, event) {

@@ -191,7 +191,7 @@ export default Vue.extend({
         if (!this.$el.parentElement) {
           return
         }
-        let parentSize = this.$el.parentElement.offsetTop
+        let parentSize = this.$el.parentElement.offsetHeight
         const oldValue = this.block.top
         if (!oldValue) {
           return
@@ -208,7 +208,7 @@ export default Vue.extend({
         if (!this.$el.parentElement) {
           return
         }
-        let parentSize = this.$el.parentElement.offsetLeft
+        let parentSize = this.$el.parentElement.offsetWidth
         const oldValue = this.block.left
         if (!oldValue) {
           return

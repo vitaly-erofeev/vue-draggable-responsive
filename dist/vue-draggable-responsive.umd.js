@@ -844,8 +844,8 @@ var BlockRepository_BlockRepository = /*#__PURE__*/function () {
     }
   }, {
     key: "change",
-    value: function change(block, property, value) {
-      var blockModel = this.getByGuid(block.guid);
+    value: function change(guid, property, value) {
+      var blockModel = this.getByGuid(guid);
 
       if (typeof blockModel !== 'undefined') {
         blockModel[property] = value;
@@ -10750,15 +10750,24 @@ var BlockManager_BlockManager = /*#__PURE__*/function () {
   }, {
     key: "setAbsolutePosition",
     value: function setAbsolutePosition(type, event) {
-      // TODO: учитывать границы родителя и минусовые значения
+      // TODO: учитывать границы родителя
       var breakpoints = BreakpointsFactory_BreakpointsFactory.build(type, this.block.sticky);
       this[breakpoints.client] = event[breakpoints.client];
+      var newValue;
 
       if (breakpoints.inverse) {
-        this.repository.change(this.block, breakpoints.offset, this.block[breakpoints.offset] + this[breakpoints.movement]); // this.block[breakpoints.offset] = this.block[breakpoints.offset] + this[breakpoints.movement]
+        newValue = this.block[breakpoints.offset] + this[breakpoints.movement];
       } else {
-        this.repository.change(this.block, breakpoints.offset, this.block[breakpoints.offset] - this[breakpoints.movement]); // this.block[breakpoints.offset] = this.block[breakpoints.offset] - this[breakpoints.movement]
+        newValue = this.block[breakpoints.offset] - this[breakpoints.movement];
       }
+
+      if (newValue < 0) {
+        return;
+      }
+
+      this.repository.change(this.block.guid, breakpoints.offset, newValue); // why?
+
+      this.block[breakpoints.offset] = newValue;
     }
   }, {
     key: "setYPosition",
@@ -10809,7 +10818,7 @@ var BlockManager_BlockManager = /*#__PURE__*/function () {
       }
 
       var currentRelativeSize = Math.floor(currentPosition / (parentElementPositions[breakpoints.size] / 100 * this.step) * this.step);
-      this.repository.change(this.block, breakpoints.offset, this.getNewRelativeSize(type, currentRelativeSize)); // this.block[breakpoints.offset] = this.getNewRelativeSize(type, currentRelativeSize)
+      this.repository.change(this.block.guid, breakpoints.offset, this.getNewRelativeSize(type, currentRelativeSize)); // this.block[breakpoints.offset] = this.getNewRelativeSize(type, currentRelativeSize)
     }
   }, {
     key: "getNewRelativeSize",

@@ -29,8 +29,8 @@ export default class BlockRepository implements BlockRepositoryInterface {
     })
   }
 
-  change (block: BlockDTO, property: string, value: any): void {
-    const blockModel = this.getByGuid(block.guid)
+  change (guid: string, property: string, value: any): void {
+    const blockModel = this.getByGuid(guid)
     if (typeof blockModel !== 'undefined') {
       blockModel[property] = value
     }

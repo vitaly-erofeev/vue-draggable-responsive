@@ -245,10 +245,16 @@ export default {
     addContainer (type, event, isStretched = false) {
       this.$refs.designer.addBlock({
         width: 70,
-        height: 10,
+        height: 100,
         top: 30,
         right: 0,
         sticky: 'tl',
+        sizeTypes: {
+          width: '%',
+          height: 'px',
+          top: '%',
+          left: '%'
+        },
         type,
         event,
         isStretched

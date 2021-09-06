@@ -125,16 +125,19 @@ export default class BlockManager {
   }
 
   private setAbsolutePosition (type: Breakpoints, event: CustomMouseEvent): void {
-    // TODO: учитывать границы родителя и минусовые значения
+    // TODO: учитывать границы родителя
     const breakpoints = BreakpointsFactory.build(type, this.block.sticky)
     this[breakpoints.client] = event[breakpoints.client]
+    let newValue
     if (breakpoints.inverse) {
-      this.repository.change(this.block, breakpoints.offset, this.block[breakpoints.offset] + this[breakpoints.movement])
-      // this.block[breakpoints.offset] = this.block[breakpoints.offset] + this[breakpoints.movement]
+      newValue = this.block[breakpoints.offset] + this[breakpoints.movement]
     } else {
-      this.repository.change(this.block, breakpoints.offset, this.block[breakpoints.offset] - this[breakpoints.movement])
-      // this.block[breakpoints.offset] = this.block[breakpoints.offset] - this[breakpoints.movement]
+      newValue = this.block[breakpoints.offset] - this[breakpoints.movement]
     }
+    if (newValue < 0) {
+      return
+    }
+    this.repository.change(this.block.guid, breakpoints.offset, newValue)
   }
 
   private setYPosition (event: MouseEvent): void {
@@ -175,7 +178,7 @@ export default class BlockManager {
     }
     const currentRelativeSize = Math.floor(currentPosition / ((parentElementPositions[breakpoints.size] / 100) * this.step) * this.step)
 
-    this.repository.change(this.block, breakpoints.offset, this.getNewRelativeSize(type, currentRelativeSize))
+    this.repository.change(this.block.guid, breakpoints.offset, this.getNewRelativeSize(type, currentRelativeSize))
     // this.block[breakpoints.offset] = this.getNewRelativeSize(type, currentRelativeSize)
   }
 

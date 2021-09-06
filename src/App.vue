@@ -16,6 +16,7 @@
       <button @click="addReplication(1, $event)">add replication</button>
       <button @click="toggleHide">toggle hide</button>
       <button @click="switchWidth">switch width</button>
+      <button @click="test">test</button>
       <pre>{{ activeBlock }}</pre>
     </div>
     <vue-draggable-responsive
@@ -72,6 +73,12 @@ export default {
     }
   },
   methods: {
+    test () {
+      if (this.activeBlock) {
+        this.activeBlock.height = 100
+        console.log(this.activeBlock)
+      }
+    },
     toggleHide () {
       if (this.activeBlock) {
         this.activeBlock.isHidden = !this.activeBlock.isHidden

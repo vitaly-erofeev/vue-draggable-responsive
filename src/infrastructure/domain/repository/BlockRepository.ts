@@ -2,7 +2,6 @@ import { BlockRepositoryInterface } from '@/domain/repository/BlockRepositoryInt
 import BlockDTO from '@/domain/model/BlockDTO'
 import GuidGenerator from '@/infrastructure/service/GuidGenerator'
 import { BlockProperties } from '@/domain/model/BlockProperties'
-import Block from '@/infrastructure/components/Block.vue'
 
 export default class BlockRepository implements BlockRepositoryInterface {
   private blocks: BlockDTO[] = [];

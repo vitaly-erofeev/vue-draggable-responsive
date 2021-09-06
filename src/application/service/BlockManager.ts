@@ -138,6 +138,8 @@ export default class BlockManager {
       return
     }
     this.repository.change(this.block.guid, breakpoints.offset, newValue)
+    // why?
+    this.block[breakpoints.offset] = newValue
   }
 
   private setYPosition (event: MouseEvent): void {

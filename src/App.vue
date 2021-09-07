@@ -16,7 +16,7 @@
       <button @click="addReplication(1, $event)">add replication</button>
       <button @click="toggleHide">toggle hide</button>
       <button @click="switchWidth">switch width</button>
-      <button @click="test">test</button>
+      <button @click="switchSticky">sticky</button>
       <pre>{{ activeBlock }}</pre>
     </div>
     <vue-draggable-responsive
@@ -73,10 +73,13 @@ export default {
     }
   },
   methods: {
-    test () {
+    switchSticky () {
       if (this.activeBlock) {
-        this.activeBlock.height = 100
-        console.log(this.activeBlock)
+        let block = this.$refs.designer.getBlocks().filter((item) => item.guid !== this.activeBlock.guid)[0]
+        this.activeBlock.stickyTo = {
+          guid: block.guid,
+          type: StickyToType.LEFT
+        }
       }
     },
     toggleHide () {
@@ -118,7 +121,7 @@ export default {
       if (!this.activeBlock) {
         return false
       }
-      this.activeBlock.sizeTypes.left = this.activeBlock.sizeTypes.left ===
+      this.activeBlock.sizeTypes.width = this.activeBlock.sizeTypes.width ===
       SizeTypes.PERCENT ? SizeTypes.PIXEL : SizeTypes.PERCENT
     },
     addWithTabs (type, event) {
@@ -236,14 +239,20 @@ export default {
       if (this.activeBlock) {
         this.$refs.designer.addBlock({
           width: 40,
-          height: 10,
+          height: 100,
           top: 10,
           left: 20,
           sticky: 'tl',
           parentGuid: this.activeBlock.parentGuid,
+          sizeTypes: {
+            width: '%',
+            height: 'px',
+            top: '%',
+            left: '%'
+          },
           stickyTo: {
             guid: this.activeBlock.guid,
-            type: StickyToType.LEFT
+            type: StickyToType.TOP
           },
           event,
           type: 1
@@ -260,7 +269,7 @@ export default {
         sizeTypes: {
           width: '%',
           height: 'px',
-          top: '%',
+          top: 'px',
           left: '%'
         },
         type,

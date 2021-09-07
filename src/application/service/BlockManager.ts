@@ -57,8 +57,7 @@ export default class BlockManager {
       this.clientX = this.blockElementRect.x + 15
       this.clientY = this.blockElementRect.y + 15
     }
-
-    if (this.type === 'drag') {
+    if (this.type === 'drag' && isInteractive) {
       if (this.block.stickyTo?.guid) {
         const el = this.repository.getRefByGuid(this.block.stickyTo?.guid) as unknown as {
           $el: {
@@ -193,6 +192,18 @@ export default class BlockManager {
       currentPosition = Math.floor(this.blockElementRect[breakpoints.offset]) + this[breakpoints.movement]
     } else {
       currentPosition = Math.floor(this.blockElementRect[breakpoints.offset]) - this[breakpoints.movement]
+    }
+    if (this.block.stickyTo?.guid && (type === Breakpoints.Y || type === Breakpoints.X)) {
+      const el = this.repository.getRefByGuid(this.block.stickyTo?.guid) as unknown as {
+        $el: {
+          offsetTop: number, offsetLeft: number, offsetHeight: number, offsetWidth: number
+        }
+      }
+      if (this.block.stickyTo?.type === StickyToType.TOP && type === Breakpoints.Y) {
+        currentPosition -= el.$el.offsetTop + el.$el.offsetHeight
+      } else if (this.block.stickyTo?.type === StickyToType.LEFT && type === Breakpoints.X) {
+        currentPosition -= el.$el.offsetLeft + el.$el.offsetWidth
+      }
     }
     const currentRelativeSize = Math.floor(currentPosition / ((parentElementPositions[breakpoints.size] / 100) * this.step) * this.step)
 

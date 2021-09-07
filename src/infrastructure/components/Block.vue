@@ -10,15 +10,6 @@
       @mousedown.stop="dragStart"
       @contextmenu.stop="$emit('contextmenu', {block: block, event: $event})"
   >
-    <svg id="svg">
-      <line class="line" v-for="(line, index) in stickyLines"
-            :key="index"
-            :x1="line.x1"
-            :y1="line.y1"
-            :x2="line.x2"
-            :y2="line.y2"
-      />
-    </svg>
     <div
         v-if="isTabsContainer"
         :class="{
@@ -64,6 +55,15 @@
     </slot>
     <div class="content" :style="block.style">
       <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
+      <svg id="svg">
+        <line class="line" v-for="(line, index) in stickyLines"
+              :key="index"
+              :x1="line.x1"
+              :y1="line.y1"
+              :x2="line.x2"
+              :y2="line.y2"
+        />
+      </svg>
       <block
           v-for="_block in block.children"
           v-show="!(block.tabs || {}).use || _block.parentTabGuid === activeTabGuid"
@@ -585,6 +585,7 @@ export default Vue.extend({
   left: 0;
   width: 100%;
   height: 100%;
+  overflow: visible;
 }
 
 .line{

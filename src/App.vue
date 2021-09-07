@@ -247,7 +247,7 @@ export default {
           sizeTypes: {
             width: '%',
             height: 'px',
-            top: '%',
+            top: 'px',
             left: '%'
           },
           stickyTo: {
@@ -285,7 +285,7 @@ export default {
           sizeTypes: {
             width: '%',
             height: 'px',
-            top: '%',
+            top: 'px',
             left: '%'
           },
           top: 30,

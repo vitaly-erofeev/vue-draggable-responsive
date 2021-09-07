@@ -142,7 +142,6 @@ export default class BlockManager {
   private setAbsolutePosition (type: Breakpoints, event: CustomMouseEvent): void {
     // TODO: учитывать границы родителя
     const breakpoints = BreakpointsFactory.build(type, this.block.sticky)
-    this[breakpoints.client] = event[breakpoints.client]
     let newValue
     if (breakpoints.inverse) {
       newValue = this.block[breakpoints.offset] + this[breakpoints.movement]
@@ -152,6 +151,7 @@ export default class BlockManager {
     if (newValue < 0) {
       return
     }
+    this[breakpoints.client] = event[breakpoints.client]
     this.repository.change(this.block.guid, breakpoints.offset, newValue)
     // why?
     this.block[breakpoints.offset] = newValue

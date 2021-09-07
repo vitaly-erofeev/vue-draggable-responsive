@@ -240,6 +240,7 @@ export default {
           top: 10,
           left: 20,
           sticky: 'tl',
+          parentGuid: this.activeBlock.parentGuid,
           stickyTo: {
             guid: this.activeBlock.guid,
             type: StickyToType.LEFT

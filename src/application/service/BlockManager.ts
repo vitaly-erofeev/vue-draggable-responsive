@@ -5,6 +5,7 @@ import BreakpointsFactory from '@/domain/service/BreakpointsFactory'
 import { Breakpoints } from '@/domain/model/Breakpoints'
 import { BlockRepositoryInterface } from '@/domain/repository/BlockRepositoryInterface'
 import { SizeTypes } from '@/domain/model/SizeTypes'
+import { StickyToType } from '@/domain/model/StickyTo'
 
 export default class BlockManager {
   [index: string]: any;
@@ -55,6 +56,21 @@ export default class BlockManager {
     if (isInteractive) {
       this.clientX = this.blockElementRect.x + 15
       this.clientY = this.blockElementRect.y + 15
+    }
+
+    if (this.type === 'drag') {
+      if (this.block.stickyTo?.guid) {
+        const el = this.repository.getRefByGuid(this.block.stickyTo?.guid) as unknown as {
+          $el: {
+            offsetTop: number, offsetLeft: number, offsetHeight: number, offsetWidth: number
+          }
+        }
+        if (this.block.stickyTo?.type === StickyToType.TOP) {
+          this.clientY += el.$el.offsetTop + el.$el.offsetHeight
+        } else if (this.block.stickyTo?.type === StickyToType.LEFT) {
+          this.clientX += el.$el.offsetLeft + el.$el.offsetWidth
+        }
+      }
     }
   }
 

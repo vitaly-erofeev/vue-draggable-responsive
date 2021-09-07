@@ -1,5 +1,14 @@
 <template>
   <div class="container">
+    <svg id="svg">
+      <line class="line" v-for="(line, index) in stickyLines"
+            :key="index"
+            :x1="line.x1"
+            :y1="line.y1"
+            :x2="line.x2"
+            :y2="line.y2"
+      />
+    </svg>
     <block
         v-for="block in _blocks"
         :key="block.guid"
@@ -207,7 +216,10 @@ export default Vue.extend({
   },
   computed: {
     _blocks (): BlockDTO[] {
-      return this.store.get()
+      return this.getStore().get()
+    },
+    stickyLines () {
+      return this.getStore().getStickyLines()
     }
   }
 })
@@ -221,5 +233,18 @@ export default Vue.extend({
   linear-gradient(90deg, rgba(128, 128, 128, 0.1) 1px, transparent 1px);
   background-size: 1% 1%;
   position: relative;
+}
+
+#svg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.line{
+  stroke-width:1px;
+  stroke: #32B84D;
 }
 </style>

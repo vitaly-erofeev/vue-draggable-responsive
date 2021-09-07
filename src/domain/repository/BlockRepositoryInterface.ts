@@ -25,4 +25,8 @@ export interface BlockRepositoryInterface {
   removeRef (guid: string): void
 
   getRefByGuid(guid: string): Vue | undefined
+
+  getStickyLines(guid?: string): {
+    x1: string, y1: string, x2: string, y2: string
+  }[]
 }

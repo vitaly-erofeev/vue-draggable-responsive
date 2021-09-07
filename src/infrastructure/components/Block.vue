@@ -10,6 +10,15 @@
       @mousedown.stop="dragStart"
       @contextmenu.stop="$emit('contextmenu', {block: block, event: $event})"
   >
+    <svg id="svg">
+      <line class="line" v-for="(line, index) in stickyLines"
+            :key="index"
+            :x1="line.x1"
+            :y1="line.y1"
+            :x2="line.x2"
+            :y2="line.y2"
+      />
+    </svg>
     <div
         v-if="isTabsContainer"
         :class="{
@@ -219,6 +228,9 @@ export default Vue.extend({
     }
   },
   computed: {
+    stickyLines () {
+      return this.getStore().getStickyLines(this.block.guid)
+    },
     zIndex (): number {
       const startIndex = 101
       if (!this.block.parentGuid) {
@@ -541,5 +553,17 @@ export default Vue.extend({
 .block .tabs_container.position_left {
   right: 100%;
   flex-direction: column;
+}
+#svg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.line{
+  stroke-width:1px;
+  stroke: #32B84D;
 }
 </style>

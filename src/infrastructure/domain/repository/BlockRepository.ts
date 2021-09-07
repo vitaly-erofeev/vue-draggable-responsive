@@ -2,9 +2,10 @@ import { BlockRepositoryInterface } from '@/domain/repository/BlockRepositoryInt
 import BlockDTO from '@/domain/model/BlockDTO'
 import GuidGenerator from '@/infrastructure/service/GuidGenerator'
 import { BlockProperties } from '@/domain/model/BlockProperties'
+import { StickyToType } from '@/domain/model/StickyTo'
 
 export default class BlockRepository implements BlockRepositoryInterface {
-  private blocks: BlockDTO[] = [];
+  private blocks: BlockDTO[] = []
   private refs: {
     guid: string,
     element: Vue
@@ -95,6 +96,7 @@ export default class BlockRepository implements BlockRepositoryInterface {
       return nestedValue
     })
   }
+
   setActiveBlock (guid: string): void {
     this.resetActiveBlock()
     const block = this.getByGuid(guid)
@@ -110,6 +112,7 @@ export default class BlockRepository implements BlockRepositoryInterface {
       }
     }
   }
+
   setActiveTab (blockGuid: string, guid: string): void {
     const block = this.getByGuid(blockGuid)
     if (typeof block === 'undefined') {
@@ -141,5 +144,52 @@ export default class BlockRepository implements BlockRepositoryInterface {
 
   removeRef (guid: string): void {
     this.refs = this.refs.filter((item) => item.guid !== guid)
+  }
+
+  getStickyLines (guid?: string): {
+    x1: string, y1: string, x2: string, y2: string
+  }[] {
+    let blocks = guid ? this.getByGuid(guid)?.children : this.blocks
+    if (!blocks) {
+      return []
+    }
+    let answer: {
+      x1: string, y1: string, x2: string, y2: string
+    }[] = []
+    blocks.filter((item) => item.stickyTo?.guid !== 'undefined').forEach((item) => {
+      if (!item.stickyTo?.guid) {
+        return false
+      }
+      let stickyElm = this.getRefByGuid(item.stickyTo.guid) as unknown as {
+        positionStyle: {
+          top: string, height: string, left: string, width: string
+        }
+      }
+      let elm = this.getRefByGuid(item.guid) as unknown as {
+        positionStyle: {
+          top: string, height: string, left: string, width: string
+        }
+      }
+      if (!elm || !stickyElm) {
+        return false
+      }
+      if (item.stickyTo.type === StickyToType.TOP) {
+        answer.push({
+          x1: `calc(${elm.positionStyle.left} + calc(${elm.positionStyle.width} / 2))`,
+          y1: elm.positionStyle.top,
+          x2: `calc(${stickyElm.positionStyle.left} + calc(${stickyElm.positionStyle.width} / 2))`,
+          y2: `calc(${stickyElm.positionStyle.top} + ${stickyElm.positionStyle.height})`
+        })
+      } else if (item.stickyTo.type === StickyToType.LEFT) {
+        answer.push({
+          x1: elm.positionStyle.left,
+          y1: `calc(${elm.positionStyle.top} + calc(${elm.positionStyle.height} / 2))`,
+          x2: `calc(${stickyElm.positionStyle.left} + ${stickyElm.positionStyle.width})`,
+          y2: `calc(${stickyElm.positionStyle.top} + calc(${stickyElm.positionStyle.height} / 2))`
+        })
+      }
+    })
+
+    return answer
   }
 }

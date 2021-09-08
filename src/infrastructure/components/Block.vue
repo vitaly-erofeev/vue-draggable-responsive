@@ -153,8 +153,33 @@ export default Vue.extend({
   },
   watch: {
     'block.stickyTo.guid': {
-      handler (value) {
-        if (!value || !this.block.stickyTo?.guid || !this.$el.parentElement) {
+      handler (value, oldValue) {
+        console.log(value, oldValue)
+        if (!this.$el.parentElement) {
+          return
+        }
+        if (oldValue && !value) {
+          const el = this.getStore().getRefByGuid(oldValue) as unknown as {
+            $el: {
+              offsetTop: number, offsetLeft: number, offsetHeight: number, offsetWidth: number
+            }
+          }
+          if (this.block.stickyTo?.type === StickyToType.TOP) {
+            let difference = el.$el.offsetTop + el.$el.offsetHeight
+            if (this.block.sizeTypes.top === SizeTypes.PERCENT) {
+              difference = difference / (this.$el.parentElement.offsetHeight / 100)
+            }
+            this.block.top = Math.abs((this.block.top || 0) + difference)
+          } else if (this.block.stickyTo?.type === StickyToType.LEFT) {
+            let difference = el.$el.offsetLeft + el.$el.offsetWidth
+            if (this.block.sizeTypes.left === SizeTypes.PERCENT) {
+              difference = difference / (this.$el.parentElement.offsetWidth / 100)
+            }
+            this.block.left = Math.abs((this.block.left || 0) + difference)
+          }
+          return
+        }
+        if (!value || !this.block.stickyTo?.guid) {
           return
         }
         const el = this.getStore().getRefByGuid(this.block.stickyTo?.guid) as unknown as {

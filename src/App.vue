@@ -75,6 +75,10 @@ export default {
   methods: {
     switchSticky () {
       if (this.activeBlock) {
+        if (this.activeBlock.stickyTo?.guid) {
+          this.activeBlock.stickyTo.guid = undefined
+          return false
+        }
         let block = this.$refs.designer.getBlocks().filter((item) => item.guid !== this.activeBlock.guid)[0]
         this.activeBlock.stickyTo = {
           guid: block.guid,

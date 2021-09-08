@@ -5,83 +5,86 @@
         'block': true,
         'highlight' : isResizing || isDragging,
         'active': block.isActive,
+        'hidden': block.isHidden,
         'active_parent': block.isActiveAsParent }"
       ref="draggableContainer"
+      v-show="!block.isHidden || showHidden"
       @mousedown.stop="dragStart"
       @contextmenu.stop="$emit('contextmenu', {block: block, event: $event})"
   >
-    <div
-        v-if="isTabsContainer"
-        :class="{
-          'tabs_container' : true,
-          'position_top': block.tabs.position === 'top',
-          'position_right': block.tabs.position === 'right',
-          'position_bottom': block.tabs.position === 'bottom',
-          'position_left': block.tabs.position === 'left',
-        }"
-        :style="block.tabs.containerStyle"
-    >
       <div
-          v-for="tab in block.tabs.list"
-          :key="tab.guid"
-          :style="`${block.tabs.tabStyle};${tab.guid === activeTabGuid ? block.tabs.activeTabStyle :''}`"
-          :class="{'tab': true, 'active': tab.guid === activeTabGuid, [block.tabs.class]: true}"
-          @click="onTabClick(tab.guid)"
+          v-if="isTabsContainer"
+          :class="{
+            'tabs_container' : true,
+            'position_top': block.tabs.position === 'top',
+            'position_right': block.tabs.position === 'right',
+            'position_bottom': block.tabs.position === 'bottom',
+            'position_left': block.tabs.position === 'left',
+          }"
+          :style="block.tabs.containerStyle"
       >
-        <span class="label">{{ tab.name }}</span>
+        <div
+            v-for="tab in block.tabs.list"
+            :key="tab.guid"
+            :style="`${block.tabs.tabStyle};${tab.guid === activeTabGuid ? block.tabs.activeTabStyle :''}`"
+            :class="{'tab': true, 'active': tab.guid === activeTabGuid, [block.tabs.class]: true}"
+            @click="onTabClick(tab.guid)"
+        >
+          <span class="label">{{ tab.name }}</span>
+        </div>
       </div>
-    </div>
-    <div class="block_info">
-      <slot :block="block" name="help_text"></slot>
-    </div>
-    <slot :block="block" :is-resizing="isResizing" :is-dragging="isDragging" name="info">
-      <div class="block_info" v-show="isResizing">
-        {{ block.width }}{{ block.sizeTypes.width }} x {{ block.height }}{{ block.sizeTypes.height }}
+      <div class="block_info">
+        <slot :block="block" name="help_text"></slot>
       </div>
-      <div
-          v-show="isDragging"
-          class="position_line left"
-          :style="`left: calc(-${currentPosition.left}px - 1px);width:calc(${currentPosition.left}px - 1px)`"
-      >
-        <span>{{ block.left }}{{ block.sizeTypes.left }}</span>
+      <slot :block="block" :is-resizing="isResizing" :is-dragging="isDragging" name="info">
+        <div class="block_info" v-show="isResizing">
+          {{ block.width }}{{ block.sizeTypes.width }} x {{ block.height }}{{ block.sizeTypes.height }}
+        </div>
+        <div
+            v-show="isDragging"
+            class="position_line left"
+            :style="`left: calc(-${currentPosition.left}px - 1px);width:calc(${currentPosition.left}px - 1px)`"
+        >
+          <span>{{ block.left }}{{ block.sizeTypes.left }}</span>
+        </div>
+        <div
+            v-show="isDragging"
+            class="position_line top"
+            :style="`top: -${currentPosition.top}px;height:${currentPosition.top}px`"
+        >
+          <span>{{ block.top }}{{ block.sizeTypes.top }}</span>
+        </div>
+      </slot>
+      <div class="content" :style="block.style">
+        <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
+        <svg id="svg">
+          <line class="line" v-for="(line, index) in stickyLines"
+                :key="index"
+                :x1="line.x1"
+                :y1="line.y1"
+                :x2="line.x2"
+                :y2="line.y2"
+          />
+        </svg>
+        <block
+            v-for="_block in block.children"
+            v-show="!(block.tabs || {}).use || _block.parentTabGuid === activeTabGuid"
+            :key="_block.guid"
+            :block="_block"
+            :step="step"
+            :ref="_block.guid"
+            :show-hidden="showHidden"
+            @start-drag="$emit('start-drag', $event)"
+            @stop-drag="$emit('stop-drag', $event)"
+            @dragging="$emit('dragging', $event)"
+            @contextmenu="$emit('contextmenu', $event)"
+        >
+          <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
+            <slot :name="name" v-bind="data"></slot>
+          </template>
+        </block>
       </div>
-      <div
-          v-show="isDragging"
-          class="position_line top"
-          :style="`top: -${currentPosition.top}px;height:${currentPosition.top}px`"
-      >
-        <span>{{ block.top }}{{ block.sizeTypes.top }}</span>
-      </div>
-    </slot>
-    <div class="content" :style="block.style">
-      <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
-      <svg id="svg">
-        <line class="line" v-for="(line, index) in stickyLines"
-              :key="index"
-              :x1="line.x1"
-              :y1="line.y1"
-              :x2="line.x2"
-              :y2="line.y2"
-        />
-      </svg>
-      <block
-          v-for="_block in block.children"
-          v-show="!(block.tabs || {}).use || _block.parentTabGuid === activeTabGuid"
-          :key="_block.guid"
-          :block="_block"
-          :step="step"
-          :ref="_block.guid"
-          @start-drag="$emit('start-drag', $event)"
-          @stop-drag="$emit('stop-drag', $event)"
-          @dragging="$emit('dragging', $event)"
-          @contextmenu="$emit('contextmenu', $event)"
-      >
-        <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
-          <slot :name="name" v-bind="data"></slot>
-        </template>
-      </block>
-    </div>
-    <font-awesome-icon
+      <font-awesome-icon
         icon="angle-down"
         class="resize-handler"
         @mousedown.stop="resizeStart"
@@ -117,6 +120,10 @@ export default Vue.extend({
     },
     step: {
       type: Number
+    },
+    showHidden: {
+      type: Boolean,
+      default: false
     }
   },
   inject: ['getStore'],
@@ -154,7 +161,6 @@ export default Vue.extend({
   watch: {
     'block.stickyTo.guid': {
       handler (value, oldValue) {
-        console.log(value, oldValue)
         if (!this.$el.parentElement) {
           return
         }
@@ -334,6 +340,15 @@ export default Vue.extend({
           }
           break
       }
+      if (this.block.isHidden && !this.showHidden) {
+        if (this.block.stickyTo?.guid && this.block.stickyTo?.type) {
+          if (this.block.stickyTo.type === StickyToType.TOP) {
+            position.top = '0px'
+          } else if (this.block.stickyTo.type === StickyToType.LEFT) {
+            position.left = '0px'
+          }
+        }
+      }
       if (this.block.stickyTo?.guid && this.block.stickyTo?.type) {
         const stickyToBlock = this.getStore().getByGuid(this.block.stickyTo.guid)
         const stickyToElement = this.getStore().getRefByGuid(this.block.stickyTo.guid) as unknown as {
@@ -363,7 +378,10 @@ export default Vue.extend({
       if (this.block.heightCalc && this.block.heightCalc.type && this.block.heightCalc.value) {
         height = `calc(${height} ${this.block.heightCalc.type} ${this.block.heightCalc.value}px)`
       }
-
+      if (this.block.isHidden && !this.showHidden) {
+        width = '0px'
+        height = '0px'
+      }
       return Object.assign(position, {
         width: width,
         height: height,
@@ -505,10 +523,16 @@ export default Vue.extend({
   outline: 1px dashed #539FFF;
   position: absolute;
 }
+.block.hidden {
+  outline: 1px dashed #E94435;
+}
 
 .block.highlight {
   outline: 1px solid #539FFF;
   cursor: pointer;
+}
+.block.highlight.hidden {
+  outline: 1px solid #E94435;
 }
 
 .block .block_info {
@@ -576,6 +600,10 @@ export default Vue.extend({
 
 .block.active {
   outline: 3px solid #539FFF;
+}
+
+.block.active.hidden {
+  outline: 3px solid #E94435;
 }
 
 .block.active_parent {

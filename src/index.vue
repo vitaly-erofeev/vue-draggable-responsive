@@ -15,6 +15,7 @@
         :block="block"
         :step="step"
         :ref="block.guid"
+        :show-hidden="showHidden"
         @start-drag="$emit('start-drag', $event)"
         @stop-drag="$emit('stop-drag', $event)"
         @dragging="$emit('dragging', $event)"
@@ -63,6 +64,10 @@ export default Vue.extend({
     blocks: {
       type: Array as Vue.PropType<object[]>,
       default: () => []
+    },
+    showHidden: {
+      type: Boolean,
+      default: false
     }
   },
   provide () {

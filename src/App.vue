@@ -17,12 +17,14 @@
       <button @click="toggleHide">toggle hide</button>
       <button @click="switchWidth">switch width</button>
       <button @click="switchSticky">sticky</button>
+      <button @click="showHidden = !showHidden">toggle show hidden: {{showHidden}}</button>
       <pre>{{ activeBlock }}</pre>
     </div>
     <vue-draggable-responsive
         ref="designer"
         style="height: 500px;width: 1059px;display: inline-block"
         :step="1"
+        :show-hidden="showHidden"
         @start-drag="onStartDrag"
         v-show="!preview"
         @contextmenu="oncontext"
@@ -59,7 +61,8 @@ export default {
     return {
       activeBlock: undefined,
       preview: false,
-      blocks: []
+      blocks: [],
+      showHidden: false
     }
   },
   watch: {

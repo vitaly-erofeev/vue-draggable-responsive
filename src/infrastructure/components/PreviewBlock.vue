@@ -3,6 +3,7 @@
       :style="positionStyle"
       ref="draggableContainer"
       class="block"
+      v-show="!block.isHidden"
   >
     <div
         v-if="isTabsContainer"
@@ -82,7 +83,7 @@ export default Vue.extend({
     },
     positionStyle (): object {
       let position: {
-        top?: string, left?: string, right?: string, bottom?: string
+        top?: string, left?: string, right?: string, bottom?: string, width?: string, height?: string
       } = {}
       let top: string
       let left: string
@@ -137,7 +138,15 @@ export default Vue.extend({
           }
           break
       }
-
+      if (this.block.isHidden) {
+        if (this.block.stickyTo?.guid && this.block.stickyTo?.type) {
+          if (this.block.stickyTo.type === StickyToType.TOP) {
+            position.top = '0px'
+          } else if (this.block.stickyTo.type === StickyToType.LEFT) {
+            position.left = '0px'
+          }
+        }
+      }
       if (this.block.stickyTo?.guid && this.block.stickyTo?.type) {
         const stickyToBlock = this.getStore().getByGuid(this.block.stickyTo.guid)
         const stickyToElement = this.getStore().getRefByGuid(this.block.stickyTo.guid) as unknown as {
@@ -178,6 +187,10 @@ export default Vue.extend({
           width: width,
           height: height
         })
+      }
+      if (this.block.isHidden) {
+        position.width = '0px'
+        position.height = '0px'
       }
       return Object.assign(position, {
         zIndex: this.zIndex

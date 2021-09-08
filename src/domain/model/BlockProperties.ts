@@ -33,5 +33,6 @@ export interface BlockProperties {
   style?: string,
   tabs?: TabProperties,
   parentTabGuid?: string,
-  replication?: ReplicationProperties
+  replication?: ReplicationProperties,
+  isHidden?: boolean
 }

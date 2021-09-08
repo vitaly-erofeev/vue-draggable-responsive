@@ -64,12 +64,14 @@ export default class BlockDTO {
       widthCalc,
       heightCalc,
       stickyTo,
-      replication
+      replication,
+      isHidden = false
     }: BlockProperties
   ) {
     this.widthCalc = widthCalc
     this.heightCalc = heightCalc
     this.stickyTo = stickyTo
+    this.isHidden = isHidden
     const {
       _top, _right, _bottom, _left
     } = BlockDTO.getPreparedSizes({

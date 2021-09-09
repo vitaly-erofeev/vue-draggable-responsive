@@ -336,6 +336,40 @@ export default Vue.extend({
         this.block.left = this.calcSwitchedSizes(value, parentSize, oldValue)
       },
       deep: true
+    },
+    'block.sizeTypes.right': {
+      handler (value: SizeTypes, old: SizeTypes) {
+        if (value === old || !value) {
+          return
+        }
+        if (!this.$el.parentElement) {
+          return
+        }
+        let parentSize = this.$el.parentElement.offsetWidth
+        const oldValue = this.block.right
+        if (!oldValue) {
+          return
+        }
+        this.block.right = this.calcSwitchedSizes(value, parentSize, oldValue)
+      },
+      deep: true
+    },
+    'block.sizeTypes.bottom': {
+      handler (value: SizeTypes, old: SizeTypes) {
+        if (value === old || !value) {
+          return
+        }
+        if (!this.$el.parentElement) {
+          return
+        }
+        let parentSize = this.$el.parentElement.offsetHeight
+        const oldValue = this.block.bottom
+        if (!oldValue) {
+          return
+        }
+        this.block.bottom = this.calcSwitchedSizes(value, parentSize, oldValue)
+      },
+      deep: true
     }
   },
   computed: {

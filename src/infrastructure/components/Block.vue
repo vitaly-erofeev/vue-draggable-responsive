@@ -41,18 +41,32 @@
           {{ block.width }}{{ block.sizeTypes.width }} x {{ block.height }}{{ block.sizeTypes.height }}
         </div>
         <div
-            v-show="isDragging"
+            v-show="isDragging && ['tl', 'bl'].includes(block.sticky)"
             class="position_line left"
             :style="`left: calc(-${currentPosition.left}px - 1px);width:calc(${currentPosition.left}px - 1px)`"
         >
           <span>{{ block.left }}{{ block.sizeTypes.left }}</span>
         </div>
         <div
-            v-show="isDragging"
+            v-show="isDragging && ['tl', 'tr'].includes(block.sticky)"
             class="position_line top"
             :style="`top: -${currentPosition.top}px;height:${currentPosition.top}px`"
         >
           <span>{{ block.top }}{{ block.sizeTypes.top }}</span>
+        </div>
+        <div
+            v-show="isDragging && ['br', 'bl'].includes(block.sticky)"
+            class="position_line bottom"
+            :style="`bottom: -${currentPosition.bottom}px;height:${currentPosition.bottom}px`"
+        >
+          <span>{{ block.bottom }}{{ block.sizeTypes.bottom }}</span>
+        </div>
+        <div
+            v-show="isDragging && ['tr', 'br'].includes(block.sticky)"
+            class="position_line right"
+            :style="`right: -${currentPosition.right}px;width:${currentPosition.right}px`"
+        >
+          <span>{{ block.right }}{{ block.sizeTypes.right }}</span>
         </div>
       </slot>
       <div class="content" :style="block.style">
@@ -86,7 +100,7 @@
       </div>
       <font-awesome-icon
         icon="angle-down"
-        class="resize-handler"
+        :class="`resize-handler ${block.sticky}`"
         @mousedown.stop="resizeStart"
     ></font-awesome-icon>
   </div>
@@ -132,6 +146,7 @@ export default Vue.extend({
     isResizing: boolean,
     isDragging: boolean,
     currentPosition: {
+      [index: string]: any;
       left: number,
       top: number,
       right: number,
@@ -159,6 +174,46 @@ export default Vue.extend({
     }
   },
   watch: {
+    'block.sticky': {
+      handler (value) {
+        if (!value) {
+          return
+        }
+        const parent = this.$el.parentElement as {
+          [index: string]: any;
+        }
+        if (!parent) {
+          return
+        }
+        if (this.block.stickyTo?.guid && value !== Sticky.TL) {
+          this.block.stickyTo.guid = undefined
+        }
+
+        const map: {
+          [index: string]: any;
+        } = {
+          [Sticky.TL]: ['top', 'left'],
+          [Sticky.TR]: ['top', 'right'],
+          [Sticky.BL]: ['bottom', 'left'],
+          [Sticky.BR]: ['bottom', 'right']
+        }
+        const parentSizesMap: {
+          [index: string]: any;
+        } = {
+          top: 'offsetHeight',
+          left: 'offsetWidth',
+          bottom: 'offsetHeight',
+          right: 'offsetWidth'
+        }
+
+        const positions = map[value]
+        positions.forEach((position: string) => {
+          this.block[position] = this.block.sizeTypes[position] === SizeTypes.PERCENT
+            ? Math.round(this.currentPosition[position] / (parent[parentSizesMap[position]] / 100))
+            : Math.round(this.currentPosition[position])
+        })
+      }
+    },
     'block.stickyTo.guid': {
       handler (value, oldValue) {
         if (!this.$el.parentElement) {
@@ -175,13 +230,13 @@ export default Vue.extend({
             if (this.block.sizeTypes.top === SizeTypes.PERCENT) {
               difference = difference / (this.$el.parentElement.offsetHeight / 100)
             }
-            this.block.top = Math.abs((this.block.top || 0) + difference)
+            this.block.top = Math.round((this.block.top || 0) + difference)
           } else if (this.block.stickyTo?.type === StickyToType.LEFT) {
             let difference = el.$el.offsetLeft + el.$el.offsetWidth
             if (this.block.sizeTypes.left === SizeTypes.PERCENT) {
               difference = difference / (this.$el.parentElement.offsetWidth / 100)
             }
-            this.block.left = Math.abs((this.block.left || 0) + difference)
+            this.block.left = Math.round((this.block.left || 0) + difference)
           }
           return
         }
@@ -198,13 +253,13 @@ export default Vue.extend({
           if (this.block.sizeTypes.top === SizeTypes.PERCENT) {
             difference = difference / (this.$el.parentElement.offsetHeight / 100)
           }
-          this.block.top = Math.abs((this.block.top || 0) - difference)
+          this.block.top = Math.round((this.block.top || 0) - difference)
         } else if (this.block.stickyTo?.type === StickyToType.LEFT) {
           let difference = el.$el.offsetLeft + el.$el.offsetWidth
           if (this.block.sizeTypes.left === SizeTypes.PERCENT) {
             difference = difference / (this.$el.parentElement.offsetWidth / 100)
           }
-          this.block.left = Math.abs((this.block.left || 0) - difference)
+          this.block.left = Math.round((this.block.left || 0) - difference)
         }
       }
     },
@@ -394,6 +449,9 @@ export default Vue.extend({
       this.activeTabGuid = this.block.tabs.list[0].guid
     }
     this.getStore().addRef(this.block.guid, this)
+    this.$nextTick(() => {
+      this.onDrag()
+    })
   },
   beforeDestroy () {
     this.getStore().removeRef(this.block.guid)
@@ -413,6 +471,10 @@ export default Vue.extend({
       const el: HTMLElement = this.$refs.draggableContainer as HTMLElement
       this.currentPosition.left = el.offsetLeft
       this.currentPosition.top = el.offsetTop
+      if (el.parentElement) {
+        this.currentPosition.bottom = el.parentElement?.offsetHeight - el.offsetTop - el.offsetHeight
+        this.currentPosition.right = el.parentElement?.offsetWidth - el.offsetLeft - el.offsetWidth
+      }
       /* if (this.block.stickyTo?.guid) {
         this.currentPosition.top =
       } */
@@ -490,8 +552,6 @@ export default Vue.extend({
 
 <style scoped>
 .resize-handler {
-  bottom: -3px;
-  right: 0;
   position: absolute;
   transform: rotate(-45deg);
   cursor: se-resize;
@@ -506,17 +566,20 @@ export default Vue.extend({
 
 .resize-handler.tr {
   bottom: -3px;
-  right: 0;
+  left: 0;
+  transform: rotate(45deg);
 }
 
 .resize-handler.bl {
-  bottom: -3px;
+  top: -3px;
   right: 0;
+  transform: rotate(-135deg);
 }
 
 .resize-handler.br {
-  bottom: -3px;
-  right: 0;
+  top: -3px;
+  left: 0;
+  transform: rotate(135deg);
 }
 
 .block {
@@ -576,17 +639,37 @@ export default Vue.extend({
   position: absolute;
 }
 
+.block .position_line.right {
+  top: calc(50% - 1px);
+  height: 1px;
+}
+
 .block .position_line.left span {
   right: 3px;
   top: 3px;
 }
 
+.block .position_line.right span {
+  left: 4px;
+  top: 3px;
+}
+
 .block .position_line.top span {
-  bottom: 3px;
+  bottom: 4px;
   left: 3px;
 }
 
 .block .position_line.top {
+  left: calc(50% - 1px);
+  width: 1px;
+}
+
+.block .position_line.bottom span {
+  top: 4px;
+  left: 3px;
+}
+
+.block .position_line.bottom {
   left: calc(50% - 1px);
   width: 1px;
 }

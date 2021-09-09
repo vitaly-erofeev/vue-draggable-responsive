@@ -44,6 +44,14 @@ const STICKY_OFFSET_MAP:{[index: string]: any} = {
     [Sticky.TL]: { offset: 'top', inverse: false },
     [Sticky.BL]: { offset: 'bottom', inverse: true },
     [Sticky.BR]: { offset: 'bottom', inverse: true }
+  },
+  [Breakpoints.H]: {
+    [Sticky.BL]: { inverse: true },
+    [Sticky.BR]: { inverse: true }
+  },
+  [Breakpoints.W]: {
+    [Sticky.TR]: { inverse: true },
+    [Sticky.BR]: { inverse: true }
   }
 }
 export default class BreakpointsFactory {
@@ -52,9 +60,8 @@ export default class BreakpointsFactory {
   } {
     const options = (STICKY_OFFSET_MAP[type] || {})[sticky] || null
     if (options) {
-      return Object.assign(MAP[type], options)
+      return Object.assign({}, MAP[type], options)
     }
-
     return MAP[type]
   }
 }

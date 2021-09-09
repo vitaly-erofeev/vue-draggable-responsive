@@ -8,6 +8,7 @@ import { ReplicationProperties } from '@/domain/model/ReplicationProperties'
 
 export default class BlockDTO {
   [index: string]: any;
+
   widthCalc?: CalcProperties
   heightCalc?: CalcProperties
   width: number
@@ -55,7 +56,6 @@ export default class BlockDTO {
         left: SizeTypes.PERCENT
       },
       guid = 'guid',
-      stickyToGuid,
       parentGuid,
       isStretched,
       style,
@@ -92,7 +92,6 @@ export default class BlockDTO {
     this.width = width
     this.height = height
     this.guid = guid
-    this.stickyToGuid = stickyToGuid
     this.parentGuid = parentGuid
     this.isStretched = isStretched
     this.style = style
@@ -100,6 +99,7 @@ export default class BlockDTO {
     this.parentTabGuid = parentTabGuid
     this.isEditing = false
     this.replication = replication
+    this.prepareSizesTypes()
   }
 
   private static getPreparedSizes ({
@@ -126,5 +126,21 @@ export default class BlockDTO {
       _bottom,
       _left
     }
+  }
+
+  private prepareSizesTypes (): void {
+    const types = [
+      'top',
+      'left',
+      'right',
+      'bottom',
+      'height',
+      'width'
+    ]
+    types.forEach((type) => {
+      if (!this.sizeTypes[type]) {
+        this.sizeTypes[type] = SizeTypes.PERCENT
+      }
+    })
   }
 }

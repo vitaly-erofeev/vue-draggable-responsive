@@ -17,7 +17,15 @@
       <button @click="toggleHide">toggle hide</button>
       <button @click="switchWidth">switch width</button>
       <button @click="switchSticky">sticky</button>
+      <button @click="addContainerPercent(1, $event)">percent container</button>
+      <button @click="addContainerPixel(1, $event)">pixel container</button>
       <button @click="showHidden = !showHidden">toggle show hidden: {{showHidden}}</button>
+      <select v-model="(activeBlock || {}).sticky">
+        <option value="tr">Top-Right</option>
+        <option value="tl">Top-Left</option>
+        <option value="br">Bottom-Right</option>
+        <option value="bl">Bottom-Left</option>
+      </select>
       <pre>{{ activeBlock }}</pre>
     </div>
     <vue-draggable-responsive
@@ -29,9 +37,6 @@
         v-show="!preview"
         @contextmenu="oncontext"
     >
-      <template v-slot:content="{ block }">
-        {{ block }}
-      </template>
     </vue-draggable-responsive>
     <vue-draggable-responsive-previewer
         v-if="preview"
@@ -197,6 +202,10 @@ export default {
           'bottom': 60,
           'height': 10,
           'sticky': 'tl',
+          'heightCalc': {
+            type: '-',
+            value: 200
+          },
           'children': [],
           'sizeTypes': {
             'top': '%',
@@ -277,6 +286,44 @@ export default {
           width: '%',
           height: 'px',
           top: 'px',
+          left: '%'
+        },
+        type,
+        event,
+        isStretched
+      })
+    },
+    addContainerPixel (type, event, isStretched = false) {
+      this.$refs.designer.addBlock({
+        width: 70,
+        height: 100,
+        top: 30,
+        right: 0,
+        sticky: 'tl',
+        sizeTypes: {
+          width: 'px',
+          height: 'px',
+          top: 'px',
+          left: 'px',
+          right: 'px',
+          bottom: 'px'
+        },
+        type,
+        event,
+        isStretched
+      })
+    },
+    addContainerPercent (type, event, isStretched = false) {
+      this.$refs.designer.addBlock({
+        width: 70,
+        height: 100,
+        top: 30,
+        right: 0,
+        sticky: 'tl',
+        sizeTypes: {
+          width: '%',
+          height: '%',
+          top: '%',
           left: '%'
         },
         type,

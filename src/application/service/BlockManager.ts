@@ -6,6 +6,7 @@ import { Breakpoints } from '@/domain/model/Breakpoints'
 import { BlockRepositoryInterface } from '@/domain/repository/BlockRepositoryInterface'
 import { SizeTypes } from '@/domain/model/SizeTypes'
 import { StickyToType } from '@/domain/model/StickyTo'
+import { Sticky } from '@/domain/model/Sticky'
 
 export default class BlockManager {
   [index: string]: any;
@@ -39,16 +40,32 @@ export default class BlockManager {
     if (this.type === 'resize') {
       if (this.block.widthCalc && this.block.widthCalc.type && this.block.widthCalc.value) {
         if (this.block.widthCalc.type === '-') {
-          this.clientX = this.clientX - this.block.widthCalc.value
+          if (this.block.sticky === Sticky.TL || this.block.sticky === Sticky.BL) {
+            this.clientX = this.clientX - this.block.widthCalc.value
+          } else {
+            this.clientX = this.clientX + this.block.widthCalc.value
+          }
         } else {
-          this.clientX = this.clientX + this.block.widthCalc.value
+          if (this.block.sticky === Sticky.TL || this.block.sticky === Sticky.BL) {
+            this.clientX = this.clientX + this.block.widthCalc.value
+          } else {
+            this.clientX = this.clientX - this.block.widthCalc.value
+          }
         }
       }
       if (this.block.heightCalc && this.block.heightCalc.type && this.block.heightCalc.value) {
         if (this.block.heightCalc.type === '-') {
-          this.clientY = this.clientY - this.block.heightCalc.value
+          if (this.block.sticky === Sticky.TL || this.block.sticky === Sticky.TR) {
+            this.clientY = this.clientY - this.block.heightCalc.value
+          } else {
+            this.clientY = this.clientY + this.block.heightCalc.value
+          }
         } else {
-          this.clientY = this.clientY + this.block.heightCalc.value
+          if (this.block.sticky === Sticky.TL || this.block.sticky === Sticky.TR) {
+            this.clientY = this.clientY + this.block.heightCalc.value
+          } else {
+            this.clientY = this.clientY - this.block.heightCalc.value
+          }
         }
       }
     }

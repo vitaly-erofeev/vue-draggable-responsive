@@ -3,6 +3,7 @@ import BlockDTO from '@/domain/model/BlockDTO'
 import GuidGenerator from '@/infrastructure/service/GuidGenerator'
 import { BlockProperties } from '@/domain/model/BlockProperties'
 import { StickyToType } from '@/domain/model/StickyTo'
+import { Sticky } from '@/domain/model/Sticky'
 
 export default class BlockRepository implements BlockRepositoryInterface {
   private blocks: BlockDTO[] = []
@@ -157,7 +158,7 @@ export default class BlockRepository implements BlockRepositoryInterface {
       x1: string, y1: string, x2: string, y2: string
     }[] = []
     blocks.filter((item) => item.stickyTo?.guid !== 'undefined').forEach((item) => {
-      if (!item.stickyTo?.guid) {
+      if (!item.stickyTo?.guid || item.sticky !== Sticky.TL) {
         return false
       }
       let stickyElm = this.getRefByGuid(item.stickyTo.guid) as unknown as {

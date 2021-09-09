@@ -1,6 +1,6 @@
 export interface StickyTo {
-  type: StickyToType,
-  guid: string
+  type?: StickyToType,
+  guid?: string
 }
 export enum StickyToType {
   TOP = 'top',

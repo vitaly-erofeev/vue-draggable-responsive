@@ -71,7 +71,7 @@
       </slot>
       <div class="content" :style="block.style">
         <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
-        <svg id="svg">
+        <svg id="svg" v-if="!block.isEditing && !isTabsContainer">
           <line class="line" v-for="(line, index) in stickyLines"
                 :key="index"
                 :x1="line.x1"

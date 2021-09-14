@@ -37,6 +37,9 @@
         v-show="!preview"
         @contextmenu="oncontext"
     >
+      <template v-slot:content="{ block }">
+        {{ block }}
+      </template>
     </vue-draggable-responsive>
     <vue-draggable-responsive-previewer
         v-if="preview"
@@ -109,9 +112,19 @@ export default {
         type,
         event,
         replication: {
-          columns: 3,
-          function: () => [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }],
-          verticalMargin: 10
+          columns: 2,
+          function: () => {
+            const count = 6
+            let counter = 0
+            let answer = []
+            while (count > counter) {
+              answer.push({ id: counter + 1 })
+              counter++
+            }
+            return answer
+          },
+          verticalMargin: 10,
+          horizontalMargin: 10
         }
       })
     },

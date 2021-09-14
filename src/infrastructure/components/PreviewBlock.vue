@@ -147,6 +147,17 @@ export default Vue.extend({
           }
         }
       }
+      if (this.block.replication?.topBlockGuid) {
+        const stickyToElement = this.getStore().getRefByGuid(this.block.replication?.topBlockGuid) as unknown as {
+          positionStyle: {
+            top: string, height: string
+          }
+        }
+        if (stickyToElement) {
+          position.top =
+              `calc(${stickyToElement.positionStyle.height} + ${stickyToElement.positionStyle.top} + ${position.top})`
+        }
+      }
       if (this.block.stickyTo?.guid && this.block.stickyTo?.type) {
         const stickyToBlock = this.getStore().getByGuid(this.block.stickyTo.guid)
         const stickyToElement = this.getStore().getRefByGuid(this.block.stickyTo.guid) as unknown as {
@@ -246,30 +257,41 @@ export default Vue.extend({
       blocksData.shift()
       let me = this
       let lastGuid = me.block.guid
-      let lastRowGuid = me.block.guid
-      let lastRowTop = me.block.top
       let columns = me.block.replication?.columns || 1
+      let rowGuids: {[index: string]: any;} = { 0: [me.block.guid] }
+      let row = 0
+      console.log(this.block)
       blocksData.forEach((item: object, index: number) => {
         const newBlock = JSON.parse(JSON.stringify(me.block))
+        console.log(newBlock)
         newBlock.replication = undefined
-        console.log(index, columns, (index + 1) % columns === 0)
         if ((index + 1) % columns !== 0) {
           newBlock.left = me.block.replication?.horizontalMargin || 0
-          newBlock.top = lastRowTop
           newBlock.stickyTo = {
             type: 'left',
             guid: lastGuid
           }
+          if (row > 0) {
+            let previousRowBlockGuid = rowGuids[row - 1][(index % columns) + 1]
+            newBlock.replication = {}
+            newBlock.replication.topBlockGuid = previousRowBlockGuid
+          }
           lastGuid = me.getStore().add(newBlock)
         } else {
+          row++
           newBlock.top = me.block.replication?.verticalMargin || 0
           newBlock.stickyTo = {
             type: 'top',
-            guid: lastRowGuid
+            guid: lastGuid
           }
-          lastGuid = lastRowGuid = me.getStore().add(newBlock)
+          lastGuid = me.getStore().add(newBlock)
         }
+        if (typeof rowGuids[row] === 'undefined') {
+          rowGuids[row] = []
+        }
+        rowGuids[row].push(lastGuid)
       })
+      console.log(rowGuids)
     },
     setParent (): void {
       this.parentBlock = this.block.parentGuid ? this.getStore().getByGuid(this.block.parentGuid) : undefined

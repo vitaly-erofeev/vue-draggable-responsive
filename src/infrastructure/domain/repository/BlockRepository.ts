@@ -53,6 +53,8 @@ export default class BlockRepository implements BlockRepositoryInterface {
   add (block: BlockProperties): string {
     block.guid = GuidGenerator.generate()
     let parent: undefined | BlockDTO
+    let children = block.children
+    block.children = []
     if (block.parentGuid) {
       parent = this.getByGuid(block.parentGuid)
       if (typeof parent !== 'undefined') {
@@ -63,6 +65,12 @@ export default class BlockRepository implements BlockRepositoryInterface {
       }
     } else {
       this.blocks.push(new BlockDTO(block))
+    }
+
+    if (children && children.length > 0) {
+      children.forEach((item) => {
+        this.add(Object.assign(item, { parentGuid: block.guid }))
+      })
     }
 
     return block.guid

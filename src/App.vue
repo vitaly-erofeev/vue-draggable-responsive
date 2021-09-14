@@ -114,7 +114,7 @@ export default {
         replication: {
           columns: 2,
           function: () => {
-            const count = 6
+            const count = 0
             let counter = 0
             let answer = []
             while (count > counter) {

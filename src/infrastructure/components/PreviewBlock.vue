@@ -249,21 +249,25 @@ export default Vue.extend({
     }
   },
   methods: {
-    prepareReplication (): void {
+    async prepareReplication (): Promise<void> {
       if (!this.block.replication?.function) {
         return
       }
-      const blocksData = this.block.replication?.function()
+      const blocksData: any[] = await this.block.replication?.function()
+      if (blocksData.length === 0) {
+        this.$nextTick(() => {
+          this.getStore().remove(this.block.guid)
+        })
+        return
+      }
       blocksData.shift()
       let me = this
       let lastGuid = me.block.guid
       let columns = me.block.replication?.columns || 1
       let rowGuids: {[index: string]: any;} = { 0: [me.block.guid] }
       let row = 0
-      console.log(this.block)
       blocksData.forEach((item: object, index: number) => {
         const newBlock = JSON.parse(JSON.stringify(me.block))
-        console.log(newBlock)
         newBlock.replication = undefined
         if ((index + 1) % columns !== 0) {
           newBlock.left = me.block.replication?.horizontalMargin || 0
@@ -291,7 +295,6 @@ export default Vue.extend({
         }
         rowGuids[row].push(lastGuid)
       })
-      console.log(rowGuids)
     },
     setParent (): void {
       this.parentBlock = this.block.parentGuid ? this.getStore().getByGuid(this.block.parentGuid) : undefined

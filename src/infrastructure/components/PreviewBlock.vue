@@ -34,7 +34,6 @@
           :key="_block.guid"
           :block="_block"
           :ref="_block.guid"
-          :style="_block.style"
       >
         <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
           <slot :name="name" v-bind="data"></slot>

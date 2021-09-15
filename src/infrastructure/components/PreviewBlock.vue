@@ -241,21 +241,24 @@ export default Vue.extend({
     parentElement?: Element,
     scrollHeight?: number,
     scrollWidth?: number,
-    activeTabGuid?: string
+    activeTabGuid?: string,
+    replicationIndex: number
     } {
     return {
       parentBlock: undefined,
       parentElement: undefined,
       scrollHeight: undefined,
       scrollWidth: undefined,
-      activeTabGuid: undefined
+      activeTabGuid: undefined,
+      replicationIndex: 0
     }
   },
   methods: {
     onReplicateBlock (event: {}) {
       if (this.replicationCallback) {
         this.replicationCallback(Object.assign({}, event, {
-          replicationBlockGuid: this.block.guid
+          replicationBlockGuid: this.block.guid,
+          replicationIndex: this.replicationIndex
         }))
       }
     },
@@ -276,10 +279,12 @@ export default Vue.extend({
       let columns = me.block.replication?.columns || 1
       let rowGuids: { [index: string]: any; } = { 0: [me.block.guid] }
       let row = 0
+      this.replicationIndex = 0
       const listenerGuid = this.getStore().addListener(new SimpleListener(this.onReplicateBlock))
       blocksData.forEach((item: object, index: number) => {
         const newBlock = JSON.parse(JSON.stringify(me.block))
         newBlock.replication = undefined
+        this.replicationIndex = this.replicationIndex + 1
         if ((index + 1) % columns !== 0) {
           if (me.block.replication?.horizontalMargin?.value) {
             newBlock.left = me.block.replication?.horizontalMargin?.value

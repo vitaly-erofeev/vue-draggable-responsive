@@ -5,6 +5,7 @@
         :key="block.guid"
         :block="block"
         :ref="block.guid"
+        :replication-callback="replicationCallback"
     >
       <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
         <slot :name="name" v-bind="data"></slot>
@@ -31,6 +32,9 @@ const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 export default Vue.extend({
   name: 'VueDraggableResponsivePreviewer',
   components: { PreviewBlock },
+  props: {
+    replicationCallback: Function
+  },
   data (): { store: BlockRepositoryInterface } {
     return {
       store: new BlockRepository()

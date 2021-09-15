@@ -4,9 +4,14 @@ import GuidGenerator from '@/infrastructure/service/GuidGenerator'
 import { BlockProperties } from '@/domain/model/BlockProperties'
 import { StickyToType } from '@/domain/model/StickyTo'
 import { Sticky } from '@/domain/model/Sticky'
+import { ListenerInterface } from '@/domain/service/ListenerInterface'
+import { EventTypes } from '@/domain/model/EventTypes'
 
 export default class BlockRepository implements BlockRepositoryInterface {
   private blocks: BlockDTO[] = []
+  private listeners: {
+    [index: string]: ListenerInterface
+  } = {}
   private refs: {
     guid: string,
     element: Vue
@@ -51,6 +56,7 @@ export default class BlockRepository implements BlockRepositoryInterface {
   }
 
   add (block: BlockProperties): string {
+    const oldGuid = block.guid
     block.guid = GuidGenerator.generate()
     let parent: undefined | BlockDTO
     let children = block.children
@@ -66,6 +72,11 @@ export default class BlockRepository implements BlockRepositoryInterface {
     } else {
       this.blocks.push(new BlockDTO(block))
     }
+
+    this.emitEvent(EventTypes.ADD_BLOCK, {
+      oldGuid: oldGuid,
+      guid: block.guid
+    })
 
     if (children && children.length > 0) {
       children.forEach((item) => {
@@ -200,5 +211,23 @@ export default class BlockRepository implements BlockRepositoryInterface {
     })
 
     return answer
+  }
+
+  addListener (listener: ListenerInterface): string {
+    const guid = GuidGenerator.generate()
+    this.listeners[guid] = listener
+    return guid
+  }
+
+  removeListener (guid: string): void {
+    delete this.listeners[guid]
+  }
+
+  private emitEvent (type: EventTypes, event: {}): void {
+    Object.values(this.listeners).forEach((listener: ListenerInterface) => {
+      if (listener.isSubscribed(type)) {
+        listener.handle(event)
+      }
+    })
   }
 }

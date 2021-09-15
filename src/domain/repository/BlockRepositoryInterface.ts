@@ -1,5 +1,6 @@
 import BlockDTO from '@/domain/model/BlockDTO'
 import { BlockProperties } from '@/domain/model/BlockProperties'
+import { ListenerInterface } from '@/domain/service/ListenerInterface'
 
 export interface BlockRepositoryInterface {
   change (guid: string, property: string, value: any): void
@@ -24,9 +25,13 @@ export interface BlockRepositoryInterface {
 
   removeRef (guid: string): void
 
-  getRefByGuid(guid: string): Vue | undefined
+  getRefByGuid (guid: string): Vue | undefined
 
-  getStickyLines(guid?: string): {
+  getStickyLines (guid?: string): {
     x1: string, y1: string, x2: string, y2: string
   }[]
+
+  addListener (listener: ListenerInterface): string
+
+  removeListener (guid: string): void
 }

@@ -54,6 +54,7 @@ import BlockManager from '@/application/service/BlockManager'
 // eslint-disable-next-line no-unused-vars
 import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
 import { StickyToType } from '@/domain/model/StickyTo'
+import SimpleListener from '@/infrastructure/service/listeners/SimpleListener'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 export default Vue.extend({
@@ -61,7 +62,8 @@ export default Vue.extend({
   props: {
     block: {
       type: BlockDTO
-    }
+    },
+    replicationCallback: Function
   },
   inject: ['getStore'],
   computed: {
@@ -235,12 +237,12 @@ export default Vue.extend({
     }
   },
   data (): {
-      parentBlock?: BlockDTO,
-      parentElement?: Element,
-      scrollHeight?: number,
-      scrollWidth?: number,
-      activeTabGuid?: string
-      } {
+    parentBlock?: BlockDTO,
+    parentElement?: Element,
+    scrollHeight?: number,
+    scrollWidth?: number,
+    activeTabGuid?: string
+    } {
     return {
       parentBlock: undefined,
       parentElement: undefined,
@@ -250,6 +252,11 @@ export default Vue.extend({
     }
   },
   methods: {
+    onReplicateBlock (event: {}) {
+      if (this.replicationCallback) {
+        this.replicationCallback(event)
+      }
+    },
     async prepareReplication (): Promise<void> {
       if (!this.block.replication?.function) {
         return
@@ -265,8 +272,9 @@ export default Vue.extend({
       let me = this
       let lastGuid = me.block.guid
       let columns = me.block.replication?.columns || 1
-      let rowGuids: {[index: string]: any;} = { 0: [me.block.guid] }
+      let rowGuids: { [index: string]: any; } = { 0: [me.block.guid] }
       let row = 0
+      const listenerGuid = this.getStore().addListener(new SimpleListener(this.onReplicateBlock))
       blocksData.forEach((item: object, index: number) => {
         const newBlock = JSON.parse(JSON.stringify(me.block))
         newBlock.replication = undefined
@@ -307,6 +315,7 @@ export default Vue.extend({
         }
         rowGuids[row].push(lastGuid)
       })
+      this.getStore().removeListener(listenerGuid)
     },
     setParent (): void {
       this.parentBlock = this.block.parentGuid ? this.getStore().getByGuid(this.block.parentGuid) : undefined
@@ -320,12 +329,14 @@ export default Vue.extend({
 .block {
   position: absolute;
 }
+
 .block .content {
   width: 100%;
   height: 100%;
   position: absolute;
   overflow: auto;
 }
+
 .block .tabs_container {
   position: absolute;
   display: flex;

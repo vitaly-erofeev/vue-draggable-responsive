@@ -9,6 +9,7 @@
       <button @click="addSticky($event)">addSticky</button>
       <button @click="get">get</button>
       <button @click="addWithTabs(1, $event)">addWithTabs</button>
+      <button @click="addTab">addTab</button>
       <button @click="removeTab">removeTab</button>
       <button @click="preview = !preview">preview: {{ preview }}</button>
       <button @click="remove">remove active</button>
@@ -142,6 +143,16 @@ export default {
         }
       }
     },
+    addTab () {
+      if (this.activeBlock) {
+        if (this.activeBlock.tabs?.use) {
+          this.activeBlock.tabs.list.push({
+            name: 'Новая вкладка',
+            guid: Date.now()
+          })
+        }
+      }
+    },
     switchWidth () {
       if (!this.activeBlock) {
         return false
@@ -163,7 +174,7 @@ export default {
           class: 'test',
           use: true,
           containerStyle: 'background: grey',
-          tabStyle: 'color:red',
+          tabStyle: 'color:orange',
           activeTabStyle: 'color:green',
           list: [
             {

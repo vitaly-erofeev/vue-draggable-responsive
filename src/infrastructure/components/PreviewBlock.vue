@@ -54,6 +54,7 @@ import BlockManager from '@/application/service/BlockManager'
 // eslint-disable-next-line no-unused-vars
 import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
 import { StickyToType } from '@/domain/model/StickyTo'
+
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 export default Vue.extend({
   name: 'PreviewBlock',
@@ -270,7 +271,13 @@ export default Vue.extend({
         const newBlock = JSON.parse(JSON.stringify(me.block))
         newBlock.replication = undefined
         if ((index + 1) % columns !== 0) {
-          newBlock.left = me.block.replication?.horizontalMargin || 0
+          if (me.block.replication?.horizontalMargin?.value) {
+            newBlock.left = me.block.replication?.horizontalMargin?.value
+            newBlock.sizeTypes.left = me.block.replication?.horizontalMargin?.type || SizeTypes.PIXEL
+          } else {
+            newBlock.left = 0
+          }
+
           newBlock.stickyTo = {
             type: 'left',
             guid: lastGuid
@@ -283,7 +290,12 @@ export default Vue.extend({
           lastGuid = me.getStore().add(newBlock)
         } else {
           row++
-          newBlock.top = me.block.replication?.verticalMargin || 0
+          if (me.block.replication?.verticalMargin?.value) {
+            newBlock.top = me.block.replication?.verticalMargin?.value
+            newBlock.sizeTypes.top = me.block.replication?.verticalMargin?.type || SizeTypes.PIXEL
+          } else {
+            newBlock.top = 0
+          }
           newBlock.stickyTo = {
             type: 'top',
             guid: lastGuid

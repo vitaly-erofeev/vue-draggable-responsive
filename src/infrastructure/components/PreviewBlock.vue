@@ -254,7 +254,9 @@ export default Vue.extend({
   methods: {
     onReplicateBlock (event: {}) {
       if (this.replicationCallback) {
-        this.replicationCallback(event)
+        this.replicationCallback(Object.assign({}, event, {
+          replicationBlockGuid: this.block.guid
+        }))
       }
     },
     async prepareReplication (): Promise<void> {

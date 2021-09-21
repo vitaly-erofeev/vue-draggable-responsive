@@ -12,8 +12,12 @@
       @mousedown.stop="dragStart"
       @contextmenu.stop="$emit('contextmenu', {block: block, event: $event})"
   >
+          <span style="color: black; font-size:25px">табы: width - {{ tabsOffset }}</span><br>
+          <span style="color: black; font-size:25px">блок: width - {{ blockWidth }}</span><br>
+
       <div
           v-if="isTabsContainer"
+          ref="tabsContainer"
           :class="{
             'tabs_container' : true,
             'position_top': block.tabs.position === 'top',
@@ -23,15 +27,38 @@
           }"
           :style="block.tabs.containerStyle"
       >
+        <font-awesome-icon
+            icon="chevron-left"
+            class="tabs_button"
+            @click="scrollPrevTab"
+        ></font-awesome-icon>
+      <div class="tabs_onScroll" ref="tabsScroll">
         <div
             v-for="tab in block.tabs.list"
             :key="tab.guid"
             :style="`${block.tabs.tabStyle};${tab.guid === activeTabGuid ? block.tabs.activeTabStyle :''}`"
-            :class="{'tab': true, 'active': tab.guid === activeTabGuid, [block.tabs.class]: true}"
+            style="width: 150px;
+              cursor: pointer;
+              background: pink;
+              border: 1px solid blue;
+              text-align: center;
+              flex: none;"
+            :class="{
+              'tab': true,
+              'active': tab.guid === activeTabGuid,
+              [block.tabs.class]: true
+              }"
             @click="onTabClick(tab.guid)"
         >
           <span class="label">{{ tab.name }}</span>
         </div>
+      </div>
+
+        <font-awesome-icon
+            icon="chevron-right"
+            class="tabs_button tabs_button_next"
+            @click="scrollNextTab"
+        ></font-awesome-icon>
       </div>
       <div class="block_info">
         <slot :block="block" name="help_text"></slot>
@@ -113,7 +140,7 @@ import BlockDTO from '../../domain/model/BlockDTO'
 import BlockManager from '@/application/service/BlockManager'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
+import { faAngleDown, faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { Sticky } from '@/domain/model/Sticky'
 // eslint-disable-next-line no-unused-vars
 import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
@@ -121,7 +148,7 @@ import { StickyToType } from '@/domain/model/StickyTo'
 import { SizeTypes } from '@/domain/model/SizeTypes'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
-library.add(faAngleDown)
+library.add(faAngleDown, faChevronRight, faChevronLeft)
 
 export default Vue.extend({
   name: 'block',
@@ -155,7 +182,9 @@ export default Vue.extend({
     parentBlock?: BlockDTO,
     parentElement?: Element,
     ctrlPressed: boolean,
-    activeTabGuid?: string
+    activeTabGuid?: string,
+    tabsOffset: number,
+    blockWidth: number
     } {
     return {
       blockManager: undefined,
@@ -170,7 +199,9 @@ export default Vue.extend({
       parentBlock: undefined,
       parentElement: undefined,
       ctrlPressed: false,
-      activeTabGuid: undefined
+      activeTabGuid: undefined,
+      tabsOffset: 0,
+      blockWidth: 0
     }
   },
   watch: {
@@ -371,6 +402,19 @@ export default Vue.extend({
       },
       deep: true
     }
+    // isTabsContainer: {
+    //   handler (val) {
+    //     console.log(val)
+    //   }
+    // }
+    // 'block.width': {
+    //   handler (val) {
+    //     if (this.isTabsContainer) {
+    //       this.getCientSize(val)
+    //     }
+    //   },
+    //   immediate: true
+    // }
   },
   computed: {
     stickyLines () {
@@ -491,6 +535,11 @@ export default Vue.extend({
     this.getStore().removeRef(this.block.guid)
   },
   methods: {
+    getCientSize (widthContainer: number) {
+      console.log(widthContainer)
+      // const el: HTMLElement = this.$refs.tabsContainer as HTMLElement
+      // this.width = el.offsetWidth
+    },
     calcSwitchedSizes (type: SizeTypes, parentSize: number, oldValue: number): number {
       if (type === SizeTypes.PIXEL) {
         return Math.round(parentSize / 100 * oldValue)
@@ -579,6 +628,65 @@ export default Vue.extend({
       document.removeEventListener('mouseup', this.dragStop)
       document.removeEventListener('keydown', this.keyDown)
       document.removeEventListener('keyup', this.keyUp)
+    },
+    getNextTab (): string {
+      const findTabIndex: number | undefined = this.block.tabs?.list.findIndex(item => item.guid === this.activeTabGuid)
+      if (typeof findTabIndex === 'number' && this.block.tabs?.list[findTabIndex + 1]) {
+        return this.block.tabs.list[findTabIndex + 1].guid
+      }
+      return ''
+    },
+    getPrevTab (): string {
+      const findTabIndex: number | undefined = this.block.tabs?.list.findIndex(item => item.guid === this.activeTabGuid)
+      if (typeof findTabIndex === 'number' && this.block.tabs?.list[findTabIndex - 1]) {
+        return this.block.tabs.list[findTabIndex - 1].guid
+      }
+      return ''
+    },
+    scrollPrevTab (): void {
+      // const guidTab = this.getPrevTab()
+      // if (guidTab) {
+      // this.onTabClick(guidTab)
+      const tabsScroll: HTMLElement = this.$refs.tabsScroll as HTMLElement
+      const draggableContainer: HTMLElement = this.$refs.draggableContainer as HTMLElement
+      const tabsWidth = tabsScroll.offsetWidth
+      const blockWidth = draggableContainer.offsetWidth
+      this.blockWidth = draggableContainer.offsetWidth
+      console.log('tabsWidth', tabsWidth)
+      console.log('blockWidth', blockWidth)
+      this.tabsOffset < 0
+        ? this.tabsOffset = 0
+        : this.tabsOffset = this.tabsOffset - blockWidth
+      console.log('tabsOffset', this.tabsOffset)
+      tabsScroll.style.transform = `translateX(-${this.tabsOffset}px)`
+      // } else {
+      // console.log('Табов нет')
+      // }
+    },
+    scrollNextTab (): void {
+      // const guidTab = this.getNextTab()
+      // if (guidTab) {
+      // this.onTabClick(guidTab)
+      const tabsScroll: HTMLElement = this.$refs.tabsScroll as HTMLElement
+      const draggableContainer: HTMLElement = this.$refs.draggableContainer as HTMLElement
+      // const tabsContainer: HTMLElement = this.$refs.tabsContainer as HTMLElement
+      // this.width = el.offsetWidth
+      // const containerSize = this.$refs.navScroll[`offset${firstUpperCase(this.sizeName)}`];
+      const tabsWidth = tabsScroll.offsetWidth
+      const blockWidth = draggableContainer.offsetWidth
+      // const tabsContainerWidth = tabsContainer.scrollWidth
+      this.blockWidth = draggableContainer.offsetWidth
+      console.log('tabsWidth', tabsWidth)
+      console.log('blockWidth', blockWidth)
+      console.log('tabsOffset', this.tabsOffset)
+      if (this.tabsOffset < 0) this.tabsOffset = 0
+      // console.log('tabsContainerWidth', tabsContainerWidth)
+      if ((tabsWidth - blockWidth) < this.tabsOffset) return
+      this.tabsOffset = (blockWidth) + this.tabsOffset
+      tabsScroll.style.transform = `translateX(-${this.tabsOffset}px)`
+      // } else {
+      // console.log('Табов нет')
+      // }
     }
   }
 })
@@ -730,6 +838,8 @@ export default Vue.extend({
 .block .tabs_container {
   position: absolute;
   display: flex;
+  overflow: hidden;
+  width: 100%;
 }
 
 .block .tabs_container.position_top {
@@ -761,5 +871,26 @@ export default Vue.extend({
 .line{
   stroke-width:1px;
   stroke: #32B84D;
+}
+.tabs_onScroll {
+  display: flex;
+  transition: 1s all;
+}
+.tabs_button {
+    display: block;
+    background: paleturquoise;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    width: 18px;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 5;
+}
+.tabs_button_next {
+    right: 0;
+    left: auto;
 }
 </style>

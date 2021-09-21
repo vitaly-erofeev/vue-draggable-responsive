@@ -147,7 +147,7 @@ export default {
       if (this.activeBlock) {
         if (this.activeBlock.tabs?.use) {
           this.activeBlock.tabs.list.push({
-            name: 'Новая вкладка',
+            name: `Новая вкладка - ${this.activeBlock.tabs.list.length}`,
             guid: Date.now()
           })
         }
@@ -174,7 +174,7 @@ export default {
           class: 'test',
           use: true,
           containerStyle: 'background: grey',
-          tabStyle: 'color:orange',
+          tabStyle: 'color:black',
           activeTabStyle: 'color:green',
           list: [
             {

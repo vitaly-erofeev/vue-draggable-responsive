@@ -112,10 +112,11 @@ export default {
         sticky: 'tl',
         type,
         event,
+        parentGuid: this.activeBlock?.guid,
         replication: {
-          columns: 2,
+          columns: 1,
           function: () => {
-            const count = 4
+            const count = 3
             let counter = 0
             let answer = []
             while (count > counter) {

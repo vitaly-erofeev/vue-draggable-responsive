@@ -1195,10 +1195,29 @@ var BlockRepository_BlockRepository = /*#__PURE__*/function () {
       var _this = this;
 
       return blocks.map(function (block) {
+        var _block$replication;
+
+        var children = [];
+
         if (typeof block.children !== 'undefined' && block.children.length > 0) {
-          block.children = _this.prepareBlocks(block.children);
+          children = _this.prepareBlocks(block.children);
         }
 
+        var replicationFunction;
+
+        if ((_block$replication = block.replication) !== null && _block$replication !== void 0 && _block$replication.function) {
+          var _block$replication2;
+
+          replicationFunction = (_block$replication2 = block.replication) === null || _block$replication2 === void 0 ? void 0 : _block$replication2.function;
+        }
+
+        block = JSON.parse(JSON.stringify(block));
+
+        if (replicationFunction && block.replication) {
+          block.replication.function = replicationFunction;
+        }
+
+        block.children = children;
         return new BlockDTO["a" /* default */](block);
       });
     }

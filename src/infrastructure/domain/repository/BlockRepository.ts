@@ -28,9 +28,21 @@ export default class BlockRepository implements BlockRepositoryInterface {
 
   prepareBlocks (blocks: BlockProperties[]): BlockDTO[] {
     return blocks.map((block) => {
+      let children: BlockDTO[] = []
       if (typeof block.children !== 'undefined' && block.children.length > 0) {
-        block.children = this.prepareBlocks(block.children)
+        children = this.prepareBlocks(block.children)
       }
+
+      let replicationFunction
+      if (block.replication?.function) {
+        replicationFunction = block.replication?.function
+      }
+      block = JSON.parse(JSON.stringify(block))
+      if (replicationFunction && block.replication) {
+        block.replication.function = replicationFunction
+      }
+      block.children = children
+
       return new BlockDTO(block)
     })
   }

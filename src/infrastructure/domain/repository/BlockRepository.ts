@@ -67,6 +67,19 @@ export default class BlockRepository implements BlockRepositoryInterface {
     return answer
   }
 
+  getByAlias (alias: string): BlockDTO | undefined {
+    let answer: BlockDTO | undefined
+    JSON.stringify(this.blocks, (_, nestedValue) => {
+      if (nestedValue && nestedValue.alias === alias &&
+        typeof nestedValue.sticky !== 'undefined') {
+        answer = nestedValue
+      }
+      return nestedValue
+    })
+
+    return answer
+  }
+
   add (block: BlockProperties): string {
     const oldGuid = block.guid
     block.guid = GuidGenerator.generate()
@@ -101,6 +114,10 @@ export default class BlockRepository implements BlockRepositoryInterface {
 
   get (): BlockDTO[] {
     return this.blocks
+  }
+
+  getFlat (): (BlockDTO | undefined)[] {
+    return this.refs.map(ref => this.getByGuid(ref.guid))
   }
 
   remove (guid: string): void {

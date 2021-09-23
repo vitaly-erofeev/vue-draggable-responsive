@@ -891,6 +891,8 @@ export default Vue.extend({
 .tabs_onScroll {
   display: flex;
   transition: 1s all;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 .tabs_button {
     display: block;

@@ -11,6 +11,8 @@ export interface BlockRepositoryInterface {
 
   getByGuid (guid: string): BlockDTO | undefined
 
+  getByAlias (alias: string): BlockDTO | undefined
+
   remove (guid: string): void
 
   setActiveBlock (guid: string): void

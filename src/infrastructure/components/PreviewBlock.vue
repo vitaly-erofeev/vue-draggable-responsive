@@ -34,6 +34,7 @@
           :key="_block.guid"
           :block="_block"
           :ref="_block.guid"
+          :replication-callback="replicationCallback"
       >
         <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
           <slot :name="name" v-bind="data"></slot>

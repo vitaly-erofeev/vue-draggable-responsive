@@ -46,6 +46,7 @@
         v-if="preview"
         ref="previewer"
         style="height: 500px;width: 1059px;display: inline-block"
+        :replication-callback="cl"
     >
       <template v-slot:content="{ block }">
         {{ block }}
@@ -85,6 +86,9 @@ export default {
     }
   },
   methods: {
+    cl (event) {
+      console.log(event)
+    },
     switchSticky () {
       if (this.activeBlock) {
         if (this.activeBlock.stickyTo?.guid) {
@@ -112,10 +116,11 @@ export default {
         sticky: 'tl',
         type,
         event,
+        parentGuid: this.activeBlock?.guid,
         replication: {
-          columns: 2,
+          columns: 1,
           function: () => {
-            const count = 4
+            const count = 3
             let counter = 0
             let answer = []
             while (count > counter) {

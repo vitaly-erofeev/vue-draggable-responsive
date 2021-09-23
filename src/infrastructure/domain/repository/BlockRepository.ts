@@ -28,9 +28,21 @@ export default class BlockRepository implements BlockRepositoryInterface {
 
   prepareBlocks (blocks: BlockProperties[]): BlockDTO[] {
     return blocks.map((block) => {
+      let children: BlockDTO[] = []
       if (typeof block.children !== 'undefined' && block.children.length > 0) {
-        block.children = this.prepareBlocks(block.children)
+        children = this.prepareBlocks(block.children)
       }
+
+      let replicationFunction
+      if (block.replication?.function) {
+        replicationFunction = block.replication?.function
+      }
+      block = JSON.parse(JSON.stringify(block))
+      if (replicationFunction && block.replication) {
+        block.replication.function = replicationFunction
+      }
+      block.children = children
+
       return new BlockDTO(block)
     })
   }
@@ -46,6 +58,19 @@ export default class BlockRepository implements BlockRepositoryInterface {
     let answer: BlockDTO | undefined
     JSON.stringify(this.blocks, (_, nestedValue) => {
       if (nestedValue && nestedValue.guid === guid &&
+        typeof nestedValue.sticky !== 'undefined') {
+        answer = nestedValue
+      }
+      return nestedValue
+    })
+
+    return answer
+  }
+
+  getByAlias (alias: string): BlockDTO | undefined {
+    let answer: BlockDTO | undefined
+    JSON.stringify(this.blocks, (_, nestedValue) => {
+      if (nestedValue && nestedValue.alias === alias &&
         typeof nestedValue.sticky !== 'undefined') {
         answer = nestedValue
       }
@@ -89,6 +114,10 @@ export default class BlockRepository implements BlockRepositoryInterface {
 
   get (): BlockDTO[] {
     return this.blocks
+  }
+
+  getFlat (): (BlockDTO | undefined)[] {
+    return this.refs.map(ref => this.getByGuid(ref.guid))
   }
 
   remove (guid: string): void {

@@ -21,6 +21,7 @@ export default class BlockDTO {
   sizeTypes: { [index: string]: any; width: SizeTypes; height: SizeTypes; top: SizeTypes; right: SizeTypes; bottom: SizeTypes; left: SizeTypes }
   children: BlockDTO[]
   guid: string
+  alias?: string
   isStretched: boolean = false
   stickyTo?: StickyTo
   parentGuid?: string
@@ -56,6 +57,7 @@ export default class BlockDTO {
         left: SizeTypes.PERCENT
       },
       guid = 'guid',
+      alias,
       parentGuid,
       isStretched,
       style,
@@ -92,6 +94,7 @@ export default class BlockDTO {
     this.width = width
     this.height = height
     this.guid = guid
+    this.alias = alias
     this.parentGuid = parentGuid
     this.isStretched = isStretched
     this.style = style

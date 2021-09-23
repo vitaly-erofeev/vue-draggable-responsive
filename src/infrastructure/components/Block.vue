@@ -28,21 +28,16 @@
           :style="block.tabs.containerStyle"
       >
         <font-awesome-icon
-            icon="chevron-left"
-            class="tabs_button"
-            @click="scrollPrevTab"
+          v-show="isShowArrows"
+          icon="chevron-left"
+          class="tabs_button"
+          @click="scrollPrevTab"
         ></font-awesome-icon>
       <div class="tabs_onScroll" ref="tabsScroll">
         <div
             v-for="tab in block.tabs.list"
             :key="tab.guid"
             :style="`${block.tabs.tabStyle};${tab.guid === activeTabGuid ? block.tabs.activeTabStyle :''}`"
-            style="width: 150px;
-              cursor: pointer;
-              background: pink;
-              border: 1px solid blue;
-              text-align: center;
-              flex: none;"
             :class="{
               'tab': true,
               'active': tab.guid === activeTabGuid,
@@ -55,9 +50,10 @@
       </div>
 
         <font-awesome-icon
-            icon="chevron-right"
-            class="tabs_button tabs_button_next"
-            @click="scrollNextTab"
+          v-show="isShowArrows"
+          icon="chevron-right"
+          class="tabs_button tabs_button_next"
+          @click="scrollNextTab"
         ></font-awesome-icon>
       </div>
       <div class="block_info">
@@ -184,7 +180,9 @@ export default Vue.extend({
     ctrlPressed: boolean,
     activeTabGuid?: string,
     tabsOffset: number,
-    blockWidth: number
+    blockWidth: number,
+    tabsWidth: number,
+    isShowArrows: boolean
     } {
     return {
       blockManager: undefined,
@@ -201,7 +199,9 @@ export default Vue.extend({
       ctrlPressed: false,
       activeTabGuid: undefined,
       tabsOffset: 0,
-      blockWidth: 0
+      blockWidth: 0,
+      tabsWidth: 0,
+      isShowArrows: false
     }
   },
   watch: {
@@ -299,12 +299,18 @@ export default Vue.extend({
     },
     'block.tabs.list': {
       handler () {
+        if (this.isTabsContainer) {
+          setTimeout(() => {
+            this.getCientSize()
+          }, 0)
+        }
         if (!this.block.tabs?.list.find(item => item.guid === this.activeTabGuid)) {
           if (this.block.tabs?.list[0]?.guid) {
             this.onTabClick(this.block.tabs.list[0].guid)
           }
         }
-      }
+      },
+      deep: true
     },
     'block.sizeTypes.width': {
       handler (value: SizeTypes, old: SizeTypes) {
@@ -401,19 +407,24 @@ export default Vue.extend({
         this.block.bottom = this.calcSwitchedSizes(value, parentSize, oldValue)
       },
       deep: true
-    }
+    },
     // isTabsContainer: {
     //   handler (val) {
     //     console.log(val)
     //   }
     // }
-    // 'block.width': {
+    'block.width': {
+      handler (val) {
+        if (this.isTabsContainer) {
+          this.getCientSize()
+        }
+      }
+      // immediate: true
+    }
+    // tabsWidth: {
     //   handler (val) {
-    //     if (this.isTabsContainer) {
-    //       this.getCientSize(val)
-    //     }
-    //   },
-    //   immediate: true
+    //     console.log(val)
+    //   }
     // }
   },
   computed: {
@@ -535,10 +546,22 @@ export default Vue.extend({
     this.getStore().removeRef(this.block.guid)
   },
   methods: {
-    getCientSize (widthContainer: number) {
-      console.log(widthContainer)
-      // const el: HTMLElement = this.$refs.tabsContainer as HTMLElement
-      // this.width = el.offsetWidth
+    getCientSize () {
+      const tabsScroll: HTMLElement = this.$refs.tabsScroll as HTMLElement
+      const draggableContainer: HTMLElement = this.$refs.draggableContainer as HTMLElement
+      const tabsWidth = tabsScroll.offsetWidth
+      this.tabsWidth = tabsScroll.offsetWidth
+      const blockWidth = draggableContainer.offsetWidth
+      this.blockWidth = draggableContainer.offsetWidth
+
+      if (tabsWidth > blockWidth) {
+        this.isShowArrows = true
+      } else {
+        this.isShowArrows = false
+        tabsScroll.style.transform = `translateX(-${0}px)`
+      }
+      console.log('tabsWidth', tabsWidth)
+      console.log('blockWidth', blockWidth)
     },
     calcSwitchedSizes (type: SizeTypes, parentSize: number, oldValue: number): number {
       if (type === SizeTypes.PIXEL) {
@@ -644,9 +667,6 @@ export default Vue.extend({
       return ''
     },
     scrollPrevTab (): void {
-      // const guidTab = this.getPrevTab()
-      // if (guidTab) {
-      // this.onTabClick(guidTab)
       const tabsScroll: HTMLElement = this.$refs.tabsScroll as HTMLElement
       const draggableContainer: HTMLElement = this.$refs.draggableContainer as HTMLElement
       const tabsWidth = tabsScroll.offsetWidth
@@ -654,39 +674,27 @@ export default Vue.extend({
       this.blockWidth = draggableContainer.offsetWidth
       console.log('tabsWidth', tabsWidth)
       console.log('blockWidth', blockWidth)
-      this.tabsOffset < 0
-        ? this.tabsOffset = 0
-        : this.tabsOffset = this.tabsOffset - blockWidth
+      this.tabsOffset -= blockWidth / 2
+      if (this.tabsOffset < 0) {
+        this.tabsOffset = 0
+        // return
+      }
       console.log('tabsOffset', this.tabsOffset)
       tabsScroll.style.transform = `translateX(-${this.tabsOffset}px)`
-      // } else {
-      // console.log('Табов нет')
-      // }
     },
     scrollNextTab (): void {
-      // const guidTab = this.getNextTab()
-      // if (guidTab) {
-      // this.onTabClick(guidTab)
       const tabsScroll: HTMLElement = this.$refs.tabsScroll as HTMLElement
       const draggableContainer: HTMLElement = this.$refs.draggableContainer as HTMLElement
       // const tabsContainer: HTMLElement = this.$refs.tabsContainer as HTMLElement
-      // this.width = el.offsetWidth
-      // const containerSize = this.$refs.navScroll[`offset${firstUpperCase(this.sizeName)}`];
       const tabsWidth = tabsScroll.offsetWidth
       const blockWidth = draggableContainer.offsetWidth
-      // const tabsContainerWidth = tabsContainer.scrollWidth
       this.blockWidth = draggableContainer.offsetWidth
       console.log('tabsWidth', tabsWidth)
       console.log('blockWidth', blockWidth)
-      console.log('tabsOffset', this.tabsOffset)
-      if (this.tabsOffset < 0) this.tabsOffset = 0
-      // console.log('tabsContainerWidth', tabsContainerWidth)
       if ((tabsWidth - blockWidth) < this.tabsOffset) return
-      this.tabsOffset = (blockWidth) + this.tabsOffset
+      this.tabsOffset += blockWidth / 1.5
+      console.log('tabsOffset', this.tabsOffset)
       tabsScroll.style.transform = `translateX(-${this.tabsOffset}px)`
-      // } else {
-      // console.log('Табов нет')
-      // }
     }
   }
 })
@@ -872,13 +880,21 @@ export default Vue.extend({
   stroke-width:1px;
   stroke: #32B84D;
 }
+.tab {
+  width: 150px;
+  cursor: pointer;
+  background: pink;
+  border: 1px solid blue;
+  text-align: center;
+  flex: 1;
+}
 .tabs_onScroll {
   display: flex;
   transition: 1s all;
 }
 .tabs_button {
     display: block;
-    background: paleturquoise;
+    background: white;
     border: none;
     outline: none;
     cursor: pointer;
@@ -888,6 +904,8 @@ export default Vue.extend({
     top: 0;
     left: 0;
     z-index: 5;
+    color: #909399;
+    box-sizing: border-box;
 }
 .tabs_button_next {
     right: 0;

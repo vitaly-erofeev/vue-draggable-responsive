@@ -873,12 +873,10 @@ export default Vue.extend({
   stroke: #32B84D;
 }
 .tab {
-  width: 150px;
+  width: 100%;
   cursor: pointer;
-  background: pink;
-  border: 1px solid blue;
   text-align: center;
-  flex: 1;
+  /* flex: 1; */
 }
 .tabs_onScroll {
   display: flex;
@@ -895,7 +893,7 @@ export default Vue.extend({
     outline: none;
     cursor: pointer;
     position: absolute;
-    width: 18px;
+    width: 12px;
     height: 100%;
     top: 0;
     left: 0;

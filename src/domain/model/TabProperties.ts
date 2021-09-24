@@ -8,6 +8,7 @@ export interface TabProperties {
   position: TabPosition,
   containerStyle?: string,
   tabStyle?: string,
+  tabArrowsClass?: string,
   activeTabStyle?: string,
   class?: string
 }

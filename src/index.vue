@@ -207,11 +207,9 @@ export default Vue.extend({
         tabs,
         replication
       })
-      console.log(guid)
       if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
         this.$nextTick(() => {
           const block: any = this.getAllBlockRefs()[guid]
-          console.log(block)
           block.onDrag()
           block.dragStart(event, true)
         })

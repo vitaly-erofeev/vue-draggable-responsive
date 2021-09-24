@@ -180,6 +180,7 @@ export default {
           use: true,
           containerStyle: 'background: grey',
           tabStyle: 'color:black',
+          tabArrowsClass: 'testArr',
           activeTabStyle: 'color:green',
           list: [
             {

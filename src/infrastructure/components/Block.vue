@@ -12,9 +12,6 @@
       @mousedown.stop="dragStart"
       @contextmenu.stop="$emit('contextmenu', {block: block, event: $event})"
   >
-          <span style="color: black; font-size:25px">табы: width - {{ tabsOffset }}</span><br>
-          <span style="color: black; font-size:25px">блок: width - {{ blockWidth }}</span><br>
-
       <div
           v-if="isTabsContainer"
           ref="tabsContainer"
@@ -32,8 +29,9 @@
           icon="chevron-left"
           class="tabs_button"
           @click="scrollPrevTab"
+          :class="{ [block.tabs.tabArrowsClass]: true }"
         ></font-awesome-icon>
-      <div class="tabs_onScroll" ref="tabsScroll">
+      <div class="tabs_onScroll" ref="tabsScroll" :class="{'tabs_padding': isShowArrows }">
         <div
             v-for="tab in block.tabs.list"
             :key="tab.guid"
@@ -52,6 +50,7 @@
         <font-awesome-icon
           v-show="isShowArrows"
           icon="chevron-right"
+          :class="{ [block.tabs.tabArrowsClass]: true }"
           class="tabs_button tabs_button_next"
           @click="scrollNextTab"
         ></font-awesome-icon>
@@ -301,7 +300,7 @@ export default Vue.extend({
       handler () {
         if (this.isTabsContainer) {
           setTimeout(() => {
-            this.getCientSize()
+            this.setIsShowArrows()
           }, 0)
         }
         if (!this.block.tabs?.list.find(item => item.guid === this.activeTabGuid)) {
@@ -416,7 +415,7 @@ export default Vue.extend({
     'block.width': {
       handler (val) {
         if (this.isTabsContainer) {
-          this.getCientSize()
+          this.setIsShowArrows()
         }
       }
       // immediate: true
@@ -540,13 +539,16 @@ export default Vue.extend({
     this.getStore().addRef(this.block.guid, this)
     this.$nextTick(() => {
       this.onDrag()
+      if (this.isTabsContainer) {
+        this.setIsShowArrows()
+      }
     })
   },
   beforeDestroy () {
     this.getStore().removeRef(this.block.guid)
   },
   methods: {
-    getCientSize () {
+    setIsShowArrows () {
       const tabsScroll: HTMLElement = this.$refs.tabsScroll as HTMLElement
       const draggableContainer: HTMLElement = this.$refs.draggableContainer as HTMLElement
       const tabsWidth = tabsScroll.offsetWidth
@@ -560,8 +562,6 @@ export default Vue.extend({
         this.isShowArrows = false
         tabsScroll.style.transform = `translateX(-${0}px)`
       }
-      console.log('tabsWidth', tabsWidth)
-      console.log('blockWidth', blockWidth)
     },
     calcSwitchedSizes (type: SizeTypes, parentSize: number, oldValue: number): number {
       if (type === SizeTypes.PIXEL) {
@@ -669,31 +669,23 @@ export default Vue.extend({
     scrollPrevTab (): void {
       const tabsScroll: HTMLElement = this.$refs.tabsScroll as HTMLElement
       const draggableContainer: HTMLElement = this.$refs.draggableContainer as HTMLElement
-      const tabsWidth = tabsScroll.offsetWidth
       const blockWidth = draggableContainer.offsetWidth
       this.blockWidth = draggableContainer.offsetWidth
-      console.log('tabsWidth', tabsWidth)
-      console.log('blockWidth', blockWidth)
       this.tabsOffset -= blockWidth / 2
       if (this.tabsOffset < 0) {
         this.tabsOffset = 0
         // return
       }
-      console.log('tabsOffset', this.tabsOffset)
       tabsScroll.style.transform = `translateX(-${this.tabsOffset}px)`
     },
     scrollNextTab (): void {
       const tabsScroll: HTMLElement = this.$refs.tabsScroll as HTMLElement
       const draggableContainer: HTMLElement = this.$refs.draggableContainer as HTMLElement
-      // const tabsContainer: HTMLElement = this.$refs.tabsContainer as HTMLElement
       const tabsWidth = tabsScroll.offsetWidth
       const blockWidth = draggableContainer.offsetWidth
       this.blockWidth = draggableContainer.offsetWidth
-      console.log('tabsWidth', tabsWidth)
-      console.log('blockWidth', blockWidth)
       if ((tabsWidth - blockWidth) < this.tabsOffset) return
       this.tabsOffset += blockWidth / 1.5
-      console.log('tabsOffset', this.tabsOffset)
       tabsScroll.style.transform = `translateX(-${this.tabsOffset}px)`
     }
   }
@@ -891,6 +883,8 @@ export default Vue.extend({
 .tabs_onScroll {
   display: flex;
   transition: 1s all;
+}
+.tabs_onScroll.tabs_padding {
   padding-left: 15px;
   padding-right: 15px;
 }

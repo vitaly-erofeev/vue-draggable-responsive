@@ -16,15 +16,31 @@
         }"
         :style="block.tabs.containerStyle"
     >
-      <div
-          v-for="tab in block.tabs.list"
-          :key="tab.guid"
-          :style="`${block.tabs.tabStyle};${tab.guid === activeTabGuid ? block.tabs.activeTabStyle :''}`"
-          :class="{'tab': true, 'active': tab.guid === activeTabGuid, [block.tabs.class]: true}"
-          @click="activeTabGuid = tab.guid"
-      >
-        <span class="label">{{ tab.name }}</span>
+      <font-awesome-icon
+        v-show="isShowArrows"
+        icon="chevron-left"
+        class="tabs_button"
+        @click="scrollPrevTab"
+        :class="{ [block.tabs.tabArrowsClass]: true }"
+      ></font-awesome-icon>
+      <div class="tabs_onScroll" ref="tabsScroll" :class="{'tabs_padding': isShowArrows }">
+        <div
+            v-for="tab in block.tabs.list"
+            :key="tab.guid"
+            :style="`${block.tabs.tabStyle};${tab.guid === activeTabGuid ? block.tabs.activeTabStyle :''}`"
+            :class="{'tab': true, 'active': tab.guid === activeTabGuid, [block.tabs.class]: true}"
+            @click="activeTabGuid = tab.guid"
+        >
+          <span class="label">{{ tab.name }}</span>
+        </div>
       </div>
+      <font-awesome-icon
+        v-show="isShowArrows"
+        icon="chevron-right"
+        :class="{ [block.tabs.tabArrowsClass]: true }"
+        class="tabs_button tabs_button_next"
+        @click="scrollNextTab"
+      ></font-awesome-icon>
     </div>
     <div class="content" :style="block.style" ref="container">
       <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
@@ -51,14 +67,21 @@ import BlockDTO from '../../domain/model/BlockDTO'
 import Vue_, { VueConstructor } from 'vue'
 import { SizeTypes } from '@/domain/model/SizeTypes'
 import BlockManager from '@/application/service/BlockManager'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faAngleDown, faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core'
 // eslint-disable-next-line no-unused-vars
 import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
 import { StickyToType } from '@/domain/model/StickyTo'
 import SimpleListener from '@/infrastructure/service/listeners/SimpleListener'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
+library.add(faAngleDown, faChevronRight, faChevronLeft)
 export default Vue.extend({
   name: 'PreviewBlock',
+  components: {
+    FontAwesomeIcon
+  },
   props: {
     block: {
       type: BlockDTO
@@ -216,6 +239,9 @@ export default Vue.extend({
     this.$nextTick(() => {
       this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
       this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
+      if (this.isTabsContainer) {
+        this.setIsShowArrows()
+      }
     })
     if (this.block?.tabs?.use && this.block?.tabs?.list?.length > 0) {
       this.activeTabGuid = this.block.tabs.list[0].guid
@@ -242,7 +268,11 @@ export default Vue.extend({
     scrollHeight?: number,
     scrollWidth?: number,
     activeTabGuid?: string,
-    replicationIndex: number
+    replicationIndex: number,
+    tabsOffset: number,
+    blockWidth: number,
+    tabsWidth: number,
+    isShowArrows: boolean
     } {
     return {
       parentBlock: undefined,
@@ -250,7 +280,11 @@ export default Vue.extend({
       scrollHeight: undefined,
       scrollWidth: undefined,
       activeTabGuid: undefined,
-      replicationIndex: 0
+      replicationIndex: 0,
+      tabsOffset: 0,
+      blockWidth: 0,
+      tabsWidth: 0,
+      isShowArrows: false
     }
   },
   methods: {
@@ -327,6 +361,43 @@ export default Vue.extend({
     setParent (): void {
       this.parentBlock = this.block.parentGuid ? this.getStore().getByGuid(this.block.parentGuid) : undefined
       this.parentElement = this.block.parentGuid ? this.$parent.$refs.draggableContainer as Element : undefined
+    },
+    scrollPrevTab (): void {
+      const tabsScroll: HTMLElement = this.$refs.tabsScroll as HTMLElement
+      const draggableContainer: HTMLElement = this.$refs.draggableContainer as HTMLElement
+      const blockWidth = draggableContainer.offsetWidth
+      this.blockWidth = draggableContainer.offsetWidth
+      this.tabsOffset -= blockWidth / 2
+      if (this.tabsOffset < 0) {
+        this.tabsOffset = 0
+        // return
+      }
+      tabsScroll.style.transform = `translateX(-${this.tabsOffset}px)`
+    },
+    scrollNextTab (): void {
+      const tabsScroll: HTMLElement = this.$refs.tabsScroll as HTMLElement
+      const draggableContainer: HTMLElement = this.$refs.draggableContainer as HTMLElement
+      const tabsWidth = tabsScroll.offsetWidth
+      const blockWidth = draggableContainer.offsetWidth
+      this.blockWidth = draggableContainer.offsetWidth
+      if ((tabsWidth - blockWidth) < this.tabsOffset) return
+      this.tabsOffset += blockWidth / 1.5
+      tabsScroll.style.transform = `translateX(-${this.tabsOffset}px)`
+    },
+    setIsShowArrows (): void {
+      const tabsScroll: HTMLElement = this.$refs.tabsScroll as HTMLElement
+      const draggableContainer: HTMLElement = this.$refs.draggableContainer as HTMLElement
+      const tabsWidth = tabsScroll.offsetWidth
+      this.tabsWidth = tabsScroll.offsetWidth
+      const blockWidth = draggableContainer.offsetWidth
+      this.blockWidth = draggableContainer.offsetWidth
+
+      if (tabsWidth > blockWidth) {
+        this.isShowArrows = true
+      } else {
+        this.isShowArrows = false
+        tabsScroll.style.transform = `translateX(-${0}px)`
+      }
     }
   }
 })
@@ -347,6 +418,8 @@ export default Vue.extend({
 .block .tabs_container {
   position: absolute;
   display: flex;
+  overflow: hidden;
+  width: 100%;
 }
 
 .block .tabs_container.position_top {
@@ -365,5 +438,41 @@ export default Vue.extend({
 .block .tabs_container.position_left {
   right: 100%;
   flex-direction: column;
+}
+.block .tab {
+  width: 100px;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid grey;
+  box-sizing: border-box;
+  text-align: center;
+  /* flex: 1; */
+}
+.block .tabs_onScroll {
+  display: flex;
+  transition: 1s all;
+}
+.block .tabs_onScroll.tabs_padding {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.block .tabs_button {
+    display: block;
+    background: white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    width: 12px;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    color: #909399;
+    box-sizing: border-box;
+}
+.block .tabs_button_next {
+    right: 0;
+    left: auto;
 }
 </style>

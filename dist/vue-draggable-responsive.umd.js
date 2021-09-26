@@ -334,6 +334,13 @@ module.exports = function (it, Constructor, name) {
 
 /***/ }),
 
+/***/ "1a28":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "1be4":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -688,13 +695,6 @@ module.exports = function (CONSTRUCTOR_NAME) {
 
 /***/ }),
 
-/***/ "2703":
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
 /***/ "2877":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1023,7 +1023,7 @@ module.exports = function (it) {
 
 /***/ }),
 
-/***/ "3dde":
+/***/ "3ede":
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
@@ -1503,27 +1503,29 @@ var BlockRepository_BlockRepository = /*#__PURE__*/function () {
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7e8adf26-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/previewer.vue?vue&type=template&id=7a29e90c&scoped=true&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"919082b6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/previewer.vue?vue&type=template&id=7a29e90c&scoped=true&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"container"},_vm._l((_vm._blocks),function(block){return _c('preview-block',{key:block.guid,ref:block.guid,refInFor:true,attrs:{"block":block,"replication-callback":_vm.replicationCallback},scopedSlots:_vm._u([_vm._l((_vm.$scopedSlots),function(index,name){return {key:name,fn:function(data){return [_vm._t(name,null,null,data)]}}})],null,true)})}),1)}
 var staticRenderFns = []
 
 
 // CONCATENATED MODULE: ./src/previewer.vue?vue&type=template&id=7a29e90c&scoped=true&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7e8adf26-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/PreviewBlock.vue?vue&type=template&id=3d5a93c2&scoped=true&
-var PreviewBlockvue_type_template_id_3d5a93c2_scoped_true_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.block.isHidden),expression:"!block.isHidden"}],ref:"draggableContainer",staticClass:"block",style:(_vm.positionStyle)},[(_vm.isTabsContainer)?_c('div',{class:{
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"919082b6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/PreviewBlock.vue?vue&type=template&id=224391f6&scoped=true&
+var PreviewBlockvue_type_template_id_224391f6_scoped_true_render = function () {
+var _obj, _obj$1;
+var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.block.isHidden),expression:"!block.isHidden"}],ref:"draggableContainer",staticClass:"block",style:(_vm.positionStyle)},[(_vm.isTabsContainer)?_c('div',{class:{
         'tabs_container' : true,
         'position_top': _vm.block.tabs.position === 'top',
         'position_right': _vm.block.tabs.position === 'right',
         'position_bottom': _vm.block.tabs.position === 'bottom',
         'position_left': _vm.block.tabs.position === 'left',
-      },style:(_vm.block.tabs.containerStyle)},_vm._l((_vm.block.tabs.list),function(tab){
+      },style:(_vm.block.tabs.containerStyle)},[_c('font-awesome-icon',{directives:[{name:"show",rawName:"v-show",value:(_vm.isShowArrows),expression:"isShowArrows"}],staticClass:"tabs_button",class:( _obj = {}, _obj[_vm.block.tabs.tabArrowsClass] = true, _obj ),attrs:{"icon":"chevron-left"},on:{"click":_vm.scrollPrevTab}}),_c('div',{ref:"tabsScroll",staticClass:"tabs_onScroll",class:{'tabs_padding': _vm.isShowArrows }},_vm._l((_vm.block.tabs.list),function(tab){
       var _obj;
-return _c('div',{key:tab.guid,class:( _obj = {'tab': true, 'active': tab.guid === _vm.activeTabGuid}, _obj[_vm.block.tabs.class] = true, _obj ),style:(((_vm.block.tabs.tabStyle) + ";" + (tab.guid === _vm.activeTabGuid ? _vm.block.tabs.activeTabStyle :''))),on:{"click":function($event){_vm.activeTabGuid = tab.guid}}},[_c('span',{staticClass:"label"},[_vm._v(_vm._s(tab.name))])])}),0):_vm._e(),_c('div',{ref:"container",staticClass:"content",style:(_vm.block.style)},[(!_vm.isTabsContainer)?_vm._t("content",null,{"block":_vm.block}):_vm._e(),_vm._l((_vm.block.children),function(_block){return _c('preview-block',{directives:[{name:"show",rawName:"v-show",value:(!(_vm.block.tabs || {}).use || _block.parentTabGuid === _vm.activeTabGuid),expression:"!(block.tabs || {}).use || _block.parentTabGuid === activeTabGuid"}],key:_block.guid,ref:_block.guid,refInFor:true,attrs:{"block":_block,"replication-callback":_vm.replicationCallback},scopedSlots:_vm._u([_vm._l((_vm.$scopedSlots),function(index,name){return {key:name,fn:function(data){return [_vm._t(name,null,null,data)]}}})],null,true)})})],2)])}
-var PreviewBlockvue_type_template_id_3d5a93c2_scoped_true_staticRenderFns = []
+return _c('div',{key:tab.guid,class:( _obj = {'tab': true, 'active': tab.guid === _vm.activeTabGuid}, _obj[_vm.block.tabs.class] = true, _obj ),style:(((_vm.block.tabs.tabStyle) + ";" + (tab.guid === _vm.activeTabGuid ? _vm.block.tabs.activeTabStyle :''))),on:{"click":function($event){_vm.activeTabGuid = tab.guid}}},[_c('span',{staticClass:"label"},[_vm._v(_vm._s(tab.name))])])}),0),_c('font-awesome-icon',{directives:[{name:"show",rawName:"v-show",value:(_vm.isShowArrows),expression:"isShowArrows"}],staticClass:"tabs_button tabs_button_next",class:( _obj$1 = {}, _obj$1[_vm.block.tabs.tabArrowsClass] = true, _obj$1 ),attrs:{"icon":"chevron-right"},on:{"click":_vm.scrollNextTab}})],1):_vm._e(),_c('div',{ref:"container",staticClass:"content",style:(_vm.block.style)},[(!_vm.isTabsContainer)?_vm._t("content",null,{"block":_vm.block}):_vm._e(),_vm._l((_vm.block.children),function(_block){return _c('preview-block',{directives:[{name:"show",rawName:"v-show",value:(!(_vm.block.tabs || {}).use || _block.parentTabGuid === _vm.activeTabGuid),expression:"!(block.tabs || {}).use || _block.parentTabGuid === activeTabGuid"}],key:_block.guid,ref:_block.guid,refInFor:true,attrs:{"block":_block,"replication-callback":_vm.replicationCallback},scopedSlots:_vm._u([_vm._l((_vm.$scopedSlots),function(index,name){return {key:name,fn:function(data){return [_vm._t(name,null,null,data)]}}})],null,true)})})],2)])}
+var PreviewBlockvue_type_template_id_224391f6_scoped_true_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=template&id=3d5a93c2&scoped=true&
+// CONCATENATED MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=template&id=224391f6&scoped=true&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -1601,6 +1603,15 @@ var SizeTypes = __webpack_require__("9338");
 // EXTERNAL MODULE: ./src/application/service/BlockManager.ts + 3 modules
 var BlockManager = __webpack_require__("c8f9");
 
+// EXTERNAL MODULE: ./node_modules/@fortawesome/vue-fontawesome/index.es.js
+var index_es = __webpack_require__("ad3d");
+
+// EXTERNAL MODULE: ./node_modules/@fortawesome/free-solid-svg-icons/index.es.js
+var free_solid_svg_icons_index_es = __webpack_require__("c074");
+
+// EXTERNAL MODULE: ./node_modules/@fortawesome/fontawesome-svg-core/index.es.js
+var fontawesome_svg_core_index_es = __webpack_require__("ecee");
+
 // EXTERNAL MODULE: ./src/domain/model/StickyTo.ts
 var StickyTo = __webpack_require__("1d16");
 
@@ -1656,9 +1667,16 @@ var SimpleListener_SimpleListener = /*#__PURE__*/function () {
 
 
 
+
+
+
 var Vue = external_commonjs_vue_commonjs2_vue_root_Vue_default.a;
+fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_es["a" /* faAngleDown */], free_solid_svg_icons_index_es["c" /* faChevronRight */], free_solid_svg_icons_index_es["b" /* faChevronLeft */]);
 /* harmony default export */ var PreviewBlockvue_type_script_lang_ts_ = (Vue.extend({
   name: 'PreviewBlock',
+  components: {
+    FontAwesomeIcon: index_es["a" /* FontAwesomeIcon */]
+  },
   props: {
     block: {
       type: BlockDTO["a" /* default */]
@@ -1842,6 +1860,10 @@ var Vue = external_commonjs_vue_commonjs2_vue_root_Vue_default.a;
     this.$nextTick(function () {
       _this.scrollHeight = _this.$el.getElementsByClassName('content')[0].scrollHeight;
       _this.scrollWidth = _this.$el.getElementsByClassName('content')[0].scrollWidth;
+
+      if (_this.isTabsContainer) {
+        _this.setIsShowArrows();
+      }
     });
 
     if ((_this$block = this.block) !== null && _this$block !== void 0 && (_this$block$tabs4 = _this$block.tabs) !== null && _this$block$tabs4 !== void 0 && _this$block$tabs4.use && ((_this$block2 = this.block) === null || _this$block2 === void 0 ? void 0 : (_this$block2$tabs = _this$block2.tabs) === null || _this$block2$tabs === void 0 ? void 0 : (_this$block2$tabs$lis = _this$block2$tabs.list) === null || _this$block2$tabs$lis === void 0 ? void 0 : _this$block2$tabs$lis.length) > 0) {
@@ -1873,7 +1895,11 @@ var Vue = external_commonjs_vue_commonjs2_vue_root_Vue_default.a;
       scrollHeight: undefined,
       scrollWidth: undefined,
       activeTabGuid: undefined,
-      replicationIndex: 0
+      replicationIndex: 0,
+      tabsOffset: 0,
+      blockWidth: 0,
+      tabsWidth: 0,
+      isShowArrows: false
     };
   },
   methods: {
@@ -2002,13 +2028,51 @@ var Vue = external_commonjs_vue_commonjs2_vue_root_Vue_default.a;
     setParent: function setParent() {
       this.parentBlock = this.block.parentGuid ? this.getStore().getByGuid(this.block.parentGuid) : undefined;
       this.parentElement = this.block.parentGuid ? this.$parent.$refs.draggableContainer : undefined;
+    },
+    scrollPrevTab: function scrollPrevTab() {
+      var tabsScroll = this.$refs.tabsScroll;
+      var draggableContainer = this.$refs.draggableContainer;
+      var blockWidth = draggableContainer.offsetWidth;
+      this.blockWidth = draggableContainer.offsetWidth;
+      this.tabsOffset -= blockWidth / 2;
+
+      if (this.tabsOffset < 0) {
+        this.tabsOffset = 0; // return
+      }
+
+      tabsScroll.style.transform = "translateX(-".concat(this.tabsOffset, "px)");
+    },
+    scrollNextTab: function scrollNextTab() {
+      var tabsScroll = this.$refs.tabsScroll;
+      var draggableContainer = this.$refs.draggableContainer;
+      var tabsWidth = tabsScroll.offsetWidth;
+      var blockWidth = draggableContainer.offsetWidth;
+      this.blockWidth = draggableContainer.offsetWidth;
+      if (tabsWidth - blockWidth < this.tabsOffset) return;
+      this.tabsOffset += blockWidth / 1.5;
+      tabsScroll.style.transform = "translateX(-".concat(this.tabsOffset, "px)");
+    },
+    setIsShowArrows: function setIsShowArrows() {
+      var tabsScroll = this.$refs.tabsScroll;
+      var draggableContainer = this.$refs.draggableContainer;
+      var tabsWidth = tabsScroll.offsetWidth;
+      this.tabsWidth = tabsScroll.offsetWidth;
+      var blockWidth = draggableContainer.offsetWidth;
+      this.blockWidth = draggableContainer.offsetWidth;
+
+      if (tabsWidth > blockWidth) {
+        this.isShowArrows = true;
+      } else {
+        this.isShowArrows = false;
+        tabsScroll.style.transform = "translateX(-".concat(0, "px)");
+      }
     }
   }
 }));
 // CONCATENATED MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=script&lang=ts&
  /* harmony default export */ var components_PreviewBlockvue_type_script_lang_ts_ = (PreviewBlockvue_type_script_lang_ts_); 
-// EXTERNAL MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=style&index=0&id=3d5a93c2&scoped=true&lang=css&
-var PreviewBlockvue_type_style_index_0_id_3d5a93c2_scoped_true_lang_css_ = __webpack_require__("ac51");
+// EXTERNAL MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=style&index=0&id=224391f6&scoped=true&lang=css&
+var PreviewBlockvue_type_style_index_0_id_224391f6_scoped_true_lang_css_ = __webpack_require__("efa9");
 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__("2877");
@@ -2024,11 +2088,11 @@ var componentNormalizer = __webpack_require__("2877");
 
 var component = Object(componentNormalizer["a" /* default */])(
   components_PreviewBlockvue_type_script_lang_ts_,
-  PreviewBlockvue_type_template_id_3d5a93c2_scoped_true_render,
-  PreviewBlockvue_type_template_id_3d5a93c2_scoped_true_staticRenderFns,
+  PreviewBlockvue_type_template_id_224391f6_scoped_true_render,
+  PreviewBlockvue_type_template_id_224391f6_scoped_true_staticRenderFns,
   false,
   null,
-  "3d5a93c2",
+  "224391f6",
   null
   
 )
@@ -2290,6 +2354,13 @@ module.exports = function (it, key) {
   return hasOwnProperty.call(it, key);
 };
 
+
+/***/ }),
+
+/***/ "5202":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -2751,6 +2822,17 @@ var TEMPLATE = String(String).split('String');
 
 /***/ }),
 
+/***/ "6f43":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_70ab8c3a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("5202");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_70ab8c3a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_70ab8c3a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+
+
+/***/ }),
+
 /***/ "6f53":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2818,6 +2900,17 @@ module.exports = function ($this, dummy, Wrapper) {
 /***/ (function(module, exports) {
 
 exports.f = Object.getOwnPropertySymbols;
+
+
+/***/ }),
+
+/***/ "74b2":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Block_vue_vue_type_style_index_0_id_32d94a8c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("3ede");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Block_vue_vue_type_style_index_0_id_32d94a8c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Block_vue_vue_type_style_index_0_id_32d94a8c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
 
 
 /***/ }),
@@ -4087,13 +4180,6 @@ try {
 
 /***/ }),
 
-/***/ "9852":
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
 /***/ "99af":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4194,12 +4280,12 @@ exports.f = DESCRIPTORS ? nativeDefineProperty : function defineProperty(O, P, A
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7e8adf26-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/index.vue?vue&type=template&id=ab434c0c&scoped=true&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"919082b6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/index.vue?vue&type=template&id=70ab8c3a&scoped=true&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"container"},[_c('svg',{attrs:{"id":"svg"}},_vm._l((_vm.stickyLines),function(line,index){return _c('line',{key:index,staticClass:"line",attrs:{"x1":line.x1,"y1":line.y1,"x2":line.x2,"y2":line.y2}})}),0),_vm._l((_vm._blocks),function(block){return _c('block',{key:block.guid,ref:block.guid,refInFor:true,attrs:{"block":block,"step":_vm.step,"show-hidden":_vm.showHidden},on:{"start-drag":function($event){return _vm.$emit('start-drag', $event)},"stop-drag":function($event){return _vm.$emit('stop-drag', $event)},"dragging":function($event){return _vm.$emit('dragging', $event)},"contextmenu":function($event){return _vm.$emit('contextmenu', $event)}},scopedSlots:_vm._u([_vm._l((_vm.$scopedSlots),function(index,name){return {key:name,fn:function(data){return [_vm._t(name,null,null,data)]}}})],null,true)})})],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/index.vue?vue&type=template&id=ab434c0c&scoped=true&
+// CONCATENATED MODULE: ./src/index.vue?vue&type=template&id=70ab8c3a&scoped=true&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.for-each.js
 var es_array_for_each = __webpack_require__("4160");
@@ -4210,8 +4296,8 @@ var es_number_constructor = __webpack_require__("a9e3");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.for-each.js
 var web_dom_collections_for_each = __webpack_require__("159b");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7e8adf26-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/Block.vue?vue&type=template&id=e4e53236&scoped=true&
-var Blockvue_type_template_id_e4e53236_scoped_true_render = function () {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"919082b6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/Block.vue?vue&type=template&id=32d94a8c&scoped=true&
+var Blockvue_type_template_id_32d94a8c_scoped_true_render = function () {
 var _obj, _obj$1;
 var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.block.isHidden || _vm.showHidden),expression:"!block.isHidden || showHidden"}],ref:"draggableContainer",class:{
       'block': true,
@@ -4230,10 +4316,10 @@ return _c('div',{key:tab.guid,class:( _obj = {
             'tab': true,
             'active': tab.guid === _vm.activeTabGuid
             }, _obj[_vm.block.tabs.class] = true, _obj ),style:(((_vm.block.tabs.tabStyle) + ";" + (tab.guid === _vm.activeTabGuid ? _vm.block.tabs.activeTabStyle :''))),on:{"click":function($event){return _vm.onTabClick(tab.guid)}}},[_c('span',{staticClass:"label"},[_vm._v(_vm._s(tab.name))])])}),0),_c('font-awesome-icon',{directives:[{name:"show",rawName:"v-show",value:(_vm.isShowArrows),expression:"isShowArrows"}],staticClass:"tabs_button tabs_button_next",class:( _obj$1 = {}, _obj$1[_vm.block.tabs.tabArrowsClass] = true, _obj$1 ),attrs:{"icon":"chevron-right"},on:{"click":_vm.scrollNextTab}})],1):_vm._e(),_c('div',{staticClass:"block_info"},[_vm._t("help_text",null,{"block":_vm.block})],2),_vm._t("info",[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isResizing),expression:"isResizing"}],staticClass:"block_info"},[_vm._v(" "+_vm._s(_vm.block.width)+_vm._s(_vm.block.sizeTypes.width)+" x "+_vm._s(_vm.block.height)+_vm._s(_vm.block.sizeTypes.height)+" ")]),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isDragging && ['tl', 'bl'].includes(_vm.block.sticky)),expression:"isDragging && ['tl', 'bl'].includes(block.sticky)"}],staticClass:"position_line left",style:(("left: calc(-" + (_vm.currentPosition.left) + "px - 1px);width:calc(" + (_vm.currentPosition.left) + "px - 1px)"))},[_c('span',[_vm._v(_vm._s(_vm.block.left)+_vm._s(_vm.block.sizeTypes.left))])]),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isDragging && ['tl', 'tr'].includes(_vm.block.sticky)),expression:"isDragging && ['tl', 'tr'].includes(block.sticky)"}],staticClass:"position_line top",style:(("top: -" + (_vm.currentPosition.top) + "px;height:" + (_vm.currentPosition.top) + "px"))},[_c('span',[_vm._v(_vm._s(_vm.block.top)+_vm._s(_vm.block.sizeTypes.top))])]),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isDragging && ['br', 'bl'].includes(_vm.block.sticky)),expression:"isDragging && ['br', 'bl'].includes(block.sticky)"}],staticClass:"position_line bottom",style:(("bottom: -" + (_vm.currentPosition.bottom) + "px;height:" + (_vm.currentPosition.bottom) + "px"))},[_c('span',[_vm._v(_vm._s(_vm.block.bottom)+_vm._s(_vm.block.sizeTypes.bottom))])]),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isDragging && ['tr', 'br'].includes(_vm.block.sticky)),expression:"isDragging && ['tr', 'br'].includes(block.sticky)"}],staticClass:"position_line right",style:(("right: -" + (_vm.currentPosition.right) + "px;width:" + (_vm.currentPosition.right) + "px"))},[_c('span',[_vm._v(_vm._s(_vm.block.right)+_vm._s(_vm.block.sizeTypes.right))])])],{"block":_vm.block,"isResizing":_vm.isResizing,"isDragging":_vm.isDragging}),_c('div',{staticClass:"content",style:(_vm.block.style)},[(!_vm.isTabsContainer)?_vm._t("content",null,{"block":_vm.block}):_vm._e(),(!_vm.block.isEditing && !_vm.isTabsContainer)?_c('svg',{attrs:{"id":"svg"}},_vm._l((_vm.stickyLines),function(line,index){return _c('line',{key:index,staticClass:"line",attrs:{"x1":line.x1,"y1":line.y1,"x2":line.x2,"y2":line.y2}})}),0):_vm._e(),_vm._l((_vm.block.children),function(_block){return _c('block',{directives:[{name:"show",rawName:"v-show",value:(!(_vm.block.tabs || {}).use || _block.parentTabGuid === _vm.activeTabGuid),expression:"!(block.tabs || {}).use || _block.parentTabGuid === activeTabGuid"}],key:_block.guid,ref:_block.guid,refInFor:true,attrs:{"block":_block,"step":_vm.step,"show-hidden":_vm.showHidden},on:{"start-drag":function($event){return _vm.$emit('start-drag', $event)},"stop-drag":function($event){return _vm.$emit('stop-drag', $event)},"dragging":function($event){return _vm.$emit('dragging', $event)},"contextmenu":function($event){return _vm.$emit('contextmenu', $event)}},scopedSlots:_vm._u([_vm._l((_vm.$scopedSlots),function(index,name){return {key:name,fn:function(data){return [_vm._t(name,null,null,data)]}}})],null,true)})})],2),_c('font-awesome-icon',{class:("resize-handler " + (_vm.block.sticky)),attrs:{"icon":"angle-down"},on:{"mousedown":function($event){$event.stopPropagation();return _vm.resizeStart($event)}}})],2)}
-var Blockvue_type_template_id_e4e53236_scoped_true_staticRenderFns = []
+var Blockvue_type_template_id_32d94a8c_scoped_true_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/infrastructure/components/Block.vue?vue&type=template&id=e4e53236&scoped=true&
+// CONCATENATED MODULE: ./src/infrastructure/components/Block.vue?vue&type=template&id=32d94a8c&scoped=true&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
@@ -4266,7 +4352,3025 @@ var index_es = __webpack_require__("ad3d");
 // EXTERNAL MODULE: ./node_modules/@fortawesome/fontawesome-svg-core/index.es.js
 var fontawesome_svg_core_index_es = __webpack_require__("ecee");
 
-// CONCATENATED MODULE: ./node_modules/@fortawesome/free-solid-svg-icons/index.es.js
+// EXTERNAL MODULE: ./node_modules/@fortawesome/free-solid-svg-icons/index.es.js
+var free_solid_svg_icons_index_es = __webpack_require__("c074");
+
+// EXTERNAL MODULE: ./src/domain/model/Sticky.ts
+var Sticky = __webpack_require__("e920");
+
+// EXTERNAL MODULE: ./src/domain/model/StickyTo.ts
+var StickyTo = __webpack_require__("1d16");
+
+// EXTERNAL MODULE: ./src/domain/model/SizeTypes.ts
+var SizeTypes = __webpack_require__("9338");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/Block.vue?vue&type=script&lang=ts&
+
+
+
+
+
+
+
+
+// eslint-disable-next-line no-unused-vars
+
+
+
+
+
+
+
+
+
+var Vue = external_commonjs_vue_commonjs2_vue_root_Vue_default.a;
+fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_es["a" /* faAngleDown */], free_solid_svg_icons_index_es["c" /* faChevronRight */], free_solid_svg_icons_index_es["b" /* faChevronLeft */]);
+/* harmony default export */ var Blockvue_type_script_lang_ts_ = (Vue.extend({
+  name: 'block',
+  components: {
+    FontAwesomeIcon: index_es["a" /* FontAwesomeIcon */]
+  },
+  props: {
+    block: {
+      type: BlockDTO["a" /* default */]
+    },
+    step: {
+      type: Number
+    },
+    showHidden: {
+      type: Boolean,
+      default: false
+    }
+  },
+  inject: ['getStore'],
+  data: function data() {
+    return {
+      blockManager: undefined,
+      isResizing: false,
+      isDragging: false,
+      currentPosition: {
+        left: 0,
+        top: 0,
+        right: 0,
+        bottom: 0
+      },
+      parentBlock: undefined,
+      parentElement: undefined,
+      ctrlPressed: false,
+      activeTabGuid: undefined,
+      tabsOffset: 0,
+      blockWidth: 0,
+      tabsWidth: 0,
+      isShowArrows: false
+    };
+  },
+  watch: {
+    'block.sticky': {
+      handler: function handler(value) {
+        var _this$block$stickyTo,
+            _map,
+            _this = this;
+
+        if (!value) {
+          return;
+        }
+
+        var parent = this.$el.parentElement;
+
+        if (!parent) {
+          return;
+        }
+
+        if ((_this$block$stickyTo = this.block.stickyTo) !== null && _this$block$stickyTo !== void 0 && _this$block$stickyTo.guid && value !== Sticky["a" /* Sticky */].TL) {
+          this.block.stickyTo.guid = undefined;
+        }
+
+        var map = (_map = {}, Object(defineProperty["a" /* default */])(_map, Sticky["a" /* Sticky */].TL, ['top', 'left']), Object(defineProperty["a" /* default */])(_map, Sticky["a" /* Sticky */].TR, ['top', 'right']), Object(defineProperty["a" /* default */])(_map, Sticky["a" /* Sticky */].BL, ['bottom', 'left']), Object(defineProperty["a" /* default */])(_map, Sticky["a" /* Sticky */].BR, ['bottom', 'right']), _map);
+        var parentSizesMap = {
+          top: 'offsetHeight',
+          left: 'offsetWidth',
+          bottom: 'offsetHeight',
+          right: 'offsetWidth'
+        };
+        var positions = map[value];
+        positions.forEach(function (position) {
+          _this.block[position] = _this.block.sizeTypes[position] === SizeTypes["a" /* SizeTypes */].PERCENT ? Math.round(_this.currentPosition[position] / (parent[parentSizesMap[position]] / 100)) : Math.round(_this.currentPosition[position]);
+        });
+      }
+    },
+    'block.stickyTo.guid': {
+      handler: function handler(value, oldValue) {
+        var _this$block$stickyTo4, _this$block$stickyTo5, _this$block$stickyTo6, _this$block$stickyTo7;
+
+        if (!this.$el.parentElement) {
+          return;
+        }
+
+        if (oldValue && !value) {
+          var _this$block$stickyTo2, _this$block$stickyTo3;
+
+          var _el = this.getStore().getRefByGuid(oldValue);
+
+          if (((_this$block$stickyTo2 = this.block.stickyTo) === null || _this$block$stickyTo2 === void 0 ? void 0 : _this$block$stickyTo2.type) === StickyTo["a" /* StickyToType */].TOP) {
+            var difference = _el.$el.offsetTop + _el.$el.offsetHeight;
+
+            if (this.block.sizeTypes.top === SizeTypes["a" /* SizeTypes */].PERCENT) {
+              difference = difference / (this.$el.parentElement.offsetHeight / 100);
+            }
+
+            this.block.top = Math.round((this.block.top || 0) + difference);
+          } else if (((_this$block$stickyTo3 = this.block.stickyTo) === null || _this$block$stickyTo3 === void 0 ? void 0 : _this$block$stickyTo3.type) === StickyTo["a" /* StickyToType */].LEFT) {
+            var _difference = _el.$el.offsetLeft + _el.$el.offsetWidth;
+
+            if (this.block.sizeTypes.left === SizeTypes["a" /* SizeTypes */].PERCENT) {
+              _difference = _difference / (this.$el.parentElement.offsetWidth / 100);
+            }
+
+            this.block.left = Math.round((this.block.left || 0) + _difference);
+          }
+
+          return;
+        }
+
+        if (!value || !((_this$block$stickyTo4 = this.block.stickyTo) !== null && _this$block$stickyTo4 !== void 0 && _this$block$stickyTo4.guid)) {
+          return;
+        }
+
+        var el = this.getStore().getRefByGuid((_this$block$stickyTo5 = this.block.stickyTo) === null || _this$block$stickyTo5 === void 0 ? void 0 : _this$block$stickyTo5.guid);
+
+        if (((_this$block$stickyTo6 = this.block.stickyTo) === null || _this$block$stickyTo6 === void 0 ? void 0 : _this$block$stickyTo6.type) === StickyTo["a" /* StickyToType */].TOP) {
+          var _difference2 = el.$el.offsetTop + el.$el.offsetHeight;
+
+          if (this.block.sizeTypes.top === SizeTypes["a" /* SizeTypes */].PERCENT) {
+            _difference2 = _difference2 / (this.$el.parentElement.offsetHeight / 100);
+          }
+
+          this.block.top = Math.round((this.block.top || 0) - _difference2);
+        } else if (((_this$block$stickyTo7 = this.block.stickyTo) === null || _this$block$stickyTo7 === void 0 ? void 0 : _this$block$stickyTo7.type) === StickyTo["a" /* StickyToType */].LEFT) {
+          var _difference3 = el.$el.offsetLeft + el.$el.offsetWidth;
+
+          if (this.block.sizeTypes.left === SizeTypes["a" /* SizeTypes */].PERCENT) {
+            _difference3 = _difference3 / (this.$el.parentElement.offsetWidth / 100);
+          }
+
+          this.block.left = Math.round((this.block.left || 0) - _difference3);
+        }
+      }
+    },
+    activeTabGuid: function activeTabGuid(guid) {
+      this.getStore().setActiveTab(this.block.guid, guid);
+    },
+    'block.tabs.list': {
+      handler: function handler() {
+        var _this2 = this,
+            _this$block$tabs;
+
+        if (this.isTabsContainer) {
+          setTimeout(function () {
+            _this2.setIsShowArrows();
+          }, 0);
+        }
+
+        if (!((_this$block$tabs = this.block.tabs) !== null && _this$block$tabs !== void 0 && _this$block$tabs.list.find(function (item) {
+          return item.guid === _this2.activeTabGuid;
+        }))) {
+          var _this$block$tabs2, _this$block$tabs2$lis;
+
+          if ((_this$block$tabs2 = this.block.tabs) !== null && _this$block$tabs2 !== void 0 && (_this$block$tabs2$lis = _this$block$tabs2.list[0]) !== null && _this$block$tabs2$lis !== void 0 && _this$block$tabs2$lis.guid) {
+            this.onTabClick(this.block.tabs.list[0].guid);
+          }
+        }
+      },
+      deep: true
+    },
+    'block.sizeTypes.width': {
+      handler: function handler(value, old) {
+        if (value === old || !value) {
+          return;
+        }
+
+        if (!this.$el.parentElement) {
+          return;
+        }
+
+        var parentSize = this.$el.parentElement.offsetWidth;
+        var oldValue = this.block.width;
+        this.block.width = this.calcSwitchedSizes(value, parentSize, oldValue);
+      },
+      deep: true
+    },
+    'block.sizeTypes.height': {
+      handler: function handler(value, old) {
+        if (value === old || !value) {
+          return;
+        }
+
+        if (!this.$el.parentElement) {
+          return;
+        }
+
+        var parentSize = this.$el.parentElement.offsetHeight;
+        var oldValue = this.block.height;
+        this.block.height = this.calcSwitchedSizes(value, parentSize, oldValue);
+      },
+      deep: true
+    },
+    'block.sizeTypes.top': {
+      handler: function handler(value, old) {
+        if (value === old || !value) {
+          return;
+        }
+
+        if (!this.$el.parentElement) {
+          return;
+        }
+
+        var parentSize = this.$el.parentElement.offsetHeight;
+        var oldValue = this.block.top;
+
+        if (!oldValue) {
+          return;
+        }
+
+        this.block.top = this.calcSwitchedSizes(value, parentSize, oldValue);
+      },
+      deep: true
+    },
+    'block.sizeTypes.left': {
+      handler: function handler(value, old) {
+        if (value === old || !value) {
+          return;
+        }
+
+        if (!this.$el.parentElement) {
+          return;
+        }
+
+        var parentSize = this.$el.parentElement.offsetWidth;
+        var oldValue = this.block.left;
+
+        if (!oldValue) {
+          return;
+        }
+
+        this.block.left = this.calcSwitchedSizes(value, parentSize, oldValue);
+      },
+      deep: true
+    },
+    'block.sizeTypes.right': {
+      handler: function handler(value, old) {
+        if (value === old || !value) {
+          return;
+        }
+
+        if (!this.$el.parentElement) {
+          return;
+        }
+
+        var parentSize = this.$el.parentElement.offsetWidth;
+        var oldValue = this.block.right;
+
+        if (!oldValue) {
+          return;
+        }
+
+        this.block.right = this.calcSwitchedSizes(value, parentSize, oldValue);
+      },
+      deep: true
+    },
+    'block.sizeTypes.bottom': {
+      handler: function handler(value, old) {
+        if (value === old || !value) {
+          return;
+        }
+
+        if (!this.$el.parentElement) {
+          return;
+        }
+
+        var parentSize = this.$el.parentElement.offsetHeight;
+        var oldValue = this.block.bottom;
+
+        if (!oldValue) {
+          return;
+        }
+
+        this.block.bottom = this.calcSwitchedSizes(value, parentSize, oldValue);
+      },
+      deep: true
+    },
+    'block.width': {
+      handler: function handler() {
+        if (this.isTabsContainer) {
+          this.setIsShowArrows();
+        }
+      }
+    }
+  },
+  computed: {
+    stickyLines: function stickyLines() {
+      return this.getStore().getStickyLines(this.block.guid);
+    },
+    zIndex: function zIndex() {
+      var _this$block$tabs4;
+
+      var startIndex = 101;
+
+      if (!this.block.parentGuid) {
+        var _this$block$tabs3;
+
+        return startIndex + ((_this$block$tabs3 = this.block.tabs) !== null && _this$block$tabs3 !== void 0 && _this$block$tabs3.use ? 1 : 0);
+      }
+
+      var parentRef = this.getStore().getRefByGuid(this.block.parentGuid);
+
+      if (!parentRef) {
+        return startIndex;
+      }
+
+      return parentRef.zIndex + 1 + ((_this$block$tabs4 = this.block.tabs) !== null && _this$block$tabs4 !== void 0 && _this$block$tabs4.use ? 1 : 0);
+    },
+    isTabsContainer: function isTabsContainer() {
+      var _this$block$tabs5;
+
+      return ((_this$block$tabs5 = this.block.tabs) === null || _this$block$tabs5 === void 0 ? void 0 : _this$block$tabs5.use) || false;
+    },
+    positionStyle: function positionStyle() {
+      var _this$block$stickyTo10, _this$block$stickyTo11;
+
+      var position = {};
+
+      switch (this.block.sticky) {
+        case Sticky["a" /* Sticky */].TL:
+          position = {
+            top: this.block.top + this.block.sizeTypes.top,
+            left: this.block.left + this.block.sizeTypes.left
+          };
+          break;
+
+        case Sticky["a" /* Sticky */].TR:
+          position = {
+            top: this.block.top + this.block.sizeTypes.top,
+            right: this.block.right + this.block.sizeTypes.right
+          };
+          break;
+
+        case Sticky["a" /* Sticky */].BL:
+          position = {
+            bottom: this.block.bottom + this.block.sizeTypes.bottom,
+            left: this.block.left + this.block.sizeTypes.left
+          };
+          break;
+
+        case Sticky["a" /* Sticky */].BR:
+          position = {
+            bottom: this.block.bottom + this.block.sizeTypes.bottom,
+            right: this.block.right + this.block.sizeTypes.right
+          };
+          break;
+
+        default:
+          position = {
+            top: this.block.top + this.block.sizeTypes.top,
+            left: this.block.left + this.block.sizeTypes.left
+          };
+          break;
+      }
+
+      if (this.block.isHidden && !this.showHidden) {
+        var _this$block$stickyTo8, _this$block$stickyTo9;
+
+        if ((_this$block$stickyTo8 = this.block.stickyTo) !== null && _this$block$stickyTo8 !== void 0 && _this$block$stickyTo8.guid && (_this$block$stickyTo9 = this.block.stickyTo) !== null && _this$block$stickyTo9 !== void 0 && _this$block$stickyTo9.type) {
+          if (this.block.stickyTo.type === StickyTo["a" /* StickyToType */].TOP) {
+            position.top = '0px';
+          } else if (this.block.stickyTo.type === StickyTo["a" /* StickyToType */].LEFT) {
+            position.left = '0px';
+          }
+        }
+      }
+
+      if ((_this$block$stickyTo10 = this.block.stickyTo) !== null && _this$block$stickyTo10 !== void 0 && _this$block$stickyTo10.guid && (_this$block$stickyTo11 = this.block.stickyTo) !== null && _this$block$stickyTo11 !== void 0 && _this$block$stickyTo11.type) {
+        var stickyToBlock = this.getStore().getByGuid(this.block.stickyTo.guid);
+        var stickyToElement = this.getStore().getRefByGuid(this.block.stickyTo.guid);
+
+        if (stickyToBlock && stickyToBlock.parentGuid === this.block.parentGuid && stickyToElement) {
+          switch (this.block.stickyTo.type) {
+            case StickyTo["a" /* StickyToType */].TOP:
+              position.top = "calc(".concat(stickyToElement.positionStyle.height, " + ").concat(stickyToElement.positionStyle.top, " + ").concat(position.top, ")");
+              break;
+
+            case StickyTo["a" /* StickyToType */].LEFT:
+              position.left = "calc(".concat(stickyToElement.positionStyle.width, " + ").concat(stickyToElement.positionStyle.left, " + ").concat(position.left, ")");
+              break;
+          }
+        }
+      }
+
+      var width = this.block.width + this.block.sizeTypes.width;
+      var height = this.block.height + this.block.sizeTypes.height;
+
+      if (this.block.widthCalc && this.block.widthCalc.type && this.block.widthCalc.value) {
+        width = "calc(".concat(width, " ").concat(this.block.widthCalc.type, " ").concat(this.block.widthCalc.value, "px)");
+      }
+
+      if (this.block.heightCalc && this.block.heightCalc.type && this.block.heightCalc.value) {
+        height = "calc(".concat(height, " ").concat(this.block.heightCalc.type, " ").concat(this.block.heightCalc.value, "px)");
+      }
+
+      if (this.block.isHidden && !this.showHidden) {
+        width = '0px';
+        height = '0px';
+      }
+
+      return Object.assign(position, {
+        width: width,
+        height: height,
+        zIndex: this.zIndex
+      });
+    }
+  },
+  mounted: function mounted() {
+    var _this$block,
+        _this$block$tabs6,
+        _this$block2,
+        _this$block2$tabs,
+        _this$block2$tabs$lis,
+        _this3 = this;
+
+    if ((_this$block = this.block) !== null && _this$block !== void 0 && (_this$block$tabs6 = _this$block.tabs) !== null && _this$block$tabs6 !== void 0 && _this$block$tabs6.use && ((_this$block2 = this.block) === null || _this$block2 === void 0 ? void 0 : (_this$block2$tabs = _this$block2.tabs) === null || _this$block2$tabs === void 0 ? void 0 : (_this$block2$tabs$lis = _this$block2$tabs.list) === null || _this$block2$tabs$lis === void 0 ? void 0 : _this$block2$tabs$lis.length) > 0) {
+      this.activeTabGuid = this.block.tabs.list[0].guid;
+    }
+
+    this.getStore().addRef(this.block.guid, this);
+    this.$nextTick(function () {
+      _this3.onDrag();
+
+      if (_this3.isTabsContainer) {
+        _this3.setIsShowArrows();
+      }
+    });
+  },
+  beforeDestroy: function beforeDestroy() {
+    this.getStore().removeRef(this.block.guid);
+  },
+  methods: {
+    setIsShowArrows: function setIsShowArrows() {
+      var tabsScroll = this.$refs.tabsScroll;
+      var draggableContainer = this.$refs.draggableContainer;
+      var tabsWidth = tabsScroll.offsetWidth;
+      this.tabsWidth = tabsScroll.offsetWidth;
+      var blockWidth = draggableContainer.offsetWidth;
+      this.blockWidth = draggableContainer.offsetWidth;
+
+      if (tabsWidth > blockWidth) {
+        this.isShowArrows = true;
+      } else {
+        this.isShowArrows = false;
+        tabsScroll.style.transform = "translateX(-".concat(0, "px)");
+      }
+    },
+    calcSwitchedSizes: function calcSwitchedSizes(type, parentSize, oldValue) {
+      if (type === SizeTypes["a" /* SizeTypes */].PIXEL) {
+        return Math.round(parentSize / 100 * oldValue);
+      } else {
+        return Math.round(oldValue / (parentSize / 100));
+      }
+    },
+    onTabClick: function onTabClick(guid) {
+      this.activeTabGuid = guid;
+    },
+    onDrag: function onDrag() {
+      var el = this.$refs.draggableContainer;
+      this.currentPosition.left = el.offsetLeft;
+      this.currentPosition.top = el.offsetTop;
+
+      if (el.parentElement) {
+        var _el$parentElement, _el$parentElement2;
+
+        this.currentPosition.bottom = ((_el$parentElement = el.parentElement) === null || _el$parentElement === void 0 ? void 0 : _el$parentElement.offsetHeight) - el.offsetTop - el.offsetHeight;
+        this.currentPosition.right = ((_el$parentElement2 = el.parentElement) === null || _el$parentElement2 === void 0 ? void 0 : _el$parentElement2.offsetWidth) - el.offsetLeft - el.offsetWidth;
+      }
+      /* if (this.block.stickyTo?.guid) {
+        this.currentPosition.top =
+      } */
+
+    },
+    getBlockManager: function getBlockManager() {
+      if (typeof this.blockManager === 'undefined') {
+        this.blockManager = new BlockManager["a" /* default */](this.block, this.getStore(), this.$refs.draggableContainer, this.step);
+      }
+
+      return this.blockManager;
+    },
+    resizeStart: function resizeStart(event) {
+      event.preventDefault();
+      this.$emit('start-drag', this.block);
+      this.getBlockManager().startDrag(event, 'resize');
+      this.isResizing = true;
+      document.addEventListener('mousemove', this.elementDrag);
+      document.addEventListener('mouseup', this.dragStop);
+    },
+    dragStart: function dragStart(event) {
+      var isInteractive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+      if (this.block.isEditing) {
+        return;
+      }
+
+      event.preventDefault();
+      this.$emit('start-drag', this.block);
+      this.getBlockManager().startDrag(event, 'drag', isInteractive);
+      this.isDragging = true;
+      document.addEventListener('mousemove', this.elementDrag);
+      document.addEventListener('mouseup', this.dragStop);
+      document.addEventListener('keydown', this.keyDown);
+      document.addEventListener('keyup', this.keyUp);
+    },
+    elementDrag: function elementDrag(event) {
+      var _this4 = this;
+
+      event.preventDefault();
+      this.$emit('dragging', this.block);
+      /* if (this.ctrlPressed) {
+        if (this.block.parentGuid) {
+          this.getBlockManager().changeParent()
+        }
+      } */
+
+      this.getBlockManager().change(event);
+
+      if (this.isDragging) {
+        this.$nextTick(function () {
+          _this4.onDrag();
+        });
+      }
+    },
+    keyDown: function keyDown(event) {
+      if (event.ctrlKey) {
+        this.ctrlPressed = true;
+      }
+    },
+    keyUp: function keyUp(event) {
+      if (event.key === 'Control') {
+        this.ctrlPressed = false;
+      }
+    },
+    dragStop: function dragStop() {
+      this.$emit('stop-drag', this.block);
+      this.isResizing = false;
+      this.isDragging = false;
+      this.ctrlPressed = false;
+      document.removeEventListener('mousemove', this.elementDrag);
+      document.removeEventListener('mouseup', this.dragStop);
+      document.removeEventListener('keydown', this.keyDown);
+      document.removeEventListener('keyup', this.keyUp);
+    },
+    getNextTab: function getNextTab() {
+      var _this$block$tabs7,
+          _this5 = this,
+          _this$block$tabs8;
+
+      var findTabIndex = (_this$block$tabs7 = this.block.tabs) === null || _this$block$tabs7 === void 0 ? void 0 : _this$block$tabs7.list.findIndex(function (item) {
+        return item.guid === _this5.activeTabGuid;
+      });
+
+      if (typeof findTabIndex === 'number' && (_this$block$tabs8 = this.block.tabs) !== null && _this$block$tabs8 !== void 0 && _this$block$tabs8.list[findTabIndex + 1]) {
+        return this.block.tabs.list[findTabIndex + 1].guid;
+      }
+
+      return '';
+    },
+    getPrevTab: function getPrevTab() {
+      var _this$block$tabs9,
+          _this6 = this,
+          _this$block$tabs10;
+
+      var findTabIndex = (_this$block$tabs9 = this.block.tabs) === null || _this$block$tabs9 === void 0 ? void 0 : _this$block$tabs9.list.findIndex(function (item) {
+        return item.guid === _this6.activeTabGuid;
+      });
+
+      if (typeof findTabIndex === 'number' && (_this$block$tabs10 = this.block.tabs) !== null && _this$block$tabs10 !== void 0 && _this$block$tabs10.list[findTabIndex - 1]) {
+        return this.block.tabs.list[findTabIndex - 1].guid;
+      }
+
+      return '';
+    },
+    scrollPrevTab: function scrollPrevTab() {
+      var tabsScroll = this.$refs.tabsScroll;
+      var draggableContainer = this.$refs.draggableContainer;
+      var blockWidth = draggableContainer.offsetWidth;
+      this.blockWidth = draggableContainer.offsetWidth;
+      this.tabsOffset -= blockWidth / 2;
+
+      if (this.tabsOffset < 0) {
+        this.tabsOffset = 0; // return
+      }
+
+      tabsScroll.style.transform = "translateX(-".concat(this.tabsOffset, "px)");
+    },
+    scrollNextTab: function scrollNextTab() {
+      var tabsScroll = this.$refs.tabsScroll;
+      var draggableContainer = this.$refs.draggableContainer;
+      var tabsWidth = tabsScroll.offsetWidth;
+      var blockWidth = draggableContainer.offsetWidth;
+      this.blockWidth = draggableContainer.offsetWidth;
+      if (tabsWidth - blockWidth < this.tabsOffset) return;
+      this.tabsOffset += blockWidth / 1.5;
+      tabsScroll.style.transform = "translateX(-".concat(this.tabsOffset, "px)");
+    }
+  }
+}));
+// CONCATENATED MODULE: ./src/infrastructure/components/Block.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_Blockvue_type_script_lang_ts_ = (Blockvue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/infrastructure/components/Block.vue?vue&type=style&index=0&id=32d94a8c&scoped=true&lang=css&
+var Blockvue_type_style_index_0_id_32d94a8c_scoped_true_lang_css_ = __webpack_require__("74b2");
+
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__("2877");
+
+// CONCATENATED MODULE: ./src/infrastructure/components/Block.vue
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  components_Blockvue_type_script_lang_ts_,
+  Blockvue_type_template_id_32d94a8c_scoped_true_render,
+  Blockvue_type_template_id_32d94a8c_scoped_true_staticRenderFns,
+  false,
+  null,
+  "32d94a8c",
+  null
+  
+)
+
+/* harmony default export */ var Block = (component.exports);
+// CONCATENATED MODULE: ./src/domain/model/AddBlockType.ts
+var AddBlockType;
+
+(function (AddBlockType) {
+  AddBlockType[AddBlockType["DEFAULT"] = 0] = "DEFAULT";
+  AddBlockType[AddBlockType["INTERACTIVE"] = 1] = "INTERACTIVE";
+})(AddBlockType || (AddBlockType = {}));
+// EXTERNAL MODULE: ./src/infrastructure/domain/repository/BlockRepository.ts + 1 modules
+var BlockRepository = __webpack_require__("42eb");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/index.vue?vue&type=script&lang=ts&
+
+
+
+ // eslint-disable-next-line no-unused-vars
+
+
+
+
+
+
+var lib_vue_loader_options_srcvue_type_script_lang_ts_Vue = external_commonjs_vue_commonjs2_vue_root_Vue_default.a;
+/* harmony default export */ var lib_vue_loader_options_srcvue_type_script_lang_ts_ = (lib_vue_loader_options_srcvue_type_script_lang_ts_Vue.extend({
+  name: 'VueDraggableResponsiveDesigner',
+  components: {
+    Block: Block
+  },
+  props: {
+    step: {
+      type: Number,
+      default: 0.5
+    },
+    blocks: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
+    },
+    showHidden: {
+      type: Boolean,
+      default: false
+    }
+  },
+  provide: function provide() {
+    return {
+      getStore: this.getStore
+    };
+  },
+  data: function data() {
+    return {
+      store: new BlockRepository["a" /* default */](),
+      blocksArray: this.blocks
+    };
+  },
+  methods: {
+    getAllBlockRefs: function getAllBlockRefs() {
+      var answer = {};
+      this.getRefs(this._blocks, this, answer);
+      return answer;
+    },
+    getRefs: function getRefs(blocks, context, object) {
+      var _this = this;
+
+      blocks.forEach(function (item) {
+        var _item$children;
+
+        var refs = context.$refs[item.guid];
+        var block = refs[0];
+        object[item.guid] = block;
+
+        if (((_item$children = item.children) === null || _item$children === void 0 ? void 0 : _item$children.length) > 0) {
+          _this.getRefs(item.children, block, object);
+        }
+      });
+    },
+    setActiveBlock: function setActiveBlock(guid) {
+      this.store.setActiveBlock(guid);
+    },
+    clearActiveBlock: function clearActiveBlock() {
+      this.store.resetActiveBlock();
+    },
+    getStore: function getStore() {
+      return this.store;
+    },
+    getBlocks: function getBlocks() {
+      return this.store.get();
+    },
+    setBlocks: function setBlocks(blocks) {
+      this.store.set(blocks);
+    },
+    getMousePosition: function getMousePosition(event, sizeTypes) {
+      var elPosition = this.$el.getBoundingClientRect();
+      var top = sizeTypes.top === SizeTypes["a" /* SizeTypes */].PIXEL ? event.clientY - elPosition.top : (event.clientY - elPosition.top) / (elPosition.height / 100) - 2;
+      var left = sizeTypes.left === SizeTypes["a" /* SizeTypes */].PIXEL ? event.clientX - elPosition.left : (event.clientX - elPosition.left) / (elPosition.width / 100) - 2;
+      var right = sizeTypes.left === SizeTypes["a" /* SizeTypes */].PIXEL ? elPosition.width - event.clientX + elPosition.left : 100 - (event.clientX / (elPosition.width / 100) + 2);
+      var bottom = sizeTypes.top === SizeTypes["a" /* SizeTypes */].PIXEL ? elPosition.height - event.clientY + elPosition.top : 100 - (event.clientY / (elPosition.height / 100) + 2);
+      return {
+        top: Math.floor(top),
+        right: Math.floor(right),
+        bottom: Math.floor(bottom),
+        left: Math.floor(left)
+      };
+    },
+    addBlock: function addBlock(_ref) {
+      var _this2 = this;
+
+      var _ref$width = _ref.width,
+          width = _ref$width === void 0 ? 0 : _ref$width,
+          _ref$height = _ref.height,
+          height = _ref$height === void 0 ? 0 : _ref$height,
+          _ref$top = _ref.top,
+          top = _ref$top === void 0 ? undefined : _ref$top,
+          _ref$right = _ref.right,
+          right = _ref$right === void 0 ? undefined : _ref$right,
+          _ref$bottom = _ref.bottom,
+          bottom = _ref$bottom === void 0 ? undefined : _ref$bottom,
+          _ref$left = _ref.left,
+          left = _ref$left === void 0 ? undefined : _ref$left,
+          _ref$sticky = _ref.sticky,
+          sticky = _ref$sticky === void 0 ? Sticky["a" /* Sticky */].TL : _ref$sticky,
+          _ref$stickyTo = _ref.stickyTo,
+          stickyTo = _ref$stickyTo === void 0 ? undefined : _ref$stickyTo,
+          _ref$parentGuid = _ref.parentGuid,
+          parentGuid = _ref$parentGuid === void 0 ? undefined : _ref$parentGuid,
+          _ref$sizeTypes = _ref.sizeTypes,
+          sizeTypes = _ref$sizeTypes === void 0 ? {
+        width: SizeTypes["a" /* SizeTypes */].PERCENT,
+        height: SizeTypes["a" /* SizeTypes */].PERCENT,
+        top: SizeTypes["a" /* SizeTypes */].PERCENT,
+        right: SizeTypes["a" /* SizeTypes */].PERCENT,
+        bottom: SizeTypes["a" /* SizeTypes */].PERCENT,
+        left: SizeTypes["a" /* SizeTypes */].PERCENT
+      } : _ref$sizeTypes,
+          _ref$event = _ref.event,
+          event = _ref$event === void 0 ? undefined : _ref$event,
+          _ref$type = _ref.type,
+          type = _ref$type === void 0 ? AddBlockType.DEFAULT : _ref$type,
+          _ref$isStretched = _ref.isStretched,
+          isStretched = _ref$isStretched === void 0 ? false : _ref$isStretched,
+          _ref$tabs = _ref.tabs,
+          tabs = _ref$tabs === void 0 ? undefined : _ref$tabs,
+          _ref$replication = _ref.replication,
+          replication = _ref$replication === void 0 ? undefined : _ref$replication;
+
+      if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
+        var position = this.getMousePosition(event, sizeTypes);
+        top = position.top;
+        right = position.right;
+        bottom = position.bottom;
+        left = position.left;
+      }
+
+      var guid = this.store.add({
+        width: width,
+        height: height,
+        top: top,
+        right: right,
+        bottom: bottom,
+        left: left,
+        sticky: sticky,
+        stickyTo: stickyTo,
+        parentGuid: parentGuid,
+        sizeTypes: sizeTypes,
+        isStretched: isStretched,
+        tabs: tabs,
+        replication: replication
+      });
+
+      if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
+        this.$nextTick(function () {
+          var block = _this2.getAllBlockRefs()[guid];
+
+          block.onDrag();
+          block.dragStart(event, true);
+        });
+      }
+
+      return guid;
+    },
+    removeBlock: function removeBlock(guid) {
+      this.store.remove(guid);
+    }
+  },
+  computed: {
+    _blocks: function _blocks() {
+      return this.getStore().get();
+    },
+    stickyLines: function stickyLines() {
+      return this.getStore().getStickyLines();
+    }
+  }
+}));
+// CONCATENATED MODULE: ./src/index.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var srcvue_type_script_lang_ts_ = (lib_vue_loader_options_srcvue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/index.vue?vue&type=style&index=0&id=70ab8c3a&scoped=true&lang=css&
+var srcvue_type_style_index_0_id_70ab8c3a_scoped_true_lang_css_ = __webpack_require__("6f43");
+
+// CONCATENATED MODULE: ./src/index.vue
+
+
+
+
+
+
+/* normalize component */
+
+var src_component = Object(componentNormalizer["a" /* default */])(
+  srcvue_type_script_lang_ts_,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  "70ab8c3a",
+  null
+  
+)
+
+/* harmony default export */ var src = __webpack_exports__["a"] = (src_component.exports);
+
+/***/ }),
+
+/***/ "9f7f":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var fails = __webpack_require__("d039");
+
+// babel-minify transpiles RegExp('a', 'y') -> /a/y and it causes SyntaxError,
+// so we use an intermediate function.
+function RE(s, f) {
+  return RegExp(s, f);
+}
+
+exports.UNSUPPORTED_Y = fails(function () {
+  // babel-minify transpiles RegExp('a', 'y') -> /a/y and it causes SyntaxError
+  var re = RE('a', 'y');
+  re.lastIndex = 2;
+  return re.exec('abcd') != null;
+});
+
+exports.BROKEN_CARET = fails(function () {
+  // https://bugzilla.mozilla.org/show_bug.cgi?id=773687
+  var re = RE('^r', 'gy');
+  re.lastIndex = 2;
+  return re.exec('str') != null;
+});
+
+
+/***/ }),
+
+/***/ "a4b4":
+/***/ (function(module, exports, __webpack_require__) {
+
+var userAgent = __webpack_require__("342f");
+
+module.exports = /web0s(?!.*chrome)/i.test(userAgent);
+
+
+/***/ }),
+
+/***/ "a640":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var fails = __webpack_require__("d039");
+
+module.exports = function (METHOD_NAME, argument) {
+  var method = [][METHOD_NAME];
+  return !!method && fails(function () {
+    // eslint-disable-next-line no-useless-call,no-throw-literal
+    method.call(null, argument || function () { throw 1; }, 1);
+  });
+};
+
+
+/***/ }),
+
+/***/ "a691":
+/***/ (function(module, exports) {
+
+var ceil = Math.ceil;
+var floor = Math.floor;
+
+// `ToInteger` abstract operation
+// https://tc39.es/ecma262/#sec-tointeger
+module.exports = function (argument) {
+  return isNaN(argument = +argument) ? 0 : (argument > 0 ? floor : ceil)(argument);
+};
+
+
+/***/ }),
+
+/***/ "a9e3":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var DESCRIPTORS = __webpack_require__("83ab");
+var global = __webpack_require__("da84");
+var isForced = __webpack_require__("94ca");
+var redefine = __webpack_require__("6eeb");
+var has = __webpack_require__("5135");
+var classof = __webpack_require__("c6b6");
+var inheritIfRequired = __webpack_require__("7156");
+var toPrimitive = __webpack_require__("c04e");
+var fails = __webpack_require__("d039");
+var create = __webpack_require__("7c73");
+var getOwnPropertyNames = __webpack_require__("241c").f;
+var getOwnPropertyDescriptor = __webpack_require__("06cf").f;
+var defineProperty = __webpack_require__("9bf2").f;
+var trim = __webpack_require__("58a8").trim;
+
+var NUMBER = 'Number';
+var NativeNumber = global[NUMBER];
+var NumberPrototype = NativeNumber.prototype;
+
+// Opera ~12 has broken Object#toString
+var BROKEN_CLASSOF = classof(create(NumberPrototype)) == NUMBER;
+
+// `ToNumber` abstract operation
+// https://tc39.es/ecma262/#sec-tonumber
+var toNumber = function (argument) {
+  var it = toPrimitive(argument, false);
+  var first, third, radix, maxCode, digits, length, index, code;
+  if (typeof it == 'string' && it.length > 2) {
+    it = trim(it);
+    first = it.charCodeAt(0);
+    if (first === 43 || first === 45) {
+      third = it.charCodeAt(2);
+      if (third === 88 || third === 120) return NaN; // Number('+0x1') should be NaN, old V8 fix
+    } else if (first === 48) {
+      switch (it.charCodeAt(1)) {
+        case 66: case 98: radix = 2; maxCode = 49; break; // fast equal of /^0b[01]+$/i
+        case 79: case 111: radix = 8; maxCode = 55; break; // fast equal of /^0o[0-7]+$/i
+        default: return +it;
+      }
+      digits = it.slice(2);
+      length = digits.length;
+      for (index = 0; index < length; index++) {
+        code = digits.charCodeAt(index);
+        // parseInt parses a string to a first unavailable symbol
+        // but ToNumber should return NaN if a string contains unavailable symbols
+        if (code < 48 || code > maxCode) return NaN;
+      } return parseInt(digits, radix);
+    }
+  } return +it;
+};
+
+// `Number` constructor
+// https://tc39.es/ecma262/#sec-number-constructor
+if (isForced(NUMBER, !NativeNumber(' 0o1') || !NativeNumber('0b1') || NativeNumber('+0x1'))) {
+  var NumberWrapper = function Number(value) {
+    var it = arguments.length < 1 ? 0 : value;
+    var dummy = this;
+    return dummy instanceof NumberWrapper
+      // check on 1..constructor(foo) case
+      && (BROKEN_CLASSOF ? fails(function () { NumberPrototype.valueOf.call(dummy); }) : classof(dummy) != NUMBER)
+        ? inheritIfRequired(new NativeNumber(toNumber(it)), dummy, NumberWrapper) : toNumber(it);
+  };
+  for (var keys = DESCRIPTORS ? getOwnPropertyNames(NativeNumber) : (
+    // ES3:
+    'MAX_VALUE,MIN_VALUE,NaN,NEGATIVE_INFINITY,POSITIVE_INFINITY,' +
+    // ES2015 (in case, if modules with ES2015 Number statics required before):
+    'EPSILON,isFinite,isInteger,isNaN,isSafeInteger,MAX_SAFE_INTEGER,' +
+    'MIN_SAFE_INTEGER,parseFloat,parseInt,isInteger,' +
+    // ESNext
+    'fromString,range'
+  ).split(','), j = 0, key; keys.length > j; j++) {
+    if (has(NativeNumber, key = keys[j]) && !has(NumberWrapper, key)) {
+      defineProperty(NumberWrapper, key, getOwnPropertyDescriptor(NativeNumber, key));
+    }
+  }
+  NumberWrapper.prototype = NumberPrototype;
+  NumberPrototype.constructor = NumberWrapper;
+  redefine(global, NUMBER, NumberWrapper);
+}
+
+
+/***/ }),
+
+/***/ "ac1f":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__("23e7");
+var exec = __webpack_require__("9263");
+
+// `RegExp.prototype.exec` method
+// https://tc39.es/ecma262/#sec-regexp.prototype.exec
+$({ target: 'RegExp', proto: true, forced: /./.exec !== exec }, {
+  exec: exec
+});
+
+
+/***/ }),
+
+/***/ "ad3d":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FontAwesomeIcon; });
+/* unused harmony export FontAwesomeLayers */
+/* unused harmony export FontAwesomeLayersText */
+/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("ecee");
+
+
+var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+var humps = createCommonjsModule(function (module) {
+(function(global) {
+
+  var _processKeys = function(convert, obj, options) {
+    if(!_isObject(obj) || _isDate(obj) || _isRegExp(obj) || _isBoolean(obj) || _isFunction(obj)) {
+      return obj;
+    }
+
+    var output,
+        i = 0,
+        l = 0;
+
+    if(_isArray(obj)) {
+      output = [];
+      for(l=obj.length; i<l; i++) {
+        output.push(_processKeys(convert, obj[i], options));
+      }
+    }
+    else {
+      output = {};
+      for(var key in obj) {
+        if(Object.prototype.hasOwnProperty.call(obj, key)) {
+          output[convert(key, options)] = _processKeys(convert, obj[key], options);
+        }
+      }
+    }
+    return output;
+  };
+
+  // String conversion methods
+
+  var separateWords = function(string, options) {
+    options = options || {};
+    var separator = options.separator || '_';
+    var split = options.split || /(?=[A-Z])/;
+
+    return string.split(split).join(separator);
+  };
+
+  var camelize = function(string) {
+    if (_isNumerical(string)) {
+      return string;
+    }
+    string = string.replace(/[\-_\s]+(.)?/g, function(match, chr) {
+      return chr ? chr.toUpperCase() : '';
+    });
+    // Ensure 1st char is always lowercase
+    return string.substr(0, 1).toLowerCase() + string.substr(1);
+  };
+
+  var pascalize = function(string) {
+    var camelized = camelize(string);
+    // Ensure 1st char is always uppercase
+    return camelized.substr(0, 1).toUpperCase() + camelized.substr(1);
+  };
+
+  var decamelize = function(string, options) {
+    return separateWords(string, options).toLowerCase();
+  };
+
+  // Utilities
+  // Taken from Underscore.js
+
+  var toString = Object.prototype.toString;
+
+  var _isFunction = function(obj) {
+    return typeof(obj) === 'function';
+  };
+  var _isObject = function(obj) {
+    return obj === Object(obj);
+  };
+  var _isArray = function(obj) {
+    return toString.call(obj) == '[object Array]';
+  };
+  var _isDate = function(obj) {
+    return toString.call(obj) == '[object Date]';
+  };
+  var _isRegExp = function(obj) {
+    return toString.call(obj) == '[object RegExp]';
+  };
+  var _isBoolean = function(obj) {
+    return toString.call(obj) == '[object Boolean]';
+  };
+
+  // Performant way to determine if obj coerces to a number
+  var _isNumerical = function(obj) {
+    obj = obj - 0;
+    return obj === obj;
+  };
+
+  // Sets up function which handles processing keys
+  // allowing the convert function to be modified by a callback
+  var _processor = function(convert, options) {
+    var callback = options && 'process' in options ? options.process : options;
+
+    if(typeof(callback) !== 'function') {
+      return convert;
+    }
+
+    return function(string, options) {
+      return callback(string, convert, options);
+    }
+  };
+
+  var humps = {
+    camelize: camelize,
+    decamelize: decamelize,
+    pascalize: pascalize,
+    depascalize: decamelize,
+    camelizeKeys: function(object, options) {
+      return _processKeys(_processor(camelize, options), object);
+    },
+    decamelizeKeys: function(object, options) {
+      return _processKeys(_processor(decamelize, options), object, options);
+    },
+    pascalizeKeys: function(object, options) {
+      return _processKeys(_processor(pascalize, options), object);
+    },
+    depascalizeKeys: function () {
+      return this.decamelizeKeys.apply(this, arguments);
+    }
+  };
+
+  if (false) {} else if ( true && module.exports) {
+    module.exports = humps;
+  } else {
+    global.humps = humps;
+  }
+
+})(commonjsGlobal);
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+  return typeof obj;
+} : function (obj) {
+  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+};
+
+var defineProperty = function (obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+};
+
+var _extends = Object.assign || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+
+    for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }
+
+  return target;
+};
+
+var objectWithoutProperties = function (obj, keys) {
+  var target = {};
+
+  for (var i in obj) {
+    if (keys.indexOf(i) >= 0) continue;
+    if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;
+    target[i] = obj[i];
+  }
+
+  return target;
+};
+
+var toConsumableArray = function (arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
+
+    return arr2;
+  } else {
+    return Array.from(arr);
+  }
+};
+
+function styleToObject(style) {
+  return style.split(';').map(function (s) {
+    return s.trim();
+  }).filter(function (s) {
+    return s;
+  }).reduce(function (acc, pair) {
+    var i = pair.indexOf(':');
+    var prop = humps.camelize(pair.slice(0, i));
+    var value = pair.slice(i + 1).trim();
+
+    acc[prop] = value;
+
+    return acc;
+  }, {});
+}
+
+function classToObject(cls) {
+  return cls.split(/\s+/).reduce(function (acc, c) {
+    acc[c] = true;
+
+    return acc;
+  }, {});
+}
+
+function combineClassObjects() {
+  for (var _len = arguments.length, objs = Array(_len), _key = 0; _key < _len; _key++) {
+    objs[_key] = arguments[_key];
+  }
+
+  return objs.reduce(function (acc, obj) {
+    if (Array.isArray(obj)) {
+      acc = acc.concat(obj);
+    } else {
+      acc.push(obj);
+    }
+
+    return acc;
+  }, []);
+}
+
+function convert(h, element) {
+  var props = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  var data = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+
+  var children = (element.children || []).map(convert.bind(null, h));
+
+  var mixins = Object.keys(element.attributes || {}).reduce(function (acc, key) {
+    var val = element.attributes[key];
+
+    switch (key) {
+      case 'class':
+        acc['class'] = classToObject(val);
+        break;
+      case 'style':
+        acc['style'] = styleToObject(val);
+        break;
+      default:
+        acc.attrs[key] = val;
+    }
+
+    return acc;
+  }, { 'class': {}, style: {}, attrs: {} });
+
+  var _data$class = data.class,
+      dClass = _data$class === undefined ? {} : _data$class,
+      _data$style = data.style,
+      dStyle = _data$style === undefined ? {} : _data$style,
+      _data$attrs = data.attrs,
+      dAttrs = _data$attrs === undefined ? {} : _data$attrs,
+      remainingData = objectWithoutProperties(data, ['class', 'style', 'attrs']);
+
+
+  if (typeof element === 'string') {
+    return element;
+  } else {
+    return h(element.tag, _extends({
+      class: combineClassObjects(mixins.class, dClass),
+      style: _extends({}, mixins.style, dStyle),
+      attrs: _extends({}, mixins.attrs, dAttrs)
+    }, remainingData, {
+      props: props
+    }), children);
+  }
+}
+
+var PRODUCTION = false;
+
+try {
+  PRODUCTION = "production" === 'production';
+} catch (e) {}
+
+function log () {
+  if (!PRODUCTION && console && typeof console.error === 'function') {
+    var _console;
+
+    (_console = console).error.apply(_console, arguments);
+  }
+}
+
+function objectWithKey(key, value) {
+  return Array.isArray(value) && value.length > 0 || !Array.isArray(value) && value ? defineProperty({}, key, value) : {};
+}
+
+function classList(props) {
+  var _classes;
+
+  var classes = (_classes = {
+    'fa-spin': props.spin,
+    'fa-pulse': props.pulse,
+    'fa-fw': props.fixedWidth,
+    'fa-border': props.border,
+    'fa-li': props.listItem,
+    'fa-inverse': props.inverse,
+    'fa-flip-horizontal': props.flip === 'horizontal' || props.flip === 'both',
+    'fa-flip-vertical': props.flip === 'vertical' || props.flip === 'both'
+  }, defineProperty(_classes, 'fa-' + props.size, props.size !== null), defineProperty(_classes, 'fa-rotate-' + props.rotation, props.rotation !== null), defineProperty(_classes, 'fa-pull-' + props.pull, props.pull !== null), defineProperty(_classes, 'fa-swap-opacity', props.swapOpacity), _classes);
+
+  return Object.keys(classes).map(function (key) {
+    return classes[key] ? key : null;
+  }).filter(function (key) {
+    return key;
+  });
+}
+
+function addStaticClass(to, what) {
+  var val = (to || '').length === 0 ? [] : [to];
+
+  return val.concat(what).join(' ');
+}
+
+function normalizeIconArgs(icon$$1) {
+  if (_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__[/* parse */ "d"].icon) {
+    return _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__[/* parse */ "d"].icon(icon$$1);
+  }
+
+  if (icon$$1 === null) {
+    return null;
+  }
+
+  if ((typeof icon$$1 === 'undefined' ? 'undefined' : _typeof(icon$$1)) === 'object' && icon$$1.prefix && icon$$1.iconName) {
+    return icon$$1;
+  }
+
+  if (Array.isArray(icon$$1) && icon$$1.length === 2) {
+    return { prefix: icon$$1[0], iconName: icon$$1[1] };
+  }
+
+  if (typeof icon$$1 === 'string') {
+    return { prefix: 'fas', iconName: icon$$1 };
+  }
+}
+
+var FontAwesomeIcon = {
+  name: 'FontAwesomeIcon',
+
+  functional: true,
+
+  props: {
+    border: {
+      type: Boolean,
+      default: false
+    },
+    fixedWidth: {
+      type: Boolean,
+      default: false
+    },
+    flip: {
+      type: String,
+      default: null,
+      validator: function validator(value) {
+        return ['horizontal', 'vertical', 'both'].indexOf(value) > -1;
+      }
+    },
+    icon: {
+      type: [Object, Array, String],
+      required: true
+    },
+    mask: {
+      type: [Object, Array, String],
+      default: null
+    },
+    listItem: {
+      type: Boolean,
+      default: false
+    },
+    pull: {
+      type: String,
+      default: null,
+      validator: function validator(value) {
+        return ['right', 'left'].indexOf(value) > -1;
+      }
+    },
+    pulse: {
+      type: Boolean,
+      default: false
+    },
+    rotation: {
+      type: [String, Number],
+      default: null,
+      validator: function validator(value) {
+        return [90, 180, 270].indexOf(parseInt(value, 10)) > -1;
+      }
+    },
+    swapOpacity: {
+      type: Boolean,
+      default: false
+    },
+    size: {
+      type: String,
+      default: null,
+      validator: function validator(value) {
+        return ['lg', 'xs', 'sm', '1x', '2x', '3x', '4x', '5x', '6x', '7x', '8x', '9x', '10x'].indexOf(value) > -1;
+      }
+    },
+    spin: {
+      type: Boolean,
+      default: false
+    },
+    transform: {
+      type: [String, Object],
+      default: null
+    },
+    symbol: {
+      type: [Boolean, String],
+      default: false
+    },
+    title: {
+      type: String,
+      default: null
+    },
+    inverse: {
+      type: Boolean,
+      default: false
+    }
+  },
+
+  render: function render(createElement, context) {
+    var props = context.props;
+    var iconArgs = props.icon,
+        maskArgs = props.mask,
+        symbol = props.symbol,
+        title = props.title;
+
+    var icon$$1 = normalizeIconArgs(iconArgs);
+    var classes = objectWithKey('classes', classList(props));
+    var transform = objectWithKey('transform', typeof props.transform === 'string' ? _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__[/* parse */ "d"].transform(props.transform) : props.transform);
+    var mask = objectWithKey('mask', normalizeIconArgs(maskArgs));
+    var renderedIcon = Object(_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__[/* icon */ "b"])(icon$$1, _extends({}, classes, transform, mask, { symbol: symbol, title: title }));
+
+    if (!renderedIcon) {
+      return log('Could not find one or more icon(s)', icon$$1, mask);
+    }
+
+    var abstract = renderedIcon.abstract;
+
+    var convertCurry = convert.bind(null, createElement);
+
+    return convertCurry(abstract[0], {}, context.data);
+  }
+};
+
+var FontAwesomeLayers = {
+  name: 'FontAwesomeLayers',
+
+  functional: true,
+
+  props: {
+    fixedWidth: {
+      type: Boolean,
+      default: false
+    }
+  },
+
+  render: function render(createElement, context) {
+    var familyPrefix = _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__[/* config */ "a"].familyPrefix;
+    var staticClass = context.data.staticClass;
+
+
+    var classes = [familyPrefix + '-layers'].concat(toConsumableArray(context.props.fixedWidth ? [familyPrefix + '-fw'] : []));
+
+    return createElement('div', _extends({}, context.data, {
+      staticClass: addStaticClass(staticClass, classes)
+    }), context.children);
+  }
+};
+
+var FontAwesomeLayersText = {
+  name: 'FontAwesomeLayersText',
+
+  functional: true,
+
+  props: {
+    value: {
+      type: [String, Number],
+      default: ''
+    },
+    transform: {
+      type: [String, Object],
+      default: null
+    },
+    counter: {
+      type: Boolean,
+      default: false
+    },
+    position: {
+      type: String,
+      default: null,
+      validator: function validator(value) {
+        return ['bottom-left', 'bottom-right', 'top-left', 'top-right'].indexOf(value) > -1;
+      }
+    }
+  },
+
+  render: function render(createElement, context) {
+    var familyPrefix = _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__[/* config */ "a"].familyPrefix;
+    var props = context.props;
+
+
+    var classes = objectWithKey('classes', [].concat(toConsumableArray(props.counter ? [familyPrefix + '-layers-counter'] : []), toConsumableArray(props.position ? [familyPrefix + '-layers-' + props.position] : [])));
+
+    var transform = objectWithKey('transform', typeof props.transform === 'string' ? _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__[/* parse */ "d"].transform(props.transform) : props.transform);
+
+    var renderedText = Object(_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__[/* text */ "e"])(props.value.toString(), _extends({}, transform, classes));
+
+    var abstract = renderedText.abstract;
+
+
+    if (props.counter) {
+      abstract[0].attributes.class = abstract[0].attributes.class.replace('fa-layers-text', '');
+    }
+
+    var convertCurry = convert.bind(null, createElement);
+
+    return convertCurry(abstract[0], {}, context.data);
+  }
+};
+
+
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("c8ba")))
+
+/***/ }),
+
+/***/ "ad6d":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var anObject = __webpack_require__("825a");
+
+// `RegExp.prototype.flags` getter implementation
+// https://tc39.es/ecma262/#sec-get-regexp.prototype.flags
+module.exports = function () {
+  var that = anObject(this);
+  var result = '';
+  if (that.global) result += 'g';
+  if (that.ignoreCase) result += 'i';
+  if (that.multiline) result += 'm';
+  if (that.dotAll) result += 's';
+  if (that.unicode) result += 'u';
+  if (that.sticky) result += 'y';
+  return result;
+};
+
+
+/***/ }),
+
+/***/ "ade3":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return _defineProperty; });
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+/***/ }),
+
+/***/ "ae40":
+/***/ (function(module, exports, __webpack_require__) {
+
+var DESCRIPTORS = __webpack_require__("83ab");
+var fails = __webpack_require__("d039");
+var has = __webpack_require__("5135");
+
+var defineProperty = Object.defineProperty;
+var cache = {};
+
+var thrower = function (it) { throw it; };
+
+module.exports = function (METHOD_NAME, options) {
+  if (has(cache, METHOD_NAME)) return cache[METHOD_NAME];
+  if (!options) options = {};
+  var method = [][METHOD_NAME];
+  var ACCESSORS = has(options, 'ACCESSORS') ? options.ACCESSORS : false;
+  var argument0 = has(options, 0) ? options[0] : thrower;
+  var argument1 = has(options, 1) ? options[1] : undefined;
+
+  return cache[METHOD_NAME] = !!method && !fails(function () {
+    if (ACCESSORS && !DESCRIPTORS) return true;
+    var O = { length: -1 };
+
+    if (ACCESSORS) defineProperty(O, 1, { enumerable: true, get: thrower });
+    else O[1] = 1;
+
+    method.call(O, argument0, argument1);
+  });
+};
+
+
+/***/ }),
+
+/***/ "b041":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var TO_STRING_TAG_SUPPORT = __webpack_require__("00ee");
+var classof = __webpack_require__("f5df");
+
+// `Object.prototype.toString` method implementation
+// https://tc39.es/ecma262/#sec-object.prototype.tostring
+module.exports = TO_STRING_TAG_SUPPORT ? {}.toString : function toString() {
+  return '[object ' + classof(this) + ']';
+};
+
+
+/***/ }),
+
+/***/ "b575":
+/***/ (function(module, exports, __webpack_require__) {
+
+var global = __webpack_require__("da84");
+var getOwnPropertyDescriptor = __webpack_require__("06cf").f;
+var macrotask = __webpack_require__("2cf4").set;
+var IS_IOS = __webpack_require__("1cdc");
+var IS_WEBOS_WEBKIT = __webpack_require__("a4b4");
+var IS_NODE = __webpack_require__("605d");
+
+var MutationObserver = global.MutationObserver || global.WebKitMutationObserver;
+var document = global.document;
+var process = global.process;
+var Promise = global.Promise;
+// Node.js 11 shows ExperimentalWarning on getting `queueMicrotask`
+var queueMicrotaskDescriptor = getOwnPropertyDescriptor(global, 'queueMicrotask');
+var queueMicrotask = queueMicrotaskDescriptor && queueMicrotaskDescriptor.value;
+
+var flush, head, last, notify, toggle, node, promise, then;
+
+// modern engines have queueMicrotask method
+if (!queueMicrotask) {
+  flush = function () {
+    var parent, fn;
+    if (IS_NODE && (parent = process.domain)) parent.exit();
+    while (head) {
+      fn = head.fn;
+      head = head.next;
+      try {
+        fn();
+      } catch (error) {
+        if (head) notify();
+        else last = undefined;
+        throw error;
+      }
+    } last = undefined;
+    if (parent) parent.enter();
+  };
+
+  // browsers with MutationObserver, except iOS - https://github.com/zloirock/core-js/issues/339
+  // also except WebOS Webkit https://github.com/zloirock/core-js/issues/898
+  if (!IS_IOS && !IS_NODE && !IS_WEBOS_WEBKIT && MutationObserver && document) {
+    toggle = true;
+    node = document.createTextNode('');
+    new MutationObserver(flush).observe(node, { characterData: true });
+    notify = function () {
+      node.data = toggle = !toggle;
+    };
+  // environments with maybe non-completely correct, but existent Promise
+  } else if (Promise && Promise.resolve) {
+    // Promise.resolve without an argument throws an error in LG WebOS 2
+    promise = Promise.resolve(undefined);
+    then = promise.then;
+    notify = function () {
+      then.call(promise, flush);
+    };
+  // Node.js without promises
+  } else if (IS_NODE) {
+    notify = function () {
+      process.nextTick(flush);
+    };
+  // for other environments - macrotask based on:
+  // - setImmediate
+  // - MessageChannel
+  // - window.postMessag
+  // - onreadystatechange
+  // - setTimeout
+  } else {
+    notify = function () {
+      // strange IE + webpack dev server bug - use .call(global)
+      macrotask.call(global, flush);
+    };
+  }
+}
+
+module.exports = queueMicrotask || function (fn) {
+  var task = { fn: fn, next: undefined };
+  if (last) last.next = task;
+  if (!head) {
+    head = task;
+    notify();
+  } last = task;
+};
+
+
+/***/ }),
+
+/***/ "b622":
+/***/ (function(module, exports, __webpack_require__) {
+
+var global = __webpack_require__("da84");
+var shared = __webpack_require__("5692");
+var has = __webpack_require__("5135");
+var uid = __webpack_require__("90e3");
+var NATIVE_SYMBOL = __webpack_require__("4930");
+var USE_SYMBOL_AS_UID = __webpack_require__("fdbf");
+
+var WellKnownSymbolsStore = shared('wks');
+var Symbol = global.Symbol;
+var createWellKnownSymbol = USE_SYMBOL_AS_UID ? Symbol : Symbol && Symbol.withoutSetter || uid;
+
+module.exports = function (name) {
+  if (!has(WellKnownSymbolsStore, name)) {
+    if (NATIVE_SYMBOL && has(Symbol, name)) WellKnownSymbolsStore[name] = Symbol[name];
+    else WellKnownSymbolsStore[name] = createWellKnownSymbol('Symbol.' + name);
+  } return WellKnownSymbolsStore[name];
+};
+
+
+/***/ }),
+
+/***/ "b635":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return install; });
+/* harmony import */ var core_js_modules_es_array_for_each_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("4160");
+/* harmony import */ var core_js_modules_es_array_for_each_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("b64b");
+/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("159b");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _index_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("9f78");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "a", function() { return _index_vue__WEBPACK_IMPORTED_MODULE_3__["a"]; });
+
+/* harmony import */ var _previewer_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("4419");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "b", function() { return _previewer_vue__WEBPACK_IMPORTED_MODULE_4__["a"]; });
+
+
+
+
+
+
+var VueDraggableResponsive = {
+  VueDraggableResponsiveDesigner: _index_vue__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"],
+  VueDraggableResponsivePreviewer: _previewer_vue__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"]
+};
+function install(Vue) {
+  if (install.installed) return;
+  install.installed = true;
+  Object.keys(VueDraggableResponsive).forEach(function (name) {
+    Vue.component(name, VueDraggableResponsive[name]);
+  });
+}
+var plugin = {
+  install: install
+};
+var GlobalVue = null;
+
+if (typeof window !== 'undefined') {
+  GlobalVue = window.Vue;
+} else if (typeof global !== 'undefined') {
+  GlobalVue = global.Vue;
+}
+
+if (GlobalVue) {
+  GlobalVue.use(plugin);
+}
+
+/* harmony default export */ __webpack_exports__["c"] = (VueDraggableResponsive);
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("c8ba")))
+
+/***/ }),
+
+/***/ "b64b":
+/***/ (function(module, exports, __webpack_require__) {
+
+var $ = __webpack_require__("23e7");
+var toObject = __webpack_require__("7b0b");
+var nativeKeys = __webpack_require__("df75");
+var fails = __webpack_require__("d039");
+
+var FAILS_ON_PRIMITIVES = fails(function () { nativeKeys(1); });
+
+// `Object.keys` method
+// https://tc39.es/ecma262/#sec-object.keys
+$({ target: 'Object', stat: true, forced: FAILS_ON_PRIMITIVES }, {
+  keys: function keys(it) {
+    return nativeKeys(toObject(it));
+  }
+});
+
+
+/***/ }),
+
+/***/ "b727":
+/***/ (function(module, exports, __webpack_require__) {
+
+var bind = __webpack_require__("0366");
+var IndexedObject = __webpack_require__("44ad");
+var toObject = __webpack_require__("7b0b");
+var toLength = __webpack_require__("50c4");
+var arraySpeciesCreate = __webpack_require__("65f0");
+
+var push = [].push;
+
+// `Array.prototype.{ forEach, map, filter, some, every, find, findIndex, filterOut }` methods implementation
+var createMethod = function (TYPE) {
+  var IS_MAP = TYPE == 1;
+  var IS_FILTER = TYPE == 2;
+  var IS_SOME = TYPE == 3;
+  var IS_EVERY = TYPE == 4;
+  var IS_FIND_INDEX = TYPE == 6;
+  var IS_FILTER_OUT = TYPE == 7;
+  var NO_HOLES = TYPE == 5 || IS_FIND_INDEX;
+  return function ($this, callbackfn, that, specificCreate) {
+    var O = toObject($this);
+    var self = IndexedObject(O);
+    var boundFunction = bind(callbackfn, that, 3);
+    var length = toLength(self.length);
+    var index = 0;
+    var create = specificCreate || arraySpeciesCreate;
+    var target = IS_MAP ? create($this, length) : IS_FILTER || IS_FILTER_OUT ? create($this, 0) : undefined;
+    var value, result;
+    for (;length > index; index++) if (NO_HOLES || index in self) {
+      value = self[index];
+      result = boundFunction(value, index, O);
+      if (TYPE) {
+        if (IS_MAP) target[index] = result; // map
+        else if (result) switch (TYPE) {
+          case 3: return true;              // some
+          case 5: return value;             // find
+          case 6: return index;             // findIndex
+          case 2: push.call(target, value); // filter
+        } else switch (TYPE) {
+          case 4: return false;             // every
+          case 7: push.call(target, value); // filterOut
+        }
+      }
+    }
+    return IS_FIND_INDEX ? -1 : IS_SOME || IS_EVERY ? IS_EVERY : target;
+  };
+};
+
+module.exports = {
+  // `Array.prototype.forEach` method
+  // https://tc39.es/ecma262/#sec-array.prototype.foreach
+  forEach: createMethod(0),
+  // `Array.prototype.map` method
+  // https://tc39.es/ecma262/#sec-array.prototype.map
+  map: createMethod(1),
+  // `Array.prototype.filter` method
+  // https://tc39.es/ecma262/#sec-array.prototype.filter
+  filter: createMethod(2),
+  // `Array.prototype.some` method
+  // https://tc39.es/ecma262/#sec-array.prototype.some
+  some: createMethod(3),
+  // `Array.prototype.every` method
+  // https://tc39.es/ecma262/#sec-array.prototype.every
+  every: createMethod(4),
+  // `Array.prototype.find` method
+  // https://tc39.es/ecma262/#sec-array.prototype.find
+  find: createMethod(5),
+  // `Array.prototype.findIndex` method
+  // https://tc39.es/ecma262/#sec-array.prototype.findIndex
+  findIndex: createMethod(6),
+  // `Array.prototype.filterOut` method
+  // https://github.com/tc39/proposal-array-filtering
+  filterOut: createMethod(7)
+};
+
+
+/***/ }),
+
+/***/ "bee2":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return _createClass; });
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+/***/ }),
+
+/***/ "c04e":
+/***/ (function(module, exports, __webpack_require__) {
+
+var isObject = __webpack_require__("861d");
+
+// `ToPrimitive` abstract operation
+// https://tc39.es/ecma262/#sec-toprimitive
+// instead of the ES6 spec version, we didn't implement @@toPrimitive case
+// and the second argument - flag - preferred type is a string
+module.exports = function (input, PREFERRED_STRING) {
+  if (!isObject(input)) return input;
+  var fn, val;
+  if (PREFERRED_STRING && typeof (fn = input.toString) == 'function' && !isObject(val = fn.call(input))) return val;
+  if (typeof (fn = input.valueOf) == 'function' && !isObject(val = fn.call(input))) return val;
+  if (!PREFERRED_STRING && typeof (fn = input.toString) == 'function' && !isObject(val = fn.call(input))) return val;
+  throw TypeError("Can't convert object to primitive value");
+};
+
+
+/***/ }),
+
+/***/ "c074":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export fas */
+/* unused harmony export prefix */
+/* unused harmony export faAd */
+/* unused harmony export faAddressBook */
+/* unused harmony export faAddressCard */
+/* unused harmony export faAdjust */
+/* unused harmony export faAirFreshener */
+/* unused harmony export faAlignCenter */
+/* unused harmony export faAlignJustify */
+/* unused harmony export faAlignLeft */
+/* unused harmony export faAlignRight */
+/* unused harmony export faAllergies */
+/* unused harmony export faAmbulance */
+/* unused harmony export faAmericanSignLanguageInterpreting */
+/* unused harmony export faAnchor */
+/* unused harmony export faAngleDoubleDown */
+/* unused harmony export faAngleDoubleLeft */
+/* unused harmony export faAngleDoubleRight */
+/* unused harmony export faAngleDoubleUp */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return faAngleDown; });
+/* unused harmony export faAngleLeft */
+/* unused harmony export faAngleRight */
+/* unused harmony export faAngleUp */
+/* unused harmony export faAngry */
+/* unused harmony export faAnkh */
+/* unused harmony export faAppleAlt */
+/* unused harmony export faArchive */
+/* unused harmony export faArchway */
+/* unused harmony export faArrowAltCircleDown */
+/* unused harmony export faArrowAltCircleLeft */
+/* unused harmony export faArrowAltCircleRight */
+/* unused harmony export faArrowAltCircleUp */
+/* unused harmony export faArrowCircleDown */
+/* unused harmony export faArrowCircleLeft */
+/* unused harmony export faArrowCircleRight */
+/* unused harmony export faArrowCircleUp */
+/* unused harmony export faArrowDown */
+/* unused harmony export faArrowLeft */
+/* unused harmony export faArrowRight */
+/* unused harmony export faArrowUp */
+/* unused harmony export faArrowsAlt */
+/* unused harmony export faArrowsAltH */
+/* unused harmony export faArrowsAltV */
+/* unused harmony export faAssistiveListeningSystems */
+/* unused harmony export faAsterisk */
+/* unused harmony export faAt */
+/* unused harmony export faAtlas */
+/* unused harmony export faAtom */
+/* unused harmony export faAudioDescription */
+/* unused harmony export faAward */
+/* unused harmony export faBaby */
+/* unused harmony export faBabyCarriage */
+/* unused harmony export faBackspace */
+/* unused harmony export faBackward */
+/* unused harmony export faBacon */
+/* unused harmony export faBacteria */
+/* unused harmony export faBacterium */
+/* unused harmony export faBahai */
+/* unused harmony export faBalanceScale */
+/* unused harmony export faBalanceScaleLeft */
+/* unused harmony export faBalanceScaleRight */
+/* unused harmony export faBan */
+/* unused harmony export faBandAid */
+/* unused harmony export faBarcode */
+/* unused harmony export faBars */
+/* unused harmony export faBaseballBall */
+/* unused harmony export faBasketballBall */
+/* unused harmony export faBath */
+/* unused harmony export faBatteryEmpty */
+/* unused harmony export faBatteryFull */
+/* unused harmony export faBatteryHalf */
+/* unused harmony export faBatteryQuarter */
+/* unused harmony export faBatteryThreeQuarters */
+/* unused harmony export faBed */
+/* unused harmony export faBeer */
+/* unused harmony export faBell */
+/* unused harmony export faBellSlash */
+/* unused harmony export faBezierCurve */
+/* unused harmony export faBible */
+/* unused harmony export faBicycle */
+/* unused harmony export faBiking */
+/* unused harmony export faBinoculars */
+/* unused harmony export faBiohazard */
+/* unused harmony export faBirthdayCake */
+/* unused harmony export faBlender */
+/* unused harmony export faBlenderPhone */
+/* unused harmony export faBlind */
+/* unused harmony export faBlog */
+/* unused harmony export faBold */
+/* unused harmony export faBolt */
+/* unused harmony export faBomb */
+/* unused harmony export faBone */
+/* unused harmony export faBong */
+/* unused harmony export faBook */
+/* unused harmony export faBookDead */
+/* unused harmony export faBookMedical */
+/* unused harmony export faBookOpen */
+/* unused harmony export faBookReader */
+/* unused harmony export faBookmark */
+/* unused harmony export faBorderAll */
+/* unused harmony export faBorderNone */
+/* unused harmony export faBorderStyle */
+/* unused harmony export faBowlingBall */
+/* unused harmony export faBox */
+/* unused harmony export faBoxOpen */
+/* unused harmony export faBoxTissue */
+/* unused harmony export faBoxes */
+/* unused harmony export faBraille */
+/* unused harmony export faBrain */
+/* unused harmony export faBreadSlice */
+/* unused harmony export faBriefcase */
+/* unused harmony export faBriefcaseMedical */
+/* unused harmony export faBroadcastTower */
+/* unused harmony export faBroom */
+/* unused harmony export faBrush */
+/* unused harmony export faBug */
+/* unused harmony export faBuilding */
+/* unused harmony export faBullhorn */
+/* unused harmony export faBullseye */
+/* unused harmony export faBurn */
+/* unused harmony export faBus */
+/* unused harmony export faBusAlt */
+/* unused harmony export faBusinessTime */
+/* unused harmony export faCalculator */
+/* unused harmony export faCalendar */
+/* unused harmony export faCalendarAlt */
+/* unused harmony export faCalendarCheck */
+/* unused harmony export faCalendarDay */
+/* unused harmony export faCalendarMinus */
+/* unused harmony export faCalendarPlus */
+/* unused harmony export faCalendarTimes */
+/* unused harmony export faCalendarWeek */
+/* unused harmony export faCamera */
+/* unused harmony export faCameraRetro */
+/* unused harmony export faCampground */
+/* unused harmony export faCandyCane */
+/* unused harmony export faCannabis */
+/* unused harmony export faCapsules */
+/* unused harmony export faCar */
+/* unused harmony export faCarAlt */
+/* unused harmony export faCarBattery */
+/* unused harmony export faCarCrash */
+/* unused harmony export faCarSide */
+/* unused harmony export faCaravan */
+/* unused harmony export faCaretDown */
+/* unused harmony export faCaretLeft */
+/* unused harmony export faCaretRight */
+/* unused harmony export faCaretSquareDown */
+/* unused harmony export faCaretSquareLeft */
+/* unused harmony export faCaretSquareRight */
+/* unused harmony export faCaretSquareUp */
+/* unused harmony export faCaretUp */
+/* unused harmony export faCarrot */
+/* unused harmony export faCartArrowDown */
+/* unused harmony export faCartPlus */
+/* unused harmony export faCashRegister */
+/* unused harmony export faCat */
+/* unused harmony export faCertificate */
+/* unused harmony export faChair */
+/* unused harmony export faChalkboard */
+/* unused harmony export faChalkboardTeacher */
+/* unused harmony export faChargingStation */
+/* unused harmony export faChartArea */
+/* unused harmony export faChartBar */
+/* unused harmony export faChartLine */
+/* unused harmony export faChartPie */
+/* unused harmony export faCheck */
+/* unused harmony export faCheckCircle */
+/* unused harmony export faCheckDouble */
+/* unused harmony export faCheckSquare */
+/* unused harmony export faCheese */
+/* unused harmony export faChess */
+/* unused harmony export faChessBishop */
+/* unused harmony export faChessBoard */
+/* unused harmony export faChessKing */
+/* unused harmony export faChessKnight */
+/* unused harmony export faChessPawn */
+/* unused harmony export faChessQueen */
+/* unused harmony export faChessRook */
+/* unused harmony export faChevronCircleDown */
+/* unused harmony export faChevronCircleLeft */
+/* unused harmony export faChevronCircleRight */
+/* unused harmony export faChevronCircleUp */
+/* unused harmony export faChevronDown */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return faChevronLeft; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return faChevronRight; });
+/* unused harmony export faChevronUp */
+/* unused harmony export faChild */
+/* unused harmony export faChurch */
+/* unused harmony export faCircle */
+/* unused harmony export faCircleNotch */
+/* unused harmony export faCity */
+/* unused harmony export faClinicMedical */
+/* unused harmony export faClipboard */
+/* unused harmony export faClipboardCheck */
+/* unused harmony export faClipboardList */
+/* unused harmony export faClock */
+/* unused harmony export faClone */
+/* unused harmony export faClosedCaptioning */
+/* unused harmony export faCloud */
+/* unused harmony export faCloudDownloadAlt */
+/* unused harmony export faCloudMeatball */
+/* unused harmony export faCloudMoon */
+/* unused harmony export faCloudMoonRain */
+/* unused harmony export faCloudRain */
+/* unused harmony export faCloudShowersHeavy */
+/* unused harmony export faCloudSun */
+/* unused harmony export faCloudSunRain */
+/* unused harmony export faCloudUploadAlt */
+/* unused harmony export faCocktail */
+/* unused harmony export faCode */
+/* unused harmony export faCodeBranch */
+/* unused harmony export faCoffee */
+/* unused harmony export faCog */
+/* unused harmony export faCogs */
+/* unused harmony export faCoins */
+/* unused harmony export faColumns */
+/* unused harmony export faComment */
+/* unused harmony export faCommentAlt */
+/* unused harmony export faCommentDollar */
+/* unused harmony export faCommentDots */
+/* unused harmony export faCommentMedical */
+/* unused harmony export faCommentSlash */
+/* unused harmony export faComments */
+/* unused harmony export faCommentsDollar */
+/* unused harmony export faCompactDisc */
+/* unused harmony export faCompass */
+/* unused harmony export faCompress */
+/* unused harmony export faCompressAlt */
+/* unused harmony export faCompressArrowsAlt */
+/* unused harmony export faConciergeBell */
+/* unused harmony export faCookie */
+/* unused harmony export faCookieBite */
+/* unused harmony export faCopy */
+/* unused harmony export faCopyright */
+/* unused harmony export faCouch */
+/* unused harmony export faCreditCard */
+/* unused harmony export faCrop */
+/* unused harmony export faCropAlt */
+/* unused harmony export faCross */
+/* unused harmony export faCrosshairs */
+/* unused harmony export faCrow */
+/* unused harmony export faCrown */
+/* unused harmony export faCrutch */
+/* unused harmony export faCube */
+/* unused harmony export faCubes */
+/* unused harmony export faCut */
+/* unused harmony export faDatabase */
+/* unused harmony export faDeaf */
+/* unused harmony export faDemocrat */
+/* unused harmony export faDesktop */
+/* unused harmony export faDharmachakra */
+/* unused harmony export faDiagnoses */
+/* unused harmony export faDice */
+/* unused harmony export faDiceD20 */
+/* unused harmony export faDiceD6 */
+/* unused harmony export faDiceFive */
+/* unused harmony export faDiceFour */
+/* unused harmony export faDiceOne */
+/* unused harmony export faDiceSix */
+/* unused harmony export faDiceThree */
+/* unused harmony export faDiceTwo */
+/* unused harmony export faDigitalTachograph */
+/* unused harmony export faDirections */
+/* unused harmony export faDisease */
+/* unused harmony export faDivide */
+/* unused harmony export faDizzy */
+/* unused harmony export faDna */
+/* unused harmony export faDog */
+/* unused harmony export faDollarSign */
+/* unused harmony export faDolly */
+/* unused harmony export faDollyFlatbed */
+/* unused harmony export faDonate */
+/* unused harmony export faDoorClosed */
+/* unused harmony export faDoorOpen */
+/* unused harmony export faDotCircle */
+/* unused harmony export faDove */
+/* unused harmony export faDownload */
+/* unused harmony export faDraftingCompass */
+/* unused harmony export faDragon */
+/* unused harmony export faDrawPolygon */
+/* unused harmony export faDrum */
+/* unused harmony export faDrumSteelpan */
+/* unused harmony export faDrumstickBite */
+/* unused harmony export faDumbbell */
+/* unused harmony export faDumpster */
+/* unused harmony export faDumpsterFire */
+/* unused harmony export faDungeon */
+/* unused harmony export faEdit */
+/* unused harmony export faEgg */
+/* unused harmony export faEject */
+/* unused harmony export faEllipsisH */
+/* unused harmony export faEllipsisV */
+/* unused harmony export faEnvelope */
+/* unused harmony export faEnvelopeOpen */
+/* unused harmony export faEnvelopeOpenText */
+/* unused harmony export faEnvelopeSquare */
+/* unused harmony export faEquals */
+/* unused harmony export faEraser */
+/* unused harmony export faEthernet */
+/* unused harmony export faEuroSign */
+/* unused harmony export faExchangeAlt */
+/* unused harmony export faExclamation */
+/* unused harmony export faExclamationCircle */
+/* unused harmony export faExclamationTriangle */
+/* unused harmony export faExpand */
+/* unused harmony export faExpandAlt */
+/* unused harmony export faExpandArrowsAlt */
+/* unused harmony export faExternalLinkAlt */
+/* unused harmony export faExternalLinkSquareAlt */
+/* unused harmony export faEye */
+/* unused harmony export faEyeDropper */
+/* unused harmony export faEyeSlash */
+/* unused harmony export faFan */
+/* unused harmony export faFastBackward */
+/* unused harmony export faFastForward */
+/* unused harmony export faFaucet */
+/* unused harmony export faFax */
+/* unused harmony export faFeather */
+/* unused harmony export faFeatherAlt */
+/* unused harmony export faFemale */
+/* unused harmony export faFighterJet */
+/* unused harmony export faFile */
+/* unused harmony export faFileAlt */
+/* unused harmony export faFileArchive */
+/* unused harmony export faFileAudio */
+/* unused harmony export faFileCode */
+/* unused harmony export faFileContract */
+/* unused harmony export faFileCsv */
+/* unused harmony export faFileDownload */
+/* unused harmony export faFileExcel */
+/* unused harmony export faFileExport */
+/* unused harmony export faFileImage */
+/* unused harmony export faFileImport */
+/* unused harmony export faFileInvoice */
+/* unused harmony export faFileInvoiceDollar */
+/* unused harmony export faFileMedical */
+/* unused harmony export faFileMedicalAlt */
+/* unused harmony export faFilePdf */
+/* unused harmony export faFilePowerpoint */
+/* unused harmony export faFilePrescription */
+/* unused harmony export faFileSignature */
+/* unused harmony export faFileUpload */
+/* unused harmony export faFileVideo */
+/* unused harmony export faFileWord */
+/* unused harmony export faFill */
+/* unused harmony export faFillDrip */
+/* unused harmony export faFilm */
+/* unused harmony export faFilter */
+/* unused harmony export faFingerprint */
+/* unused harmony export faFire */
+/* unused harmony export faFireAlt */
+/* unused harmony export faFireExtinguisher */
+/* unused harmony export faFirstAid */
+/* unused harmony export faFish */
+/* unused harmony export faFistRaised */
+/* unused harmony export faFlag */
+/* unused harmony export faFlagCheckered */
+/* unused harmony export faFlagUsa */
+/* unused harmony export faFlask */
+/* unused harmony export faFlushed */
+/* unused harmony export faFolder */
+/* unused harmony export faFolderMinus */
+/* unused harmony export faFolderOpen */
+/* unused harmony export faFolderPlus */
+/* unused harmony export faFont */
+/* unused harmony export faFontAwesomeLogoFull */
+/* unused harmony export faFootballBall */
+/* unused harmony export faForward */
+/* unused harmony export faFrog */
+/* unused harmony export faFrown */
+/* unused harmony export faFrownOpen */
+/* unused harmony export faFunnelDollar */
+/* unused harmony export faFutbol */
+/* unused harmony export faGamepad */
+/* unused harmony export faGasPump */
+/* unused harmony export faGavel */
+/* unused harmony export faGem */
+/* unused harmony export faGenderless */
+/* unused harmony export faGhost */
+/* unused harmony export faGift */
+/* unused harmony export faGifts */
+/* unused harmony export faGlassCheers */
+/* unused harmony export faGlassMartini */
+/* unused harmony export faGlassMartiniAlt */
+/* unused harmony export faGlassWhiskey */
+/* unused harmony export faGlasses */
+/* unused harmony export faGlobe */
+/* unused harmony export faGlobeAfrica */
+/* unused harmony export faGlobeAmericas */
+/* unused harmony export faGlobeAsia */
+/* unused harmony export faGlobeEurope */
+/* unused harmony export faGolfBall */
+/* unused harmony export faGopuram */
+/* unused harmony export faGraduationCap */
+/* unused harmony export faGreaterThan */
+/* unused harmony export faGreaterThanEqual */
+/* unused harmony export faGrimace */
+/* unused harmony export faGrin */
+/* unused harmony export faGrinAlt */
+/* unused harmony export faGrinBeam */
+/* unused harmony export faGrinBeamSweat */
+/* unused harmony export faGrinHearts */
+/* unused harmony export faGrinSquint */
+/* unused harmony export faGrinSquintTears */
+/* unused harmony export faGrinStars */
+/* unused harmony export faGrinTears */
+/* unused harmony export faGrinTongue */
+/* unused harmony export faGrinTongueSquint */
+/* unused harmony export faGrinTongueWink */
+/* unused harmony export faGrinWink */
+/* unused harmony export faGripHorizontal */
+/* unused harmony export faGripLines */
+/* unused harmony export faGripLinesVertical */
+/* unused harmony export faGripVertical */
+/* unused harmony export faGuitar */
+/* unused harmony export faHSquare */
+/* unused harmony export faHamburger */
+/* unused harmony export faHammer */
+/* unused harmony export faHamsa */
+/* unused harmony export faHandHolding */
+/* unused harmony export faHandHoldingHeart */
+/* unused harmony export faHandHoldingMedical */
+/* unused harmony export faHandHoldingUsd */
+/* unused harmony export faHandHoldingWater */
+/* unused harmony export faHandLizard */
+/* unused harmony export faHandMiddleFinger */
+/* unused harmony export faHandPaper */
+/* unused harmony export faHandPeace */
+/* unused harmony export faHandPointDown */
+/* unused harmony export faHandPointLeft */
+/* unused harmony export faHandPointRight */
+/* unused harmony export faHandPointUp */
+/* unused harmony export faHandPointer */
+/* unused harmony export faHandRock */
+/* unused harmony export faHandScissors */
+/* unused harmony export faHandSparkles */
+/* unused harmony export faHandSpock */
+/* unused harmony export faHands */
+/* unused harmony export faHandsHelping */
+/* unused harmony export faHandsWash */
+/* unused harmony export faHandshake */
+/* unused harmony export faHandshakeAltSlash */
+/* unused harmony export faHandshakeSlash */
+/* unused harmony export faHanukiah */
+/* unused harmony export faHardHat */
+/* unused harmony export faHashtag */
+/* unused harmony export faHatCowboy */
+/* unused harmony export faHatCowboySide */
+/* unused harmony export faHatWizard */
+/* unused harmony export faHdd */
+/* unused harmony export faHeadSideCough */
+/* unused harmony export faHeadSideCoughSlash */
+/* unused harmony export faHeadSideMask */
+/* unused harmony export faHeadSideVirus */
+/* unused harmony export faHeading */
+/* unused harmony export faHeadphones */
+/* unused harmony export faHeadphonesAlt */
+/* unused harmony export faHeadset */
+/* unused harmony export faHeart */
+/* unused harmony export faHeartBroken */
+/* unused harmony export faHeartbeat */
+/* unused harmony export faHelicopter */
+/* unused harmony export faHighlighter */
+/* unused harmony export faHiking */
+/* unused harmony export faHippo */
+/* unused harmony export faHistory */
+/* unused harmony export faHockeyPuck */
+/* unused harmony export faHollyBerry */
+/* unused harmony export faHome */
+/* unused harmony export faHorse */
+/* unused harmony export faHorseHead */
+/* unused harmony export faHospital */
+/* unused harmony export faHospitalAlt */
+/* unused harmony export faHospitalSymbol */
+/* unused harmony export faHospitalUser */
+/* unused harmony export faHotTub */
+/* unused harmony export faHotdog */
+/* unused harmony export faHotel */
+/* unused harmony export faHourglass */
+/* unused harmony export faHourglassEnd */
+/* unused harmony export faHourglassHalf */
+/* unused harmony export faHourglassStart */
+/* unused harmony export faHouseDamage */
+/* unused harmony export faHouseUser */
+/* unused harmony export faHryvnia */
+/* unused harmony export faICursor */
+/* unused harmony export faIceCream */
+/* unused harmony export faIcicles */
+/* unused harmony export faIcons */
+/* unused harmony export faIdBadge */
+/* unused harmony export faIdCard */
+/* unused harmony export faIdCardAlt */
+/* unused harmony export faIgloo */
+/* unused harmony export faImage */
+/* unused harmony export faImages */
+/* unused harmony export faInbox */
+/* unused harmony export faIndent */
+/* unused harmony export faIndustry */
+/* unused harmony export faInfinity */
+/* unused harmony export faInfo */
+/* unused harmony export faInfoCircle */
+/* unused harmony export faItalic */
+/* unused harmony export faJedi */
+/* unused harmony export faJoint */
+/* unused harmony export faJournalWhills */
+/* unused harmony export faKaaba */
+/* unused harmony export faKey */
+/* unused harmony export faKeyboard */
+/* unused harmony export faKhanda */
+/* unused harmony export faKiss */
+/* unused harmony export faKissBeam */
+/* unused harmony export faKissWinkHeart */
+/* unused harmony export faKiwiBird */
+/* unused harmony export faLandmark */
+/* unused harmony export faLanguage */
+/* unused harmony export faLaptop */
+/* unused harmony export faLaptopCode */
+/* unused harmony export faLaptopHouse */
+/* unused harmony export faLaptopMedical */
+/* unused harmony export faLaugh */
+/* unused harmony export faLaughBeam */
+/* unused harmony export faLaughSquint */
+/* unused harmony export faLaughWink */
+/* unused harmony export faLayerGroup */
+/* unused harmony export faLeaf */
+/* unused harmony export faLemon */
+/* unused harmony export faLessThan */
+/* unused harmony export faLessThanEqual */
+/* unused harmony export faLevelDownAlt */
+/* unused harmony export faLevelUpAlt */
+/* unused harmony export faLifeRing */
+/* unused harmony export faLightbulb */
+/* unused harmony export faLink */
+/* unused harmony export faLiraSign */
+/* unused harmony export faList */
+/* unused harmony export faListAlt */
+/* unused harmony export faListOl */
+/* unused harmony export faListUl */
+/* unused harmony export faLocationArrow */
+/* unused harmony export faLock */
+/* unused harmony export faLockOpen */
+/* unused harmony export faLongArrowAltDown */
+/* unused harmony export faLongArrowAltLeft */
+/* unused harmony export faLongArrowAltRight */
+/* unused harmony export faLongArrowAltUp */
+/* unused harmony export faLowVision */
+/* unused harmony export faLuggageCart */
+/* unused harmony export faLungs */
+/* unused harmony export faLungsVirus */
+/* unused harmony export faMagic */
+/* unused harmony export faMagnet */
+/* unused harmony export faMailBulk */
+/* unused harmony export faMale */
+/* unused harmony export faMap */
+/* unused harmony export faMapMarked */
+/* unused harmony export faMapMarkedAlt */
+/* unused harmony export faMapMarker */
+/* unused harmony export faMapMarkerAlt */
+/* unused harmony export faMapPin */
+/* unused harmony export faMapSigns */
+/* unused harmony export faMarker */
+/* unused harmony export faMars */
+/* unused harmony export faMarsDouble */
+/* unused harmony export faMarsStroke */
+/* unused harmony export faMarsStrokeH */
+/* unused harmony export faMarsStrokeV */
+/* unused harmony export faMask */
+/* unused harmony export faMedal */
+/* unused harmony export faMedkit */
+/* unused harmony export faMeh */
+/* unused harmony export faMehBlank */
+/* unused harmony export faMehRollingEyes */
+/* unused harmony export faMemory */
+/* unused harmony export faMenorah */
+/* unused harmony export faMercury */
+/* unused harmony export faMeteor */
+/* unused harmony export faMicrochip */
+/* unused harmony export faMicrophone */
+/* unused harmony export faMicrophoneAlt */
+/* unused harmony export faMicrophoneAltSlash */
+/* unused harmony export faMicrophoneSlash */
+/* unused harmony export faMicroscope */
+/* unused harmony export faMinus */
+/* unused harmony export faMinusCircle */
+/* unused harmony export faMinusSquare */
+/* unused harmony export faMitten */
+/* unused harmony export faMobile */
+/* unused harmony export faMobileAlt */
+/* unused harmony export faMoneyBill */
+/* unused harmony export faMoneyBillAlt */
+/* unused harmony export faMoneyBillWave */
+/* unused harmony export faMoneyBillWaveAlt */
+/* unused harmony export faMoneyCheck */
+/* unused harmony export faMoneyCheckAlt */
+/* unused harmony export faMonument */
+/* unused harmony export faMoon */
+/* unused harmony export faMortarPestle */
+/* unused harmony export faMosque */
+/* unused harmony export faMotorcycle */
+/* unused harmony export faMountain */
+/* unused harmony export faMouse */
+/* unused harmony export faMousePointer */
+/* unused harmony export faMugHot */
+/* unused harmony export faMusic */
+/* unused harmony export faNetworkWired */
+/* unused harmony export faNeuter */
+/* unused harmony export faNewspaper */
+/* unused harmony export faNotEqual */
+/* unused harmony export faNotesMedical */
+/* unused harmony export faObjectGroup */
+/* unused harmony export faObjectUngroup */
+/* unused harmony export faOilCan */
+/* unused harmony export faOm */
+/* unused harmony export faOtter */
+/* unused harmony export faOutdent */
+/* unused harmony export faPager */
+/* unused harmony export faPaintBrush */
+/* unused harmony export faPaintRoller */
+/* unused harmony export faPalette */
+/* unused harmony export faPallet */
+/* unused harmony export faPaperPlane */
+/* unused harmony export faPaperclip */
+/* unused harmony export faParachuteBox */
+/* unused harmony export faParagraph */
+/* unused harmony export faParking */
+/* unused harmony export faPassport */
+/* unused harmony export faPastafarianism */
+/* unused harmony export faPaste */
+/* unused harmony export faPause */
+/* unused harmony export faPauseCircle */
+/* unused harmony export faPaw */
+/* unused harmony export faPeace */
+/* unused harmony export faPen */
+/* unused harmony export faPenAlt */
+/* unused harmony export faPenFancy */
+/* unused harmony export faPenNib */
+/* unused harmony export faPenSquare */
+/* unused harmony export faPencilAlt */
+/* unused harmony export faPencilRuler */
+/* unused harmony export faPeopleArrows */
+/* unused harmony export faPeopleCarry */
+/* unused harmony export faPepperHot */
+/* unused harmony export faPercent */
+/* unused harmony export faPercentage */
+/* unused harmony export faPersonBooth */
+/* unused harmony export faPhone */
+/* unused harmony export faPhoneAlt */
+/* unused harmony export faPhoneSlash */
+/* unused harmony export faPhoneSquare */
+/* unused harmony export faPhoneSquareAlt */
+/* unused harmony export faPhoneVolume */
+/* unused harmony export faPhotoVideo */
+/* unused harmony export faPiggyBank */
+/* unused harmony export faPills */
+/* unused harmony export faPizzaSlice */
+/* unused harmony export faPlaceOfWorship */
+/* unused harmony export faPlane */
+/* unused harmony export faPlaneArrival */
+/* unused harmony export faPlaneDeparture */
+/* unused harmony export faPlaneSlash */
+/* unused harmony export faPlay */
+/* unused harmony export faPlayCircle */
+/* unused harmony export faPlug */
+/* unused harmony export faPlus */
+/* unused harmony export faPlusCircle */
+/* unused harmony export faPlusSquare */
+/* unused harmony export faPodcast */
+/* unused harmony export faPoll */
+/* unused harmony export faPollH */
+/* unused harmony export faPoo */
+/* unused harmony export faPooStorm */
+/* unused harmony export faPoop */
+/* unused harmony export faPortrait */
+/* unused harmony export faPoundSign */
+/* unused harmony export faPowerOff */
+/* unused harmony export faPray */
+/* unused harmony export faPrayingHands */
+/* unused harmony export faPrescription */
+/* unused harmony export faPrescriptionBottle */
+/* unused harmony export faPrescriptionBottleAlt */
+/* unused harmony export faPrint */
+/* unused harmony export faProcedures */
+/* unused harmony export faProjectDiagram */
+/* unused harmony export faPumpMedical */
+/* unused harmony export faPumpSoap */
+/* unused harmony export faPuzzlePiece */
+/* unused harmony export faQrcode */
+/* unused harmony export faQuestion */
+/* unused harmony export faQuestionCircle */
+/* unused harmony export faQuidditch */
+/* unused harmony export faQuoteLeft */
+/* unused harmony export faQuoteRight */
+/* unused harmony export faQuran */
+/* unused harmony export faRadiation */
+/* unused harmony export faRadiationAlt */
+/* unused harmony export faRainbow */
+/* unused harmony export faRandom */
+/* unused harmony export faReceipt */
+/* unused harmony export faRecordVinyl */
+/* unused harmony export faRecycle */
+/* unused harmony export faRedo */
+/* unused harmony export faRedoAlt */
+/* unused harmony export faRegistered */
+/* unused harmony export faRemoveFormat */
+/* unused harmony export faReply */
+/* unused harmony export faReplyAll */
+/* unused harmony export faRepublican */
+/* unused harmony export faRestroom */
+/* unused harmony export faRetweet */
+/* unused harmony export faRibbon */
+/* unused harmony export faRing */
+/* unused harmony export faRoad */
+/* unused harmony export faRobot */
+/* unused harmony export faRocket */
+/* unused harmony export faRoute */
+/* unused harmony export faRss */
+/* unused harmony export faRssSquare */
+/* unused harmony export faRubleSign */
+/* unused harmony export faRuler */
+/* unused harmony export faRulerCombined */
+/* unused harmony export faRulerHorizontal */
+/* unused harmony export faRulerVertical */
+/* unused harmony export faRunning */
+/* unused harmony export faRupeeSign */
+/* unused harmony export faSadCry */
+/* unused harmony export faSadTear */
+/* unused harmony export faSatellite */
+/* unused harmony export faSatelliteDish */
+/* unused harmony export faSave */
+/* unused harmony export faSchool */
+/* unused harmony export faScrewdriver */
+/* unused harmony export faScroll */
+/* unused harmony export faSdCard */
+/* unused harmony export faSearch */
+/* unused harmony export faSearchDollar */
+/* unused harmony export faSearchLocation */
+/* unused harmony export faSearchMinus */
+/* unused harmony export faSearchPlus */
+/* unused harmony export faSeedling */
+/* unused harmony export faServer */
+/* unused harmony export faShapes */
+/* unused harmony export faShare */
+/* unused harmony export faShareAlt */
+/* unused harmony export faShareAltSquare */
+/* unused harmony export faShareSquare */
+/* unused harmony export faShekelSign */
+/* unused harmony export faShieldAlt */
+/* unused harmony export faShieldVirus */
+/* unused harmony export faShip */
+/* unused harmony export faShippingFast */
+/* unused harmony export faShoePrints */
+/* unused harmony export faShoppingBag */
+/* unused harmony export faShoppingBasket */
+/* unused harmony export faShoppingCart */
+/* unused harmony export faShower */
+/* unused harmony export faShuttleVan */
+/* unused harmony export faSign */
+/* unused harmony export faSignInAlt */
+/* unused harmony export faSignLanguage */
+/* unused harmony export faSignOutAlt */
+/* unused harmony export faSignal */
+/* unused harmony export faSignature */
+/* unused harmony export faSimCard */
+/* unused harmony export faSink */
+/* unused harmony export faSitemap */
+/* unused harmony export faSkating */
+/* unused harmony export faSkiing */
+/* unused harmony export faSkiingNordic */
+/* unused harmony export faSkull */
+/* unused harmony export faSkullCrossbones */
+/* unused harmony export faSlash */
+/* unused harmony export faSleigh */
+/* unused harmony export faSlidersH */
+/* unused harmony export faSmile */
+/* unused harmony export faSmileBeam */
+/* unused harmony export faSmileWink */
+/* unused harmony export faSmog */
+/* unused harmony export faSmoking */
+/* unused harmony export faSmokingBan */
+/* unused harmony export faSms */
+/* unused harmony export faSnowboarding */
+/* unused harmony export faSnowflake */
+/* unused harmony export faSnowman */
+/* unused harmony export faSnowplow */
+/* unused harmony export faSoap */
+/* unused harmony export faSocks */
+/* unused harmony export faSolarPanel */
+/* unused harmony export faSort */
+/* unused harmony export faSortAlphaDown */
+/* unused harmony export faSortAlphaDownAlt */
+/* unused harmony export faSortAlphaUp */
+/* unused harmony export faSortAlphaUpAlt */
+/* unused harmony export faSortAmountDown */
+/* unused harmony export faSortAmountDownAlt */
+/* unused harmony export faSortAmountUp */
+/* unused harmony export faSortAmountUpAlt */
+/* unused harmony export faSortDown */
+/* unused harmony export faSortNumericDown */
+/* unused harmony export faSortNumericDownAlt */
+/* unused harmony export faSortNumericUp */
+/* unused harmony export faSortNumericUpAlt */
+/* unused harmony export faSortUp */
+/* unused harmony export faSpa */
+/* unused harmony export faSpaceShuttle */
+/* unused harmony export faSpellCheck */
+/* unused harmony export faSpider */
+/* unused harmony export faSpinner */
+/* unused harmony export faSplotch */
+/* unused harmony export faSprayCan */
+/* unused harmony export faSquare */
+/* unused harmony export faSquareFull */
+/* unused harmony export faSquareRootAlt */
+/* unused harmony export faStamp */
+/* unused harmony export faStar */
+/* unused harmony export faStarAndCrescent */
+/* unused harmony export faStarHalf */
+/* unused harmony export faStarHalfAlt */
+/* unused harmony export faStarOfDavid */
+/* unused harmony export faStarOfLife */
+/* unused harmony export faStepBackward */
+/* unused harmony export faStepForward */
+/* unused harmony export faStethoscope */
+/* unused harmony export faStickyNote */
+/* unused harmony export faStop */
+/* unused harmony export faStopCircle */
+/* unused harmony export faStopwatch */
+/* unused harmony export faStopwatch20 */
+/* unused harmony export faStore */
+/* unused harmony export faStoreAlt */
+/* unused harmony export faStoreAltSlash */
+/* unused harmony export faStoreSlash */
+/* unused harmony export faStream */
+/* unused harmony export faStreetView */
+/* unused harmony export faStrikethrough */
+/* unused harmony export faStroopwafel */
+/* unused harmony export faSubscript */
+/* unused harmony export faSubway */
+/* unused harmony export faSuitcase */
+/* unused harmony export faSuitcaseRolling */
+/* unused harmony export faSun */
+/* unused harmony export faSuperscript */
+/* unused harmony export faSurprise */
+/* unused harmony export faSwatchbook */
+/* unused harmony export faSwimmer */
+/* unused harmony export faSwimmingPool */
+/* unused harmony export faSynagogue */
+/* unused harmony export faSync */
+/* unused harmony export faSyncAlt */
+/* unused harmony export faSyringe */
+/* unused harmony export faTable */
+/* unused harmony export faTableTennis */
+/* unused harmony export faTablet */
+/* unused harmony export faTabletAlt */
+/* unused harmony export faTablets */
+/* unused harmony export faTachometerAlt */
+/* unused harmony export faTag */
+/* unused harmony export faTags */
+/* unused harmony export faTape */
+/* unused harmony export faTasks */
+/* unused harmony export faTaxi */
+/* unused harmony export faTeeth */
+/* unused harmony export faTeethOpen */
+/* unused harmony export faTemperatureHigh */
+/* unused harmony export faTemperatureLow */
+/* unused harmony export faTenge */
+/* unused harmony export faTerminal */
+/* unused harmony export faTextHeight */
+/* unused harmony export faTextWidth */
+/* unused harmony export faTh */
+/* unused harmony export faThLarge */
+/* unused harmony export faThList */
+/* unused harmony export faTheaterMasks */
+/* unused harmony export faThermometer */
+/* unused harmony export faThermometerEmpty */
+/* unused harmony export faThermometerFull */
+/* unused harmony export faThermometerHalf */
+/* unused harmony export faThermometerQuarter */
+/* unused harmony export faThermometerThreeQuarters */
+/* unused harmony export faThumbsDown */
+/* unused harmony export faThumbsUp */
+/* unused harmony export faThumbtack */
+/* unused harmony export faTicketAlt */
+/* unused harmony export faTimes */
+/* unused harmony export faTimesCircle */
+/* unused harmony export faTint */
+/* unused harmony export faTintSlash */
+/* unused harmony export faTired */
+/* unused harmony export faToggleOff */
+/* unused harmony export faToggleOn */
+/* unused harmony export faToilet */
+/* unused harmony export faToiletPaper */
+/* unused harmony export faToiletPaperSlash */
+/* unused harmony export faToolbox */
+/* unused harmony export faTools */
+/* unused harmony export faTooth */
+/* unused harmony export faTorah */
+/* unused harmony export faToriiGate */
+/* unused harmony export faTractor */
+/* unused harmony export faTrademark */
+/* unused harmony export faTrafficLight */
+/* unused harmony export faTrailer */
+/* unused harmony export faTrain */
+/* unused harmony export faTram */
+/* unused harmony export faTransgender */
+/* unused harmony export faTransgenderAlt */
+/* unused harmony export faTrash */
+/* unused harmony export faTrashAlt */
+/* unused harmony export faTrashRestore */
+/* unused harmony export faTrashRestoreAlt */
+/* unused harmony export faTree */
+/* unused harmony export faTrophy */
+/* unused harmony export faTruck */
+/* unused harmony export faTruckLoading */
+/* unused harmony export faTruckMonster */
+/* unused harmony export faTruckMoving */
+/* unused harmony export faTruckPickup */
+/* unused harmony export faTshirt */
+/* unused harmony export faTty */
+/* unused harmony export faTv */
+/* unused harmony export faUmbrella */
+/* unused harmony export faUmbrellaBeach */
+/* unused harmony export faUnderline */
+/* unused harmony export faUndo */
+/* unused harmony export faUndoAlt */
+/* unused harmony export faUniversalAccess */
+/* unused harmony export faUniversity */
+/* unused harmony export faUnlink */
+/* unused harmony export faUnlock */
+/* unused harmony export faUnlockAlt */
+/* unused harmony export faUpload */
+/* unused harmony export faUser */
+/* unused harmony export faUserAlt */
+/* unused harmony export faUserAltSlash */
+/* unused harmony export faUserAstronaut */
+/* unused harmony export faUserCheck */
+/* unused harmony export faUserCircle */
+/* unused harmony export faUserClock */
+/* unused harmony export faUserCog */
+/* unused harmony export faUserEdit */
+/* unused harmony export faUserFriends */
+/* unused harmony export faUserGraduate */
+/* unused harmony export faUserInjured */
+/* unused harmony export faUserLock */
+/* unused harmony export faUserMd */
+/* unused harmony export faUserMinus */
+/* unused harmony export faUserNinja */
+/* unused harmony export faUserNurse */
+/* unused harmony export faUserPlus */
+/* unused harmony export faUserSecret */
+/* unused harmony export faUserShield */
+/* unused harmony export faUserSlash */
+/* unused harmony export faUserTag */
+/* unused harmony export faUserTie */
+/* unused harmony export faUserTimes */
+/* unused harmony export faUsers */
+/* unused harmony export faUsersCog */
+/* unused harmony export faUsersSlash */
+/* unused harmony export faUtensilSpoon */
+/* unused harmony export faUtensils */
+/* unused harmony export faVectorSquare */
+/* unused harmony export faVenus */
+/* unused harmony export faVenusDouble */
+/* unused harmony export faVenusMars */
+/* unused harmony export faVest */
+/* unused harmony export faVestPatches */
+/* unused harmony export faVial */
+/* unused harmony export faVials */
+/* unused harmony export faVideo */
+/* unused harmony export faVideoSlash */
+/* unused harmony export faVihara */
+/* unused harmony export faVirus */
+/* unused harmony export faVirusSlash */
+/* unused harmony export faViruses */
+/* unused harmony export faVoicemail */
+/* unused harmony export faVolleyballBall */
+/* unused harmony export faVolumeDown */
+/* unused harmony export faVolumeMute */
+/* unused harmony export faVolumeOff */
+/* unused harmony export faVolumeUp */
+/* unused harmony export faVoteYea */
+/* unused harmony export faVrCardboard */
+/* unused harmony export faWalking */
+/* unused harmony export faWallet */
+/* unused harmony export faWarehouse */
+/* unused harmony export faWater */
+/* unused harmony export faWaveSquare */
+/* unused harmony export faWeight */
+/* unused harmony export faWeightHanging */
+/* unused harmony export faWheelchair */
+/* unused harmony export faWifi */
+/* unused harmony export faWind */
+/* unused harmony export faWindowClose */
+/* unused harmony export faWindowMaximize */
+/* unused harmony export faWindowMinimize */
+/* unused harmony export faWindowRestore */
+/* unused harmony export faWineBottle */
+/* unused harmony export faWineGlass */
+/* unused harmony export faWineGlassAlt */
+/* unused harmony export faWonSign */
+/* unused harmony export faWrench */
+/* unused harmony export faXRay */
+/* unused harmony export faYenSign */
+/* unused harmony export faYinYang */
 /*!
  * Font Awesome Free 5.15.2 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -10289,2034 +13393,6 @@ var _iconsCache = {
 
 
 
-// EXTERNAL MODULE: ./src/domain/model/Sticky.ts
-var Sticky = __webpack_require__("e920");
-
-// EXTERNAL MODULE: ./src/domain/model/StickyTo.ts
-var StickyTo = __webpack_require__("1d16");
-
-// EXTERNAL MODULE: ./src/domain/model/SizeTypes.ts
-var SizeTypes = __webpack_require__("9338");
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/Block.vue?vue&type=script&lang=ts&
-
-
-
-
-
-
-
-
-// eslint-disable-next-line no-unused-vars
-
-
-
-
-
-
-
-
-
-var Vue = external_commonjs_vue_commonjs2_vue_root_Vue_default.a;
-fontawesome_svg_core_index_es["c" /* library */].add(faAngleDown, faChevronRight, faChevronLeft);
-/* harmony default export */ var Blockvue_type_script_lang_ts_ = (Vue.extend({
-  name: 'block',
-  components: {
-    FontAwesomeIcon: index_es["a" /* FontAwesomeIcon */]
-  },
-  props: {
-    block: {
-      type: BlockDTO["a" /* default */]
-    },
-    step: {
-      type: Number
-    },
-    showHidden: {
-      type: Boolean,
-      default: false
-    }
-  },
-  inject: ['getStore'],
-  data: function data() {
-    return {
-      blockManager: undefined,
-      isResizing: false,
-      isDragging: false,
-      currentPosition: {
-        left: 0,
-        top: 0,
-        right: 0,
-        bottom: 0
-      },
-      parentBlock: undefined,
-      parentElement: undefined,
-      ctrlPressed: false,
-      activeTabGuid: undefined,
-      tabsOffset: 0,
-      blockWidth: 0,
-      tabsWidth: 0,
-      isShowArrows: false
-    };
-  },
-  watch: {
-    'block.sticky': {
-      handler: function handler(value) {
-        var _this$block$stickyTo,
-            _map,
-            _this = this;
-
-        if (!value) {
-          return;
-        }
-
-        var parent = this.$el.parentElement;
-
-        if (!parent) {
-          return;
-        }
-
-        if ((_this$block$stickyTo = this.block.stickyTo) !== null && _this$block$stickyTo !== void 0 && _this$block$stickyTo.guid && value !== Sticky["a" /* Sticky */].TL) {
-          this.block.stickyTo.guid = undefined;
-        }
-
-        var map = (_map = {}, Object(defineProperty["a" /* default */])(_map, Sticky["a" /* Sticky */].TL, ['top', 'left']), Object(defineProperty["a" /* default */])(_map, Sticky["a" /* Sticky */].TR, ['top', 'right']), Object(defineProperty["a" /* default */])(_map, Sticky["a" /* Sticky */].BL, ['bottom', 'left']), Object(defineProperty["a" /* default */])(_map, Sticky["a" /* Sticky */].BR, ['bottom', 'right']), _map);
-        var parentSizesMap = {
-          top: 'offsetHeight',
-          left: 'offsetWidth',
-          bottom: 'offsetHeight',
-          right: 'offsetWidth'
-        };
-        var positions = map[value];
-        positions.forEach(function (position) {
-          _this.block[position] = _this.block.sizeTypes[position] === SizeTypes["a" /* SizeTypes */].PERCENT ? Math.round(_this.currentPosition[position] / (parent[parentSizesMap[position]] / 100)) : Math.round(_this.currentPosition[position]);
-        });
-      }
-    },
-    'block.stickyTo.guid': {
-      handler: function handler(value, oldValue) {
-        var _this$block$stickyTo4, _this$block$stickyTo5, _this$block$stickyTo6, _this$block$stickyTo7;
-
-        if (!this.$el.parentElement) {
-          return;
-        }
-
-        if (oldValue && !value) {
-          var _this$block$stickyTo2, _this$block$stickyTo3;
-
-          var _el = this.getStore().getRefByGuid(oldValue);
-
-          if (((_this$block$stickyTo2 = this.block.stickyTo) === null || _this$block$stickyTo2 === void 0 ? void 0 : _this$block$stickyTo2.type) === StickyTo["a" /* StickyToType */].TOP) {
-            var difference = _el.$el.offsetTop + _el.$el.offsetHeight;
-
-            if (this.block.sizeTypes.top === SizeTypes["a" /* SizeTypes */].PERCENT) {
-              difference = difference / (this.$el.parentElement.offsetHeight / 100);
-            }
-
-            this.block.top = Math.round((this.block.top || 0) + difference);
-          } else if (((_this$block$stickyTo3 = this.block.stickyTo) === null || _this$block$stickyTo3 === void 0 ? void 0 : _this$block$stickyTo3.type) === StickyTo["a" /* StickyToType */].LEFT) {
-            var _difference = _el.$el.offsetLeft + _el.$el.offsetWidth;
-
-            if (this.block.sizeTypes.left === SizeTypes["a" /* SizeTypes */].PERCENT) {
-              _difference = _difference / (this.$el.parentElement.offsetWidth / 100);
-            }
-
-            this.block.left = Math.round((this.block.left || 0) + _difference);
-          }
-
-          return;
-        }
-
-        if (!value || !((_this$block$stickyTo4 = this.block.stickyTo) !== null && _this$block$stickyTo4 !== void 0 && _this$block$stickyTo4.guid)) {
-          return;
-        }
-
-        var el = this.getStore().getRefByGuid((_this$block$stickyTo5 = this.block.stickyTo) === null || _this$block$stickyTo5 === void 0 ? void 0 : _this$block$stickyTo5.guid);
-
-        if (((_this$block$stickyTo6 = this.block.stickyTo) === null || _this$block$stickyTo6 === void 0 ? void 0 : _this$block$stickyTo6.type) === StickyTo["a" /* StickyToType */].TOP) {
-          var _difference2 = el.$el.offsetTop + el.$el.offsetHeight;
-
-          if (this.block.sizeTypes.top === SizeTypes["a" /* SizeTypes */].PERCENT) {
-            _difference2 = _difference2 / (this.$el.parentElement.offsetHeight / 100);
-          }
-
-          this.block.top = Math.round((this.block.top || 0) - _difference2);
-        } else if (((_this$block$stickyTo7 = this.block.stickyTo) === null || _this$block$stickyTo7 === void 0 ? void 0 : _this$block$stickyTo7.type) === StickyTo["a" /* StickyToType */].LEFT) {
-          var _difference3 = el.$el.offsetLeft + el.$el.offsetWidth;
-
-          if (this.block.sizeTypes.left === SizeTypes["a" /* SizeTypes */].PERCENT) {
-            _difference3 = _difference3 / (this.$el.parentElement.offsetWidth / 100);
-          }
-
-          this.block.left = Math.round((this.block.left || 0) - _difference3);
-        }
-      }
-    },
-    activeTabGuid: function activeTabGuid(guid) {
-      this.getStore().setActiveTab(this.block.guid, guid);
-    },
-    'block.tabs.list': {
-      handler: function handler() {
-        var _this2 = this,
-            _this$block$tabs;
-
-        if (this.isTabsContainer) {
-          setTimeout(function () {
-            _this2.setIsShowArrows();
-          }, 0);
-        }
-
-        if (!((_this$block$tabs = this.block.tabs) !== null && _this$block$tabs !== void 0 && _this$block$tabs.list.find(function (item) {
-          return item.guid === _this2.activeTabGuid;
-        }))) {
-          var _this$block$tabs2, _this$block$tabs2$lis;
-
-          if ((_this$block$tabs2 = this.block.tabs) !== null && _this$block$tabs2 !== void 0 && (_this$block$tabs2$lis = _this$block$tabs2.list[0]) !== null && _this$block$tabs2$lis !== void 0 && _this$block$tabs2$lis.guid) {
-            this.onTabClick(this.block.tabs.list[0].guid);
-          }
-        }
-      },
-      deep: true
-    },
-    'block.sizeTypes.width': {
-      handler: function handler(value, old) {
-        if (value === old || !value) {
-          return;
-        }
-
-        if (!this.$el.parentElement) {
-          return;
-        }
-
-        var parentSize = this.$el.parentElement.offsetWidth;
-        var oldValue = this.block.width;
-        this.block.width = this.calcSwitchedSizes(value, parentSize, oldValue);
-      },
-      deep: true
-    },
-    'block.sizeTypes.height': {
-      handler: function handler(value, old) {
-        if (value === old || !value) {
-          return;
-        }
-
-        if (!this.$el.parentElement) {
-          return;
-        }
-
-        var parentSize = this.$el.parentElement.offsetHeight;
-        var oldValue = this.block.height;
-        this.block.height = this.calcSwitchedSizes(value, parentSize, oldValue);
-      },
-      deep: true
-    },
-    'block.sizeTypes.top': {
-      handler: function handler(value, old) {
-        if (value === old || !value) {
-          return;
-        }
-
-        if (!this.$el.parentElement) {
-          return;
-        }
-
-        var parentSize = this.$el.parentElement.offsetHeight;
-        var oldValue = this.block.top;
-
-        if (!oldValue) {
-          return;
-        }
-
-        this.block.top = this.calcSwitchedSizes(value, parentSize, oldValue);
-      },
-      deep: true
-    },
-    'block.sizeTypes.left': {
-      handler: function handler(value, old) {
-        if (value === old || !value) {
-          return;
-        }
-
-        if (!this.$el.parentElement) {
-          return;
-        }
-
-        var parentSize = this.$el.parentElement.offsetWidth;
-        var oldValue = this.block.left;
-
-        if (!oldValue) {
-          return;
-        }
-
-        this.block.left = this.calcSwitchedSizes(value, parentSize, oldValue);
-      },
-      deep: true
-    },
-    'block.sizeTypes.right': {
-      handler: function handler(value, old) {
-        if (value === old || !value) {
-          return;
-        }
-
-        if (!this.$el.parentElement) {
-          return;
-        }
-
-        var parentSize = this.$el.parentElement.offsetWidth;
-        var oldValue = this.block.right;
-
-        if (!oldValue) {
-          return;
-        }
-
-        this.block.right = this.calcSwitchedSizes(value, parentSize, oldValue);
-      },
-      deep: true
-    },
-    'block.sizeTypes.bottom': {
-      handler: function handler(value, old) {
-        if (value === old || !value) {
-          return;
-        }
-
-        if (!this.$el.parentElement) {
-          return;
-        }
-
-        var parentSize = this.$el.parentElement.offsetHeight;
-        var oldValue = this.block.bottom;
-
-        if (!oldValue) {
-          return;
-        }
-
-        this.block.bottom = this.calcSwitchedSizes(value, parentSize, oldValue);
-      },
-      deep: true
-    },
-    // isTabsContainer: {
-    //   handler (val) {
-    //     console.log(val)
-    //   }
-    // }
-    'block.width': {
-      handler: function handler(val) {
-        if (this.isTabsContainer) {
-          this.setIsShowArrows();
-        }
-      } // immediate: true
-
-    } // tabsWidth: {
-    //   handler (val) {
-    //     console.log(val)
-    //   }
-    // }
-
-  },
-  computed: {
-    stickyLines: function stickyLines() {
-      return this.getStore().getStickyLines(this.block.guid);
-    },
-    zIndex: function zIndex() {
-      var _this$block$tabs4;
-
-      var startIndex = 101;
-
-      if (!this.block.parentGuid) {
-        var _this$block$tabs3;
-
-        return startIndex + ((_this$block$tabs3 = this.block.tabs) !== null && _this$block$tabs3 !== void 0 && _this$block$tabs3.use ? 1 : 0);
-      }
-
-      var parentRef = this.getStore().getRefByGuid(this.block.parentGuid);
-
-      if (!parentRef) {
-        return startIndex;
-      }
-
-      return parentRef.zIndex + 1 + ((_this$block$tabs4 = this.block.tabs) !== null && _this$block$tabs4 !== void 0 && _this$block$tabs4.use ? 1 : 0);
-    },
-    isTabsContainer: function isTabsContainer() {
-      var _this$block$tabs5;
-
-      return ((_this$block$tabs5 = this.block.tabs) === null || _this$block$tabs5 === void 0 ? void 0 : _this$block$tabs5.use) || false;
-    },
-    positionStyle: function positionStyle() {
-      var _this$block$stickyTo10, _this$block$stickyTo11;
-
-      var position = {};
-
-      switch (this.block.sticky) {
-        case Sticky["a" /* Sticky */].TL:
-          position = {
-            top: this.block.top + this.block.sizeTypes.top,
-            left: this.block.left + this.block.sizeTypes.left
-          };
-          break;
-
-        case Sticky["a" /* Sticky */].TR:
-          position = {
-            top: this.block.top + this.block.sizeTypes.top,
-            right: this.block.right + this.block.sizeTypes.right
-          };
-          break;
-
-        case Sticky["a" /* Sticky */].BL:
-          position = {
-            bottom: this.block.bottom + this.block.sizeTypes.bottom,
-            left: this.block.left + this.block.sizeTypes.left
-          };
-          break;
-
-        case Sticky["a" /* Sticky */].BR:
-          position = {
-            bottom: this.block.bottom + this.block.sizeTypes.bottom,
-            right: this.block.right + this.block.sizeTypes.right
-          };
-          break;
-
-        default:
-          position = {
-            top: this.block.top + this.block.sizeTypes.top,
-            left: this.block.left + this.block.sizeTypes.left
-          };
-          break;
-      }
-
-      if (this.block.isHidden && !this.showHidden) {
-        var _this$block$stickyTo8, _this$block$stickyTo9;
-
-        if ((_this$block$stickyTo8 = this.block.stickyTo) !== null && _this$block$stickyTo8 !== void 0 && _this$block$stickyTo8.guid && (_this$block$stickyTo9 = this.block.stickyTo) !== null && _this$block$stickyTo9 !== void 0 && _this$block$stickyTo9.type) {
-          if (this.block.stickyTo.type === StickyTo["a" /* StickyToType */].TOP) {
-            position.top = '0px';
-          } else if (this.block.stickyTo.type === StickyTo["a" /* StickyToType */].LEFT) {
-            position.left = '0px';
-          }
-        }
-      }
-
-      if ((_this$block$stickyTo10 = this.block.stickyTo) !== null && _this$block$stickyTo10 !== void 0 && _this$block$stickyTo10.guid && (_this$block$stickyTo11 = this.block.stickyTo) !== null && _this$block$stickyTo11 !== void 0 && _this$block$stickyTo11.type) {
-        var stickyToBlock = this.getStore().getByGuid(this.block.stickyTo.guid);
-        var stickyToElement = this.getStore().getRefByGuid(this.block.stickyTo.guid);
-
-        if (stickyToBlock && stickyToBlock.parentGuid === this.block.parentGuid && stickyToElement) {
-          switch (this.block.stickyTo.type) {
-            case StickyTo["a" /* StickyToType */].TOP:
-              position.top = "calc(".concat(stickyToElement.positionStyle.height, " + ").concat(stickyToElement.positionStyle.top, " + ").concat(position.top, ")");
-              break;
-
-            case StickyTo["a" /* StickyToType */].LEFT:
-              position.left = "calc(".concat(stickyToElement.positionStyle.width, " + ").concat(stickyToElement.positionStyle.left, " + ").concat(position.left, ")");
-              break;
-          }
-        }
-      }
-
-      var width = this.block.width + this.block.sizeTypes.width;
-      var height = this.block.height + this.block.sizeTypes.height;
-
-      if (this.block.widthCalc && this.block.widthCalc.type && this.block.widthCalc.value) {
-        width = "calc(".concat(width, " ").concat(this.block.widthCalc.type, " ").concat(this.block.widthCalc.value, "px)");
-      }
-
-      if (this.block.heightCalc && this.block.heightCalc.type && this.block.heightCalc.value) {
-        height = "calc(".concat(height, " ").concat(this.block.heightCalc.type, " ").concat(this.block.heightCalc.value, "px)");
-      }
-
-      if (this.block.isHidden && !this.showHidden) {
-        width = '0px';
-        height = '0px';
-      }
-
-      return Object.assign(position, {
-        width: width,
-        height: height,
-        zIndex: this.zIndex
-      });
-    }
-  },
-  mounted: function mounted() {
-    var _this$block,
-        _this$block$tabs6,
-        _this$block2,
-        _this$block2$tabs,
-        _this$block2$tabs$lis,
-        _this3 = this;
-
-    if ((_this$block = this.block) !== null && _this$block !== void 0 && (_this$block$tabs6 = _this$block.tabs) !== null && _this$block$tabs6 !== void 0 && _this$block$tabs6.use && ((_this$block2 = this.block) === null || _this$block2 === void 0 ? void 0 : (_this$block2$tabs = _this$block2.tabs) === null || _this$block2$tabs === void 0 ? void 0 : (_this$block2$tabs$lis = _this$block2$tabs.list) === null || _this$block2$tabs$lis === void 0 ? void 0 : _this$block2$tabs$lis.length) > 0) {
-      this.activeTabGuid = this.block.tabs.list[0].guid;
-    }
-
-    this.getStore().addRef(this.block.guid, this);
-    this.$nextTick(function () {
-      _this3.onDrag();
-
-      if (_this3.isTabsContainer) {
-        _this3.setIsShowArrows();
-      }
-    });
-  },
-  beforeDestroy: function beforeDestroy() {
-    this.getStore().removeRef(this.block.guid);
-  },
-  methods: {
-    setIsShowArrows: function setIsShowArrows() {
-      var tabsScroll = this.$refs.tabsScroll;
-      var draggableContainer = this.$refs.draggableContainer;
-      var tabsWidth = tabsScroll.offsetWidth;
-      this.tabsWidth = tabsScroll.offsetWidth;
-      var blockWidth = draggableContainer.offsetWidth;
-      this.blockWidth = draggableContainer.offsetWidth;
-
-      if (tabsWidth > blockWidth) {
-        this.isShowArrows = true;
-      } else {
-        this.isShowArrows = false;
-        tabsScroll.style.transform = "translateX(-".concat(0, "px)");
-      }
-    },
-    calcSwitchedSizes: function calcSwitchedSizes(type, parentSize, oldValue) {
-      if (type === SizeTypes["a" /* SizeTypes */].PIXEL) {
-        return Math.round(parentSize / 100 * oldValue);
-      } else {
-        return Math.round(oldValue / (parentSize / 100));
-      }
-    },
-    onTabClick: function onTabClick(guid) {
-      this.activeTabGuid = guid;
-    },
-    onDrag: function onDrag() {
-      var el = this.$refs.draggableContainer;
-      this.currentPosition.left = el.offsetLeft;
-      this.currentPosition.top = el.offsetTop;
-
-      if (el.parentElement) {
-        var _el$parentElement, _el$parentElement2;
-
-        this.currentPosition.bottom = ((_el$parentElement = el.parentElement) === null || _el$parentElement === void 0 ? void 0 : _el$parentElement.offsetHeight) - el.offsetTop - el.offsetHeight;
-        this.currentPosition.right = ((_el$parentElement2 = el.parentElement) === null || _el$parentElement2 === void 0 ? void 0 : _el$parentElement2.offsetWidth) - el.offsetLeft - el.offsetWidth;
-      }
-      /* if (this.block.stickyTo?.guid) {
-        this.currentPosition.top =
-      } */
-
-    },
-    getBlockManager: function getBlockManager() {
-      if (typeof this.blockManager === 'undefined') {
-        this.blockManager = new BlockManager["a" /* default */](this.block, this.getStore(), this.$refs.draggableContainer, this.step);
-      }
-
-      return this.blockManager;
-    },
-    resizeStart: function resizeStart(event) {
-      event.preventDefault();
-      this.$emit('start-drag', this.block);
-      this.getBlockManager().startDrag(event, 'resize');
-      this.isResizing = true;
-      document.addEventListener('mousemove', this.elementDrag);
-      document.addEventListener('mouseup', this.dragStop);
-    },
-    dragStart: function dragStart(event) {
-      var isInteractive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-      if (this.block.isEditing) {
-        return;
-      }
-
-      event.preventDefault();
-      this.$emit('start-drag', this.block);
-      this.getBlockManager().startDrag(event, 'drag', isInteractive);
-      this.isDragging = true;
-      document.addEventListener('mousemove', this.elementDrag);
-      document.addEventListener('mouseup', this.dragStop);
-      document.addEventListener('keydown', this.keyDown);
-      document.addEventListener('keyup', this.keyUp);
-    },
-    elementDrag: function elementDrag(event) {
-      var _this4 = this;
-
-      event.preventDefault();
-      this.$emit('dragging', this.block);
-      /* if (this.ctrlPressed) {
-        if (this.block.parentGuid) {
-          this.getBlockManager().changeParent()
-        }
-      } */
-
-      this.getBlockManager().change(event);
-
-      if (this.isDragging) {
-        this.$nextTick(function () {
-          _this4.onDrag();
-        });
-      }
-    },
-    keyDown: function keyDown(event) {
-      if (event.ctrlKey) {
-        this.ctrlPressed = true;
-      }
-    },
-    keyUp: function keyUp(event) {
-      if (event.key === 'Control') {
-        this.ctrlPressed = false;
-      }
-    },
-    dragStop: function dragStop() {
-      this.$emit('stop-drag', this.block);
-      this.isResizing = false;
-      this.isDragging = false;
-      this.ctrlPressed = false;
-      document.removeEventListener('mousemove', this.elementDrag);
-      document.removeEventListener('mouseup', this.dragStop);
-      document.removeEventListener('keydown', this.keyDown);
-      document.removeEventListener('keyup', this.keyUp);
-    },
-    getNextTab: function getNextTab() {
-      var _this$block$tabs7,
-          _this5 = this,
-          _this$block$tabs8;
-
-      var findTabIndex = (_this$block$tabs7 = this.block.tabs) === null || _this$block$tabs7 === void 0 ? void 0 : _this$block$tabs7.list.findIndex(function (item) {
-        return item.guid === _this5.activeTabGuid;
-      });
-
-      if (typeof findTabIndex === 'number' && (_this$block$tabs8 = this.block.tabs) !== null && _this$block$tabs8 !== void 0 && _this$block$tabs8.list[findTabIndex + 1]) {
-        return this.block.tabs.list[findTabIndex + 1].guid;
-      }
-
-      return '';
-    },
-    getPrevTab: function getPrevTab() {
-      var _this$block$tabs9,
-          _this6 = this,
-          _this$block$tabs10;
-
-      var findTabIndex = (_this$block$tabs9 = this.block.tabs) === null || _this$block$tabs9 === void 0 ? void 0 : _this$block$tabs9.list.findIndex(function (item) {
-        return item.guid === _this6.activeTabGuid;
-      });
-
-      if (typeof findTabIndex === 'number' && (_this$block$tabs10 = this.block.tabs) !== null && _this$block$tabs10 !== void 0 && _this$block$tabs10.list[findTabIndex - 1]) {
-        return this.block.tabs.list[findTabIndex - 1].guid;
-      }
-
-      return '';
-    },
-    scrollPrevTab: function scrollPrevTab() {
-      var tabsScroll = this.$refs.tabsScroll;
-      var draggableContainer = this.$refs.draggableContainer;
-      var blockWidth = draggableContainer.offsetWidth;
-      this.blockWidth = draggableContainer.offsetWidth;
-      this.tabsOffset -= blockWidth / 2;
-
-      if (this.tabsOffset < 0) {
-        this.tabsOffset = 0; // return
-      }
-
-      tabsScroll.style.transform = "translateX(-".concat(this.tabsOffset, "px)");
-    },
-    scrollNextTab: function scrollNextTab() {
-      var tabsScroll = this.$refs.tabsScroll;
-      var draggableContainer = this.$refs.draggableContainer;
-      var tabsWidth = tabsScroll.offsetWidth;
-      var blockWidth = draggableContainer.offsetWidth;
-      this.blockWidth = draggableContainer.offsetWidth;
-      if (tabsWidth - blockWidth < this.tabsOffset) return;
-      this.tabsOffset += blockWidth / 1.5;
-      tabsScroll.style.transform = "translateX(-".concat(this.tabsOffset, "px)");
-    }
-  }
-}));
-// CONCATENATED MODULE: ./src/infrastructure/components/Block.vue?vue&type=script&lang=ts&
- /* harmony default export */ var components_Blockvue_type_script_lang_ts_ = (Blockvue_type_script_lang_ts_); 
-// EXTERNAL MODULE: ./src/infrastructure/components/Block.vue?vue&type=style&index=0&id=e4e53236&scoped=true&lang=css&
-var Blockvue_type_style_index_0_id_e4e53236_scoped_true_lang_css_ = __webpack_require__("f074");
-
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__("2877");
-
-// CONCATENATED MODULE: ./src/infrastructure/components/Block.vue
-
-
-
-
-
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  components_Blockvue_type_script_lang_ts_,
-  Blockvue_type_template_id_e4e53236_scoped_true_render,
-  Blockvue_type_template_id_e4e53236_scoped_true_staticRenderFns,
-  false,
-  null,
-  "e4e53236",
-  null
-  
-)
-
-/* harmony default export */ var Block = (component.exports);
-// CONCATENATED MODULE: ./src/domain/model/AddBlockType.ts
-var AddBlockType;
-
-(function (AddBlockType) {
-  AddBlockType[AddBlockType["DEFAULT"] = 0] = "DEFAULT";
-  AddBlockType[AddBlockType["INTERACTIVE"] = 1] = "INTERACTIVE";
-})(AddBlockType || (AddBlockType = {}));
-// EXTERNAL MODULE: ./src/infrastructure/domain/repository/BlockRepository.ts + 1 modules
-var BlockRepository = __webpack_require__("42eb");
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/index.vue?vue&type=script&lang=ts&
-
-
-
- // eslint-disable-next-line no-unused-vars
-
-
-
-
-
-
-var lib_vue_loader_options_srcvue_type_script_lang_ts_Vue = external_commonjs_vue_commonjs2_vue_root_Vue_default.a;
-/* harmony default export */ var lib_vue_loader_options_srcvue_type_script_lang_ts_ = (lib_vue_loader_options_srcvue_type_script_lang_ts_Vue.extend({
-  name: 'VueDraggableResponsiveDesigner',
-  components: {
-    Block: Block
-  },
-  props: {
-    step: {
-      type: Number,
-      default: 0.5
-    },
-    blocks: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
-    },
-    showHidden: {
-      type: Boolean,
-      default: false
-    }
-  },
-  provide: function provide() {
-    return {
-      getStore: this.getStore
-    };
-  },
-  data: function data() {
-    return {
-      store: new BlockRepository["a" /* default */](),
-      blocksArray: this.blocks
-    };
-  },
-  methods: {
-    getAllBlockRefs: function getAllBlockRefs() {
-      var answer = {};
-      this.getRefs(this._blocks, this, answer);
-      return answer;
-    },
-    getRefs: function getRefs(blocks, context, object) {
-      var _this = this;
-
-      blocks.forEach(function (item) {
-        var _item$children;
-
-        var refs = context.$refs[item.guid];
-        var block = refs[0];
-        object[item.guid] = block;
-
-        if (((_item$children = item.children) === null || _item$children === void 0 ? void 0 : _item$children.length) > 0) {
-          _this.getRefs(item.children, block, object);
-        }
-      });
-    },
-    setActiveBlock: function setActiveBlock(guid) {
-      this.store.setActiveBlock(guid);
-    },
-    clearActiveBlock: function clearActiveBlock() {
-      this.store.resetActiveBlock();
-    },
-    getStore: function getStore() {
-      return this.store;
-    },
-    getBlocks: function getBlocks() {
-      return this.store.get();
-    },
-    setBlocks: function setBlocks(blocks) {
-      this.store.set(blocks);
-    },
-    getMousePosition: function getMousePosition(event, sizeTypes) {
-      console.log(this.$el);
-      var elPosition = this.$el.getBoundingClientRect();
-      var top = sizeTypes.top === SizeTypes["a" /* SizeTypes */].PIXEL ? event.clientY - elPosition.top : (event.clientY - elPosition.top) / (elPosition.height / 100) - 2;
-      var left = sizeTypes.left === SizeTypes["a" /* SizeTypes */].PIXEL ? event.clientX - elPosition.left : (event.clientX - elPosition.left) / (elPosition.width / 100) - 2;
-      var right = sizeTypes.left === SizeTypes["a" /* SizeTypes */].PIXEL ? elPosition.width - event.clientX + elPosition.left : 100 - (event.clientX / (elPosition.width / 100) + 2);
-      var bottom = sizeTypes.top === SizeTypes["a" /* SizeTypes */].PIXEL ? elPosition.height - event.clientY + elPosition.top : 100 - (event.clientY / (elPosition.height / 100) + 2);
-      return {
-        top: Math.floor(top),
-        right: Math.floor(right),
-        bottom: Math.floor(bottom),
-        left: Math.floor(left)
-      };
-    },
-    addBlock: function addBlock(_ref) {
-      var _this2 = this;
-
-      var _ref$width = _ref.width,
-          width = _ref$width === void 0 ? 0 : _ref$width,
-          _ref$height = _ref.height,
-          height = _ref$height === void 0 ? 0 : _ref$height,
-          _ref$top = _ref.top,
-          top = _ref$top === void 0 ? undefined : _ref$top,
-          _ref$right = _ref.right,
-          right = _ref$right === void 0 ? undefined : _ref$right,
-          _ref$bottom = _ref.bottom,
-          bottom = _ref$bottom === void 0 ? undefined : _ref$bottom,
-          _ref$left = _ref.left,
-          left = _ref$left === void 0 ? undefined : _ref$left,
-          _ref$sticky = _ref.sticky,
-          sticky = _ref$sticky === void 0 ? Sticky["a" /* Sticky */].TL : _ref$sticky,
-          _ref$stickyTo = _ref.stickyTo,
-          stickyTo = _ref$stickyTo === void 0 ? undefined : _ref$stickyTo,
-          _ref$parentGuid = _ref.parentGuid,
-          parentGuid = _ref$parentGuid === void 0 ? undefined : _ref$parentGuid,
-          _ref$sizeTypes = _ref.sizeTypes,
-          sizeTypes = _ref$sizeTypes === void 0 ? {
-        width: SizeTypes["a" /* SizeTypes */].PERCENT,
-        height: SizeTypes["a" /* SizeTypes */].PERCENT,
-        top: SizeTypes["a" /* SizeTypes */].PERCENT,
-        right: SizeTypes["a" /* SizeTypes */].PERCENT,
-        bottom: SizeTypes["a" /* SizeTypes */].PERCENT,
-        left: SizeTypes["a" /* SizeTypes */].PERCENT
-      } : _ref$sizeTypes,
-          _ref$event = _ref.event,
-          event = _ref$event === void 0 ? undefined : _ref$event,
-          _ref$type = _ref.type,
-          type = _ref$type === void 0 ? AddBlockType.DEFAULT : _ref$type,
-          _ref$isStretched = _ref.isStretched,
-          isStretched = _ref$isStretched === void 0 ? false : _ref$isStretched,
-          _ref$tabs = _ref.tabs,
-          tabs = _ref$tabs === void 0 ? undefined : _ref$tabs,
-          _ref$replication = _ref.replication,
-          replication = _ref$replication === void 0 ? undefined : _ref$replication;
-
-      if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
-        var position = this.getMousePosition(event, sizeTypes);
-        top = position.top;
-        right = position.right;
-        bottom = position.bottom;
-        left = position.left;
-      }
-
-      var guid = this.store.add({
-        width: width,
-        height: height,
-        top: top,
-        right: right,
-        bottom: bottom,
-        left: left,
-        sticky: sticky,
-        stickyTo: stickyTo,
-        parentGuid: parentGuid,
-        sizeTypes: sizeTypes,
-        isStretched: isStretched,
-        tabs: tabs,
-        replication: replication
-      });
-
-      if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
-        this.$nextTick(function () {
-          var block = _this2.getAllBlockRefs()[guid];
-
-          block.onDrag();
-          block.dragStart(event, true);
-        });
-      }
-
-      return guid;
-    },
-    removeBlock: function removeBlock(guid) {
-      this.store.remove(guid);
-    }
-  },
-  computed: {
-    _blocks: function _blocks() {
-      return this.getStore().get();
-    },
-    stickyLines: function stickyLines() {
-      return this.getStore().getStickyLines();
-    }
-  }
-}));
-// CONCATENATED MODULE: ./src/index.vue?vue&type=script&lang=ts&
- /* harmony default export */ var srcvue_type_script_lang_ts_ = (lib_vue_loader_options_srcvue_type_script_lang_ts_); 
-// EXTERNAL MODULE: ./src/index.vue?vue&type=style&index=0&id=ab434c0c&scoped=true&lang=css&
-var srcvue_type_style_index_0_id_ab434c0c_scoped_true_lang_css_ = __webpack_require__("ef6d");
-
-// CONCATENATED MODULE: ./src/index.vue
-
-
-
-
-
-
-/* normalize component */
-
-var src_component = Object(componentNormalizer["a" /* default */])(
-  srcvue_type_script_lang_ts_,
-  render,
-  staticRenderFns,
-  false,
-  null,
-  "ab434c0c",
-  null
-  
-)
-
-/* harmony default export */ var src = __webpack_exports__["a"] = (src_component.exports);
-
-/***/ }),
-
-/***/ "9f7f":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var fails = __webpack_require__("d039");
-
-// babel-minify transpiles RegExp('a', 'y') -> /a/y and it causes SyntaxError,
-// so we use an intermediate function.
-function RE(s, f) {
-  return RegExp(s, f);
-}
-
-exports.UNSUPPORTED_Y = fails(function () {
-  // babel-minify transpiles RegExp('a', 'y') -> /a/y and it causes SyntaxError
-  var re = RE('a', 'y');
-  re.lastIndex = 2;
-  return re.exec('abcd') != null;
-});
-
-exports.BROKEN_CARET = fails(function () {
-  // https://bugzilla.mozilla.org/show_bug.cgi?id=773687
-  var re = RE('^r', 'gy');
-  re.lastIndex = 2;
-  return re.exec('str') != null;
-});
-
-
-/***/ }),
-
-/***/ "a4b4":
-/***/ (function(module, exports, __webpack_require__) {
-
-var userAgent = __webpack_require__("342f");
-
-module.exports = /web0s(?!.*chrome)/i.test(userAgent);
-
-
-/***/ }),
-
-/***/ "a640":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var fails = __webpack_require__("d039");
-
-module.exports = function (METHOD_NAME, argument) {
-  var method = [][METHOD_NAME];
-  return !!method && fails(function () {
-    // eslint-disable-next-line no-useless-call,no-throw-literal
-    method.call(null, argument || function () { throw 1; }, 1);
-  });
-};
-
-
-/***/ }),
-
-/***/ "a691":
-/***/ (function(module, exports) {
-
-var ceil = Math.ceil;
-var floor = Math.floor;
-
-// `ToInteger` abstract operation
-// https://tc39.es/ecma262/#sec-tointeger
-module.exports = function (argument) {
-  return isNaN(argument = +argument) ? 0 : (argument > 0 ? floor : ceil)(argument);
-};
-
-
-/***/ }),
-
-/***/ "a9e3":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var DESCRIPTORS = __webpack_require__("83ab");
-var global = __webpack_require__("da84");
-var isForced = __webpack_require__("94ca");
-var redefine = __webpack_require__("6eeb");
-var has = __webpack_require__("5135");
-var classof = __webpack_require__("c6b6");
-var inheritIfRequired = __webpack_require__("7156");
-var toPrimitive = __webpack_require__("c04e");
-var fails = __webpack_require__("d039");
-var create = __webpack_require__("7c73");
-var getOwnPropertyNames = __webpack_require__("241c").f;
-var getOwnPropertyDescriptor = __webpack_require__("06cf").f;
-var defineProperty = __webpack_require__("9bf2").f;
-var trim = __webpack_require__("58a8").trim;
-
-var NUMBER = 'Number';
-var NativeNumber = global[NUMBER];
-var NumberPrototype = NativeNumber.prototype;
-
-// Opera ~12 has broken Object#toString
-var BROKEN_CLASSOF = classof(create(NumberPrototype)) == NUMBER;
-
-// `ToNumber` abstract operation
-// https://tc39.es/ecma262/#sec-tonumber
-var toNumber = function (argument) {
-  var it = toPrimitive(argument, false);
-  var first, third, radix, maxCode, digits, length, index, code;
-  if (typeof it == 'string' && it.length > 2) {
-    it = trim(it);
-    first = it.charCodeAt(0);
-    if (first === 43 || first === 45) {
-      third = it.charCodeAt(2);
-      if (third === 88 || third === 120) return NaN; // Number('+0x1') should be NaN, old V8 fix
-    } else if (first === 48) {
-      switch (it.charCodeAt(1)) {
-        case 66: case 98: radix = 2; maxCode = 49; break; // fast equal of /^0b[01]+$/i
-        case 79: case 111: radix = 8; maxCode = 55; break; // fast equal of /^0o[0-7]+$/i
-        default: return +it;
-      }
-      digits = it.slice(2);
-      length = digits.length;
-      for (index = 0; index < length; index++) {
-        code = digits.charCodeAt(index);
-        // parseInt parses a string to a first unavailable symbol
-        // but ToNumber should return NaN if a string contains unavailable symbols
-        if (code < 48 || code > maxCode) return NaN;
-      } return parseInt(digits, radix);
-    }
-  } return +it;
-};
-
-// `Number` constructor
-// https://tc39.es/ecma262/#sec-number-constructor
-if (isForced(NUMBER, !NativeNumber(' 0o1') || !NativeNumber('0b1') || NativeNumber('+0x1'))) {
-  var NumberWrapper = function Number(value) {
-    var it = arguments.length < 1 ? 0 : value;
-    var dummy = this;
-    return dummy instanceof NumberWrapper
-      // check on 1..constructor(foo) case
-      && (BROKEN_CLASSOF ? fails(function () { NumberPrototype.valueOf.call(dummy); }) : classof(dummy) != NUMBER)
-        ? inheritIfRequired(new NativeNumber(toNumber(it)), dummy, NumberWrapper) : toNumber(it);
-  };
-  for (var keys = DESCRIPTORS ? getOwnPropertyNames(NativeNumber) : (
-    // ES3:
-    'MAX_VALUE,MIN_VALUE,NaN,NEGATIVE_INFINITY,POSITIVE_INFINITY,' +
-    // ES2015 (in case, if modules with ES2015 Number statics required before):
-    'EPSILON,isFinite,isInteger,isNaN,isSafeInteger,MAX_SAFE_INTEGER,' +
-    'MIN_SAFE_INTEGER,parseFloat,parseInt,isInteger,' +
-    // ESNext
-    'fromString,range'
-  ).split(','), j = 0, key; keys.length > j; j++) {
-    if (has(NativeNumber, key = keys[j]) && !has(NumberWrapper, key)) {
-      defineProperty(NumberWrapper, key, getOwnPropertyDescriptor(NativeNumber, key));
-    }
-  }
-  NumberWrapper.prototype = NumberPrototype;
-  NumberPrototype.constructor = NumberWrapper;
-  redefine(global, NUMBER, NumberWrapper);
-}
-
-
-/***/ }),
-
-/***/ "ac1f":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var $ = __webpack_require__("23e7");
-var exec = __webpack_require__("9263");
-
-// `RegExp.prototype.exec` method
-// https://tc39.es/ecma262/#sec-regexp.prototype.exec
-$({ target: 'RegExp', proto: true, forced: /./.exec !== exec }, {
-  exec: exec
-});
-
-
-/***/ }),
-
-/***/ "ac51":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_3d5a93c2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("3dde");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_3d5a93c2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_3d5a93c2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
-
-
-/***/ }),
-
-/***/ "ad3d":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FontAwesomeIcon; });
-/* unused harmony export FontAwesomeLayers */
-/* unused harmony export FontAwesomeLayersText */
-/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("ecee");
-
-
-var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
-
-function createCommonjsModule(fn, module) {
-	return module = { exports: {} }, fn(module, module.exports), module.exports;
-}
-
-var humps = createCommonjsModule(function (module) {
-(function(global) {
-
-  var _processKeys = function(convert, obj, options) {
-    if(!_isObject(obj) || _isDate(obj) || _isRegExp(obj) || _isBoolean(obj) || _isFunction(obj)) {
-      return obj;
-    }
-
-    var output,
-        i = 0,
-        l = 0;
-
-    if(_isArray(obj)) {
-      output = [];
-      for(l=obj.length; i<l; i++) {
-        output.push(_processKeys(convert, obj[i], options));
-      }
-    }
-    else {
-      output = {};
-      for(var key in obj) {
-        if(Object.prototype.hasOwnProperty.call(obj, key)) {
-          output[convert(key, options)] = _processKeys(convert, obj[key], options);
-        }
-      }
-    }
-    return output;
-  };
-
-  // String conversion methods
-
-  var separateWords = function(string, options) {
-    options = options || {};
-    var separator = options.separator || '_';
-    var split = options.split || /(?=[A-Z])/;
-
-    return string.split(split).join(separator);
-  };
-
-  var camelize = function(string) {
-    if (_isNumerical(string)) {
-      return string;
-    }
-    string = string.replace(/[\-_\s]+(.)?/g, function(match, chr) {
-      return chr ? chr.toUpperCase() : '';
-    });
-    // Ensure 1st char is always lowercase
-    return string.substr(0, 1).toLowerCase() + string.substr(1);
-  };
-
-  var pascalize = function(string) {
-    var camelized = camelize(string);
-    // Ensure 1st char is always uppercase
-    return camelized.substr(0, 1).toUpperCase() + camelized.substr(1);
-  };
-
-  var decamelize = function(string, options) {
-    return separateWords(string, options).toLowerCase();
-  };
-
-  // Utilities
-  // Taken from Underscore.js
-
-  var toString = Object.prototype.toString;
-
-  var _isFunction = function(obj) {
-    return typeof(obj) === 'function';
-  };
-  var _isObject = function(obj) {
-    return obj === Object(obj);
-  };
-  var _isArray = function(obj) {
-    return toString.call(obj) == '[object Array]';
-  };
-  var _isDate = function(obj) {
-    return toString.call(obj) == '[object Date]';
-  };
-  var _isRegExp = function(obj) {
-    return toString.call(obj) == '[object RegExp]';
-  };
-  var _isBoolean = function(obj) {
-    return toString.call(obj) == '[object Boolean]';
-  };
-
-  // Performant way to determine if obj coerces to a number
-  var _isNumerical = function(obj) {
-    obj = obj - 0;
-    return obj === obj;
-  };
-
-  // Sets up function which handles processing keys
-  // allowing the convert function to be modified by a callback
-  var _processor = function(convert, options) {
-    var callback = options && 'process' in options ? options.process : options;
-
-    if(typeof(callback) !== 'function') {
-      return convert;
-    }
-
-    return function(string, options) {
-      return callback(string, convert, options);
-    }
-  };
-
-  var humps = {
-    camelize: camelize,
-    decamelize: decamelize,
-    pascalize: pascalize,
-    depascalize: decamelize,
-    camelizeKeys: function(object, options) {
-      return _processKeys(_processor(camelize, options), object);
-    },
-    decamelizeKeys: function(object, options) {
-      return _processKeys(_processor(decamelize, options), object, options);
-    },
-    pascalizeKeys: function(object, options) {
-      return _processKeys(_processor(pascalize, options), object);
-    },
-    depascalizeKeys: function () {
-      return this.decamelizeKeys.apply(this, arguments);
-    }
-  };
-
-  if (false) {} else if ( true && module.exports) {
-    module.exports = humps;
-  } else {
-    global.humps = humps;
-  }
-
-})(commonjsGlobal);
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-  return typeof obj;
-} : function (obj) {
-  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-};
-
-var defineProperty = function (obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-};
-
-var _extends = Object.assign || function (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];
-
-    for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
-      }
-    }
-  }
-
-  return target;
-};
-
-var objectWithoutProperties = function (obj, keys) {
-  var target = {};
-
-  for (var i in obj) {
-    if (keys.indexOf(i) >= 0) continue;
-    if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;
-    target[i] = obj[i];
-  }
-
-  return target;
-};
-
-var toConsumableArray = function (arr) {
-  if (Array.isArray(arr)) {
-    for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
-
-    return arr2;
-  } else {
-    return Array.from(arr);
-  }
-};
-
-function styleToObject(style) {
-  return style.split(';').map(function (s) {
-    return s.trim();
-  }).filter(function (s) {
-    return s;
-  }).reduce(function (acc, pair) {
-    var i = pair.indexOf(':');
-    var prop = humps.camelize(pair.slice(0, i));
-    var value = pair.slice(i + 1).trim();
-
-    acc[prop] = value;
-
-    return acc;
-  }, {});
-}
-
-function classToObject(cls) {
-  return cls.split(/\s+/).reduce(function (acc, c) {
-    acc[c] = true;
-
-    return acc;
-  }, {});
-}
-
-function combineClassObjects() {
-  for (var _len = arguments.length, objs = Array(_len), _key = 0; _key < _len; _key++) {
-    objs[_key] = arguments[_key];
-  }
-
-  return objs.reduce(function (acc, obj) {
-    if (Array.isArray(obj)) {
-      acc = acc.concat(obj);
-    } else {
-      acc.push(obj);
-    }
-
-    return acc;
-  }, []);
-}
-
-function convert(h, element) {
-  var props = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-  var data = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
-
-  var children = (element.children || []).map(convert.bind(null, h));
-
-  var mixins = Object.keys(element.attributes || {}).reduce(function (acc, key) {
-    var val = element.attributes[key];
-
-    switch (key) {
-      case 'class':
-        acc['class'] = classToObject(val);
-        break;
-      case 'style':
-        acc['style'] = styleToObject(val);
-        break;
-      default:
-        acc.attrs[key] = val;
-    }
-
-    return acc;
-  }, { 'class': {}, style: {}, attrs: {} });
-
-  var _data$class = data.class,
-      dClass = _data$class === undefined ? {} : _data$class,
-      _data$style = data.style,
-      dStyle = _data$style === undefined ? {} : _data$style,
-      _data$attrs = data.attrs,
-      dAttrs = _data$attrs === undefined ? {} : _data$attrs,
-      remainingData = objectWithoutProperties(data, ['class', 'style', 'attrs']);
-
-
-  if (typeof element === 'string') {
-    return element;
-  } else {
-    return h(element.tag, _extends({
-      class: combineClassObjects(mixins.class, dClass),
-      style: _extends({}, mixins.style, dStyle),
-      attrs: _extends({}, mixins.attrs, dAttrs)
-    }, remainingData, {
-      props: props
-    }), children);
-  }
-}
-
-var PRODUCTION = false;
-
-try {
-  PRODUCTION = "production" === 'production';
-} catch (e) {}
-
-function log () {
-  if (!PRODUCTION && console && typeof console.error === 'function') {
-    var _console;
-
-    (_console = console).error.apply(_console, arguments);
-  }
-}
-
-function objectWithKey(key, value) {
-  return Array.isArray(value) && value.length > 0 || !Array.isArray(value) && value ? defineProperty({}, key, value) : {};
-}
-
-function classList(props) {
-  var _classes;
-
-  var classes = (_classes = {
-    'fa-spin': props.spin,
-    'fa-pulse': props.pulse,
-    'fa-fw': props.fixedWidth,
-    'fa-border': props.border,
-    'fa-li': props.listItem,
-    'fa-inverse': props.inverse,
-    'fa-flip-horizontal': props.flip === 'horizontal' || props.flip === 'both',
-    'fa-flip-vertical': props.flip === 'vertical' || props.flip === 'both'
-  }, defineProperty(_classes, 'fa-' + props.size, props.size !== null), defineProperty(_classes, 'fa-rotate-' + props.rotation, props.rotation !== null), defineProperty(_classes, 'fa-pull-' + props.pull, props.pull !== null), defineProperty(_classes, 'fa-swap-opacity', props.swapOpacity), _classes);
-
-  return Object.keys(classes).map(function (key) {
-    return classes[key] ? key : null;
-  }).filter(function (key) {
-    return key;
-  });
-}
-
-function addStaticClass(to, what) {
-  var val = (to || '').length === 0 ? [] : [to];
-
-  return val.concat(what).join(' ');
-}
-
-function normalizeIconArgs(icon$$1) {
-  if (_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__[/* parse */ "d"].icon) {
-    return _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__[/* parse */ "d"].icon(icon$$1);
-  }
-
-  if (icon$$1 === null) {
-    return null;
-  }
-
-  if ((typeof icon$$1 === 'undefined' ? 'undefined' : _typeof(icon$$1)) === 'object' && icon$$1.prefix && icon$$1.iconName) {
-    return icon$$1;
-  }
-
-  if (Array.isArray(icon$$1) && icon$$1.length === 2) {
-    return { prefix: icon$$1[0], iconName: icon$$1[1] };
-  }
-
-  if (typeof icon$$1 === 'string') {
-    return { prefix: 'fas', iconName: icon$$1 };
-  }
-}
-
-var FontAwesomeIcon = {
-  name: 'FontAwesomeIcon',
-
-  functional: true,
-
-  props: {
-    border: {
-      type: Boolean,
-      default: false
-    },
-    fixedWidth: {
-      type: Boolean,
-      default: false
-    },
-    flip: {
-      type: String,
-      default: null,
-      validator: function validator(value) {
-        return ['horizontal', 'vertical', 'both'].indexOf(value) > -1;
-      }
-    },
-    icon: {
-      type: [Object, Array, String],
-      required: true
-    },
-    mask: {
-      type: [Object, Array, String],
-      default: null
-    },
-    listItem: {
-      type: Boolean,
-      default: false
-    },
-    pull: {
-      type: String,
-      default: null,
-      validator: function validator(value) {
-        return ['right', 'left'].indexOf(value) > -1;
-      }
-    },
-    pulse: {
-      type: Boolean,
-      default: false
-    },
-    rotation: {
-      type: [String, Number],
-      default: null,
-      validator: function validator(value) {
-        return [90, 180, 270].indexOf(parseInt(value, 10)) > -1;
-      }
-    },
-    swapOpacity: {
-      type: Boolean,
-      default: false
-    },
-    size: {
-      type: String,
-      default: null,
-      validator: function validator(value) {
-        return ['lg', 'xs', 'sm', '1x', '2x', '3x', '4x', '5x', '6x', '7x', '8x', '9x', '10x'].indexOf(value) > -1;
-      }
-    },
-    spin: {
-      type: Boolean,
-      default: false
-    },
-    transform: {
-      type: [String, Object],
-      default: null
-    },
-    symbol: {
-      type: [Boolean, String],
-      default: false
-    },
-    title: {
-      type: String,
-      default: null
-    },
-    inverse: {
-      type: Boolean,
-      default: false
-    }
-  },
-
-  render: function render(createElement, context) {
-    var props = context.props;
-    var iconArgs = props.icon,
-        maskArgs = props.mask,
-        symbol = props.symbol,
-        title = props.title;
-
-    var icon$$1 = normalizeIconArgs(iconArgs);
-    var classes = objectWithKey('classes', classList(props));
-    var transform = objectWithKey('transform', typeof props.transform === 'string' ? _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__[/* parse */ "d"].transform(props.transform) : props.transform);
-    var mask = objectWithKey('mask', normalizeIconArgs(maskArgs));
-    var renderedIcon = Object(_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__[/* icon */ "b"])(icon$$1, _extends({}, classes, transform, mask, { symbol: symbol, title: title }));
-
-    if (!renderedIcon) {
-      return log('Could not find one or more icon(s)', icon$$1, mask);
-    }
-
-    var abstract = renderedIcon.abstract;
-
-    var convertCurry = convert.bind(null, createElement);
-
-    return convertCurry(abstract[0], {}, context.data);
-  }
-};
-
-var FontAwesomeLayers = {
-  name: 'FontAwesomeLayers',
-
-  functional: true,
-
-  props: {
-    fixedWidth: {
-      type: Boolean,
-      default: false
-    }
-  },
-
-  render: function render(createElement, context) {
-    var familyPrefix = _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__[/* config */ "a"].familyPrefix;
-    var staticClass = context.data.staticClass;
-
-
-    var classes = [familyPrefix + '-layers'].concat(toConsumableArray(context.props.fixedWidth ? [familyPrefix + '-fw'] : []));
-
-    return createElement('div', _extends({}, context.data, {
-      staticClass: addStaticClass(staticClass, classes)
-    }), context.children);
-  }
-};
-
-var FontAwesomeLayersText = {
-  name: 'FontAwesomeLayersText',
-
-  functional: true,
-
-  props: {
-    value: {
-      type: [String, Number],
-      default: ''
-    },
-    transform: {
-      type: [String, Object],
-      default: null
-    },
-    counter: {
-      type: Boolean,
-      default: false
-    },
-    position: {
-      type: String,
-      default: null,
-      validator: function validator(value) {
-        return ['bottom-left', 'bottom-right', 'top-left', 'top-right'].indexOf(value) > -1;
-      }
-    }
-  },
-
-  render: function render(createElement, context) {
-    var familyPrefix = _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__[/* config */ "a"].familyPrefix;
-    var props = context.props;
-
-
-    var classes = objectWithKey('classes', [].concat(toConsumableArray(props.counter ? [familyPrefix + '-layers-counter'] : []), toConsumableArray(props.position ? [familyPrefix + '-layers-' + props.position] : [])));
-
-    var transform = objectWithKey('transform', typeof props.transform === 'string' ? _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__[/* parse */ "d"].transform(props.transform) : props.transform);
-
-    var renderedText = Object(_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__[/* text */ "e"])(props.value.toString(), _extends({}, transform, classes));
-
-    var abstract = renderedText.abstract;
-
-
-    if (props.counter) {
-      abstract[0].attributes.class = abstract[0].attributes.class.replace('fa-layers-text', '');
-    }
-
-    var convertCurry = convert.bind(null, createElement);
-
-    return convertCurry(abstract[0], {}, context.data);
-  }
-};
-
-
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("c8ba")))
-
-/***/ }),
-
-/***/ "ad6d":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var anObject = __webpack_require__("825a");
-
-// `RegExp.prototype.flags` getter implementation
-// https://tc39.es/ecma262/#sec-get-regexp.prototype.flags
-module.exports = function () {
-  var that = anObject(this);
-  var result = '';
-  if (that.global) result += 'g';
-  if (that.ignoreCase) result += 'i';
-  if (that.multiline) result += 'm';
-  if (that.dotAll) result += 's';
-  if (that.unicode) result += 'u';
-  if (that.sticky) result += 'y';
-  return result;
-};
-
-
-/***/ }),
-
-/***/ "ade3":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return _defineProperty; });
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
-/***/ }),
-
-/***/ "ae40":
-/***/ (function(module, exports, __webpack_require__) {
-
-var DESCRIPTORS = __webpack_require__("83ab");
-var fails = __webpack_require__("d039");
-var has = __webpack_require__("5135");
-
-var defineProperty = Object.defineProperty;
-var cache = {};
-
-var thrower = function (it) { throw it; };
-
-module.exports = function (METHOD_NAME, options) {
-  if (has(cache, METHOD_NAME)) return cache[METHOD_NAME];
-  if (!options) options = {};
-  var method = [][METHOD_NAME];
-  var ACCESSORS = has(options, 'ACCESSORS') ? options.ACCESSORS : false;
-  var argument0 = has(options, 0) ? options[0] : thrower;
-  var argument1 = has(options, 1) ? options[1] : undefined;
-
-  return cache[METHOD_NAME] = !!method && !fails(function () {
-    if (ACCESSORS && !DESCRIPTORS) return true;
-    var O = { length: -1 };
-
-    if (ACCESSORS) defineProperty(O, 1, { enumerable: true, get: thrower });
-    else O[1] = 1;
-
-    method.call(O, argument0, argument1);
-  });
-};
-
-
-/***/ }),
-
-/***/ "b041":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var TO_STRING_TAG_SUPPORT = __webpack_require__("00ee");
-var classof = __webpack_require__("f5df");
-
-// `Object.prototype.toString` method implementation
-// https://tc39.es/ecma262/#sec-object.prototype.tostring
-module.exports = TO_STRING_TAG_SUPPORT ? {}.toString : function toString() {
-  return '[object ' + classof(this) + ']';
-};
-
-
-/***/ }),
-
-/***/ "b575":
-/***/ (function(module, exports, __webpack_require__) {
-
-var global = __webpack_require__("da84");
-var getOwnPropertyDescriptor = __webpack_require__("06cf").f;
-var macrotask = __webpack_require__("2cf4").set;
-var IS_IOS = __webpack_require__("1cdc");
-var IS_WEBOS_WEBKIT = __webpack_require__("a4b4");
-var IS_NODE = __webpack_require__("605d");
-
-var MutationObserver = global.MutationObserver || global.WebKitMutationObserver;
-var document = global.document;
-var process = global.process;
-var Promise = global.Promise;
-// Node.js 11 shows ExperimentalWarning on getting `queueMicrotask`
-var queueMicrotaskDescriptor = getOwnPropertyDescriptor(global, 'queueMicrotask');
-var queueMicrotask = queueMicrotaskDescriptor && queueMicrotaskDescriptor.value;
-
-var flush, head, last, notify, toggle, node, promise, then;
-
-// modern engines have queueMicrotask method
-if (!queueMicrotask) {
-  flush = function () {
-    var parent, fn;
-    if (IS_NODE && (parent = process.domain)) parent.exit();
-    while (head) {
-      fn = head.fn;
-      head = head.next;
-      try {
-        fn();
-      } catch (error) {
-        if (head) notify();
-        else last = undefined;
-        throw error;
-      }
-    } last = undefined;
-    if (parent) parent.enter();
-  };
-
-  // browsers with MutationObserver, except iOS - https://github.com/zloirock/core-js/issues/339
-  // also except WebOS Webkit https://github.com/zloirock/core-js/issues/898
-  if (!IS_IOS && !IS_NODE && !IS_WEBOS_WEBKIT && MutationObserver && document) {
-    toggle = true;
-    node = document.createTextNode('');
-    new MutationObserver(flush).observe(node, { characterData: true });
-    notify = function () {
-      node.data = toggle = !toggle;
-    };
-  // environments with maybe non-completely correct, but existent Promise
-  } else if (Promise && Promise.resolve) {
-    // Promise.resolve without an argument throws an error in LG WebOS 2
-    promise = Promise.resolve(undefined);
-    then = promise.then;
-    notify = function () {
-      then.call(promise, flush);
-    };
-  // Node.js without promises
-  } else if (IS_NODE) {
-    notify = function () {
-      process.nextTick(flush);
-    };
-  // for other environments - macrotask based on:
-  // - setImmediate
-  // - MessageChannel
-  // - window.postMessag
-  // - onreadystatechange
-  // - setTimeout
-  } else {
-    notify = function () {
-      // strange IE + webpack dev server bug - use .call(global)
-      macrotask.call(global, flush);
-    };
-  }
-}
-
-module.exports = queueMicrotask || function (fn) {
-  var task = { fn: fn, next: undefined };
-  if (last) last.next = task;
-  if (!head) {
-    head = task;
-    notify();
-  } last = task;
-};
-
-
-/***/ }),
-
-/***/ "b622":
-/***/ (function(module, exports, __webpack_require__) {
-
-var global = __webpack_require__("da84");
-var shared = __webpack_require__("5692");
-var has = __webpack_require__("5135");
-var uid = __webpack_require__("90e3");
-var NATIVE_SYMBOL = __webpack_require__("4930");
-var USE_SYMBOL_AS_UID = __webpack_require__("fdbf");
-
-var WellKnownSymbolsStore = shared('wks');
-var Symbol = global.Symbol;
-var createWellKnownSymbol = USE_SYMBOL_AS_UID ? Symbol : Symbol && Symbol.withoutSetter || uid;
-
-module.exports = function (name) {
-  if (!has(WellKnownSymbolsStore, name)) {
-    if (NATIVE_SYMBOL && has(Symbol, name)) WellKnownSymbolsStore[name] = Symbol[name];
-    else WellKnownSymbolsStore[name] = createWellKnownSymbol('Symbol.' + name);
-  } return WellKnownSymbolsStore[name];
-};
-
-
-/***/ }),
-
-/***/ "b635":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return install; });
-/* harmony import */ var core_js_modules_es_array_for_each_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("4160");
-/* harmony import */ var core_js_modules_es_array_for_each_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("b64b");
-/* harmony import */ var core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("159b");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _index_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("9f78");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "a", function() { return _index_vue__WEBPACK_IMPORTED_MODULE_3__["a"]; });
-
-/* harmony import */ var _previewer_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("4419");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "b", function() { return _previewer_vue__WEBPACK_IMPORTED_MODULE_4__["a"]; });
-
-
-
-
-
-
-var VueDraggableResponsive = {
-  VueDraggableResponsiveDesigner: _index_vue__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"],
-  VueDraggableResponsivePreviewer: _previewer_vue__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"]
-};
-function install(Vue) {
-  if (install.installed) return;
-  install.installed = true;
-  Object.keys(VueDraggableResponsive).forEach(function (name) {
-    Vue.component(name, VueDraggableResponsive[name]);
-  });
-}
-var plugin = {
-  install: install
-};
-var GlobalVue = null;
-
-if (typeof window !== 'undefined') {
-  GlobalVue = window.Vue;
-} else if (typeof global !== 'undefined') {
-  GlobalVue = global.Vue;
-}
-
-if (GlobalVue) {
-  GlobalVue.use(plugin);
-}
-
-/* harmony default export */ __webpack_exports__["c"] = (VueDraggableResponsive);
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("c8ba")))
-
-/***/ }),
-
-/***/ "b64b":
-/***/ (function(module, exports, __webpack_require__) {
-
-var $ = __webpack_require__("23e7");
-var toObject = __webpack_require__("7b0b");
-var nativeKeys = __webpack_require__("df75");
-var fails = __webpack_require__("d039");
-
-var FAILS_ON_PRIMITIVES = fails(function () { nativeKeys(1); });
-
-// `Object.keys` method
-// https://tc39.es/ecma262/#sec-object.keys
-$({ target: 'Object', stat: true, forced: FAILS_ON_PRIMITIVES }, {
-  keys: function keys(it) {
-    return nativeKeys(toObject(it));
-  }
-});
-
-
-/***/ }),
-
-/***/ "b727":
-/***/ (function(module, exports, __webpack_require__) {
-
-var bind = __webpack_require__("0366");
-var IndexedObject = __webpack_require__("44ad");
-var toObject = __webpack_require__("7b0b");
-var toLength = __webpack_require__("50c4");
-var arraySpeciesCreate = __webpack_require__("65f0");
-
-var push = [].push;
-
-// `Array.prototype.{ forEach, map, filter, some, every, find, findIndex, filterOut }` methods implementation
-var createMethod = function (TYPE) {
-  var IS_MAP = TYPE == 1;
-  var IS_FILTER = TYPE == 2;
-  var IS_SOME = TYPE == 3;
-  var IS_EVERY = TYPE == 4;
-  var IS_FIND_INDEX = TYPE == 6;
-  var IS_FILTER_OUT = TYPE == 7;
-  var NO_HOLES = TYPE == 5 || IS_FIND_INDEX;
-  return function ($this, callbackfn, that, specificCreate) {
-    var O = toObject($this);
-    var self = IndexedObject(O);
-    var boundFunction = bind(callbackfn, that, 3);
-    var length = toLength(self.length);
-    var index = 0;
-    var create = specificCreate || arraySpeciesCreate;
-    var target = IS_MAP ? create($this, length) : IS_FILTER || IS_FILTER_OUT ? create($this, 0) : undefined;
-    var value, result;
-    for (;length > index; index++) if (NO_HOLES || index in self) {
-      value = self[index];
-      result = boundFunction(value, index, O);
-      if (TYPE) {
-        if (IS_MAP) target[index] = result; // map
-        else if (result) switch (TYPE) {
-          case 3: return true;              // some
-          case 5: return value;             // find
-          case 6: return index;             // findIndex
-          case 2: push.call(target, value); // filter
-        } else switch (TYPE) {
-          case 4: return false;             // every
-          case 7: push.call(target, value); // filterOut
-        }
-      }
-    }
-    return IS_FIND_INDEX ? -1 : IS_SOME || IS_EVERY ? IS_EVERY : target;
-  };
-};
-
-module.exports = {
-  // `Array.prototype.forEach` method
-  // https://tc39.es/ecma262/#sec-array.prototype.foreach
-  forEach: createMethod(0),
-  // `Array.prototype.map` method
-  // https://tc39.es/ecma262/#sec-array.prototype.map
-  map: createMethod(1),
-  // `Array.prototype.filter` method
-  // https://tc39.es/ecma262/#sec-array.prototype.filter
-  filter: createMethod(2),
-  // `Array.prototype.some` method
-  // https://tc39.es/ecma262/#sec-array.prototype.some
-  some: createMethod(3),
-  // `Array.prototype.every` method
-  // https://tc39.es/ecma262/#sec-array.prototype.every
-  every: createMethod(4),
-  // `Array.prototype.find` method
-  // https://tc39.es/ecma262/#sec-array.prototype.find
-  find: createMethod(5),
-  // `Array.prototype.findIndex` method
-  // https://tc39.es/ecma262/#sec-array.prototype.findIndex
-  findIndex: createMethod(6),
-  // `Array.prototype.filterOut` method
-  // https://github.com/tc39/proposal-array-filtering
-  filterOut: createMethod(7)
-};
-
-
-/***/ }),
-
-/***/ "bee2":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return _createClass; });
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
-
-/***/ }),
-
-/***/ "c04e":
-/***/ (function(module, exports, __webpack_require__) {
-
-var isObject = __webpack_require__("861d");
-
-// `ToPrimitive` abstract operation
-// https://tc39.es/ecma262/#sec-toprimitive
-// instead of the ES6 spec version, we didn't implement @@toPrimitive case
-// and the second argument - flag - preferred type is a string
-module.exports = function (input, PREFERRED_STRING) {
-  if (!isObject(input)) return input;
-  var fn, val;
-  if (PREFERRED_STRING && typeof (fn = input.toString) == 'function' && !isObject(val = fn.call(input))) return val;
-  if (typeof (fn = input.valueOf) == 'function' && !isObject(val = fn.call(input))) return val;
-  if (!PREFERRED_STRING && typeof (fn = input.toString) == 'function' && !isObject(val = fn.call(input))) return val;
-  throw TypeError("Can't convert object to primitive value");
-};
-
 
 /***/ }),
 
@@ -16409,12 +17485,12 @@ var autoReplace = function autoReplace() {
 
 /***/ }),
 
-/***/ "ef6d":
+/***/ "efa9":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_ab434c0c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("9852");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_ab434c0c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_ab434c0c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_224391f6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("1a28");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_224391f6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_224391f6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
 
 
@@ -16442,17 +17518,6 @@ var PromiseCapability = function (C) {
 module.exports.f = function (C) {
   return new PromiseCapability(C);
 };
-
-
-/***/ }),
-
-/***/ "f074":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Block_vue_vue_type_style_index_0_id_e4e53236_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("2703");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Block_vue_vue_type_style_index_0_id_e4e53236_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Block_vue_vue_type_style_index_0_id_e4e53236_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
 
 
 /***/ }),

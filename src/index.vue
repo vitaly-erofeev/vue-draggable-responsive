@@ -121,7 +121,6 @@ export default Vue.extend({
       bottom: SizeTypes,
       left: SizeTypes
     }): { top: number, right: number, bottom: number, left: number } {
-      console.log(this.$el)
       const elPosition = this.$el.getBoundingClientRect()
       const top = sizeTypes.top === SizeTypes.PIXEL ? event.clientY - elPosition.top : (event.clientY - elPosition.top) / (elPosition.height / 100) - 2
       const left = sizeTypes.left === SizeTypes.PIXEL ? event.clientX - elPosition.left : (event.clientX - elPosition.left) / (elPosition.width / 100) - 2

@@ -407,24 +407,13 @@ export default Vue.extend({
       },
       deep: true
     },
-    // isTabsContainer: {
-    //   handler (val) {
-    //     console.log(val)
-    //   }
-    // }
     'block.width': {
-      handler (val) {
+      handler () {
         if (this.isTabsContainer) {
           this.setIsShowArrows()
         }
       }
-      // immediate: true
     }
-    // tabsWidth: {
-    //   handler (val) {
-    //     console.log(val)
-    //   }
-    // }
   },
   computed: {
     stickyLines () {
@@ -873,8 +862,11 @@ export default Vue.extend({
   stroke: #32B84D;
 }
 .tab {
-  width: 100%;
+  width: 100px;
   cursor: pointer;
+  background-color: #fff;
+  border: 1px solid grey;
+  box-sizing: border-box;
   text-align: center;
   /* flex: 1; */
 }

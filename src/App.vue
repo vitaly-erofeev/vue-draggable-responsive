@@ -57,7 +57,7 @@
 
 <script>
 import VueDraggableResponsive from './index.vue'
-import VueDraggableResponsivePreviewer from '@/previewer'
+import VueDraggableResponsivePreviewer from '@/previewer.vue'
 import { StickyToType } from '@/domain/model/StickyTo'
 import { SizeTypes } from '@/domain/model/SizeTypes'
 
@@ -204,13 +204,13 @@ export default {
           'guid': '4488bb6c-ba9b-44dd-97e0-e51c23fcf224',
           'left': 24,
           'right': 37,
-          'width': 20,
+          'width': 45,
           'widthCalc': {
             type: '-',
             value: 200
           },
           'bottom': 85,
-          'height': 20,
+          'height': 30,
           'sticky': 'tl',
           'children': [],
           'style': 'background:green',
@@ -221,6 +221,57 @@ export default {
             'width': '%',
             'bottom': '%',
             'height': '%'
+          },
+          tabs: {
+            class: 'test',
+            use: true,
+            containerStyle: 'background: grey',
+            tabStyle: 'color:black',
+            tabArrowsClass: 'testArr',
+            activeTabStyle: 'color:green',
+            list: [
+              {
+                guid: 'asdasdas',
+                name: 'test'
+              },
+              {
+                guid: 'asdasdas2',
+                name: 'test2'
+              },
+              {
+                guid: '1',
+                name: 'test'
+              },
+              {
+                guid: '2',
+                name: 'test2'
+              },
+              {
+                guid: '3',
+                name: 'test'
+              },
+              {
+                guid: '4',
+                name: 'test2'
+              },
+              {
+                guid: '5',
+                name: 'test'
+              },
+              {
+                guid: '6',
+                name: 'test2'
+              },
+              {
+                guid: '7',
+                name: 'test'
+              },
+              {
+                guid: '8',
+                name: 'test2'
+              }
+            ],
+            position: 'top'
           }
         },
         {

@@ -443,7 +443,7 @@ export default Vue.extend({
   width: 100px;
   cursor: pointer;
   background-color: #fff;
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
   box-sizing: border-box;
   text-align: center;
   /* flex: 1; */

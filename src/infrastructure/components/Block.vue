@@ -31,7 +31,11 @@
           @click="scrollPrevTab"
           :class="{ [block.tabs.tabArrowsClass]: true }"
         ></font-awesome-icon>
-      <div class="tabs_onScroll" ref="tabsScroll" :class="{'tabs_padding': isShowArrows }">
+      <div class="tabs_onScroll" ref="tabsScroll"
+        :class="{
+        'tabs_padding': isShowArrows,
+        'direction': directionTabs
+        }">
         <div
             v-for="tab in block.tabs.list"
             :key="tab.guid"
@@ -436,6 +440,9 @@ export default Vue.extend({
     isTabsContainer (): boolean {
       return this.block.tabs?.use || false
     },
+    directionTabs (): boolean {
+      return (this.block.tabs?.position === 'left' || this.block.tabs?.position === 'right')
+    },
     positionStyle (): object {
       let position: {
         top?: string, left?: string, right?: string, bottom?: string
@@ -537,7 +544,7 @@ export default Vue.extend({
     this.getStore().removeRef(this.block.guid)
   },
   methods: {
-    setIsShowArrows () {
+    setIsShowArrows ():void {
       const tabsScroll: HTMLElement = this.$refs.tabsScroll as HTMLElement
       const draggableContainer: HTMLElement = this.$refs.draggableContainer as HTMLElement
       const tabsWidth = tabsScroll.offsetWidth
@@ -545,7 +552,7 @@ export default Vue.extend({
       const blockWidth = draggableContainer.offsetWidth
       this.blockWidth = draggableContainer.offsetWidth
 
-      if (tabsWidth > blockWidth) {
+      if (tabsWidth > blockWidth && (this.block.tabs?.position !== 'left' && this.block.tabs?.position !== 'right')) {
         this.isShowArrows = true
       } else {
         this.isShowArrows = false
@@ -828,24 +835,27 @@ export default Vue.extend({
   position: absolute;
   display: flex;
   overflow: hidden;
-  width: 100%;
 }
 
 .block .tabs_container.position_top {
   bottom: 100%;
+  width: 100%;
 }
 
 .block .tabs_container.position_right {
   left: 100%;
   flex-direction: column;
+  height: 100%;
 }
 
 .block .tabs_container.position_bottom {
   top: 100%;
+  width: 100%;
 }
 
 .block .tabs_container.position_left {
   right: 100%;
+  height: 100%;
   flex-direction: column;
 }
 #svg{
@@ -864,8 +874,6 @@ export default Vue.extend({
 .tab {
   width: 100px;
   cursor: pointer;
-  background-color: #fff;
-  /* border: 1px solid grey; */
   box-sizing: border-box;
   text-align: center;
   /* flex: 1; */
@@ -877,6 +885,9 @@ export default Vue.extend({
 .tabs_onScroll.tabs_padding {
   padding-left: 15px;
   padding-right: 15px;
+}
+.tabs_onScroll.direction {
+  flex-direction: column;
 }
 .tabs_button {
     display: block;

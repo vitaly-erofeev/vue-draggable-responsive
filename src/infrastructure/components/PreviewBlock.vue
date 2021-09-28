@@ -23,7 +23,7 @@
         @click="scrollPrevTab"
         :class="{ [block.tabs.tabArrowsClass]: true }"
       ></font-awesome-icon>
-      <div class="tabs_onScroll" ref="tabsScroll" :class="{'tabs_padding': isShowArrows }">
+      <div class="tabs_onScroll" ref="tabsScroll" :class="{'tabs_padding': isShowArrows, 'direction': directionTabs }">
         <div
             v-for="tab in block.tabs.list"
             :key="tab.guid"
@@ -90,6 +90,9 @@ export default Vue.extend({
   },
   inject: ['getStore'],
   computed: {
+    directionTabs (): boolean {
+      return (this.block.tabs?.position === 'left' || this.block.tabs?.position === 'right')
+    },
     zIndex (): number {
       const startIndex = 101
       if (!this.block.parentGuid) {
@@ -419,31 +422,35 @@ export default Vue.extend({
   position: absolute;
   display: flex;
   overflow: hidden;
-  width: 100%;
+}
+.tabs_onScroll.direction {
+  flex-direction: column;
 }
 
 .block .tabs_container.position_top {
   bottom: 100%;
+  width: 100%;
 }
 
 .block .tabs_container.position_right {
   left: 100%;
+  height: 100%;
   flex-direction: column;
 }
 
 .block .tabs_container.position_bottom {
   top: 100%;
+  width: 100%;
 }
 
 .block .tabs_container.position_left {
   right: 100%;
+  height: 100%;
   flex-direction: column;
 }
 .block .tab {
   width: 100px;
   cursor: pointer;
-  background-color: #fff;
-  /* border: 1px solid grey; */
   box-sizing: border-box;
   text-align: center;
   /* flex: 1; */

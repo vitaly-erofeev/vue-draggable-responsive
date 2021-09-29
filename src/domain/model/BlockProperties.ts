@@ -5,10 +5,14 @@ import { TabProperties } from '@/domain/model/TabProperties'
 import { CalcProperties } from '@/domain/model/CalcProperties'
 import { StickyTo } from '@/domain/model/StickyTo'
 import { ReplicationProperties } from '@/domain/model/ReplicationProperties'
+import { MinMax } from '@/domain/model/MinMax'
+import { OnCenter } from '@/domain/model/OnCenter'
 
 export interface BlockProperties {
   widthCalc?: CalcProperties
   heightCalc?: CalcProperties
+  onCenter?: OnCenter
+  minMax?: MinMax
   width: number,
   height: number,
   top?: number,

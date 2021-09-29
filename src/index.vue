@@ -50,6 +50,10 @@ import { TabProperties } from '@/domain/model/TabProperties'
 import { StickyTo } from '@/domain/model/StickyTo'
 // eslint-disable-next-line no-unused-vars
 import { ReplicationProperties } from '@/domain/model/ReplicationProperties'
+// eslint-disable-next-line no-unused-vars
+import { MinMax } from '@/domain/model/MinMax'
+// eslint-disable-next-line no-unused-vars
+import { OnCenter } from '@/domain/model/OnCenter'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 
@@ -157,7 +161,9 @@ export default Vue.extend({
         type = AddBlockType.DEFAULT,
         isStretched = false,
         tabs = undefined,
-        replication = undefined
+        replication = undefined,
+        minMax = undefined,
+        onCenter = undefined
       }: {
           width: number,
           height: number,
@@ -180,7 +186,9 @@ export default Vue.extend({
           type: AddBlockType,
           isStretched: boolean,
           tabs?: TabProperties,
-          replication?: ReplicationProperties
+          replication?: ReplicationProperties,
+          minMax?: MinMax,
+          onCenter?: OnCenter
         }
     ): string {
       if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
@@ -204,7 +212,9 @@ export default Vue.extend({
         sizeTypes,
         isStretched,
         tabs,
-        replication
+        replication,
+        minMax,
+        onCenter
       })
       if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
         this.$nextTick(() => {

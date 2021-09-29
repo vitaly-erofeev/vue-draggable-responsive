@@ -139,7 +139,7 @@ import BlockDTO from '../../domain/model/BlockDTO'
 import BlockManager from '@/application/service/BlockManager'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faAngleDown, faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import { faAngleDown, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { Sticky } from '@/domain/model/Sticky'
 // eslint-disable-next-line no-unused-vars
 import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
@@ -520,6 +520,22 @@ export default Vue.extend({
       if (this.block.isHidden && !this.showHidden) {
         width = '0px'
         height = '0px'
+      }
+
+      if (!this.block.stickyTo?.guid && this.block.onCenter?.horizontal) {
+        if (this.block.sticky === Sticky.BL || this.block.sticky === Sticky.TL) {
+          position.left = `calc(50% - calc(${width} / 2))`
+        } else {
+          position.right = `calc(50% - calc(${width} / 2))`
+        }
+      }
+
+      if (!this.block.stickyTo?.guid && this.block.onCenter?.vertical) {
+        if (this.block.sticky === Sticky.TR || this.block.sticky === Sticky.TL) {
+          position.top = `calc(50% - calc(${height} / 2))`
+        } else {
+          position.bottom = `calc(50% - calc(${height} / 2))`
+        }
       }
       return Object.assign(position, {
         width: width,

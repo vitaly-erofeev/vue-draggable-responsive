@@ -20,6 +20,9 @@
       <button @click="switchSticky">sticky</button>
       <button @click="addContainerPercent(1, $event)">percent container</button>
       <button @click="addContainerPixel(1, $event)">pixel container</button>
+      <button @click="addMinMax()">add min_max</button>
+      <button @click="addHorizontalCenter()">add hor center</button>
+      <button @click="addVerticalCenter()">add ver center</button>
       <button @click="showHidden = !showHidden">toggle show hidden: {{showHidden}}</button>
       <select v-model="(activeBlock || {}).sticky">
         <option value="tr">Top-Right</option>
@@ -86,6 +89,60 @@ export default {
     }
   },
   methods: {
+    addVerticalCenter () {
+      this.$refs.designer.addBlock({
+        width: 70,
+        height: 10,
+        top: 30,
+        right: 0,
+        sticky: 'tl',
+        onCenter: {
+          vertical: true
+        },
+        sizeTypes: {
+          width: '%',
+          height: '%',
+          top: 'px',
+          left: '%'
+        }
+      })
+    },
+    addHorizontalCenter () {
+      this.$refs.designer.addBlock({
+        width: 70,
+        height: 10,
+        top: 30,
+        right: 0,
+        sticky: 'tl',
+        onCenter: {
+          horizontal: true
+        },
+        sizeTypes: {
+          width: '%',
+          height: '%',
+          top: 'px',
+          left: '%'
+        }
+      })
+    },
+    addMinMax () {
+      this.$refs.designer.addBlock({
+        width: 70,
+        height: 10,
+        top: 30,
+        right: 0,
+        sticky: 'tl',
+        minMax: {
+          maxHeight: 100
+        },
+        sizeTypes: {
+          width: '%',
+          height: '%',
+          top: 'px',
+          left: '%'
+        }
+      })
+    },
     cl (event) {
       console.log(event)
     },

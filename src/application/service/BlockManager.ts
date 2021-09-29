@@ -175,6 +175,9 @@ export default class BlockManager {
   }
 
   private setYPosition (event: MouseEvent): void {
+    if (this.block.onCenter?.vertical) {
+      return
+    }
     const breakpoints = BreakpointsFactory.build(Breakpoints.Y, this.block.sticky)
     switch (this.block.sizeTypes[breakpoints.offset]) {
       case SizeTypes.PIXEL:
@@ -187,6 +190,9 @@ export default class BlockManager {
   }
 
   private setXPosition (event: MouseEvent): void {
+    if (this.block.onCenter?.horizontal) {
+      return
+    }
     const breakpoints = BreakpointsFactory.build(Breakpoints.X, this.block.sticky)
     switch (this.block.sizeTypes[breakpoints.offset]) {
       case SizeTypes.PIXEL:

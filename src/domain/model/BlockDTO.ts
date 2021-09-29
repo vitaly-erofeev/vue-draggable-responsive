@@ -5,12 +5,16 @@ import { TabPosition, TabProperties } from '@/domain/model/TabProperties'
 import { CalcProperties } from '@/domain/model/CalcProperties'
 import { StickyTo } from '@/domain/model/StickyTo'
 import { ReplicationProperties } from '@/domain/model/ReplicationProperties'
+import { MinMax } from '@/domain/model/MinMax'
+import { OnCenter } from '@/domain/model/OnCenter'
 
 export default class BlockDTO {
   [index: string]: any;
 
+  onCenter?: OnCenter
   widthCalc?: CalcProperties
   heightCalc?: CalcProperties
+  minMax?: MinMax
   width: number
   height: number
   top?: number
@@ -67,13 +71,17 @@ export default class BlockDTO {
       heightCalc,
       stickyTo,
       replication,
-      isHidden = false
+      isHidden = false,
+      minMax,
+      onCenter
     }: BlockProperties
   ) {
     this.widthCalc = widthCalc
     this.heightCalc = heightCalc
     this.stickyTo = stickyTo
     this.isHidden = isHidden
+    this.minMax = minMax
+    this.onCenter = onCenter
     const {
       _top, _right, _bottom, _left
     } = BlockDTO.getPreparedSizes({

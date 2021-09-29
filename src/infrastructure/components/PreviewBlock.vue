@@ -68,7 +68,7 @@ import Vue_, { VueConstructor } from 'vue'
 import { SizeTypes } from '@/domain/model/SizeTypes'
 import BlockManager from '@/application/service/BlockManager'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faAngleDown, faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import { faAngleDown, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 // eslint-disable-next-line no-unused-vars
 import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
@@ -223,6 +223,26 @@ export default Vue.extend({
           width: this.scrollWidth + 'px'
         })
       } else {
+        if (this.block.minMax?.minWidth && this.block.sizeTypes.width === SizeTypes.PERCENT) {
+          position = Object.assign(position, {
+            minWidth: `${this.block.minMax.minWidth}px`
+          })
+        }
+        if (this.block.minMax?.maxWidth && this.block.sizeTypes.width === SizeTypes.PERCENT) {
+          position = Object.assign(position, {
+            maxWidth: `${this.block.minMax.maxWidth}px`
+          })
+        }
+        if (this.block.minMax?.minHeight && this.block.sizeTypes.height === SizeTypes.PERCENT) {
+          position = Object.assign(position, {
+            minHeight: `${this.block.minMax.minHeight}px`
+          })
+        }
+        if (this.block.minMax?.maxHeight && this.block.sizeTypes.height === SizeTypes.PERCENT) {
+          position = Object.assign(position, {
+            maxHeight: `${this.block.minMax.maxHeight}px`
+          })
+        }
         position = Object.assign(position, {
           width: width,
           height: height
@@ -232,6 +252,22 @@ export default Vue.extend({
         position.width = '0px'
         position.height = '0px'
       }
+      if (!this.block.stickyTo?.guid && this.block.onCenter?.horizontal) {
+        if (this.block.sticky === Sticky.BL || this.block.sticky === Sticky.TL) {
+          position.left = `calc(50% - calc(${width} / 2))`
+        } else {
+          position.right = `calc(50% - calc(${width} / 2))`
+        }
+      }
+
+      if (!this.block.stickyTo?.guid && this.block.onCenter?.vertical) {
+        if (this.block.sticky === Sticky.TR || this.block.sticky === Sticky.TL) {
+          position.top = `calc(50% - calc(${height} / 2))`
+        } else {
+          position.bottom = `calc(50% - calc(${height} / 2))`
+        }
+      }
+
       return Object.assign(position, {
         zIndex: this.zIndex
       })

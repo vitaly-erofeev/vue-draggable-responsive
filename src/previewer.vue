@@ -37,7 +37,7 @@ export default Vue.extend({
   },
   data (): { store: BlockRepositoryInterface } {
     return {
-      store: new BlockRepository()
+      store: new BlockRepository([], true)
     }
   },
   provide (): { getStore: Function } {

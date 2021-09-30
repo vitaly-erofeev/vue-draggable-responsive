@@ -16,9 +16,11 @@ export default class BlockRepository implements BlockRepositoryInterface {
     guid: string,
     element: Vue
   }[] = []
+  private isPreviewMode: boolean
 
-  constructor (blocks: BlockDTO[] = []) {
+  constructor (blocks: BlockDTO[] = [], isPreviewMode: boolean = false) {
     this.blocks = blocks
+    this.isPreviewMode = isPreviewMode
   }
 
   set (blocks: BlockProperties[]): void {
@@ -89,7 +91,7 @@ export default class BlockRepository implements BlockRepositoryInterface {
     if (block.parentGuid) {
       parent = this.getByGuid(block.parentGuid)
       if (typeof parent !== 'undefined') {
-        if (parent.tabs?.use && parent.tabs?.activeGuid) {
+        if (parent.tabs?.use && parent.tabs?.activeGuid && !this.isPreviewMode) {
           block.parentTabGuid = parent.tabs.activeGuid
         }
         parent.children.push(new BlockDTO(block))

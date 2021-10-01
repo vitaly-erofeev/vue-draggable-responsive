@@ -248,6 +248,28 @@ export default Vue.extend({
   linear-gradient(90deg, rgba(128, 128, 128, 0.1) 1px, transparent 1px);
   background-size: 1% 1%;
   position: relative;
+  overflow: scroll;
+}
+
+/* Works on Firefox */
+.container {
+  scrollbar-width: thin;
+  scrollbar-color: #539FFF transparent;
+}
+
+/* Works on Chrome, Edge, and Safari */
+.container::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: #539FFF;
+  border-radius: 5px;
 }
 
 #svg{

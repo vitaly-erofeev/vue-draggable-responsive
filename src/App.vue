@@ -127,13 +127,16 @@ export default {
     },
     addMinMax () {
       this.$refs.designer.addBlock({
-        width: 70,
+        width: 100,
         height: 10,
         top: 30,
         right: 0,
         sticky: 'tl',
         minMax: {
-          maxHeight: 100
+          maxWidth: 200
+        },
+        onCenter: {
+          horizontal: true
         },
         sizeTypes: {
           width: '%',

@@ -253,18 +253,28 @@ export default Vue.extend({
         position.height = '0px'
       }
       if (!this.block.stickyTo?.guid && this.block.onCenter?.horizontal) {
-        if (this.block.sticky === Sticky.BL || this.block.sticky === Sticky.TL) {
-          position.left = `calc(50% - calc(${width} / 2))`
-        } else {
-          position.right = `calc(50% - calc(${width} / 2))`
+        const refBlock = this.getStore().getRefByGuid(this.block.guid) as unknown as {
+          $el: HTMLElement
+        }
+        if (refBlock) {
+          if (this.block.sticky === Sticky.BL || this.block.sticky === Sticky.TL) {
+            position.left = `calc(50% - calc(${refBlock.$el.offsetWidth}px / 2))`
+          } else {
+            position.right = `calc(50% - calc(${refBlock.$el.offsetWidth}px / 2))`
+          }
         }
       }
 
       if (!this.block.stickyTo?.guid && this.block.onCenter?.vertical) {
-        if (this.block.sticky === Sticky.TR || this.block.sticky === Sticky.TL) {
-          position.top = `calc(50% - calc(${height} / 2))`
-        } else {
-          position.bottom = `calc(50% - calc(${height} / 2))`
+        const refBlock = this.getStore().getRefByGuid(this.block.guid) as unknown as {
+          $el: HTMLElement
+        }
+        if (refBlock) {
+          if (this.block.sticky === Sticky.TR || this.block.sticky === Sticky.TL) {
+            position.top = `calc(50% - calc(${refBlock.$el.offsetHeight}px / 2))`
+          } else {
+            position.bottom = `calc(50% - calc(${refBlock.$el.offsetHeight}px / 2))`
+          }
         }
       }
 

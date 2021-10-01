@@ -1,6 +1,7 @@
 import { Sticky } from './Sticky'
 import { BlockProperties } from '@/domain/model/BlockProperties'
 import { SizeTypes } from '@/domain/model/SizeTypes'
+import { InteractiveProperties } from '@/domain/model/InteractiveProperties'
 import { TabPosition, TabProperties } from '@/domain/model/TabProperties'
 import { CalcProperties } from '@/domain/model/CalcProperties'
 import { StickyTo } from '@/domain/model/StickyTo'
@@ -32,6 +33,7 @@ export default class BlockDTO {
   style?: string
   isActive: boolean = false
   isActiveAsParent: boolean = false
+  interactive?: InteractiveProperties
   tabs?: TabProperties = {
     use: false,
     list: [],
@@ -40,6 +42,7 @@ export default class BlockDTO {
   parentTabGuid?: string
   isEditing?: boolean
   replication?: ReplicationProperties
+  isHover: boolean = false
   isHidden: boolean = false
 
   constructor (
@@ -65,12 +68,14 @@ export default class BlockDTO {
       parentGuid,
       isStretched,
       style,
+      interactive,
       tabs,
       parentTabGuid,
       widthCalc,
       heightCalc,
       stickyTo,
       replication,
+      isHover = false,
       isHidden = false,
       minMax,
       onCenter
@@ -79,6 +84,7 @@ export default class BlockDTO {
     this.widthCalc = widthCalc
     this.heightCalc = heightCalc
     this.stickyTo = stickyTo
+    this.isHover = isHover
     this.isHidden = isHidden
     this.minMax = minMax
     this.onCenter = onCenter
@@ -106,6 +112,7 @@ export default class BlockDTO {
     this.parentGuid = parentGuid
     this.isStretched = isStretched
     this.style = style
+    this.interactive = interactive
     this.tabs = tabs
     this.parentTabGuid = parentTabGuid
     this.isEditing = false

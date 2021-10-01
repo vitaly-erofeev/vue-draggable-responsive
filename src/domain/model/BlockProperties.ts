@@ -1,6 +1,7 @@
 import { Sticky } from '@/domain/model/Sticky'
 import BlockDTO from '@/domain/model/BlockDTO'
 import { SizeTypes } from '@/domain/model/SizeTypes'
+import { InteractiveProperties } from '@/domain/model/InteractiveProperties'
 import { TabProperties } from '@/domain/model/TabProperties'
 import { CalcProperties } from '@/domain/model/CalcProperties'
 import { StickyTo } from '@/domain/model/StickyTo'
@@ -35,8 +36,10 @@ export interface BlockProperties {
   children?: BlockDTO[],
   parentGuid?: string,
   style?: string,
+  interactive?: InteractiveProperties,
   tabs?: TabProperties,
   parentTabGuid?: string,
   replication?: ReplicationProperties,
+  isHover?: boolean,
   isHidden?: boolean
 }

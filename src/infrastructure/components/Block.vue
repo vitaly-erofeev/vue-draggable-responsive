@@ -6,7 +6,8 @@
         'highlight' : isResizing || isDragging,
         'active': block.isActive,
         'hidden': block.isHidden,
-        'active_parent': block.isActiveAsParent }"
+        'active_parent': block.isActiveAsParent
+      }"
       ref="draggableContainer"
       v-show="!block.isHidden || showHidden"
       @mousedown.stop="dragStart"
@@ -95,7 +96,13 @@
           <span>{{ block.right }}{{ block.sizeTypes.right }}</span>
         </div>
       </slot>
-      <div class="content" :style="block.style">
+      <div
+        class="content"
+        :style="blockContentStyle"
+        @mouseover="block.isHover = true"
+        @mouseleave="block.isHover = false"
+        @click.stop="$emit('click', { block, event: $event.event || $event })"
+      >
         <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
         <svg id="svg" v-if="!block.isEditing && !isTabsContainer">
           <line class="line" v-for="(line, index) in stickyLines"
@@ -108,7 +115,7 @@
         </svg>
         <block
             v-for="_block in block.children"
-            v-show="!(block.tabs || {}).use || _block.parentTabGuid === activeTabGuid"
+            v-show="isShowChildren || _block.parentTabGuid"
             :key="_block.guid"
             :block="_block"
             :step="step"
@@ -118,6 +125,7 @@
             @stop-drag="$emit('stop-drag', $event)"
             @dragging="$emit('dragging', $event)"
             @contextmenu="$emit('contextmenu', $event)"
+            @click="$emit('click', { block: _block, event: $event.event || $event })"
         >
           <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
             <slot :name="name" v-bind="data"></slot>
@@ -542,6 +550,38 @@ export default Vue.extend({
         height: height,
         zIndex: this.zIndex
       })
+    },
+    blockContentStyle () {
+      let style = ''
+
+      const block = this.block
+
+      if (block.style) {
+        style += block.style
+      }
+
+      if (block.isHover) {
+        if (block.interactive?.containerHoverStyle) {
+          style += '; ' + block.interactive.containerHoverStyle
+        }
+      }
+
+      return style
+    },
+    isShowChildren () {
+      let isShow = true
+
+      const block = this.block
+
+      if (block.tabs?.use) {
+        isShow = false
+      }
+
+      if (block.contentType === 'registry') {
+        isShow = false
+      }
+
+      return isShow
     }
   },
   mounted () {

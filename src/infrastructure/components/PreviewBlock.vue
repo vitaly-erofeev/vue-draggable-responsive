@@ -42,15 +42,23 @@
         @click="scrollNextTab"
       ></font-awesome-icon>
     </div>
-    <div class="content" :style="block.style" ref="container">
+    <div
+      ref="container"
+      class="content"
+      :style="blockContentStyle"
+      @mouseover="block.isHover = true"
+      @mouseleave="block.isHover = false"
+      @click.stop="$emit('click', { block, event: $event.event || $event })"
+    >
       <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
       <preview-block
           v-for="_block in block.children"
-          v-show="!(block.tabs || {}).use || _block.parentTabGuid === activeTabGuid"
+          v-show="isShowChildren || _block.parentTabGuid"
           :key="_block.guid"
           :block="_block"
           :ref="_block.guid"
           :replication-callback="replicationCallback"
+          @click="$emit('click', { block: _block, event: $event.event || $event })"
       >
         <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
           <slot :name="name" v-bind="data"></slot>
@@ -281,6 +289,38 @@ export default Vue.extend({
       return Object.assign(position, {
         zIndex: this.zIndex
       })
+    },
+    blockContentStyle () {
+      let style = ''
+
+      const block = this.block
+
+      if (block.style) {
+        style += block.style
+      }
+
+      if (block.isHover) {
+        if (block.interactive?.containerHoverStyle) {
+          style += '; ' + block.interactive.containerHoverStyle
+        }
+      }
+
+      return style
+    },
+    isShowChildren () {
+      let isShow = true
+
+      const block = this.block
+
+      if (block.tabs?.use) {
+        isShow = false
+      }
+
+      if (block.contentType === 'registry') {
+        isShow = false
+      }
+
+      return isShow
     }
   },
   mounted () {

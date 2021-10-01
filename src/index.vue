@@ -20,6 +20,7 @@
         @stop-drag="$emit('stop-drag', $event)"
         @dragging="$emit('dragging', $event)"
         @contextmenu="$emit('contextmenu', $event)"
+        @click="$emit('click', $event)"
     >
       <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
         <slot :name="name" v-bind="data"></slot>

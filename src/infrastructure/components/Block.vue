@@ -115,7 +115,7 @@
         </svg>
         <block
             v-for="_block in block.children"
-            v-show="isShowChildren || _block.parentTabGuid"
+            v-show="isShowChildren && _block.parentTabGuid === activeTabGuid"
             :key="_block.guid"
             :block="_block"
             :step="step"
@@ -572,10 +572,6 @@ export default Vue.extend({
       let isShow = true
 
       const block = this.block
-
-      if (block.tabs?.use) {
-        isShow = false
-      }
 
       if (block.contentType === 'registry') {
         isShow = false

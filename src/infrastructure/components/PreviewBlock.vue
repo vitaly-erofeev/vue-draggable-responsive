@@ -3,7 +3,6 @@
       :style="positionStyle"
       ref="draggableContainer"
       class="block"
-      v-show="!block.isHidden"
   >
     <div
         v-if="isTabsContainer"
@@ -53,7 +52,7 @@
       <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
       <preview-block
           v-for="_block in block.children"
-          v-show="isShowChildren && _block.parentTabGuid === activeTabGuid"
+          v-show="isShowChildren && _block.parentTabGuid === activeTabGuid && !_block.isHidden"
           :key="_block.guid"
           :block="_block"
           :ref="_block.guid"

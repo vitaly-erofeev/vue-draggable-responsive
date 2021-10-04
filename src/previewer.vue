@@ -6,6 +6,7 @@
         :block="block"
         :ref="block.guid"
         :replication-callback="replicationCallback"
+        v-show="!block.isHidden"
         @click="$emit('click', $event)"
     >
       <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">

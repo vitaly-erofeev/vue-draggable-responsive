@@ -51,7 +51,7 @@
     >
       <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
       <preview-block
-          v-for="_block in block.children"
+          v-for="_block in children"
           v-show="isShowChildren && _block.parentTabGuid === activeTabGuid && !_block.isHidden"
           :key="_block.guid"
           :block="_block"
@@ -99,6 +99,19 @@ export default Vue.extend({
   computed: {
     directionTabs (): boolean {
       return (this.block.tabs?.position === 'left' || this.block.tabs?.position === 'right')
+    },
+    // список потомков у контейнера
+    children () {
+      if (this.activeTabGuid) {
+        return this.block.children.map(item => {
+          if (item.parentTabGuid === this.activeTabGuid) {
+            item['isLoadedTab'] = true
+          }
+          return item
+        }).filter(item => item.isLoadedTab)
+      } else {
+        return this.block.children
+      }
     },
     zIndex (): number {
       const startIndex = 101

@@ -425,9 +425,24 @@ export default Vue.extend({
           this.setIsShowArrows()
         }
       }
+    },
+    tabGuids (value, oldValue) {
+      if (value.length < oldValue.length) {
+        let removedTab = oldValue.filter((item: string) => !value.includes(item))[0]
+        if (removedTab) {
+          this.block.children
+            .filter((item) => item.parentTabGuid === removedTab)
+            .forEach((item) => {
+              this.getStore().remove(item.guid)
+            })
+        }
+      }
     }
   },
   computed: {
+    tabGuids () {
+      return (this.block.tabs?.list || []).map((item) => item.guid)
+    },
     stickyLines () {
       return this.getStore().getStickyLines(this.block.guid)
     },

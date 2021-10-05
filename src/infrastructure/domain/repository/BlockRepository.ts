@@ -127,15 +127,21 @@ export default class BlockRepository implements BlockRepositoryInterface {
     if (!block) {
       return
     }
+    if (block.children?.length) {
+      block.children.forEach((item) => this.remove(item.guid))
+    }
     if (block.parentGuid) {
       const parent = this.getByGuid(block.parentGuid)
       if (!parent) {
         return
       }
       parent.children = parent.children.filter((item) => item.guid !== guid)
-      return
+    } else {
+      this.blocks = this.blocks.filter((item) => item.guid !== guid)
     }
-    this.blocks = this.blocks.filter((item) => item.guid !== guid)
+    this.emitEvent(EventTypes.REMOVE_BLOCK, {
+      guid: guid
+    })
   }
 
   resetActiveBlock (): void {

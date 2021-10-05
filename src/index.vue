@@ -55,6 +55,7 @@ import { ReplicationProperties } from '@/domain/model/ReplicationProperties'
 import { MinMax } from '@/domain/model/MinMax'
 // eslint-disable-next-line no-unused-vars
 import { OnCenter } from '@/domain/model/OnCenter'
+import SimpleRemoveListener from '@/infrastructure/service/listeners/SimpleRemoveListener'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 
@@ -86,7 +87,13 @@ export default Vue.extend({
       blocksArray: this.blocks
     }
   },
+  mounted () {
+    this.store.addListener(new SimpleRemoveListener(this.onBlockRemove))
+  },
   methods: {
+    onBlockRemove (event: {guid: string}) {
+      this.$emit('block-remove', event.guid)
+    },
     getAllBlockRefs (): { [index: string]: Vue; } {
       let answer: { [index: string]: Vue; } = {}
 

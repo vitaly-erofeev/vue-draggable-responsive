@@ -80,7 +80,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 // eslint-disable-next-line no-unused-vars
 import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
 import { StickyToType } from '@/domain/model/StickyTo'
-import SimpleListener from '@/infrastructure/service/listeners/SimpleListener'
+import SimpleAddListener from '@/infrastructure/service/listeners/SimpleAddListener'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 library.add(faAngleDown, faChevronRight, faChevronLeft)
@@ -398,7 +398,7 @@ export default Vue.extend({
       let rowGuids: { [index: string]: any; } = { 0: [me.block.guid] }
       let row = 0
       this.replicationIndex = 0
-      const listenerGuid = this.getStore().addListener(new SimpleListener(this.onReplicateBlock))
+      const listenerGuid = this.getStore().addListener(new SimpleAddListener(this.onReplicateBlock))
       blocksData.forEach((item: object, index: number) => {
         const newBlock = JSON.parse(JSON.stringify(me.block))
         newBlock.replication = undefined

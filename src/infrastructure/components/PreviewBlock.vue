@@ -482,6 +482,7 @@ export default Vue.extend({
       tabsScroll.style.transform = `translateX(-${this.tabsOffset}px)`
     },
     setIsShowArrows (): void {
+      if (!this.$refs.draggableContainer) return
       const tabsScroll: HTMLElement = this.$refs.tabsScroll as HTMLElement
       const draggableContainer: HTMLElement = this.$refs.draggableContainer as HTMLElement
       const tabsWidth = tabsScroll.offsetWidth

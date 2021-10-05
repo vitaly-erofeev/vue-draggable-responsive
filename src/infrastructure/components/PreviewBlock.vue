@@ -47,7 +47,7 @@
       :style="blockContentStyle"
       @mouseover="block.isHover = true"
       @mouseleave="block.isHover = false"
-      @click.stop="$emit('click', { block, event: $event.event || $event })"
+      @click.stop="$emit('click', { block: $event.block || block, event: $event.event || $event })"
     >
       <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
       <preview-block
@@ -57,7 +57,7 @@
           :block="_block"
           :ref="_block.guid"
           :replication-callback="replicationCallback"
-          @click="$emit('click', { block: _block, event: $event.event || $event })"
+          @click="$emit('click', { block: $event.block || _block, event: $event.event || $event })"
       >
         <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
           <slot :name="name" v-bind="data"></slot>

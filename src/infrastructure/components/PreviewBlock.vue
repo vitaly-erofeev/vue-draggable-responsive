@@ -51,7 +51,7 @@
     >
       <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
       <preview-block
-          v-for="_block in block.children"
+          v-for="_block in children"
           v-show="isShowChildren && _block.parentTabGuid === activeTabGuid && !_block.isHidden"
           :key="_block.guid"
           :block="_block"
@@ -97,6 +97,19 @@ export default Vue.extend({
   },
   inject: ['getStore'],
   computed: {
+    // список потомков у контейнера
+    children () {
+      if (this.activeTabGuid) {
+        return this.block.children.map(item => {
+          if (item.parentTabGuid === this.activeTabGuid) {
+            item['isLoadedTab'] = true
+          }
+          return item
+        }).filter(item => item.isLoadedTab)
+      } else {
+        return this.block.children
+      }
+    },
     directionTabs (): boolean {
       return (this.block.tabs?.position === 'left' || this.block.tabs?.position === 'right')
     },
@@ -469,6 +482,7 @@ export default Vue.extend({
       tabsScroll.style.transform = `translateX(-${this.tabsOffset}px)`
     },
     setIsShowArrows (): void {
+      if (!this.$refs.draggableContainer) return
       const tabsScroll: HTMLElement = this.$refs.tabsScroll as HTMLElement
       const draggableContainer: HTMLElement = this.$refs.draggableContainer as HTMLElement
       const tabsWidth = tabsScroll.offsetWidth

@@ -114,7 +114,7 @@
           />
         </svg>
         <block
-            v-for="_block in block.children"
+            v-for="_block in children"
             v-show="isShowChildren && _block.parentTabGuid === activeTabGuid"
             :key="_block.guid"
             :block="_block"
@@ -440,6 +440,19 @@ export default Vue.extend({
     }
   },
   computed: {
+    // список потомков у контейнера
+    children () {
+      if (this.activeTabGuid) {
+        return this.block.children.map(item => {
+          if (item.parentTabGuid === this.activeTabGuid) {
+            item['isLoadedTab'] = true
+          }
+          return item
+        }).filter(item => item.isLoadedTab)
+      } else {
+        return this.block.children
+      }
+    },
     tabGuids () {
       return (this.block.tabs?.list || []).map((item) => item.guid)
     },
@@ -612,6 +625,7 @@ export default Vue.extend({
   },
   methods: {
     setIsShowArrows ():void {
+      if (!this.$refs.draggableContainer) return
       const tabsScroll: HTMLElement = this.$refs.tabsScroll as HTMLElement
       const draggableContainer: HTMLElement = this.$refs.draggableContainer as HTMLElement
       const tabsWidth = tabsScroll.offsetWidth
@@ -637,6 +651,8 @@ export default Vue.extend({
       this.activeTabGuid = guid
     },
     onDrag (): void {
+      // при ленивой загрузки табов this.$refs.draggableContainer undefined
+      if (!this.$refs.draggableContainer) return
       const el: HTMLElement = this.$refs.draggableContainer as HTMLElement
       this.currentPosition.left = el.offsetLeft
       this.currentPosition.top = el.offsetTop

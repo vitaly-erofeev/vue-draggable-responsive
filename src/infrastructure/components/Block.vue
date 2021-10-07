@@ -445,6 +445,8 @@ export default Vue.extend({
       if (this.activeTabGuid && this.isTabsContainer) {
         return this.block.children.map(item => {
           if (item.parentTabGuid === this.activeTabGuid) {
+            console.log(item, this.activeTabGuid)
+
             item['isLoadedTab'] = true
           }
           return item

@@ -98,8 +98,8 @@ export default Vue.extend({
   inject: ['getStore'],
   computed: {
     // список потомков у контейнера
-    children () {
-      if (this.activeTabGuid) {
+    children (): object[] {
+      if (this.activeTabGuid && this.isTabsContainer) {
         return this.block.children.map(item => {
           if (item.parentTabGuid === this.activeTabGuid) {
             item['isLoadedTab'] = true

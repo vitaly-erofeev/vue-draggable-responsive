@@ -53,6 +53,7 @@
       <preview-block
           v-for="_block in children"
           v-show="isShowChildren && _block.parentTabGuid === activeTabGuid && !_block.isHidden"
+          :is-showing="isShowChildren && _block.parentTabGuid === activeTabGuid && !_block.isHidden"
           :key="_block.guid"
           :block="_block"
           :ref="_block.guid"
@@ -93,22 +94,18 @@ export default Vue.extend({
     block: {
       type: BlockDTO
     },
-    replicationCallback: Function
+    replicationCallback: Function,
+    isShowing: {
+      type: Boolean,
+      default: true
+    }
   },
   inject: ['getStore'],
   computed: {
     // список потомков у контейнера
     children (): object[] {
       if (this.activeTabGuid) {
-        return this.block.children.map(item => {
-          if (item.parentTabGuid === this.activeTabGuid) {
-            if (!this.visitedTabs.includes(item.guid)) {
-              this.visitedTabs.push(item.guid)
-              return item
-            }
-          }
-          return item
-        }).filter(item => this.visitedTabs.includes(item.guid))
+        return this.block.children.filter(item => item.parentTabGuid && this.visitedTabGuids.includes(item.parentTabGuid))
       } else {
         return this.block.children
       }
@@ -275,7 +272,7 @@ export default Vue.extend({
         position.width = '0px'
         position.height = '0px'
       }
-      if (!this.block.stickyTo?.guid && this.block.onCenter?.horizontal) {
+      if (!this.block.stickyTo?.guid && this.block.onCenter?.horizontal && this.isShowing) {
         const refBlock = this.getStore().getRefByGuid(this.block.guid) as unknown as {
           $el: HTMLElement
         }
@@ -288,7 +285,7 @@ export default Vue.extend({
         }
       }
 
-      if (!this.block.stickyTo?.guid && this.block.onCenter?.vertical) {
+      if (!this.block.stickyTo?.guid && this.block.onCenter?.vertical && this.isShowing) {
         const refBlock = this.getStore().getRefByGuid(this.block.guid) as unknown as {
           $el: HTMLElement
         }
@@ -353,9 +350,12 @@ export default Vue.extend({
     this.getStore().removeRef(this.block.guid)
   },
   watch: {
-    activeTabGuid () {
+    activeTabGuid (value) {
       this.scrollHeight = 0
       this.scrollWidth = 0
+      if (!this.visitedTabGuids.includes(value)) {
+        this.visitedTabGuids.push(value)
+      }
       this.$nextTick(() => {
         this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
         this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
@@ -373,7 +373,7 @@ export default Vue.extend({
     blockWidth: number,
     tabsWidth: number,
     isShowArrows: boolean,
-    visitedTabs: string[]
+    visitedTabGuids: string[],
     } {
     return {
       parentBlock: undefined,
@@ -386,7 +386,7 @@ export default Vue.extend({
       blockWidth: 0,
       tabsWidth: 0,
       isShowArrows: false,
-      visitedTabs: []
+      visitedTabGuids: []
     }
   },
   methods: {

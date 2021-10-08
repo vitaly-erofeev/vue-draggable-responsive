@@ -260,79 +260,108 @@ export default {
       this.activeBlock = undefined
       this.$refs.designer.setBlocks([
         {
-          'top': 27,
-          'guid': '4488bb6c-ba9b-44dd-97e0-e51c23fcf224',
-          'left': 24,
-          'right': 37,
-          'width': 45,
-          'widthCalc': {
-            type: '-',
-            value: 200
-          },
-          'bottom': 85,
-          'height': 30,
-          'sticky': 'tl',
-          'children': [],
-          'style': 'background:green',
-          'sizeTypes': {
-            'top': '%',
-            'left': '%',
-            'right': '%',
-            'width': '%',
-            'bottom': '%',
-            'height': '%'
-          },
-          tabs: {
-            class: 'test',
-            use: true,
-            containerStyle: 'background: grey',
-            tabStyle: 'color:black',
-            tabArrowsClass: 'testArr',
-            activeTabStyle: 'color:green',
-            list: [
+          'isStretched': true,
+          'isActive': true,
+          'isActiveAsParent': false,
+          'tabs': {
+            'class': 'test',
+            'use': true,
+            'containerStyle': 'background: grey',
+            'tabStyle': 'color:black',
+            'tabArrowsClass': 'testArr',
+            'activeTabStyle': 'color:green',
+            'list': [
               {
-                guid: 'asdasdas',
-                name: 'test'
+                'guid': 'asdasdas',
+                'name': 'test'
               },
               {
-                guid: 'asdasdas2',
-                name: 'test2'
-              },
-              {
-                guid: '1',
-                name: 'test'
-              },
-              {
-                guid: '2',
-                name: 'test2'
-              },
-              {
-                guid: '3',
-                name: 'test'
-              },
-              {
-                guid: '4',
-                name: 'test2'
-              },
-              {
-                guid: '5',
-                name: 'test'
-              },
-              {
-                guid: '6',
-                name: 'test2'
-              },
-              {
-                guid: '7',
-                name: 'test'
-              },
-              {
-                guid: '8',
-                name: 'test2'
+                'guid': 'asdasdas2',
+                'name': 'test2'
               }
             ],
-            position: 'top'
-          }
+            'position': 'top',
+            'activeGuid': 'asdasdas'
+          },
+          'isHover': false,
+          'isHidden': false,
+          'top': 22,
+          'right': 82,
+          'bottom': 91,
+          'left': 9,
+          'sticky': 'tl',
+          'sizeTypes': {
+            'width': '%',
+            'height': '%',
+            'top': '%',
+            'right': '%',
+            'bottom': '%',
+            'left': '%'
+          },
+          'children': [
+            {
+              'isStretched': false,
+              'isActive': false,
+              'isActiveAsParent': false,
+              'isHover': false,
+              'isHidden': false,
+              'top': 81.109375,
+              'right': 78,
+              'bottom': 488,
+              'left': 10,
+              'sticky': 'tl',
+              'sizeTypes': {
+                'width': '%',
+                'height': 'px',
+                'top': 'px',
+                'left': '%',
+                'right': '%',
+                'bottom': '%'
+              },
+              onCenter: {
+                horizontal: true,
+                vertical: true
+              },
+              'children': [],
+              'width': 70,
+              'height': 100,
+              'guid': '3bb941e8-996e-45f6-afce-1bfcc95e4bcd',
+              'parentGuid': 'f5cd4eaf-0005-482a-87aa-b34aa1e0ab1b',
+              'parentTabGuid': 'asdasdas',
+              'isEditing': false
+            },
+            {
+              'isStretched': false,
+              'isActive': false,
+              'isActiveAsParent': false,
+              'isHover': false,
+              'isHidden': false,
+              'top': 62.109375,
+              'right': 76,
+              'bottom': 490,
+              'left': 14,
+              'sticky': 'tl',
+              'sizeTypes': {
+                'width': '%',
+                'height': 'px',
+                'top': 'px',
+                'left': '%',
+                'right': '%',
+                'bottom': '%'
+              },
+              'children': [],
+              'width': 70,
+              'height': 100,
+              'guid': '3e22f8e6-a83c-4387-bdd3-441611917bc9',
+              'parentGuid': 'f5cd4eaf-0005-482a-87aa-b34aa1e0ab1b',
+              'parentTabGuid': 'asdasdas2',
+              'isEditing': false
+            }
+          ],
+          'width': 84,
+          'height': 55,
+          'guid': 'f5cd4eaf-0005-482a-87aa-b34aa1e0ab1b',
+          'isEditing': false
         },
         {
           'top': 9,

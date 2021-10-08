@@ -44,7 +44,6 @@ export default class BlockDTO {
   replication?: ReplicationProperties
   isHover: boolean = false
   isHidden: boolean = false
-  isLoadedTab: boolean = false
 
   constructor (
     {
@@ -78,7 +77,6 @@ export default class BlockDTO {
       replication,
       isHover = false,
       isHidden = false,
-      isLoadedTab = false,
       minMax,
       onCenter
     }: BlockProperties
@@ -88,7 +86,6 @@ export default class BlockDTO {
     this.stickyTo = stickyTo
     this.isHover = isHover
     this.isHidden = isHidden
-    this.isLoadedTab = isLoadedTab
     this.minMax = minMax
     this.onCenter = onCenter
     const {

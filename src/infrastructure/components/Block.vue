@@ -193,7 +193,8 @@ export default Vue.extend({
     tabsOffset: number,
     blockWidth: number,
     tabsWidth: number,
-    isShowArrows: boolean
+    isShowArrows: boolean,
+    visitedTabs: string[]
     } {
     return {
       blockManager: undefined,
@@ -212,7 +213,8 @@ export default Vue.extend({
       tabsOffset: 0,
       blockWidth: 0,
       tabsWidth: 0,
-      isShowArrows: false
+      isShowArrows: false,
+      visitedTabs: []
     }
   },
   watch: {
@@ -442,15 +444,16 @@ export default Vue.extend({
   computed: {
     // список потомков у контейнера
     children (): object[] {
-      if (this.activeTabGuid && this.isTabsContainer) {
+      if (this.activeTabGuid) {
         return this.block.children.map(item => {
           if (item.parentTabGuid === this.activeTabGuid) {
-            console.log(item, this.activeTabGuid)
-
-            item['isLoadedTab'] = true
+            if (!this.visitedTabs.includes(item.guid)) {
+              this.visitedTabs.push(item.guid)
+              return item
+            }
           }
           return item
-        }).filter(item => item.isLoadedTab)
+        }).filter(item => this.visitedTabs.includes(item.guid))
       } else {
         return this.block.children
       }

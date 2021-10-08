@@ -42,5 +42,4 @@ export interface BlockProperties {
   replication?: ReplicationProperties,
   isHover?: boolean,
   isHidden?: boolean
-  isLoadedTab?: boolean
 }

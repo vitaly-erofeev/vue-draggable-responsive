@@ -42,6 +42,11 @@ export default class BlockDTO {
   parentTabGuid?: string
   isEditing?: boolean
   replication?: ReplicationProperties
+  pagination?: {
+    replicationGuid: string,
+    total: number,
+    limit: number
+  }
   isHover: boolean = false
   isHidden: boolean = false
 
@@ -75,6 +80,7 @@ export default class BlockDTO {
       heightCalc,
       stickyTo,
       replication,
+      pagination,
       isHover = false,
       isHidden = false,
       minMax,
@@ -117,6 +123,7 @@ export default class BlockDTO {
     this.parentTabGuid = parentTabGuid
     this.isEditing = false
     this.replication = replication
+    this.pagination = pagination
     this.prepareSizesTypes()
   }
 

@@ -40,6 +40,11 @@ export interface BlockProperties {
   tabs?: TabProperties,
   parentTabGuid?: string,
   replication?: ReplicationProperties,
+  pagination?: {
+    replicationGuid: string,
+    total: number,
+    limit: number
+  },
   isHover?: boolean,
   isHidden?: boolean
 }

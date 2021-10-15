@@ -170,6 +170,7 @@ export default Vue.extend({
         isStretched = false,
         tabs = undefined,
         replication = undefined,
+        pagination = undefined,
         minMax = undefined,
         onCenter = undefined
       }: {
@@ -195,6 +196,11 @@ export default Vue.extend({
           isStretched: boolean,
           tabs?: TabProperties,
           replication?: ReplicationProperties,
+          pagination?: {
+            replicationGuid: string,
+            total: number,
+            limit: number
+          }
           minMax?: MinMax,
           onCenter?: OnCenter
         }
@@ -221,6 +227,7 @@ export default Vue.extend({
         isStretched,
         tabs,
         replication,
+        pagination,
         minMax,
         onCenter
       })

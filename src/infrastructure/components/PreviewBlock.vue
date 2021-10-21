@@ -43,7 +43,7 @@
     </div>
     <div
       ref="container"
-      class="content"
+      class="content custom_scrollbar"
       :style="blockContentStyle"
       @mouseover="block.isHover = true"
       @mouseleave="block.isHover = false"

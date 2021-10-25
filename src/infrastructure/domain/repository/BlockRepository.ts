@@ -82,6 +82,20 @@ export default class BlockRepository implements BlockRepositoryInterface {
     return answer
   }
 
+  getMainParents (guid: string): BlockDTO | {} {
+    let block!: BlockDTO | {}
+    let blocks: BlockDTO[] | []
+    blocks = this.get()
+    for (let i = 0; i < blocks.length; i++) {
+      if (JSON.stringify(blocks[i]).includes(guid)) {
+        block = blocks[i]
+        break
+      }
+    }
+
+    return block
+  }
+
   add (block: BlockProperties): string {
     const oldGuid = block.guid
     block.guid = GuidGenerator.generate()

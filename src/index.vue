@@ -122,6 +122,9 @@ export default Vue.extend({
     getBlocks (): BlockDTO[] {
       return this.store.get()
     },
+    getMainParents (guid: string): BlockDTO | {} {
+      return this.store.getMainParents(guid)
+    },
     setBlocks (blocks: BlockProperties[]): void {
       this.store.set(blocks)
     },

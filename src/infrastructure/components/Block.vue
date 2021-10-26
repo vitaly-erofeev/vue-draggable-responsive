@@ -462,7 +462,8 @@ export default Vue.extend({
       return (this.block.tabs?.list || []).map((item) => item.guid)
     },
     stickyLines () {
-      return this.getStore().getStickyLines(this.block.guid)
+      return []
+      // return this.getStore().getStickyLines(this.block.guid)
     },
     zIndex (): number {
       const startIndex = 101

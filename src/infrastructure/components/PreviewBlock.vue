@@ -398,11 +398,11 @@ export default Vue.extend({
         }))
       }
     },
-    async prepareReplication (): Promise<void> {
+    async prepareReplication (offset = {}): Promise<void> {
       if (!this.block.replication?.function) {
         return
       }
-      const blocksData: any[] = await this.block.replication?.function()
+      const blocksData: any[] = await this.block.replication?.function(offset)
       if (blocksData.length === 0) {
         this.$nextTick(() => {
           this.getStore().remove(this.block.guid)

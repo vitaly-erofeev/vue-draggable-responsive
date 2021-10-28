@@ -58,6 +58,12 @@ export default Vue.extend({
     },
     setBlocks (blocks: BlockProperties[]): void {
       this.store.set(blocks)
+    },
+    removeBlock (guid: string): void {
+      this.store.remove(guid)
+    },
+    getRefByGuid (guid: string): Vue | undefined {
+      return this.store.getRefByGuid(guid)
     }
   }
 })

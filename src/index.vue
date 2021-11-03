@@ -10,17 +10,18 @@
       />
     </svg>
     <block
-        v-for="block in _blocks"
-        :key="block.guid"
-        :block="block"
-        :step="step"
-        :ref="block.guid"
-        :show-hidden="showHidden"
-        @start-drag="$emit('start-drag', $event)"
-        @stop-drag="$emit('stop-drag', $event)"
-        @dragging="$emit('dragging', $event)"
-        @contextmenu="$emit('contextmenu', $event)"
-        @click="$emit('click', $event)"
+      v-for="block in _blocks"
+      :ref="block.guid"
+      :key="block.guid"
+      :block="block"
+      :step="step"
+      :show-hidden="showHidden"
+      :tab-settings-service="tabSettingsService"
+      @start-drag="$emit('start-drag', $event)"
+      @stop-drag="$emit('stop-drag', $event)"
+      @dragging="$emit('dragging', $event)"
+      @contextmenu="$emit('contextmenu', $event)"
+      @click="$emit('click', $event)"
     >
       <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
         <slot :name="name" v-bind="data"></slot>
@@ -57,11 +58,20 @@ import { MinMax } from '@/domain/model/MinMax'
 import { OnCenter } from '@/domain/model/OnCenter'
 import SimpleRemoveListener from '@/infrastructure/service/listeners/SimpleRemoveListener'
 
+import TabSettings from '@/application/service/TabSettings'
+
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 
 export default Vue.extend({
   name: 'VueDraggableResponsiveDesigner',
   components: { Block },
+
+  provide () {
+    return {
+      getStore: this.getStore
+    }
+  },
+
   props: {
     step: {
       type: Number,
@@ -74,22 +84,41 @@ export default Vue.extend({
     showHidden: {
       type: Boolean,
       default: false
+    },
+    tabSettings: {
+      type: Object
     }
   },
-  provide () {
-    return {
-      getStore: this.getStore
-    }
-  },
-  data (): { blocksArray: object[], store: BlockRepositoryInterface } {
+
+  data (): { blocksArray: object[], store: BlockRepositoryInterface, tabSettingsService: TabSettings } {
     return {
       store: new BlockRepository(),
-      blocksArray: this.blocks
+      blocksArray: this.blocks,
+      tabSettingsService: new TabSettings(this.tabSettings, this)
     }
   },
+
+  computed: {
+    _blocks (): BlockDTO[] {
+      return this.getStore().get()
+    },
+    stickyLines () {
+      return this.getStore().getStickyLines()
+    }
+  },
+
+  watch: {
+    tabSettings: {
+      handler () {
+        this.$set(this.tabSettingsService, 'tabSettings', this.tabSettings)
+      }
+    }
+  },
+
   mounted () {
     this.store.addListener(new SimpleRemoveListener(this.onBlockRemove))
   },
+
   methods: {
     onBlockRemove (event: {guid: string}) {
       this.$emit('block-remove', event.guid)
@@ -245,14 +274,10 @@ export default Vue.extend({
     },
     removeBlock (guid: string): void {
       this.store.remove(guid)
-    }
-  },
-  computed: {
-    _blocks (): BlockDTO[] {
-      return this.getStore().get()
     },
-    stickyLines () {
-      return this.getStore().getStickyLines()
+    onUpdateTabSettings (tabSettings: object): void {
+      // Обновить ссылку на объект на новую
+      this.$emit('tab-settings-update', tabSettings)
     }
   }
 })

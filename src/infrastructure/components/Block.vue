@@ -1,141 +1,134 @@
 <template>
   <div
-      :style="positionStyle"
-      :class="{
-        'block': true,
-        'highlight' : isResizing || isDragging,
-        'active': block.isActive,
-        'hidden': block.isHidden,
-        'active_parent': block.isActiveAsParent
-      }"
-      ref="draggableContainer"
-      v-show="!block.isHidden || showHidden"
-      @mousedown.stop="dragStart"
-      @contextmenu.stop="$emit('contextmenu', {block: block, event: $event})"
+    :style="positionStyle"
+    :class="{
+      'block': true,
+      'highlight' : isResizing || isDragging,
+      'active': block.isActive,
+      'hidden': block.isHidden,
+      'active_parent': block.isActiveAsParent
+    }"
+    ref="draggableContainer"
+    v-show="!block.isHidden || showHidden"
+    @mousedown.stop="dragStart"
+    @contextmenu.stop="$emit('contextmenu', { block: block, event: $event })"
   >
-      <div
-          v-if="isTabsContainer"
-          ref="tabsContainer"
-          :class="{
-            'tabs_container' : true,
-            'position_top': block.tabs.position === 'top',
-            'position_right': block.tabs.position === 'right',
-            'position_bottom': block.tabs.position === 'bottom',
-            'position_left': block.tabs.position === 'left',
-          }"
-          :style="block.tabs.containerStyle"
-      >
-        <font-awesome-icon
-          v-show="isShowArrows"
-          icon="chevron-left"
-          class="tabs_button"
-          @click="scrollPrevTab"
-          :class="{ [block.tabs.tabArrowsClass]: true }"
-        ></font-awesome-icon>
-      <div class="tabs_onScroll" ref="tabsScroll"
-        :class="{
-        'tabs_padding': isShowArrows,
-        'direction': directionTabs
-        }">
+    <div
+      v-if="isTabsContainer"
+      ref="tabsContainer"
+      :class="{
+        'tabs_container' : true,
+        'position_top': block.tabs.position === 'top',
+        'position_right': block.tabs.position === 'right',
+        'position_bottom': block.tabs.position === 'bottom',
+        'position_left': block.tabs.position === 'left',
+      }"
+      :style="block.tabs.containerStyle"
+    >
+      <font-awesome-icon
+        v-show="isShowArrows"
+        icon="chevron-left"
+        class="tabs_button"
+        @click="scrollPrevTab"
+        :class="{ [block.tabs.tabArrowsClass]: true }"
+      ></font-awesome-icon>
+      <div class="tabs_onScroll" ref="tabsScroll" :class="{ 'tabs_padding': isShowArrows, 'direction': directionTabs }">
         <div
-            v-for="tab in block.tabs.list"
-            :key="tab.guid"
-            :style="`${block.tabs.tabStyle};${tab.guid === activeTabGuid ? block.tabs.activeTabStyle :''}`"
-            :class="{
-              'tab': true,
-              'active': tab.guid === activeTabGuid,
-              [block.tabs.class]: true
-              }"
-            @click="onTabClick(tab.guid)"
+          v-for="tab in visibleTabs"
+          :key="tab.guid"
+          :style="blockTabStyle + getBlockTabStyle(tab)"
+          :class="{ 'tab': true, 'active': tab.guid === activeTabGuid, [block.tabs.class]: true }"
+          @click="onTabClick(tab.guid)"
         >
           <span class="label">{{ tab.name }}</span>
         </div>
       </div>
-
-        <font-awesome-icon
-          v-show="isShowArrows"
-          icon="chevron-right"
-          :class="{ [block.tabs.tabArrowsClass]: true }"
-          class="tabs_button tabs_button_next"
-          @click="scrollNextTab"
-        ></font-awesome-icon>
-      </div>
-      <div class="block_info">
-        <slot :block="block" name="help_text"></slot>
-      </div>
-      <slot :block="block" :is-resizing="isResizing" :is-dragging="isDragging" name="info">
-        <div class="block_info" v-show="isResizing">
-          {{ block.width }}{{ block.sizeTypes.width }} x {{ block.height }}{{ block.sizeTypes.height }}
-        </div>
-        <div
-            v-show="isDragging && ['tl', 'bl'].includes(block.sticky)"
-            class="position_line left"
-            :style="`left: calc(-${currentPosition.left}px - 1px);width:calc(${currentPosition.left}px - 1px)`"
-        >
-          <span>{{ block.left }}{{ block.sizeTypes.left }}</span>
-        </div>
-        <div
-            v-show="isDragging && ['tl', 'tr'].includes(block.sticky)"
-            class="position_line top"
-            :style="`top: -${currentPosition.top}px;height:${currentPosition.top}px`"
-        >
-          <span>{{ block.top }}{{ block.sizeTypes.top }}</span>
-        </div>
-        <div
-            v-show="isDragging && ['br', 'bl'].includes(block.sticky)"
-            class="position_line bottom"
-            :style="`bottom: -${currentPosition.bottom}px;height:${currentPosition.bottom}px`"
-        >
-          <span>{{ block.bottom }}{{ block.sizeTypes.bottom }}</span>
-        </div>
-        <div
-            v-show="isDragging && ['tr', 'br'].includes(block.sticky)"
-            class="position_line right"
-            :style="`right: -${currentPosition.right}px;width:${currentPosition.right}px`"
-        >
-          <span>{{ block.right }}{{ block.sizeTypes.right }}</span>
-        </div>
-      </slot>
-      <div
-        class="content custom_scrollbar"
-        :style="blockContentStyle"
-        @mouseover="block.isHover = true"
-        @mouseleave="block.isHover = false"
-        @click.stop="$emit('click', { block: $event.block || block, event: $event.event || $event })"
-      >
-        <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
-        <svg id="svg" v-if="!block.isEditing && !isTabsContainer">
-          <line class="line" v-for="(line, index) in stickyLines"
-                :key="index"
-                :x1="line.x1"
-                :y1="line.y1"
-                :x2="line.x2"
-                :y2="line.y2"
-          />
-        </svg>
-        <block
-            v-for="_block in children"
-            v-show="isShowChildren && _block.parentTabGuid === activeTabGuid"
-            :key="_block.guid"
-            :block="_block"
-            :step="step"
-            :ref="_block.guid"
-            :show-hidden="showHidden"
-            @start-drag="$emit('start-drag', $event)"
-            @stop-drag="$emit('stop-drag', $event)"
-            @dragging="$emit('dragging', $event)"
-            @contextmenu="$emit('contextmenu', $event)"
-            @click="$emit('click', { block: $event.block || _block, event: $event.event || $event })"
-        >
-          <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
-            <slot :name="name" v-bind="data"></slot>
-          </template>
-        </block>
-      </div>
       <font-awesome-icon
-        icon="angle-down"
-        :class="`resize-handler ${block.sticky}`"
-        @mousedown.stop="resizeStart"
+        v-show="isShowArrows"
+        icon="chevron-right"
+        :class="{ [block.tabs.tabArrowsClass]: true }"
+        class="tabs_button tabs_button_next"
+        @click="scrollNextTab"
+      ></font-awesome-icon>
+    </div>
+
+    <div class="block_info">
+      <slot :block="block" name="help_text"></slot>
+    </div>
+    <slot :block="block" :is-resizing="isResizing" :is-dragging="isDragging" name="info">
+      <div class="block_info" v-show="isResizing">
+        {{ block.width }}{{ block.sizeTypes.width }} x {{ block.height }}{{ block.sizeTypes.height }}
+      </div>
+      <div
+        v-show="isDragging && ['tl', 'bl'].includes(block.sticky)"
+        class="position_line left"
+        :style="`left: calc(-${currentPosition.left}px - 1px);width:calc(${currentPosition.left}px - 1px)`"
+      >
+        <span>{{ block.left }}{{ block.sizeTypes.left }}</span>
+      </div>
+      <div
+        v-show="isDragging && ['tl', 'tr'].includes(block.sticky)"
+        class="position_line top"
+        :style="`top: -${currentPosition.top}px;height:${currentPosition.top}px`"
+      >
+        <span>{{ block.top }}{{ block.sizeTypes.top }}</span>
+      </div>
+      <div
+        v-show="isDragging && ['br', 'bl'].includes(block.sticky)"
+        class="position_line bottom"
+        :style="`bottom: -${currentPosition.bottom}px;height:${currentPosition.bottom}px`"
+      >
+        <span>{{ block.bottom }}{{ block.sizeTypes.bottom }}</span>
+      </div>
+      <div
+        v-show="isDragging && ['tr', 'br'].includes(block.sticky)"
+        class="position_line right"
+        :style="`right: -${currentPosition.right}px;width:${currentPosition.right}px`"
+      >
+        <span>{{ block.right }}{{ block.sizeTypes.right }}</span>
+      </div>
+    </slot>
+    <div
+      class="content custom_scrollbar"
+      :style="blockContentStyle"
+      @mouseover="block.isHover = true"
+      @mouseleave="block.isHover = false"
+      @click.stop="$emit('click', { block: $event.block || block, event: $event.event || $event })"
+    >
+      <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
+      <svg id="svg" v-if="!block.isEditing && !isTabsContainer">
+        <line class="line" v-for="(line, index) in stickyLines"
+              :key="index"
+              :x1="line.x1"
+              :y1="line.y1"
+              :x2="line.x2"
+              :y2="line.y2"
+        />
+      </svg>
+      <block
+        v-for="_block in children"
+        v-show="isShowChildren && _block.parentTabGuid === activeTabGuid"
+        :ref="_block.guid"
+        :key="_block.guid"
+        :block="_block"
+        :tab-settings-service="tabSettingsService"
+        :step="step"
+        :show-hidden="showHidden"
+        @start-drag="$emit('start-drag', $event)"
+        @stop-drag="$emit('stop-drag', $event)"
+        @dragging="$emit('dragging', $event)"
+        @contextmenu="$emit('contextmenu', $event)"
+        @click="$emit('click', { block: $event.block || _block, event: $event.event || $event })"
+      >
+        <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
+          <slot :name="name" v-bind="data"></slot>
+        </template>
+      </block>
+    </div>
+    <font-awesome-icon
+      icon="angle-down"
+      :class="`resize-handler ${block.sticky}`"
+      @mousedown.stop="resizeStart"
     ></font-awesome-icon>
   </div>
 </template>
@@ -159,9 +152,17 @@ library.add(faAngleDown, faChevronRight, faChevronLeft)
 
 export default Vue.extend({
   name: 'block',
+
   components: {
     FontAwesomeIcon
   },
+
+  inject: {
+    getStore: {
+      default: () => () => {}
+    }
+  },
+
   props: {
     block: {
       type: BlockDTO
@@ -172,9 +173,12 @@ export default Vue.extend({
     showHidden: {
       type: Boolean,
       default: false
+    },
+    tabSettingsService: {
+      type: Object
     }
   },
-  inject: ['getStore'],
+
   data (): {
     blockManager: undefined | BlockManager,
     isResizing: boolean,
@@ -217,6 +221,242 @@ export default Vue.extend({
       visitedTabs: []
     }
   },
+
+  computed: {
+    // список потомков у контейнера
+    children (): object[] {
+      if (this.activeTabGuid) {
+        return this.block.children.map(item => {
+          if (item.parentTabGuid === this.activeTabGuid) {
+            if (!this.visitedTabs.includes(item.guid)) {
+              this.visitedTabs.push(item.guid)
+              return item
+            }
+          }
+          return item
+        }).filter(item => this.visitedTabs.includes(item.guid))
+      } else {
+        return this.block.children
+      }
+    },
+
+    availableTabs (): Array<object> {
+      if (!this.block?.tabs?.use || this.block?.tabs?.list?.length < 1) {
+        return []
+      }
+
+      return this.block.tabs.list.filter(tab => {
+        if (this.tabSettingsService) {
+          const isHidden = this.tabSettingsService.getIsHidden(tab.guid)
+          const isBlocked = this.tabSettingsService.getIsBlocked(tab.guid)
+
+          if (isHidden || isBlocked) {
+            return false
+          }
+        }
+
+        return true
+      })
+    },
+
+    visibleTabs (): object[] {
+      if (!this.block?.tabs?.use || this.block?.tabs?.list?.length < 1) {
+        return []
+      }
+
+      return this.block.tabs.list.filter(tab => {
+        if (this.tabSettingsService) {
+          const isHidden = this.tabSettingsService.getIsHidden(tab.guid)
+
+          if (isHidden) {
+            return false
+          }
+        }
+
+        return true
+      })
+    },
+
+    tabGuids () {
+      return (this.block.tabs?.list || []).map((item) => item.guid)
+    },
+
+    stickyLines () {
+      return []
+      // return this.getStore().getStickyLines(this.block.guid)
+    },
+
+    zIndex (): number {
+      const startIndex = 101
+      if (!this.block.parentGuid) {
+        return startIndex + (this.block.tabs?.use ? 1 : 0)
+      }
+      let parentRef = this.getStore().getRefByGuid(this.block.parentGuid) as unknown as {
+        zIndex: number
+      }
+      if (!parentRef) {
+        return startIndex
+      }
+
+      return parentRef.zIndex + 1 + (this.block.tabs?.use ? 1 : 0)
+    },
+
+    isTabsContainer (): boolean {
+      return this.block.tabs?.use || false
+    },
+
+    directionTabs (): boolean {
+      return (this.block.tabs?.position === 'left' || this.block.tabs?.position === 'right')
+    },
+
+    positionStyle (): object {
+      let position: {
+        top?: string, left?: string, right?: string, bottom?: string
+      } = {}
+
+      switch (this.block.sticky) {
+        case Sticky.TL:
+          position = {
+            top: this.block.top + this.block.sizeTypes.top,
+            left: this.block.left + this.block.sizeTypes.left
+          }
+          break
+        case Sticky.TR:
+          position = {
+            top: this.block.top + this.block.sizeTypes.top,
+            right: this.block.right + this.block.sizeTypes.right
+          }
+          break
+        case Sticky.BL:
+          position = {
+            bottom: this.block.bottom + this.block.sizeTypes.bottom,
+            left: this.block.left + this.block.sizeTypes.left
+          }
+          break
+        case Sticky.BR:
+          position = {
+            bottom: this.block.bottom + this.block.sizeTypes.bottom,
+            right: this.block.right + this.block.sizeTypes.right
+          }
+          break
+        default:
+          position = {
+            top: this.block.top + this.block.sizeTypes.top,
+            left: this.block.left + this.block.sizeTypes.left
+          }
+          break
+      }
+
+      if (this.block.isHidden && !this.showHidden) {
+        if (this.block.stickyTo?.guid && this.block.stickyTo?.type) {
+          if (this.block.stickyTo.type === StickyToType.TOP) {
+            position.top = '0px'
+          } else if (this.block.stickyTo.type === StickyToType.LEFT) {
+            position.left = '0px'
+          }
+        }
+      }
+
+      if (this.block.stickyTo?.guid && this.block.stickyTo?.type) {
+        const stickyToBlock = this.getStore().getByGuid(this.block.stickyTo.guid)
+        const stickyToElement = this.getStore().getRefByGuid(this.block.stickyTo.guid) as unknown as {
+          positionStyle: {
+            top: string, height: string, left: string, width: string
+          }
+        }
+        if (stickyToBlock && stickyToBlock.parentGuid === this.block.parentGuid && stickyToElement) {
+          switch (this.block.stickyTo.type) {
+            case StickyToType.TOP:
+              position.top =
+                  `calc(${stickyToElement.positionStyle.height} + ${stickyToElement.positionStyle.top} + ${position.top})`
+              break
+            case StickyToType.LEFT:
+              position.left =
+                  `calc(${stickyToElement.positionStyle.width} + ${stickyToElement.positionStyle.left} + ${position.left})`
+              break
+          }
+        }
+      }
+
+      let width = this.block.width + this.block.sizeTypes.width
+      let height = this.block.height + this.block.sizeTypes.height
+
+      if (this.block.widthCalc && this.block.widthCalc.type && this.block.widthCalc.value) {
+        width = `calc(${width} ${this.block.widthCalc.type} ${this.block.widthCalc.value}px)`
+      }
+      if (this.block.heightCalc && this.block.heightCalc.type && this.block.heightCalc.value) {
+        height = `calc(${height} ${this.block.heightCalc.type} ${this.block.heightCalc.value}px)`
+      }
+
+      if (this.block.isHidden && !this.showHidden) {
+        width = '0px'
+        height = '0px'
+      }
+
+      if (!this.block.stickyTo?.guid && this.block.onCenter?.horizontal) {
+        if (this.block.sticky === Sticky.BL || this.block.sticky === Sticky.TL) {
+          position.left = `calc(50% - calc(${width} / 2))`
+        } else {
+          position.right = `calc(50% - calc(${width} / 2))`
+        }
+      }
+
+      if (!this.block.stickyTo?.guid && this.block.onCenter?.vertical) {
+        if (this.block.sticky === Sticky.TR || this.block.sticky === Sticky.TL) {
+          position.top = `calc(50% - calc(${height} / 2))`
+        } else {
+          position.bottom = `calc(50% - calc(${height} / 2))`
+        }
+      }
+
+      return Object.assign(position, {
+        width: width,
+        height: height,
+        zIndex: this.zIndex
+      })
+    },
+
+    blockTabStyle () {
+      let style = ''
+
+      if (this.block.tabs) {
+        style += this.block.tabs.tabStyle
+      }
+
+      return style
+    },
+
+    blockContentStyle () {
+      let style = ''
+
+      const block = this.block
+
+      if (block.style) {
+        style += block.style
+      }
+
+      if (block.isHover) {
+        if (block.interactive?.containerHoverStyle) {
+          style += '; ' + block.interactive.containerHoverStyle
+        }
+      }
+
+      return style
+    },
+
+    isShowChildren () {
+      let isShow = true
+
+      const block = this.block
+
+      if (block.contentType === 'registry') {
+        isShow = false
+      }
+
+      return isShow
+    }
+  },
+
   watch: {
     'block.sticky': {
       handler (value) {
@@ -258,6 +498,7 @@ export default Vue.extend({
         })
       }
     },
+
     'block.stickyTo.guid': {
       handler (value, oldValue) {
         if (!this.$el.parentElement) {
@@ -307,9 +548,11 @@ export default Vue.extend({
         }
       }
     },
+
     activeTabGuid (guid) {
       this.getStore().setActiveTab(this.block.guid, guid)
     },
+
     'block.tabs.list': {
       handler () {
         if (this.isTabsContainer) {
@@ -325,6 +568,7 @@ export default Vue.extend({
       },
       deep: true
     },
+
     'block.sizeTypes.width': {
       handler (value: SizeTypes, old: SizeTypes) {
         if (value === old || !value) {
@@ -339,6 +583,7 @@ export default Vue.extend({
       },
       deep: true
     },
+
     'block.sizeTypes.height': {
       handler (value: SizeTypes, old: SizeTypes) {
         if (value === old || !value) {
@@ -353,6 +598,7 @@ export default Vue.extend({
       },
       deep: true
     },
+
     'block.sizeTypes.top': {
       handler (value: SizeTypes, old: SizeTypes) {
         if (value === old || !value) {
@@ -370,6 +616,7 @@ export default Vue.extend({
       },
       deep: true
     },
+
     'block.sizeTypes.left': {
       handler (value: SizeTypes, old: SizeTypes) {
         if (value === old || !value) {
@@ -387,6 +634,7 @@ export default Vue.extend({
       },
       deep: true
     },
+
     'block.sizeTypes.right': {
       handler (value: SizeTypes, old: SizeTypes) {
         if (value === old || !value) {
@@ -404,6 +652,7 @@ export default Vue.extend({
       },
       deep: true
     },
+
     'block.sizeTypes.bottom': {
       handler (value: SizeTypes, old: SizeTypes) {
         if (value === old || !value) {
@@ -421,6 +670,7 @@ export default Vue.extend({
       },
       deep: true
     },
+
     'block.width': {
       handler () {
         if (this.isTabsContainer) {
@@ -428,6 +678,7 @@ export default Vue.extend({
         }
       }
     },
+
     tabGuids (value, oldValue) {
       if (value.length < oldValue.length) {
         let removedTab = oldValue.filter((item: string) => !value.includes(item))[0]
@@ -441,182 +692,10 @@ export default Vue.extend({
       }
     }
   },
-  computed: {
-    // список потомков у контейнера
-    children (): object[] {
-      if (this.activeTabGuid) {
-        return this.block.children.map(item => {
-          if (item.parentTabGuid === this.activeTabGuid) {
-            if (!this.visitedTabs.includes(item.guid)) {
-              this.visitedTabs.push(item.guid)
-              return item
-            }
-          }
-          return item
-        }).filter(item => this.visitedTabs.includes(item.guid))
-      } else {
-        return this.block.children
-      }
-    },
-    tabGuids () {
-      return (this.block.tabs?.list || []).map((item) => item.guid)
-    },
-    stickyLines () {
-      return []
-      // return this.getStore().getStickyLines(this.block.guid)
-    },
-    zIndex (): number {
-      const startIndex = 101
-      if (!this.block.parentGuid) {
-        return startIndex + (this.block.tabs?.use ? 1 : 0)
-      }
-      let parentRef = this.getStore().getRefByGuid(this.block.parentGuid) as unknown as {
-        zIndex: number
-      }
-      if (!parentRef) {
-        return startIndex
-      }
 
-      return parentRef.zIndex + 1 + (this.block.tabs?.use ? 1 : 0)
-    },
-    isTabsContainer (): boolean {
-      return this.block.tabs?.use || false
-    },
-    directionTabs (): boolean {
-      return (this.block.tabs?.position === 'left' || this.block.tabs?.position === 'right')
-    },
-    positionStyle (): object {
-      let position: {
-        top?: string, left?: string, right?: string, bottom?: string
-      } = {}
-      switch (this.block.sticky) {
-        case Sticky.TL:
-          position = {
-            top: this.block.top + this.block.sizeTypes.top,
-            left: this.block.left + this.block.sizeTypes.left
-          }
-          break
-        case Sticky.TR:
-          position = {
-            top: this.block.top + this.block.sizeTypes.top,
-            right: this.block.right + this.block.sizeTypes.right
-          }
-          break
-        case Sticky.BL:
-          position = {
-            bottom: this.block.bottom + this.block.sizeTypes.bottom,
-            left: this.block.left + this.block.sizeTypes.left
-          }
-          break
-        case Sticky.BR:
-          position = {
-            bottom: this.block.bottom + this.block.sizeTypes.bottom,
-            right: this.block.right + this.block.sizeTypes.right
-          }
-          break
-        default:
-          position = {
-            top: this.block.top + this.block.sizeTypes.top,
-            left: this.block.left + this.block.sizeTypes.left
-          }
-          break
-      }
-      if (this.block.isHidden && !this.showHidden) {
-        if (this.block.stickyTo?.guid && this.block.stickyTo?.type) {
-          if (this.block.stickyTo.type === StickyToType.TOP) {
-            position.top = '0px'
-          } else if (this.block.stickyTo.type === StickyToType.LEFT) {
-            position.left = '0px'
-          }
-        }
-      }
-      if (this.block.stickyTo?.guid && this.block.stickyTo?.type) {
-        const stickyToBlock = this.getStore().getByGuid(this.block.stickyTo.guid)
-        const stickyToElement = this.getStore().getRefByGuid(this.block.stickyTo.guid) as unknown as {
-          positionStyle: {
-            top: string, height: string, left: string, width: string
-          }
-        }
-        if (stickyToBlock && stickyToBlock.parentGuid === this.block.parentGuid && stickyToElement) {
-          switch (this.block.stickyTo.type) {
-            case StickyToType.TOP:
-              position.top =
-                  `calc(${stickyToElement.positionStyle.height} + ${stickyToElement.positionStyle.top} + ${position.top})`
-              break
-            case StickyToType.LEFT:
-              position.left =
-                  `calc(${stickyToElement.positionStyle.width} + ${stickyToElement.positionStyle.left} + ${position.left})`
-              break
-          }
-        }
-      }
-      let width = this.block.width + this.block.sizeTypes.width
-      let height = this.block.height + this.block.sizeTypes.height
-
-      if (this.block.widthCalc && this.block.widthCalc.type && this.block.widthCalc.value) {
-        width = `calc(${width} ${this.block.widthCalc.type} ${this.block.widthCalc.value}px)`
-      }
-      if (this.block.heightCalc && this.block.heightCalc.type && this.block.heightCalc.value) {
-        height = `calc(${height} ${this.block.heightCalc.type} ${this.block.heightCalc.value}px)`
-      }
-      if (this.block.isHidden && !this.showHidden) {
-        width = '0px'
-        height = '0px'
-      }
-
-      if (!this.block.stickyTo?.guid && this.block.onCenter?.horizontal) {
-        if (this.block.sticky === Sticky.BL || this.block.sticky === Sticky.TL) {
-          position.left = `calc(50% - calc(${width} / 2))`
-        } else {
-          position.right = `calc(50% - calc(${width} / 2))`
-        }
-      }
-
-      if (!this.block.stickyTo?.guid && this.block.onCenter?.vertical) {
-        if (this.block.sticky === Sticky.TR || this.block.sticky === Sticky.TL) {
-          position.top = `calc(50% - calc(${height} / 2))`
-        } else {
-          position.bottom = `calc(50% - calc(${height} / 2))`
-        }
-      }
-      return Object.assign(position, {
-        width: width,
-        height: height,
-        zIndex: this.zIndex
-      })
-    },
-    blockContentStyle () {
-      let style = ''
-
-      const block = this.block
-
-      if (block.style) {
-        style += block.style
-      }
-
-      if (block.isHover) {
-        if (block.interactive?.containerHoverStyle) {
-          style += '; ' + block.interactive.containerHoverStyle
-        }
-      }
-
-      return style
-    },
-    isShowChildren () {
-      let isShow = true
-
-      const block = this.block
-
-      if (block.contentType === 'registry') {
-        isShow = false
-      }
-
-      return isShow
-    }
-  },
   mounted () {
     if (this.block?.tabs?.use && this.block?.tabs?.list?.length > 0) {
-      this.activeTabGuid = this.block.tabs.list[0].guid
+      this.onTabClick(this.block.tabs.list[0].guid)
     }
     this.getStore().addRef(this.block.guid, this)
     this.$nextTick(() => {
@@ -626,11 +705,13 @@ export default Vue.extend({
       }
     })
   },
+
   beforeDestroy () {
     this.getStore().removeRef(this.block.guid)
   },
+
   methods: {
-    setIsShowArrows ():void {
+    setIsShowArrows (): void {
       if (!this.$refs.draggableContainer) return
       const tabsScroll: HTMLElement = this.$refs.tabsScroll as HTMLElement
       const draggableContainer: HTMLElement = this.$refs.draggableContainer as HTMLElement
@@ -646,6 +727,7 @@ export default Vue.extend({
         tabsScroll.style.transform = `translateX(-${0}px)`
       }
     },
+
     calcSwitchedSizes (type: SizeTypes, parentSize: number, oldValue: number): number {
       if (type === SizeTypes.PIXEL) {
         return Math.round(parentSize / 100 * oldValue)
@@ -653,9 +735,43 @@ export default Vue.extend({
         return Math.round(oldValue / (parentSize / 100))
       }
     },
+
+    getBlockTabStyle (tab: any): string {
+      let style = ';'
+
+      if (this.block.tabs) {
+        if (tab.guid === this.activeTabGuid) {
+          const newStyle = this.block.tabs.activeTabStyle
+          if (newStyle) {
+            style += '; ' + this.block.tabs.activeTabStyle
+          }
+        }
+      }
+
+      if (this.tabSettingsService) {
+        if (this.tabSettingsService.getIsStyled(tab.guid)) {
+          const newStyle = this.tabSettingsService.getStyle(tab.guid)
+          if (newStyle) {
+            style += '; ' + newStyle
+          }
+        }
+
+        if (this.tabSettingsService.getIsBlocked(tab.guid)) {
+          style += '; cursor: not-allowed; '
+        }
+      }
+
+      return style
+    },
+
     onTabClick (guid: string) {
+      if (this.tabSettingsService && this.tabSettingsService.getIsBlocked(guid)) {
+        return
+      }
+
       this.activeTabGuid = guid
     },
+
     onDrag (): void {
       // при ленивой загрузки табов this.$refs.draggableContainer undefined
       if (!this.$refs.draggableContainer) return
@@ -670,6 +786,7 @@ export default Vue.extend({
         this.currentPosition.top =
       } */
     },
+
     getBlockManager (): BlockManager {
       if (typeof this.blockManager === 'undefined') {
         this.blockManager = new BlockManager(
@@ -681,6 +798,7 @@ export default Vue.extend({
       }
       return this.blockManager
     },
+
     resizeStart (event: MouseEvent): void {
       event.preventDefault()
       this.$emit('start-drag', this.block)
@@ -689,6 +807,7 @@ export default Vue.extend({
       document.addEventListener('mousemove', this.elementDrag)
       document.addEventListener('mouseup', this.dragStop)
     },
+
     dragStart (event: MouseEvent, isInteractive: boolean = false): void {
       if (this.block.isEditing) {
         return
@@ -702,6 +821,7 @@ export default Vue.extend({
       document.addEventListener('keydown', this.keyDown)
       document.addEventListener('keyup', this.keyUp)
     },
+
     elementDrag (event: MouseEvent): void {
       event.preventDefault()
       this.$emit('dragging', this.block)
@@ -717,16 +837,19 @@ export default Vue.extend({
         })
       }
     },
+
     keyDown (event: KeyboardEvent) {
       if (event.ctrlKey) {
         this.ctrlPressed = true
       }
     },
+
     keyUp (event: KeyboardEvent) {
       if (event.key === 'Control') {
         this.ctrlPressed = false
       }
     },
+
     dragStop (): void {
       this.$emit('stop-drag', this.block)
       this.isResizing = false
@@ -737,20 +860,23 @@ export default Vue.extend({
       document.removeEventListener('keydown', this.keyDown)
       document.removeEventListener('keyup', this.keyUp)
     },
+
     getNextTab (): string {
-      const findTabIndex: number | undefined = this.block.tabs?.list.findIndex(item => item.guid === this.activeTabGuid)
-      if (typeof findTabIndex === 'number' && this.block.tabs?.list[findTabIndex + 1]) {
-        return this.block.tabs.list[findTabIndex + 1].guid
+      const findTabIndex: number | undefined = this.availableTabs.findIndex((item: any) => item.guid === this.activeTabGuid)
+      if (typeof findTabIndex === 'number' && this.availableTabs[findTabIndex + 1]) {
+        return (this.availableTabs[findTabIndex + 1] as any).guid
       }
       return ''
     },
+
     getPrevTab (): string {
-      const findTabIndex: number | undefined = this.block.tabs?.list.findIndex(item => item.guid === this.activeTabGuid)
-      if (typeof findTabIndex === 'number' && this.block.tabs?.list[findTabIndex - 1]) {
-        return this.block.tabs.list[findTabIndex - 1].guid
+      const findTabIndex: number | undefined = this.availableTabs.findIndex((item: any) => item.guid === this.activeTabGuid)
+      if (typeof findTabIndex === 'number' && this.availableTabs[findTabIndex - 1]) {
+        return (this.availableTabs[findTabIndex - 1] as any).guid
       }
       return ''
     },
+
     scrollPrevTab (): void {
       const tabsScroll: HTMLElement = this.$refs.tabsScroll as HTMLElement
       const draggableContainer: HTMLElement = this.$refs.draggableContainer as HTMLElement
@@ -763,6 +889,7 @@ export default Vue.extend({
       }
       tabsScroll.style.transform = `translateX(-${this.tabsOffset}px)`
     },
+
     scrollNextTab (): void {
       const tabsScroll: HTMLElement = this.$refs.tabsScroll as HTMLElement
       const draggableContainer: HTMLElement = this.$refs.draggableContainer as HTMLElement

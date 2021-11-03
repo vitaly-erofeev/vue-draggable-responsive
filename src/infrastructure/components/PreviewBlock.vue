@@ -1,19 +1,19 @@
 <template>
   <div
-      :style="positionStyle"
-      ref="draggableContainer"
-      class="block"
+    :style="positionStyle"
+    ref="draggableContainer"
+    class="block"
   >
     <div
-        v-if="isTabsContainer"
-        :class="{
-          'tabs_container' : true,
-          'position_top': block.tabs.position === 'top',
-          'position_right': block.tabs.position === 'right',
-          'position_bottom': block.tabs.position === 'bottom',
-          'position_left': block.tabs.position === 'left',
-        }"
-        :style="block.tabs.containerStyle"
+      v-if="isTabsContainer"
+      :class="{
+        'tabs_container' : true,
+        'position_top': block.tabs.position === 'top',
+        'position_right': block.tabs.position === 'right',
+        'position_bottom': block.tabs.position === 'bottom',
+        'position_left': block.tabs.position === 'left',
+      }"
+      :style="block.tabs.containerStyle"
     >
       <font-awesome-icon
         v-show="isShowArrows"
@@ -22,13 +22,13 @@
         @click="scrollPrevTab"
         :class="{ [block.tabs.tabArrowsClass]: true }"
       ></font-awesome-icon>
-      <div class="tabs_onScroll" ref="tabsScroll" :class="{'tabs_padding': isShowArrows, 'direction': directionTabs }">
+      <div class="tabs_onScroll" ref="tabsScroll" :class="{ 'tabs_padding': isShowArrows, 'direction': directionTabs }">
         <div
-            v-for="tab in block.tabs.list"
-            :key="tab.guid"
-            :style="`${block.tabs.tabStyle};${tab.guid === activeTabGuid ? block.tabs.activeTabStyle :''}`"
-            :class="{'tab': true, 'active': tab.guid === activeTabGuid, [block.tabs.class]: true}"
-            @click="activeTabGuid = tab.guid"
+          v-for="tab in visibleTabs"
+          :key="tab.guid"
+          :style="blockTabStyle + getBlockTabStyle(tab)"
+          :class="{ 'tab': true, 'active': tab.guid === activeTabGuid, [block.tabs.class]: true }"
+          @click="onTabClick(tab.guid)"
         >
           <span class="label">{{ tab.name }}</span>
         </div>
@@ -41,6 +41,7 @@
         @click="scrollNextTab"
       ></font-awesome-icon>
     </div>
+
     <div
       ref="container"
       class="content custom_scrollbar"
@@ -51,14 +52,15 @@
     >
       <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
       <preview-block
-          v-for="_block in children"
-          v-show="isShowChildren && _block.parentTabGuid === activeTabGuid && !_block.isHidden"
-          :is-showing="isShowChildren && _block.parentTabGuid === activeTabGuid && !_block.isHidden"
-          :key="_block.guid"
-          :block="_block"
-          :ref="_block.guid"
-          :replication-callback="replicationCallback"
-          @click="$emit('click', { block: $event.block || _block, event: $event.event || $event })"
+        v-for="_block in children"
+        v-show="isShowChildren && _block.parentTabGuid === activeTabGuid && !_block.isHidden"
+        :ref="_block.guid"
+        :key="_block.guid"
+        :is-showing="isShowChildren && _block.parentTabGuid === activeTabGuid && !_block.isHidden"
+        :block="_block"
+        :replication-callback="replicationCallback"
+        :tab-settings-service="tabSettingsService"
+        @click="$emit('click', { block: $event.block || _block, event: $event.event || $event })"
       >
         <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
           <slot :name="name" v-bind="data"></slot>
@@ -87,9 +89,17 @@ const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 library.add(faAngleDown, faChevronRight, faChevronLeft)
 export default Vue.extend({
   name: 'PreviewBlock',
+
   components: {
     FontAwesomeIcon
   },
+
+  inject: {
+    getStore: {
+      default: () => () => {}
+    }
+  },
+
   props: {
     block: {
       type: BlockDTO
@@ -98,9 +108,40 @@ export default Vue.extend({
     isShowing: {
       type: Boolean,
       default: true
+    },
+    tabSettingsService: {
+      type: Object
     }
   },
-  inject: ['getStore'],
+
+  data (): {
+    parentBlock?: BlockDTO,
+    parentElement?: Element,
+    scrollHeight?: number,
+    scrollWidth?: number,
+    activeTabGuid?: string,
+    replicationIndex: number,
+    tabsOffset: number,
+    blockWidth: number,
+    tabsWidth: number,
+    isShowArrows: boolean,
+    visitedTabGuids: string[],
+    } {
+    return {
+      parentBlock: undefined,
+      parentElement: undefined,
+      scrollHeight: undefined,
+      scrollWidth: undefined,
+      activeTabGuid: undefined,
+      replicationIndex: 0,
+      tabsOffset: 0,
+      blockWidth: 0,
+      tabsWidth: 0,
+      isShowArrows: false,
+      visitedTabGuids: []
+    }
+  },
+
   computed: {
     // список потомков у контейнера
     children (): object[] {
@@ -110,9 +151,48 @@ export default Vue.extend({
         return this.block.children
       }
     },
+
+    availableTabs (): object[] {
+      if (!this.block?.tabs?.use || this.block?.tabs?.list?.length < 1) {
+        return []
+      }
+
+      return this.block.tabs.list.filter(tab => {
+        if (this.tabSettingsService) {
+          const isHidden = this.tabSettingsService.getIsHidden(tab.guid)
+          const isBlocked = this.tabSettingsService.getIsBlocked(tab.guid)
+
+          if (isHidden || isBlocked) {
+            return false
+          }
+        }
+
+        return true
+      })
+    },
+
+    visibleTabs (): object[] {
+      if (!this.block?.tabs?.use || this.block?.tabs?.list?.length < 1) {
+        return []
+      }
+
+      return this.block.tabs.list.filter(tab => {
+        if (this.tabSettingsService) {
+          const isHidden = this.tabSettingsService.getIsHidden(tab.guid)
+
+          if (isHidden) {
+            return false
+          }
+        }
+
+        return true
+      })
+    },
+
     directionTabs (): boolean {
       return (this.block.tabs?.position === 'left' || this.block.tabs?.position === 'right')
     },
+
     zIndex (): number {
       const startIndex = 101
       if (!this.block.parentGuid) {
@@ -127,9 +207,11 @@ export default Vue.extend({
 
       return parentRef.zIndex + 1 + (this.block.tabs?.use ? 1 : 0)
     },
+
     isTabsContainer (): boolean {
       return this.block.tabs?.use || false
     },
+
     positionStyle (): object {
       let position: {
         top?: string, left?: string, right?: string, bottom?: string, width?: string, height?: string
@@ -138,6 +220,7 @@ export default Vue.extend({
       let left: string
       let height: string = this.block.height + this.block.sizeTypes.height
       let width: string = this.block.width + this.block.sizeTypes.width
+
       switch (this.block.sticky) {
         case Sticky.TL:
           top = this.block.top + this.block.sizeTypes.top
@@ -187,6 +270,7 @@ export default Vue.extend({
           }
           break
       }
+
       if (this.block.isHidden) {
         if (this.block.stickyTo?.guid && this.block.stickyTo?.type) {
           if (this.block.stickyTo.type === StickyToType.TOP) {
@@ -196,6 +280,7 @@ export default Vue.extend({
           }
         }
       }
+
       if (this.block.replication?.topBlockGuid) {
         const stickyToElement = this.getStore().getRefByGuid(this.block.replication?.topBlockGuid) as unknown as {
           positionStyle: {
@@ -207,6 +292,7 @@ export default Vue.extend({
               `calc(${stickyToElement.positionStyle.height} + ${stickyToElement.positionStyle.top} + ${position.top})`
         }
       }
+
       if (this.block.stickyTo?.guid && this.block.stickyTo?.type) {
         const stickyToBlock = this.getStore().getByGuid(this.block.stickyTo.guid)
         const stickyToElement = this.getStore().getRefByGuid(this.block.stickyTo.guid) as unknown as {
@@ -268,10 +354,12 @@ export default Vue.extend({
           height: height
         })
       }
+
       if (this.block.isHidden) {
         position.width = '0px'
         position.height = '0px'
       }
+
       if (!this.block.stickyTo?.guid && this.block.onCenter?.horizontal && this.isShowing) {
         const refBlock = this.getStore().getRefByGuid(this.block.guid) as unknown as {
           $el: HTMLElement
@@ -302,6 +390,17 @@ export default Vue.extend({
         zIndex: this.zIndex
       })
     },
+
+    blockTabStyle () {
+      let style = ''
+
+      if (this.block.tabs) {
+        style += this.block.tabs.tabStyle
+      }
+
+      return style
+    },
+
     blockContentStyle () {
       let style = ''
 
@@ -319,6 +418,7 @@ export default Vue.extend({
 
       return style
     },
+
     isShowChildren () {
       let isShow = true
 
@@ -331,24 +431,7 @@ export default Vue.extend({
       return isShow
     }
   },
-  mounted () {
-    this.setParent()
-    this.$nextTick(() => {
-      this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
-      this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
-      if (this.isTabsContainer) {
-        this.setIsShowArrows()
-      }
-    })
-    if (this.block?.tabs?.use && this.block?.tabs?.list?.length > 0) {
-      this.activeTabGuid = this.block.tabs.list[0].guid
-    }
-    this.prepareReplication()
-    this.getStore().addRef(this.block.guid, this)
-  },
-  beforeDestroy () {
-    this.getStore().removeRef(this.block.guid)
-  },
+
   watch: {
     activeTabGuid (value) {
       this.scrollHeight = 0
@@ -362,33 +445,27 @@ export default Vue.extend({
       })
     }
   },
-  data (): {
-    parentBlock?: BlockDTO,
-    parentElement?: Element,
-    scrollHeight?: number,
-    scrollWidth?: number,
-    activeTabGuid?: string,
-    replicationIndex: number,
-    tabsOffset: number,
-    blockWidth: number,
-    tabsWidth: number,
-    isShowArrows: boolean,
-    visitedTabGuids: string[],
-    } {
-    return {
-      parentBlock: undefined,
-      parentElement: undefined,
-      scrollHeight: undefined,
-      scrollWidth: undefined,
-      activeTabGuid: undefined,
-      replicationIndex: 0,
-      tabsOffset: 0,
-      blockWidth: 0,
-      tabsWidth: 0,
-      isShowArrows: false,
-      visitedTabGuids: []
+
+  mounted () {
+    this.setParent()
+    this.$nextTick(() => {
+      this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
+      this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
+      if (this.isTabsContainer) {
+        this.setIsShowArrows()
+      }
+    })
+    if (this.block?.tabs?.use && this.block?.tabs?.list?.length > 0) {
+      this.onTabClick(this.block.tabs.list[0].guid)
     }
+    this.prepareReplication()
+    this.getStore().addRef(this.block.guid, this)
   },
+
+  beforeDestroy () {
+    this.getStore().removeRef(this.block.guid)
+  },
+
   methods: {
     onReplicateBlock (event: {}) {
       if (this.replicationCallback) {
@@ -398,6 +475,7 @@ export default Vue.extend({
         }))
       }
     },
+
     async prepareReplication (offset = {}): Promise<void> {
       if (!this.block.replication?.function) {
         return
@@ -460,10 +538,12 @@ export default Vue.extend({
       })
       this.getStore().removeListener(listenerGuid)
     },
+
     setParent (): void {
       this.parentBlock = this.block.parentGuid ? this.getStore().getByGuid(this.block.parentGuid) : undefined
       this.parentElement = this.block.parentGuid ? this.$parent.$refs.draggableContainer as Element : undefined
     },
+
     scrollPrevTab (): void {
       const tabsScroll: HTMLElement = this.$refs.tabsScroll as HTMLElement
       const draggableContainer: HTMLElement = this.$refs.draggableContainer as HTMLElement
@@ -476,6 +556,7 @@ export default Vue.extend({
       }
       tabsScroll.style.transform = `translateX(-${this.tabsOffset}px)`
     },
+
     scrollNextTab (): void {
       const tabsScroll: HTMLElement = this.$refs.tabsScroll as HTMLElement
       const draggableContainer: HTMLElement = this.$refs.draggableContainer as HTMLElement
@@ -486,6 +567,7 @@ export default Vue.extend({
       this.tabsOffset += blockWidth / 1.5
       tabsScroll.style.transform = `translateX(-${this.tabsOffset}px)`
     },
+
     setIsShowArrows (): void {
       if (!this.$refs.draggableContainer) return
       const tabsScroll: HTMLElement = this.$refs.tabsScroll as HTMLElement
@@ -501,6 +583,42 @@ export default Vue.extend({
         this.isShowArrows = false
         tabsScroll.style.transform = `translateX(-${0}px)`
       }
+    },
+
+    getBlockTabStyle (tab: any): string {
+      let style = ';'
+
+      if (this.block.tabs) {
+        if (tab.guid === this.activeTabGuid) {
+          const newStyle = this.block.tabs.activeTabStyle
+          if (newStyle) {
+            style += '; ' + this.block.tabs.activeTabStyle
+          }
+        }
+      }
+
+      if (this.tabSettingsService) {
+        if (this.tabSettingsService.getIsStyled(tab.guid)) {
+          const newStyle = this.tabSettingsService.getStyle(tab.guid)
+          if (newStyle) {
+            style += '; ' + newStyle
+          }
+        }
+
+        if (this.tabSettingsService.getIsBlocked(tab.guid)) {
+          style += '; cursor: not-allowed; '
+        }
+      }
+
+      return style
+    },
+
+    onTabClick (guid: string) {
+      if (this.tabSettingsService && this.tabSettingsService.getIsBlocked(guid)) {
+        return
+      }
+
+      this.activeTabGuid = guid
     }
   }
 })

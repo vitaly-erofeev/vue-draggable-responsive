@@ -482,11 +482,13 @@ export default Vue.extend({
       }
       const blocksData: any[] = await this.block.replication?.function(offset)
       if (blocksData.length === 0) {
-        this.$nextTick(() => {
+        this.block.isHidden = true
+        /* this.$nextTick(() => {
           this.getStore().remove(this.block.guid)
-        })
+        }) */
         return
       }
+      this.block.isHidden = false
       blocksData.shift()
       let me = this
       let lastGuid = me.block.guid

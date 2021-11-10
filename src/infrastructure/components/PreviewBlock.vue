@@ -440,8 +440,7 @@ export default Vue.extend({
         this.visitedTabGuids.push(value)
       }
       this.$nextTick(() => {
-        this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
-        this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
+        this.setStretchedSize()
       })
     }
   },
@@ -449,14 +448,23 @@ export default Vue.extend({
   mounted () {
     this.setParent()
     this.$nextTick(() => {
-      this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
-      this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
+      this.setStretchedSize()
       if (this.isTabsContainer) {
         this.setIsShowArrows()
       }
     })
     if (this.block?.tabs?.use && this.block?.tabs?.list?.length > 0) {
       this.onTabClick(this.block.tabs.list[0].guid)
+    }
+    if (this.block?.isStretched) {
+      if (this.$refs.container && this.$refs.container instanceof Element) {
+        let children: HTMLCollection = this.$refs.container.children
+        for (let item of children) {
+          new ResizeObserver(() => {
+            this.setStretchedSize()
+          }).observe(item)
+        }
+      }
     }
     this.prepareReplication()
     this.getStore().addRef(this.block.guid, this)
@@ -467,6 +475,10 @@ export default Vue.extend({
   },
 
   methods: {
+    setStretchedSize () {
+      this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
+      this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
+    },
     onReplicateBlock (event: {}) {
       if (this.replicationCallback) {
         this.replicationCallback(Object.assign({}, event, {

@@ -16,7 +16,7 @@ export default class BlockRepository implements BlockRepositoryInterface {
     guid: string,
     element: Vue
   }[] = []
-  private isPreviewMode: boolean
+  private readonly isPreviewMode: boolean
 
   constructor (blocks: BlockDTO[] = [], isPreviewMode: boolean = false) {
     this.blocks = blocks

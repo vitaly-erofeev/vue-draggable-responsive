@@ -266,11 +266,11 @@ export default Vue.extend({
 
       return this.block.tabs.list.filter(tab => {
         if (this.tabSettingsService) {
-          const isHidden = this.tabSettingsService.getIsHidden(tab.guid)
+          // const isHidden = this.tabSettingsService.getIsHidden(tab.guid)
 
-          if (isHidden) {
-            return false
-          }
+          // if (isHidden) {
+          //   return false
+          // }
         }
 
         return true
@@ -756,8 +756,12 @@ export default Vue.extend({
           }
         }
 
+        if (this.tabSettingsService.getIsHidden(tab.guid)) {
+          style += '; color: #f46666; cursor: not-allowed; '
+        }
+
         if (this.tabSettingsService.getIsBlocked(tab.guid)) {
-          style += '; cursor: not-allowed; '
+          style += '; color: gray; cursor: not-allowed; '
         }
       }
 

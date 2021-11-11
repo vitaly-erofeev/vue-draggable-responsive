@@ -608,7 +608,7 @@ export default Vue.extend({
         }
 
         if (this.tabSettingsService.getIsBlocked(tab.guid)) {
-          style += '; cursor: not-allowed; '
+          style += '; color: gray; cursor: not-allowed; '
         }
       }
 

@@ -73,6 +73,7 @@
 <script lang="ts">
 import { Sticky } from '@/domain/model/Sticky'
 import BlockDTO from '../../domain/model/BlockDTO'
+import ResizeObserver from 'resize-observer-polyfill'
 // eslint-disable-next-line no-unused-vars
 import Vue_, { VueConstructor } from 'vue'
 import { SizeTypes } from '@/domain/model/SizeTypes'
@@ -456,14 +457,12 @@ export default Vue.extend({
     if (this.block?.tabs?.use && this.block?.tabs?.list?.length > 0) {
       this.onTabClick(this.block.tabs.list[0].guid)
     }
-    if (this.block?.isStretched) {
-      if (this.$refs.container && this.$refs.container instanceof Element) {
-        let children: HTMLCollection = this.$refs.container.children
-        for (let item of children) {
-          new ResizeObserver(() => {
-            this.setStretchedSize()
-          }).observe(item)
-        }
+    if (this.block?.isStretched && this.$refs.container && this.$refs.container instanceof Element) {
+      let children: HTMLCollection = this.$refs.container.children
+      for (let item of children) {
+        new ResizeObserver(() => {
+          this.setStretchedSize()
+        }).observe(item)
       }
     }
     this.prepareReplication()

@@ -53,6 +53,7 @@
     >
       <template v-slot:content="{ block }">
         {{ block }}
+        <textarea></textarea>
       </template>
     </vue-draggable-responsive-previewer>
   </div>

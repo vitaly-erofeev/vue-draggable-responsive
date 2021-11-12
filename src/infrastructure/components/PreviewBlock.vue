@@ -48,7 +48,7 @@
       :style="blockContentStyle"
       @mouseover="block.isHover = true"
       @mouseleave="block.isHover = false"
-      @click.stop="$emit('click', { block: $event.block || block, event: $event.event || $event })"
+      @click="$emit('click', { block: $event.block || block, event: $event.event || $event })"
     >
       <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
       <preview-block

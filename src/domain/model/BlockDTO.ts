@@ -117,7 +117,7 @@ export default class BlockDTO {
     this.alias = alias
     this.parentGuid = parentGuid
     this.isStretched = isStretched
-    this.style = 'background: red'
+    this.style = style
     this.interactive = interactive
     this.tabs = tabs
     this.parentTabGuid = parentTabGuid

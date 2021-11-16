@@ -73,6 +73,7 @@
 <script lang="ts">
 import { Sticky } from '@/domain/model/Sticky'
 import BlockDTO from '../../domain/model/BlockDTO'
+import ResizeObserver from 'resize-observer-polyfill'
 // eslint-disable-next-line no-unused-vars
 import Vue_, { VueConstructor } from 'vue'
 import { SizeTypes } from '@/domain/model/SizeTypes'
@@ -440,8 +441,7 @@ export default Vue.extend({
         this.visitedTabGuids.push(value)
       }
       this.$nextTick(() => {
-        this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
-        this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
+        this.setStretchedSize()
       })
     }
   },
@@ -449,14 +449,28 @@ export default Vue.extend({
   mounted () {
     this.setParent()
     this.$nextTick(() => {
-      this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
-      this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
+      this.setStretchedSize()
       if (this.isTabsContainer) {
         this.setIsShowArrows()
       }
     })
     if (this.block?.tabs?.use && this.block?.tabs?.list?.length > 0) {
       this.onTabClick(this.block.tabs.list[0].guid)
+    }
+    if (this.block?.isStretched && this.$refs.container && this.$refs.container instanceof Element) {
+      let children: HTMLCollection = this.$refs.container.children
+      const observer = new ResizeObserver(() => {
+        this.setStretchedSize()
+      })
+      for (let item of children) {
+        observer.observe(item)
+      }
+      /* this.$refs.container.addEventListener('DOMNodeInserted', (event) => {
+        console.log('element added', event)
+      })
+      this.$refs.container.addEventListener('DOMNodeRemoved', (event) => {
+        console.log('element removed', event)
+      }) */
     }
     this.prepareReplication()
     this.getStore().addRef(this.block.guid, this)
@@ -467,6 +481,14 @@ export default Vue.extend({
   },
 
   methods: {
+    setStretchedSize () {
+      this.scrollHeight = 0
+      this.scrollWidth = 0
+      this.$nextTick(() => {
+        this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
+        this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
+      })
+    },
     onReplicateBlock (event: {}) {
       if (this.replicationCallback) {
         this.replicationCallback(Object.assign({}, event, {

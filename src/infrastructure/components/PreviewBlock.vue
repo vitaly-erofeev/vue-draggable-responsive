@@ -464,6 +464,12 @@ export default Vue.extend({
           this.setStretchedSize()
         }).observe(item)
       }
+      /* this.$refs.container.addEventListener('DOMNodeInserted', (event) => {
+        console.log('element added', event)
+      })
+      this.$refs.container.addEventListener('DOMNodeRemoved', (event) => {
+        console.log('element removed', event)
+      }) */
     }
     this.prepareReplication()
     this.getStore().addRef(this.block.guid, this)
@@ -475,8 +481,12 @@ export default Vue.extend({
 
   methods: {
     setStretchedSize () {
-      this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
-      this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
+      this.scrollHeight = 0
+      this.scrollWidth = 0
+      this.$nextTick(() => {
+        this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
+        this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
+      })
     },
     onReplicateBlock (event: {}) {
       if (this.replicationCallback) {

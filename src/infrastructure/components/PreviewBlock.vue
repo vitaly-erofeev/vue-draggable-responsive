@@ -465,12 +465,12 @@ export default Vue.extend({
       for (let item of children) {
         observer.observe(item)
       }
-      /* this.$refs.container.addEventListener('DOMNodeInserted', (event) => {
-        console.log('element added', event)
+      const el = this.$refs.container
+      this.$refs.container.addEventListener('DOMNodeInserted', function (event) {
+        if (event.target && (event.target as Element).parentElement === el) {
+          observer.observe(event.target as Element)
+        }
       })
-      this.$refs.container.addEventListener('DOMNodeRemoved', (event) => {
-        console.log('element removed', event)
-      }) */
     }
     this.prepareReplication()
     this.getStore().addRef(this.block.guid, this)

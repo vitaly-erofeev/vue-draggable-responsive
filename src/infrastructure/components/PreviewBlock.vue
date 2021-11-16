@@ -459,10 +459,11 @@ export default Vue.extend({
     }
     if (this.block?.isStretched && this.$refs.container && this.$refs.container instanceof Element) {
       let children: HTMLCollection = this.$refs.container.children
+      const observer = new ResizeObserver(() => {
+        this.setStretchedSize()
+      })
       for (let item of children) {
-        new ResizeObserver(() => {
-          this.setStretchedSize()
-        }).observe(item)
+        observer.observe(item)
       }
       /* this.$refs.container.addEventListener('DOMNodeInserted', (event) => {
         console.log('element added', event)

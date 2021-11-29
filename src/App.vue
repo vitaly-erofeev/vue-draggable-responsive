@@ -64,6 +64,7 @@ import VueDraggableResponsive from './index.vue'
 import VueDraggableResponsivePreviewer from '@/previewer.vue'
 import { StickyToType } from '@/domain/model/StickyTo'
 import { SizeTypes } from '@/domain/model/SizeTypes'
+import { TabPosition } from '@/domain/model/TabProperties'
 
 export default {
   name: 'App',
@@ -211,6 +212,12 @@ export default {
     },
     addTab () {
       if (this.activeBlock) {
+        this.$set(this.activeBlock, 'tabs', {
+          use: false,
+          list: [],
+          position: TabPosition.TOP
+        })
+        this.activeBlock.tabs.use = true
         if (this.activeBlock.tabs?.use) {
           this.activeBlock.tabs.list.push({
             name: `Новая вкладка - ${this.activeBlock.tabs.list.length}`,

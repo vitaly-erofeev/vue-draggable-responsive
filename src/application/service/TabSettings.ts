@@ -1,5 +1,5 @@
 export default class TabSettings {
-  tabSettings: object
+  tabSettings: {[index: string]: any;}
   context: Vue
   onUpdateTabSettings: Function
 
@@ -37,7 +37,14 @@ export default class TabSettings {
   }
 
   getTabSettingByGuid (tabGuid: string): object {
-    const tabSetting = (this.tabSettings as any)[tabGuid]
+    if (!this.tabSettings) {
+      return {}
+    }
+    const tabSetting = this.tabSettings[tabGuid]
+    if (!tabSetting) {
+      return {}
+    }
+
     this.restoreTabSettingsStructure(tabSetting)
 
     return tabSetting
@@ -110,9 +117,10 @@ export default class TabSettings {
 
   getIsHidden (tabGuid: string): boolean | void {
     const tabSetting: any = this.getTabSettingByGuid(tabGuid)
-    if (tabSetting) {
+    if (tabSetting && ('isHidden' in tabSetting)) {
       return tabSetting.isHidden
     }
+    return false
   }
 
   setIsHidden (tabGuid: string, value: boolean): void {
@@ -123,9 +131,10 @@ export default class TabSettings {
 
   getIsBlocked (tabGuid: string): boolean | void {
     const tabSetting: any = this.getTabSettingByGuid(tabGuid)
-    if (tabSetting) {
+    if (tabSetting && ('isBlocked' in tabSetting)) {
       return tabSetting.isBlocked
     }
+    return false
   }
 
   setIsBlocked (tabGuid: string, value: boolean): void {
@@ -136,9 +145,10 @@ export default class TabSettings {
 
   getIsStyled (tabGuid: string): boolean | void {
     const tabSetting: any = this.getTabSettingByGuid(tabGuid)
-    if (tabSetting) {
+    if (tabSetting && ('isStyled' in tabSetting)) {
       return tabSetting.isStyled
     }
+    return false
   }
 
   setIsStyled (tabGuid: string, value: boolean): void {

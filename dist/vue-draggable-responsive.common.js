@@ -3339,7 +3339,16 @@ var TabSettings = /*#__PURE__*/function () {
   }, {
     key: "getTabSettingByGuid",
     value: function getTabSettingByGuid(tabGuid) {
+      if (!this.tabSettings) {
+        return {};
+      }
+
       var tabSetting = this.tabSettings[tabGuid];
+
+      if (!tabSetting) {
+        return {};
+      }
+
       this.restoreTabSettingsStructure(tabSetting);
       return tabSetting;
     }
@@ -3426,9 +3435,11 @@ var TabSettings = /*#__PURE__*/function () {
     value: function getIsHidden(tabGuid) {
       var tabSetting = this.getTabSettingByGuid(tabGuid);
 
-      if (tabSetting) {
+      if (tabSetting && 'isHidden' in tabSetting) {
         return tabSetting.isHidden;
       }
+
+      return false;
     }
   }, {
     key: "setIsHidden",
@@ -3441,9 +3452,11 @@ var TabSettings = /*#__PURE__*/function () {
     value: function getIsBlocked(tabGuid) {
       var tabSetting = this.getTabSettingByGuid(tabGuid);
 
-      if (tabSetting) {
+      if (tabSetting && 'isBlocked' in tabSetting) {
         return tabSetting.isBlocked;
       }
+
+      return false;
     }
   }, {
     key: "setIsBlocked",
@@ -3456,9 +3469,11 @@ var TabSettings = /*#__PURE__*/function () {
     value: function getIsStyled(tabGuid) {
       var tabSetting = this.getTabSettingByGuid(tabGuid);
 
-      if (tabSetting) {
+      if (tabSetting && 'isStyled' in tabSetting) {
         return tabSetting.isStyled;
       }
+
+      return false;
     }
   }, {
     key: "setIsStyled",

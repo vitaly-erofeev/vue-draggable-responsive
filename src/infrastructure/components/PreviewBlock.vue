@@ -146,7 +146,7 @@ export default Vue.extend({
   computed: {
     // список потомков у контейнера
     children (): object[] {
-      if (this.activeTabGuid) {
+      if (this.block?.tabs?.use) {
         return this.block.children.filter(item => item.parentTabGuid && this.visitedTabGuids.includes(item.parentTabGuid))
       } else {
         return this.block.children
@@ -447,6 +447,7 @@ export default Vue.extend({
   },
 
   mounted () {
+    console.log(this)
     this.setParent()
     this.$nextTick(() => {
       this.setStretchedSize()

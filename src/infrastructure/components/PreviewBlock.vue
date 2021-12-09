@@ -447,7 +447,6 @@ export default Vue.extend({
   },
 
   mounted () {
-    console.log(this)
     this.setParent()
     this.$nextTick(() => {
       this.setStretchedSize()

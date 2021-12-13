@@ -1,31 +1,26 @@
-export default class TabSettings {
-  tabSettings: {[index: string]: any;}
-  context: Vue
-  onUpdateTabSettings: Function
+import { TabSettingsType } from '@/domain/model/TabSettingsType'
+import { TabSettingType } from '@/domain/model/TabSettingType'
 
-  constructor (tabSettings: object, context: Vue) {
+export default class TabSettings {
+  tabSettings: TabSettingsType
+  context: Vue
+
+  constructor (tabSettings: TabSettingsType, context: Vue) {
     this.tabSettings = tabSettings
     this.context = context
-    this.onUpdateTabSettings = (context as any).onUpdateTabSettings
   }
 
-  createTabSetting (tabGuid: string): object {
-    // Заменить изначальную ссылку, только так возможно добавить несколько реактивных свойств
-    this.tabSettings = Object.assign({}, this.tabSettings, {
-      [tabGuid]: {
-        isHidden: false,
-        isBlocked: false,
-        isStyled: true,
-        style: ''
-      }
-    })
-
-    if (typeof this.onUpdateTabSettings === 'function') {
-      // Обновить ссылку на объект на новую
-      this.onUpdateTabSettings(this.tabSettings)
+  createTabSetting (tabGuid: string): TabSettingType {
+    const tabSetting: TabSettingType = {
+      isHidden: false,
+      isBlocked: false,
+      isStyled: true,
+      style: ''
     }
 
-    return this.getTabSettingByGuid(tabGuid)
+    this.context.$set(this.tabSettings, tabGuid, tabSetting)
+
+    return tabSetting
   }
 
   createTabSettings (tabGuids: Array<string>): void {
@@ -36,13 +31,14 @@ export default class TabSettings {
     }
   }
 
-  getTabSettingByGuid (tabGuid: string): object {
+  getTabSettingByGuid (tabGuid: string): TabSettingType | void {
     if (!this.tabSettings) {
-      return {}
+      return
     }
-    const tabSetting = this.tabSettings[tabGuid]
+
+    const tabSetting: TabSettingType = this.tabSettings[tabGuid]
     if (!tabSetting) {
-      return {}
+      return
     }
 
     this.restoreTabSettingsStructure(tabSetting)
@@ -50,13 +46,17 @@ export default class TabSettings {
     return tabSetting
   }
 
-  restoreTabSettingsStructure (tabSetting: object): void {
+  restoreTabSettingsStructure (tabSetting: TabSettingType): void {
     if (!tabSetting) {
       return
     }
 
     if (!('isHidden' in tabSetting)) {
-      this.context.$set(tabSetting, 'isHidden', true)
+      this.context.$set(tabSetting, 'isHidden', false)
+    }
+
+    if (!('isBlocked' in tabSetting)) {
+      this.context.$set(tabSetting, 'isBlocked', false)
     }
 
     if (!('isStyled' in tabSetting)) {
@@ -77,7 +77,7 @@ export default class TabSettings {
   }
 
   getHiddenConditions (tabGuid: string): object | void {
-    const tabSetting: any = this.getTabSettingByGuid(tabGuid)
+    const tabSetting: TabSettingType | void = this.getTabSettingByGuid(tabGuid)
     if (tabSetting) {
       return tabSetting.hiddenConditions
     }
@@ -90,7 +90,7 @@ export default class TabSettings {
   }
 
   getBlockedConditions (tabGuid: string): object | void {
-    const tabSetting: any = this.getTabSettingByGuid(tabGuid)
+    const tabSetting: TabSettingType | void = this.getTabSettingByGuid(tabGuid)
     if (tabSetting) {
       return tabSetting.blockedConditions
     }
@@ -103,7 +103,7 @@ export default class TabSettings {
   }
 
   getStyledConditions (tabGuid: string): object | void {
-    const tabSetting: any = this.getTabSettingByGuid(tabGuid)
+    const tabSetting: TabSettingType | void = this.getTabSettingByGuid(tabGuid)
     if (tabSetting) {
       return tabSetting.styledConditions
     }
@@ -115,11 +115,12 @@ export default class TabSettings {
     this.context.$set(tabSetting, 'styledConditions', value)
   }
 
-  getIsHidden (tabGuid: string): boolean | void {
-    const tabSetting: any = this.getTabSettingByGuid(tabGuid)
+  getIsHidden (tabGuid: string): boolean {
+    const tabSetting: TabSettingType | void = this.getTabSettingByGuid(tabGuid)
     if (tabSetting && ('isHidden' in tabSetting)) {
       return tabSetting.isHidden
     }
+
     return false
   }
 
@@ -129,11 +130,12 @@ export default class TabSettings {
     this.context.$set(tabSetting, 'isHidden', value)
   }
 
-  getIsBlocked (tabGuid: string): boolean | void {
-    const tabSetting: any = this.getTabSettingByGuid(tabGuid)
+  getIsBlocked (tabGuid: string): boolean {
+    const tabSetting: TabSettingType | void = this.getTabSettingByGuid(tabGuid)
     if (tabSetting && ('isBlocked' in tabSetting)) {
       return tabSetting.isBlocked
     }
+
     return false
   }
 
@@ -143,11 +145,12 @@ export default class TabSettings {
     this.context.$set(tabSetting, 'isBlocked', value)
   }
 
-  getIsStyled (tabGuid: string): boolean | void {
-    const tabSetting: any = this.getTabSettingByGuid(tabGuid)
+  getIsStyled (tabGuid: string): boolean {
+    const tabSetting: TabSettingType | void = this.getTabSettingByGuid(tabGuid)
     if (tabSetting && ('isStyled' in tabSetting)) {
       return tabSetting.isStyled
     }
+
     return false
   }
 
@@ -158,7 +161,7 @@ export default class TabSettings {
   }
 
   getStyle (tabGuid: string): string | void {
-    const tabSetting: any = this.getTabSettingByGuid(tabGuid)
+    const tabSetting: TabSettingType | void = this.getTabSettingByGuid(tabGuid)
     if (tabSetting) {
       return tabSetting.style
     }

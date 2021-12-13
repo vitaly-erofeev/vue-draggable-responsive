@@ -84,10 +84,6 @@ export default Vue.extend({
     },
     getRefByGuid (guid: string): Vue | undefined {
       return this.store.getRefByGuid(guid)
-    },
-    onUpdateTabSettings (tabSettings: object): void {
-      // Обновить ссылку на объект на новую
-      this.$emit('tab-settings-update', tabSettings)
     }
   }
 })

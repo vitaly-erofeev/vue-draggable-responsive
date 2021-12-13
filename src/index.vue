@@ -274,10 +274,6 @@ export default Vue.extend({
     },
     removeBlock (guid: string): void {
       this.store.remove(guid)
-    },
-    onUpdateTabSettings (tabSettings: object): void {
-      // Обновить ссылку на объект на новую
-      this.$emit('tab-settings-update', tabSettings)
     }
   }
 })

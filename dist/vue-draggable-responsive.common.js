@@ -946,6 +946,9 @@ var es_array_includes = __webpack_require__("caad");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
 var es_array_map = __webpack_require__("d81d");
 
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.assign.js
+var es_object_assign = __webpack_require__("cca6");
+
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.values.js
 var es_object_values = __webpack_require__("07ac");
 
@@ -1020,6 +1023,7 @@ var Sticky = __webpack_require__("e920");
 var EventTypes = __webpack_require__("f2d8");
 
 // CONCATENATED MODULE: ./src/infrastructure/domain/repository/BlockRepository.ts
+
 
 
 
@@ -16392,6 +16396,8 @@ var BlockDTO_BlockDTO = /*#__PURE__*/function () {
         isHover = _ref$isHover === void 0 ? false : _ref$isHover,
         _ref$isHidden = _ref.isHidden,
         isHidden = _ref$isHidden === void 0 ? false : _ref$isHidden,
+        _ref$isHighlight = _ref.isHighlight,
+        isHighlight = _ref$isHighlight === void 0 ? false : _ref$isHighlight,
         minMax = _ref.minMax,
         onCenter = _ref.onCenter;
 
@@ -16407,11 +16413,13 @@ var BlockDTO_BlockDTO = /*#__PURE__*/function () {
     };
     this.isHover = false;
     this.isHidden = false;
+    this.isHighlight = false;
     this.widthCalc = widthCalc;
     this.heightCalc = heightCalc;
     this.stickyTo = stickyTo;
     this.isHover = isHover;
     this.isHidden = isHidden;
+    this.isHighlight = isHighlight;
     this.minMax = minMax;
     this.onCenter = onCenter;
 

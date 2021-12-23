@@ -49,6 +49,7 @@ export default class BlockDTO {
   }
   isHover: boolean = false
   isHidden: boolean = false
+  isHighlight: boolean = false
 
   constructor (
     {
@@ -83,6 +84,7 @@ export default class BlockDTO {
       pagination,
       isHover = false,
       isHidden = false,
+      isHighlight = false,
       minMax,
       onCenter
     }: BlockProperties
@@ -92,6 +94,7 @@ export default class BlockDTO {
     this.stickyTo = stickyTo
     this.isHover = isHover
     this.isHidden = isHidden
+    this.isHighlight = isHighlight
     this.minMax = minMax
     this.onCenter = onCenter
     const {

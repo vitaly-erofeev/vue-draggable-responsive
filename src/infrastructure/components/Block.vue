@@ -198,7 +198,7 @@ export default Vue.extend({
     blockWidth: number,
     tabsWidth: number,
     isShowArrows: boolean,
-    visitedTabs: string[]
+    visitedTabs: Set<string>
     } {
     return {
       blockManager: undefined,
@@ -218,7 +218,7 @@ export default Vue.extend({
       blockWidth: 0,
       tabsWidth: 0,
       isShowArrows: false,
-      visitedTabs: []
+      visitedTabs: new Set()
     }
   },
 
@@ -226,15 +226,19 @@ export default Vue.extend({
     // список потомков у контейнера
     children (): object[] {
       if (this.activeTabGuid) {
-        return this.block.children.map(item => {
+        return this.block.children.reduce((arr: object[], item) => {
           if (item.parentTabGuid === this.activeTabGuid) {
-            if (!this.visitedTabs.includes(item.guid)) {
-              this.visitedTabs.push(item.guid)
-              return item
+            if (!this.visitedTabs.has(item.guid)) {
+              this.visitedTabs.add(item.guid)
             }
           }
-          return item
-        }).filter(item => this.visitedTabs.includes(item.guid))
+
+          if (this.visitedTabs.has(item.guid)) {
+            arr.push(item)
+          }
+
+          return arr
+        }, [])
       } else {
         return this.block.children
       }
@@ -684,9 +688,10 @@ export default Vue.extend({
         let removedTab = oldValue.filter((item: string) => !value.includes(item))[0]
         if (removedTab) {
           this.block.children
-            .filter((item) => item.parentTabGuid === removedTab)
             .forEach((item) => {
-              this.getStore().remove(item.guid)
+              if (item.parentTabGuid === removedTab) {
+                this.getStore().remove(item.guid)
+              }
             })
         }
       }

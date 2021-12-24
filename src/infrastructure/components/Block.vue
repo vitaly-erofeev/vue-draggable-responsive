@@ -198,7 +198,7 @@ export default Vue.extend({
     blockWidth: number,
     tabsWidth: number,
     isShowArrows: boolean,
-    visitedTabs: Set<string>
+    visitedTabs: string[]
     } {
     return {
       blockManager: undefined,
@@ -218,7 +218,7 @@ export default Vue.extend({
       blockWidth: 0,
       tabsWidth: 0,
       isShowArrows: false,
-      visitedTabs: new Set()
+      visitedTabs: []
     }
   },
 
@@ -228,12 +228,12 @@ export default Vue.extend({
       if (this.activeTabGuid) {
         return this.block.children.reduce((arr: object[], item) => {
           if (item.parentTabGuid === this.activeTabGuid) {
-            if (!this.visitedTabs.has(item.guid)) {
-              this.visitedTabs.add(item.guid)
+            if (!this.visitedTabs.includes(item.guid)) {
+              this.visitedTabs.push(item.guid)
             }
           }
 
-          if (this.visitedTabs.has(item.guid)) {
+          if (this.visitedTabs.includes(item.guid)) {
             arr.push(item)
           }
 

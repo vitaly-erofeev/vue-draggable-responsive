@@ -126,7 +126,7 @@ export default Vue.extend({
     blockWidth: number,
     tabsWidth: number,
     isShowArrows: boolean,
-    visitedTabs: Set<string>,
+    visitedTabGuids: string[],
     } {
     return {
       parentBlock: undefined,
@@ -139,7 +139,7 @@ export default Vue.extend({
       blockWidth: 0,
       tabsWidth: 0,
       isShowArrows: false,
-      visitedTabs: new Set()
+      visitedTabGuids: []
     }
   },
 
@@ -147,7 +147,7 @@ export default Vue.extend({
     // список потомков у контейнера
     children (): object[] {
       if (this.block?.tabs?.use) {
-        return this.block.children.filter(item => item.parentTabGuid && this.visitedTabs.has(item.parentTabGuid))
+        return this.block.children.filter(item => item.parentTabGuid && this.visitedTabGuids.includes(item.parentTabGuid))
       } else {
         return this.block.children
       }
@@ -437,8 +437,8 @@ export default Vue.extend({
     activeTabGuid (value) {
       this.scrollHeight = 0
       this.scrollWidth = 0
-      if (!this.visitedTabs.has(value)) {
-        this.visitedTabs.add(value)
+      if (!this.visitedTabGuids.includes(value)) {
+        this.visitedTabGuids.push(value)
       }
       this.$nextTick(() => {
         this.setStretchedSize()

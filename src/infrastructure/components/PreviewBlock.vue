@@ -228,7 +228,9 @@ export default Vue.extend({
           left = this.block.left + this.block.sizeTypes.left
           if (this.block.parentGuid) {
             if (typeof this.parentBlock !== 'undefined') {
-              if (this.parentBlock.isStretched) {
+              if (this.parentBlock.isStretched && this.isTabsContainer) {
+                // Если this.isTabsContainer === false
+                // и чекбокс "Растягиваемый" включен у дочернего блока, то поля в дочернем блоке пропадают (width = 0px)
                 const parentSizes = BlockManager.getAbsoluteSizesByParent(this.parentBlock, this.parentElement as Element)
                 if (this.block.sizeTypes.top === SizeTypes.PERCENT) {
                   top = `${parentSizes.height / 100 * (this.block.top || 0)}px`
@@ -641,7 +643,6 @@ export default Vue.extend({
       if (this.tabSettingsService && this.tabSettingsService.getIsBlocked(guid)) {
         return
       }
-
       this.activeTabGuid = guid
     }
   }

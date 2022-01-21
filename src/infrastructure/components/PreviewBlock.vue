@@ -53,7 +53,7 @@
       <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
       <preview-block
         v-for="_block in children"
-        v-show="isShowChildren && _block.parentTabGuid === activeTabGuid && !_block.isHidden"
+        :class="(isShowChildren && _block.parentTabGuid === activeTabGuid && !_block.isHidden) ? '' : 'visibility'"
         :ref="_block.guid"
         :key="_block.guid"
         :is-showing="isShowChildren && _block.parentTabGuid === activeTabGuid && !_block.isHidden"
@@ -724,5 +724,10 @@ export default Vue.extend({
 .block .tabs_button_next {
     right: 0;
     left: auto;
+}
+.block .visibility {
+   visibility: hidden;
+  /*opacity: 0;*/
+  /* display: none; */
 }
 </style>

@@ -504,7 +504,12 @@ export default Vue.extend({
       if (!this.block.replication?.function) {
         return
       }
-      const blocksData: any[] = await this.block.replication?.function(offset)
+      let blocksData: any[] = []
+      try {
+        blocksData = await this.block.replication?.function(offset)
+      } catch (e) {
+        console.log('Error in replication request', e)
+      }
       if (blocksData.length === 0) {
         this.block.isHidden = true
         /* this.$nextTick(() => {

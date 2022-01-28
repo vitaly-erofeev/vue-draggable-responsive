@@ -53,7 +53,8 @@
       <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
       <preview-block
         v-for="_block in children"
-        :class="(isShowChildren && _block.parentTabGuid === activeTabGuid && !_block.isHidden) ? '' : 'visibility'"
+        v-show="(isShowChildren && !_block.isHidden )"
+        :class="(_block.parentTabGuid === activeTabGuid) ? '' : 'visibility'"
         :ref="_block.guid"
         :key="_block.guid"
         :is-showing="isShowChildren && _block.parentTabGuid === activeTabGuid && !_block.isHidden"

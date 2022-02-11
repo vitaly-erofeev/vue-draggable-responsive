@@ -368,7 +368,8 @@ export default Vue.extend({
         const refBlock = this.getStore().getRefByGuid(this.block.guid) as unknown as {
           $el: HTMLElement
         }
-        if (refBlock) {
+        // Для элементов с display:none offsetWidth равен нулю
+        if (refBlock && refBlock.$el.offsetWidth) {
           if (this.block.sticky === Sticky.BL || this.block.sticky === Sticky.TL) {
             position.left = `calc(50% - calc(${refBlock.$el.offsetWidth}px / 2))`
           } else {

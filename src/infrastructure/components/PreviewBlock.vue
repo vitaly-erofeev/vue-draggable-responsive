@@ -45,6 +45,7 @@
     <div
       ref="container"
       class="content custom_scrollbar"
+      :class="{ 'scroll_hover': isActiveScrollHover }"
       :style="blockContentStyle"
       @mouseover="block.isHover = true"
       @mouseleave="block.isHover = false"
@@ -434,6 +435,9 @@ export default Vue.extend({
       }
 
       return isShow
+    },
+    isActiveScrollHover (): boolean {
+      return !!this.block?.isScrollHover
     }
   },
 
@@ -738,5 +742,19 @@ export default Vue.extend({
    height: 0px !important;
   /*opacity: 0;*/
   /* display: none; */
+}
+.block .scroll_hover {
+  scrollbar-color: transparent white; /* thumb and track color  for fireFox*/
+  transition: scrollbar-color 0.3s ease-out;
+}
+.block .scroll_hover:hover {
+  scrollbar-color: rgba(144,147,153,.3) white; /* thumb and track color  for fireFox*/
+}
+.block .scroll_hover:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(144,147,153,.3);
+}
+.block .scroll_hover::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  transition: background-color 0.3s ease-out; /* transition not working for chrome*/
 }
 </style>

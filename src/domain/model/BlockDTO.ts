@@ -33,6 +33,7 @@ export default class BlockDTO {
   style?: string
   isActive: boolean = false
   isActiveAsParent: boolean = false
+  isScrollHover?: boolean = false
   interactive?: InteractiveProperties
   tabs?: TabProperties = {
     use: false,
@@ -73,6 +74,7 @@ export default class BlockDTO {
       alias,
       parentGuid,
       isStretched,
+      isScrollHover,
       style,
       interactive,
       tabs,
@@ -120,6 +122,7 @@ export default class BlockDTO {
     this.alias = alias
     this.parentGuid = parentGuid
     this.isStretched = isStretched
+    this.isScrollHover = isScrollHover
     this.style = style
     this.interactive = interactive
     this.tabs = tabs

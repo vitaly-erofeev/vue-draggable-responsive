@@ -31,6 +31,7 @@ export interface BlockProperties {
   },
   stickyTo?: StickyTo,
   isStretched: boolean,
+  isScrollHover?: boolean,
   guid?: string,
   alias?: string,
   children?: BlockDTO[],

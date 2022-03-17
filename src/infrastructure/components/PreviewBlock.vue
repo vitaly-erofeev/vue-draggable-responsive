@@ -294,7 +294,7 @@ export default Vue.extend({
         }
         if (stickyToElement) {
           position.top =
-              `calc(${stickyToElement.positionStyle.height} + ${stickyToElement.positionStyle.top} + ${position.top})`
+              `calc(${stickyToElement.positionStyle.height} + ${stickyToElement.positionStyle.top} + ${this.block.replication?.verticalMargin})`
         }
       }
 
@@ -552,6 +552,10 @@ export default Vue.extend({
             let previousRowBlockGuid = rowGuids[row - 1][(index % columns) + 1]
             newBlock.replication = {}
             newBlock.replication.topBlockGuid = previousRowBlockGuid
+            if (me.block.replication?.verticalMargin?.value) {
+              newBlock.replication.verticalMargin =
+                  `${me.block.replication?.verticalMargin?.value}${me.block.replication?.verticalMargin?.type || SizeTypes.PIXEL}`
+            }
           }
           lastGuid = me.getStore().add(newBlock)
         } else {

@@ -180,9 +180,9 @@ export default {
         event,
         parentGuid: this.activeBlock?.guid,
         replication: {
-          columns: 1,
+          columns: 2,
           function: () => {
-            const count = 3
+            const count = 7
             let counter = 0
             let answer = []
             while (count > counter) {
@@ -191,8 +191,14 @@ export default {
             }
             return answer
           },
-          verticalMargin: 10,
-          horizontalMargin: 10
+          verticalMargin: {
+            type: 'px',
+            value: 20
+          },
+          horizontalMargin: {
+            type: 'px',
+            value: 20
+          }
         }
       })
     },

@@ -12,7 +12,8 @@ export interface TabProperties {
   tabStyle?: string,
   activeTabStyle?: string,
   class?: string,
-  tabStyleByCondition?: string
+  tabStyleByCondition?: string,
+  saveActiveTab?: boolean
 }
 export enum TabPosition {
   TOP = 'top',

@@ -463,7 +463,11 @@ export default Vue.extend({
       }
     })
     if (this.block?.tabs?.use && this.block?.tabs?.list?.length > 0) {
-      this.onTabClick(this.block.tabs.list[0].guid)
+      if (this.block.tabs.saveActiveTab && this.block.tabs.activeGuid) {
+        this.onTabClick(this.block.tabs.list[0].guid)
+      } else {
+        this.onTabClick(this.block.tabs.list[0].guid)
+      }
     }
     if (this.block?.isStretched && this.$refs.container && this.$refs.container instanceof Element) {
       let children: HTMLCollection = this.$refs.container.children

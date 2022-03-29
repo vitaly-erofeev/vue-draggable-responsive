@@ -204,7 +204,8 @@ export default Vue.extend({
         replication = undefined,
         pagination = undefined,
         minMax = undefined,
-        onCenter = undefined
+        onCenter = undefined,
+        alias = undefined
       }: {
           width: number,
           height: number,
@@ -234,7 +235,8 @@ export default Vue.extend({
             limit: number
           }
           minMax?: MinMax,
-          onCenter?: OnCenter
+          onCenter?: OnCenter,
+          alias?: string
         }
     ): string {
       if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
@@ -261,7 +263,8 @@ export default Vue.extend({
         replication,
         pagination,
         minMax,
-        onCenter
+        onCenter,
+        alias
       })
       if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
         this.$nextTick(() => {

@@ -8,6 +8,7 @@
       v-if="isTabsContainer"
       :class="{
         'tabs_container' : true,
+        'custom_scrollbar' : true,
         'position_top': block.tabs.position === 'top',
         'position_right': block.tabs.position === 'right',
         'position_bottom': block.tabs.position === 'bottom',

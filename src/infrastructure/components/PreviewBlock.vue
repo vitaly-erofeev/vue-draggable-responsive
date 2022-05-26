@@ -746,9 +746,10 @@ export default Vue.extend({
     left: auto;
 }
 .block .visibility {
-   visibility: hidden;
+    margin-left: -9999px;
+   /* visibility: hidden;
    min-height: 0px !important;
-   height: 0px !important;
+   height: 0px !important; */
   /*opacity: 0;*/
   /* display: none; */
 }

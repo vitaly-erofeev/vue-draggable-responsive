@@ -6,7 +6,8 @@
       'highlight' : isResizing || isDragging,
       'active': block.isActive,
       'hidden': block.isHidden,
-      'active_parent': block.isActiveAsParent
+      'active_parent': block.isActiveAsParent,
+      [block.className]: !!block.className
     }"
     ref="draggableContainer"
     v-show="!block.isHidden || showHidden"

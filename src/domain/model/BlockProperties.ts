@@ -29,6 +29,7 @@ export interface BlockProperties {
     bottom: SizeTypes,
     left: SizeTypes
   },
+  className?: string,
   stickyTo?: StickyTo,
   isStretched: boolean,
   isScrollHover?: boolean,

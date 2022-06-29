@@ -71,6 +71,7 @@ export default class BlockDTO {
         bottom: SizeTypes.PERCENT,
         left: SizeTypes.PERCENT
       },
+      className,
       guid = 'guid',
       alias,
       parentGuid,
@@ -109,6 +110,7 @@ export default class BlockDTO {
       left,
       sticky
     })
+    this.className = className
     this.top = _top
     this.right = _right
     this.bottom = _bottom

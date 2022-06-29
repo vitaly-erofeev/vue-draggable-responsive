@@ -197,6 +197,7 @@ export default Vue.extend({
           bottom: SizeTypes.PERCENT,
           left: SizeTypes.PERCENT
         },
+        className = undefined,
         event = undefined,
         type = AddBlockType.DEFAULT,
         isStretched = false,
@@ -224,6 +225,7 @@ export default Vue.extend({
             bottom: SizeTypes,
             left: SizeTypes
           },
+          className?: string,
           event?: MouseEvent,
           type: AddBlockType,
           isStretched: boolean,
@@ -260,6 +262,7 @@ export default Vue.extend({
         sizeTypes,
         isStretched,
         tabs,
+        className,
         replication,
         pagination,
         minMax,

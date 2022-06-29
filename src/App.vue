@@ -465,6 +465,7 @@ export default {
         height: 100,
         top: 30,
         right: 0,
+        className: 'test',
         sticky: 'tl',
         sizeTypes: {
           width: '%',

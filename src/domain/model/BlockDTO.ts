@@ -27,6 +27,7 @@ export default class BlockDTO {
   children: BlockDTO[]
   guid: string
   alias?: string
+  className?: string
   isStretched: boolean = false
   stickyTo?: StickyTo
   parentGuid?: string

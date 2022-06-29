@@ -2,7 +2,7 @@
   <div
     :style="positionStyle"
     ref="draggableContainer"
-    class="block"
+    :class="['block', block.className]"
   >
     <div
       v-if="isTabsContainer"

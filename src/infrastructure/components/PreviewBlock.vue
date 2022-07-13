@@ -130,6 +130,8 @@ export default Vue.extend({
     tabsWidth: number,
     isShowArrows: boolean,
     visitedTabGuids: string[],
+    stickyToBlock?: BlockDTO,
+    stickyToElement?: any
     } {
     return {
       parentBlock: undefined,
@@ -142,7 +144,9 @@ export default Vue.extend({
       blockWidth: 0,
       tabsWidth: 0,
       isShowArrows: false,
-      visitedTabGuids: []
+      visitedTabGuids: [],
+      stickyToBlock: undefined,
+      stickyToElement: undefined
     }
   },
 
@@ -298,14 +302,9 @@ export default Vue.extend({
               `calc(${stickyToElement.positionStyle.height} + ${stickyToElement.positionStyle.top} + ${this.block.replication?.verticalMargin})`
         }
       }
-
-      if (this.block.stickyTo?.guid && this.block.stickyTo?.type) {
-        const stickyToBlock = this.getStore().getByGuid(this.block.stickyTo.guid)
-        const stickyToElement = this.getStore().getRefByGuid(this.block.stickyTo.guid) as unknown as {
-          positionStyle: {
-            top: string, height: string, left: string, width: string
-          }
-        }
+      if (this.block.stickyTo?.guid && this.block.stickyTo?.type && this.stickyToBlock?.guid) {
+        const stickyToBlock = this.stickyToBlock
+        const stickyToElement = this.stickyToElement
         if (stickyToBlock && stickyToBlock.parentGuid === this.block.parentGuid && stickyToElement) {
           switch (this.block.stickyTo.type) {
             case StickyToType.TOP:
@@ -459,6 +458,7 @@ export default Vue.extend({
     this.setParent()
     this.$nextTick(() => {
       this.setStretchedSize()
+      this.setSticky(this.block?.stickyTo?.guid)
       if (this.isTabsContainer) {
         this.setIsShowArrows()
       }
@@ -494,6 +494,19 @@ export default Vue.extend({
   },
 
   methods: {
+    setSticky (guid?: string) {
+      if (guid) {
+        this.stickyToBlock = this.getStore().getByGuid(guid)
+        this.stickyToElement = this.getStore().getRefByGuid(guid) as unknown as {
+          positionStyle: {
+            top: string, height: string, left: string, width: string
+          }
+        }
+      } else {
+        this.stickyToBlock = undefined
+        this.stickyToElement = undefined
+      }
+    },
     setStretchedSize () {
       this.scrollHeight = 0
       this.scrollWidth = 0

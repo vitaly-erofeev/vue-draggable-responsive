@@ -160,7 +160,7 @@ export default {
         let block = this.$refs.designer.getBlocks().filter((item) => item.guid !== this.activeBlock.guid)[0]
         this.activeBlock.stickyTo = {
           guid: block.guid,
-          type: StickyToType.LEFT
+          type: StickyToType.TOP
         }
       }
     },

@@ -153,7 +153,7 @@ const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 library.add(faAngleDown, faChevronRight, faChevronLeft)
 
 export default Vue.extend({
-  name: 'block',
+  name: 'Block',
 
   components: {
     FontAwesomeIcon
@@ -200,7 +200,9 @@ export default Vue.extend({
     blockWidth: number,
     tabsWidth: number,
     isShowArrows: boolean,
-    visitedTabs: string[]
+    visitedTabs: string[],
+    stickyToBlock?: BlockDTO,
+    stickyToElement?: any
     } {
     return {
       blockManager: undefined,
@@ -220,7 +222,9 @@ export default Vue.extend({
       blockWidth: 0,
       tabsWidth: 0,
       isShowArrows: false,
-      visitedTabs: []
+      visitedTabs: [],
+      stickyToBlock: undefined,
+      stickyToElement: undefined
     }
   },
 
@@ -364,12 +368,9 @@ export default Vue.extend({
       }
 
       if (this.block.stickyTo?.guid && this.block.stickyTo?.type) {
-        const stickyToBlock = this.getStore().getByGuid(this.block.stickyTo.guid)
-        const stickyToElement = this.getStore().getRefByGuid(this.block.stickyTo.guid) as unknown as {
-          positionStyle: {
-            top: string, height: string, left: string, width: string
-          }
-        }
+        const stickyToBlock = this.stickyToBlock
+        const stickyToElement = this.stickyToElement
+
         if (stickyToBlock && stickyToBlock.parentGuid === this.block.parentGuid && stickyToElement) {
           switch (this.block.stickyTo.type) {
             case StickyToType.TOP:
@@ -510,6 +511,7 @@ export default Vue.extend({
         if (!this.$el.parentElement) {
           return
         }
+        this.setSticky(value)
         if (oldValue && !value) {
           const el = this.getStore().getRefByGuid(oldValue) as unknown as {
             $el: {
@@ -711,6 +713,7 @@ export default Vue.extend({
         this.setIsShowArrows()
       }
     })
+    this.setSticky(this.block?.stickyTo?.guid)
   },
 
   beforeDestroy () {
@@ -718,6 +721,19 @@ export default Vue.extend({
   },
 
   methods: {
+    setSticky (guid?: string) {
+      if (guid) {
+        this.stickyToBlock = this.getStore().getByGuid(guid)
+        this.stickyToElement = this.getStore().getRefByGuid(guid) as unknown as {
+          positionStyle: {
+            top: string, height: string, left: string, width: string
+          }
+        }
+      } else {
+        this.stickyToBlock = undefined
+        this.stickyToElement = undefined
+      }
+    },
     setIsShowArrows (): void {
       if (!this.$refs.draggableContainer) return
       const tabsScroll: HTMLElement = this.$refs.tabsScroll as HTMLElement

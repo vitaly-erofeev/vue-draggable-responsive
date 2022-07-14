@@ -712,8 +712,8 @@ export default Vue.extend({
       if (this.isTabsContainer) {
         this.setIsShowArrows()
       }
+      this.setSticky(this.block?.stickyTo?.guid)
     })
-    this.setSticky(this.block?.stickyTo?.guid)
   },
 
   beforeDestroy () {

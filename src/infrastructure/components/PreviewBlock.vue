@@ -28,7 +28,7 @@
           v-for="tab in visibleTabs"
           :key="tab.guid"
           :style="blockTabStyle + getBlockTabStyle(tab)"
-          :class="{ 'tab': true, 'active': tab.guid === activeTabGuid, [block.tabs.class]: true }"
+          :class="{ 'tab': true, 'active': getDefaultTab(tab), [block.tabs.class]: true }"
           @click="onTabClick(tab.guid)"
         >
           <span class="label">{{ tab.name }}</span>
@@ -670,6 +670,26 @@ export default Vue.extend({
       }
 
       return style
+    },
+
+    getDefaultTab (tab: any): boolean | void {
+      if (!this.block?.tabs?.use || this.block?.tabs?.list?.length === 1) {
+        return true
+      }
+
+      let tabs = this.block.tabs.list
+      for (let i = 0; i < tabs.length; i++) {
+        const currentTab = tabs[i]
+        if (this.tabSettingsService) {
+          const isDefault = this.tabSettingsService.getIsDefaultTab(currentTab.guid)
+          if (isDefault) {
+            this.activeTabGuid = currentTab.guid
+            return
+          }
+        }
+      }
+
+      return tab.guid === this.activeTabGuid
     },
 
     onTabClick (guid: string) {

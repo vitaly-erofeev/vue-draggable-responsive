@@ -15,6 +15,7 @@ export default class TabSettings {
       isHidden: false,
       isBlocked: false,
       isStyled: true,
+      isDefaultTab: false,
       style: ''
     }
 
@@ -61,6 +62,10 @@ export default class TabSettings {
 
     if (!('isStyled' in tabSetting)) {
       this.context.$set(tabSetting, 'isStyled', true)
+    }
+
+    if (!('isDefaultTab' in tabSetting)) {
+      this.context.$set(tabSetting, 'isDefaultTab', false)
     }
 
     if (!('hiddenConditions' in tabSetting)) {
@@ -171,5 +176,20 @@ export default class TabSettings {
     const tabSetting = this.getTabSettingByGuid(tabGuid) || this.createTabSetting(tabGuid)
 
     this.context.$set(tabSetting, 'style', value)
+  }
+
+  getIsDefaultTab (tabGuid: string): boolean {
+    const tabSetting: TabSettingType | void = this.getTabSettingByGuid(tabGuid)
+    if (tabSetting && ('isDefaultTab' in tabSetting)) {
+      return tabSetting.isDefaultTab
+    }
+
+    return false
+  }
+
+  setIsDefaultTab (tabGuid: string, value: string): void {
+    const tabSetting = this.getTabSettingByGuid(tabGuid) || this.createTabSetting(tabGuid)
+
+    this.context.$set(tabSetting, 'isDefaultTab', value)
   }
 }

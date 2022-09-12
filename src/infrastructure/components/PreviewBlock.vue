@@ -28,7 +28,7 @@
           v-for="tab in visibleTabs"
           :key="tab.guid"
           :style="blockTabStyle + getBlockTabStyle(tab)"
-          :class="{ 'tab': true, 'active': getDefaultTab(tab), [block.tabs.class]: true }"
+          :class="{ 'tab': true, 'active': tab.guid === activeTabGuid, [block.tabs.class]: true }"
           @click="onTabClick(tab.guid)"
         >
           <span class="label">{{ tab.name }}</span>
@@ -469,6 +469,11 @@ export default Vue.extend({
       } else {
         this.onTabClick(this.block.tabs.list[0].guid)
       }
+      // установлена вкладка по умолчанию
+      let defaultTab = this.getDefaultTab()
+      if (defaultTab) {
+        this.onTabClick(defaultTab)
+      }
     }
     if (this.block?.isStretched && this.$refs.container && this.$refs.container instanceof Element) {
       let children: HTMLCollection = this.$refs.container.children
@@ -672,9 +677,9 @@ export default Vue.extend({
       return style
     },
 
-    getDefaultTab (tab: any): boolean | void {
+    getDefaultTab (): string | null {
       if (!this.block?.tabs?.use || this.block?.tabs?.list?.length === 1) {
-        return true
+        return null
       }
 
       let tabs = this.block.tabs.list
@@ -683,13 +688,12 @@ export default Vue.extend({
         if (this.tabSettingsService) {
           const isDefault = this.tabSettingsService.getIsDefaultTab(currentTab.guid)
           if (isDefault) {
-            this.activeTabGuid = currentTab.guid
-            return
+            return currentTab.guid
           }
         }
       }
 
-      return tab.guid === this.activeTabGuid
+      return null
     },
 
     onTabClick (guid: string) {

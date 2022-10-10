@@ -1212,8 +1212,8 @@ var es_array_includes = __webpack_require__("caad");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
 var es_array_map = __webpack_require__("d81d");
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.assign.js
-var es_object_assign = __webpack_require__("cca6");
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.keys.js
+var es_object_keys = __webpack_require__("b64b");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.values.js
 var es_object_values = __webpack_require__("07ac");
@@ -1413,8 +1413,6 @@ var BlockRepository_BlockRepository = /*#__PURE__*/function () {
   }, {
     key: "add",
     value: function add(block) {
-      var _this2 = this;
-
       var oldGuid = block.guid;
       block.guid = GuidGenerator_GuidGenerator.generate();
       var parent;
@@ -1443,14 +1441,48 @@ var BlockRepository_BlockRepository = /*#__PURE__*/function () {
       });
 
       if (children && children.length > 0) {
-        children.forEach(function (item) {
-          _this2.add(Object.assign(item, {
-            parentGuid: block.guid
-          }));
-        });
+        this.addChildren(children, block.guid);
       }
 
       return block.guid;
+    }
+  }, {
+    key: "addChildren",
+    value: function addChildren(blocks, parentGuid) {
+      var _this2 = this;
+
+      var blocksMapper = {};
+      var stickyMapper = {};
+      blocks.forEach(function (item) {
+        var oldGuid = item.guid;
+
+        var newGuid = _this2.add(Object.assign(item, {
+          parentGuid: parentGuid
+        }));
+
+        if (oldGuid) {
+          var _item$stickyTo;
+
+          blocksMapper[oldGuid] = newGuid;
+
+          if ((_item$stickyTo = item.stickyTo) !== null && _item$stickyTo !== void 0 && _item$stickyTo.guid) {
+            stickyMapper[oldGuid] = item.stickyTo.guid;
+          }
+        }
+      });
+      Object.keys(stickyMapper).forEach(function (key) {
+        var block = _this2.getByGuid(blocksMapper[key]);
+
+        if (block) {
+          var newStickyBlockGuid = blocksMapper[stickyMapper[key]];
+
+          if (newStickyBlockGuid) {
+            if (block.stickyTo) {
+              block.stickyTo.guid = newStickyBlockGuid;
+            }
+          }
+        }
+      });
     }
   }, {
     key: "get",
@@ -1591,13 +1623,13 @@ var BlockRepository_BlockRepository = /*#__PURE__*/function () {
 
       var answer = [];
       blocks.filter(function (item) {
-        var _item$stickyTo;
-
-        return ((_item$stickyTo = item.stickyTo) === null || _item$stickyTo === void 0 ? void 0 : _item$stickyTo.guid) !== 'undefined';
-      }).forEach(function (item) {
         var _item$stickyTo2;
 
-        if (!((_item$stickyTo2 = item.stickyTo) !== null && _item$stickyTo2 !== void 0 && _item$stickyTo2.guid) || item.sticky !== Sticky["a" /* Sticky */].TL) {
+        return ((_item$stickyTo2 = item.stickyTo) === null || _item$stickyTo2 === void 0 ? void 0 : _item$stickyTo2.guid) !== 'undefined';
+      }).forEach(function (item) {
+        var _item$stickyTo3;
+
+        if (!((_item$stickyTo3 = item.stickyTo) !== null && _item$stickyTo3 !== void 0 && _item$stickyTo3.guid) || item.sticky !== Sticky["a" /* Sticky */].TL) {
           return false;
         }
 
@@ -1698,9 +1730,6 @@ var es_array_for_each = __webpack_require__("4160");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.includes.js
 var es_array_includes = __webpack_require__("caad");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.assign.js
-var es_object_assign = __webpack_require__("cca6");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.includes.js
 var es_string_includes = __webpack_require__("2532");
@@ -1828,7 +1857,6 @@ var SimpleAddListener_SimpleAddListener = /*#__PURE__*/function () {
 
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--14-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/PreviewBlock.vue?vue&type=script&lang=ts&
-
 
 
 
@@ -3379,22 +3407,22 @@ module.exports = {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabSettings; });
-/* harmony import */ var D_vue_draggable_responsive1_node_modules_babel_runtime_helpers_esm_createForOfIteratorHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("b85c");
-/* harmony import */ var D_vue_draggable_responsive1_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("d4ec");
-/* harmony import */ var D_vue_draggable_responsive1_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("bee2");
+/* harmony import */ var _Users_vitaly_erofeev_PhpstormProjects_vue_draggable_responsive_node_modules_babel_runtime_helpers_esm_createForOfIteratorHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("b85c");
+/* harmony import */ var _Users_vitaly_erofeev_PhpstormProjects_vue_draggable_responsive_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("d4ec");
+/* harmony import */ var _Users_vitaly_erofeev_PhpstormProjects_vue_draggable_responsive_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("bee2");
 
 
 
 
 var TabSettings = /*#__PURE__*/function () {
   function TabSettings(tabSettings, context) {
-    Object(D_vue_draggable_responsive1_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])(this, TabSettings);
+    Object(_Users_vitaly_erofeev_PhpstormProjects_vue_draggable_responsive_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])(this, TabSettings);
 
     this.tabSettings = tabSettings;
     this.context = context;
   }
 
-  Object(D_vue_draggable_responsive1_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(TabSettings, [{
+  Object(_Users_vitaly_erofeev_PhpstormProjects_vue_draggable_responsive_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(TabSettings, [{
     key: "createTabSetting",
     value: function createTabSetting(tabGuid) {
       var tabSetting = {
@@ -3410,7 +3438,7 @@ var TabSettings = /*#__PURE__*/function () {
   }, {
     key: "createTabSettings",
     value: function createTabSettings(tabGuids) {
-      var _iterator = Object(D_vue_draggable_responsive1_node_modules_babel_runtime_helpers_esm_createForOfIteratorHelper__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(tabGuids),
+      var _iterator = Object(_Users_vitaly_erofeev_PhpstormProjects_vue_draggable_responsive_node_modules_babel_runtime_helpers_esm_createForOfIteratorHelper__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(tabGuids),
           _step;
 
       try {

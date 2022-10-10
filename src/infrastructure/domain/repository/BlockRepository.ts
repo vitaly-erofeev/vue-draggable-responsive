@@ -120,12 +120,37 @@ export default class BlockRepository implements BlockRepositoryInterface {
     })
 
     if (children && children.length > 0) {
-      children.forEach((item) => {
-        this.add(Object.assign(item, { parentGuid: block.guid }))
-      })
+      this.addChildren(children, block.guid)
     }
 
     return block.guid
+  }
+
+  private addChildren (blocks: BlockProperties[], parentGuid: string) {
+    const blocksMapper: { [index: string]: string } = {}
+    const stickyMapper: { [index: string]: string } = {}
+    blocks.forEach((item) => {
+      const oldGuid = item.guid
+      const newGuid = this.add(Object.assign(item, { parentGuid }))
+      if (oldGuid) {
+        blocksMapper[oldGuid] = newGuid
+        if (item.stickyTo?.guid) {
+          stickyMapper[oldGuid] = item.stickyTo.guid
+        }
+      }
+    })
+
+    Object.keys(stickyMapper).forEach((key) => {
+      const block = this.getByGuid(blocksMapper[key])
+      if (block) {
+        const newStickyBlockGuid = blocksMapper[stickyMapper[key]]
+        if (newStickyBlockGuid) {
+          if (block.stickyTo) {
+            block.stickyTo.guid = newStickyBlockGuid
+          }
+        }
+      }
+    })
   }
 
   get (): BlockDTO[] {

@@ -153,6 +153,19 @@ export default class BlockRepository implements BlockRepositoryInterface {
     })
   }
 
+  getParentTabs (guid: string): string[] {
+    const block = this.getByGuid(guid)
+    let answer: string[] = []
+
+    if (block?.parentTabGuid) {
+      answer.push(block.parentTabGuid)
+    } else if (block?.parentGuid) {
+      answer = [...answer, ...this.getParentTabs(block.parentGuid)]
+    }
+
+    return answer
+  }
+
   get (): BlockDTO[] {
     return this.blocks
   }

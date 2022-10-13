@@ -38,4 +38,6 @@ export interface BlockRepositoryInterface {
   addListener (listener: ListenerInterface): string
 
   removeListener (guid: string): void
+
+  getParentTabs (guid: string): string[]
 }

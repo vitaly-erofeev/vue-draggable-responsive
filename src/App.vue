@@ -256,6 +256,7 @@ export default {
           tabStyle: 'color:black',
           tabArrowsClass: 'testArr',
           activeTabStyle: 'color:green',
+          requiredTabs: ['asdasdas'],
           list: [
             {
               guid: 'asdasdas',

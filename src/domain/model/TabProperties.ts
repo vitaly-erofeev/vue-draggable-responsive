@@ -7,7 +7,7 @@ export interface TabProperties {
   activeGuid?: string,
   position: TabPosition,
   tabArrowsClass?: string,
-
+  requiredTabs?: string[],
   containerStyle?: string,
   tabStyle?: string,
   activeTabStyle?: string,

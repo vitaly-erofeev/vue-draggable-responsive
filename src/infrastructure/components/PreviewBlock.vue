@@ -28,7 +28,12 @@
           v-for="tab in visibleTabs"
           :key="tab.guid"
           :style="blockTabStyle + getBlockTabStyle(tab)"
-          :class="{ 'tab': true, 'active': tab.guid === activeTabGuid, [block.tabs.class]: true }"
+          :class="{
+            'tab': true,
+            'active': tab.guid === activeTabGuid,
+            [block.tabs.class]: true,
+            'required_tab': block.tabs.requiredTabs && block.tabs.requiredTabs.includes(tab.guid)
+          }"
           @click="onTabClick(tab.guid)"
         >
           <span class="label">{{ tab.name }}</span>
@@ -803,5 +808,16 @@ export default Vue.extend({
 .block .scroll_hover::-webkit-scrollbar-thumb {
   background-color: transparent;
   transition: background-color 0.3s ease-out; /* transition not working for chrome*/
+}
+
+.required_tab:after {
+  content: '';
+  width: 4px;
+  height: 4px;
+  display: inline-block;
+  background-color: #f56c6c;
+  vertical-align: middle;
+  margin-left: 5px;
+  border-radius: 4px;
 }
 </style>

@@ -1520,7 +1520,7 @@ var BlockRepository_BlockRepository = /*#__PURE__*/function () {
       }
 
       if (block !== null && block !== void 0 && block.parentGuid) {
-        this.setRequiredTab(block.parentGuid);
+        this.setRequiredTab(block.parentGuid, toClear);
       }
 
       return answer;

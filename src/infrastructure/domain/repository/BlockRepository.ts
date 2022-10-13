@@ -177,7 +177,7 @@ export default class BlockRepository implements BlockRepositoryInterface {
       }
     }
     if (block?.parentGuid) {
-      this.setRequiredTab(block.parentGuid)
+      this.setRequiredTab(block.parentGuid, toClear)
     }
 
     return answer

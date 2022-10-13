@@ -1209,8 +1209,14 @@ var es_array_for_each = __webpack_require__("4160");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.includes.js
 var es_array_includes = __webpack_require__("caad");
 
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.index-of.js
+var es_array_index_of = __webpack_require__("c975");
+
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
 var es_array_map = __webpack_require__("d81d");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.splice.js
+var es_array_splice = __webpack_require__("a434");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.assign.js
 var es_object_assign = __webpack_require__("cca6");
@@ -1311,6 +1317,8 @@ var EventTypes = __webpack_require__("f2d8");
 
 
 
+
+
 var BlockRepository_BlockRepository = /*#__PURE__*/function () {
   function BlockRepository() {
     var blocks = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -1319,6 +1327,7 @@ var BlockRepository_BlockRepository = /*#__PURE__*/function () {
     Object(classCallCheck["a" /* default */])(this, BlockRepository);
 
     this.blocks = [];
+    this.previousRequiredBlocks = [];
     this.listeners = {};
     this.refs = [];
     this.blocks = blocks;
@@ -1491,6 +1500,7 @@ var BlockRepository_BlockRepository = /*#__PURE__*/function () {
   }, {
     key: "setRequiredTab",
     value: function setRequiredTab(guid) {
+      var toClear = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       var block = this.getByGuid(guid);
       var answer = [];
 
@@ -1505,7 +1515,15 @@ var BlockRepository_BlockRepository = /*#__PURE__*/function () {
           }
 
           if (parentBlock !== null && parentBlock !== void 0 && (_parentBlock$tabs2 = parentBlock.tabs) !== null && _parentBlock$tabs2 !== void 0 && _parentBlock$tabs2.requiredTabs) {
-            parentBlock.tabs.requiredTabs.push(block.parentTabGuid);
+            if (toClear) {
+              var index = parentBlock.tabs.requiredTabs.indexOf(block.parentTabGuid);
+
+              if (index > -1) {
+                parentBlock.tabs.requiredTabs.splice(index, 1);
+              }
+            } else {
+              parentBlock.tabs.requiredTabs.push(block.parentTabGuid);
+            }
           }
         }
       }
@@ -1521,9 +1539,13 @@ var BlockRepository_BlockRepository = /*#__PURE__*/function () {
     value: function setRequiredTabs(blocks) {
       var _this3 = this;
 
+      this.previousRequiredBlocks.forEach(function (item) {
+        return _this3.setRequiredTab(item, true);
+      });
       blocks.forEach(function (item) {
         return _this3.setRequiredTab(item);
       });
+      this.previousRequiredBlocks = blocks;
     }
   }, {
     key: "get",
@@ -7594,6 +7616,84 @@ exports.BROKEN_CARET = fails(function () {
   var re = RE('^r', 'gy');
   re.lastIndex = 2;
   return re.exec('str') != null;
+});
+
+
+/***/ }),
+
+/***/ "a434":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__("23e7");
+var toAbsoluteIndex = __webpack_require__("23cb");
+var toInteger = __webpack_require__("a691");
+var toLength = __webpack_require__("50c4");
+var toObject = __webpack_require__("7b0b");
+var arraySpeciesCreate = __webpack_require__("65f0");
+var createProperty = __webpack_require__("8418");
+var arrayMethodHasSpeciesSupport = __webpack_require__("1dde");
+var arrayMethodUsesToLength = __webpack_require__("ae40");
+
+var HAS_SPECIES_SUPPORT = arrayMethodHasSpeciesSupport('splice');
+var USES_TO_LENGTH = arrayMethodUsesToLength('splice', { ACCESSORS: true, 0: 0, 1: 2 });
+
+var max = Math.max;
+var min = Math.min;
+var MAX_SAFE_INTEGER = 0x1FFFFFFFFFFFFF;
+var MAXIMUM_ALLOWED_LENGTH_EXCEEDED = 'Maximum allowed length exceeded';
+
+// `Array.prototype.splice` method
+// https://tc39.es/ecma262/#sec-array.prototype.splice
+// with adding support of @@species
+$({ target: 'Array', proto: true, forced: !HAS_SPECIES_SUPPORT || !USES_TO_LENGTH }, {
+  splice: function splice(start, deleteCount /* , ...items */) {
+    var O = toObject(this);
+    var len = toLength(O.length);
+    var actualStart = toAbsoluteIndex(start, len);
+    var argumentsLength = arguments.length;
+    var insertCount, actualDeleteCount, A, k, from, to;
+    if (argumentsLength === 0) {
+      insertCount = actualDeleteCount = 0;
+    } else if (argumentsLength === 1) {
+      insertCount = 0;
+      actualDeleteCount = len - actualStart;
+    } else {
+      insertCount = argumentsLength - 2;
+      actualDeleteCount = min(max(toInteger(deleteCount), 0), len - actualStart);
+    }
+    if (len + insertCount - actualDeleteCount > MAX_SAFE_INTEGER) {
+      throw TypeError(MAXIMUM_ALLOWED_LENGTH_EXCEEDED);
+    }
+    A = arraySpeciesCreate(O, actualDeleteCount);
+    for (k = 0; k < actualDeleteCount; k++) {
+      from = actualStart + k;
+      if (from in O) createProperty(A, k, O[from]);
+    }
+    A.length = actualDeleteCount;
+    if (insertCount < actualDeleteCount) {
+      for (k = actualStart; k < len - actualDeleteCount; k++) {
+        from = k + actualDeleteCount;
+        to = k + insertCount;
+        if (from in O) O[to] = O[from];
+        else delete O[to];
+      }
+      for (k = len; k > len - actualDeleteCount + insertCount; k--) delete O[k - 1];
+    } else if (insertCount > actualDeleteCount) {
+      for (k = len - actualDeleteCount; k > actualStart; k--) {
+        from = k + actualDeleteCount - 1;
+        to = k + insertCount - 1;
+        if (from in O) O[to] = O[from];
+        else delete O[to];
+      }
+    }
+    for (k = 0; k < insertCount; k++) {
+      O[k + actualStart] = arguments[k + 2];
+    }
+    O.length = len - actualDeleteCount + insertCount;
+    return A;
+  }
 });
 
 
@@ -16881,6 +16981,36 @@ var BlockManager_BlockManager = /*#__PURE__*/function () {
   return BlockManager;
 }();
 
+
+
+/***/ }),
+
+/***/ "c975":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__("23e7");
+var $indexOf = __webpack_require__("4d64").indexOf;
+var arrayMethodIsStrict = __webpack_require__("a640");
+var arrayMethodUsesToLength = __webpack_require__("ae40");
+
+var nativeIndexOf = [].indexOf;
+
+var NEGATIVE_ZERO = !!nativeIndexOf && 1 / [1].indexOf(1, -0) < 0;
+var STRICT_METHOD = arrayMethodIsStrict('indexOf');
+var USES_TO_LENGTH = arrayMethodUsesToLength('indexOf', { ACCESSORS: true, 1: 0 });
+
+// `Array.prototype.indexOf` method
+// https://tc39.es/ecma262/#sec-array.prototype.indexof
+$({ target: 'Array', proto: true, forced: NEGATIVE_ZERO || !STRICT_METHOD || !USES_TO_LENGTH }, {
+  indexOf: function indexOf(searchElement /* , fromIndex = 0 */) {
+    return NEGATIVE_ZERO
+      // convert -0 to +0
+      ? nativeIndexOf.apply(this, arguments) || 0
+      : $indexOf(this, searchElement, arguments.length > 1 ? arguments[1] : undefined);
+  }
+});
 
 
 /***/ }),

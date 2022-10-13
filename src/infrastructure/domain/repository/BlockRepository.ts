@@ -9,6 +9,7 @@ import { EventTypes } from '@/domain/model/EventTypes'
 
 export default class BlockRepository implements BlockRepositoryInterface {
   private blocks: BlockDTO[] = []
+  private previousRequiredBlocks: string[] = []
   private listeners: {
     [index: string]: ListenerInterface
   } = {}
@@ -153,7 +154,7 @@ export default class BlockRepository implements BlockRepositoryInterface {
     })
   }
 
-  private setRequiredTab (guid: string): string[] {
+  private setRequiredTab (guid: string, toClear = false): string[] {
     const block = this.getByGuid(guid)
     let answer: string[] = []
 
@@ -164,7 +165,14 @@ export default class BlockRepository implements BlockRepositoryInterface {
           parentBlock.tabs.requiredTabs = []
         }
         if (parentBlock?.tabs?.requiredTabs) {
-          parentBlock.tabs.requiredTabs.push(block.parentTabGuid)
+          if (toClear) {
+            const index = parentBlock.tabs.requiredTabs.indexOf(block.parentTabGuid)
+            if (index > -1) {
+              parentBlock.tabs.requiredTabs.splice(index, 1)
+            }
+          } else {
+            parentBlock.tabs.requiredTabs.push(block.parentTabGuid)
+          }
         }
       }
     }
@@ -176,7 +184,9 @@ export default class BlockRepository implements BlockRepositoryInterface {
   }
 
   setRequiredTabs (blocks: string[]): void {
+    this.previousRequiredBlocks.forEach((item) => this.setRequiredTab(item, true))
     blocks.forEach((item) => this.setRequiredTab(item))
+    this.previousRequiredBlocks = blocks
   }
 
   get (): BlockDTO[] {

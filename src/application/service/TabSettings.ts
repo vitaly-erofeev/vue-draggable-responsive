@@ -101,6 +101,19 @@ export default class TabSettings {
     }
   }
 
+  setInteractive (tabGuid: string, value: object): void {
+    const tabSetting = this.getTabSettingByGuid(tabGuid) || this.createTabSetting(tabGuid)
+
+    this.context.$set(tabSetting, 'interactive', value)
+  }
+
+  getInteractive (tabGuid: string): object | void {
+    const tabSetting: TabSettingType | void = this.getTabSettingByGuid(tabGuid)
+    if (tabSetting) {
+      return tabSetting.interactive
+    }
+  }
+
   setBlockedConditions (tabGuid: string, value: object): void {
     const tabSetting = this.getTabSettingByGuid(tabGuid) || this.createTabSetting(tabGuid)
 

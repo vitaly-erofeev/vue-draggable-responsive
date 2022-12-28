@@ -1,3 +1,5 @@
+import { InteractiveProperties } from '@/domain/model/InteractiveProperties'
+
 export interface TabSettingType {
   isHidden: boolean,
   isBlocked: boolean,
@@ -7,6 +9,8 @@ export interface TabSettingType {
   hiddenConditions?: object,
   blockedConditions?: object,
   styledConditions?: object,
+
+  interactive?: InteractiveProperties,
 
   style: string
 }

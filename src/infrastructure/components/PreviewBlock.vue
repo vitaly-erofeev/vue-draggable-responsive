@@ -705,6 +705,7 @@ export default Vue.extend({
       if (this.tabSettingsService && this.tabSettingsService.getIsBlocked(guid)) {
         return
       }
+      this.$emit('tab-click', { guid })
       this.activeTabGuid = guid
     }
   }

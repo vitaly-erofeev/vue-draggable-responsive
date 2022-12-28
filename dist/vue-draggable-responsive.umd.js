@@ -3496,7 +3496,8 @@ var TabSettings = /*#__PURE__*/function () {
         isBlocked: false,
         isStyled: true,
         isDefaultTab: false,
-        style: ''
+        style: '',
+        interactive: {}
       };
       this.context.$set(this.tabSettings, tabGuid, tabSetting);
       return tabSetting;

@@ -16,7 +16,8 @@ export default class TabSettings {
       isBlocked: false,
       isStyled: true,
       isDefaultTab: false,
-      style: ''
+      style: '',
+      interactive: {}
     }
 
     this.context.$set(this.tabSettings, tabGuid, tabSetting)

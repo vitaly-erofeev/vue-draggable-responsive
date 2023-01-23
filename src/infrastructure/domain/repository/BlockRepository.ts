@@ -70,6 +70,20 @@ export default class BlockRepository implements BlockRepositoryInterface {
     return answer
   }
 
+  getByTabGuid (tabGuid: string): BlockDTO[] {
+    let answer: BlockDTO[] = []
+
+    JSON.stringify(this.blocks, (_, nestedValue) => {
+      if (nestedValue && nestedValue.parentTabGuid === tabGuid &&
+          typeof nestedValue.sticky !== 'undefined') {
+        !answer.includes(nestedValue.guid) && answer.push(nestedValue.guid)
+      }
+      return nestedValue
+    })
+
+    return answer
+  }
+
   getByAlias (alias: string): BlockDTO | undefined {
     let answer: BlockDTO | undefined
     JSON.stringify(this.blocks, (_, nestedValue) => {

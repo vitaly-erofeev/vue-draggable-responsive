@@ -13,6 +13,8 @@ export interface BlockRepositoryInterface {
 
   getByAlias (alias: string): BlockDTO | undefined
 
+  getByTabGuid (tabGuid: string): BlockDTO[]
+
   getMainParents (guid: string): BlockDTO | {}
 
   remove (guid: string): void

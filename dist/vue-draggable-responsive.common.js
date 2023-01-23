@@ -1379,6 +1379,19 @@ var BlockRepository_BlockRepository = /*#__PURE__*/function () {
       return answer;
     }
   }, {
+    key: "getByTabGuid",
+    value: function getByTabGuid(tabGuid) {
+      var answer = [];
+      JSON.stringify(this.blocks, function (_, nestedValue) {
+        if (nestedValue && nestedValue.parentTabGuid === tabGuid && typeof nestedValue.sticky !== 'undefined') {
+          !answer.includes(nestedValue.guid) && answer.push(nestedValue.guid);
+        }
+
+        return nestedValue;
+      });
+      return answer;
+    }
+  }, {
     key: "getByAlias",
     value: function getByAlias(alias) {
       var answer;

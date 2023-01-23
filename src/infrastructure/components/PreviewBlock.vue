@@ -69,6 +69,7 @@
         :replication-callback="replicationCallback"
         :tab-settings-service="tabSettingsService"
         @click="$emit('click', { block: $event.block || _block, event: $event.event || $event })"
+        @tab-click="$emit('tab-click', $event)"
       >
         <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
           <slot :name="name" v-bind="data"></slot>

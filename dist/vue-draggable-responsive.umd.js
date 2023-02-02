@@ -1356,6 +1356,7 @@ var BlockRepository_BlockRepository = /*#__PURE__*/function () {
         }
 
         block = JSON.parse(JSON.stringify(block));
+        block.isHidden = false;
 
         if (replicationFunction && block.replication) {
           block.replication.function = replicationFunction;

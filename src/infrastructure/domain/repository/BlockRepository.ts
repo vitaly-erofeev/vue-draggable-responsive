@@ -41,6 +41,7 @@ export default class BlockRepository implements BlockRepositoryInterface {
         replicationFunction = block.replication?.function
       }
       block = JSON.parse(JSON.stringify(block))
+      block.isHidden = false
       if (replicationFunction && block.replication) {
         block.replication.function = replicationFunction
       }

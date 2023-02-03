@@ -78,7 +78,10 @@ export default Vue.extend({
       return this.store
     },
     setBlocks (blocks: BlockProperties[]): void {
-      this.store.set(blocks)
+      this.store.set([])
+      this.$nextTick(() => {
+        this.store.set(blocks)
+      })
     },
     removeBlock (guid: string): void {
       this.store.remove(guid)

@@ -155,7 +155,10 @@ export default Vue.extend({
       return this.store.getMainParents(guid)
     },
     setBlocks (blocks: BlockProperties[]): void {
-      this.store.set(blocks)
+      this.store.set([])
+      this.$nextTick(() => {
+        this.store.set(blocks)
+      })
     },
     getMousePosition (event: MouseEvent, sizeTypes: {
       width: SizeTypes,

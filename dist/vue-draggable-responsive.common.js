@@ -17232,7 +17232,9 @@ var BlockDTO_BlockDTO = /*#__PURE__*/function () {
         _ref$isHighlight = _ref.isHighlight,
         isHighlight = _ref$isHighlight === void 0 ? false : _ref$isHighlight,
         minMax = _ref.minMax,
-        onCenter = _ref.onCenter;
+        onCenter = _ref.onCenter,
+        _ref$properties = _ref.properties,
+        properties = _ref$properties === void 0 ? {} : _ref$properties;
 
     Object(classCallCheck["a" /* default */])(this, BlockDTO);
 
@@ -17248,6 +17250,7 @@ var BlockDTO_BlockDTO = /*#__PURE__*/function () {
     this.isHover = false;
     this.isHidden = false;
     this.isHighlight = false;
+    this.properties = {};
     this.widthCalc = widthCalc;
     this.heightCalc = heightCalc;
     this.stickyTo = stickyTo;
@@ -17291,6 +17294,7 @@ var BlockDTO_BlockDTO = /*#__PURE__*/function () {
     this.isEditing = false;
     this.replication = replication;
     this.pagination = pagination;
+    this.properties = properties;
     this.prepareSizesTypes();
   }
 

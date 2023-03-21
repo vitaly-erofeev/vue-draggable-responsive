@@ -49,5 +49,6 @@ export interface BlockProperties {
   },
   isHover?: boolean,
   isHidden?: boolean
-  isHighlight?: boolean
+  isHighlight?: boolean,
+  properties?: {}
 }

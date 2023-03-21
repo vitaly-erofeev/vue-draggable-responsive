@@ -52,6 +52,7 @@ export default class BlockDTO {
   isHover: boolean = false
   isHidden: boolean = false
   isHighlight: boolean = false
+  properties: {} = {}
 
   constructor (
     {
@@ -90,7 +91,8 @@ export default class BlockDTO {
       isHidden = false,
       isHighlight = false,
       minMax,
-      onCenter
+      onCenter,
+      properties = {}
     }: BlockProperties
   ) {
     this.widthCalc = widthCalc
@@ -133,6 +135,7 @@ export default class BlockDTO {
     this.isEditing = false
     this.replication = replication
     this.pagination = pagination
+    this.properties = properties
     this.prepareSizesTypes()
   }
 

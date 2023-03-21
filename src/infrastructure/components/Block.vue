@@ -461,7 +461,7 @@ export default Vue.extend({
 
       const block = this.block
 
-      if (block.contentType === 'registry') {
+      if (block.properties?.contentType === 'registry') {
         isShow = false
       }
 

@@ -52,7 +52,7 @@ export default class BlockDTO {
   isHover: boolean = false
   isHidden: boolean = false
   isHighlight: boolean = false
-  properties: {} = {}
+  properties: {[index: string]: any;} = {}
 
   constructor (
     {

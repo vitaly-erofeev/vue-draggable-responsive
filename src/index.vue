@@ -134,7 +134,7 @@ export default Vue.extend({
         const refs: any = context.$refs[item.guid]
         const block: Vue = refs[0]
         object[item.guid] = block
-        if (item.children?.length > 0) {
+        if (item.children?.length > 0 && block) {
           this.getRefs(item.children, block, object)
         }
       })

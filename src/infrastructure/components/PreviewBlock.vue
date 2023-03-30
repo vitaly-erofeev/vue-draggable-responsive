@@ -166,7 +166,7 @@ export default Vue.extend({
       }
     },
 
-    availableTabs (): object[] {
+    availableTabs (): { guid: string, name: string }[] {
       if (!this.block?.tabs?.use || this.block?.tabs?.list?.length < 1) {
         return []
       }
@@ -457,6 +457,9 @@ export default Vue.extend({
       this.$nextTick(() => {
         this.setStretchedSize()
       })
+    },
+    availableTabs (value) {
+      this.onTabClick(this.availableTabs[0].guid)
     }
   },
 
@@ -471,9 +474,9 @@ export default Vue.extend({
     })
     if (this.block?.tabs?.use && this.block?.tabs?.list?.length > 0) {
       if (this.block.tabs.saveActiveTab && this.block.tabs.activeGuid) {
-        this.onTabClick(this.block.tabs.activeGuid || this.block.tabs.list[0].guid)
+        this.onTabClick(this.block.tabs.activeGuid || this.availableTabs[0].guid)
       } else {
-        this.onTabClick(this.block.tabs.list[0].guid)
+        this.onTabClick(this.availableTabs[0].guid)
       }
       // установлена вкладка по умолчанию
       let defaultTab = this.getDefaultTab()

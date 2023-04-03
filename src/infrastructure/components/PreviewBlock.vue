@@ -459,7 +459,10 @@ export default Vue.extend({
       })
     },
     availableTabs (value) {
-      this.onTabClick(this.availableTabs[0].guid)
+      let someGuid = value.some((item: { guid?: string }) => item?.guid === this.activeTabGuid)
+      if (!someGuid) {
+        this.onTabClick(value[0].guid)
+      }
     }
   },
 

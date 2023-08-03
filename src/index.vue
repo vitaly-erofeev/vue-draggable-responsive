@@ -289,7 +289,6 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-@import url('https://rsms.me/inter/inter.css');
 
 .container {
   background-image: linear-gradient(rgba(128, 128, 128, 0.1) 1px, transparent 1px),

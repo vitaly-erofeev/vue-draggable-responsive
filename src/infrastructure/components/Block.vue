@@ -986,7 +986,7 @@ export default Vue.extend({
 
 .block .block_info {
   font-size: 12px;
-  font-family: "Inter";
+  font-family: 'Roboto', sans-serif;
   background: #539FFF;
   display: inline-block;
   position: absolute;
@@ -1007,7 +1007,7 @@ export default Vue.extend({
   position: absolute;
   background: red;
   font-size: 12px;
-  font-family: "Inter";
+  font-family: 'Roboto', sans-serif;
   font-weight: 400;
 }
 

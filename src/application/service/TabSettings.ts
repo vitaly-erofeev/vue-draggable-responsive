@@ -16,6 +16,8 @@ export default class TabSettings {
       isBlocked: false,
       isStyled: true,
       isDefaultTab: false,
+      isExpanded: false,
+      parentTabForTree: '',
       style: '',
       interactive: {}
     }
@@ -67,6 +69,13 @@ export default class TabSettings {
 
     if (!('isDefaultTab' in tabSetting)) {
       this.context.$set(tabSetting, 'isDefaultTab', false)
+    }
+    if (!('isExpanded' in tabSetting)) {
+      this.context.$set(tabSetting, 'isExpanded', false)
+    }
+
+    if (!('parentTabForTree' in tabSetting)) {
+      this.context.$set(tabSetting, 'parentTabForTree', '')
     }
 
     if (!('hiddenConditions' in tabSetting)) {
@@ -205,5 +214,20 @@ export default class TabSettings {
     const tabSetting = this.getTabSettingByGuid(tabGuid) || this.createTabSetting(tabGuid)
 
     this.context.$set(tabSetting, 'isDefaultTab', value)
+  }
+  // получить guid родительской вкладки
+  getParentTabForTree (tabGuid: string): string {
+    const tabSetting: TabSettingType | void = this.getTabSettingByGuid(tabGuid)
+    if (tabSetting && ('parentTabForTree' in tabSetting)) {
+      return tabSetting.parentTabForTree
+    }
+
+    return ''
+  }
+  // установить guid родительской вкладки
+  setParentTabForTree (tabGuid: string, value: string): void {
+    const tabSetting = this.getTabSettingByGuid(tabGuid) || this.createTabSetting(tabGuid)
+
+    this.context.$set(tabSetting, 'parentTabForTree', value)
   }
 }

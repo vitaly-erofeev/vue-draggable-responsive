@@ -26,16 +26,21 @@
       <div class="tabs_onScroll" ref="tabsScroll" :class="{ 'tabs_padding': isShowArrows, 'direction': directionTabs }">
         <div
           v-for="tab in visibleTabs"
+          v-show="isShowTabs(tab)"
           :key="tab.guid"
           :style="blockTabStyle + getBlockTabStyle(tab)"
           :class="{
             'tab': true,
             'active': tab.guid === activeTabGuid,
             [block.tabs.class]: true,
-            'required_tab': block.tabs.requiredTabs && block.tabs.requiredTabs.includes(tab.guid)
+            'required_tab': block.tabs.requiredTabs && block.tabs.requiredTabs.includes(tab.guid),
+            'positionTab': tab.data.isChild
           }"
           @click="onTabClick(tab.guid)"
         >
+        <div @click="showChildTabs(tab.guid)" v-show="tab.data.isChild">
+          <i class="plus" :class="{'el-icon-plus': !tab.data.isExpanded, 'el-icon-minus': tab.data.isExpanded}"></i>
+        </div>
           <span class="label">{{ tab.name }}</span>
         </div>
       </div>
@@ -185,22 +190,64 @@ export default Vue.extend({
       })
     },
 
-    visibleTabs (): object[] {
+    visibleTabs (): { guid: string, name: string, data: any }[] {
       if (!this.block?.tabs?.use || this.block?.tabs?.list?.length < 1) {
         return []
       }
+      let tabs = this.tabSettingsService.tabSettings || {}
 
-      return this.block.tabs.list.filter(tab => {
-        if (this.tabSettingsService) {
+      if (this.tabSettingsService) {
+        const parentKeys: { [key: string]: boolean } = {}
+
+        // Заполняем parentKeys ключами, используемыми в parentTabForTree
+        for (const key in tabs) {
+          if (Object.prototype.hasOwnProperty.call(tabs, key)) {
+            const parentKey = tabs[key].parentTabForTree
+            if (parentKey) {
+              parentKeys[parentKey] = true
+            }
+          }
+        }
+        for (const guid in tabs) {
+          if (Object.prototype.hasOwnProperty.call(tabs, guid)) {
+            // изначально svg в плюсик
+            tabs[guid].isExpanded = false
+            // является первым уровнем и есть потомок - вкладку показывать при иницилизации
+            if (!tabs[guid].parentTabForTree && parentKeys[guid]) {
+              tabs[guid].isShow = true
+            }
+            // есть родитель, является потомком - вкладку не показывать при иницилизации
+            if (tabs[guid].parentTabForTree) {
+              tabs[guid].isShow = false
+            }
+            // есть потомок - показать плюсик
+            if (parentKeys[guid]) {
+              tabs[guid].isChild = true
+            } else {
+              tabs[guid].isChild = false
+            }
+          }
+        }
+
+        let result = this.block.tabs.list.filter(tab => {
           const isHidden = this.tabSettingsService.getIsHidden(tab.guid)
 
           if (isHidden) {
             return false
           }
-        }
 
-        return true
-      })
+          return true
+        }).map(tab => {
+          return {
+            guid: tab.guid,
+            name: tab.name,
+            data: tabs[tab.guid]
+          }
+        })
+
+        return result
+      }
+      return []
     },
 
     directionTabs (): boolean {
@@ -511,6 +558,28 @@ export default Vue.extend({
   },
 
   methods: {
+    showChildTabs (guid: any) {
+      if (this.block.tabs) {
+        this.visibleTabs.forEach(tab => {
+          if (tab.guid === guid) {
+            tab.data.isExpanded = !tab.data.isExpanded
+          }
+          if (tab.data.parentTabForTree === guid) {
+            tab.data.isShow = !tab.data.isShow
+          }
+        })
+      }
+    },
+    isShowTabs (tab: { guid: string, name: string, data: any }): boolean {
+      if (tab.data.parentTabForTree === '') {
+        return true
+      }
+      if (tab.data.isShow) {
+        return true
+      }
+
+      return false
+    },
     setSticky (guid?: string) {
       if (guid) {
         this.stickyToBlock = this.getStore().getByGuid(guid)
@@ -827,5 +896,15 @@ export default Vue.extend({
   vertical-align: middle;
   margin-left: 5px;
   border-radius: 4px;
+}
+.tabs_container .positionTab {
+  position: relative;
+  padding-left: 20px !important;
+}
+.tabs_container .positionTab>div:first-child {
+  position: absolute;
+  top: 50%;
+  left: 4%;
+  transform: translate(0%, -50%);
 }
 </style>

@@ -558,17 +558,33 @@ export default Vue.extend({
   },
 
   methods: {
-    showChildTabs (guid: any) {
+    showChildTabs (guid: string) {
       if (this.block.tabs) {
-        this.visibleTabs.forEach(tab => {
-          if (tab.guid === guid) {
-            tab.data.isExpanded = !tab.data.isExpanded
-          }
-          if (tab.data.parentTabForTree === guid) {
-            tab.data.isShow = !tab.data.isShow
+        let tabs = this.buidTreeTabs(this.visibleTabs)
+        // изменить иконку плюс на минус
+        tabs[guid].data.isExpanded = !tabs[guid].data.isExpanded
+        // если закрыт верхний родитель  - то закрыть все child. Рекурсивно обходим "дерево"
+        tabs[guid].childNodes.forEach(function search (item: any) {
+          item.data.isShow = !item.data.isShow
+          if (item.childNodes?.length > 0 && item.data.isExpanded) {
+            item.childNodes.forEach((item: any) => search(item))
           }
         })
       }
+    },
+    // Для удобства добавить childNodes
+    buidTreeTabs (tabs: { guid: string, name: string, data: any }[]) {
+      const hashTable = Object.create(null)
+      for (let item of tabs) {
+        hashTable[item.guid] = { ...item, childNodes: [] }
+      }
+      for (let item of tabs) {
+        if (hashTable[item.data.parentTabForTree]) {
+          hashTable[item.data.parentTabForTree].childNodes.push(hashTable[item.guid])
+        }
+      }
+
+      return hashTable
     },
     isShowTabs (tab: { guid: string, name: string, data: any }): boolean {
       if (tab.data.parentTabForTree === '') {

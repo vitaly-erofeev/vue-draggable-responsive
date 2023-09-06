@@ -44,11 +44,11 @@
             'active': tab.guid === activeTabGuid,
             [block.tabs.class]: true,
             'required_tab': block.tabs.requiredTabs && block.tabs.requiredTabs.includes(tab.guid),
-            'positionTab': tab.data ? tab.data.isChild : false
+            'positionTab': tab.data.isChild
           }"
           @click="onTabClick(tab.guid)"
         >
-          <div @click="showChildTabs(tab.guid)" v-if="tab.data ? tab.data.isChild : false">
+          <div @click="showChildTabs(tab.guid)" v-show="tab.data.isChild">
             <i class="plus" :class="{'el-icon-plus': !tab.data.isExpanded, 'el-icon-minus': tab.data.isExpanded}"></i>
           </div>
           <span class="label">{{ tab.name }}</span>
@@ -317,13 +317,13 @@ export default Vue.extend({
             }
           }
         }
-
+        const defaultData = { isChild: false, isExpanded: false, isShow: false, parentTabForTree: '' }
         let result = this.block.tabs.list
           .map(tab => {
             return {
               guid: tab.guid,
               name: tab.name,
-              data: tabs[tab.guid]
+              data: tabs[tab.guid] || defaultData
             }
           })
 

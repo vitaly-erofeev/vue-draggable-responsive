@@ -91,6 +91,14 @@ export default class TabSettings {
     }
   }
 
+  deleteTabOnGuid (tabGuid: string): void {
+    if (this.tabSettings[tabGuid]) {
+      delete this.tabSettings[tabGuid]
+    } else {
+      console.warn(`Вкладка с ${tabGuid} не найден`)
+    }
+  }
+
   getHiddenConditions (tabGuid: string): object | void {
     const tabSetting: TabSettingType | void = this.getTabSettingByGuid(tabGuid)
     if (tabSetting) {

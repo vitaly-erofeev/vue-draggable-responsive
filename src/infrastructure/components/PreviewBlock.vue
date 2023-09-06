@@ -229,6 +229,7 @@ export default Vue.extend({
           }
         }
 
+        const defaultData = { isChild: false, isExpanded: false, isShow: false, parentTabForTree: '' }
         let result = this.block.tabs.list.filter(tab => {
           const isHidden = this.tabSettingsService.getIsHidden(tab.guid)
 
@@ -241,10 +242,9 @@ export default Vue.extend({
           return {
             guid: tab.guid,
             name: tab.name,
-            data: tabs[tab.guid]
+            data: tabs[tab.guid] || defaultData
           }
         })
-
         return result
       }
       return []

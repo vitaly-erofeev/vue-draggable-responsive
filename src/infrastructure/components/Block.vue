@@ -44,11 +44,11 @@
             'active': tab.guid === activeTabGuid,
             [block.tabs.class]: true,
             'required_tab': block.tabs.requiredTabs && block.tabs.requiredTabs.includes(tab.guid),
-            'positionTab': tab.data.isChild
+            'positionTab': tab.data && tab.data.isChild
           }"
           @click="onTabClick(tab.guid)"
         >
-          <div @click="showChildTabs(tab.guid)" v-show="tab.data.isChild">
+          <div @click="showChildTabs(tab.guid)" v-show="tab.data && tab.data.isChild">
             <i class="plus" :class="{'el-icon-plus': !tab.data.isExpanded, 'el-icon-minus': tab.data.isExpanded}"></i>
           </div>
           <span class="label">{{ tab.name }}</span>

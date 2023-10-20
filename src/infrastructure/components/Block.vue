@@ -49,7 +49,7 @@
           @click="onTabClick(tab.guid)"
         >
           <div @click="showChildTabs(tab.guid)" v-show="tab.data && tab.data.isChild">
-            <i class="plus" :class="{'el-icon-plus': !tab.data.isExpanded, 'el-icon-minus': tab.data.isExpanded}"></i>
+            <i class="plus" :class="{'el-icon-arrow-right': !tab.data.isExpanded, 'el-icon-arrow-down': tab.data.isExpanded}"></i>
           </div>
           <span class="label">{{ tab.name }}</span>
         </div>

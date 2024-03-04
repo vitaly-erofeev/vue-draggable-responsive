@@ -613,6 +613,11 @@ export default Vue.extend({
             this.setIsShowArrows()
           }, 0)
         }
+        if (this.block.tabs?.list.length === 1) {
+          this.block.children.forEach(el => {
+            el.parentTabGuid = this.block.tabs?.list[0].guid
+          })
+        }
         if (!this.block.tabs?.list.find(item => item.guid === this.activeTabGuid)) {
           if (this.block.tabs?.list[0]?.guid) {
             this.onTabClick(this.block.tabs.list[0].guid)

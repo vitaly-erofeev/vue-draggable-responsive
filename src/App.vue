@@ -218,11 +218,13 @@ export default {
     },
     addTab () {
       if (this.activeBlock) {
-        this.$set(this.activeBlock, 'tabs', {
-          use: false,
-          list: [],
-          position: TabPosition.TOP
-        })
+        if (!this.activeBlock.tabs) {
+          this.$set(this.activeBlock, 'tabs', {
+            use: false,
+            list: [],
+            position: TabPosition.TOP
+          })
+        }
         this.activeBlock.tabs.use = true
         if (this.activeBlock.tabs?.use) {
           this.activeBlock.tabs.list.push({

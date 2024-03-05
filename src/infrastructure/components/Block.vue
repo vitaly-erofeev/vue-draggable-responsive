@@ -148,6 +148,8 @@
 // eslint-disable-next-line no-unused-vars
 import Vue_, { VueConstructor } from 'vue'
 import BlockDTO from '../../domain/model/BlockDTO'
+// eslint-disable-next-line no-unused-vars
+import { Position } from '@/domain/model/PositionCss'
 import BlockManager from '@/application/service/BlockManager'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -365,9 +367,7 @@ export default Vue.extend({
     },
 
     positionStyle (): object {
-      let position: {
-        top?: string, left?: string, right?: string, bottom?: string
-      } = {}
+      let position: Position = {}
 
       switch (this.block.sticky) {
         case Sticky.TL:
@@ -451,6 +451,14 @@ export default Vue.extend({
         } else {
           position.right = `calc(50% - calc(${width} / 2))`
         }
+      }
+      // центрировать горизонтально (адаптивно)
+      if (!this.block.stickyTo?.guid && this.block.onCenter?.horizontalAdaptive) {
+        position.marginLeft = 'auto'
+        position.marginLeft = 'auto'
+        position.marginRight = 'auto'
+        position.left = '0'
+        position.right = '0'
       }
 
       if (!this.block.stickyTo?.guid && this.block.onCenter?.vertical) {

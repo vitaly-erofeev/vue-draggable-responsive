@@ -87,6 +87,8 @@
 <script lang="ts">
 import { Sticky } from '@/domain/model/Sticky'
 import BlockDTO from '../../domain/model/BlockDTO'
+// eslint-disable-next-line no-unused-vars
+import { Position } from '@/domain/model/PositionCss'
 import ResizeObserver from 'resize-observer-polyfill'
 // eslint-disable-next-line no-unused-vars
 import Vue_, { VueConstructor } from 'vue'
@@ -274,9 +276,7 @@ export default Vue.extend({
     },
 
     positionStyle (): object {
-      let position: {
-        top?: string, left?: string, right?: string, bottom?: string, width?: string, height?: string
-      } = {}
+      let position: Position = {}
       let top: string
       let left: string
       let height: string = this.block.height + this.block.sizeTypes.height
@@ -429,6 +429,20 @@ export default Vue.extend({
           } else {
             position.right = `calc(50% - calc(${refBlock.$el.offsetWidth}px / 2))`
           }
+        }
+      }
+      // центрировать горизонтально (адаптивно)
+      if (!this.block.stickyTo?.guid && this.block.onCenter?.horizontalAdaptive && this.isShowing) {
+        const refBlock = this.getStore().getRefByGuid(this.block.guid) as unknown as {
+          $el: HTMLElement
+        }
+        // Для элементов с display:none offsetWidth равен нулю
+        if (refBlock && refBlock.$el.offsetWidth) {
+          position.marginLeft = 'auto'
+          position.marginLeft = 'auto'
+          position.marginRight = 'auto'
+          position.left = '0'
+          position.right = '0'
         }
       }
 

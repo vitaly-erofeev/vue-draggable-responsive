@@ -1,4 +1,5 @@
 export interface OnCenter {
   horizontal?: boolean,
-  vertical?: boolean
+  vertical?: boolean,
+  horizontalAdaptive?: boolean
 }

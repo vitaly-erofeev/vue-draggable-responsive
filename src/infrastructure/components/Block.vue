@@ -455,7 +455,6 @@ export default Vue.extend({
       // центрировать горизонтально (адаптивно)
       if (!this.block.stickyTo?.guid && this.block.onCenter?.horizontalAdaptive) {
         position.marginLeft = 'auto'
-        position.marginLeft = 'auto'
         position.marginRight = 'auto'
         position.left = '0'
         position.right = '0'
@@ -804,9 +803,15 @@ export default Vue.extend({
         this.stickyToElement = undefined
       }
     },
+    // Функция для проверки, имеет ли контейнер горизонтальную прокрутку
+    hasHorizontalScroll (element: HTMLElement | null): boolean {
+      if (!element) return false
+      return element.scrollWidth > element.clientWidth
+    },
     setIsShowArrows (): void {
       if (!this.$refs.draggableContainer) return
       const tabsScroll: HTMLElement = this.$refs.tabsScroll as HTMLElement
+      // this.hasHorizontalScroll(tabsScroll)
       const draggableContainer: HTMLElement = this.$refs.draggableContainer as HTMLElement
       const tabsWidth = tabsScroll.offsetWidth
       this.tabsWidth = tabsScroll.offsetWidth
@@ -817,7 +822,6 @@ export default Vue.extend({
         this.isShowArrows = true
       } else {
         this.isShowArrows = false
-        tabsScroll.style.transform = `translateX(-${0}px)`
       }
     },
 
@@ -976,26 +980,14 @@ export default Vue.extend({
 
     scrollPrevTab (): void {
       const tabsScroll: HTMLElement = this.$refs.tabsScroll as HTMLElement
-      const draggableContainer: HTMLElement = this.$refs.draggableContainer as HTMLElement
-      const blockWidth = draggableContainer.offsetWidth
-      this.blockWidth = draggableContainer.offsetWidth
-      this.tabsOffset -= blockWidth / 2
-      if (this.tabsOffset < 0) {
-        this.tabsOffset = 0
-        // return
-      }
-      tabsScroll.style.transform = `translateX(-${this.tabsOffset}px)`
+      const scrollAmount = 100 // Количество пикселей для прокрутки
+      tabsScroll.scrollLeft -= scrollAmount
     },
 
     scrollNextTab (): void {
       const tabsScroll: HTMLElement = this.$refs.tabsScroll as HTMLElement
-      const draggableContainer: HTMLElement = this.$refs.draggableContainer as HTMLElement
-      const tabsWidth = tabsScroll.offsetWidth
-      const blockWidth = draggableContainer.offsetWidth
-      this.blockWidth = draggableContainer.offsetWidth
-      if ((tabsWidth - blockWidth) < this.tabsOffset) return
-      this.tabsOffset += blockWidth / 1.5
-      tabsScroll.style.transform = `translateX(-${this.tabsOffset}px)`
+      const scrollAmount = 100 // Количество пикселей для прокрутки
+      tabsScroll.scrollLeft += scrollAmount
     }
   }
 })
@@ -1194,6 +1186,11 @@ export default Vue.extend({
 .tabs_onScroll {
   display: flex;
   transition: 1s all;
+  scroll-behavior: smooth;
+  overflow-x: auto;
+  /* margin-bottom: -17px; */
+  scrollbar-width: none;
+
 }
 .tabs_onScroll.tabs_padding {
   padding-left: 15px;
@@ -1201,6 +1198,7 @@ export default Vue.extend({
 }
 .tabs_onScroll.direction {
   flex-direction: column;
+  overflow-x: hidden;
 }
 .tabs_button {
     display: block;

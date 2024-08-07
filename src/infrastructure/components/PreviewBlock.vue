@@ -556,12 +556,11 @@ export default Vue.extend({
       for (let item of children) {
         observer.observe(item)
       }
-      const el = this.$refs.container
-      this.$refs.container.addEventListener('DOMNodeInserted', function (event) {
-        if (event.target && (event.target as Element).parentElement === el) {
-          observer.observe(event.target as Element)
-        }
-      })
+      const observerInserted = new MutationObserver(mutationList =>
+        mutationList.filter(m => m.type === 'childList').forEach(m => {
+          observer.observe(m.target as Element)
+        }))
+      observerInserted.observe(this.$refs.container, { childList: true, subtree: true })
     }
     this.prepareReplication()
     this.getStore().addRef(this.block.guid, this)

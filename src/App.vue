@@ -42,7 +42,7 @@
         @contextmenu="oncontext"
     >
       <template v-slot:content="{ block }">
-        {{ block }}
+        {{ block.guid }}
       </template>
     </vue-draggable-responsive>
     <vue-draggable-responsive-previewer
@@ -52,8 +52,7 @@
         :replication-callback="cl"
     >
       <template v-slot:content="{ block }">
-        {{ block }}
-        <textarea></textarea>
+        {{ block.guid }}
       </template>
     </vue-draggable-responsive-previewer>
   </div>
@@ -177,11 +176,18 @@ export default {
         right: 0,
         sticky: 'tl',
         type,
+        sizeTypes: {
+          width: 'px',
+          height: 'px',
+          top: 'px',
+          left: 'px'
+        },
         event,
         parentGuid: this.activeBlock?.guid,
+        className: 'red',
         replication: {
-          columns: 2,
-          function: () => {
+          columns: 1,
+          function: async () => {
             const count = 7
             let counter = 0
             let answer = []
@@ -189,6 +195,7 @@ export default {
               answer.push({ id: counter + 1 })
               counter++
             }
+            await new Promise(resolve => setTimeout(resolve, 1000))
             return answer
           },
           verticalMargin: {
@@ -468,7 +475,7 @@ export default {
         height: 100,
         top: 30,
         right: 0,
-        className: 'test',
+        className: 'green',
         sticky: 'tl',
         sizeTypes: {
           width: '%',
@@ -543,4 +550,10 @@ export default {
 </script>
 
 <style>
+.red {
+  background: red;
+}
+.green {
+  background: green;
+}
 </style>

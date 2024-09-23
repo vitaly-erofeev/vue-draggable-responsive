@@ -118,6 +118,7 @@ export default class BlockRepository implements BlockRepositoryInterface {
     let parent: undefined | BlockDTO
     let children = block.children
     block.children = []
+    block.isLoading = false
     if (block.parentGuid) {
       parent = this.getByGuid(block.parentGuid)
       if (typeof parent !== 'undefined') {

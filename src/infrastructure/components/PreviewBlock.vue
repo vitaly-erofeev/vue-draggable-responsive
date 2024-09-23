@@ -573,7 +573,6 @@ export default Vue.extend({
     }
     this.prepareReplication()
     this.getStore().addRef(this.block.guid, this)
-    this.block.isLoading = false
   },
 
   beforeDestroy () {

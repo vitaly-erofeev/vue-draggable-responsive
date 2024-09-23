@@ -649,6 +649,7 @@ export default Vue.extend({
       if (!this.block.replication?.function) {
         return
       }
+      this.block.isLoading = true
       let blocksData: any[] = []
       try {
         blocksData = await this.block.replication?.function(offset)
@@ -660,6 +661,7 @@ export default Vue.extend({
         /* this.$nextTick(() => {
           this.getStore().remove(this.block.guid)
         }) */
+        this.block.isLoading = false
         return
       }
       this.block.isHidden = false
@@ -717,6 +719,7 @@ export default Vue.extend({
         rowGuids[row].push(lastGuid)
       })
       this.getStore().removeListener(listenerGuid)
+      this.block.isLoading = false
     },
 
     setParent (): void {

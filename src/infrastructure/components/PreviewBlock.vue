@@ -571,6 +571,7 @@ export default Vue.extend({
         }))
       observerInserted.observe(this.$refs.container, { childList: true, subtree: true })
     }
+    this.block.isLoading = false
     this.prepareReplication()
     this.getStore().addRef(this.block.guid, this)
   },

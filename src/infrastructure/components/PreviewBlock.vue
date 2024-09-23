@@ -102,6 +102,8 @@ import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInje
 import { StickyToType } from '@/domain/model/StickyTo'
 import SimpleAddListener from '@/infrastructure/service/listeners/SimpleAddListener'
 
+import { debounce } from '@/infrastructure/service/utils'
+
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 library.add(faAngleDown, faChevronRight, faChevronLeft)
 export default Vue.extend({
@@ -144,7 +146,8 @@ export default Vue.extend({
     isShowArrows: boolean,
     visitedTabGuids: string[],
     stickyToBlock?: BlockDTO,
-    stickyToElement?: any
+    stickyToElement?: any,
+    prepareReplication: () => void
     } {
     return {
       parentBlock: undefined,
@@ -159,10 +162,13 @@ export default Vue.extend({
       isShowArrows: false,
       visitedTabGuids: [],
       stickyToBlock: undefined,
-      stickyToElement: undefined
+      stickyToElement: undefined,
+      prepareReplication: () => {}
     }
   },
-
+  created () {
+    this.prepareReplication = debounce(this._prepareReplication, 300)
+  },
   computed: {
     // список потомков у контейнера
     children (): object[] {
@@ -639,7 +645,7 @@ export default Vue.extend({
       }
     },
 
-    async prepareReplication (offset = {}): Promise<void> {
+    async _prepareReplication (offset = {}): Promise<void> {
       if (!this.block.replication?.function) {
         return
       }
@@ -715,7 +721,7 @@ export default Vue.extend({
 
     setParent (): void {
       this.parentBlock = this.block.parentGuid ? this.getStore().getByGuid(this.block.parentGuid) : undefined
-      this.parentElement = this.block.parentGuid ? this.$parent.$refs.draggableContainer as Element : undefined
+      this.parentElement = this.block.parentGuid ? this.$parent?.$refs.draggableContainer as Element : undefined
     },
 
     scrollPrevTab (): void {

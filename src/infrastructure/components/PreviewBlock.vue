@@ -169,6 +169,9 @@ export default Vue.extend({
   created () {
     let me = this
     this.prepareReplication = debounce(this._prepareReplication, 300, () => {
+      if (!this.block.replication?.function) {
+        return
+      }
       me.block.isLoading = true
     })
   },
@@ -651,6 +654,7 @@ export default Vue.extend({
 
     async _prepareReplication (offset = {}): Promise<void> {
       if (!this.block.replication?.function) {
+        this.block.isLoading = false
         return
       }
       this.block.isLoading = true

@@ -167,7 +167,10 @@ export default Vue.extend({
     }
   },
   created () {
-    this.prepareReplication = debounce(this._prepareReplication, 300)
+    let me = this
+    this.prepareReplication = debounce(this._prepareReplication, 300, () => {
+      me.block.isLoading = true
+    })
   },
   computed: {
     // список потомков у контейнера
@@ -570,6 +573,7 @@ export default Vue.extend({
     }
     this.prepareReplication()
     this.getStore().addRef(this.block.guid, this)
+    this.block.isLoading = false
   },
 
   beforeDestroy () {
@@ -676,6 +680,7 @@ export default Vue.extend({
       blocksData.forEach((item: object, index: number) => {
         const newBlock = JSON.parse(JSON.stringify(me.block))
         newBlock.replication = undefined
+        newBlock.isLoading = false
         this.replicationIndex = this.replicationIndex + 1
         if ((index + 1) % columns !== 0) {
           if (me.block.replication?.horizontalMargin?.value) {

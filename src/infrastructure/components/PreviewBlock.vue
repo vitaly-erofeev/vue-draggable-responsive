@@ -654,6 +654,7 @@ export default Vue.extend({
         return
       }
       this.block.isLoading = true
+      this.block.isHidden = false
       let blocksData: any[] = []
       try {
         blocksData = await this.block.replication?.function(offset)
@@ -668,7 +669,6 @@ export default Vue.extend({
         this.block.isLoading = false
         return
       }
-      this.block.isHidden = false
       blocksData.shift()
       let me = this
       let lastGuid = me.block.guid

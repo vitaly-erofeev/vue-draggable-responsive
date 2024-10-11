@@ -8,7 +8,10 @@
       :block="block"
       :replication-callback="replicationCallback"
       :tab-settings-service="tabSettingsService"
-      @click="$emit('click', $event)"
+      :class="{
+          'active_block': block.guid === activeBlockGuid,
+        }"
+      @click="handleClick"
       @tab-click="$emit('tab-click', $event)"
     >
       <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
@@ -52,10 +55,11 @@ export default Vue.extend({
     }
   },
 
-  data (): { store: BlockRepositoryInterface, tabSettingsService: TabSettings } {
+  data (): { store: BlockRepositoryInterface, tabSettingsService: TabSettings, activeBlockGuid: string } {
     return {
       store: new BlockRepository([], true),
-      tabSettingsService: new TabSettings(this.tabSettings, this)
+      tabSettingsService: new TabSettings(this.tabSettings, this),
+      activeBlockGuid: ''
     }
   },
 
@@ -74,6 +78,10 @@ export default Vue.extend({
   },
 
   methods: {
+    handleClick (event: {block: any, event: Event}) {
+      this.$emit('click', event)
+      this.activeBlockGuid = event.block.guid
+    },
     getStore (): BlockRepositoryInterface {
       return this.store
     },

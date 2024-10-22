@@ -395,7 +395,7 @@ export default Vue.extend({
         position = Object.assign(position, {
           minWidth: width,
           minHeight: height,
-          height: this.scrollHeight + 'px',
+          height: 'auto', // this.scrollHeight + 'px',
           width: this.scrollWidth + 'px'
         })
       } else {

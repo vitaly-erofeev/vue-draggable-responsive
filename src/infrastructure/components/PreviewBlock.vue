@@ -565,6 +565,7 @@ export default Vue.extend({
       const observer = new ResizeObserver(() => {
         this.setStretchedSize()
       })
+      observer.observe(this.$refs.container)
       for (let item of children) {
         observer.observe(item)
       }

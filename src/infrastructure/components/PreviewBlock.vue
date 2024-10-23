@@ -565,14 +565,16 @@ export default Vue.extend({
       const observer = new ResizeObserver(() => {
         this.setStretchedSize()
       })
-      console.log(this.$refs.container, children)
+      console.log(this.$refs.container, children.length)
       for (let item of children) {
         observer.observe(item)
       }
-      const observerInserted = new MutationObserver(mutationList =>
+      const observerInserted = new MutationObserver(mutationList => {
+        console.log(mutationList)
         mutationList.filter(m => m.type === 'childList').forEach(m => {
           observer.observe(m.target as Element)
-        }))
+        })
+      })
       observerInserted.observe(this.$refs.container, { childList: true, subtree: true })
     }
     this.block.isLoading = false

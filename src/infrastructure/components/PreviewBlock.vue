@@ -636,12 +636,15 @@ export default Vue.extend({
       }
     },
     setStretchedSize () {
-      this.scrollHeight = 0
-      this.scrollWidth = 0
-      this.$nextTick(() => {
-        this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
-        this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
-      })
+      // this.scrollHeight = 0
+      // this.scrollWidth = 0
+      // this.$nextTick(() => {
+      const container = this.$refs.container as HTMLElement
+      if (container) {
+        this.scrollHeight = container.scrollHeight
+        this.scrollWidth = container.scrollWidth
+      }
+      // })
     },
     onReplicateBlock (event: {}) {
       if (this.replicationCallback) {

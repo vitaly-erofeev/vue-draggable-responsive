@@ -640,6 +640,7 @@ export default Vue.extend({
       // this.scrollWidth = 0
       // this.$nextTick(() => {
       const container = this.$refs.container as HTMLElement
+      console.log(container?.scrollHeight, container)
       if (container) {
         this.scrollHeight = container.scrollHeight
         this.scrollWidth = container.scrollWidth

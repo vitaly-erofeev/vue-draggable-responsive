@@ -51,5 +51,6 @@ export interface BlockProperties {
   isHidden?: boolean
   isHighlight?: boolean,
   properties?: {},
-  isLoading?: boolean
+  isLoading?: boolean,
+  disabledMove?: boolean
 }

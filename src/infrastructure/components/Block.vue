@@ -906,7 +906,7 @@ export default Vue.extend({
     },
 
     dragStart (event: MouseEvent, isInteractive: boolean = false): void {
-      if (this.block.isEditing) {
+      if (this.block.isEditing || this.block.disabledMove) {
         return
       }
       event.preventDefault()

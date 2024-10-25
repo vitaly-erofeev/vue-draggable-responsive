@@ -102,6 +102,8 @@ import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInje
 import { StickyToType } from '@/domain/model/StickyTo'
 import SimpleAddListener from '@/infrastructure/service/listeners/SimpleAddListener'
 
+import { debounce } from '@/infrastructure/service/utils'
+
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 library.add(faAngleDown, faChevronRight, faChevronLeft)
 export default Vue.extend({
@@ -144,7 +146,8 @@ export default Vue.extend({
     isShowArrows: boolean,
     visitedTabGuids: string[],
     stickyToBlock?: BlockDTO,
-    stickyToElement?: any
+    stickyToElement?: any,
+    prepareReplication: () => void
     } {
     return {
       parentBlock: undefined,
@@ -159,10 +162,19 @@ export default Vue.extend({
       isShowArrows: false,
       visitedTabGuids: [],
       stickyToBlock: undefined,
-      stickyToElement: undefined
+      stickyToElement: undefined,
+      prepareReplication: () => {}
     }
   },
-
+  created () {
+    let me = this
+    this.prepareReplication = debounce(this._prepareReplication, 300, () => {
+      if (!this.block.replication?.function) {
+        return
+      }
+      me.block.isLoading = true
+    })
+  },
   computed: {
     // список потомков у контейнера
     children (): object[] {
@@ -553,15 +565,18 @@ export default Vue.extend({
       const observer = new ResizeObserver(() => {
         this.setStretchedSize()
       })
+
       for (let item of children) {
         observer.observe(item)
       }
-      const observerInserted = new MutationObserver(mutationList =>
+      const observerInserted = new MutationObserver(mutationList => {
         mutationList.filter(m => m.type === 'childList').forEach(m => {
-          observer.observe(m.target as Element)
-        }))
+          m.addedNodes.forEach(node => observer.observe(node as Element))
+        })
+      })
       observerInserted.observe(this.$refs.container, { childList: true, subtree: true })
     }
+    this.block.isLoading = false
     this.prepareReplication()
     this.getStore().addRef(this.block.guid, this)
   },
@@ -639,10 +654,13 @@ export default Vue.extend({
       }
     },
 
-    async prepareReplication (offset = {}): Promise<void> {
+    async _prepareReplication (offset = {}): Promise<void> {
       if (!this.block.replication?.function) {
+        this.block.isLoading = false
         return
       }
+      this.block.isLoading = true
+      this.block.isHidden = false
       let blocksData: any[] = []
       try {
         blocksData = await this.block.replication?.function(offset)
@@ -654,9 +672,9 @@ export default Vue.extend({
         /* this.$nextTick(() => {
           this.getStore().remove(this.block.guid)
         }) */
+        this.block.isLoading = false
         return
       }
-      this.block.isHidden = false
       blocksData.shift()
       let me = this
       let lastGuid = me.block.guid
@@ -668,6 +686,7 @@ export default Vue.extend({
       blocksData.forEach((item: object, index: number) => {
         const newBlock = JSON.parse(JSON.stringify(me.block))
         newBlock.replication = undefined
+        newBlock.isLoading = false
         this.replicationIndex = this.replicationIndex + 1
         if ((index + 1) % columns !== 0) {
           if (me.block.replication?.horizontalMargin?.value) {
@@ -711,11 +730,12 @@ export default Vue.extend({
         rowGuids[row].push(lastGuid)
       })
       this.getStore().removeListener(listenerGuid)
+      this.block.isLoading = false
     },
 
     setParent (): void {
       this.parentBlock = this.block.parentGuid ? this.getStore().getByGuid(this.block.parentGuid) : undefined
-      this.parentElement = this.block.parentGuid ? this.$parent.$refs.draggableContainer as Element : undefined
+      this.parentElement = this.block.parentGuid ? this.$parent?.$refs.draggableContainer as Element : undefined
     },
 
     scrollPrevTab (): void {

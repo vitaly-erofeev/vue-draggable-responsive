@@ -53,6 +53,8 @@ export default class BlockDTO {
   isHidden: boolean = false
   isHighlight: boolean = false
   properties: {[index: string]: any;} = {}
+  isLoading: boolean = false
+  disabledMove: boolean = false
 
   constructor (
     {
@@ -92,7 +94,9 @@ export default class BlockDTO {
       isHighlight = false,
       minMax,
       onCenter,
-      properties = {}
+      properties = {},
+      isLoading = false,
+      disabledMove = false
     }: BlockProperties
   ) {
     this.widthCalc = widthCalc
@@ -136,6 +140,8 @@ export default class BlockDTO {
     this.replication = replication
     this.pagination = pagination
     this.properties = properties
+    this.isLoading = isLoading
+    this.disabledMove = disabledMove
     this.prepareSizesTypes()
   }
 

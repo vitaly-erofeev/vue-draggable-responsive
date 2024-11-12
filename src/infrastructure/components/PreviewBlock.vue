@@ -571,7 +571,7 @@ export default Vue.extend({
       }
       const observerInserted = new MutationObserver(mutationList => {
         mutationList.filter(m => m.type === 'childList').forEach(m => {
-          m.addedNodes.forEach(node => observer.observe(node as Element))
+          m.addedNodes.forEach(node => node instanceof Element && observer.observe(node as Element))
         })
       })
       observerInserted.observe(this.$refs.container, { childList: true, subtree: true })
@@ -638,8 +638,8 @@ export default Vue.extend({
       }
     },
     setStretchedSize () {
-      this.scrollHeight = 0
-      this.scrollWidth = 0
+      // this.scrollHeight = 0
+      // this.scrollWidth = 0
       this.$nextTick(() => {
         this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
         this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth

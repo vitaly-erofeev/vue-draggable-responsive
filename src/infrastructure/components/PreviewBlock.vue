@@ -651,7 +651,11 @@ export default Vue.extend({
         this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
         if (parentNode && parentScroll) {
           console.log('after', parentNode, parentScroll)
-          parentNode.scrollTop = parentScroll
+          this.$nextTick(() => {
+            if (parentNode) {
+              parentNode.scrollTop = parentScroll
+            }
+          })
         }
       })
     },

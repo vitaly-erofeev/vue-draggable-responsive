@@ -522,8 +522,6 @@ export default Vue.extend({
 
   watch: {
     activeTabGuid (value) {
-      this.scrollHeight = 0
-      this.scrollWidth = 0
       if (!this.visitedTabGuids.includes(value)) {
         this.visitedTabGuids.push(value)
       }
@@ -638,11 +636,23 @@ export default Vue.extend({
       }
     },
     setStretchedSize () {
-      // this.scrollHeight = 0
-      // this.scrollWidth = 0
+      let parentNode: HTMLElement | undefined
+      let parentScroll = 0
+      if (this.block.parentGuid) {
+        parentNode = this.$el.parentNode as HTMLElement
+        parentScroll = parentNode?.scrollTop || 0
+      }
+
+      this.scrollHeight = 0
+      this.scrollWidth = 0
+      console.log('before', parentNode, parentScroll)
       this.$nextTick(() => {
         this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
         this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
+        if (parentNode && parentScroll) {
+          console.log('after', parentNode, parentScroll)
+          parentNode.scrollTop = parentScroll
+        }
       })
     },
     onReplicateBlock (event: {}) {

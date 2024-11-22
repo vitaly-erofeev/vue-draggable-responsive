@@ -42,9 +42,10 @@ export default Vue.extend({
   name: 'VueDraggableResponsivePreviewer',
   components: { PreviewBlock },
 
-  provide (): { getStore: Function } {
+  provide (): { getStore: Function, mainBlockSelector: string } {
     return {
-      getStore: this.getStore
+      getStore: this.getStore,
+      mainBlockSelector: this.mainBlockSelector
     }
   },
 
@@ -52,7 +53,8 @@ export default Vue.extend({
     replicationCallback: Function,
     tabSettings: {
       type: Object
-    }
+    },
+    mainBlockSelector: String
   },
 
   data (): { store: BlockRepositoryInterface, tabSettingsService: TabSettings, activeBlockGuid: string } {

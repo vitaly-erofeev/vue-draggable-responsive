@@ -1,5 +1,6 @@
 import { BlockRepositoryInterface } from '@/domain/repository/BlockRepositoryInterface'
 
 export interface DataSourceInjected {
-  getStore: () => BlockRepositoryInterface
+  getStore: () => BlockRepositoryInterface,
+  mainBlockSelector: string
 }

@@ -116,6 +116,9 @@ export default Vue.extend({
   inject: {
     getStore: {
       default: () => () => {}
+    },
+    mainBlockSelector: {
+      default: null
     }
   },
 
@@ -641,16 +644,16 @@ export default Vue.extend({
       if (this.block.parentGuid) {
         parentNode = this.$el.parentNode as HTMLElement
         parentScroll = parentNode?.scrollTop || 0
+      } else if (this.mainBlockSelector) {
+        parentNode = this.$el.closest(this.mainBlockSelector) as HTMLElement
       }
 
       this.scrollHeight = 0
       this.scrollWidth = 0
-      console.log('before', parentNode, parentScroll)
       this.$nextTick(() => {
         this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
         this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
         if (parentNode && parentScroll) {
-          console.log('after', parentNode, parentScroll)
           this.$nextTick(() => {
             if (parentNode) {
               parentNode.scrollTop = parentScroll

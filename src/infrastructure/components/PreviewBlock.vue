@@ -643,10 +643,10 @@ export default Vue.extend({
       let parentScroll = 0
       if (this.block.parentGuid) {
         parentNode = this.$el.parentNode as HTMLElement
-        parentScroll = parentNode?.scrollTop || 0
       } else if (this.mainBlockSelector) {
         parentNode = this.$el.closest(this.mainBlockSelector) as HTMLElement
       }
+      parentScroll = parentNode?.scrollTop || 0
 
       this.scrollHeight = 0
       this.scrollWidth = 0

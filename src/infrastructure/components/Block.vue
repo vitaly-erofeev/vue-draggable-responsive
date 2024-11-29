@@ -906,11 +906,12 @@ export default Vue.extend({
     },
 
     dragStart (event: MouseEvent, isInteractive: boolean = false): void {
-      if (this.block.isEditing || this.block.disabledMove) {
-        return
-      }
       event.preventDefault()
       this.$emit('start-drag', this.block)
+      if (this.block.isEditing || this.block.disabledMove) {
+        this.dragStop()
+        return
+      }
       this.getBlockManager().startDrag(event, 'drag', isInteractive)
       this.isDragging = true
       document.addEventListener('mousemove', this.elementDrag)

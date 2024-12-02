@@ -109,6 +109,9 @@
       <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
       <svg id="svg" v-if="!block.isEditing && !isTabsContainer">
         <line class="line" v-for="(line, index) in stickyLines"
+              :class="{
+                [line.type]: true
+              }"
               :key="index"
               :x1="line.x1"
               :y1="line.y1"
@@ -159,13 +162,14 @@ import { Sticky } from '@/domain/model/Sticky'
 import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
 import { StickyToType } from '@/domain/model/StickyTo'
 import { SizeTypes } from '@/domain/model/SizeTypes'
+import stickyLinesMixin from '@/infrastructure/service/stickyLinesMixin'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 library.add(faAngleDown, faChevronRight, faChevronLeft)
 
 export default Vue.extend({
   name: 'Block',
-
+  mixins: [stickyLinesMixin],
   components: {
     FontAwesomeIcon
   },
@@ -336,11 +340,6 @@ export default Vue.extend({
 
     tabGuids () {
       return (this.block.tabs?.list || []).map((item) => item.guid)
-    },
-
-    stickyLines () {
-      return []
-      // return this.getStore().getStickyLines(this.block.guid)
     },
 
     zIndex (): number {
@@ -1183,7 +1182,12 @@ export default Vue.extend({
 
 .line{
   stroke-width:1px;
+}
+.line.top {
   stroke: #32B84D;
+}
+.line.left {
+  stroke: #F56C6C;
 }
 .tab {
   width: 100px;

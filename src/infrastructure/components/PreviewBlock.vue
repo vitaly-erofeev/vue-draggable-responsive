@@ -66,14 +66,17 @@
       <preview-block
         v-for="_block in children"
         v-show="(isShowChildren && !_block.isHidden )"
-        :class="(_block.parentTabGuid === activeTabGuid) ? '' : 'visibility'"
+        :class="[
+          (_block.parentTabGuid === activeTabGuid) ? '' : 'visibility',
+          { 'active_block': _block.guid === activeBlockGuid }
+        ]"
         :ref="_block.guid"
         :key="_block.guid"
         :is-showing="isShowChildren && _block.parentTabGuid === activeTabGuid && !_block.isHidden"
         :block="_block"
         :replication-callback="replicationCallback"
         :tab-settings-service="tabSettingsService"
-        @click="$emit('click', { block: $event.block || _block, event: $event.event || $event })"
+        @click="handleClick({ block: $event.block || _block, event: $event.event || $event })"
         @tab-click="$emit('tab-click', $event)"
       >
         <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
@@ -150,7 +153,8 @@ export default Vue.extend({
     visitedTabGuids: string[],
     stickyToBlock?: BlockDTO,
     stickyToElement?: any,
-    prepareReplication: () => void
+    prepareReplication: () => void,
+    activeBlockGuid?: string
     } {
     return {
       parentBlock: undefined,
@@ -166,7 +170,8 @@ export default Vue.extend({
       visitedTabGuids: [],
       stickyToBlock: undefined,
       stickyToElement: undefined,
-      prepareReplication: () => {}
+      prepareReplication: () => {},
+      activeBlockGuid: ''
     }
   },
   created () {
@@ -587,6 +592,10 @@ export default Vue.extend({
   },
 
   methods: {
+    handleClick (event: {block: any, event: Event}) {
+      this.$emit('click', event)
+      this.activeBlockGuid = event.block.guid
+    },
     showChildTabs (guid: string) {
       if (this.block.tabs) {
         let tabs = this.buidTreeTabs(this.visibleTabs)

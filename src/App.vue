@@ -551,9 +551,9 @@ export default {
 
 <style>
 .red {
-  background: red;
+  background: transparent;
 }
 .green {
-  background: green;
+  background: transparent;
 }
 </style>

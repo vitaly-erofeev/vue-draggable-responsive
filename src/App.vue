@@ -23,6 +23,7 @@
       <button @click="addMinMax()">add min_max</button>
       <button @click="addHorizontalCenter()">add hor center</button>
       <button @click="addVerticalCenter()">add ver center</button>
+      <button @click="disableMove">disable move</button>
       <button @click="showHidden = !showHidden">toggle show hidden: {{showHidden}}</button>
       <select v-model="(activeBlock || {}).sticky">
         <option value="tr">Top-Right</option>
@@ -240,6 +241,9 @@ export default {
           })
         }
       }
+    },
+    disableMove () {
+      this.$set(this.activeBlock, 'disabledMove', !(this.activeBlock.disabledMove || false))
     },
     switchWidth () {
       if (!this.activeBlock) {

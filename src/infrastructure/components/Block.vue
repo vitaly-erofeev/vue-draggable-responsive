@@ -107,6 +107,7 @@
       @click.stop="$emit('click', { block: $event.block || block, event: $event.event || $event })"
     >
       <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
+      <slot :block="block" name="toolbar"></slot>
       <svg id="svg" v-if="!block.isEditing && !isTabsContainer">
         <line class="line" v-for="(line, index) in stickyLines"
               :class="{
@@ -140,6 +141,7 @@
       </block>
     </div>
     <font-awesome-icon
+      v-show="!block.disabledMove"
       icon="angle-down"
       :class="`resize-handler ${block.sticky}`"
       @mousedown.stop="resizeStart"

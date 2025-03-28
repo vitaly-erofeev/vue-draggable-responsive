@@ -242,6 +242,10 @@ export default Vue.extend({
             if (tabs[guid].parentTabForTree) {
               tabs[guid].isShow = false
             }
+            // показать все вкладки, если чек-бокс expandAllByDefault
+            if (tabs[guid].parentTabForTree && this.block.tabs.expandAllByDefault) {
+              tabs[guid].isShow = true
+            }
             // есть потомок - показать плюсик
             if (parentKeys[guid]) {
               tabs[guid].isChild = true

@@ -12,6 +12,7 @@ export interface TabProperties {
   tabStyle?: string,
   activeTabStyle?: string,
   class?: string,
+  expandAllByDefault?: boolean,
   tabStyleByCondition?: string,
   saveActiveTab?: boolean
 }

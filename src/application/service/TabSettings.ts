@@ -19,7 +19,8 @@ export default class TabSettings {
       isExpanded: false,
       parentTabForTree: '',
       style: '',
-      interactive: {}
+      interactive: {},
+      expandChildrenByDefault: false
     }
 
     this.context.$set(this.tabSettings, tabGuid, tabSetting)
@@ -57,6 +58,10 @@ export default class TabSettings {
 
     if (!('isHidden' in tabSetting)) {
       this.context.$set(tabSetting, 'isHidden', false)
+    }
+
+    if (!('expandChildrenByDefault' in tabSetting)) {
+      this.context.$set(tabSetting, 'expandChildrenByDefault', false)
     }
 
     if (!('isBlocked' in tabSetting)) {
@@ -237,5 +242,17 @@ export default class TabSettings {
     const tabSetting = this.getTabSettingByGuid(tabGuid) || this.createTabSetting(tabGuid)
 
     this.context.$set(tabSetting, 'parentTabForTree', value)
+  }
+  getExpandChildren (tabGuid: string): boolean {
+    const tabSetting: TabSettingType | void = this.getTabSettingByGuid(tabGuid)
+    if (tabSetting && ('expandChildrenByDefault' in tabSetting)) {
+      return tabSetting.expandChildrenByDefault
+    }
+    return false
+  }
+
+  setExpandChildren (tabGuid: string, value: boolean): void {
+    const tabSetting = this.getTabSettingByGuid(tabGuid) || this.createTabSetting(tabGuid)
+    this.context.$set(tabSetting, 'expandChildrenByDefault', value)
   }
 }

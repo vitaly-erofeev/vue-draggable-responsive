@@ -7,6 +7,7 @@ export interface TabSettingType {
   isDefaultTab: boolean,
   isExpanded?: boolean
   parentTabForTree: string,
+  expandChildrenByDefault: boolean
 
   hiddenConditions?: object,
   blockedConditions?: object,

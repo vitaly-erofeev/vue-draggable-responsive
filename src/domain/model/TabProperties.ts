@@ -12,7 +12,7 @@ export interface TabProperties {
   tabStyle?: string,
   activeTabStyle?: string,
   class?: string,
-  expandAllByDefault?: boolean,
+  expandChildrenByDefault?: boolean,
   tabStyleByCondition?: string,
   saveActiveTab?: boolean
 }

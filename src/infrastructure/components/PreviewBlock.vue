@@ -234,6 +234,10 @@ export default Vue.extend({
           if (Object.prototype.hasOwnProperty.call(tabs, guid)) {
             // изначально svg в плюсик
             tabs[guid].isExpanded = false
+            if (tabs[guid].isChild) {
+              // isExpanded если есть expandChildrenByDefault
+              tabs[guid].isExpanded = this.tabSettingsService.getExpandChildren(guid)
+            }
             // является первым уровнем и есть потомок - вкладку показывать при иницилизации
             if (!tabs[guid].parentTabForTree && parentKeys[guid]) {
               tabs[guid].isShow = true
@@ -242,9 +246,12 @@ export default Vue.extend({
             if (tabs[guid].parentTabForTree) {
               tabs[guid].isShow = false
             }
-            // показать все вкладки, если чек-бокс expandAllByDefault
-            if (tabs[guid].parentTabForTree && this.block.tabs.expandAllByDefault) {
-              tabs[guid].isShow = true
+            // показать вкладки, если expandChildrenByDefault и есть родитель
+            if (tabs[guid].parentTabForTree) {
+              const parentGuid = tabs[guid].parentTabForTree
+              if (tabs[parentGuid]?.expandChildrenByDefault) {
+                tabs[guid].isShow = true
+              }
             }
             // есть потомок - показать плюсик
             if (parentKeys[guid]) {

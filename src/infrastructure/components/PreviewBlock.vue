@@ -490,6 +490,10 @@ export default Vue.extend({
         }
       }
 
+      position.transform = `translate(${position.left}, ${position.top})`
+      position.left = undefined
+      position.top = undefined
+
       return Object.assign(position, {
         zIndex: this.zIndex
       })
@@ -646,8 +650,7 @@ export default Vue.extend({
       return false
     },
     setSticky (guid?: string) {
-      this.block.stickyTo = undefined
-      if (guid && this.block.stickyTo) {
+      if (guid) {
         this.stickyToBlock = this.getStore().getByGuid(guid)
         this.stickyToElement = this.getStore().getRefByGuid(guid) as unknown as {
           positionStyle: {

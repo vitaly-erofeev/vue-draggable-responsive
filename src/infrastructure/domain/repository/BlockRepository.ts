@@ -59,16 +59,18 @@ export default class BlockRepository implements BlockRepositoryInterface {
   }
 
   getByGuid (guid: string): BlockDTO | undefined {
-    let answer: BlockDTO | undefined
-    JSON.stringify(this.blocks, (_, nestedValue) => {
-      if (nestedValue && nestedValue.guid === guid &&
-        typeof nestedValue.sticky !== 'undefined') {
-        answer = nestedValue
+    const stack = [...this.blocks]
+    while (stack.length) {
+      const block = stack.pop()
+      if (!block) continue
+      if (block.guid === guid && typeof block.sticky !== 'undefined') {
+        return block
       }
-      return nestedValue
-    })
-
-    return answer
+      if (block.children && block.children.length) {
+        stack.push(...block.children)
+      }
+    }
+    return undefined
   }
 
   getByTabGuid (tabGuid: string): BlockDTO[] {

@@ -490,10 +490,6 @@ export default Vue.extend({
         }
       }
 
-      position.transform = `translate(${position.left}, ${position.top})`
-      position.left = undefined
-      position.top = undefined
-
       return Object.assign(position, {
         zIndex: this.zIndex
       })

@@ -646,7 +646,8 @@ export default Vue.extend({
       return false
     },
     setSticky (guid?: string) {
-      if (guid) {
+      this.block.stickyTo = undefined
+      if (guid && this.block.stickyTo) {
         this.stickyToBlock = this.getStore().getByGuid(guid)
         this.stickyToElement = this.getStore().getRefByGuid(guid) as unknown as {
           positionStyle: {

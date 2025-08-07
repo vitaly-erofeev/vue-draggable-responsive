@@ -620,7 +620,7 @@ export default Vue.extend({
         if (this.isTabsContainer) {
           setTimeout(() => {
             this.setIsShowArrows()
-          }, 0)
+          }, 50)
         }
         if (this.block.tabs?.list.length === 1) {
           this.block.children.forEach(el => {
@@ -766,13 +766,13 @@ export default Vue.extend({
       this.onTabClick(this.block.tabs.list[0].guid)
     }
     this.getStore().addRef(this.block.guid, this)
-    this.$nextTick(() => {
+    setTimeout(() => {
       this.onDrag()
       if (this.isTabsContainer) {
         this.setIsShowArrows()
       }
       this.setSticky(this.block?.stickyTo?.guid)
-    })
+    }, 50)
   },
 
   beforeDestroy () {
@@ -931,9 +931,9 @@ export default Vue.extend({
       } */
       this.getBlockManager().change(event)
       if (this.isDragging) {
-        this.$nextTick(() => {
+        setTimeout(() => {
           this.onDrag()
-        })
+        }, 50)
       }
     },
 

@@ -544,9 +544,9 @@ export default Vue.extend({
       if (!this.visitedTabGuids.includes(value)) {
         this.visitedTabGuids.push(value)
       }
-      this.$nextTick(() => {
+      setTimeout(() => {
         this.setStretchedSize()
-      })
+      }, 50)
     },
     availableTabs (value) {
       let someGuid = value.some((item: { guid?: string }) => item?.guid === this.activeTabGuid)
@@ -558,13 +558,13 @@ export default Vue.extend({
 
   mounted () {
     this.setParent()
-    this.$nextTick(() => {
+    setTimeout(() => {
       this.setStretchedSize()
       this.setSticky(this.block?.stickyTo?.guid)
       if (this.isTabsContainer) {
         this.setIsShowArrows()
       }
-    })
+    }, 50)
     if (this.block?.tabs?.use && this.block?.tabs?.list?.length > 0) {
       if (this.block.tabs.saveActiveTab && this.block.tabs.activeGuid) {
         this.onTabClick(this.block.tabs.activeGuid || this.availableTabs[0].guid)
@@ -670,17 +670,17 @@ export default Vue.extend({
 
       this.scrollHeight = 0
       this.scrollWidth = 0
-      this.$nextTick(() => {
+      setTimeout(() => {
         this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
         this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
         if (parentNode && parentScroll) {
-          this.$nextTick(() => {
+          setTimeout(() => {
             if (parentNode) {
               parentNode.scrollTop = parentScroll
             }
-          })
+          }, 50)
         }
-      })
+      }, 50)
     },
     onReplicateBlock (event: {}) {
       if (this.replicationCallback) {

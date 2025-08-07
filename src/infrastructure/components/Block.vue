@@ -1,7 +1,7 @@
 <template>
   <div
-    :style="positionStyle"
-    :class="{
+      :style="positionStyle"
+      :class="{
       'block': true,
       'highlight' : isResizing || isDragging,
       'active': block.isActive,
@@ -9,15 +9,15 @@
       'active_parent': block.isActiveAsParent,
       [block.className]: !!block.className
     }"
-    ref="draggableContainer"
-    v-show="!block.isHidden || showHidden"
-    @mousedown.stop="dragStart"
-    @contextmenu.stop="$emit('contextmenu', { block: block, event: $event })"
+      ref="draggableContainer"
+      v-show="showHidden || !block.isHidden"
+      @mousedown.stop="dragStart"
+      @contextmenu.stop="$emit('contextmenu', { block: block, event: $event })"
   >
     <div
-      v-if="isTabsContainer"
-      ref="tabsContainer"
-      :class="{
+        v-if="isTabsContainer"
+        ref="tabsContainer"
+        :class="{
         'tabs_container' : true,
         'custom_scrollbar' : true,
         'position_top': block.tabs.position === 'top',
@@ -25,41 +25,42 @@
         'position_bottom': block.tabs.position === 'bottom',
         'position_left': block.tabs.position === 'left',
       }"
-      :style="block.tabs.containerStyle"
+        :style="block.tabs.containerStyle"
     >
       <font-awesome-icon
-        v-show="isShowArrows"
-        icon="chevron-left"
-        class="tabs_button"
-        @click="scrollPrevTab"
-        :class="{ [block.tabs.tabArrowsClass]: true }"
+          v-show="isShowArrows"
+          icon="chevron-left"
+          class="tabs_button"
+          @click="scrollPrevTab"
+          :class="{ [block.tabs.tabArrowsClass]: true }"
       ></font-awesome-icon>
       <div class="tabs_onScroll" ref="tabsScroll" :class="{ 'tabs_padding': isShowArrows, 'direction': directionTabs }">
         <div
-          v-for="tab in visibleTabs"
-          :key="tab.guid"
-          :style="blockTabStyle + getBlockTabStyle(tab)"
-          :class="{
+            v-for="tab in visibleTabs"
+            :key="tab.guid"
+            :style="blockTabStyle + getBlockTabStyle(tab)"
+            :class="{
             'tab': true,
             'active': tab.guid === activeTabGuid,
             [block.tabs.class]: true,
             'required_tab': block.tabs.requiredTabs && block.tabs.requiredTabs.includes(tab.guid),
             'positionTab': tab.data && tab.data.isChild
           }"
-          @click="onTabClick(tab.guid)"
+            @click="onTabClick(tab.guid)"
         >
           <div @click="showChildTabs(tab.guid)" v-show="tab.data && tab.data.isChild">
-            <i class="plus" :class="{'el-icon-arrow-right': !tab.data.isExpanded, 'el-icon-arrow-down': tab.data.isExpanded}"></i>
+            <i class="plus"
+               :class="{'el-icon-arrow-right': !tab.data.isExpanded, 'el-icon-arrow-down': tab.data.isExpanded}"></i>
           </div>
           <span class="label">{{ tab.name }}</span>
         </div>
       </div>
       <font-awesome-icon
-        v-show="isShowArrows"
-        icon="chevron-right"
-        :class="{ [block.tabs.tabArrowsClass]: true }"
-        class="tabs_button tabs_button_next"
-        @click="scrollNextTab"
+          v-show="isShowArrows"
+          icon="chevron-right"
+          :class="{ [block.tabs.tabArrowsClass]: true }"
+          class="tabs_button tabs_button_next"
+          @click="scrollNextTab"
       ></font-awesome-icon>
     </div>
 
@@ -71,40 +72,40 @@
         {{ block.width }}{{ block.sizeTypes.width }} x {{ block.height }}{{ block.sizeTypes.height }}
       </div>
       <div
-        v-show="isDragging && ['tl', 'bl'].includes(block.sticky)"
-        class="position_line left"
-        :style="`left: calc(-${currentPosition.left}px - 1px);width:calc(${currentPosition.left}px - 1px)`"
+          v-show="isDragging && ['tl', 'bl'].includes(block.sticky)"
+          class="position_line left"
+          :style="`left: calc(-${currentPosition.left}px - 1px);width:calc(${currentPosition.left}px - 1px)`"
       >
         <span>{{ block.left }}{{ block.sizeTypes.left }}</span>
       </div>
       <div
-        v-show="isDragging && ['tl', 'tr'].includes(block.sticky)"
-        class="position_line top"
-        :style="`top: -${currentPosition.top}px;height:${currentPosition.top}px`"
+          v-show="isDragging && ['tl', 'tr'].includes(block.sticky)"
+          class="position_line top"
+          :style="`top: -${currentPosition.top}px;height:${currentPosition.top}px`"
       >
         <span>{{ block.top }}{{ block.sizeTypes.top }}</span>
       </div>
       <div
-        v-show="isDragging && ['br', 'bl'].includes(block.sticky)"
-        class="position_line bottom"
-        :style="`bottom: -${currentPosition.bottom}px;height:${currentPosition.bottom}px`"
+          v-show="isDragging && ['br', 'bl'].includes(block.sticky)"
+          class="position_line bottom"
+          :style="`bottom: -${currentPosition.bottom}px;height:${currentPosition.bottom}px`"
       >
         <span>{{ block.bottom }}{{ block.sizeTypes.bottom }}</span>
       </div>
       <div
-        v-show="isDragging && ['tr', 'br'].includes(block.sticky)"
-        class="position_line right"
-        :style="`right: -${currentPosition.right}px;width:${currentPosition.right}px`"
+          v-show="isDragging && ['tr', 'br'].includes(block.sticky)"
+          class="position_line right"
+          :style="`right: -${currentPosition.right}px;width:${currentPosition.right}px`"
       >
         <span>{{ block.right }}{{ block.sizeTypes.right }}</span>
       </div>
     </slot>
     <div
-      class="content custom_scrollbar"
-      :style="blockContentStyle"
-      @mouseover="block.isHover = true"
-      @mouseleave="block.isHover = false"
-      @click.stop="$emit('click', { block: $event.block || block, event: $event.event || $event })"
+        class="content custom_scrollbar"
+        :style="blockContentStyle"
+        @mouseover="block.isHover = true"
+        @mouseleave="block.isHover = false"
+        @click.stop="$emit('click', { block: $event.block || block, event: $event.event || $event })"
     >
       <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
       <slot :block="block" name="toolbar"></slot>
@@ -121,19 +122,19 @@
         />
       </svg>
       <block
-        v-for="_block in children"
-        v-show="isShowChildren && _block.parentTabGuid === activeTabGuid"
-        :ref="_block.guid"
-        :key="_block.guid"
-        :block="_block"
-        :tab-settings-service="tabSettingsService"
-        :step="step"
-        :show-hidden="showHidden"
-        @start-drag="$emit('start-drag', $event)"
-        @stop-drag="$emit('stop-drag', $event)"
-        @dragging="$emit('dragging', $event)"
-        @contextmenu="$emit('contextmenu', $event)"
-        @click="$emit('click', { block: $event.block || _block, event: $event.event || $event })"
+          v-for="_block in children"
+          v-show="isShowChildren && _block.parentTabGuid === activeTabGuid"
+          :ref="_block.guid"
+          :key="_block.guid"
+          :block="_block"
+          :tab-settings-service="tabSettingsService"
+          :step="step"
+          :show-hidden="showHidden"
+          @start-drag="$emit('start-drag', $event)"
+          @stop-drag="$emit('stop-drag', $event)"
+          @dragging="$emit('dragging', $event)"
+          @contextmenu="$emit('contextmenu', $event)"
+          @click="$emit('click', { block: $event.block || _block, event: $event.event || $event })"
       >
         <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
           <slot :name="name" v-bind="data"></slot>
@@ -141,10 +142,10 @@
       </block>
     </div>
     <font-awesome-icon
-      v-show="!block.disabledMove"
-      icon="angle-down"
-      :class="`resize-handler ${block.sticky}`"
-      @mousedown.stop="resizeStart"
+        v-show="!block.disabledMove"
+        icon="angle-down"
+        :class="`resize-handler ${block.sticky}`"
+        @mousedown.stop="resizeStart"
     ></font-awesome-icon>
   </div>
 </template>
@@ -178,7 +179,8 @@ export default Vue.extend({
 
   inject: {
     getStore: {
-      default: () => () => {}
+      default: () => () => {
+      }
     }
   },
 
@@ -219,7 +221,8 @@ export default Vue.extend({
     isShowArrows: boolean,
     visitedTabs: string[],
     stickyToBlock?: BlockDTO,
-    stickyToElement?: any
+    stickyToElement?: any,
+    zIndex?: number
     } {
     return {
       blockManager: undefined,
@@ -241,7 +244,8 @@ export default Vue.extend({
       isShowArrows: false,
       visitedTabs: [],
       stickyToBlock: undefined,
-      stickyToElement: undefined
+      stickyToElement: undefined,
+      zIndex: undefined
     }
   },
 
@@ -344,21 +348,6 @@ export default Vue.extend({
       return (this.block.tabs?.list || []).map((item) => item.guid)
     },
 
-    zIndex (): number {
-      const startIndex = 101
-      if (!this.block.parentGuid) {
-        return startIndex + (this.block.tabs?.use ? 1 : 0)
-      }
-      let parentRef = this.getStore().getRefByGuid(this.block.parentGuid) as unknown as {
-        zIndex: number
-      }
-      if (!parentRef) {
-        return startIndex
-      }
-
-      return parentRef.zIndex + 1 + (this.block.tabs?.use ? 1 : 0)
-    },
-
     isTabsContainer (): boolean {
       return this.block.tabs?.use || false
     },
@@ -369,7 +358,6 @@ export default Vue.extend({
 
     positionStyle (): object {
       let position: Position = {}
-
       switch (this.block.sticky) {
         case Sticky.TL:
           position = {
@@ -773,6 +761,7 @@ export default Vue.extend({
       }
       this.setSticky(this.block?.stickyTo?.guid)
     })
+    this.zIndex = this.getZIndex()
   },
 
   beforeDestroy () {
@@ -780,6 +769,20 @@ export default Vue.extend({
   },
 
   methods: {
+    getZIndex (): number {
+      const startIndex = 101
+      if (!this.block.parentGuid) {
+        return startIndex + (this.block.tabs?.use ? 1 : 0)
+      }
+      let parentRef = this.getStore().getRefByGuid(this.block.parentGuid) as unknown as {
+        zIndex: number
+      }
+      if (!parentRef) {
+        return startIndex
+      }
+
+      return parentRef.zIndex + 1 + (this.block.tabs?.use ? 1 : 0)
+    },
     showChildTabs (guid: string) {
       if (this.block.tabs) {
         this.visibleTabs.forEach(tab => {
@@ -1039,6 +1042,7 @@ export default Vue.extend({
   outline: 1px dashed #539FFF;
   position: absolute;
 }
+
 .block.hidden {
   outline: 1px dashed #E94435;
 }
@@ -1047,6 +1051,7 @@ export default Vue.extend({
   outline: 1px solid #539FFF;
   cursor: pointer;
 }
+
 .block.highlight.hidden {
   outline: 1px solid #E94435;
 }
@@ -1173,7 +1178,8 @@ export default Vue.extend({
   height: 100%;
   flex-direction: column;
 }
-#svg{
+
+#svg {
   position: absolute;
   top: 0;
   left: 0;
@@ -1182,15 +1188,18 @@ export default Vue.extend({
   overflow: visible;
 }
 
-.line{
-  stroke-width:1px;
+.line {
+  stroke-width: 1px;
 }
+
 .line.top {
   stroke: #32B84D;
 }
+
 .line.left {
   stroke: #F56C6C;
 }
+
 .tab {
   width: 100px;
   cursor: pointer;
@@ -1198,35 +1207,40 @@ export default Vue.extend({
   text-align: center;
   /* flex: 1; */
 }
+
 .tabs_onScroll {
   display: flex;
   transition: 1s all;
 }
+
 .tabs_onScroll.tabs_padding {
   padding-left: 15px;
   padding-right: 15px;
 }
+
 .tabs_onScroll.direction {
   flex-direction: column;
 }
+
 .tabs_button {
-    display: block;
-    background: white;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    position: absolute;
-    width: 12px;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 5;
-    color: #909399;
-    box-sizing: border-box;
+  display: block;
+  background: white;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: absolute;
+  width: 12px;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  color: #909399;
+  box-sizing: border-box;
 }
+
 .tabs_button_next {
-    right: 0;
-    left: auto;
+  right: 0;
+  left: auto;
 }
 
 .required_tab:after {
@@ -1239,11 +1253,13 @@ export default Vue.extend({
   margin-left: 5px;
   border-radius: 4px;
 }
+
 .tabs_container .positionTab {
   position: relative;
   padding-left: 20px !important;
 }
-.tabs_container .positionTab>div:first-child {
+
+.tabs_container .positionTab > div:first-child {
   position: absolute;
   top: 50%;
   left: 4%;

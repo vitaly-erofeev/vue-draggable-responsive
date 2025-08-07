@@ -24,7 +24,7 @@
       <button @click="addHorizontalCenter()">add hor center</button>
       <button @click="addVerticalCenter()">add ver center</button>
       <button @click="disableMove">disable move</button>
-      <button @click="showHidden = !showHidden">toggle show hidden: {{showHidden}}</button>
+      <button @click="showHidden = !showHidden">toggle show hidden: {{ showHidden }}</button>
       <select v-model="(activeBlock || {}).sticky">
         <option value="tr">Top-Right</option>
         <option value="tl">Top-Left</option>
@@ -52,8 +52,9 @@
         style="height: 500px;width: 1059px;display: inline-block"
         :replication-callback="cl"
     >
-      <template v-slot:content="{ block }">
-        {{ block.guid }}
+      <template v-slot:content="{block}">
+          <textarea :value="block.guid">
+          </textarea>
       </template>
     </vue-draggable-responsive-previewer>
   </div>
@@ -11895,6 +11896,7 @@ export default {
         top: 30,
         right: 0,
         className: 'green',
+        parentGuid: this.activeBlock?.guid || null,
         sticky: 'tl',
         sizeTypes: {
           width: '%',
@@ -11972,6 +11974,7 @@ export default {
 .red {
   background: transparent;
 }
+
 .green {
   background: transparent;
 }

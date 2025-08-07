@@ -6,6 +6,7 @@ import { StickyToType } from '@/domain/model/StickyTo'
 import { Sticky } from '@/domain/model/Sticky'
 import { ListenerInterface } from '@/domain/service/ListenerInterface'
 import { EventTypes } from '@/domain/model/EventTypes'
+import _ from 'lodash'
 
 export default class BlockRepository implements BlockRepositoryInterface {
   private blocks: BlockDTO[] = []
@@ -40,7 +41,7 @@ export default class BlockRepository implements BlockRepositoryInterface {
       if (block.replication?.function) {
         replicationFunction = block.replication?.function
       }
-      block = JSON.parse(JSON.stringify(block))
+      block = _.cloneDeep(block)
       block.isHidden = false
       if (replicationFunction && block.replication) {
         block.replication.function = replicationFunction
@@ -63,7 +64,7 @@ export default class BlockRepository implements BlockRepositoryInterface {
     while (stack.length) {
       const block = stack.pop()
       if (!block) continue
-      if (block.guid === guid && typeof block.sticky !== 'undefined') {
+      if (block.guid === guid) {
         return block
       }
       if (block.children && block.children.length) {
@@ -78,7 +79,7 @@ export default class BlockRepository implements BlockRepositoryInterface {
 
     JSON.stringify(this.blocks, (_, nestedValue) => {
       if (nestedValue && nestedValue.parentTabGuid === tabGuid &&
-          typeof nestedValue.sticky !== 'undefined') {
+        typeof nestedValue.sticky !== 'undefined') {
         !answer.includes(nestedValue.guid) && answer.push(nestedValue.guid)
       }
       return nestedValue
@@ -88,16 +89,18 @@ export default class BlockRepository implements BlockRepositoryInterface {
   }
 
   getByAlias (alias: string): BlockDTO | undefined {
-    let answer: BlockDTO | undefined
-    JSON.stringify(this.blocks, (_, nestedValue) => {
-      if (nestedValue && nestedValue.alias === alias &&
-        typeof nestedValue.sticky !== 'undefined') {
-        answer = nestedValue
+    const stack = [...this.blocks]
+    while (stack.length) {
+      const block = stack.pop()
+      if (!block) continue
+      if (block.alias === alias) {
+        return block
       }
-      return nestedValue
-    })
-
-    return answer
+      if (block.children && block.children.length) {
+        stack.push(...block.children)
+      }
+    }
+    return undefined
   }
 
   getMainParents (guid: string): BlockDTO | {} {
@@ -238,13 +241,18 @@ export default class BlockRepository implements BlockRepositoryInterface {
   }
 
   resetActiveBlock (): void {
-    JSON.stringify(this.blocks, (_, nestedValue) => {
-      if (nestedValue && typeof nestedValue.isActive !== 'undefined') {
-        nestedValue.isActive = false
-        nestedValue.isActiveAsParent = false
+    const stack = [...this.blocks]
+    while (stack.length) {
+      const block = stack.pop()
+      if (!block) continue
+      if (typeof block.isActive !== 'undefined') {
+        block.isActive = false
+        block.isActiveAsParent = false
       }
-      return nestedValue
-    })
+      if (block.children && block.children.length) {
+        stack.push(...block.children)
+      }
+    }
   }
 
   setActiveBlock (guid: string): void {

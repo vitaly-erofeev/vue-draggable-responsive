@@ -145,17 +145,6 @@ exports.f = DESCRIPTORS ? $getOwnPropertyDescriptor : function getOwnPropertyDes
 
 /***/ }),
 
-/***/ "07d6":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ppp_old_vue_vue_type_style_index_0_id_0cf16e16_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("3524");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ppp_old_vue_vue_type_style_index_0_id_0cf16e16_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ppp_old_vue_vue_type_style_index_0_id_0cf16e16_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
-
-
-/***/ }),
-
 /***/ "07fa":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -494,6 +483,13 @@ $({ target: 'Set', proto: true, real: true, forced: !setMethodAcceptSetLike('dif
   difference: difference
 });
 
+
+/***/ }),
+
+/***/ "21c0":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -17963,13 +17959,6 @@ module.exports = function (it) {
 
 /***/ }),
 
-/***/ "3524":
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
 /***/ "384f":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18063,13 +18052,6 @@ var uncurryThis = __webpack_require__("e330");
 
 module.exports = uncurryThis({}.isPrototypeOf);
 
-
-/***/ }),
-
-/***/ "3aeb":
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -18462,7 +18444,7 @@ class BlockRepository_BlockRepository {
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"176724c4-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/previewer.vue?vue&type=template&id=278a7e84&scoped=true
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"176724c4-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/previewer.vue?vue&type=template&id=61a95f02&scoped=true
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c,
@@ -18507,21 +18489,16 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/previewer.vue?vue&type=template&id=278a7e84&scoped=true
+// CONCATENATED MODULE: ./src/previewer.vue?vue&type=template&id=61a95f02&scoped=true
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"176724c4-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/ppp_old.vue?vue&type=template&id=0cf16e16&scoped=true
-var ppp_oldvue_type_template_id_0cf16e16_scoped_true_render = function render() {
-  var _vm$block;
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"176724c4-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/PreviewBlock.vue?vue&type=template&id=29ac3151&scoped=true
+var PreviewBlockvue_type_template_id_29ac3151_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
   return _c('div', {
     ref: "draggableContainer",
-    class: {
-      'block': true,
-      [_vm.block.className]: true,
-      'sticky_to': (_vm$block = _vm.block) === null || _vm$block === void 0 || (_vm$block = _vm$block.stickyTo) === null || _vm$block === void 0 ? void 0 : _vm$block.guid
-    },
+    class: ['block', _vm.block.className],
     style: _vm.positionStyle
   }, [_vm.isTabsContainer ? _c('div', {
     class: {
@@ -18682,15 +18659,12 @@ var ppp_oldvue_type_template_id_0cf16e16_scoped_true_render = function render() 
     });
   })], 2)]);
 };
-var ppp_oldvue_type_template_id_0cf16e16_scoped_true_staticRenderFns = [];
+var PreviewBlockvue_type_template_id_29ac3151_scoped_true_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/infrastructure/components/ppp_old.vue?vue&type=template&id=0cf16e16&scoped=true
+// CONCATENATED MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=template&id=29ac3151&scoped=true
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.push.js
 var es_array_push = __webpack_require__("14d9");
-
-// EXTERNAL MODULE: ./src/domain/model/Sticky.ts
-var Sticky = __webpack_require__("e920");
 
 // EXTERNAL MODULE: ./src/domain/model/BlockDTO.ts + 1 modules
 var BlockDTO = __webpack_require__("ccb2");
@@ -18702,12 +18676,6 @@ var ResizeObserver_es = __webpack_require__("6dd8");
 var external_commonjs_vue_commonjs2_vue_root_Vue_ = __webpack_require__("8bbf");
 var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpack_require__.n(external_commonjs_vue_commonjs2_vue_root_Vue_);
 
-// EXTERNAL MODULE: ./src/domain/model/SizeTypes.ts
-var SizeTypes = __webpack_require__("9338");
-
-// EXTERNAL MODULE: ./src/application/service/BlockManager.ts + 3 modules
-var BlockManager = __webpack_require__("c8f9");
-
 // EXTERNAL MODULE: ./node_modules/@fortawesome/vue-fontawesome/index.es.js
 var index_es = __webpack_require__("ad3d");
 
@@ -18717,25 +18685,6 @@ var free_solid_svg_icons_index_es = __webpack_require__("c074");
 // EXTERNAL MODULE: ./node_modules/@fortawesome/fontawesome-svg-core/index.es.js
 var fontawesome_svg_core_index_es = __webpack_require__("ecee");
 
-// EXTERNAL MODULE: ./src/domain/model/StickyTo.ts
-var StickyTo = __webpack_require__("1d16");
-
-// EXTERNAL MODULE: ./src/domain/model/EventTypes.ts
-var EventTypes = __webpack_require__("f2d8");
-
-// CONCATENATED MODULE: ./src/infrastructure/service/listeners/SimpleAddListener.ts
-
-class SimpleAddListener_SimpleAddListener {
-  constructor(handler) {
-    this.handler = handler;
-  }
-  handle(event) {
-    this.handler(event);
-  }
-  isSubscribed(eventType) {
-    return eventType === EventTypes["a" /* EventTypes */].ADD_BLOCK;
-  }
-}
 // CONCATENATED MODULE: ./src/infrastructure/service/utils.ts
 function debounce(cb, wait = 20, additionalCb = () => {}) {
   let h = 0;
@@ -18787,6 +18736,156 @@ function debounce(cb, wait = 20, additionalCb = () => {}) {
     }
   }
 });
+// EXTERNAL MODULE: ./src/domain/model/EventTypes.ts
+var EventTypes = __webpack_require__("f2d8");
+
+// CONCATENATED MODULE: ./src/infrastructure/service/listeners/SimpleAddListener.ts
+
+class SimpleAddListener_SimpleAddListener {
+  constructor(handler) {
+    this.handler = handler;
+  }
+  handle(event) {
+    this.handler(event);
+  }
+  isSubscribed(eventType) {
+    return eventType === EventTypes["a" /* EventTypes */].ADD_BLOCK;
+  }
+}
+// EXTERNAL MODULE: ./src/domain/model/SizeTypes.ts
+var SizeTypes = __webpack_require__("9338");
+
+// CONCATENATED MODULE: ./src/infrastructure/components/mixins/ReplicationMixin.js
+
+
+
+
+/* harmony default export */ var ReplicationMixin = ({
+  props: {
+    replicationCallback: Function
+  },
+  data() {
+    return {
+      prepareReplication: () => {},
+      replicationIndex: 0
+    };
+  },
+  created() {
+    const me = this;
+    this.prepareReplication = debounce(this._prepareReplication.bind(this), 300, () => {
+      var _this$block$replicati;
+      if (!((_this$block$replicati = this.block.replication) !== null && _this$block$replicati !== void 0 && _this$block$replicati.function)) {
+        return;
+      }
+      me.block.isLoading = true;
+    });
+  },
+  methods: {
+    onReplicateBlock(event) {
+      if (this.replicationCallback) {
+        this.replicationCallback(Object.assign({}, event, {
+          replicationBlockGuid: this.block.guid,
+          replicationIndex: this.replicationIndex
+        }));
+      }
+    },
+    async _prepareReplication(offset = {}) {
+      var _this$block$replicati2, _me$block$replication;
+      if (!((_this$block$replicati2 = this.block.replication) !== null && _this$block$replicati2 !== void 0 && _this$block$replicati2.function)) {
+        this.block.isLoading = false;
+        return;
+      }
+      this.block.isLoading = true;
+      this.block.isHidden = false;
+      let blocksData = [];
+      try {
+        var _this$block$replicati3;
+        blocksData = await ((_this$block$replicati3 = this.block.replication) === null || _this$block$replicati3 === void 0 ? void 0 : _this$block$replicati3.function(offset));
+      } catch (e) {
+        console.log('Error in replication request', e);
+      }
+      if (blocksData.length === 0) {
+        this.block.isHidden = true;
+        /* this.$nextTick(() => {
+                                      this.getStore().remove(this.block.guid)
+                                    }) */
+        this.block.isLoading = false;
+        return;
+      }
+      blocksData.shift();
+      let me = this;
+      let lastGuid = me.block.guid;
+      let columns = ((_me$block$replication = me.block.replication) === null || _me$block$replication === void 0 ? void 0 : _me$block$replication.columns) || 1;
+      let rowGuids = {
+        0: [me.block.guid]
+      };
+      let row = 0;
+      this.replicationIndex = 0;
+      const listenerGuid = this.getStore().addListener(new SimpleAddListener_SimpleAddListener(this.onReplicateBlock));
+      blocksData.forEach((item, index) => {
+        const newBlock = JSON.parse(JSON.stringify(me.block));
+        newBlock.replication = undefined;
+        newBlock.isLoading = false;
+        this.replicationIndex = this.replicationIndex + 1;
+        if ((index + 1) % columns !== 0) {
+          var _me$block$replication2;
+          if ((_me$block$replication2 = me.block.replication) !== null && _me$block$replication2 !== void 0 && (_me$block$replication2 = _me$block$replication2.horizontalMargin) !== null && _me$block$replication2 !== void 0 && _me$block$replication2.value) {
+            var _me$block$replication3, _me$block$replication4;
+            newBlock.left = (_me$block$replication3 = me.block.replication) === null || _me$block$replication3 === void 0 || (_me$block$replication3 = _me$block$replication3.horizontalMargin) === null || _me$block$replication3 === void 0 ? void 0 : _me$block$replication3.value;
+            newBlock.sizeTypes.left = ((_me$block$replication4 = me.block.replication) === null || _me$block$replication4 === void 0 || (_me$block$replication4 = _me$block$replication4.horizontalMargin) === null || _me$block$replication4 === void 0 ? void 0 : _me$block$replication4.type) || SizeTypes["a" /* SizeTypes */].PIXEL;
+          } else {
+            newBlock.left = 0;
+          }
+          newBlock.stickyTo = {
+            type: 'left',
+            guid: lastGuid
+          };
+          if (row > 0) {
+            var _me$block$replication5;
+            let previousRowBlockGuid = rowGuids[row - 1][index % columns + 1];
+            newBlock.replication = {};
+            newBlock.replication.topBlockGuid = previousRowBlockGuid;
+            if ((_me$block$replication5 = me.block.replication) !== null && _me$block$replication5 !== void 0 && (_me$block$replication5 = _me$block$replication5.verticalMargin) !== null && _me$block$replication5 !== void 0 && _me$block$replication5.value) {
+              var _me$block$replication6, _me$block$replication7;
+              newBlock.replication.verticalMargin = `${(_me$block$replication6 = me.block.replication) === null || _me$block$replication6 === void 0 || (_me$block$replication6 = _me$block$replication6.verticalMargin) === null || _me$block$replication6 === void 0 ? void 0 : _me$block$replication6.value}${((_me$block$replication7 = me.block.replication) === null || _me$block$replication7 === void 0 || (_me$block$replication7 = _me$block$replication7.verticalMargin) === null || _me$block$replication7 === void 0 ? void 0 : _me$block$replication7.type) || SizeTypes["a" /* SizeTypes */].PIXEL}`;
+            }
+          }
+          lastGuid = me.getStore().add(newBlock);
+        } else {
+          var _me$block$replication8;
+          row++;
+          if ((_me$block$replication8 = me.block.replication) !== null && _me$block$replication8 !== void 0 && (_me$block$replication8 = _me$block$replication8.verticalMargin) !== null && _me$block$replication8 !== void 0 && _me$block$replication8.value) {
+            var _me$block$replication9, _me$block$replication10;
+            newBlock.top = (_me$block$replication9 = me.block.replication) === null || _me$block$replication9 === void 0 || (_me$block$replication9 = _me$block$replication9.verticalMargin) === null || _me$block$replication9 === void 0 ? void 0 : _me$block$replication9.value;
+            newBlock.sizeTypes.top = ((_me$block$replication10 = me.block.replication) === null || _me$block$replication10 === void 0 || (_me$block$replication10 = _me$block$replication10.verticalMargin) === null || _me$block$replication10 === void 0 ? void 0 : _me$block$replication10.type) || SizeTypes["a" /* SizeTypes */].PIXEL;
+          } else {
+            newBlock.top = 0;
+          }
+          newBlock.stickyTo = {
+            type: 'top',
+            guid: lastGuid
+          };
+          lastGuid = me.getStore().add(newBlock);
+        }
+        if (typeof rowGuids[row] === 'undefined') {
+          rowGuids[row] = [];
+        }
+        rowGuids[row].push(lastGuid);
+      });
+      this.getStore().removeListener(listenerGuid);
+      this.block.isLoading = false;
+    }
+  }
+});
+// EXTERNAL MODULE: ./src/domain/model/Sticky.ts
+var Sticky = __webpack_require__("e920");
+
+// EXTERNAL MODULE: ./src/application/service/BlockManager.ts + 3 modules
+var BlockManager = __webpack_require__("c8f9");
+
+// EXTERNAL MODULE: ./src/domain/model/StickyTo.ts
+var StickyTo = __webpack_require__("1d16");
+
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.set.difference.v2.js
 var es_set_difference_v2 = __webpack_require__("1e70");
 
@@ -18822,8 +18921,9 @@ var es_set_union_v2 = __webpack_require__("72c3");
 class StickyManager_StickyManager {
   constructor() {
     this.blocks = new Map();
+    this.dependentsMap = new Map();
+    this.elementToGuidMap = new Map();
     this.resizeObservers = new Map();
-    this.ticking = false;
   }
   addBlock({
     element,
@@ -18839,93 +18939,360 @@ class StickyManager_StickyManager {
       offset,
       guid
     });
-    // Add resize observer
-    const resizeObserver = new ResizeObserver_es["a" /* default */](() => {
-      this.updateOne(guid);
-    });
-    resizeObserver.observe(stickyTo);
-    this.resizeObservers.set(guid, resizeObserver);
-    // Optional: immediately update position
+    this.elementToGuidMap.set(element, guid);
+    if (!this.elementToGuidMap.has(stickyTo)) {
+      const stickyToGuid = `__external__-${Math.random().toString(36).slice(2)}`;
+      this.elementToGuidMap.set(stickyTo, stickyToGuid);
+    }
+    const stickyToGuid = this.elementToGuidMap.get(stickyTo);
+    if (stickyToGuid) {
+      if (!this.dependentsMap.has(stickyToGuid)) {
+        this.dependentsMap.set(stickyToGuid, new Set());
+      }
+      this.dependentsMap.get(stickyToGuid).add(guid);
+    }
+    // Подключаем ResizeObserver только один раз на stickyTo
+    if (!this.resizeObservers.has(stickyTo)) {
+      const observer = new ResizeObserver_es["a" /* default */](() => {
+        const observedGuid = this.elementToGuidMap.get(stickyTo);
+        if (observedGuid) {
+          this.updateDependentsRecursively(observedGuid);
+        } else {
+          console.log('NOT FOUND');
+        }
+      });
+      observer.observe(stickyTo);
+      this.resizeObservers.set(stickyTo, observer);
+    }
     this.updateOne(guid);
   }
   removeBlock(guid) {
+    const block = this.blocks.get(guid);
+    if (!block) return;
     this.blocks.delete(guid);
-    const observer = this.resizeObservers.get(guid);
-    if (observer) {
-      observer.disconnect();
-      this.resizeObservers.delete(guid);
+    this.elementToGuidMap.delete(block.element);
+    // Удаляем из карты зависимостей
+    for (const dependents of this.dependentsMap.values()) {
+      dependents.delete(guid);
     }
-  }
-  updateAll() {
-    const sorted = this.topologicalSort();
-    for (const guid of sorted) {
-      this.updateOne(guid);
+    this.dependentsMap.delete(guid);
+    // Удаляем observer, если никто больше не использует stickyTo
+    const stillUsed = [...this.blocks.values()].some(b => b.stickyTo === block.stickyTo && b.guid !== guid);
+    if (!stillUsed) {
+      const observer = this.resizeObservers.get(block.stickyTo);
+      if (observer) {
+        observer.disconnect();
+        this.resizeObservers.delete(block.stickyTo);
+      }
     }
   }
   updateOne(guid) {
-    const data = this.blocks.get(guid);
-    if (!data) return;
+    const block = this.blocks.get(guid);
+    if (!block) return;
     const {
       element,
       stickyTo,
-      type
-    } = data;
-    const top = `calc(${stickyTo.style.top || 0} + ${stickyTo.style.height})`;
-    const left = `calc(${stickyTo.style.left} + ${stickyTo.style.width})`;
+      type,
+      offset
+    } = block;
+    const {
+      width,
+      height
+    } = stickyTo.getBoundingClientRect();
+    const top = `calc(${stickyTo.style.top || 0} + ${height}px + ${offset})`;
+    const left = `calc(${stickyTo.style.left || 0} + ${width}px + ${offset})`;
     if (type === StickyTo["a" /* StickyToType */].TOP) {
-      console.log(top);
       element.style.top = top;
     } else if (type === StickyTo["a" /* StickyToType */].LEFT) {
       element.style.left = left;
     }
   }
-  bindScrollAndResize(container = window) {
-    const handler = () => {
-      if (!this.ticking) {
-        requestAnimationFrame(() => {
-          this.updateAll();
-          this.ticking = false;
-        });
-        this.ticking = true;
-      }
-    };
-    container.addEventListener('scroll', handler, {
-      passive: true
-    });
-    container.addEventListener('resize', handler, {
-      passive: true
-    });
-    window.addEventListener('resize', handler);
-  }
-  topologicalSort() {
+  updateDependentsRecursively(guid) {
+    if (!guid) return;
+    const stack = [guid];
     const visited = new Set();
-    const sorted = [];
-    const visit = (guid, stack = new Set()) => {
-      var _find;
-      if (stack.has(guid)) {
-        console.warn('Цикл в зависимости прилипания!', [...stack, guid]);
-        return;
+    while (stack.length > 0) {
+      const current = stack.pop();
+      if (visited.has(current)) continue;
+      visited.add(current);
+      const dependents = this.dependentsMap.get(current);
+      if (dependents) {
+        for (const dep of dependents) {
+          this.updateOne(dep);
+          stack.push(dep);
+        }
       }
-      if (visited.has(guid)) return;
-      const block = this.blocks.get(guid);
-      if (!block) return;
-      stack.add(guid);
-      const stickyToGuid = (_find = [...this.blocks.values()].find(b => b.element === block.stickyTo)) === null || _find === void 0 ? void 0 : _find.guid;
-      if (stickyToGuid) {
-        visit(stickyToGuid, new Set(stack));
-      }
-      visited.add(guid);
-      sorted.push(guid);
-    };
-    for (const guid of this.blocks.keys()) {
-      visit(guid);
     }
-    return sorted;
+  }
+  updateAll() {
+    for (const guid of this.blocks.keys()) {
+      this.updateOne(guid);
+    }
   }
 }
 const stickyManager = new StickyManager_StickyManager();
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--15-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--15-3!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/ppp_old.vue?vue&type=script&lang=ts
+// CONCATENATED MODULE: ./src/infrastructure/components/mixins/StyleMixin.js
 
+
+
+
+
+/* harmony default export */ var StyleMixin = ({
+  data() {
+    return {
+      parentBlock: undefined,
+      parentElement: undefined,
+      stickyToBlock: undefined,
+      stickyToElement: undefined
+    };
+  },
+  beforeDestroy() {
+    stickyManager.removeBlock(this.block.guid);
+  },
+  mounted() {
+    this.$nextTick(() => {
+      var _this$block;
+      this.setSticky((_this$block = this.block) === null || _this$block === void 0 || (_this$block = _this$block.stickyTo) === null || _this$block === void 0 ? void 0 : _this$block.guid);
+    });
+  },
+  computed: {
+    zIndex() {
+      var _this$block$tabs2;
+      // console.count(`zIndex ${this.block.guid}`)
+      const startIndex = 101;
+      if (!this.block.parentGuid) {
+        var _this$block$tabs;
+        return startIndex + ((_this$block$tabs = this.block.tabs) !== null && _this$block$tabs !== void 0 && _this$block$tabs.use ? 1 : 0);
+      }
+      let parentRef = this.getStore().getRefByGuid(this.block.parentGuid);
+      if (!parentRef) {
+        return startIndex;
+      }
+      return parentRef.zIndex + 1 + ((_this$block$tabs2 = this.block.tabs) !== null && _this$block$tabs2 !== void 0 && _this$block$tabs2.use ? 1 : 0);
+    },
+    defaultPosition() {
+      // console.count(`defaultPosition ${this.block.guid}`)
+      let position = {};
+      let top;
+      let left;
+      let width = null;
+      let height = null;
+      switch (this.block.sticky) {
+        case Sticky["a" /* Sticky */].TL:
+          top = this.block.top + this.block.sizeTypes.top;
+          left = this.block.left + this.block.sizeTypes.left;
+          if (this.block.parentGuid) {
+            if (typeof this.parentBlock !== 'undefined') {
+              if (this.parentBlock.isStretched && this.isTabsContainer) {
+                // Если this.isTabsContainer === false
+                // и чекбокс "Растягиваемый" включен у дочернего блока, то поля в дочернем блоке пропадают (width = 0px)
+                const parentSizes = BlockManager["a" /* default */].getAbsoluteSizesByParent(this.parentBlock, this.parentElement);
+                if (this.block.sizeTypes.top === SizeTypes["a" /* SizeTypes */].PERCENT) {
+                  top = `${parentSizes.height / 100 * (this.block.top || 0)}px`;
+                  height = `${parentSizes.height / 100 * this.block.height}px`;
+                }
+                if (this.block.sizeTypes.left === SizeTypes["a" /* SizeTypes */].PERCENT) {
+                  left = `${parentSizes.width / 100 * (this.block.left || 0)}px`;
+                  width = `${parentSizes.width / 100 * this.block.width}px`;
+                }
+              }
+            }
+          }
+          position = {
+            top: top,
+            left: left
+          };
+          break;
+        case Sticky["a" /* Sticky */].TR:
+          position = {
+            top: this.block.top + this.block.sizeTypes.top,
+            right: this.block.right + this.block.sizeTypes.right
+          };
+          break;
+        case Sticky["a" /* Sticky */].BL:
+          position = {
+            bottom: this.block.bottom + this.block.sizeTypes.bottom,
+            left: this.block.left + this.block.sizeTypes.left
+          };
+          break;
+        case Sticky["a" /* Sticky */].BR:
+          position = {
+            bottom: this.block.bottom + this.block.sizeTypes.bottom,
+            right: this.block.right + this.block.sizeTypes.right
+          };
+          break;
+        default:
+          position = {
+            top: this.block.top + this.block.sizeTypes.top,
+            left: this.block.left + this.block.sizeTypes.left
+          };
+          break;
+      }
+      return {
+        position,
+        width,
+        height
+      };
+    },
+    positionStyle: function () {
+      var _this$block$replicati, _this$block$stickyTo3, _this$block$onCenter, _this$block$stickyTo4, _this$block$onCenter2, _this$block$stickyTo5, _this$block$onCenter3, _this$block$stickyTo6;
+      // console.count(`positionStyle ${this.block.guid}`)
+
+      let height = this.block.height + this.block.sizeTypes.height;
+      let width = this.block.width + this.block.sizeTypes.width;
+      let {
+        position,
+        width: _width,
+        height: _height
+      } = this.defaultPosition;
+      if (_width !== null) {
+        width = _width;
+      }
+      if (_height !== null) {
+        height = _height;
+      }
+      if (this.block.isHidden) {
+        var _this$block$stickyTo, _this$block$stickyTo2;
+        if ((_this$block$stickyTo = this.block.stickyTo) !== null && _this$block$stickyTo !== void 0 && _this$block$stickyTo.guid && (_this$block$stickyTo2 = this.block.stickyTo) !== null && _this$block$stickyTo2 !== void 0 && _this$block$stickyTo2.type) {
+          if (this.block.stickyTo.type === StickyTo["a" /* StickyToType */].TOP) {
+            position.top = '0px';
+          } else if (this.block.stickyTo.type === StickyTo["a" /* StickyToType */].LEFT) {
+            position.left = '0px';
+          }
+        }
+      }
+      if ((_this$block$replicati = this.block.replication) !== null && _this$block$replicati !== void 0 && _this$block$replicati.topBlockGuid) {
+        var _this$block$replicati2;
+        const stickyToElement = this.getStore().getRefByGuid((_this$block$replicati2 = this.block.replication) === null || _this$block$replicati2 === void 0 ? void 0 : _this$block$replicati2.topBlockGuid);
+        if (stickyToElement) {
+          var _this$block$replicati3;
+          position.top = `calc(${stickyToElement.positionStyle.height} + ${stickyToElement.positionStyle.top} + ${(_this$block$replicati3 = this.block.replication) === null || _this$block$replicati3 === void 0 ? void 0 : _this$block$replicati3.verticalMargin})`;
+        }
+      }
+      if (this.block.widthCalc && this.block.widthCalc.type && this.block.widthCalc.value) {
+        width = `calc(${width} ${this.block.widthCalc.type} ${this.block.widthCalc.value}px)`;
+      }
+      if (this.block.heightCalc && this.block.heightCalc.type && this.block.heightCalc.value) {
+        height = `calc(${height} ${this.block.heightCalc.type} ${this.block.heightCalc.value}px)`;
+      }
+      if (this.block.isStretched) {
+        position = Object.assign(position, {
+          minWidth: width,
+          minHeight: height,
+          height: this.scrollHeight + 'px',
+          width: this.scrollWidth + 'px'
+        });
+      } else {
+        var _this$block$minMax, _this$block$minMax2, _this$block$minMax3, _this$block$minMax4;
+        if ((_this$block$minMax = this.block.minMax) !== null && _this$block$minMax !== void 0 && _this$block$minMax.minWidth && this.block.sizeTypes.width === SizeTypes["a" /* SizeTypes */].PERCENT) {
+          position = Object.assign(position, {
+            minWidth: `${this.block.minMax.minWidth}px`
+          });
+        }
+        if ((_this$block$minMax2 = this.block.minMax) !== null && _this$block$minMax2 !== void 0 && _this$block$minMax2.maxWidth && this.block.sizeTypes.width === SizeTypes["a" /* SizeTypes */].PERCENT) {
+          position = Object.assign(position, {
+            maxWidth: `${this.block.minMax.maxWidth}px`
+          });
+        }
+        if ((_this$block$minMax3 = this.block.minMax) !== null && _this$block$minMax3 !== void 0 && _this$block$minMax3.minHeight && this.block.sizeTypes.height === SizeTypes["a" /* SizeTypes */].PERCENT) {
+          position = Object.assign(position, {
+            minHeight: `${this.block.minMax.minHeight}px`
+          });
+        }
+        if ((_this$block$minMax4 = this.block.minMax) !== null && _this$block$minMax4 !== void 0 && _this$block$minMax4.maxHeight && this.block.sizeTypes.height === SizeTypes["a" /* SizeTypes */].PERCENT) {
+          position = Object.assign(position, {
+            maxHeight: `${this.block.minMax.maxHeight}px`
+          });
+        }
+        position = Object.assign(position, {
+          width: width,
+          height: height
+        });
+      }
+      if (this.block.isHidden) {
+        position.width = '0px';
+        position.height = '0px';
+      }
+      if (!((_this$block$stickyTo3 = this.block.stickyTo) !== null && _this$block$stickyTo3 !== void 0 && _this$block$stickyTo3.guid) && (_this$block$onCenter = this.block.onCenter) !== null && _this$block$onCenter !== void 0 && _this$block$onCenter.horizontal && this.isShowing) {
+        const refBlock = this.getStore().getRefByGuid(this.block.guid);
+        // Для элементов с display:none offsetWidth равен нулю
+        if (refBlock && refBlock.$el.offsetWidth) {
+          if (this.block.sticky === Sticky["a" /* Sticky */].BL || this.block.sticky === Sticky["a" /* Sticky */].TL) {
+            position.left = `calc(50% - calc(${refBlock.$el.offsetWidth}px / 2))`;
+          } else {
+            position.right = `calc(50% - calc(${refBlock.$el.offsetWidth}px / 2))`;
+          }
+        }
+      }
+      // центрировать горизонтально (адаптивно)
+      if (!((_this$block$stickyTo4 = this.block.stickyTo) !== null && _this$block$stickyTo4 !== void 0 && _this$block$stickyTo4.guid) && (_this$block$onCenter2 = this.block.onCenter) !== null && _this$block$onCenter2 !== void 0 && _this$block$onCenter2.horizontalAdaptive && this.isShowing) {
+        const refBlock = this.getStore().getRefByGuid(this.block.guid);
+        // Для элементов с display:none offsetWidth равен нулю
+        if (refBlock && refBlock.$el.offsetWidth) {
+          position.marginLeft = 'auto';
+          position.marginLeft = 'auto';
+          position.marginRight = 'auto';
+          position.left = '0';
+          position.right = '0';
+        }
+      }
+      if (!((_this$block$stickyTo5 = this.block.stickyTo) !== null && _this$block$stickyTo5 !== void 0 && _this$block$stickyTo5.guid) && (_this$block$onCenter3 = this.block.onCenter) !== null && _this$block$onCenter3 !== void 0 && _this$block$onCenter3.vertical && this.isShowing) {
+        const refBlock = this.getStore().getRefByGuid(this.block.guid);
+        if (refBlock) {
+          if (this.block.sticky === Sticky["a" /* Sticky */].TR || this.block.sticky === Sticky["a" /* Sticky */].TL) {
+            position.top = `calc(50% - calc(${refBlock.$el.offsetHeight}px / 2))`;
+          } else {
+            position.bottom = `calc(50% - calc(${refBlock.$el.offsetHeight}px / 2))`;
+          }
+        }
+      }
+      if ((_this$block$stickyTo6 = this.block.stickyTo) !== null && _this$block$stickyTo6 !== void 0 && _this$block$stickyTo6.guid) {
+        delete position.top;
+      }
+      return Object.assign(position, {
+        zIndex: this.zIndex
+      });
+    },
+    isTabsContainer() {
+      var _this$block$tabs3;
+      return ((_this$block$tabs3 = this.block.tabs) === null || _this$block$tabs3 === void 0 ? void 0 : _this$block$tabs3.use) || false;
+    }
+  },
+  methods: {
+    setSticky(guid) {
+      if (guid) {
+        var _this$block$stickyTo7, _this$block$stickyTo8;
+        this.stickyToBlock = this.getStore().getByGuid(guid);
+        this.stickyToElement = this.getStore().getRefByGuid(guid);
+        let stickyOffset = '';
+        switch ((_this$block$stickyTo7 = this.block.stickyTo) === null || _this$block$stickyTo7 === void 0 ? void 0 : _this$block$stickyTo7.type) {
+          case StickyTo["a" /* StickyToType */].TOP:
+            stickyOffset = this.block.top + this.block.sizeTypes.top;
+            break;
+          case StickyTo["a" /* StickyToType */].LEFT:
+            stickyOffset = this.block.left + this.block.sizeTypes.left;
+            break;
+        }
+        stickyManager.addBlock({
+          guid: this.block.guid,
+          stickyTo: this.stickyToElement.$el,
+          element: this.$refs.draggableContainer,
+          type: ((_this$block$stickyTo8 = this.block.stickyTo) === null || _this$block$stickyTo8 === void 0 ? void 0 : _this$block$stickyTo8.type) || StickyTo["a" /* StickyToType */].TOP,
+          offset: stickyOffset
+        });
+      } else {
+        this.stickyToBlock = undefined;
+        this.stickyToElement = undefined;
+      }
+    },
+    setParent() {
+      var _this$$parent;
+      this.parentBlock = this.block.parentGuid ? this.getStore().getByGuid(this.block.parentGuid) : undefined;
+      this.parentElement = this.block.parentGuid ? (_this$$parent = this.$parent) === null || _this$$parent === void 0 ? void 0 : _this$$parent.$refs.draggableContainer : undefined;
+    }
+  }
+});
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--15-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--15-3!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/PreviewBlock.vue?vue&type=script&lang=ts
 
 
 
@@ -18937,13 +19304,9 @@ const stickyManager = new StickyManager_StickyManager();
 
 
 
-
-
-
-
 const Vue = external_commonjs_vue_commonjs2_vue_root_Vue_default.a;
 fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_es["a" /* faAngleDown */], free_solid_svg_icons_index_es["c" /* faChevronRight */], free_solid_svg_icons_index_es["b" /* faChevronLeft */]);
-/* harmony default export */ var ppp_oldvue_type_script_lang_ts = (Vue.extend({
+/* harmony default export */ var PreviewBlockvue_type_script_lang_ts = (Vue.extend({
   name: 'PreviewBlock',
   components: {
     FontAwesomeIcon: index_es["a" /* FontAwesomeIcon */]
@@ -18956,12 +19319,11 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
       default: null
     }
   },
-  mixins: [StretchedMixin],
+  mixins: [StretchedMixin, ReplicationMixin, StyleMixin],
   props: {
     block: {
       type: BlockDTO["a" /* default */]
     },
-    replicationCallback: Function,
     isShowing: {
       type: Boolean,
       default: true
@@ -18972,32 +19334,14 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
   },
   data() {
     return {
-      parentBlock: undefined,
-      parentElement: undefined,
-      scrollHeight: undefined,
-      scrollWidth: undefined,
       activeTabGuid: undefined,
-      replicationIndex: 0,
       tabsOffset: 0,
       blockWidth: 0,
       tabsWidth: 0,
       isShowArrows: false,
       visitedTabGuids: [],
-      stickyToBlock: undefined,
-      stickyToElement: undefined,
-      prepareReplication: () => {},
       activeBlockGuid: ''
     };
-  },
-  created() {
-    let me = this;
-    this.prepareReplication = debounce(this._prepareReplication, 300, () => {
-      var _this$block$replicati;
-      if (!((_this$block$replicati = this.block.replication) !== null && _this$block$replicati !== void 0 && _this$block$replicati.function)) {
-        return;
-      }
-      me.block.isLoading = true;
-    });
   },
   computed: {
     // список потомков у контейнера
@@ -19101,199 +19445,6 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
       var _this$block$tabs, _this$block$tabs2;
       return ((_this$block$tabs = this.block.tabs) === null || _this$block$tabs === void 0 ? void 0 : _this$block$tabs.position) === 'left' || ((_this$block$tabs2 = this.block.tabs) === null || _this$block$tabs2 === void 0 ? void 0 : _this$block$tabs2.position) === 'right';
     },
-    zIndex() {
-      var _this$block$tabs4;
-      const startIndex = 101;
-      if (!this.block.parentGuid) {
-        var _this$block$tabs3;
-        return startIndex + ((_this$block$tabs3 = this.block.tabs) !== null && _this$block$tabs3 !== void 0 && _this$block$tabs3.use ? 1 : 0);
-      }
-      let parentRef = this.getStore().getRefByGuid(this.block.parentGuid);
-      if (!parentRef) {
-        return startIndex;
-      }
-      return parentRef.zIndex + 1 + ((_this$block$tabs4 = this.block.tabs) !== null && _this$block$tabs4 !== void 0 && _this$block$tabs4.use ? 1 : 0);
-    },
-    isTabsContainer() {
-      var _this$block$tabs5;
-      return ((_this$block$tabs5 = this.block.tabs) === null || _this$block$tabs5 === void 0 ? void 0 : _this$block$tabs5.use) || false;
-    },
-    positionStyle() {
-      var _this$block$replicati2, _this$block$stickyTo3, _this$block$onCenter, _this$block$stickyTo4, _this$block$onCenter2, _this$block$stickyTo5, _this$block$onCenter3, _this$block6;
-      let position = {};
-      let top;
-      let left;
-      let height = this.block.height + this.block.sizeTypes.height;
-      let width = this.block.width + this.block.sizeTypes.width;
-      switch (this.block.sticky) {
-        case Sticky["a" /* Sticky */].TL:
-          top = this.block.top + this.block.sizeTypes.top;
-          left = this.block.left + this.block.sizeTypes.left;
-          if (this.block.parentGuid) {
-            if (typeof this.parentBlock !== 'undefined') {
-              if (this.parentBlock.isStretched && this.isTabsContainer) {
-                // Если this.isTabsContainer === false
-                // и чекбокс "Растягиваемый" включен у дочернего блока, то поля в дочернем блоке пропадают (width = 0px)
-                const parentSizes = BlockManager["a" /* default */].getAbsoluteSizesByParent(this.parentBlock, this.parentElement);
-                if (this.block.sizeTypes.top === SizeTypes["a" /* SizeTypes */].PERCENT) {
-                  top = `${parentSizes.height / 100 * (this.block.top || 0)}px`;
-                  height = `${parentSizes.height / 100 * this.block.height}px`;
-                }
-                if (this.block.sizeTypes.left === SizeTypes["a" /* SizeTypes */].PERCENT) {
-                  left = `${parentSizes.width / 100 * (this.block.left || 0)}px`;
-                  width = `${parentSizes.width / 100 * this.block.width}px`;
-                }
-              }
-            }
-          }
-          position = {
-            top: top,
-            left: left
-          };
-          break;
-        case Sticky["a" /* Sticky */].TR:
-          position = {
-            top: this.block.top + this.block.sizeTypes.top,
-            right: this.block.right + this.block.sizeTypes.right
-          };
-          break;
-        case Sticky["a" /* Sticky */].BL:
-          position = {
-            bottom: this.block.bottom + this.block.sizeTypes.bottom,
-            left: this.block.left + this.block.sizeTypes.left
-          };
-          break;
-        case Sticky["a" /* Sticky */].BR:
-          position = {
-            bottom: this.block.bottom + this.block.sizeTypes.bottom,
-            right: this.block.right + this.block.sizeTypes.right
-          };
-          break;
-        default:
-          position = {
-            top: this.block.top + this.block.sizeTypes.top,
-            left: this.block.left + this.block.sizeTypes.left
-          };
-          break;
-      }
-      if (this.block.isHidden) {
-        var _this$block$stickyTo, _this$block$stickyTo2;
-        if ((_this$block$stickyTo = this.block.stickyTo) !== null && _this$block$stickyTo !== void 0 && _this$block$stickyTo.guid && (_this$block$stickyTo2 = this.block.stickyTo) !== null && _this$block$stickyTo2 !== void 0 && _this$block$stickyTo2.type) {
-          if (this.block.stickyTo.type === StickyTo["a" /* StickyToType */].TOP) {
-            position.top = '0px';
-          } else if (this.block.stickyTo.type === StickyTo["a" /* StickyToType */].LEFT) {
-            position.left = '0px';
-          }
-        }
-      }
-      if ((_this$block$replicati2 = this.block.replication) !== null && _this$block$replicati2 !== void 0 && _this$block$replicati2.topBlockGuid) {
-        var _this$block$replicati3;
-        const stickyToElement = this.getStore().getRefByGuid((_this$block$replicati3 = this.block.replication) === null || _this$block$replicati3 === void 0 ? void 0 : _this$block$replicati3.topBlockGuid);
-        if (stickyToElement) {
-          var _this$block$replicati4;
-          position.top = `calc(${stickyToElement.positionStyle.height} + ${stickyToElement.positionStyle.top} + ${(_this$block$replicati4 = this.block.replication) === null || _this$block$replicati4 === void 0 ? void 0 : _this$block$replicati4.verticalMargin})`;
-        }
-      }
-      /* if (this.block.stickyTo?.guid && this.block.stickyTo?.type && this.stickyToBlock?.guid) {
-        const stickyToBlock = this.stickyToBlock
-        const stickyToElement = this.stickyToElement
-        if (stickyToBlock && stickyToBlock.parentGuid === this.block.parentGuid && stickyToElement) {
-          switch (this.block.stickyTo.type) {
-            case StickyToType.TOP:
-              position.top =
-                  `calc(${stickyToElement.positionStyle.height} + ${stickyToElement.positionStyle.top} + ${position.top})`
-              break
-            case StickyToType.LEFT:
-              position.left =
-                  `calc(${stickyToElement.positionStyle.width} + ${stickyToElement.positionStyle.left} + ${position.left})`
-              break
-          }
-        }
-      } */
-      if (this.block.widthCalc && this.block.widthCalc.type && this.block.widthCalc.value) {
-        width = `calc(${width} ${this.block.widthCalc.type} ${this.block.widthCalc.value}px)`;
-      }
-      if (this.block.heightCalc && this.block.heightCalc.type && this.block.heightCalc.value) {
-        height = `calc(${height} ${this.block.heightCalc.type} ${this.block.heightCalc.value}px)`;
-      }
-      if (this.block.isStretched) {
-        position = Object.assign(position, {
-          minWidth: width,
-          minHeight: height,
-          height: this.scrollHeight + 'px',
-          width: this.scrollWidth + 'px'
-        });
-      } else {
-        var _this$block$minMax, _this$block$minMax2, _this$block$minMax3, _this$block$minMax4;
-        if ((_this$block$minMax = this.block.minMax) !== null && _this$block$minMax !== void 0 && _this$block$minMax.minWidth && this.block.sizeTypes.width === SizeTypes["a" /* SizeTypes */].PERCENT) {
-          position = Object.assign(position, {
-            minWidth: `${this.block.minMax.minWidth}px`
-          });
-        }
-        if ((_this$block$minMax2 = this.block.minMax) !== null && _this$block$minMax2 !== void 0 && _this$block$minMax2.maxWidth && this.block.sizeTypes.width === SizeTypes["a" /* SizeTypes */].PERCENT) {
-          position = Object.assign(position, {
-            maxWidth: `${this.block.minMax.maxWidth}px`
-          });
-        }
-        if ((_this$block$minMax3 = this.block.minMax) !== null && _this$block$minMax3 !== void 0 && _this$block$minMax3.minHeight && this.block.sizeTypes.height === SizeTypes["a" /* SizeTypes */].PERCENT) {
-          position = Object.assign(position, {
-            minHeight: `${this.block.minMax.minHeight}px`
-          });
-        }
-        if ((_this$block$minMax4 = this.block.minMax) !== null && _this$block$minMax4 !== void 0 && _this$block$minMax4.maxHeight && this.block.sizeTypes.height === SizeTypes["a" /* SizeTypes */].PERCENT) {
-          position = Object.assign(position, {
-            maxHeight: `${this.block.minMax.maxHeight}px`
-          });
-        }
-        position = Object.assign(position, {
-          width: width,
-          height: height
-        });
-      }
-      if (this.block.isHidden) {
-        position.width = '0px';
-        position.height = '0px';
-      }
-      if (!((_this$block$stickyTo3 = this.block.stickyTo) !== null && _this$block$stickyTo3 !== void 0 && _this$block$stickyTo3.guid) && (_this$block$onCenter = this.block.onCenter) !== null && _this$block$onCenter !== void 0 && _this$block$onCenter.horizontal && this.isShowing) {
-        const refBlock = this.getStore().getRefByGuid(this.block.guid);
-        // Для элементов с display:none offsetWidth равен нулю
-        if (refBlock && refBlock.$el.offsetWidth) {
-          if (this.block.sticky === Sticky["a" /* Sticky */].BL || this.block.sticky === Sticky["a" /* Sticky */].TL) {
-            position.left = `calc(50% - calc(${refBlock.$el.offsetWidth}px / 2))`;
-          } else {
-            position.right = `calc(50% - calc(${refBlock.$el.offsetWidth}px / 2))`;
-          }
-        }
-      }
-      // центрировать горизонтально (адаптивно)
-      if (!((_this$block$stickyTo4 = this.block.stickyTo) !== null && _this$block$stickyTo4 !== void 0 && _this$block$stickyTo4.guid) && (_this$block$onCenter2 = this.block.onCenter) !== null && _this$block$onCenter2 !== void 0 && _this$block$onCenter2.horizontalAdaptive && this.isShowing) {
-        const refBlock = this.getStore().getRefByGuid(this.block.guid);
-        // Для элементов с display:none offsetWidth равен нулю
-        if (refBlock && refBlock.$el.offsetWidth) {
-          position.marginLeft = 'auto';
-          position.marginLeft = 'auto';
-          position.marginRight = 'auto';
-          position.left = '0';
-          position.right = '0';
-        }
-      }
-      if (!((_this$block$stickyTo5 = this.block.stickyTo) !== null && _this$block$stickyTo5 !== void 0 && _this$block$stickyTo5.guid) && (_this$block$onCenter3 = this.block.onCenter) !== null && _this$block$onCenter3 !== void 0 && _this$block$onCenter3.vertical && this.isShowing) {
-        const refBlock = this.getStore().getRefByGuid(this.block.guid);
-        if (refBlock) {
-          if (this.block.sticky === Sticky["a" /* Sticky */].TR || this.block.sticky === Sticky["a" /* Sticky */].TL) {
-            position.top = `calc(50% - calc(${refBlock.$el.offsetHeight}px / 2))`;
-          } else {
-            position.bottom = `calc(50% - calc(${refBlock.$el.offsetHeight}px / 2))`;
-          }
-        }
-      }
-      if ((_this$block6 = this.block) !== null && _this$block6 !== void 0 && (_this$block6 = _this$block6.stickyTo) !== null && _this$block6 !== void 0 && _this$block6.guid) {
-        delete position.top;
-      }
-      return Object.assign(position, {
-        zIndex: this.zIndex
-      });
-    },
     blockTabStyle() {
       let style = '';
       if (this.block.tabs) {
@@ -19325,8 +19476,8 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
       return isShow;
     },
     isActiveScrollHover() {
-      var _this$block7;
-      return !!((_this$block7 = this.block) !== null && _this$block7 !== void 0 && _this$block7.isScrollHover);
+      var _this$block6;
+      return !!((_this$block6 = this.block) !== null && _this$block6 !== void 0 && _this$block6.isScrollHover);
     }
   },
   watch: {
@@ -19346,17 +19497,15 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
     }
   },
   mounted() {
-    var _this$block9, _this$block10, _this$block11;
+    var _this$block7, _this$block8, _this$block9;
     this.setParent();
     this.$nextTick(() => {
-      var _this$block8;
       this.setStretchedSize();
-      this.setSticky((_this$block8 = this.block) === null || _this$block8 === void 0 || (_this$block8 = _this$block8.stickyTo) === null || _this$block8 === void 0 ? void 0 : _this$block8.guid);
       if (this.isTabsContainer) {
         this.setIsShowArrows();
       }
     });
-    if ((_this$block9 = this.block) !== null && _this$block9 !== void 0 && (_this$block9 = _this$block9.tabs) !== null && _this$block9 !== void 0 && _this$block9.use && ((_this$block10 = this.block) === null || _this$block10 === void 0 || (_this$block10 = _this$block10.tabs) === null || _this$block10 === void 0 || (_this$block10 = _this$block10.list) === null || _this$block10 === void 0 ? void 0 : _this$block10.length) > 0) {
+    if ((_this$block7 = this.block) !== null && _this$block7 !== void 0 && (_this$block7 = _this$block7.tabs) !== null && _this$block7 !== void 0 && _this$block7.use && ((_this$block8 = this.block) === null || _this$block8 === void 0 || (_this$block8 = _this$block8.tabs) === null || _this$block8 === void 0 || (_this$block8 = _this$block8.list) === null || _this$block8 === void 0 ? void 0 : _this$block8.length) > 0) {
       if (this.block.tabs.saveActiveTab && this.block.tabs.activeGuid) {
         this.onTabClick(this.block.tabs.activeGuid || this.availableTabs[0].guid);
       } else {
@@ -19368,7 +19517,7 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
         this.onTabClick(defaultTab);
       }
     }
-    if ((_this$block11 = this.block) !== null && _this$block11 !== void 0 && _this$block11.isStretched && this.$refs.container && this.$refs.container instanceof Element) {
+    if ((_this$block9 = this.block) !== null && _this$block9 !== void 0 && _this$block9.isStretched && this.$refs.container && this.$refs.container instanceof Element) {
       let children = this.$refs.container.children;
       const observer = new ResizeObserver_es["a" /* default */](() => {
         this.setStretchedSize();
@@ -19392,7 +19541,6 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
   },
   beforeDestroy() {
     this.getStore().removeRef(this.block.guid);
-    stickyManager.removeBlock(this.block.guid);
   },
   methods: {
     handleClick(event) {
@@ -19438,132 +19586,6 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
         return true;
       }
       return false;
-    },
-    setSticky(guid) {
-      if (guid) {
-        var _this$block$stickyTo6, _this$block$stickyTo7;
-        this.stickyToBlock = this.getStore().getByGuid(guid);
-        this.stickyToElement = this.getStore().getRefByGuid(guid);
-        let stickyOffset = '';
-        switch ((_this$block$stickyTo6 = this.block.stickyTo) === null || _this$block$stickyTo6 === void 0 ? void 0 : _this$block$stickyTo6.type) {
-          case StickyTo["a" /* StickyToType */].TOP:
-            stickyOffset = this.block.top + this.block.sizeTypes.top;
-            break;
-          case StickyTo["a" /* StickyToType */].LEFT:
-            stickyOffset = this.block.left + this.block.sizeTypes.left;
-            break;
-        }
-        stickyManager.addBlock({
-          guid: this.block.guid,
-          stickyTo: this.stickyToElement.$el,
-          element: this.$refs.draggableContainer,
-          type: ((_this$block$stickyTo7 = this.block.stickyTo) === null || _this$block$stickyTo7 === void 0 ? void 0 : _this$block$stickyTo7.type) || StickyTo["a" /* StickyToType */].TOP,
-          offset: stickyOffset
-        });
-        stickyManager.bindScrollAndResize(this.stickyToElement.$el);
-      } else {
-        this.stickyToBlock = undefined;
-        this.stickyToElement = undefined;
-      }
-    },
-    onReplicateBlock(event) {
-      if (this.replicationCallback) {
-        this.replicationCallback(Object.assign({}, event, {
-          replicationBlockGuid: this.block.guid,
-          replicationIndex: this.replicationIndex
-        }));
-      }
-    },
-    async _prepareReplication(offset = {}) {
-      var _this$block$replicati5, _me$block$replication;
-      if (!((_this$block$replicati5 = this.block.replication) !== null && _this$block$replicati5 !== void 0 && _this$block$replicati5.function)) {
-        this.block.isLoading = false;
-        return;
-      }
-      this.block.isLoading = true;
-      this.block.isHidden = false;
-      let blocksData = [];
-      try {
-        var _this$block$replicati6;
-        blocksData = await ((_this$block$replicati6 = this.block.replication) === null || _this$block$replicati6 === void 0 ? void 0 : _this$block$replicati6.function(offset));
-      } catch (e) {
-        console.log('Error in replication request', e);
-      }
-      if (blocksData.length === 0) {
-        this.block.isHidden = true;
-        /* this.$nextTick(() => {
-          this.getStore().remove(this.block.guid)
-        }) */
-        this.block.isLoading = false;
-        return;
-      }
-      blocksData.shift();
-      let me = this;
-      let lastGuid = me.block.guid;
-      let columns = ((_me$block$replication = me.block.replication) === null || _me$block$replication === void 0 ? void 0 : _me$block$replication.columns) || 1;
-      let rowGuids = {
-        0: [me.block.guid]
-      };
-      let row = 0;
-      this.replicationIndex = 0;
-      const listenerGuid = this.getStore().addListener(new SimpleAddListener_SimpleAddListener(this.onReplicateBlock));
-      blocksData.forEach((item, index) => {
-        const newBlock = JSON.parse(JSON.stringify(me.block));
-        newBlock.replication = undefined;
-        newBlock.isLoading = false;
-        this.replicationIndex = this.replicationIndex + 1;
-        if ((index + 1) % columns !== 0) {
-          var _me$block$replication2;
-          if ((_me$block$replication2 = me.block.replication) !== null && _me$block$replication2 !== void 0 && (_me$block$replication2 = _me$block$replication2.horizontalMargin) !== null && _me$block$replication2 !== void 0 && _me$block$replication2.value) {
-            var _me$block$replication3, _me$block$replication4;
-            newBlock.left = (_me$block$replication3 = me.block.replication) === null || _me$block$replication3 === void 0 || (_me$block$replication3 = _me$block$replication3.horizontalMargin) === null || _me$block$replication3 === void 0 ? void 0 : _me$block$replication3.value;
-            newBlock.sizeTypes.left = ((_me$block$replication4 = me.block.replication) === null || _me$block$replication4 === void 0 || (_me$block$replication4 = _me$block$replication4.horizontalMargin) === null || _me$block$replication4 === void 0 ? void 0 : _me$block$replication4.type) || SizeTypes["a" /* SizeTypes */].PIXEL;
-          } else {
-            newBlock.left = 0;
-          }
-          newBlock.stickyTo = {
-            type: 'left',
-            guid: lastGuid
-          };
-          if (row > 0) {
-            var _me$block$replication5;
-            let previousRowBlockGuid = rowGuids[row - 1][index % columns + 1];
-            newBlock.replication = {};
-            newBlock.replication.topBlockGuid = previousRowBlockGuid;
-            if ((_me$block$replication5 = me.block.replication) !== null && _me$block$replication5 !== void 0 && (_me$block$replication5 = _me$block$replication5.verticalMargin) !== null && _me$block$replication5 !== void 0 && _me$block$replication5.value) {
-              var _me$block$replication6, _me$block$replication7;
-              newBlock.replication.verticalMargin = `${(_me$block$replication6 = me.block.replication) === null || _me$block$replication6 === void 0 || (_me$block$replication6 = _me$block$replication6.verticalMargin) === null || _me$block$replication6 === void 0 ? void 0 : _me$block$replication6.value}${((_me$block$replication7 = me.block.replication) === null || _me$block$replication7 === void 0 || (_me$block$replication7 = _me$block$replication7.verticalMargin) === null || _me$block$replication7 === void 0 ? void 0 : _me$block$replication7.type) || SizeTypes["a" /* SizeTypes */].PIXEL}`;
-            }
-          }
-          lastGuid = me.getStore().add(newBlock);
-        } else {
-          var _me$block$replication8;
-          row++;
-          if ((_me$block$replication8 = me.block.replication) !== null && _me$block$replication8 !== void 0 && (_me$block$replication8 = _me$block$replication8.verticalMargin) !== null && _me$block$replication8 !== void 0 && _me$block$replication8.value) {
-            var _me$block$replication9, _me$block$replication10;
-            newBlock.top = (_me$block$replication9 = me.block.replication) === null || _me$block$replication9 === void 0 || (_me$block$replication9 = _me$block$replication9.verticalMargin) === null || _me$block$replication9 === void 0 ? void 0 : _me$block$replication9.value;
-            newBlock.sizeTypes.top = ((_me$block$replication10 = me.block.replication) === null || _me$block$replication10 === void 0 || (_me$block$replication10 = _me$block$replication10.verticalMargin) === null || _me$block$replication10 === void 0 ? void 0 : _me$block$replication10.type) || SizeTypes["a" /* SizeTypes */].PIXEL;
-          } else {
-            newBlock.top = 0;
-          }
-          newBlock.stickyTo = {
-            type: 'top',
-            guid: lastGuid
-          };
-          lastGuid = me.getStore().add(newBlock);
-        }
-        if (typeof rowGuids[row] === 'undefined') {
-          rowGuids[row] = [];
-        }
-        rowGuids[row].push(lastGuid);
-      });
-      this.getStore().removeListener(listenerGuid);
-      this.block.isLoading = false;
-    },
-    setParent() {
-      var _this$$parent;
-      this.parentBlock = this.block.parentGuid ? this.getStore().getByGuid(this.block.parentGuid) : undefined;
-      this.parentElement = this.block.parentGuid ? (_this$$parent = this.$parent) === null || _this$$parent === void 0 ? void 0 : _this$$parent.$refs.draggableContainer : undefined;
     },
     scrollPrevTab() {
       const tabsScroll = this.$refs.tabsScroll;
@@ -19626,8 +19648,8 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
       return style;
     },
     getDefaultTab() {
-      var _this$block12, _this$block13;
-      if (!((_this$block12 = this.block) !== null && _this$block12 !== void 0 && (_this$block12 = _this$block12.tabs) !== null && _this$block12 !== void 0 && _this$block12.use) || ((_this$block13 = this.block) === null || _this$block13 === void 0 || (_this$block13 = _this$block13.tabs) === null || _this$block13 === void 0 || (_this$block13 = _this$block13.list) === null || _this$block13 === void 0 ? void 0 : _this$block13.length) === 1) {
+      var _this$block10, _this$block11;
+      if (!((_this$block10 = this.block) !== null && _this$block10 !== void 0 && (_this$block10 = _this$block10.tabs) !== null && _this$block10 !== void 0 && _this$block10.use) || ((_this$block11 = this.block) === null || _this$block11 === void 0 || (_this$block11 = _this$block11.tabs) === null || _this$block11 === void 0 || (_this$block11 = _this$block11.list) === null || _this$block11 === void 0 ? void 0 : _this$block11.length) === 1) {
         return null;
       }
       let tabs = this.block.tabs.list;
@@ -19653,15 +19675,15 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
     }
   }
 }));
-// CONCATENATED MODULE: ./src/infrastructure/components/ppp_old.vue?vue&type=script&lang=ts
- /* harmony default export */ var components_ppp_oldvue_type_script_lang_ts = (ppp_oldvue_type_script_lang_ts); 
-// EXTERNAL MODULE: ./src/infrastructure/components/ppp_old.vue?vue&type=style&index=0&id=0cf16e16&prod&scoped=true&lang=css
-var ppp_oldvue_type_style_index_0_id_0cf16e16_prod_scoped_true_lang_css = __webpack_require__("07d6");
+// CONCATENATED MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=script&lang=ts
+ /* harmony default export */ var components_PreviewBlockvue_type_script_lang_ts = (PreviewBlockvue_type_script_lang_ts); 
+// EXTERNAL MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=style&index=0&id=29ac3151&prod&scoped=true&lang=css
+var PreviewBlockvue_type_style_index_0_id_29ac3151_prod_scoped_true_lang_css = __webpack_require__("82e6");
 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__("2877");
 
-// CONCATENATED MODULE: ./src/infrastructure/components/ppp_old.vue
+// CONCATENATED MODULE: ./src/infrastructure/components/PreviewBlock.vue
 
 
 
@@ -19671,17 +19693,17 @@ var componentNormalizer = __webpack_require__("2877");
 /* normalize component */
 
 var component = Object(componentNormalizer["a" /* default */])(
-  components_ppp_oldvue_type_script_lang_ts,
-  ppp_oldvue_type_template_id_0cf16e16_scoped_true_render,
-  ppp_oldvue_type_template_id_0cf16e16_scoped_true_staticRenderFns,
+  components_PreviewBlockvue_type_script_lang_ts,
+  PreviewBlockvue_type_template_id_29ac3151_scoped_true_render,
+  PreviewBlockvue_type_template_id_29ac3151_scoped_true_staticRenderFns,
   false,
   null,
-  "0cf16e16",
+  "29ac3151",
   null
   
 )
 
-/* harmony default export */ var ppp_old = (component.exports);
+/* harmony default export */ var PreviewBlock = (component.exports);
 // EXTERNAL MODULE: ./src/infrastructure/domain/repository/BlockRepository.ts + 1 modules
 var BlockRepository = __webpack_require__("42eb");
 
@@ -19699,7 +19721,7 @@ const previewervue_type_script_lang_ts_Vue = external_commonjs_vue_commonjs2_vue
 /* harmony default export */ var previewervue_type_script_lang_ts = (previewervue_type_script_lang_ts_Vue.extend({
   name: 'VueDraggableResponsivePreviewer',
   components: {
-    PreviewBlock: ppp_old
+    PreviewBlock: PreviewBlock
   },
   provide() {
     return {
@@ -19760,8 +19782,8 @@ const previewervue_type_script_lang_ts_Vue = external_commonjs_vue_commonjs2_vue
 }));
 // CONCATENATED MODULE: ./src/previewer.vue?vue&type=script&lang=ts
  /* harmony default export */ var src_previewervue_type_script_lang_ts = (previewervue_type_script_lang_ts); 
-// EXTERNAL MODULE: ./src/previewer.vue?vue&type=style&index=0&id=278a7e84&prod&scoped=true&lang=css
-var previewervue_type_style_index_0_id_278a7e84_prod_scoped_true_lang_css = __webpack_require__("988a");
+// EXTERNAL MODULE: ./src/previewer.vue?vue&type=style&index=0&id=61a95f02&prod&scoped=true&lang=css
+var previewervue_type_style_index_0_id_61a95f02_prod_scoped_true_lang_css = __webpack_require__("5113");
 
 // CONCATENATED MODULE: ./src/previewer.vue
 
@@ -19778,7 +19800,7 @@ var previewer_component = Object(componentNormalizer["a" /* default */])(
   staticRenderFns,
   false,
   null,
-  "278a7e84",
+  "61a95f02",
   null
   
 )
@@ -19910,6 +19932,17 @@ module.exports = function (argument) {
   var len = toIntegerOrInfinity(argument);
   return len > 0 ? min(len, 0x1FFFFFFFFFFFFF) : 0; // 2 ** 53 - 1 == 9007199254740991
 };
+
+
+/***/ }),
+
+/***/ "5113":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_previewer_vue_vue_type_style_index_0_id_61a95f02_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("643e");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_previewer_vue_vue_type_style_index_0_id_61a95f02_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_previewer_vue_vue_type_style_index_0_id_61a95f02_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
 
 
 /***/ }),
@@ -20105,6 +20138,13 @@ module.exports = function (key, value) {
   } return value;
 };
 
+
+/***/ }),
+
+/***/ "643e":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -21557,6 +21597,17 @@ module.exports = function (argument) {
 
 /***/ }),
 
+/***/ "82e6":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_29ac3151_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("21c0");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_29ac3151_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_29ac3151_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+
+
+/***/ }),
+
 /***/ "83ab":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21828,17 +21879,6 @@ module.exports = function intersection(other) {
 
   return result;
 };
-
-
-/***/ }),
-
-/***/ "988a":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_previewer_vue_vue_type_style_index_0_id_278a7e84_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("3aeb");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_previewer_vue_vue_type_style_index_0_id_278a7e84_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_previewer_vue_vue_type_style_index_0_id_278a7e84_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
 
 
 /***/ }),

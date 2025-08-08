@@ -154,6 +154,17 @@ exports.f = DESCRIPTORS ? $getOwnPropertyDescriptor : function getOwnPropertyDes
 
 /***/ }),
 
+/***/ "07d6":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ppp_old_vue_vue_type_style_index_0_id_0cf16e16_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("3524");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ppp_old_vue_vue_type_style_index_0_id_0cf16e16_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ppp_old_vue_vue_type_style_index_0_id_0cf16e16_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+
+
+/***/ }),
+
 /***/ "07fa":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -167,13 +178,6 @@ module.exports = function (obj) {
   return toLength(obj.length);
 };
 
-
-/***/ }),
-
-/***/ "0991":
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -466,6 +470,42 @@ module.exports = function (it) {
 
 /***/ }),
 
+/***/ "1e5a":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__("23e7");
+var symmetricDifference = __webpack_require__("9961");
+var setMethodAcceptSetLike = __webpack_require__("dad2");
+
+// `Set.prototype.symmetricDifference` method
+// https://github.com/tc39/proposal-set-methods
+$({ target: 'Set', proto: true, real: true, forced: !setMethodAcceptSetLike('symmetricDifference') }, {
+  symmetricDifference: symmetricDifference
+});
+
+
+/***/ }),
+
+/***/ "1e70":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__("23e7");
+var difference = __webpack_require__("a5f7");
+var setMethodAcceptSetLike = __webpack_require__("dad2");
+
+// `Set.prototype.difference` method
+// https://github.com/tc39/proposal-set-methods
+$({ target: 'Set', proto: true, real: true, forced: !setMethodAcceptSetLike('difference') }, {
+  difference: difference
+});
+
+
+/***/ }),
+
 /***/ "23cb":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -671,6 +711,38 @@ function normalizeComponent(
     options: options
   }
 }
+
+
+/***/ }),
+
+/***/ "2a62":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var call = __webpack_require__("c65b");
+var anObject = __webpack_require__("825a");
+var getMethod = __webpack_require__("dc4a");
+
+module.exports = function (iterator, kind, value) {
+  var innerResult, innerError;
+  anObject(iterator);
+  try {
+    innerResult = getMethod(iterator, 'return');
+    if (!innerResult) {
+      if (kind === 'throw') throw value;
+      return value;
+    }
+    innerResult = call(innerResult, iterator);
+  } catch (error) {
+    innerError = true;
+    innerResult = error;
+  }
+  if (kind === 'throw') throw value;
+  if (innerError) throw innerResult;
+  anObject(innerResult);
+  return value;
+};
 
 
 /***/ }),
@@ -17900,6 +17972,62 @@ module.exports = function (it) {
 
 /***/ }),
 
+/***/ "3524":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "384f":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var uncurryThis = __webpack_require__("e330");
+var iterateSimple = __webpack_require__("5388");
+var SetHelpers = __webpack_require__("cb27");
+
+var Set = SetHelpers.Set;
+var SetPrototype = SetHelpers.proto;
+var forEach = uncurryThis(SetPrototype.forEach);
+var keys = uncurryThis(SetPrototype.keys);
+var next = keys(new Set()).next;
+
+module.exports = function (set, fn, interruptible) {
+  return interruptible ? iterateSimple({ iterator: keys(set), next: next }, fn) : forEach(set, fn);
+};
+
+
+/***/ }),
+
+/***/ "395e":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var aSet = __webpack_require__("dc19");
+var has = __webpack_require__("cb27").has;
+var size = __webpack_require__("8e16");
+var getSetRecord = __webpack_require__("7f65");
+var iterateSimple = __webpack_require__("5388");
+var iteratorClose = __webpack_require__("2a62");
+
+// `Set.prototype.isSupersetOf` method
+// https://tc39.github.io/proposal-set-methods/#Set.prototype.isSupersetOf
+module.exports = function isSupersetOf(other) {
+  var O = aSet(this);
+  var otherRec = getSetRecord(other);
+  if (size(O) < otherRec.size) return false;
+  var iterator = otherRec.getIterator();
+  return iterateSimple(iterator, function (e) {
+    if (!has(O, e)) return iteratorClose(iterator, 'normal', false);
+  }) !== false;
+};
+
+
+/***/ }),
+
 /***/ "3a34":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17944,6 +18072,13 @@ var uncurryThis = __webpack_require__("e330");
 
 module.exports = uncurryThis({}.isPrototypeOf);
 
+
+/***/ }),
+
+/***/ "3aeb":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -18336,7 +18471,7 @@ class BlockRepository_BlockRepository {
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"176724c4-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/previewer.vue?vue&type=template&id=32a3db7a&scoped=true
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"176724c4-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/previewer.vue?vue&type=template&id=278a7e84&scoped=true
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c,
@@ -18381,16 +18516,21 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/previewer.vue?vue&type=template&id=32a3db7a&scoped=true
+// CONCATENATED MODULE: ./src/previewer.vue?vue&type=template&id=278a7e84&scoped=true
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"176724c4-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/ppp_old.vue?vue&type=template&id=49c97ed9&scoped=true
-var ppp_oldvue_type_template_id_49c97ed9_scoped_true_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"176724c4-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/ppp_old.vue?vue&type=template&id=0cf16e16&scoped=true
+var ppp_oldvue_type_template_id_0cf16e16_scoped_true_render = function render() {
+  var _vm$block;
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
   return _c('div', {
     ref: "draggableContainer",
-    class: ['block', _vm.block.className],
+    class: {
+      'block': true,
+      [_vm.block.className]: true,
+      'sticky_to': (_vm$block = _vm.block) === null || _vm$block === void 0 || (_vm$block = _vm$block.stickyTo) === null || _vm$block === void 0 ? void 0 : _vm$block.guid
+    },
     style: _vm.positionStyle
   }, [_vm.isTabsContainer ? _c('div', {
     class: {
@@ -18551,9 +18691,9 @@ var ppp_oldvue_type_template_id_49c97ed9_scoped_true_render = function render() 
     });
   })], 2)]);
 };
-var ppp_oldvue_type_template_id_49c97ed9_scoped_true_staticRenderFns = [];
+var ppp_oldvue_type_template_id_0cf16e16_scoped_true_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/infrastructure/components/ppp_old.vue?vue&type=template&id=49c97ed9&scoped=true
+// CONCATENATED MODULE: ./src/infrastructure/components/ppp_old.vue?vue&type=template&id=0cf16e16&scoped=true
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.push.js
 var es_array_push = __webpack_require__("14d9");
@@ -18656,37 +18796,143 @@ function debounce(cb, wait = 20, additionalCb = () => {}) {
     }
   }
 });
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.set.difference.v2.js
+var es_set_difference_v2 = __webpack_require__("1e70");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.set.intersection.v2.js
+var es_set_intersection_v2 = __webpack_require__("79a4");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.set.is-disjoint-from.v2.js
+var es_set_is_disjoint_from_v2 = __webpack_require__("c1a1");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.set.is-subset-of.v2.js
+var es_set_is_subset_of_v2 = __webpack_require__("8b00");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.set.is-superset-of.v2.js
+var es_set_is_superset_of_v2 = __webpack_require__("a4e7");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.set.symmetric-difference.v2.js
+var es_set_symmetric_difference_v2 = __webpack_require__("1e5a");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.set.union.v2.js
+var es_set_union_v2 = __webpack_require__("72c3");
+
 // CONCATENATED MODULE: ./src/infrastructure/service/StickyManager.ts
 
-class StickyManager {
+
+
+
+
+
+
+
+
+
+class StickyManager_StickyManager {
   constructor() {
-    this.relations = [];
-    this.rafId = null;
-    this.tick = () => {
-      this.relations.forEach(({
-        target,
-        dependent,
-        type,
-        offset
-      }) => {
-        if (type === 'top') {
-          dependent.style.top = `calc(${target.style.top} + ${target.style.height} + ${offset})`;
-        } else if (type === 'left') {
-          dependent.style.left = `calc(${target.style.left} + ${target.style.width} + ${offset})`;
-        }
-      });
-      this.rafId = requestAnimationFrame(this.tick);
+    this.blocks = new Map();
+    this.resizeObservers = new Map();
+    this.ticking = false;
+  }
+  addBlock({
+    element,
+    stickyTo,
+    type,
+    offset,
+    guid
+  }) {
+    this.blocks.set(guid, {
+      element,
+      stickyTo,
+      type,
+      offset,
+      guid
+    });
+    // Add resize observer
+    const resizeObserver = new ResizeObserver_es["a" /* default */](() => {
+      this.updateOne(guid);
+    });
+    resizeObserver.observe(stickyTo);
+    this.resizeObservers.set(guid, resizeObserver);
+    // Optional: immediately update position
+    this.updateOne(guid);
+  }
+  removeBlock(guid) {
+    this.blocks.delete(guid);
+    const observer = this.resizeObservers.get(guid);
+    if (observer) {
+      observer.disconnect();
+      this.resizeObservers.delete(guid);
+    }
+  }
+  updateAll() {
+    const sorted = this.topologicalSort();
+    for (const guid of sorted) {
+      this.updateOne(guid);
+    }
+  }
+  updateOne(guid) {
+    const data = this.blocks.get(guid);
+    if (!data) return;
+    const {
+      element,
+      stickyTo,
+      type
+    } = data;
+    const top = `calc(${stickyTo.style.top || 0} + ${stickyTo.style.height})`;
+    const left = `calc(${stickyTo.style.left} + ${stickyTo.style.width})`;
+    if (type === StickyTo["a" /* StickyToType */].TOP) {
+      console.log(top);
+      element.style.top = top;
+    } else if (type === StickyTo["a" /* StickyToType */].LEFT) {
+      element.style.left = left;
+    }
+  }
+  bindScrollAndResize(container = window) {
+    const handler = () => {
+      if (!this.ticking) {
+        requestAnimationFrame(() => {
+          this.updateAll();
+          this.ticking = false;
+        });
+        this.ticking = true;
+      }
     };
+    container.addEventListener('scroll', handler, {
+      passive: true
+    });
+    container.addEventListener('resize', handler, {
+      passive: true
+    });
+    window.addEventListener('resize', handler);
   }
-  register(relation) {
-    this.relations.push(relation);
-    if (!this.rafId) this.tick();
-  }
-  unregister(id) {
-    this.relations = this.relations.filter(r => r.id !== id);
+  topologicalSort() {
+    const visited = new Set();
+    const sorted = [];
+    const visit = (guid, stack = new Set()) => {
+      var _find;
+      if (stack.has(guid)) {
+        console.warn('Цикл в зависимости прилипания!', [...stack, guid]);
+        return;
+      }
+      if (visited.has(guid)) return;
+      const block = this.blocks.get(guid);
+      if (!block) return;
+      stack.add(guid);
+      const stickyToGuid = (_find = [...this.blocks.values()].find(b => b.element === block.stickyTo)) === null || _find === void 0 ? void 0 : _find.guid;
+      if (stickyToGuid) {
+        visit(stickyToGuid, new Set(stack));
+      }
+      visited.add(guid);
+      sorted.push(guid);
+    };
+    for (const guid of this.blocks.keys()) {
+      visit(guid);
+    }
+    return sorted;
   }
 }
-const stickyManager = new StickyManager();
+const stickyManager = new StickyManager_StickyManager();
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--15-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--15-3!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/ppp_old.vue?vue&type=script&lang=ts
 
 
@@ -18882,7 +19128,7 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
       return ((_this$block$tabs5 = this.block.tabs) === null || _this$block$tabs5 === void 0 ? void 0 : _this$block$tabs5.use) || false;
     },
     positionStyle() {
-      var _this$block$replicati2, _this$block$stickyTo3, _this$block$onCenter, _this$block$stickyTo4, _this$block$onCenter2, _this$block$stickyTo5, _this$block$onCenter3;
+      var _this$block$replicati2, _this$block$stickyTo3, _this$block$onCenter, _this$block$stickyTo4, _this$block$onCenter2, _this$block$stickyTo5, _this$block$onCenter3, _this$block6;
       let position = {};
       let top;
       let left;
@@ -19050,6 +19296,9 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
           }
         }
       }
+      if ((_this$block6 = this.block) !== null && _this$block6 !== void 0 && (_this$block6 = _this$block6.stickyTo) !== null && _this$block6 !== void 0 && _this$block6.guid) {
+        delete position.top;
+      }
       return Object.assign(position, {
         zIndex: this.zIndex
       });
@@ -19085,8 +19334,8 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
       return isShow;
     },
     isActiveScrollHover() {
-      var _this$block6;
-      return !!((_this$block6 = this.block) !== null && _this$block6 !== void 0 && _this$block6.isScrollHover);
+      var _this$block7;
+      return !!((_this$block7 = this.block) !== null && _this$block7 !== void 0 && _this$block7.isScrollHover);
     }
   },
   watch: {
@@ -19106,17 +19355,17 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
     }
   },
   mounted() {
-    var _this$block8, _this$block9, _this$block10;
+    var _this$block9, _this$block10, _this$block11;
     this.setParent();
     this.$nextTick(() => {
-      var _this$block7;
+      var _this$block8;
       this.setStretchedSize();
-      this.setSticky((_this$block7 = this.block) === null || _this$block7 === void 0 || (_this$block7 = _this$block7.stickyTo) === null || _this$block7 === void 0 ? void 0 : _this$block7.guid);
+      this.setSticky((_this$block8 = this.block) === null || _this$block8 === void 0 || (_this$block8 = _this$block8.stickyTo) === null || _this$block8 === void 0 ? void 0 : _this$block8.guid);
       if (this.isTabsContainer) {
         this.setIsShowArrows();
       }
     });
-    if ((_this$block8 = this.block) !== null && _this$block8 !== void 0 && (_this$block8 = _this$block8.tabs) !== null && _this$block8 !== void 0 && _this$block8.use && ((_this$block9 = this.block) === null || _this$block9 === void 0 || (_this$block9 = _this$block9.tabs) === null || _this$block9 === void 0 || (_this$block9 = _this$block9.list) === null || _this$block9 === void 0 ? void 0 : _this$block9.length) > 0) {
+    if ((_this$block9 = this.block) !== null && _this$block9 !== void 0 && (_this$block9 = _this$block9.tabs) !== null && _this$block9 !== void 0 && _this$block9.use && ((_this$block10 = this.block) === null || _this$block10 === void 0 || (_this$block10 = _this$block10.tabs) === null || _this$block10 === void 0 || (_this$block10 = _this$block10.list) === null || _this$block10 === void 0 ? void 0 : _this$block10.length) > 0) {
       if (this.block.tabs.saveActiveTab && this.block.tabs.activeGuid) {
         this.onTabClick(this.block.tabs.activeGuid || this.availableTabs[0].guid);
       } else {
@@ -19128,7 +19377,7 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
         this.onTabClick(defaultTab);
       }
     }
-    if ((_this$block10 = this.block) !== null && _this$block10 !== void 0 && _this$block10.isStretched && this.$refs.container && this.$refs.container instanceof Element) {
+    if ((_this$block11 = this.block) !== null && _this$block11 !== void 0 && _this$block11.isStretched && this.$refs.container && this.$refs.container instanceof Element) {
       let children = this.$refs.container.children;
       const observer = new ResizeObserver_es["a" /* default */](() => {
         this.setStretchedSize();
@@ -19152,7 +19401,7 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
   },
   beforeDestroy() {
     this.getStore().removeRef(this.block.guid);
-    stickyManager.unregister(this.block.guid);
+    stickyManager.removeBlock(this.block.guid);
   },
   methods: {
     handleClick(event) {
@@ -19213,13 +19462,14 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
             stickyOffset = this.block.left + this.block.sizeTypes.left;
             break;
         }
-        stickyManager.register({
-          id: this.block.guid,
-          target: this.stickyToElement.$el,
-          dependent: this.$refs.draggableContainer,
+        stickyManager.addBlock({
+          guid: this.block.guid,
+          stickyTo: this.stickyToElement.$el,
+          element: this.$refs.draggableContainer,
           type: ((_this$block$stickyTo7 = this.block.stickyTo) === null || _this$block$stickyTo7 === void 0 ? void 0 : _this$block$stickyTo7.type) || StickyTo["a" /* StickyToType */].TOP,
           offset: stickyOffset
         });
+        stickyManager.bindScrollAndResize(this.stickyToElement.$el);
       } else {
         this.stickyToBlock = undefined;
         this.stickyToElement = undefined;
@@ -19385,8 +19635,8 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
       return style;
     },
     getDefaultTab() {
-      var _this$block11, _this$block12;
-      if (!((_this$block11 = this.block) !== null && _this$block11 !== void 0 && (_this$block11 = _this$block11.tabs) !== null && _this$block11 !== void 0 && _this$block11.use) || ((_this$block12 = this.block) === null || _this$block12 === void 0 || (_this$block12 = _this$block12.tabs) === null || _this$block12 === void 0 || (_this$block12 = _this$block12.list) === null || _this$block12 === void 0 ? void 0 : _this$block12.length) === 1) {
+      var _this$block12, _this$block13;
+      if (!((_this$block12 = this.block) !== null && _this$block12 !== void 0 && (_this$block12 = _this$block12.tabs) !== null && _this$block12 !== void 0 && _this$block12.use) || ((_this$block13 = this.block) === null || _this$block13 === void 0 || (_this$block13 = _this$block13.tabs) === null || _this$block13 === void 0 || (_this$block13 = _this$block13.list) === null || _this$block13 === void 0 ? void 0 : _this$block13.length) === 1) {
         return null;
       }
       let tabs = this.block.tabs.list;
@@ -19414,8 +19664,8 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
 }));
 // CONCATENATED MODULE: ./src/infrastructure/components/ppp_old.vue?vue&type=script&lang=ts
  /* harmony default export */ var components_ppp_oldvue_type_script_lang_ts = (ppp_oldvue_type_script_lang_ts); 
-// EXTERNAL MODULE: ./src/infrastructure/components/ppp_old.vue?vue&type=style&index=0&id=49c97ed9&prod&scoped=true&lang=css
-var ppp_oldvue_type_style_index_0_id_49c97ed9_prod_scoped_true_lang_css = __webpack_require__("4e56");
+// EXTERNAL MODULE: ./src/infrastructure/components/ppp_old.vue?vue&type=style&index=0&id=0cf16e16&prod&scoped=true&lang=css
+var ppp_oldvue_type_style_index_0_id_0cf16e16_prod_scoped_true_lang_css = __webpack_require__("07d6");
 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__("2877");
@@ -19431,11 +19681,11 @@ var componentNormalizer = __webpack_require__("2877");
 
 var component = Object(componentNormalizer["a" /* default */])(
   components_ppp_oldvue_type_script_lang_ts,
-  ppp_oldvue_type_template_id_49c97ed9_scoped_true_render,
-  ppp_oldvue_type_template_id_49c97ed9_scoped_true_staticRenderFns,
+  ppp_oldvue_type_template_id_0cf16e16_scoped_true_render,
+  ppp_oldvue_type_template_id_0cf16e16_scoped_true_staticRenderFns,
   false,
   null,
-  "49c97ed9",
+  "0cf16e16",
   null
   
 )
@@ -19450,6 +19700,7 @@ var TabSettings = __webpack_require__("6b0c");
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--15-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--15-3!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/previewer.vue?vue&type=script&lang=ts
 
 // eslint-disable-next-line no-unused-vars
+
 
 
 
@@ -19504,6 +19755,9 @@ const previewervue_type_script_lang_ts_Vue = external_commonjs_vue_commonjs2_vue
       this.$nextTick(() => {
         this.store.set(blocks);
       });
+      setTimeout(() => {
+        stickyManager.updateAll();
+      }, 1000);
     },
     removeBlock(guid) {
       this.store.remove(guid);
@@ -19515,8 +19769,8 @@ const previewervue_type_script_lang_ts_Vue = external_commonjs_vue_commonjs2_vue
 }));
 // CONCATENATED MODULE: ./src/previewer.vue?vue&type=script&lang=ts
  /* harmony default export */ var src_previewervue_type_script_lang_ts = (previewervue_type_script_lang_ts); 
-// EXTERNAL MODULE: ./src/previewer.vue?vue&type=style&index=0&id=32a3db7a&prod&scoped=true&lang=css
-var previewervue_type_style_index_0_id_32a3db7a_prod_scoped_true_lang_css = __webpack_require__("4a0e");
+// EXTERNAL MODULE: ./src/previewer.vue?vue&type=style&index=0&id=278a7e84&prod&scoped=true&lang=css
+var previewervue_type_style_index_0_id_278a7e84_prod_scoped_true_lang_css = __webpack_require__("988a");
 
 // CONCATENATED MODULE: ./src/previewer.vue
 
@@ -19533,7 +19787,7 @@ var previewer_component = Object(componentNormalizer["a" /* default */])(
   staticRenderFns,
   false,
   null,
-  "32a3db7a",
+  "278a7e84",
   null
   
 )
@@ -19566,6 +19820,24 @@ module.exports = fails(function () {
 
 /***/ }),
 
+/***/ "46c4":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// `GetIteratorDirect(obj)` abstract operation
+// https://tc39.es/proposal-iterator-helpers/#sec-getiteratordirect
+module.exports = function (obj) {
+  return {
+    iterator: obj,
+    next: obj.next,
+    done: false
+  };
+};
+
+
+/***/ }),
+
 /***/ "485a":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19586,17 +19858,6 @@ module.exports = function (input, pref) {
   if (pref !== 'string' && isCallable(fn = input.toString) && !isObject(val = call(fn, input))) return val;
   throw new $TypeError("Can't convert object to primitive value");
 };
-
-
-/***/ }),
-
-/***/ "4a0e":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_previewer_vue_vue_type_style_index_0_id_32a3db7a_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("a55e");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_previewer_vue_vue_type_style_index_0_id_32a3db7a_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_previewer_vue_vue_type_style_index_0_id_32a3db7a_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
 
 
 /***/ }),
@@ -19643,17 +19904,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "4e56":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ppp_old_vue_vue_type_style_index_0_id_49c97ed9_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("0991");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ppp_old_vue_vue_type_style_index_0_id_49c97ed9_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ppp_old_vue_vue_type_style_index_0_id_49c97ed9_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
-
-
-/***/ }),
-
 /***/ "50c4":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19668,6 +19918,26 @@ var min = Math.min;
 module.exports = function (argument) {
   var len = toIntegerOrInfinity(argument);
   return len > 0 ? min(len, 0x1FFFFFFFFFFFFF) : 0; // 2 ** 53 - 1 == 9007199254740991
+};
+
+
+/***/ }),
+
+/***/ "5388":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var call = __webpack_require__("c65b");
+
+module.exports = function (record, fn, ITERATOR_INSTEAD_OF_RECORD) {
+  var iterator = ITERATOR_INSTEAD_OF_RECORD ? record : record.iterator;
+  var next = record.next;
+  var step, result;
+  while (!(step = call(next, iterator)).done) {
+    result = fn(step.value);
+    if (result !== undefined) return result;
+  }
 };
 
 
@@ -19797,17 +20067,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "6253":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Block_vue_vue_type_style_index_0_id_1c1889ae_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("66cc");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Block_vue_vue_type_style_index_0_id_1c1889ae_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Block_vue_vue_type_style_index_0_id_1c1889ae_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
-
-
-/***/ }),
-
 /***/ "62e4":
 /***/ (function(module, exports) {
 
@@ -19858,10 +20117,34 @@ module.exports = function (key, value) {
 
 /***/ }),
 
-/***/ "66cc":
+/***/ "664f":
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "68df":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var aSet = __webpack_require__("dc19");
+var size = __webpack_require__("8e16");
+var iterate = __webpack_require__("384f");
+var getSetRecord = __webpack_require__("7f65");
+
+// `Set.prototype.isSubsetOf` method
+// https://tc39.github.io/proposal-set-methods/#Set.prototype.isSubsetOf
+module.exports = function isSubsetOf(other) {
+  var O = aSet(this);
+  var otherRec = getSetRecord(other);
+  if (size(O) > otherRec.size) return false;
+  return iterate(O, function (e) {
+    if (!otherRec.includes(e)) return false;
+  }, true) !== false;
+};
+
 
 /***/ }),
 
@@ -21108,6 +21391,42 @@ module.exports = function (it) {
 
 /***/ }),
 
+/***/ "7282":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var uncurryThis = __webpack_require__("e330");
+var aCallable = __webpack_require__("59ed");
+
+module.exports = function (object, key, method) {
+  try {
+    // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
+    return uncurryThis(aCallable(Object.getOwnPropertyDescriptor(object, key)[method]));
+  } catch (error) { /* empty */ }
+};
+
+
+/***/ }),
+
+/***/ "72c3":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__("23e7");
+var union = __webpack_require__("e9bc");
+var setMethodAcceptSetLike = __webpack_require__("dad2");
+
+// `Set.prototype.union` method
+// https://github.com/tc39/proposal-set-methods
+$({ target: 'Set', proto: true, real: true, forced: !setMethodAcceptSetLike('union') }, {
+  union: union
+});
+
+
+/***/ }),
+
 /***/ "7418":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21138,6 +21457,30 @@ module.exports = [
 
 /***/ }),
 
+/***/ "79a4":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__("23e7");
+var fails = __webpack_require__("d039");
+var intersection = __webpack_require__("953b");
+var setMethodAcceptSetLike = __webpack_require__("dad2");
+
+var INCORRECT = !setMethodAcceptSetLike('intersection') || fails(function () {
+  // eslint-disable-next-line es/no-array-from, es/no-set -- testing
+  return String(Array.from(new Set([1, 2, 3]).intersection(new Set([3, 2])))) !== '3,2';
+});
+
+// `Set.prototype.intersection` method
+// https://github.com/tc39/proposal-set-methods
+$({ target: 'Set', proto: true, real: true, forced: INCORRECT }, {
+  intersection: intersection
+});
+
+
+/***/ }),
+
 /***/ "7b0b":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21151,6 +21494,54 @@ var $Object = Object;
 // https://tc39.es/ecma262/#sec-toobject
 module.exports = function (argument) {
   return $Object(requireObjectCoercible(argument));
+};
+
+
+/***/ }),
+
+/***/ "7f65":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var aCallable = __webpack_require__("59ed");
+var anObject = __webpack_require__("825a");
+var call = __webpack_require__("c65b");
+var toIntegerOrInfinity = __webpack_require__("5926");
+var getIteratorDirect = __webpack_require__("46c4");
+
+var INVALID_SIZE = 'Invalid size';
+var $RangeError = RangeError;
+var $TypeError = TypeError;
+var max = Math.max;
+
+var SetRecord = function (set, intSize) {
+  this.set = set;
+  this.size = max(intSize, 0);
+  this.has = aCallable(set.has);
+  this.keys = aCallable(set.keys);
+};
+
+SetRecord.prototype = {
+  getIterator: function () {
+    return getIteratorDirect(anObject(call(this.keys, this.set)));
+  },
+  includes: function (it) {
+    return call(this.has, this.set, it);
+  }
+};
+
+// `GetSetRecord` abstract operation
+// https://tc39.es/proposal-set-methods/#sec-getsetrecord
+module.exports = function (obj) {
+  anObject(obj);
+  var numSize = +obj.size;
+  // NOTE: If size is undefined, then numSize will be NaN
+  // eslint-disable-next-line no-self-compare -- NaN check
+  if (numSize !== numSize) throw new $TypeError(INVALID_SIZE);
+  var intSize = toIntegerOrInfinity(numSize);
+  if (intSize < 0) throw new $RangeError(INVALID_SIZE);
+  return new SetRecord(obj, intSize);
 };
 
 
@@ -21187,6 +21578,28 @@ module.exports = !fails(function () {
   // eslint-disable-next-line es/no-object-defineproperty -- required for testing
   return Object.defineProperty({}, 1, { get: function () { return 7; } })[1] !== 7;
 });
+
+
+/***/ }),
+
+/***/ "83b9":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var SetHelpers = __webpack_require__("cb27");
+var iterate = __webpack_require__("384f");
+
+var Set = SetHelpers.Set;
+var add = SetHelpers.add;
+
+module.exports = function (set) {
+  var result = new Set();
+  iterate(set, function (it) {
+    add(result, it);
+  });
+  return result;
+};
 
 
 /***/ }),
@@ -21257,10 +21670,54 @@ module.exports = store.inspectSource;
 
 /***/ }),
 
+/***/ "8b00":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__("23e7");
+var isSubsetOf = __webpack_require__("68df");
+var setMethodAcceptSetLike = __webpack_require__("dad2");
+
+// `Set.prototype.isSubsetOf` method
+// https://github.com/tc39/proposal-set-methods
+$({ target: 'Set', proto: true, real: true, forced: !setMethodAcceptSetLike('isSubsetOf') }, {
+  isSubsetOf: isSubsetOf
+});
+
+
+/***/ }),
+
 /***/ "8bbf":
 /***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE__8bbf__;
+
+/***/ }),
+
+/***/ "8c39":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Block_vue_vue_type_style_index_0_id_08516045_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("664f");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Block_vue_vue_type_style_index_0_id_08516045_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Block_vue_vue_type_style_index_0_id_08516045_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+
+
+/***/ }),
+
+/***/ "8e16":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var uncurryThisAccessor = __webpack_require__("7282");
+var SetHelpers = __webpack_require__("cb27");
+
+module.exports = uncurryThisAccessor(SetHelpers.proto, 'size', 'get') || function (set) {
+  return set.size;
+};
+
 
 /***/ }),
 
@@ -21341,6 +21798,87 @@ var NATIVE = isForced.NATIVE = 'N';
 var POLYFILL = isForced.POLYFILL = 'P';
 
 module.exports = isForced;
+
+
+/***/ }),
+
+/***/ "953b":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var aSet = __webpack_require__("dc19");
+var SetHelpers = __webpack_require__("cb27");
+var size = __webpack_require__("8e16");
+var getSetRecord = __webpack_require__("7f65");
+var iterateSet = __webpack_require__("384f");
+var iterateSimple = __webpack_require__("5388");
+
+var Set = SetHelpers.Set;
+var add = SetHelpers.add;
+var has = SetHelpers.has;
+
+// `Set.prototype.intersection` method
+// https://github.com/tc39/proposal-set-methods
+module.exports = function intersection(other) {
+  var O = aSet(this);
+  var otherRec = getSetRecord(other);
+  var result = new Set();
+
+  if (size(O) > otherRec.size) {
+    iterateSimple(otherRec.getIterator(), function (e) {
+      if (has(O, e)) add(result, e);
+    });
+  } else {
+    iterateSet(O, function (e) {
+      if (otherRec.includes(e)) add(result, e);
+    });
+  }
+
+  return result;
+};
+
+
+/***/ }),
+
+/***/ "988a":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_previewer_vue_vue_type_style_index_0_id_278a7e84_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("3aeb");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_previewer_vue_vue_type_style_index_0_id_278a7e84_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_previewer_vue_vue_type_style_index_0_id_278a7e84_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+
+
+/***/ }),
+
+/***/ "9961":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var aSet = __webpack_require__("dc19");
+var SetHelpers = __webpack_require__("cb27");
+var clone = __webpack_require__("83b9");
+var getSetRecord = __webpack_require__("7f65");
+var iterateSimple = __webpack_require__("5388");
+
+var add = SetHelpers.add;
+var has = SetHelpers.has;
+var remove = SetHelpers.remove;
+
+// `Set.prototype.symmetricDifference` method
+// https://github.com/tc39/proposal-set-methods
+module.exports = function symmetricDifference(other) {
+  var O = aSet(this);
+  var keysIter = getSetRecord(other).getIterator();
+  var result = clone(O);
+  iterateSimple(keysIter, function (e) {
+    if (has(O, e)) remove(result, e);
+    else add(result, e);
+  });
+  return result;
+};
 
 
 /***/ }),
@@ -21479,8 +22017,8 @@ var staticRenderFns = [];
 
 // CONCATENATED MODULE: ./src/index.vue?vue&type=template&id=683d5d5c&scoped=true
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"176724c4-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/Block.vue?vue&type=template&id=1c1889ae&scoped=true
-var Blockvue_type_template_id_1c1889ae_scoped_true_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"176724c4-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/Block.vue?vue&type=template&id=08516045&scoped=true
+var Blockvue_type_template_id_08516045_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
@@ -21762,9 +22300,9 @@ var Blockvue_type_template_id_1c1889ae_scoped_true_render = function render() {
     }
   })], 2);
 };
-var Blockvue_type_template_id_1c1889ae_scoped_true_staticRenderFns = [];
+var Blockvue_type_template_id_08516045_scoped_true_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/infrastructure/components/Block.vue?vue&type=template&id=1c1889ae&scoped=true
+// CONCATENATED MODULE: ./src/infrastructure/components/Block.vue?vue&type=template&id=08516045&scoped=true
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.push.js
 var es_array_push = __webpack_require__("14d9");
@@ -21921,8 +22459,7 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
       isShowArrows: false,
       visitedTabs: [],
       stickyToBlock: undefined,
-      stickyToElement: undefined,
-      zIndex: undefined
+      stickyToElement: undefined
     };
   },
   computed: {
@@ -22154,6 +22691,19 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
         isShow = false;
       }
       return isShow;
+    },
+    zIndex() {
+      var _this$block$tabs6;
+      const startIndex = 101;
+      if (!this.block.parentGuid) {
+        var _this$block$tabs5;
+        return startIndex + ((_this$block$tabs5 = this.block.tabs) !== null && _this$block$tabs5 !== void 0 && _this$block$tabs5.use ? 1 : 0);
+      }
+      let parentRef = this.getStore().getRefByGuid(this.block.parentGuid);
+      if (!parentRef) {
+        return startIndex;
+      }
+      return parentRef.zIndex + 1 + ((_this$block$tabs6 = this.block.tabs) !== null && _this$block$tabs6 !== void 0 && _this$block$tabs6.use ? 1 : 0);
     }
   },
   watch: {
@@ -22237,21 +22787,21 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
     },
     'block.tabs.list': {
       handler() {
-        var _this$block$tabs5, _this$block$tabs7;
+        var _this$block$tabs7, _this$block$tabs9;
         if (this.isTabsContainer) {
           setTimeout(() => {
             this.setIsShowArrows();
           }, 0);
         }
-        if (((_this$block$tabs5 = this.block.tabs) === null || _this$block$tabs5 === void 0 ? void 0 : _this$block$tabs5.list.length) === 1) {
+        if (((_this$block$tabs7 = this.block.tabs) === null || _this$block$tabs7 === void 0 ? void 0 : _this$block$tabs7.list.length) === 1) {
           this.block.children.forEach(el => {
-            var _this$block$tabs6;
-            el.parentTabGuid = (_this$block$tabs6 = this.block.tabs) === null || _this$block$tabs6 === void 0 ? void 0 : _this$block$tabs6.list[0].guid;
+            var _this$block$tabs8;
+            el.parentTabGuid = (_this$block$tabs8 = this.block.tabs) === null || _this$block$tabs8 === void 0 ? void 0 : _this$block$tabs8.list[0].guid;
           });
         }
-        if (!((_this$block$tabs7 = this.block.tabs) !== null && _this$block$tabs7 !== void 0 && _this$block$tabs7.list.find(item => item.guid === this.activeTabGuid))) {
-          var _this$block$tabs8;
-          if ((_this$block$tabs8 = this.block.tabs) !== null && _this$block$tabs8 !== void 0 && (_this$block$tabs8 = _this$block$tabs8.list[0]) !== null && _this$block$tabs8 !== void 0 && _this$block$tabs8.guid) {
+        if (!((_this$block$tabs9 = this.block.tabs) !== null && _this$block$tabs9 !== void 0 && _this$block$tabs9.list.find(item => item.guid === this.activeTabGuid))) {
+          var _this$block$tabs10;
+          if ((_this$block$tabs10 = this.block.tabs) !== null && _this$block$tabs10 !== void 0 && (_this$block$tabs10 = _this$block$tabs10.list[0]) !== null && _this$block$tabs10 !== void 0 && _this$block$tabs10.guid) {
             this.onTabClick(this.block.tabs.list[0].guid);
           }
         }
@@ -22388,25 +22938,11 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
       }
       this.setSticky((_this$block7 = this.block) === null || _this$block7 === void 0 || (_this$block7 = _this$block7.stickyTo) === null || _this$block7 === void 0 ? void 0 : _this$block7.guid);
     });
-    this.zIndex = this.getZIndex();
   },
   beforeDestroy() {
     this.getStore().removeRef(this.block.guid);
   },
   methods: {
-    getZIndex() {
-      var _this$block$tabs10;
-      const startIndex = 101;
-      if (!this.block.parentGuid) {
-        var _this$block$tabs9;
-        return startIndex + ((_this$block$tabs9 = this.block.tabs) !== null && _this$block$tabs9 !== void 0 && _this$block$tabs9.use ? 1 : 0);
-      }
-      let parentRef = this.getStore().getRefByGuid(this.block.parentGuid);
-      if (!parentRef) {
-        return startIndex;
-      }
-      return parentRef.zIndex + 1 + ((_this$block$tabs10 = this.block.tabs) !== null && _this$block$tabs10 !== void 0 && _this$block$tabs10.use ? 1 : 0);
-    },
     showChildTabs(guid) {
       if (this.block.tabs) {
         this.visibleTabs.forEach(tab => {
@@ -22601,8 +23137,8 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
 }));
 // CONCATENATED MODULE: ./src/infrastructure/components/Block.vue?vue&type=script&lang=ts
  /* harmony default export */ var components_Blockvue_type_script_lang_ts = (Blockvue_type_script_lang_ts); 
-// EXTERNAL MODULE: ./src/infrastructure/components/Block.vue?vue&type=style&index=0&id=1c1889ae&prod&scoped=true&lang=css
-var Blockvue_type_style_index_0_id_1c1889ae_prod_scoped_true_lang_css = __webpack_require__("6253");
+// EXTERNAL MODULE: ./src/infrastructure/components/Block.vue?vue&type=style&index=0&id=08516045&prod&scoped=true&lang=css
+var Blockvue_type_style_index_0_id_08516045_prod_scoped_true_lang_css = __webpack_require__("8c39");
 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__("2877");
@@ -22618,11 +23154,11 @@ var componentNormalizer = __webpack_require__("2877");
 
 var component = Object(componentNormalizer["a" /* default */])(
   components_Blockvue_type_script_lang_ts,
-  Blockvue_type_template_id_1c1889ae_scoped_true_render,
-  Blockvue_type_template_id_1c1889ae_scoped_true_staticRenderFns,
+  Blockvue_type_template_id_08516045_scoped_true_render,
+  Blockvue_type_template_id_08516045_scoped_true_staticRenderFns,
   false,
   null,
-  "1c1889ae",
+  "08516045",
   null
   
 )
@@ -22890,10 +23426,55 @@ module.exports = function (argument) {
 
 /***/ }),
 
-/***/ "a55e":
+/***/ "a4e7":
 /***/ (function(module, exports, __webpack_require__) {
 
-// extracted by mini-css-extract-plugin
+"use strict";
+
+var $ = __webpack_require__("23e7");
+var isSupersetOf = __webpack_require__("395e");
+var setMethodAcceptSetLike = __webpack_require__("dad2");
+
+// `Set.prototype.isSupersetOf` method
+// https://github.com/tc39/proposal-set-methods
+$({ target: 'Set', proto: true, real: true, forced: !setMethodAcceptSetLike('isSupersetOf') }, {
+  isSupersetOf: isSupersetOf
+});
+
+
+/***/ }),
+
+/***/ "a5f7":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var aSet = __webpack_require__("dc19");
+var SetHelpers = __webpack_require__("cb27");
+var clone = __webpack_require__("83b9");
+var size = __webpack_require__("8e16");
+var getSetRecord = __webpack_require__("7f65");
+var iterateSet = __webpack_require__("384f");
+var iterateSimple = __webpack_require__("5388");
+
+var has = SetHelpers.has;
+var remove = SetHelpers.remove;
+
+// `Set.prototype.difference` method
+// https://github.com/tc39/proposal-set-methods
+module.exports = function difference(other) {
+  var O = aSet(this);
+  var otherRec = getSetRecord(other);
+  var result = clone(O);
+  if (size(O) <= otherRec.size) iterateSet(O, function (e) {
+    if (otherRec.includes(e)) remove(result, e);
+  });
+  else iterateSimple(otherRec.getIterator(), function (e) {
+    if (has(O, e)) remove(result, e);
+  });
+  return result;
+};
+
 
 /***/ }),
 
@@ -23590,6 +24171,36 @@ var floor = Math.floor;
 module.exports = Math.trunc || function trunc(x) {
   var n = +x;
   return (n > 0 ? floor : ceil)(n);
+};
+
+
+/***/ }),
+
+/***/ "b4bc":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var aSet = __webpack_require__("dc19");
+var has = __webpack_require__("cb27").has;
+var size = __webpack_require__("8e16");
+var getSetRecord = __webpack_require__("7f65");
+var iterateSet = __webpack_require__("384f");
+var iterateSimple = __webpack_require__("5388");
+var iteratorClose = __webpack_require__("2a62");
+
+// `Set.prototype.isDisjointFrom` method
+// https://tc39.github.io/proposal-set-methods/#Set.prototype.isDisjointFrom
+module.exports = function isDisjointFrom(other) {
+  var O = aSet(this);
+  var otherRec = getSetRecord(other);
+  if (size(O) <= otherRec.size) return iterateSet(O, function (e) {
+    if (otherRec.includes(e)) return false;
+  }, true) !== false;
+  var iterator = otherRec.getIterator();
+  return iterateSimple(iterator, function (e) {
+    if (has(O, e)) return iteratorClose(iterator, 'normal', false);
+  }) !== false;
 };
 
 
@@ -30746,6 +31357,24 @@ var _iconsCache = {
 
 /***/ }),
 
+/***/ "c1a1":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__("23e7");
+var isDisjointFrom = __webpack_require__("b4bc");
+var setMethodAcceptSetLike = __webpack_require__("dad2");
+
+// `Set.prototype.isDisjointFrom` method
+// https://github.com/tc39/proposal-set-methods
+$({ target: 'Set', proto: true, real: true, forced: !setMethodAcceptSetLike('isDisjointFrom') }, {
+  isDisjointFrom: isDisjointFrom
+});
+
+
+/***/ }),
+
 /***/ "c430":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -31242,6 +31871,28 @@ module.exports = function (object, names) {
 
 /***/ }),
 
+/***/ "cb27":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var uncurryThis = __webpack_require__("e330");
+
+// eslint-disable-next-line es/no-set -- safe
+var SetPrototype = Set.prototype;
+
+module.exports = {
+  // eslint-disable-next-line es/no-set -- safe
+  Set: Set,
+  add: uncurryThis(SetPrototype.add),
+  has: uncurryThis(SetPrototype.has),
+  remove: uncurryThis(SetPrototype['delete']),
+  proto: SetPrototype
+};
+
+
+/***/ }),
+
 /***/ "cb2d":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -31645,6 +32296,65 @@ module.exports = USE_SYMBOL_AS_UID ? function (it) {
 
 /***/ }),
 
+/***/ "dad2":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var getBuiltIn = __webpack_require__("d066");
+
+var createSetLike = function (size) {
+  return {
+    size: size,
+    has: function () {
+      return false;
+    },
+    keys: function () {
+      return {
+        next: function () {
+          return { done: true };
+        }
+      };
+    }
+  };
+};
+
+module.exports = function (name) {
+  var Set = getBuiltIn('Set');
+  try {
+    new Set()[name](createSetLike(0));
+    try {
+      // late spec change, early WebKit ~ Safari 17.0 beta implementation does not pass it
+      // https://github.com/tc39/proposal-set-methods/pull/88
+      new Set()[name](createSetLike(-1));
+      return false;
+    } catch (error2) {
+      return true;
+    }
+  } catch (error) {
+    return false;
+  }
+};
+
+
+/***/ }),
+
+/***/ "dc19":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var has = __webpack_require__("cb27").has;
+
+// Perform ? RequireInternalSlot(M, [[SetData]])
+module.exports = function (it) {
+  has(it);
+  return it;
+};
+
+
+/***/ }),
+
 /***/ "dc4a":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -31748,6 +32458,32 @@ var Sticky;
   Sticky["BL"] = "bl";
   Sticky["BR"] = "br";
 })(Sticky || (Sticky = {}));
+
+/***/ }),
+
+/***/ "e9bc":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var aSet = __webpack_require__("dc19");
+var add = __webpack_require__("cb27").add;
+var clone = __webpack_require__("83b9");
+var getSetRecord = __webpack_require__("7f65");
+var iterateSimple = __webpack_require__("5388");
+
+// `Set.prototype.union` method
+// https://github.com/tc39/proposal-set-methods
+module.exports = function union(other) {
+  var O = aSet(this);
+  var keysIter = getSetRecord(other).getIterator();
+  var result = clone(O);
+  iterateSimple(keysIter, function (it) {
+    add(result, it);
+  });
+  return result;
+};
+
 
 /***/ }),
 

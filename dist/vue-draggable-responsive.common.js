@@ -486,10 +486,14 @@ $({ target: 'Set', proto: true, real: true, forced: !setMethodAcceptSetLike('dif
 
 /***/ }),
 
-/***/ "21c0":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "1fab":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-// extracted by mini-css-extract-plugin
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Block_vue_vue_type_style_index_0_id_3d3e9885_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("8f5f");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Block_vue_vue_type_style_index_0_id_3d3e9885_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Block_vue_vue_type_style_index_0_id_3d3e9885_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+
 
 /***/ }),
 
@@ -17959,6 +17963,17 @@ module.exports = function (it) {
 
 /***/ }),
 
+/***/ "36b1":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_previewer_vue_vue_type_style_index_0_id_9d7644ce_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("a2b9");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_previewer_vue_vue_type_style_index_0_id_9d7644ce_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_previewer_vue_vue_type_style_index_0_id_9d7644ce_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+
+
+/***/ }),
+
 /***/ "384f":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18439,12 +18454,19 @@ class BlockRepository_BlockRepository {
 
 /***/ }),
 
+/***/ "435d":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "4419":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"176724c4-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/previewer.vue?vue&type=template&id=61a95f02&scoped=true
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"176724c4-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/previewer.vue?vue&type=template&id=9d7644ce&scoped=true
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c,
@@ -18489,10 +18511,10 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/previewer.vue?vue&type=template&id=61a95f02&scoped=true
+// CONCATENATED MODULE: ./src/previewer.vue?vue&type=template&id=9d7644ce&scoped=true
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"176724c4-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/PreviewBlock.vue?vue&type=template&id=29ac3151&scoped=true
-var PreviewBlockvue_type_template_id_29ac3151_scoped_true_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"176724c4-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/PreviewBlock.vue?vue&type=template&id=6ba80a4e&scoped=true
+var PreviewBlockvue_type_template_id_6ba80a4e_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
@@ -18659,18 +18681,15 @@ var PreviewBlockvue_type_template_id_29ac3151_scoped_true_render = function rend
     });
   })], 2)]);
 };
-var PreviewBlockvue_type_template_id_29ac3151_scoped_true_staticRenderFns = [];
+var PreviewBlockvue_type_template_id_6ba80a4e_scoped_true_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=template&id=29ac3151&scoped=true
+// CONCATENATED MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=template&id=6ba80a4e&scoped=true
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.push.js
 var es_array_push = __webpack_require__("14d9");
 
 // EXTERNAL MODULE: ./src/domain/model/BlockDTO.ts + 1 modules
 var BlockDTO = __webpack_require__("ccb2");
-
-// EXTERNAL MODULE: ./node_modules/resize-observer-polyfill/dist/ResizeObserver.es.js
-var ResizeObserver_es = __webpack_require__("6dd8");
 
 // EXTERNAL MODULE: external {"commonjs":"vue","commonjs2":"vue","root":"Vue"}
 var external_commonjs_vue_commonjs2_vue_root_Vue_ = __webpack_require__("8bbf");
@@ -18696,18 +18715,52 @@ function debounce(cb, wait = 20, additionalCb = () => {}) {
   };
   return callable;
 }
+// EXTERNAL MODULE: ./node_modules/resize-observer-polyfill/dist/ResizeObserver.es.js
+var ResizeObserver_es = __webpack_require__("6dd8");
+
 // CONCATENATED MODULE: ./src/infrastructure/components/mixins/StretchedMixin.js
+
 
 /* harmony default export */ var StretchedMixin = ({
   data() {
     return {
       scrollHeight: 0,
       scrollWidth: 0,
-      setStretchedSize: () => {}
+      setStretchedSize: () => {},
+      resizeObserver: null,
+      mutationObserver: null
     };
+  },
+  mounted() {
+    var _this$block;
+    this.$nextTick(() => {
+      this.setStretchedSize();
+    });
+    if ((_this$block = this.block) !== null && _this$block !== void 0 && _this$block.isStretched && this.$refs.container && this.$refs.container instanceof Element) {
+      let children = this.$refs.container.children;
+      this.resizeObserver = new ResizeObserver_es["a" /* default */](() => {
+        this.setStretchedSize();
+      });
+      for (let item of children) {
+        this.resizeObserver.observe(item);
+      }
+      let me = this;
+      this.mutationObserver = new MutationObserver(mutationList => {
+        mutationList.filter(m => m.type === 'childList').forEach(m => {
+          m.addedNodes.forEach(node => node instanceof Element && me.resizeObserver.observe(node));
+        });
+      });
+      this.mutationObserver.observe(this.$refs.container, {
+        childList: true
+      });
+    }
   },
   created() {
     this.setStretchedSize = debounce(this._setStretchedSize.bind(this), 100);
+  },
+  beforeDestroy() {
+    this.resizeObserver && this.resizeObserver.disconnect();
+    this.mutationObserver && this.mutationObserver.disconnect();
   },
   methods: {
     _setStretchedSize() {
@@ -18723,8 +18776,13 @@ function debounce(cb, wait = 20, additionalCb = () => {}) {
       this.scrollHeight = 0;
       this.scrollWidth = 0;
       this.$nextTick(() => {
-        this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight;
-        this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth;
+        const el = this.$el.getElementsByClassName('content')[0];
+        const newHeight = el.scrollHeight;
+        const newWidth = el.scrollWidth;
+        if (this.scrollHeight !== newHeight || this.scrollWidth !== newWidth) {
+          this.scrollHeight = newHeight;
+          this.scrollWidth = newWidth;
+        }
         if (parentNode && parentScroll) {
           this.$nextTick(() => {
             if (parentNode) {
@@ -18880,9 +18938,6 @@ var SizeTypes = __webpack_require__("9338");
 // EXTERNAL MODULE: ./src/domain/model/Sticky.ts
 var Sticky = __webpack_require__("e920");
 
-// EXTERNAL MODULE: ./src/application/service/BlockManager.ts + 3 modules
-var BlockManager = __webpack_require__("c8f9");
-
 // EXTERNAL MODULE: ./src/domain/model/StickyTo.ts
 var StickyTo = __webpack_require__("1d16");
 
@@ -18957,8 +19012,6 @@ class StickyManager_StickyManager {
         const observedGuid = this.elementToGuidMap.get(stickyTo);
         if (observedGuid) {
           this.updateDependentsRecursively(observedGuid);
-        } else {
-          console.log('NOT FOUND');
         }
       });
       observer.observe(stickyTo);
@@ -19036,7 +19089,6 @@ const stickyManager = new StickyManager_StickyManager();
 
 
 
-
 /* harmony default export */ var StyleMixin = ({
   data() {
     return {
@@ -19050,6 +19102,7 @@ const stickyManager = new StickyManager_StickyManager();
     stickyManager.removeBlock(this.block.guid);
   },
   mounted() {
+    this.setParent();
     this.$nextTick(() => {
       var _this$block;
       this.setSticky((_this$block = this.block) === null || _this$block === void 0 || (_this$block = _this$block.stickyTo) === null || _this$block === void 0 ? void 0 : _this$block.guid);
@@ -19071,33 +19124,15 @@ const stickyManager = new StickyManager_StickyManager();
       return parentRef.zIndex + 1 + ((_this$block$tabs2 = this.block.tabs) !== null && _this$block$tabs2 !== void 0 && _this$block$tabs2.use ? 1 : 0);
     },
     defaultPosition() {
+      var _this$block$stickyTo;
       // console.count(`defaultPosition ${this.block.guid}`)
       let position = {};
       let top;
       let left;
-      let width = null;
-      let height = null;
       switch (this.block.sticky) {
         case Sticky["a" /* Sticky */].TL:
           top = this.block.top + this.block.sizeTypes.top;
           left = this.block.left + this.block.sizeTypes.left;
-          if (this.block.parentGuid) {
-            if (typeof this.parentBlock !== 'undefined') {
-              if (this.parentBlock.isStretched && this.isTabsContainer) {
-                // Если this.isTabsContainer === false
-                // и чекбокс "Растягиваемый" включен у дочернего блока, то поля в дочернем блоке пропадают (width = 0px)
-                const parentSizes = BlockManager["a" /* default */].getAbsoluteSizesByParent(this.parentBlock, this.parentElement);
-                if (this.block.sizeTypes.top === SizeTypes["a" /* SizeTypes */].PERCENT) {
-                  top = `${parentSizes.height / 100 * (this.block.top || 0)}px`;
-                  height = `${parentSizes.height / 100 * this.block.height}px`;
-                }
-                if (this.block.sizeTypes.left === SizeTypes["a" /* SizeTypes */].PERCENT) {
-                  left = `${parentSizes.width / 100 * (this.block.left || 0)}px`;
-                  width = `${parentSizes.width / 100 * this.block.width}px`;
-                }
-              }
-            }
-          }
           position = {
             top: top,
             left: left
@@ -19128,39 +19163,25 @@ const stickyManager = new StickyManager_StickyManager();
           };
           break;
       }
-      return {
-        position,
-        width,
-        height
-      };
+      if ((_this$block$stickyTo = this.block.stickyTo) !== null && _this$block$stickyTo !== void 0 && _this$block$stickyTo.guid) {
+        var _this$block$stickyTo2;
+        if (this.block.stickyTo.type === StickyTo["a" /* StickyToType */].TOP) {
+          delete position.top;
+        } else if (((_this$block$stickyTo2 = this.block.stickyTo) === null || _this$block$stickyTo2 === void 0 ? void 0 : _this$block$stickyTo2.type) === StickyTo["a" /* StickyToType */].LEFT) {
+          delete position.left;
+        }
+      }
+      return position;
     },
     positionStyle: function () {
-      var _this$block$replicati, _this$block$stickyTo3, _this$block$onCenter, _this$block$stickyTo4, _this$block$onCenter2, _this$block$stickyTo5, _this$block$onCenter3, _this$block$stickyTo6;
+      var _this$block$replicati, _this$block$stickyTo5, _this$block$onCenter, _this$block$stickyTo6, _this$block$onCenter2, _this$block$stickyTo7, _this$block$onCenter3, _this$block$stickyTo8;
       // console.count(`positionStyle ${this.block.guid}`)
 
       let height = this.block.height + this.block.sizeTypes.height;
       let width = this.block.width + this.block.sizeTypes.width;
-      let {
-        position,
-        width: _width,
-        height: _height
-      } = this.defaultPosition;
-      if (_width !== null) {
-        width = _width;
-      }
-      if (_height !== null) {
-        height = _height;
-      }
-      if (this.block.isHidden) {
-        var _this$block$stickyTo, _this$block$stickyTo2;
-        if ((_this$block$stickyTo = this.block.stickyTo) !== null && _this$block$stickyTo !== void 0 && _this$block$stickyTo.guid && (_this$block$stickyTo2 = this.block.stickyTo) !== null && _this$block$stickyTo2 !== void 0 && _this$block$stickyTo2.type) {
-          if (this.block.stickyTo.type === StickyTo["a" /* StickyToType */].TOP) {
-            position.top = '0px';
-          } else if (this.block.stickyTo.type === StickyTo["a" /* StickyToType */].LEFT) {
-            position.left = '0px';
-          }
-        }
-      }
+      let position = this.defaultPosition;
+      position.width = width;
+      position.height = height;
       if ((_this$block$replicati = this.block.replication) !== null && _this$block$replicati !== void 0 && _this$block$replicati.topBlockGuid) {
         var _this$block$replicati2;
         const stickyToElement = this.getStore().getRefByGuid((_this$block$replicati2 = this.block.replication) === null || _this$block$replicati2 === void 0 ? void 0 : _this$block$replicati2.topBlockGuid);
@@ -19210,10 +19231,18 @@ const stickyManager = new StickyManager_StickyManager();
         });
       }
       if (this.block.isHidden) {
+        var _this$block$stickyTo3, _this$block$stickyTo4;
         position.width = '0px';
         position.height = '0px';
+        if ((_this$block$stickyTo3 = this.block.stickyTo) !== null && _this$block$stickyTo3 !== void 0 && _this$block$stickyTo3.guid && (_this$block$stickyTo4 = this.block.stickyTo) !== null && _this$block$stickyTo4 !== void 0 && _this$block$stickyTo4.type) {
+          if (this.block.stickyTo.type === StickyTo["a" /* StickyToType */].TOP) {
+            position.top = '0px';
+          } else if (this.block.stickyTo.type === StickyTo["a" /* StickyToType */].LEFT) {
+            position.left = '0px';
+          }
+        }
       }
-      if (!((_this$block$stickyTo3 = this.block.stickyTo) !== null && _this$block$stickyTo3 !== void 0 && _this$block$stickyTo3.guid) && (_this$block$onCenter = this.block.onCenter) !== null && _this$block$onCenter !== void 0 && _this$block$onCenter.horizontal && this.isShowing) {
+      if (!((_this$block$stickyTo5 = this.block.stickyTo) !== null && _this$block$stickyTo5 !== void 0 && _this$block$stickyTo5.guid) && (_this$block$onCenter = this.block.onCenter) !== null && _this$block$onCenter !== void 0 && _this$block$onCenter.horizontal && this.isShowing) {
         const refBlock = this.getStore().getRefByGuid(this.block.guid);
         // Для элементов с display:none offsetWidth равен нулю
         if (refBlock && refBlock.$el.offsetWidth) {
@@ -19225,7 +19254,7 @@ const stickyManager = new StickyManager_StickyManager();
         }
       }
       // центрировать горизонтально (адаптивно)
-      if (!((_this$block$stickyTo4 = this.block.stickyTo) !== null && _this$block$stickyTo4 !== void 0 && _this$block$stickyTo4.guid) && (_this$block$onCenter2 = this.block.onCenter) !== null && _this$block$onCenter2 !== void 0 && _this$block$onCenter2.horizontalAdaptive && this.isShowing) {
+      if (!((_this$block$stickyTo6 = this.block.stickyTo) !== null && _this$block$stickyTo6 !== void 0 && _this$block$stickyTo6.guid) && (_this$block$onCenter2 = this.block.onCenter) !== null && _this$block$onCenter2 !== void 0 && _this$block$onCenter2.horizontalAdaptive && this.isShowing) {
         const refBlock = this.getStore().getRefByGuid(this.block.guid);
         // Для элементов с display:none offsetWidth равен нулю
         if (refBlock && refBlock.$el.offsetWidth) {
@@ -19236,7 +19265,7 @@ const stickyManager = new StickyManager_StickyManager();
           position.right = '0';
         }
       }
-      if (!((_this$block$stickyTo5 = this.block.stickyTo) !== null && _this$block$stickyTo5 !== void 0 && _this$block$stickyTo5.guid) && (_this$block$onCenter3 = this.block.onCenter) !== null && _this$block$onCenter3 !== void 0 && _this$block$onCenter3.vertical && this.isShowing) {
+      if (!((_this$block$stickyTo7 = this.block.stickyTo) !== null && _this$block$stickyTo7 !== void 0 && _this$block$stickyTo7.guid) && (_this$block$onCenter3 = this.block.onCenter) !== null && _this$block$onCenter3 !== void 0 && _this$block$onCenter3.vertical && this.isShowing) {
         const refBlock = this.getStore().getRefByGuid(this.block.guid);
         if (refBlock) {
           if (this.block.sticky === Sticky["a" /* Sticky */].TR || this.block.sticky === Sticky["a" /* Sticky */].TL) {
@@ -19246,8 +19275,13 @@ const stickyManager = new StickyManager_StickyManager();
           }
         }
       }
-      if ((_this$block$stickyTo6 = this.block.stickyTo) !== null && _this$block$stickyTo6 !== void 0 && _this$block$stickyTo6.guid) {
-        delete position.top;
+      if ((_this$block$stickyTo8 = this.block.stickyTo) !== null && _this$block$stickyTo8 !== void 0 && _this$block$stickyTo8.guid) {
+        var _this$block$stickyTo9, _this$block$stickyTo10;
+        if (((_this$block$stickyTo9 = this.block.stickyTo) === null || _this$block$stickyTo9 === void 0 ? void 0 : _this$block$stickyTo9.type) === StickyTo["a" /* StickyToType */].TOP) {
+          delete position.top;
+        } else if (((_this$block$stickyTo10 = this.block.stickyTo) === null || _this$block$stickyTo10 === void 0 ? void 0 : _this$block$stickyTo10.type) === StickyTo["a" /* StickyToType */].LEFT) {
+          delete position.left;
+        }
       }
       return Object.assign(position, {
         zIndex: this.zIndex
@@ -19261,11 +19295,11 @@ const stickyManager = new StickyManager_StickyManager();
   methods: {
     setSticky(guid) {
       if (guid) {
-        var _this$block$stickyTo7, _this$block$stickyTo8;
+        var _this$block$stickyTo11, _this$block$stickyTo12;
         this.stickyToBlock = this.getStore().getByGuid(guid);
         this.stickyToElement = this.getStore().getRefByGuid(guid);
         let stickyOffset = '';
-        switch ((_this$block$stickyTo7 = this.block.stickyTo) === null || _this$block$stickyTo7 === void 0 ? void 0 : _this$block$stickyTo7.type) {
+        switch ((_this$block$stickyTo11 = this.block.stickyTo) === null || _this$block$stickyTo11 === void 0 ? void 0 : _this$block$stickyTo11.type) {
           case StickyTo["a" /* StickyToType */].TOP:
             stickyOffset = this.block.top + this.block.sizeTypes.top;
             break;
@@ -19277,7 +19311,7 @@ const stickyManager = new StickyManager_StickyManager();
           guid: this.block.guid,
           stickyTo: this.stickyToElement.$el,
           element: this.$refs.draggableContainer,
-          type: ((_this$block$stickyTo8 = this.block.stickyTo) === null || _this$block$stickyTo8 === void 0 ? void 0 : _this$block$stickyTo8.type) || StickyTo["a" /* StickyToType */].TOP,
+          type: ((_this$block$stickyTo12 = this.block.stickyTo) === null || _this$block$stickyTo12 === void 0 ? void 0 : _this$block$stickyTo12.type) || StickyTo["a" /* StickyToType */].TOP,
           offset: stickyOffset
         });
       } else {
@@ -19293,7 +19327,6 @@ const stickyManager = new StickyManager_StickyManager();
   }
 });
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--15-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--15-3!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/PreviewBlock.vue?vue&type=script&lang=ts
-
 
 
 // eslint-disable-next-line no-unused-vars
@@ -19497,43 +19530,25 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
     }
   },
   mounted() {
-    var _this$block7, _this$block8, _this$block9;
+    var _this$block7, _this$block8;
     this.setParent();
     this.$nextTick(() => {
-      this.setStretchedSize();
       if (this.isTabsContainer) {
         this.setIsShowArrows();
       }
     });
     if ((_this$block7 = this.block) !== null && _this$block7 !== void 0 && (_this$block7 = _this$block7.tabs) !== null && _this$block7 !== void 0 && _this$block7.use && ((_this$block8 = this.block) === null || _this$block8 === void 0 || (_this$block8 = _this$block8.tabs) === null || _this$block8 === void 0 || (_this$block8 = _this$block8.list) === null || _this$block8 === void 0 ? void 0 : _this$block8.length) > 0) {
       if (this.block.tabs.saveActiveTab && this.block.tabs.activeGuid) {
-        this.onTabClick(this.block.tabs.activeGuid || this.availableTabs[0].guid);
+        var _this$availableTabs$;
+        this.onTabClick(this.block.tabs.activeGuid || ((_this$availableTabs$ = this.availableTabs[0]) === null || _this$availableTabs$ === void 0 ? void 0 : _this$availableTabs$.guid));
       } else {
-        this.onTabClick(this.availableTabs[0].guid);
+        this.availableTabs[0].guid && this.onTabClick(this.availableTabs[0].guid);
       }
       // установлена вкладка по умолчанию
       let defaultTab = this.getDefaultTab();
       if (defaultTab) {
         this.onTabClick(defaultTab);
       }
-    }
-    if ((_this$block9 = this.block) !== null && _this$block9 !== void 0 && _this$block9.isStretched && this.$refs.container && this.$refs.container instanceof Element) {
-      let children = this.$refs.container.children;
-      const observer = new ResizeObserver_es["a" /* default */](() => {
-        this.setStretchedSize();
-      });
-      for (let item of children) {
-        observer.observe(item);
-      }
-      const observerInserted = new MutationObserver(mutationList => {
-        mutationList.filter(m => m.type === 'childList').forEach(m => {
-          m.addedNodes.forEach(node => node instanceof Element && observer.observe(node));
-        });
-      });
-      observerInserted.observe(this.$refs.container, {
-        childList: true,
-        subtree: true
-      });
     }
     this.block.isLoading = false;
     this.prepareReplication();
@@ -19648,8 +19663,8 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
       return style;
     },
     getDefaultTab() {
-      var _this$block10, _this$block11;
-      if (!((_this$block10 = this.block) !== null && _this$block10 !== void 0 && (_this$block10 = _this$block10.tabs) !== null && _this$block10 !== void 0 && _this$block10.use) || ((_this$block11 = this.block) === null || _this$block11 === void 0 || (_this$block11 = _this$block11.tabs) === null || _this$block11 === void 0 || (_this$block11 = _this$block11.list) === null || _this$block11 === void 0 ? void 0 : _this$block11.length) === 1) {
+      var _this$block9, _this$block10;
+      if (!((_this$block9 = this.block) !== null && _this$block9 !== void 0 && (_this$block9 = _this$block9.tabs) !== null && _this$block9 !== void 0 && _this$block9.use) || ((_this$block10 = this.block) === null || _this$block10 === void 0 || (_this$block10 = _this$block10.tabs) === null || _this$block10 === void 0 || (_this$block10 = _this$block10.list) === null || _this$block10 === void 0 ? void 0 : _this$block10.length) === 1) {
         return null;
       }
       let tabs = this.block.tabs.list;
@@ -19677,8 +19692,8 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
 }));
 // CONCATENATED MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=script&lang=ts
  /* harmony default export */ var components_PreviewBlockvue_type_script_lang_ts = (PreviewBlockvue_type_script_lang_ts); 
-// EXTERNAL MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=style&index=0&id=29ac3151&prod&scoped=true&lang=css
-var PreviewBlockvue_type_style_index_0_id_29ac3151_prod_scoped_true_lang_css = __webpack_require__("82e6");
+// EXTERNAL MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=style&index=0&id=6ba80a4e&prod&scoped=true&lang=css
+var PreviewBlockvue_type_style_index_0_id_6ba80a4e_prod_scoped_true_lang_css = __webpack_require__("b9c2");
 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__("2877");
@@ -19694,11 +19709,11 @@ var componentNormalizer = __webpack_require__("2877");
 
 var component = Object(componentNormalizer["a" /* default */])(
   components_PreviewBlockvue_type_script_lang_ts,
-  PreviewBlockvue_type_template_id_29ac3151_scoped_true_render,
-  PreviewBlockvue_type_template_id_29ac3151_scoped_true_staticRenderFns,
+  PreviewBlockvue_type_template_id_6ba80a4e_scoped_true_render,
+  PreviewBlockvue_type_template_id_6ba80a4e_scoped_true_staticRenderFns,
   false,
   null,
-  "29ac3151",
+  "6ba80a4e",
   null
   
 )
@@ -19713,7 +19728,6 @@ var TabSettings = __webpack_require__("6b0c");
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--15-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--15-3!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/previewer.vue?vue&type=script&lang=ts
 
 // eslint-disable-next-line no-unused-vars
-
 
 
 
@@ -19768,9 +19782,6 @@ const previewervue_type_script_lang_ts_Vue = external_commonjs_vue_commonjs2_vue
       this.$nextTick(() => {
         this.store.set(blocks);
       });
-      setTimeout(() => {
-        stickyManager.updateAll();
-      }, 1000);
     },
     removeBlock(guid) {
       this.store.remove(guid);
@@ -19782,8 +19793,8 @@ const previewervue_type_script_lang_ts_Vue = external_commonjs_vue_commonjs2_vue
 }));
 // CONCATENATED MODULE: ./src/previewer.vue?vue&type=script&lang=ts
  /* harmony default export */ var src_previewervue_type_script_lang_ts = (previewervue_type_script_lang_ts); 
-// EXTERNAL MODULE: ./src/previewer.vue?vue&type=style&index=0&id=61a95f02&prod&scoped=true&lang=css
-var previewervue_type_style_index_0_id_61a95f02_prod_scoped_true_lang_css = __webpack_require__("5113");
+// EXTERNAL MODULE: ./src/previewer.vue?vue&type=style&index=0&id=9d7644ce&prod&scoped=true&lang=css
+var previewervue_type_style_index_0_id_9d7644ce_prod_scoped_true_lang_css = __webpack_require__("36b1");
 
 // CONCATENATED MODULE: ./src/previewer.vue
 
@@ -19800,7 +19811,7 @@ var previewer_component = Object(componentNormalizer["a" /* default */])(
   staticRenderFns,
   false,
   null,
-  "61a95f02",
+  "9d7644ce",
   null
   
 )
@@ -19932,17 +19943,6 @@ module.exports = function (argument) {
   var len = toIntegerOrInfinity(argument);
   return len > 0 ? min(len, 0x1FFFFFFFFFFFFF) : 0; // 2 ** 53 - 1 == 9007199254740991
 };
-
-
-/***/ }),
-
-/***/ "5113":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_previewer_vue_vue_type_style_index_0_id_61a95f02_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("643e");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_previewer_vue_vue_type_style_index_0_id_61a95f02_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_previewer_vue_vue_type_style_index_0_id_61a95f02_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
 
 
 /***/ }),
@@ -20138,20 +20138,6 @@ module.exports = function (key, value) {
   } return value;
 };
 
-
-/***/ }),
-
-/***/ "643e":
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ "664f":
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -21597,17 +21583,6 @@ module.exports = function (argument) {
 
 /***/ }),
 
-/***/ "82e6":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_29ac3151_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("21c0");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_29ac3151_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_29ac3151_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
-
-
-/***/ }),
-
 /***/ "83ab":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21737,17 +21712,6 @@ module.exports = require("vue");
 
 /***/ }),
 
-/***/ "8c39":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Block_vue_vue_type_style_index_0_id_08516045_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("664f");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Block_vue_vue_type_style_index_0_id_08516045_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Block_vue_vue_type_style_index_0_id_08516045_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
-
-
-/***/ }),
-
 /***/ "8e16":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21760,6 +21724,13 @@ module.exports = uncurryThisAccessor(SetHelpers.proto, 'size', 'get') || functio
   return set.size;
 };
 
+
+/***/ }),
+
+/***/ "8f5f":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -22048,8 +22019,8 @@ var staticRenderFns = [];
 
 // CONCATENATED MODULE: ./src/index.vue?vue&type=template&id=683d5d5c&scoped=true
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"176724c4-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/Block.vue?vue&type=template&id=08516045&scoped=true
-var Blockvue_type_template_id_08516045_scoped_true_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"176724c4-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/Block.vue?vue&type=template&id=3d3e9885&scoped=true
+var Blockvue_type_template_id_3d3e9885_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
@@ -22331,9 +22302,9 @@ var Blockvue_type_template_id_08516045_scoped_true_render = function render() {
     }
   })], 2);
 };
-var Blockvue_type_template_id_08516045_scoped_true_staticRenderFns = [];
+var Blockvue_type_template_id_3d3e9885_scoped_true_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/infrastructure/components/Block.vue?vue&type=template&id=08516045&scoped=true
+// CONCATENATED MODULE: ./src/infrastructure/components/Block.vue?vue&type=template&id=3d3e9885&scoped=true
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.push.js
 var es_array_push = __webpack_require__("14d9");
@@ -22348,9 +22319,369 @@ var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpac
 // EXTERNAL MODULE: ./src/domain/model/BlockDTO.ts + 1 modules
 var BlockDTO = __webpack_require__("ccb2");
 
-// EXTERNAL MODULE: ./src/application/service/BlockManager.ts + 3 modules
-var BlockManager = __webpack_require__("c8f9");
+// CONCATENATED MODULE: ./src/domain/model/CustomDomRect.ts
+class CustomDomRect {
+  constructor() {
+    this.x = 0;
+    this.y = 0;
+    this.width = 0;
+    this.height = 0;
+    this.left = 0;
+    this.right = 0;
+    this.top = 0;
+    this.bottom = 0;
+  }
+  static fromDocRect(domRect) {
+    const {
+      top,
+      right,
+      bottom,
+      left,
+      width,
+      height,
+      x,
+      y
+    } = domRect;
+    return {
+      top,
+      right,
+      bottom,
+      left,
+      width,
+      height,
+      x,
+      y
+    };
+  }
+}
+// CONCATENATED MODULE: ./src/domain/model/Breakpoints.ts
+var Breakpoints;
+(function (Breakpoints) {
+  Breakpoints[Breakpoints["X"] = 0] = "X";
+  Breakpoints[Breakpoints["Y"] = 1] = "Y";
+  Breakpoints[Breakpoints["W"] = 2] = "W";
+  Breakpoints[Breakpoints["H"] = 3] = "H";
+})(Breakpoints || (Breakpoints = {}));
+// EXTERNAL MODULE: ./src/domain/model/Sticky.ts
+var Sticky = __webpack_require__("e920");
 
+// CONCATENATED MODULE: ./src/domain/service/BreakpointsFactory.ts
+
+
+const MAP = {
+  [Breakpoints.W]: {
+    client: 'clientX',
+    movement: 'movementX',
+    offset: 'width',
+    size: 'width',
+    inverse: false
+  },
+  [Breakpoints.H]: {
+    client: 'clientY',
+    movement: 'movementY',
+    offset: 'height',
+    size: 'height',
+    inverse: false
+  },
+  [Breakpoints.Y]: {
+    client: 'clientY',
+    movement: 'movementY',
+    size: 'height',
+    offset: 'top',
+    inverse: false
+  },
+  [Breakpoints.X]: {
+    client: 'clientX',
+    movement: 'movementX',
+    size: 'width',
+    offset: 'left',
+    inverse: false
+  }
+};
+const STICKY_OFFSET_MAP = {
+  [Breakpoints.X]: {
+    [Sticky["a" /* Sticky */].TR]: {
+      offset: 'right',
+      inverse: true
+    },
+    [Sticky["a" /* Sticky */].TL]: {
+      offset: 'left',
+      inverse: false
+    },
+    [Sticky["a" /* Sticky */].BL]: {
+      offset: 'left',
+      inverse: false
+    },
+    [Sticky["a" /* Sticky */].BR]: {
+      offset: 'right',
+      inverse: true
+    }
+  },
+  [Breakpoints.Y]: {
+    [Sticky["a" /* Sticky */].TR]: {
+      offset: 'top',
+      inverse: false
+    },
+    [Sticky["a" /* Sticky */].TL]: {
+      offset: 'top',
+      inverse: false
+    },
+    [Sticky["a" /* Sticky */].BL]: {
+      offset: 'bottom',
+      inverse: true
+    },
+    [Sticky["a" /* Sticky */].BR]: {
+      offset: 'bottom',
+      inverse: true
+    }
+  },
+  [Breakpoints.H]: {
+    [Sticky["a" /* Sticky */].BL]: {
+      inverse: true
+    },
+    [Sticky["a" /* Sticky */].BR]: {
+      inverse: true
+    }
+  },
+  [Breakpoints.W]: {
+    [Sticky["a" /* Sticky */].TR]: {
+      inverse: true
+    },
+    [Sticky["a" /* Sticky */].BR]: {
+      inverse: true
+    }
+  }
+};
+class BreakpointsFactory {
+  static build(type, sticky) {
+    const options = (STICKY_OFFSET_MAP[type] || {})[sticky] || null;
+    if (options) {
+      return Object.assign({}, MAP[type], options);
+    }
+    return MAP[type];
+  }
+}
+// EXTERNAL MODULE: ./src/domain/model/SizeTypes.ts
+var SizeTypes = __webpack_require__("9338");
+
+// EXTERNAL MODULE: ./src/domain/model/StickyTo.ts
+var StickyTo = __webpack_require__("1d16");
+
+// CONCATENATED MODULE: ./src/application/service/BlockManager.ts
+
+
+
+
+
+
+class BlockManager_BlockManager {
+  constructor(block, repository, blockElement, step = 0.5) {
+    this.clientX = 0;
+    this.clientY = 0;
+    this.movementX = 0;
+    this.movementY = 0;
+    this.type = 'drag';
+    this.blockElementRect = new CustomDomRect();
+    this.repository = repository;
+    this.block = block;
+    this.step = step;
+    this.blockElement = blockElement;
+    this.parentElement = this.blockElement.parentElement;
+  }
+  startDrag(event, type, isInteractive = false) {
+    this.blockElementRect = this.getBlockElementRect();
+    this.clientX = event.clientX;
+    this.clientY = event.clientY;
+    this.type = type;
+    if (this.type === 'resize') {
+      if (this.block.widthCalc && this.block.widthCalc.type && this.block.widthCalc.value) {
+        if (this.block.widthCalc.type === '-') {
+          if (this.block.sticky === Sticky["a" /* Sticky */].TL || this.block.sticky === Sticky["a" /* Sticky */].BL) {
+            this.clientX = this.clientX - this.block.widthCalc.value;
+          } else {
+            this.clientX = this.clientX + this.block.widthCalc.value;
+          }
+        } else {
+          if (this.block.sticky === Sticky["a" /* Sticky */].TL || this.block.sticky === Sticky["a" /* Sticky */].BL) {
+            this.clientX = this.clientX + this.block.widthCalc.value;
+          } else {
+            this.clientX = this.clientX - this.block.widthCalc.value;
+          }
+        }
+      }
+      if (this.block.heightCalc && this.block.heightCalc.type && this.block.heightCalc.value) {
+        if (this.block.heightCalc.type === '-') {
+          if (this.block.sticky === Sticky["a" /* Sticky */].TL || this.block.sticky === Sticky["a" /* Sticky */].TR) {
+            this.clientY = this.clientY - this.block.heightCalc.value;
+          } else {
+            this.clientY = this.clientY + this.block.heightCalc.value;
+          }
+        } else {
+          if (this.block.sticky === Sticky["a" /* Sticky */].TL || this.block.sticky === Sticky["a" /* Sticky */].TR) {
+            this.clientY = this.clientY + this.block.heightCalc.value;
+          } else {
+            this.clientY = this.clientY - this.block.heightCalc.value;
+          }
+        }
+      }
+    }
+    if (isInteractive) {
+      this.clientX = this.blockElementRect.x + 15;
+      this.clientY = this.blockElementRect.y + 15;
+    }
+    if (this.type === 'drag' && isInteractive) {
+      var _this$block$stickyTo;
+      if ((_this$block$stickyTo = this.block.stickyTo) !== null && _this$block$stickyTo !== void 0 && _this$block$stickyTo.guid) {
+        var _this$block$stickyTo2, _this$block$stickyTo3, _this$block$stickyTo4;
+        const el = this.repository.getRefByGuid((_this$block$stickyTo2 = this.block.stickyTo) === null || _this$block$stickyTo2 === void 0 ? void 0 : _this$block$stickyTo2.guid);
+        if (((_this$block$stickyTo3 = this.block.stickyTo) === null || _this$block$stickyTo3 === void 0 ? void 0 : _this$block$stickyTo3.type) === StickyTo["a" /* StickyToType */].TOP) {
+          this.clientY += el.$el.offsetTop + el.$el.offsetHeight;
+        } else if (((_this$block$stickyTo4 = this.block.stickyTo) === null || _this$block$stickyTo4 === void 0 ? void 0 : _this$block$stickyTo4.type) === StickyTo["a" /* StickyToType */].LEFT) {
+          this.clientX += el.$el.offsetLeft + el.$el.offsetWidth;
+        }
+      }
+    }
+  }
+  getBlockElementRect() {
+    const blockRect = CustomDomRect.fromDocRect(this.blockElement.getBoundingClientRect());
+    if (!this.parentElement) {
+      return blockRect;
+    }
+    const parentElementRect = this.parentElement.getBoundingClientRect();
+    blockRect.left -= parentElementRect.left;
+    blockRect.top -= parentElementRect.top;
+    blockRect.left += this.parentElement.scrollLeft;
+    blockRect.top += this.parentElement.scrollTop;
+    blockRect.right = parentElementRect.width - (blockRect.left + blockRect.width);
+    blockRect.bottom = parentElementRect.height - (blockRect.top + blockRect.height);
+    return blockRect;
+  }
+  static getAbsoluteSizesByParent(block, blockElement) {
+    let blockRect = new CustomDomRect();
+    const parentElement = blockElement.parentElement;
+    if (!parentElement) {
+      return blockRect;
+    }
+    const parentElementRect = parentElement.getBoundingClientRect();
+    blockRect.height = parentElementRect.height / 100 * block.height;
+    blockRect.width = parentElementRect.width / 100 * block.width;
+    return blockRect;
+  }
+  // TODO: учитывать sticky
+  change(event) {
+    this.movementX = this.clientX - event.clientX;
+    this.movementY = this.clientY - event.clientY;
+    if (this.type === 'drag') {
+      this.setYPosition(event);
+      this.setXPosition(event);
+    } else if (this.type === 'resize') {
+      this.setWidth(event);
+      this.setHeight(event);
+    }
+  }
+  setWidth(event) {
+    switch (this.block.sizeTypes.width) {
+      case SizeTypes["a" /* SizeTypes */].PIXEL:
+        this.setAbsolutePosition(Breakpoints.W, event);
+        break;
+      case SizeTypes["a" /* SizeTypes */].PERCENT:
+        this.setRelativePosition(Breakpoints.W);
+        break;
+    }
+  }
+  setHeight(event) {
+    switch (this.block.sizeTypes.height) {
+      case SizeTypes["a" /* SizeTypes */].PIXEL:
+        this.setAbsolutePosition(Breakpoints.H, event);
+        break;
+      case SizeTypes["a" /* SizeTypes */].PERCENT:
+        this.setRelativePosition(Breakpoints.H);
+        break;
+    }
+  }
+  setAbsolutePosition(type, event) {
+    // TODO: учитывать границы родителя
+    const breakpoints = BreakpointsFactory.build(type, this.block.sticky);
+    let newValue;
+    if (breakpoints.inverse) {
+      newValue = this.block[breakpoints.offset] + this[breakpoints.movement];
+    } else {
+      newValue = this.block[breakpoints.offset] - this[breakpoints.movement];
+    }
+    if (newValue < 0) {
+      return;
+    }
+    this[breakpoints.client] = event[breakpoints.client];
+    this.repository.change(this.block.guid, breakpoints.offset, newValue);
+    // why?
+    this.block[breakpoints.offset] = newValue;
+  }
+  setYPosition(event) {
+    var _this$block$onCenter;
+    if ((_this$block$onCenter = this.block.onCenter) !== null && _this$block$onCenter !== void 0 && _this$block$onCenter.vertical) {
+      return;
+    }
+    const breakpoints = BreakpointsFactory.build(Breakpoints.Y, this.block.sticky);
+    switch (this.block.sizeTypes[breakpoints.offset]) {
+      case SizeTypes["a" /* SizeTypes */].PIXEL:
+        this.setAbsolutePosition(Breakpoints.Y, event);
+        break;
+      case SizeTypes["a" /* SizeTypes */].PERCENT:
+        this.setRelativePosition(Breakpoints.Y);
+        break;
+    }
+  }
+  setXPosition(event) {
+    var _this$block$onCenter2;
+    if ((_this$block$onCenter2 = this.block.onCenter) !== null && _this$block$onCenter2 !== void 0 && _this$block$onCenter2.horizontal) {
+      return;
+    }
+    const breakpoints = BreakpointsFactory.build(Breakpoints.X, this.block.sticky);
+    switch (this.block.sizeTypes[breakpoints.offset]) {
+      case SizeTypes["a" /* SizeTypes */].PIXEL:
+        this.setAbsolutePosition(Breakpoints.X, event);
+        break;
+      case SizeTypes["a" /* SizeTypes */].PERCENT:
+        this.setRelativePosition(Breakpoints.X);
+        break;
+    }
+  }
+  setRelativePosition(type) {
+    var _this$block$stickyTo5;
+    const breakpoints = BreakpointsFactory.build(type, this.block.sticky);
+    if (!this.parentElement || Math.abs(this[breakpoints.movement]) < 2) {
+      return;
+    }
+    const parentElementPositions = this.parentElement.getBoundingClientRect();
+    let currentPosition;
+    if (breakpoints.inverse) {
+      currentPosition = Math.floor(this.blockElementRect[breakpoints.offset]) + this[breakpoints.movement];
+    } else {
+      currentPosition = Math.floor(this.blockElementRect[breakpoints.offset]) - this[breakpoints.movement];
+    }
+    if ((_this$block$stickyTo5 = this.block.stickyTo) !== null && _this$block$stickyTo5 !== void 0 && _this$block$stickyTo5.guid && (type === Breakpoints.Y || type === Breakpoints.X)) {
+      var _this$block$stickyTo6, _this$block$stickyTo7, _this$block$stickyTo8;
+      const el = this.repository.getRefByGuid((_this$block$stickyTo6 = this.block.stickyTo) === null || _this$block$stickyTo6 === void 0 ? void 0 : _this$block$stickyTo6.guid);
+      if (((_this$block$stickyTo7 = this.block.stickyTo) === null || _this$block$stickyTo7 === void 0 ? void 0 : _this$block$stickyTo7.type) === StickyTo["a" /* StickyToType */].TOP && type === Breakpoints.Y) {
+        currentPosition -= el.$el.offsetTop + el.$el.offsetHeight;
+      } else if (((_this$block$stickyTo8 = this.block.stickyTo) === null || _this$block$stickyTo8 === void 0 ? void 0 : _this$block$stickyTo8.type) === StickyTo["a" /* StickyToType */].LEFT && type === Breakpoints.X) {
+        currentPosition -= el.$el.offsetLeft + el.$el.offsetWidth;
+      }
+    }
+    const currentRelativeSize = Math.floor(currentPosition / (parentElementPositions[breakpoints.size] / 100 * this.step) * this.step);
+    this.repository.change(this.block.guid, breakpoints.offset, this.getNewRelativeSize(type, currentRelativeSize));
+    // this.block[breakpoints.offset] = this.getNewRelativeSize(type, currentRelativeSize)
+  }
+  getNewRelativeSize(type, currentRelativeSize) {
+    const size = Math.floor(currentRelativeSize / this.step) * this.step;
+    if (type === Breakpoints.W || type === Breakpoints.H) {
+      return size > 100 ? 100 : size < 1 ? 1 : size;
+    } else if (type === Breakpoints.X || type === Breakpoints.Y) {
+      return size < 0 ? 0 : size;
+    }
+    return size;
+  }
+}
 // EXTERNAL MODULE: ./node_modules/@fortawesome/vue-fontawesome/index.es.js
 var index_es = __webpack_require__("ad3d");
 
@@ -22359,15 +22690,6 @@ var fontawesome_svg_core_index_es = __webpack_require__("ecee");
 
 // EXTERNAL MODULE: ./node_modules/@fortawesome/free-solid-svg-icons/index.es.js
 var free_solid_svg_icons_index_es = __webpack_require__("c074");
-
-// EXTERNAL MODULE: ./src/domain/model/Sticky.ts
-var Sticky = __webpack_require__("e920");
-
-// EXTERNAL MODULE: ./src/domain/model/StickyTo.ts
-var StickyTo = __webpack_require__("1d16");
-
-// EXTERNAL MODULE: ./src/domain/model/SizeTypes.ts
-var SizeTypes = __webpack_require__("9338");
 
 // CONCATENATED MODULE: ./src/infrastructure/service/stickyLinesMixin.ts
 
@@ -22824,13 +23146,13 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
             this.setIsShowArrows();
           }, 0);
         }
-        if (((_this$block$tabs7 = this.block.tabs) === null || _this$block$tabs7 === void 0 ? void 0 : _this$block$tabs7.list.length) === 1) {
+        if (((_this$block$tabs7 = this.block.tabs) === null || _this$block$tabs7 === void 0 || (_this$block$tabs7 = _this$block$tabs7.list) === null || _this$block$tabs7 === void 0 ? void 0 : _this$block$tabs7.length) === 1) {
           this.block.children.forEach(el => {
             var _this$block$tabs8;
             el.parentTabGuid = (_this$block$tabs8 = this.block.tabs) === null || _this$block$tabs8 === void 0 ? void 0 : _this$block$tabs8.list[0].guid;
           });
         }
-        if (!((_this$block$tabs9 = this.block.tabs) !== null && _this$block$tabs9 !== void 0 && _this$block$tabs9.list.find(item => item.guid === this.activeTabGuid))) {
+        if (!((_this$block$tabs9 = this.block.tabs) !== null && _this$block$tabs9 !== void 0 && (_this$block$tabs9 = _this$block$tabs9.list) !== null && _this$block$tabs9 !== void 0 && _this$block$tabs9.find(item => item.guid === this.activeTabGuid))) {
           var _this$block$tabs10;
           if ((_this$block$tabs10 = this.block.tabs) !== null && _this$block$tabs10 !== void 0 && (_this$block$tabs10 = _this$block$tabs10.list[0]) !== null && _this$block$tabs10 !== void 0 && _this$block$tabs10.guid) {
             this.onTabClick(this.block.tabs.list[0].guid);
@@ -23067,7 +23389,7 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
     },
     getBlockManager() {
       if (typeof this.blockManager === 'undefined') {
-        this.blockManager = new BlockManager["a" /* default */](this.block, this.getStore(), this.$refs.draggableContainer, this.step);
+        this.blockManager = new BlockManager_BlockManager(this.block, this.getStore(), this.$refs.draggableContainer, this.step);
       }
       return this.blockManager;
     },
@@ -23168,8 +23490,8 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
 }));
 // CONCATENATED MODULE: ./src/infrastructure/components/Block.vue?vue&type=script&lang=ts
  /* harmony default export */ var components_Blockvue_type_script_lang_ts = (Blockvue_type_script_lang_ts); 
-// EXTERNAL MODULE: ./src/infrastructure/components/Block.vue?vue&type=style&index=0&id=08516045&prod&scoped=true&lang=css
-var Blockvue_type_style_index_0_id_08516045_prod_scoped_true_lang_css = __webpack_require__("8c39");
+// EXTERNAL MODULE: ./src/infrastructure/components/Block.vue?vue&type=style&index=0&id=3d3e9885&prod&scoped=true&lang=css
+var Blockvue_type_style_index_0_id_3d3e9885_prod_scoped_true_lang_css = __webpack_require__("1fab");
 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__("2877");
@@ -23185,11 +23507,11 @@ var componentNormalizer = __webpack_require__("2877");
 
 var component = Object(componentNormalizer["a" /* default */])(
   components_Blockvue_type_script_lang_ts,
-  Blockvue_type_template_id_08516045_scoped_true_render,
-  Blockvue_type_template_id_08516045_scoped_true_staticRenderFns,
+  Blockvue_type_template_id_3d3e9885_scoped_true_render,
+  Blockvue_type_template_id_3d3e9885_scoped_true_staticRenderFns,
   false,
   null,
-  "08516045",
+  "3d3e9885",
   null
   
 )
@@ -23454,6 +23776,13 @@ module.exports = function (argument) {
   return isSymbol(key) ? key : key + '';
 };
 
+
+/***/ }),
+
+/***/ "a2b9":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -24318,6 +24647,17 @@ if (GlobalVue) {
 /* harmony default export */ __webpack_exports__["c"] = (VueDraggableResponsive);
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("c8ba")))
+
+/***/ }),
+
+/***/ "b9c2":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_6ba80a4e_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("435d");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_6ba80a4e_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_6ba80a4e_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+
 
 /***/ }),
 
@@ -31496,380 +31836,6 @@ try {
 
 module.exports = g;
 
-
-/***/ }),
-
-/***/ "c8f9":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, "a", function() { return /* binding */ BlockManager_BlockManager; });
-
-// CONCATENATED MODULE: ./src/domain/model/CustomDomRect.ts
-class CustomDomRect {
-  constructor() {
-    this.x = 0;
-    this.y = 0;
-    this.width = 0;
-    this.height = 0;
-    this.left = 0;
-    this.right = 0;
-    this.top = 0;
-    this.bottom = 0;
-  }
-  static fromDocRect(domRect) {
-    const {
-      top,
-      right,
-      bottom,
-      left,
-      width,
-      height,
-      x,
-      y
-    } = domRect;
-    return {
-      top,
-      right,
-      bottom,
-      left,
-      width,
-      height,
-      x,
-      y
-    };
-  }
-}
-// CONCATENATED MODULE: ./src/domain/model/Breakpoints.ts
-var Breakpoints;
-(function (Breakpoints) {
-  Breakpoints[Breakpoints["X"] = 0] = "X";
-  Breakpoints[Breakpoints["Y"] = 1] = "Y";
-  Breakpoints[Breakpoints["W"] = 2] = "W";
-  Breakpoints[Breakpoints["H"] = 3] = "H";
-})(Breakpoints || (Breakpoints = {}));
-// EXTERNAL MODULE: ./src/domain/model/Sticky.ts
-var Sticky = __webpack_require__("e920");
-
-// CONCATENATED MODULE: ./src/domain/service/BreakpointsFactory.ts
-
-
-const MAP = {
-  [Breakpoints.W]: {
-    client: 'clientX',
-    movement: 'movementX',
-    offset: 'width',
-    size: 'width',
-    inverse: false
-  },
-  [Breakpoints.H]: {
-    client: 'clientY',
-    movement: 'movementY',
-    offset: 'height',
-    size: 'height',
-    inverse: false
-  },
-  [Breakpoints.Y]: {
-    client: 'clientY',
-    movement: 'movementY',
-    size: 'height',
-    offset: 'top',
-    inverse: false
-  },
-  [Breakpoints.X]: {
-    client: 'clientX',
-    movement: 'movementX',
-    size: 'width',
-    offset: 'left',
-    inverse: false
-  }
-};
-const STICKY_OFFSET_MAP = {
-  [Breakpoints.X]: {
-    [Sticky["a" /* Sticky */].TR]: {
-      offset: 'right',
-      inverse: true
-    },
-    [Sticky["a" /* Sticky */].TL]: {
-      offset: 'left',
-      inverse: false
-    },
-    [Sticky["a" /* Sticky */].BL]: {
-      offset: 'left',
-      inverse: false
-    },
-    [Sticky["a" /* Sticky */].BR]: {
-      offset: 'right',
-      inverse: true
-    }
-  },
-  [Breakpoints.Y]: {
-    [Sticky["a" /* Sticky */].TR]: {
-      offset: 'top',
-      inverse: false
-    },
-    [Sticky["a" /* Sticky */].TL]: {
-      offset: 'top',
-      inverse: false
-    },
-    [Sticky["a" /* Sticky */].BL]: {
-      offset: 'bottom',
-      inverse: true
-    },
-    [Sticky["a" /* Sticky */].BR]: {
-      offset: 'bottom',
-      inverse: true
-    }
-  },
-  [Breakpoints.H]: {
-    [Sticky["a" /* Sticky */].BL]: {
-      inverse: true
-    },
-    [Sticky["a" /* Sticky */].BR]: {
-      inverse: true
-    }
-  },
-  [Breakpoints.W]: {
-    [Sticky["a" /* Sticky */].TR]: {
-      inverse: true
-    },
-    [Sticky["a" /* Sticky */].BR]: {
-      inverse: true
-    }
-  }
-};
-class BreakpointsFactory {
-  static build(type, sticky) {
-    const options = (STICKY_OFFSET_MAP[type] || {})[sticky] || null;
-    if (options) {
-      return Object.assign({}, MAP[type], options);
-    }
-    return MAP[type];
-  }
-}
-// EXTERNAL MODULE: ./src/domain/model/SizeTypes.ts
-var SizeTypes = __webpack_require__("9338");
-
-// EXTERNAL MODULE: ./src/domain/model/StickyTo.ts
-var StickyTo = __webpack_require__("1d16");
-
-// CONCATENATED MODULE: ./src/application/service/BlockManager.ts
-
-
-
-
-
-
-class BlockManager_BlockManager {
-  constructor(block, repository, blockElement, step = 0.5) {
-    this.clientX = 0;
-    this.clientY = 0;
-    this.movementX = 0;
-    this.movementY = 0;
-    this.type = 'drag';
-    this.blockElementRect = new CustomDomRect();
-    this.repository = repository;
-    this.block = block;
-    this.step = step;
-    this.blockElement = blockElement;
-    this.parentElement = this.blockElement.parentElement;
-  }
-  startDrag(event, type, isInteractive = false) {
-    this.blockElementRect = this.getBlockElementRect();
-    this.clientX = event.clientX;
-    this.clientY = event.clientY;
-    this.type = type;
-    if (this.type === 'resize') {
-      if (this.block.widthCalc && this.block.widthCalc.type && this.block.widthCalc.value) {
-        if (this.block.widthCalc.type === '-') {
-          if (this.block.sticky === Sticky["a" /* Sticky */].TL || this.block.sticky === Sticky["a" /* Sticky */].BL) {
-            this.clientX = this.clientX - this.block.widthCalc.value;
-          } else {
-            this.clientX = this.clientX + this.block.widthCalc.value;
-          }
-        } else {
-          if (this.block.sticky === Sticky["a" /* Sticky */].TL || this.block.sticky === Sticky["a" /* Sticky */].BL) {
-            this.clientX = this.clientX + this.block.widthCalc.value;
-          } else {
-            this.clientX = this.clientX - this.block.widthCalc.value;
-          }
-        }
-      }
-      if (this.block.heightCalc && this.block.heightCalc.type && this.block.heightCalc.value) {
-        if (this.block.heightCalc.type === '-') {
-          if (this.block.sticky === Sticky["a" /* Sticky */].TL || this.block.sticky === Sticky["a" /* Sticky */].TR) {
-            this.clientY = this.clientY - this.block.heightCalc.value;
-          } else {
-            this.clientY = this.clientY + this.block.heightCalc.value;
-          }
-        } else {
-          if (this.block.sticky === Sticky["a" /* Sticky */].TL || this.block.sticky === Sticky["a" /* Sticky */].TR) {
-            this.clientY = this.clientY + this.block.heightCalc.value;
-          } else {
-            this.clientY = this.clientY - this.block.heightCalc.value;
-          }
-        }
-      }
-    }
-    if (isInteractive) {
-      this.clientX = this.blockElementRect.x + 15;
-      this.clientY = this.blockElementRect.y + 15;
-    }
-    if (this.type === 'drag' && isInteractive) {
-      var _this$block$stickyTo;
-      if ((_this$block$stickyTo = this.block.stickyTo) !== null && _this$block$stickyTo !== void 0 && _this$block$stickyTo.guid) {
-        var _this$block$stickyTo2, _this$block$stickyTo3, _this$block$stickyTo4;
-        const el = this.repository.getRefByGuid((_this$block$stickyTo2 = this.block.stickyTo) === null || _this$block$stickyTo2 === void 0 ? void 0 : _this$block$stickyTo2.guid);
-        if (((_this$block$stickyTo3 = this.block.stickyTo) === null || _this$block$stickyTo3 === void 0 ? void 0 : _this$block$stickyTo3.type) === StickyTo["a" /* StickyToType */].TOP) {
-          this.clientY += el.$el.offsetTop + el.$el.offsetHeight;
-        } else if (((_this$block$stickyTo4 = this.block.stickyTo) === null || _this$block$stickyTo4 === void 0 ? void 0 : _this$block$stickyTo4.type) === StickyTo["a" /* StickyToType */].LEFT) {
-          this.clientX += el.$el.offsetLeft + el.$el.offsetWidth;
-        }
-      }
-    }
-  }
-  getBlockElementRect() {
-    const blockRect = CustomDomRect.fromDocRect(this.blockElement.getBoundingClientRect());
-    if (!this.parentElement) {
-      return blockRect;
-    }
-    const parentElementRect = this.parentElement.getBoundingClientRect();
-    blockRect.left -= parentElementRect.left;
-    blockRect.top -= parentElementRect.top;
-    blockRect.left += this.parentElement.scrollLeft;
-    blockRect.top += this.parentElement.scrollTop;
-    blockRect.right = parentElementRect.width - (blockRect.left + blockRect.width);
-    blockRect.bottom = parentElementRect.height - (blockRect.top + blockRect.height);
-    return blockRect;
-  }
-  static getAbsoluteSizesByParent(block, blockElement) {
-    let blockRect = new CustomDomRect();
-    const parentElement = blockElement.parentElement;
-    if (!parentElement) {
-      return blockRect;
-    }
-    const parentElementRect = parentElement.getBoundingClientRect();
-    blockRect.height = parentElementRect.height / 100 * block.height;
-    blockRect.width = parentElementRect.width / 100 * block.width;
-    return blockRect;
-  }
-  // TODO: учитывать sticky
-  change(event) {
-    this.movementX = this.clientX - event.clientX;
-    this.movementY = this.clientY - event.clientY;
-    if (this.type === 'drag') {
-      this.setYPosition(event);
-      this.setXPosition(event);
-    } else if (this.type === 'resize') {
-      this.setWidth(event);
-      this.setHeight(event);
-    }
-  }
-  setWidth(event) {
-    switch (this.block.sizeTypes.width) {
-      case SizeTypes["a" /* SizeTypes */].PIXEL:
-        this.setAbsolutePosition(Breakpoints.W, event);
-        break;
-      case SizeTypes["a" /* SizeTypes */].PERCENT:
-        this.setRelativePosition(Breakpoints.W);
-        break;
-    }
-  }
-  setHeight(event) {
-    switch (this.block.sizeTypes.height) {
-      case SizeTypes["a" /* SizeTypes */].PIXEL:
-        this.setAbsolutePosition(Breakpoints.H, event);
-        break;
-      case SizeTypes["a" /* SizeTypes */].PERCENT:
-        this.setRelativePosition(Breakpoints.H);
-        break;
-    }
-  }
-  setAbsolutePosition(type, event) {
-    // TODO: учитывать границы родителя
-    const breakpoints = BreakpointsFactory.build(type, this.block.sticky);
-    let newValue;
-    if (breakpoints.inverse) {
-      newValue = this.block[breakpoints.offset] + this[breakpoints.movement];
-    } else {
-      newValue = this.block[breakpoints.offset] - this[breakpoints.movement];
-    }
-    if (newValue < 0) {
-      return;
-    }
-    this[breakpoints.client] = event[breakpoints.client];
-    this.repository.change(this.block.guid, breakpoints.offset, newValue);
-    // why?
-    this.block[breakpoints.offset] = newValue;
-  }
-  setYPosition(event) {
-    var _this$block$onCenter;
-    if ((_this$block$onCenter = this.block.onCenter) !== null && _this$block$onCenter !== void 0 && _this$block$onCenter.vertical) {
-      return;
-    }
-    const breakpoints = BreakpointsFactory.build(Breakpoints.Y, this.block.sticky);
-    switch (this.block.sizeTypes[breakpoints.offset]) {
-      case SizeTypes["a" /* SizeTypes */].PIXEL:
-        this.setAbsolutePosition(Breakpoints.Y, event);
-        break;
-      case SizeTypes["a" /* SizeTypes */].PERCENT:
-        this.setRelativePosition(Breakpoints.Y);
-        break;
-    }
-  }
-  setXPosition(event) {
-    var _this$block$onCenter2;
-    if ((_this$block$onCenter2 = this.block.onCenter) !== null && _this$block$onCenter2 !== void 0 && _this$block$onCenter2.horizontal) {
-      return;
-    }
-    const breakpoints = BreakpointsFactory.build(Breakpoints.X, this.block.sticky);
-    switch (this.block.sizeTypes[breakpoints.offset]) {
-      case SizeTypes["a" /* SizeTypes */].PIXEL:
-        this.setAbsolutePosition(Breakpoints.X, event);
-        break;
-      case SizeTypes["a" /* SizeTypes */].PERCENT:
-        this.setRelativePosition(Breakpoints.X);
-        break;
-    }
-  }
-  setRelativePosition(type) {
-    var _this$block$stickyTo5;
-    const breakpoints = BreakpointsFactory.build(type, this.block.sticky);
-    if (!this.parentElement || Math.abs(this[breakpoints.movement]) < 2) {
-      return;
-    }
-    const parentElementPositions = this.parentElement.getBoundingClientRect();
-    let currentPosition;
-    if (breakpoints.inverse) {
-      currentPosition = Math.floor(this.blockElementRect[breakpoints.offset]) + this[breakpoints.movement];
-    } else {
-      currentPosition = Math.floor(this.blockElementRect[breakpoints.offset]) - this[breakpoints.movement];
-    }
-    if ((_this$block$stickyTo5 = this.block.stickyTo) !== null && _this$block$stickyTo5 !== void 0 && _this$block$stickyTo5.guid && (type === Breakpoints.Y || type === Breakpoints.X)) {
-      var _this$block$stickyTo6, _this$block$stickyTo7, _this$block$stickyTo8;
-      const el = this.repository.getRefByGuid((_this$block$stickyTo6 = this.block.stickyTo) === null || _this$block$stickyTo6 === void 0 ? void 0 : _this$block$stickyTo6.guid);
-      if (((_this$block$stickyTo7 = this.block.stickyTo) === null || _this$block$stickyTo7 === void 0 ? void 0 : _this$block$stickyTo7.type) === StickyTo["a" /* StickyToType */].TOP && type === Breakpoints.Y) {
-        currentPosition -= el.$el.offsetTop + el.$el.offsetHeight;
-      } else if (((_this$block$stickyTo8 = this.block.stickyTo) === null || _this$block$stickyTo8 === void 0 ? void 0 : _this$block$stickyTo8.type) === StickyTo["a" /* StickyToType */].LEFT && type === Breakpoints.X) {
-        currentPosition -= el.$el.offsetLeft + el.$el.offsetWidth;
-      }
-    }
-    const currentRelativeSize = Math.floor(currentPosition / (parentElementPositions[breakpoints.size] / 100 * this.step) * this.step);
-    this.repository.change(this.block.guid, breakpoints.offset, this.getNewRelativeSize(type, currentRelativeSize));
-    // this.block[breakpoints.offset] = this.getNewRelativeSize(type, currentRelativeSize)
-  }
-  getNewRelativeSize(type, currentRelativeSize) {
-    const size = Math.floor(currentRelativeSize / this.step) * this.step;
-    if (type === Breakpoints.W || type === Breakpoints.H) {
-      return size > 100 ? 100 : size < 1 ? 1 : size;
-    } else if (type === Breakpoints.X || type === Breakpoints.Y) {
-      return size < 0 ? 0 : size;
-    }
-    return size;
-  }
-}
 
 /***/ }),
 

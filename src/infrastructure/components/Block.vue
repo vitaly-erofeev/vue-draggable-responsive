@@ -221,8 +221,7 @@ export default Vue.extend({
     isShowArrows: boolean,
     visitedTabs: string[],
     stickyToBlock?: BlockDTO,
-    stickyToElement?: any,
-    zIndex?: number
+    stickyToElement?: any
     } {
     return {
       blockManager: undefined,
@@ -244,8 +243,7 @@ export default Vue.extend({
       isShowArrows: false,
       visitedTabs: [],
       stickyToBlock: undefined,
-      stickyToElement: undefined,
-      zIndex: undefined
+      stickyToElement: undefined
     }
   },
 
@@ -503,6 +501,20 @@ export default Vue.extend({
       }
 
       return isShow
+    },
+    zIndex () {
+      const startIndex = 101
+      if (!this.block.parentGuid) {
+        return startIndex + (this.block.tabs?.use ? 1 : 0)
+      }
+      let parentRef = this.getStore().getRefByGuid(this.block.parentGuid) as unknown as {
+        zIndex: number
+      }
+      if (!parentRef) {
+        return startIndex
+      }
+
+      return parentRef.zIndex + 1 + (this.block.tabs?.use ? 1 : 0)
     }
   },
 
@@ -610,12 +622,12 @@ export default Vue.extend({
             this.setIsShowArrows()
           }, 0)
         }
-        if (this.block.tabs?.list.length === 1) {
+        if (this.block.tabs?.list?.length === 1) {
           this.block.children.forEach(el => {
             el.parentTabGuid = this.block.tabs?.list[0].guid
           })
         }
-        if (!this.block.tabs?.list.find(item => item.guid === this.activeTabGuid)) {
+        if (!this.block.tabs?.list?.find(item => item.guid === this.activeTabGuid)) {
           if (this.block.tabs?.list[0]?.guid) {
             this.onTabClick(this.block.tabs.list[0].guid)
           }
@@ -761,7 +773,6 @@ export default Vue.extend({
       }
       this.setSticky(this.block?.stickyTo?.guid)
     })
-    this.zIndex = this.getZIndex()
   },
 
   beforeDestroy () {
@@ -769,20 +780,6 @@ export default Vue.extend({
   },
 
   methods: {
-    getZIndex (): number {
-      const startIndex = 101
-      if (!this.block.parentGuid) {
-        return startIndex + (this.block.tabs?.use ? 1 : 0)
-      }
-      let parentRef = this.getStore().getRefByGuid(this.block.parentGuid) as unknown as {
-        zIndex: number
-      }
-      if (!parentRef) {
-        return startIndex
-      }
-
-      return parentRef.zIndex + 1 + (this.block.tabs?.use ? 1 : 0)
-    },
     showChildTabs (guid: string) {
       if (this.block.tabs) {
         this.visibleTabs.forEach(tab => {

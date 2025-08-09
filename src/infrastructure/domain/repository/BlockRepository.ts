@@ -6,7 +6,8 @@ import { StickyToType } from '@/domain/model/StickyTo'
 import { Sticky } from '@/domain/model/Sticky'
 import { ListenerInterface } from '@/domain/service/ListenerInterface'
 import { EventTypes } from '@/domain/model/EventTypes'
-import _ from 'lodash'
+// @ts-ignore
+import cloneDeep from 'lodash.clonedeep'
 
 export default class BlockRepository implements BlockRepositoryInterface {
   private blocks: BlockDTO[] = []
@@ -41,7 +42,7 @@ export default class BlockRepository implements BlockRepositoryInterface {
       if (block.replication?.function) {
         replicationFunction = block.replication?.function
       }
-      block = _.cloneDeep(block)
+      block = cloneDeep(block)
       block.isHidden = false
       if (replicationFunction && block.replication) {
         block.replication.function = replicationFunction

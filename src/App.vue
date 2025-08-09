@@ -11976,6 +11976,6 @@ export default {
 }
 
 .green {
-  background: transparent;
+  background: green;
 }
 </style>

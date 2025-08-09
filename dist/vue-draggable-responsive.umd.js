@@ -1840,9 +1840,7 @@ var ResizeObserver_es = __webpack_require__("6dd8");
     return {
       scrollHeight: 0,
       scrollWidth: 0,
-      setStretchedSize: () => {},
-      resizeObserver: null,
-      mutationObserver: null
+      setStretchedSize: () => {}
     };
   },
   mounted() {
@@ -1852,29 +1850,25 @@ var ResizeObserver_es = __webpack_require__("6dd8");
     });
     if ((_this$block = this.block) !== null && _this$block !== void 0 && _this$block.isStretched && this.$refs.container && this.$refs.container instanceof Element) {
       let children = this.$refs.container.children;
-      this.resizeObserver = new ResizeObserver_es["a" /* default */](() => {
+      const observer = new ResizeObserver_es["a" /* default */](() => {
         this.setStretchedSize();
       });
       for (let item of children) {
-        this.resizeObserver.observe(item);
+        observer.observe(item);
       }
-      let me = this;
-      this.mutationObserver = new MutationObserver(mutationList => {
+      const observerInserted = new MutationObserver(mutationList => {
         mutationList.filter(m => m.type === 'childList').forEach(m => {
-          m.addedNodes.forEach(node => node instanceof Element && me.resizeObserver.observe(node));
+          m.addedNodes.forEach(node => node instanceof Element && observer.observe(node));
         });
       });
-      this.mutationObserver.observe(this.$refs.container, {
-        childList: true
+      observerInserted.observe(this.$refs.container, {
+        childList: true,
+        subtree: true
       });
     }
   },
   created() {
     this.setStretchedSize = debounce(this._setStretchedSize.bind(this), 100);
-  },
-  beforeDestroy() {
-    this.resizeObserver && this.resizeObserver.disconnect();
-    this.mutationObserver && this.mutationObserver.disconnect();
   },
   methods: {
     _setStretchedSize() {
@@ -1890,13 +1884,8 @@ var ResizeObserver_es = __webpack_require__("6dd8");
       this.scrollHeight = 0;
       this.scrollWidth = 0;
       this.$nextTick(() => {
-        const el = this.$el.getElementsByClassName('content')[0];
-        const newHeight = el.scrollHeight;
-        const newWidth = el.scrollWidth;
-        if (this.scrollHeight !== newHeight || this.scrollWidth !== newWidth) {
-          this.scrollHeight = newHeight;
-          this.scrollWidth = newWidth;
-        }
+        this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight;
+        this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth;
         if (parentNode && parentScroll) {
           this.$nextTick(() => {
             if (parentNode) {
@@ -2095,6 +2084,7 @@ class StickyManager_StickyManager {
     this.dependentsMap = new Map();
     this.elementToGuidMap = new Map();
     this.resizeObservers = new Map();
+    this.initialized = false;
   }
   addBlock({
     element,
@@ -2134,6 +2124,21 @@ class StickyManager_StickyManager {
       this.resizeObservers.set(stickyTo, observer);
     }
     this.updateOne(guid);
+    this.scheduleSmartUpdateAll();
+  }
+  scheduleSmartUpdateAll() {
+    // Отменяем предыдущий таймер, чтобы дождаться конца добавлений
+    if (this.scheduleUpdateTimer) {
+      clearTimeout(this.scheduleUpdateTimer);
+    }
+    this.scheduleUpdateTimer = window.setTimeout(() => {
+      requestAnimationFrame(() => {
+        this.updateAll();
+        // Делаем повторный прогон — иногда первый расчет не попадает в правильные размеры
+        requestAnimationFrame(() => this.updateAll());
+        this.initialized = true;
+      });
+    }, 0);
   }
   removeBlock(guid) {
     const block = this.blocks.get(guid);
@@ -2223,6 +2228,7 @@ const stickyManager = new StickyManager_StickyManager();
       var _this$block;
       this.setSticky((_this$block = this.block) === null || _this$block === void 0 || (_this$block = _this$block.stickyTo) === null || _this$block === void 0 ? void 0 : _this$block.guid);
     });
+    console.log(stickyManager);
   },
   computed: {
     zIndex() {
@@ -2298,8 +2304,6 @@ const stickyManager = new StickyManager_StickyManager();
       let position = {
         ...this.defaultPosition
       };
-      position.width = width;
-      position.height = height;
       if ((_this$block$replicati = this.block.replication) !== null && _this$block$replicati !== void 0 && _this$block$replicati.topBlockGuid) {
         var _this$block$replicati2;
         const stickyToElement = this.getStore().getRefByGuid((_this$block$replicati2 = this.block.replication) === null || _this$block$replicati2 === void 0 ? void 0 : _this$block$replicati2.topBlockGuid);
@@ -2398,7 +2402,7 @@ const stickyManager = new StickyManager_StickyManager();
         if (((_this$block$stickyTo9 = this.block.stickyTo) === null || _this$block$stickyTo9 === void 0 ? void 0 : _this$block$stickyTo9.type) === StickyTo["a" /* StickyToType */].TOP) {
           delete position.top;
         } else if (((_this$block$stickyTo0 = this.block.stickyTo) === null || _this$block$stickyTo0 === void 0 ? void 0 : _this$block$stickyTo0.type) === StickyTo["a" /* StickyToType */].LEFT) {
-          delete position.left;
+          // delete position.left
         }
       }
       return Object.assign(position, {

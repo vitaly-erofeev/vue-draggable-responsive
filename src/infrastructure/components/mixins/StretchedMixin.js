@@ -1,4 +1,5 @@
 import { debounce } from '@/infrastructure/service/utils'
+import ResizeObserver from 'resize-observer-polyfill'
 
 export default {
   data () {
@@ -7,6 +8,28 @@ export default {
       scrollWidth: 0,
       setStretchedSize: () => {
       }
+    }
+  },
+  mounted () {
+    this.$nextTick(() => {
+      this.setStretchedSize()
+    })
+
+    if (this.block?.isStretched && this.$refs.container && this.$refs.container instanceof Element) {
+      let children = this.$refs.container.children
+      const observer = new ResizeObserver(() => {
+        this.setStretchedSize()
+      })
+
+      for (let item of children) {
+        observer.observe(item)
+      }
+      const observerInserted = new MutationObserver(mutationList => {
+        mutationList.filter(m => m.type === 'childList').forEach(m => {
+          m.addedNodes.forEach(node => node instanceof Element && observer.observe(node))
+        })
+      })
+      observerInserted.observe(this.$refs.container, { childList: true, subtree: true })
     }
   },
   created () {

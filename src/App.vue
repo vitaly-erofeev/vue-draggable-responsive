@@ -61,10 +61,10 @@
 
 <script>
 import VueDraggableResponsive from './index.vue'
-import VueDraggableResponsivePreviewer from '@/previewer.vue'
-import { StickyToType } from '@/domain/model/StickyTo'
-import { SizeTypes } from '@/domain/model/SizeTypes'
-import { TabPosition } from '@/domain/model/TabProperties'
+import VueDraggableResponsivePreviewer from 'e:/vue-draggable-responsive/src/previewer.vue'
+import { StickyToType } from 'e:/vue-draggable-responsive/src/domain/model/StickyTo'
+import { SizeTypes } from 'e:/vue-draggable-responsive/src/domain/model/SizeTypes'
+import { TabPosition } from 'e:/vue-draggable-responsive/src/domain/model/TabProperties'
 
 export default {
   name: 'App',

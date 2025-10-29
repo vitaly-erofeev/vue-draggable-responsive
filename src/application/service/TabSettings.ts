@@ -1,5 +1,5 @@
-import { TabSettingsType } from '@/domain/model/TabSettingsType'
-import { TabSettingType } from '@/domain/model/TabSettingType'
+import { TabSettingsType } from 'e:/vue-draggable-responsive/src/domain/model/TabSettingsType'
+import { TabSettingType } from 'e:/vue-draggable-responsive/src/domain/model/TabSettingType'
 
 export default class TabSettings {
   tabSettings: TabSettingsType

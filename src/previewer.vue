@@ -22,23 +22,24 @@
 </template>
 
 <script lang="ts">
-import PreviewBlock from '@/infrastructure/components/PreviewBlock.vue'
+import PreviewBlock from 'e:/vue-draggable-responsive/src/infrastructure/components/PreviewBlock.vue'
 // eslint-disable-next-line no-unused-vars
 import Vue_, { VueConstructor } from 'vue'
-import BlockRepository from '@/infrastructure/domain/repository/BlockRepository'
+import BlockRepository from 'e:/vue-draggable-responsive/src/infrastructure/domain/repository/BlockRepository'
 // eslint-disable-next-line no-unused-vars
-import { BlockRepositoryInterface } from '@/domain/repository/BlockRepositoryInterface'
+import { BlockRepositoryInterface } from 'e:/vue-draggable-responsive/src/domain/repository/BlockRepositoryInterface'
 // eslint-disable-next-line no-unused-vars
-import BlockDTO from '@/domain/model/BlockDTO'
+import BlockDTO from 'e:/vue-draggable-responsive/src/domain/model/BlockDTO'
 // eslint-disable-next-line no-unused-vars
-import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
+import { DataSourceInjected } from 'e:/vue-draggable-responsive/src/infrastructure/domain/model/DataSourceInjected'
 // eslint-disable-next-line no-unused-vars
-import { BlockProperties } from '@/domain/model/BlockProperties'
+import { BlockProperties } from 'e:/vue-draggable-responsive/src/domain/model/BlockProperties'
 
-import TabSettings from '@/application/service/TabSettings'
+import TabSettings from 'e:/vue-draggable-responsive/src/application/service/TabSettings'
 
-const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
-export default Vue.extend({
+// const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
+// export default Vue.extend({
+export default {
   name: 'VueDraggableResponsivePreviewer',
   components: { PreviewBlock },
 
@@ -100,7 +101,8 @@ export default Vue.extend({
       return this.store.getRefByGuid(guid)
     }
   }
-})
+// })
+}
 </script>
 
 <style scoped>

@@ -154,22 +154,24 @@
 import Vue_, { VueConstructor } from 'vue'
 import BlockDTO from '../../domain/model/BlockDTO'
 // eslint-disable-next-line no-unused-vars
-import { Position } from '@/domain/model/PositionCss'
-import BlockManager from '@/application/service/BlockManager'
+import { Position } from 'e:/vue-draggable-responsive/src/domain/model/PositionCss'
+import BlockManager from 'e:/vue-draggable-responsive/src/application/service/BlockManager'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faAngleDown, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
-import { Sticky } from '@/domain/model/Sticky'
+import { Sticky } from 'e:/vue-draggable-responsive/src/domain/model/Sticky'
 // eslint-disable-next-line no-unused-vars
-import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
-import { StickyToType } from '@/domain/model/StickyTo'
-import { SizeTypes } from '@/domain/model/SizeTypes'
-import stickyLinesMixin from '@/infrastructure/service/stickyLinesMixin'
+import { DataSourceInjected } from 'e:/vue-draggable-responsive/src/infrastructure/domain/model/DataSourceInjected'
+import { StickyToType } from 'e:/vue-draggable-responsive/src/domain/model/StickyTo'
+import { SizeTypes } from 'e:/vue-draggable-responsive/src/domain/model/SizeTypes'
+import stickyLinesMixin from 'e:/vue-draggable-responsive/src/infrastructure/service/stickyLinesMixin'
 
-const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
+// const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
+// const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 library.add(faAngleDown, faChevronRight, faChevronLeft)
 
-export default Vue.extend({
+// export default Vue.extend({
+export default {
   name: 'Block',
   mixins: [stickyLinesMixin],
   components: {
@@ -1000,7 +1002,8 @@ export default Vue.extend({
       tabsScroll.style.transform = `translateX(-${this.tabsOffset}px)`
     }
   }
-})
+// })
+}
 </script>
 
 <style scoped>

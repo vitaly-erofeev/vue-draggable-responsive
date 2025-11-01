@@ -78,7 +78,7 @@ export default class BlockDTO {
       guid = 'guid',
       alias,
       parentGuid,
-      isStretched,
+      isStretched = false,
       isScrollHover,
       style,
       interactive,
@@ -97,7 +97,7 @@ export default class BlockDTO {
       properties = {},
       isLoading = false,
       disabledMove = false
-    }: BlockProperties
+    }: Partial<BlockProperties>
   ) {
     this.widthCalc = widthCalc
     this.heightCalc = heightCalc

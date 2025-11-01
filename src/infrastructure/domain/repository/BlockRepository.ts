@@ -8,7 +8,7 @@ import { ListenerInterface } from 'e:/vue-draggable-responsive/src/domain/servic
 import { EventTypes } from 'e:/vue-draggable-responsive/src/domain/model/EventTypes'
 
 export default class BlockRepository implements BlockRepositoryInterface {
-  private blocks: BlockDTO[] = []
+  protected blocks: BlockDTO[] = []
   private previousRequiredBlocks: string[] = []
   private listeners: {
     [index: string]: ListenerInterface

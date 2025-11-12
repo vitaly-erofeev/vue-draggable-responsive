@@ -20,8 +20,8 @@ export interface BlockProperties {
   right?: number,
   bottom?: number,
   left?: number,
-  sticky: Sticky,
-  sizeTypes: {
+  sticky?: Sticky,
+  sizeTypes?: {
     width: SizeTypes,
     height: SizeTypes,
     top: SizeTypes,

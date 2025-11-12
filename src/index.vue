@@ -9,8 +9,8 @@
             :y2="line.y2"
       />
     </svg>
-    <!-- _blocks
-    {{_blocks}} -->
+  _blocks
+    <pre>{{_blocks}}</pre>
     <block
       v-for="block in _blocks"
       :ref="block.guid"
@@ -29,13 +29,14 @@
         <slot :name="name" v-bind="data"></slot>
       </template>
     </block>
-<!-- _blocksRelative
-{{_blocksRelative}} -->
+_blocksRelative
+<pre>{{_blocksRelative}}</pre>
     <block-relative
      v-for="block in _blocksRelative"
       :ref="block.guid"
       :key="block.guid"
       :block="block"
+       @set-active-block="$emit('set-active-block', $event)"
     ></block-relative>
   </div>
 </template>
@@ -49,7 +50,7 @@ import { SizeTypes } from 'e:/vue-draggable-responsive/src/domain/model/SizeType
 import { AddBlockType } from 'e:/vue-draggable-responsive/src/domain/model/AddBlockType'
 // eslint-disable-next-line no-unused-vars
 import { BlockRepositoryInterface } from 'e:/vue-draggable-responsive/src/domain/repository/BlockRepositoryInterface'
-// import BlockRepository from 'e:/vue-draggable-responsive/src/infrastructure/domain/repository/BlockRepository'
+import BlockRepository from 'e:/vue-draggable-responsive/src/infrastructure/domain/repository/BlockRepository'
 // eslint-disable-next-line no-unused-vars
 import BlockDTO from 'e:/vue-draggable-responsive/src/domain/model/BlockDTO'
 // eslint-disable-next-line no-unused-vars
@@ -70,13 +71,12 @@ import SimpleRemoveListener from 'e:/vue-draggable-responsive/src/infrastructure
 
 import TabSettings from 'e:/vue-draggable-responsive/src/application/service/TabSettings'
 import BlockRelative from 'e:/vue-draggable-responsive/src/blockRelative/infrastructure/components/BlockRelative.vue'
+
+// V2
 // eslint-disable-next-line no-unused-vars
-import { BlockPropertiesV2 } from 'e:/vue-draggable-responsive/src/blockRelative/domain/model/RelativeBlockProperties'
-// eslint-disable-next-line no-unused-vars
-import { BlockRepositoryInterfaceV2 } from 'e:/vue-draggable-responsive/src/blockRelative/domain/repository/RelativeBlock'
-import { BlockRepositoryV2 } from 'e:/vue-draggable-responsive/src/blockRelative/infrastructure/domain/repository/RelativeBlockRepository'
-// eslint-disable-next-line no-unused-vars
-import { BlockDTOV2 } from 'e:/vue-draggable-responsive/src/blockRelative/domain/model/RelativeBlockDTO'
+import { BlockDTOV2 } from 'e:/vue-draggable-responsive/src/blockRelative/model/types'
+import { BlockV2Repository } from 'e:/vue-draggable-responsive/src/blockRelative/infrastructure/domain/repository/BlockV2Repository'
+
 // const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 
 // export default Vue.extend({
@@ -109,9 +109,9 @@ export default {
     }
   },
 
-  data (): { blocksArray: object[], store: BlockRepositoryInterfaceV2, tabSettingsService: TabSettings } {
+  data (): { blocksArray: object[], store: BlockRepositoryInterface, tabSettingsService: TabSettings } {
     return {
-      store: new BlockRepositoryV2(),
+      store: new BlockRepository(),
       blocksArray: this.blocks,
       tabSettingsService: new TabSettings(this.tabSettings, this)
     }
@@ -119,10 +119,10 @@ export default {
 
   computed: {
     _blocks (): BlockDTO[] {
-      return this.getStore().get().filter(item => !item.isBlockRelative)
+      return this.getStore().get().filter(item => (!item.blockV2 || !item.blockV2.isBlockV2)) as unknown as BlockDTO[]
     },
     _blocksRelative (): BlockDTOV2[] {
-      return this.getStore().get().filter(item => item.isBlockRelative)
+      return this.getStore().get().filter(item => (item.blockV2 && item.blockV2.isBlockV2)) as unknown as BlockDTOV2[]
     },
     stickyLines () {
       // @ts-ignore
@@ -204,9 +204,11 @@ export default {
         left: Math.floor(left)
       }
     },
-    addBlockRelactive (block: BlockDTO, blockRelative: BlockPropertiesV2): string {
-      console.log('blockRelative', blockRelative)
-      return this.store.addRelativeBlock?.(block, blockRelative) ?? ''
+    addBlockV2 ({ alias, parentGuid } = { alias: '', parentGuid: '' }): string {
+      const externalBlocks: BlockDTOV2[] = this.store.get() as unknown as BlockDTOV2[]
+      const repository = BlockV2Repository(externalBlocks)
+      const block = repository.createBlock({ alias, parentGuid })
+      return repository.addBlock(block)
     },
     addBlock (
       {

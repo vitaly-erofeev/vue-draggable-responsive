@@ -8,6 +8,8 @@ interface BlockDTOV2 {
   height: number;
   guid: string;
   isStretched: boolean;
+  isActive: boolean;
+  isActiveAsParent: boolean;
   // top: number;
   // right: number;
   // bottom: number;

@@ -6,4 +6,8 @@ export interface InterfaceBlockV2 {
   getByGuid(guid: string): BlockDTOV2 | undefined
 
   addBlock (block: BlockDTOV2): string
+
+  setActiveBlock (guid: string): void
+
+  resetActiveBlock (): void
 }

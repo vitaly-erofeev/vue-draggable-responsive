@@ -56,45 +56,82 @@ import GuidGenerator from 'e:/vue-draggable-responsive/src/infrastructure/servic
 //   }
 // }
 export const BlockV2Repository = (blocks: BlockDTOV2[]): InterfaceBlockV2 => {
+  // Кэш для быстрого поиска
+  const blocksMap = new Map<string, BlockDTOV2>()
+
+  const buildCache = (blocksToCache: BlockDTOV2[]) => {
+    for (const block of blocksToCache) {
+      blocksMap.set(block.guid, block)
+      if (block.children?.length) {
+        buildCache(block.children)
+      }
+    }
+  }
+  buildCache(blocks)
   return {
-    createBlock ({ alias, parentGuid }) {
+    createBlock ({ alias, parentGuid }): BlockDTOV2 {
       const guid = GuidGenerator.generate()
       const block: BlockDTOV2 = {
-        guid,
-        alias,
-        parentGuid,
+        guid: guid,
+        alias: alias,
+        parentGuid: parentGuid || '',
         children: [],
-        width: 200,
+        width: 202,
         height: 150,
         isStretched: false,
+        isActive: false,
+        isActiveAsParent: false,
         blockV2: { isBlockV2: true }
       }
+      blocksMap.set(block.guid, block)
       return block
     },
 
-    getByGuid (guid: string) {
-      const findBlock = (blocksToSearch: BlockDTOV2[]): BlockDTOV2 | undefined => {
-        for (const block of blocksToSearch) {
-          if (block.guid === guid) return block
-          if (block.children?.length) {
-            const found = findBlock(block.children)
-            if (found) return found
-          }
-        }
-        return undefined
-      }
-      return findBlock(blocks)
+    getByGuid (guid: string | undefined): BlockDTOV2 | undefined {
+      if (!guid) return undefined
+      return blocksMap.get(guid)
     },
 
     addBlock (block: BlockDTOV2): string {
-      blocks.push(block)
       if (block.parentGuid) {
         const parent = this.getByGuid(block.parentGuid)
         if (parent) {
           parent.children.push(block)
         }
+      } else {
+        blocks.push(block)
       }
       return block.guid
+    },
+
+    setActiveBlock (guid: string): void {
+      this.resetActiveBlock()
+      const block = this.getByGuid(guid)
+      if (!block) return
+
+      block.isActive = true
+
+      let currentGuid = block.parentGuid
+      while (currentGuid) {
+        const parent = this.getByGuid(currentGuid)
+        if (!parent) break
+
+        parent.isActiveAsParent = true
+        currentGuid = parent.parentGuid
+      }
+    },
+
+    resetActiveBlock (): void {
+      const resetRecursive = (blocksToReset: BlockDTOV2[]) => {
+        for (const block of blocksToReset) {
+          block.isActive = false
+          block.isActiveAsParent = false
+          if (block.children?.length) {
+            resetRecursive(block.children)
+          }
+        }
+      }
+      resetRecursive(blocks)
     }
   }
 }

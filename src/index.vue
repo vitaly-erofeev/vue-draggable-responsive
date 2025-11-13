@@ -9,8 +9,8 @@
             :y2="line.y2"
       />
     </svg>
-  _blocks
-    <pre>{{_blocks}}</pre>
+  <!-- _blocks
+    <pre>{{_blocks}}</pre> -->
     <block
       v-for="block in _blocks"
       :ref="block.guid"
@@ -204,12 +204,6 @@ export default {
         left: Math.floor(left)
       }
     },
-    addBlockV2 ({ alias, parentGuid } = { alias: '', parentGuid: '' }): string {
-      const externalBlocks: BlockDTOV2[] = this.store.get() as unknown as BlockDTOV2[]
-      const repository = BlockV2Repository(externalBlocks)
-      const block = repository.createBlock({ alias, parentGuid })
-      return repository.addBlock(block)
-    },
     addBlock (
       {
         width = 0,
@@ -312,7 +306,28 @@ export default {
     },
     removeBlock (guid: string): void {
       this.store.remove(guid)
+    },
+    getBlockStoreV1 (): BlockDTOV2[] {
+      return this.store.get() as unknown as BlockDTOV2[]
+    },
+    addBlockV2 ({ alias, parentGuid } = { alias: '', parentGuid: '' }): string {
+      const externalBlocks: BlockDTOV2[] = this.getBlockStoreV1()
+      const repository = BlockV2Repository(externalBlocks)
+      const block = repository.createBlock({ alias, parentGuid })
+      console.log('[addBlockV2]', parentGuid)
+      return repository.addBlock(block)
+    },
+    setActiveBlockV2 (guid: string): void {
+      const externalBlocks: BlockDTOV2[] = this.getBlockStoreV1()
+      const repository = BlockV2Repository(externalBlocks)
+      repository.setActiveBlock(guid)
+    },
+    resetActiveBlockV2 (): void {
+      const externalBlocks: BlockDTOV2[] = this.getBlockStoreV1()
+      const repository = BlockV2Repository(externalBlocks)
+      repository.resetActiveBlock()
     }
+
   }
 // })
 }

@@ -10,6 +10,7 @@ interface BlockDTOV2 {
   isStretched: boolean;
   isActive: boolean;
   isActiveAsParent: boolean;
+  isHidden: boolean;
   // top: number;
   // right: number;
   // bottom: number;

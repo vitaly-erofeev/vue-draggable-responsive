@@ -10,4 +10,6 @@ export interface InterfaceBlockV2 {
   setActiveBlock (guid: string): void
 
   resetActiveBlock (): void
+
+  setBlocks (blocks: BlockDTOV2[]): void
 }

@@ -314,7 +314,6 @@ export default {
       const externalBlocks: BlockDTOV2[] = this.getBlockStoreV1()
       const repository = BlockV2Repository(externalBlocks)
       const block = repository.createBlock({ alias, parentGuid })
-      console.log('[addBlockV2]', parentGuid)
       return repository.addBlock(block)
     },
     setActiveBlockV2 (guid: string): void {
@@ -322,10 +321,15 @@ export default {
       const repository = BlockV2Repository(externalBlocks)
       repository.setActiveBlock(guid)
     },
-    resetActiveBlockV2 (): void {
+    clearActiveBlockV2 (): void {
       const externalBlocks: BlockDTOV2[] = this.getBlockStoreV1()
       const repository = BlockV2Repository(externalBlocks)
       repository.resetActiveBlock()
+    },
+    setBlocksV2 (blocks: BlockDTOV2[]): void {
+      const externalBlocks: BlockDTOV2[] = this.getBlockStoreV1()
+      const repository = BlockV2Repository(externalBlocks)
+      repository.setBlocks(blocks)
     }
 
   }

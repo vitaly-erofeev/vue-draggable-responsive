@@ -67,7 +67,9 @@ export const BlockV2Repository = (blocks: BlockDTOV2[]): InterfaceBlockV2 => {
       }
     }
   }
+
   buildCache(blocks)
+
   return {
     createBlock ({ alias, parentGuid }): BlockDTOV2 {
       const guid = GuidGenerator.generate()
@@ -81,6 +83,7 @@ export const BlockV2Repository = (blocks: BlockDTOV2[]): InterfaceBlockV2 => {
         isStretched: false,
         isActive: false,
         isActiveAsParent: false,
+        isHidden: false,
         blockV2: { isBlockV2: true }
       }
       blocksMap.set(block.guid, block)
@@ -132,6 +135,15 @@ export const BlockV2Repository = (blocks: BlockDTOV2[]): InterfaceBlockV2 => {
         }
       }
       resetRecursive(blocks)
+    },
+
+    setBlocks (blocksV2: BlockDTOV2[]): void {
+      // this.resetActiveBlock()
+      const copy = JSON.parse(JSON.stringify(blocksV2))
+      copy.forEach((block: BlockDTOV2) => {
+        blocks.push(block)
+      })
+      buildCache(blocks)
     }
   }
 }

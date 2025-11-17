@@ -330,6 +330,16 @@ export default {
       const externalBlocks: BlockDTOV2[] = this.getBlockStoreV1()
       const repository = BlockV2Repository(externalBlocks)
       repository.setBlocks(blocks)
+    },
+    removeBlockV2 (guid: string): void {
+      const externalBlocks: BlockDTOV2[] = this.getBlockStoreV1()
+      const repository = BlockV2Repository(externalBlocks)
+      repository.removeBlock(guid)
+    },
+    getByGuidV2 (guid: string): BlockDTOV2 | undefined {
+      const externalBlocks: BlockDTOV2[] = this.getBlockStoreV1()
+      const repository = BlockV2Repository(externalBlocks)
+      return repository.getByGuid(guid)
     }
 
   }

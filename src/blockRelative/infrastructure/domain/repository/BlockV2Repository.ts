@@ -144,6 +144,39 @@ export const BlockV2Repository = (blocks: BlockDTOV2[]): InterfaceBlockV2 => {
         blocks.push(block)
       })
       buildCache(blocks)
+    },
+    findBlockIndexByGuid (guid: string): number {
+      let blockIndex = -1
+
+      const findBlockIndexRecursive = (blocks: BlockDTOV2[]): number => {
+        for (let i = 0; i < blocks.length; i++) {
+          const block = blocks[i]
+          if (block.guid === guid) {
+            blockIndex = i
+            break
+          }
+
+          if (block.children?.length) {
+            const childIndex = findBlockIndexRecursive(block.children)
+            if (childIndex !== -1) {
+              blockIndex = childIndex
+              break
+            }
+          }
+        }
+
+        return blockIndex
+      }
+
+      return findBlockIndexRecursive(blocks)
+    },
+
+    removeBlock (guid: string): void {
+      const index = this.findBlockIndexByGuid(guid)
+      if (index !== -1) {
+        blocks.splice(index, 1)
+        buildCache(blocks)
+      }
     }
   }
 }

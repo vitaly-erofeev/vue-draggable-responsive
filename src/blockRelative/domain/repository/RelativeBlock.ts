@@ -12,4 +12,8 @@ export interface InterfaceBlockV2 {
   resetActiveBlock (): void
 
   setBlocks (blocks: BlockDTOV2[]): void
+
+  removeBlock (guid: string): void
+
+  findBlockIndexByGuid (guid: string): number
 }

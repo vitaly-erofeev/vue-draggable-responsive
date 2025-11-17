@@ -15,5 +15,5 @@ export interface InterfaceBlockV2 {
 
   removeBlock (guid: string): void
 
-  findBlockIndexByGuid (guid: string): number
+  findBlocks (predicate:(block: BlockDTOV2) => boolean): BlockDTOV2[]
 }

@@ -145,38 +145,44 @@ export const BlockV2Repository = (blocks: BlockDTOV2[]): InterfaceBlockV2 => {
       })
       buildCache(blocks)
     },
-    findBlockIndexByGuid (guid: string): number {
-      let blockIndex = -1
+    findBlocks (predicate: (block: BlockDTOV2) => boolean): BlockDTOV2[] {
+      const results: BlockDTOV2[] = []
 
-      const findBlockIndexRecursive = (blocks: BlockDTOV2[]): number => {
-        for (let i = 0; i < blocks.length; i++) {
-          const block = blocks[i]
-          if (block.guid === guid) {
-            blockIndex = i
-            break
-          }
-
-          if (block.children?.length) {
-            const childIndex = findBlockIndexRecursive(block.children)
-            if (childIndex !== -1) {
-              blockIndex = childIndex
-              break
-            }
-          }
+      const search = (blockList: BlockDTOV2[]) => {
+        for (const block of blockList) {
+          if (predicate(block)) results.push(block)
+          if (block.children?.length) search(block.children)
         }
-
-        return blockIndex
       }
 
-      return findBlockIndexRecursive(blocks)
+      search(blocks)
+      return results
     },
 
-    removeBlock (guid: string): void {
-      const index = this.findBlockIndexByGuid(guid)
-      if (index !== -1) {
-        blocks.splice(index, 1)
-        buildCache(blocks)
+    removeBlock (guid: string): boolean {
+      const blockToRemove = blocksMap.get(guid)
+      if (!blockToRemove) return false
+
+      if (blockToRemove.parentGuid) {
+        const parent = blocksMap.get(blockToRemove.parentGuid)
+        if (parent?.children) {
+          const index = parent.children.findIndex(child => child.guid === guid)
+          if (index !== -1) {
+            parent.children.splice(index, 1)
+            blocksMap.delete(guid)
+            return true
+          }
+        }
+      } else {
+        const index = blocks.findIndex(block => block.guid === guid)
+        if (index !== -1) {
+          blocks.splice(index, 1)
+          blocksMap.delete(guid)
+          return true
+        }
       }
+
+      return false
     }
   }
 }

@@ -11,7 +11,12 @@
     }"
     @click.stop="setActiveBLock(block)"
   >
-  {{ block.width }} x {{ block.height }}
+   <div class="block_info">
+      <slot :block="block" name="help_text">
+        <pre>{{ block }}</pre>
+      </slot>
+    </div>
+    <slot :block="block" name="content"></slot>
 
     <!-- Потомки -->
     <block-relative
@@ -20,8 +25,11 @@
       :ref="child.guid"
       :block="child"
       @set-active-block="$emit('set-active-block', $event)"
-    />
-
+    >
+      <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
+        <slot :name="name" v-bind="data"></slot>
+      </template>
+    </block-relative>
     <!-- Ресайзер -->
     <Resizer :width.sync="block.width" :height.sync="block.height" />
   </div>
@@ -74,5 +82,26 @@ export default {
 .block-relative.active_parent {
   background: rgba(37, 134, 179, 0.336);
   outline: 2px solid rgb(37, 134, 179);
+}
+.block-relative .block_info {
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  background: #e2e2e2;
+  display: inline-block;
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  border-radius: 3px;
+  padding: 3px;
+  color: rgb(0, 0, 0);
+  font-weight: 400;
+  z-index: 9999;
+  height: 350px;
+  width: 350px;
+  overflow: auto;
+}
+
+.block-relative .block_info:empty {
+  display: none;
 }
 </style>

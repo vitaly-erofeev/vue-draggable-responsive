@@ -1,34 +1,29 @@
-type SizeType = 'px' | '%';
-interface propertiesBlockV2 {
-  isBlockV2: boolean
+export type PropertiesBlockV2 = {
+  isBlockV2: boolean;
+}
+export type PropertiesBlock = {
+  contentType: string | null;
+  showBreadcrumbs?: boolean;
+  name?: string;
 }
 
-interface BlockDTOV2 {
+export type ParametersBlock = {
   width: number;
   height: number;
+  parentGuid: string;
+  alias: string;
+}
+
+export type BlockDTOV2 = ParametersBlock & {
   guid: string;
   isStretched: boolean;
   isActive: boolean;
   isActiveAsParent: boolean;
   isHidden: boolean;
-  // top: number;
-  // right: number;
-  // bottom: number;
-  // left: number;
-  // sizeTypes: {
-  //   width: SizeType,
-  //   height: SizeType,
-  //   top: SizeType,
-  //   right: SizeType,
-  //   bottom: SizeType,
-  //   left: SizeType
-  // },
-  blockV2: propertiesBlockV2
-  // properties: {
-  //   contentType: string
-  // };
-  parentGuid: string;
+  blockV2: PropertiesBlockV2;
+  properties: PropertiesBlock;
   children: BlockDTOV2[];
-  alias: string;
 }
-export { BlockDTOV2 }
+
+export type BlockTree = BlockDTOV2[];
+export type BlockMap = Map<string, BlockDTOV2>

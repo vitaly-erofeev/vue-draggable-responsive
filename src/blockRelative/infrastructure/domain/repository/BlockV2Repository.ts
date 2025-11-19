@@ -1,10 +1,10 @@
 import { InterfaceBlockV2 } from 'e:/vue-draggable-responsive/src/blockRelative/domain/repository/RelativeBlock'
-import { BlockDTOV2 } from 'e:/vue-draggable-responsive/src/blockRelative/model/types'
+import { BlockDTOV2, ParametersBlock, BlockMap } from 'e:/vue-draggable-responsive/src/blockRelative/model/types'
 import GuidGenerator from 'e:/vue-draggable-responsive/src/infrastructure/service/GuidGenerator'
 
 export class BlockV2Repository implements InterfaceBlockV2 {
   private blocks: BlockDTOV2[]
-  private blocksMap: Map<string, BlockDTOV2>
+  private blocksMap: BlockMap
 
   constructor (initialBlocks: BlockDTOV2[] = []) {
     this.blocks = initialBlocks
@@ -24,19 +24,23 @@ export class BlockV2Repository implements InterfaceBlockV2 {
       }
     }
   }
-  public createBlock ({ alias, parentGuid } = { alias: '', parentGuid: '' }): BlockDTOV2 {
+  public createBlock (parametersBlock: ParametersBlock): BlockDTOV2 {
+    const { alias, parentGuid, width, height } = parametersBlock
     const guid = GuidGenerator.generate()
     const block: BlockDTOV2 = {
-      guid: guid,
-      alias: alias,
-      parentGuid: parentGuid || '',
+      guid,
+      alias: alias || '',
+      parentGuid,
       children: [],
-      width: 202,
-      height: 150,
+      width,
+      height,
       isStretched: false,
       isActive: false,
       isActiveAsParent: false,
       isHidden: false,
+      properties: {
+        contentType: null
+      },
       blockV2: { isBlockV2: true }
     }
     this.blocksMap.set(block.guid, block)

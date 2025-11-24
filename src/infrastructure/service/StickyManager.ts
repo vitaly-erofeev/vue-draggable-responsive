@@ -6,7 +6,8 @@ type StickyBlock = {
   element: HTMLElement
   stickyTo: HTMLElement
   type: StickyToType
-  offset: string
+  offset: number
+  cachedOffset?: { top?: number, left?: number }
 }
 
 class StickyManager {
@@ -14,6 +15,7 @@ class StickyManager {
   private dependentsMap: Map<string, Set<string>> = new Map()
   private elementToGuidMap: Map<HTMLElement, string> = new Map()
   private resizeObservers: Map<HTMLElement, ResizeObserver> = new Map()
+  private stickySizes: Map<HTMLElement, { width: number, height: number }> = new Map()
 
   private initialized = false
   private scheduleUpdateTimer?: number
@@ -38,6 +40,7 @@ class StickyManager {
     // Подключаем ResizeObserver только один раз на stickyTo
     if (!this.resizeObservers.has(stickyTo)) {
       const observer = new ResizeObserver(() => {
+        this.stickySizes.delete(stickyTo)
         const observedGuid = this.elementToGuidMap.get(stickyTo)
         if (observedGuid) {
           this.updateDependentsRecursively(observedGuid)
@@ -85,6 +88,7 @@ class StickyManager {
       .some(b => b.stickyTo === block.stickyTo && b.guid !== guid)
 
     if (!stillUsed) {
+      this.stickySizes.delete(block.stickyTo)
       const observer = this.resizeObservers.get(block.stickyTo)
       if (observer) {
         observer.disconnect()
@@ -98,17 +102,47 @@ class StickyManager {
     if (!block) return
 
     const { element, stickyTo, type, offset } = block
+    const cachedOffset = this.getCachedOffset(block)
+
+    if (type === StickyToType.TOP && cachedOffset.top !== undefined) {
+      element.style.top = `${cachedOffset.top}px`
+    } else if (type === StickyToType.LEFT && cachedOffset.left !== undefined) {
+      element.style.left = `${cachedOffset.left}px`
+    }
+  }
+
+  private getStickySize (stickyTo: HTMLElement) {
+    if (this.stickySizes.has(stickyTo)) {
+      return this.stickySizes.get(stickyTo)!
+    }
 
     const { width, height } = stickyTo.getBoundingClientRect()
+    const size = { width, height }
 
-    const top = `calc(${stickyTo.style.top || 0} + ${height}px + ${offset})`
-    const left = `calc(${stickyTo.style.left || 0} + ${width}px + ${offset})`
+    this.stickySizes.set(stickyTo, size)
+    return size
+  }
 
-    if (type === StickyToType.TOP) {
-      element.style.top = top
-    } else if (type === StickyToType.LEFT) {
-      element.style.left = left
+  private getCachedOffset (block: StickyBlock) {
+    if (block.cachedOffset) {
+      return block.cachedOffset
     }
+
+    const { stickyTo, offset, type } = block
+    const size = this.getStickySize(stickyTo)
+
+    const baseTop = stickyTo.offsetTop || 0
+    const baseLeft = stickyTo.offsetLeft || 0
+
+    const offsets: { top?: number, left?: number } = {}
+    if (type === StickyToType.TOP) {
+      offsets.top = baseTop + size.height + offset
+    } else if (type === StickyToType.LEFT) {
+      offsets.left = baseLeft + size.width + offset
+    }
+
+    block.cachedOffset = offsets
+    return offsets
   }
 
   private updateDependentsRecursively (guid: string) {
@@ -125,6 +159,7 @@ class StickyManager {
       const dependents = this.dependentsMap.get(current)
       if (dependents) {
         for (const dep of dependents) {
+          this.clearBlockCache(dep)
           this.updateOne(dep)
           stack.push(dep)
         }
@@ -134,8 +169,16 @@ class StickyManager {
 
   updateAll () {
     for (const guid of this.blocks.keys()) {
+      this.clearBlockCache(guid)
       this.updateOne(guid)
     }
+  }
+
+  private clearBlockCache (guid: string) {
+    const block = this.blocks.get(guid)
+    if (!block) return
+
+    block.cachedOffset = undefined
   }
 }
 

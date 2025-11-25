@@ -4,7 +4,7 @@
       <div>
         <h1>Vue Draggable Responsive playground</h1>
         <p class="subtitle">
-          Выбирай сценарий, добавляй свои блоки и синхронизируй превью — удобно тестировать sticky, stretched, replication и tabs.
+          Добавляйте блоки, меняйте их свойства и сразу проверяйте результат в превью.
         </p>
       </div>
       <div class="header__toggles">
@@ -21,27 +21,94 @@
     </header>
 
     <section class="controls">
-      <div class="controls__scenario">
-        <label for="scenario">Сценарий</label>
-        <select id="scenario" v-model="scenarioKey" @change="loadScenario(scenarioKey)">
-          <option v-for="scenario in scenarios" :key="scenario.key" :value="scenario.key">
-            {{ scenario.name }}
-          </option>
-        </select>
-        <p class="hint">{{ selectedScenario.description }}</p>
-        <button class="secondary" type="button" @click="loadScenario(scenarioKey)">
-          Перезагрузить сценарий
-        </button>
-      </div>
       <div class="controls__actions">
-        <button type="button" @click="addContainer">+ Контейнер</button>
-        <button type="button" :disabled="!activeBlockGuid" @click="addChildToActive">+ Дочерний блок</button>
-        <button type="button" @click="addInteractive($event)">Добавить под курсор</button>
-        <button class="secondary" type="button" @click="syncPreview">Синхронизировать превью</button>
+        <div class="panel__title">Быстрое добавление</div>
+        <div class="controls__buttons">
+          <button type="button" @click="addContainer">+ Контейнер</button>
+          <button type="button" :disabled="!activeBlockGuid" @click="addChildToActive">+ Дочерний блок</button>
+          <button type="button" @click="addInteractive($event)">Добавить под курсор</button>
+          <button class="secondary" type="button" @click="syncPreview">Синхронизировать превью</button>
+        </div>
       </div>
       <div class="controls__meta">
         <div>Активный блок: <strong>{{ activeBlockLabel }}</strong></div>
         <div class="status" v-if="statusMessage">{{ statusMessage }}</div>
+      </div>
+    </section>
+
+    <section class="inspector">
+      <div class="inspector__panel">
+        <div class="panel__title">Свойства активного блока</div>
+        <div class="hint" v-if="!activeBlock">Выберите блок в designer, чтобы редактировать его свойства.</div>
+        <form class="properties" @submit.prevent="applyBlockChanges" v-else>
+          <div class="properties__grid">
+            <label>
+              <span>Alias</span>
+              <input v-model="form.alias" type="text" placeholder="Название блока">
+            </label>
+            <label>
+              <span>Sticky</span>
+              <select v-model="form.sticky">
+                <option v-for="option in stickyOptions" :key="option.value" :value="option.value">{{ option.label }}</option>
+              </select>
+            </label>
+            <label>
+              <span>Ширина (%)</span>
+              <input v-model.number="form.width" type="number" step="1" min="0">
+            </label>
+            <label>
+              <span>Высота (%)</span>
+              <input v-model.number="form.height" type="number" step="1" min="0">
+            </label>
+            <label>
+              <span>Top</span>
+              <input v-model.number="form.top" type="number" step="1">
+            </label>
+            <label>
+              <span>Left</span>
+              <input v-model.number="form.left" type="number" step="1">
+            </label>
+            <label>
+              <span>Right</span>
+              <input v-model.number="form.right" type="number" step="1">
+            </label>
+            <label>
+              <span>Bottom</span>
+              <input v-model.number="form.bottom" type="number" step="1">
+            </label>
+            <label>
+              <span>StickyTo guid</span>
+              <select v-model="form.stickyToGuid">
+                <option value="">— не привязан —</option>
+                <option v-for="option in stickyTargets" :key="option.guid" :value="option.guid">
+                  {{ option.label }}
+                </option>
+              </select>
+            </label>
+            <label>
+              <span>StickyTo type</span>
+              <select v-model="form.stickyToType">
+                <option v-for="option in stickyToTypeOptions" :key="option.value" :value="option.value">{{ option.label }}</option>
+              </select>
+            </label>
+          </div>
+          <div class="properties__toggles">
+            <label class="checkbox">
+              <input v-model="form.isStretched" type="checkbox"> Stretched
+            </label>
+            <label class="checkbox">
+              <input v-model="form.isHidden" type="checkbox"> Hidden
+            </label>
+          </div>
+          <div class="properties__actions">
+            <button type="submit">Сохранить</button>
+            <button class="secondary" type="button" @click="resetForm">Сбросить</button>
+          </div>
+        </form>
+      </div>
+      <div class="inspector__panel">
+        <div class="panel__title">JSON активного блока</div>
+        <pre class="json-viewer">{{ activeBlockJson }}</pre>
       </div>
     </section>
 
@@ -89,8 +156,38 @@ import VueDraggableResponsiveDesigner from './index.vue'
 import VueDraggableResponsivePreviewer from './previewer.vue'
 import { AddBlockType } from '@/domain/model/AddBlockType'
 import { Sticky } from '@/domain/model/Sticky'
+import { StickyToType } from '@/domain/model/StickyTo'
+import { SizeTypes } from '@/domain/model/SizeTypes'
 import { TabPosition } from '@/domain/model/TabProperties'
-import { cloneBlocks, percentSizeTypes, playgroundScenarios } from '@/dev/scenarios'
+// eslint-disable-next-line no-unused-vars
+import type { BlockProperties } from '@/domain/model/BlockProperties'
+
+const percentSizeTypes = {
+  width: SizeTypes.PERCENT,
+  height: SizeTypes.PERCENT,
+  top: SizeTypes.PERCENT,
+  right: SizeTypes.PERCENT,
+  bottom: SizeTypes.PERCENT,
+  left: SizeTypes.PERCENT
+}
+
+function cloneBlocks (blocks: BlockProperties[]): BlockProperties[] {
+  return blocks.map((block) => ({
+    ...block,
+    sizeTypes: { ...block.sizeTypes },
+    stickyTo: block.stickyTo ? { ...block.stickyTo } : undefined,
+    tabs: block.tabs
+      ? {
+        ...block.tabs,
+        list: block.tabs.list?.map(tab => ({ ...tab }))
+      }
+      : undefined,
+    replication: block.replication ? { ...block.replication } : undefined,
+    minMax: block.minMax ? { ...block.minMax } : undefined,
+    onCenter: block.onCenter ? { ...block.onCenter } : undefined,
+    children: block.children ? cloneBlocks(block.children as unknown as BlockProperties[]) : []
+  }))
+}
 
 export default Vue.extend({
   name: 'App',
@@ -100,18 +197,32 @@ export default Vue.extend({
   },
   data () {
     return {
-      scenarioKey: playgroundScenarios[0].key,
       autoPreview: true,
       showPreview: true,
       showHidden: false,
       activeBlockGuid: '',
       statusMessage: '',
-      scenarios: playgroundScenarios
+      blocksSnapshot: [] as BlockProperties[],
+      form: {
+        alias: '',
+        width: 0,
+        height: 0,
+        top: undefined as number | undefined,
+        left: undefined as number | undefined,
+        right: undefined as number | undefined,
+        bottom: undefined as number | undefined,
+        sticky: Sticky.TL,
+        stickyToGuid: '',
+        stickyToType: StickyToType.TOP,
+        isStretched: false,
+        isHidden: false
+      }
     }
   },
   computed: {
-    selectedScenario () {
-      return this.scenarios.find(scenario => scenario.key === this.scenarioKey) || this.scenarios[0]
+    activeBlock (): BlockProperties | undefined {
+      if (!this.activeBlockGuid) return undefined
+      return this.findBlock(this.activeBlockGuid, this.blocksSnapshot)
     },
     activeBlockLabel (): string {
       if (!this.activeBlockGuid) {
@@ -120,10 +231,59 @@ export default Vue.extend({
       const active = this.getDesigner()?.getMainParents(this.activeBlockGuid)
       const alias = (active as any)?.alias
       return alias ? `${alias} (${this.activeBlockGuid})` : this.activeBlockGuid
+    },
+    stickyOptions () {
+      return [
+        { value: Sticky.TL, label: 'Top left' },
+        { value: Sticky.TR, label: 'Top right' },
+        { value: Sticky.BL, label: 'Bottom left' },
+        { value: Sticky.BR, label: 'Bottom right' }
+      ]
+    },
+    stickyToTypeOptions () {
+      return [
+        { value: StickyToType.TOP, label: 'top' },
+        { value: StickyToType.RIGHT, label: 'right' },
+        { value: StickyToType.BOTTOM, label: 'bottom' },
+        { value: StickyToType.LEFT, label: 'left' }
+      ]
+    },
+    stickyTargets () {
+      const blocks = this.flattenBlocks(this.blocksSnapshot)
+      return blocks
+        .filter(block => block.guid !== this.activeBlockGuid)
+        .map(block => ({
+          guid: block.guid,
+          label: `${block.alias || 'Без имени'} (${block.guid})`
+        }))
+    },
+    activeBlockJson (): string {
+      if (!this.activeBlock) return '—'
+      return JSON.stringify(this.activeBlock, null, 2)
+    }
+  },
+  watch: {
+    activeBlock: {
+      handler (block: BlockProperties | undefined) {
+        if (!block) return
+        this.form.alias = block.alias || ''
+        this.form.width = block.width || 0
+        this.form.height = block.height || 0
+        this.form.top = block.top
+        this.form.left = block.left
+        this.form.right = block.right
+        this.form.bottom = block.bottom
+        this.form.sticky = block.sticky || Sticky.TL
+        this.form.stickyToGuid = block.stickyTo?.guid || ''
+        this.form.stickyToType = block.stickyTo?.type || StickyToType.TOP
+        this.form.isStretched = Boolean(block.isStretched)
+        this.form.isHidden = Boolean((block as any).isHidden)
+      },
+      immediate: true
     }
   },
   mounted () {
-    this.loadScenario(this.scenarioKey)
+    this.updateBlocksSnapshot()
   },
   methods: {
     getDesigner (): any {
@@ -132,22 +292,34 @@ export default Vue.extend({
     getPreviewer (): any {
       return this.$refs.previewer as any
     },
-    loadScenario (key: string): void {
-      const scenario = this.scenarios.find(item => item.key === key)
-      if (!scenario) {
-        return
+    findBlock (guid: string, blocks: BlockProperties[]): BlockProperties | undefined {
+      for (const block of blocks) {
+        if (block.guid === guid) return block
+        if (block.children) {
+          const found = this.findBlock(guid, block.children as unknown as BlockProperties[])
+          if (found) return found
+        }
       }
+      return undefined
+    },
+    flattenBlocks (blocks: BlockProperties[]): BlockProperties[] {
+      const acc: BlockProperties[] = []
+      blocks.forEach((block) => {
+        acc.push(block)
+        if (block.children && block.children.length) {
+          acc.push(...this.flattenBlocks(block.children as unknown as BlockProperties[]))
+        }
+      })
+      return acc
+    },
+    updateBlocksSnapshot (): void {
       const designer = this.getDesigner()
-      if (!designer) {
-        return
-      }
-      designer.setBlocks(cloneBlocks(scenario.blocks))
-      this.activeBlockGuid = ''
-      this.statusMessage = `Загружен сценарий "${scenario.name}"`
-      this.syncPreview()
+      if (!designer) return
+      this.blocksSnapshot = cloneBlocks(designer.getBlocks())
     },
     handleDesignerClick (event: { block: any }): void {
       this.activeBlockGuid = event?.block?.guid || ''
+      this.updateBlocksSnapshot()
     },
     addContainer (): void {
       const designer = this.getDesigner()
@@ -213,6 +385,53 @@ export default Vue.extend({
       this.statusMessage = `Интерактивный блок ${guid} добавлен`
       this.onDesignerMutated()
     },
+    applyBlockChanges (): void {
+      if (!this.activeBlockGuid) return
+      const designer = this.getDesigner()
+      const store = designer?.getStore?.()
+      if (!designer || !store) return
+
+      const numericOrUndefined = (value: number | undefined) => (value === null || typeof value === 'undefined' || Number.isNaN(value)) ? undefined : value
+
+      store.change(this.activeBlockGuid, 'alias', this.form.alias)
+      store.change(this.activeBlockGuid, 'width', numericOrUndefined(this.form.width))
+      store.change(this.activeBlockGuid, 'height', numericOrUndefined(this.form.height))
+      store.change(this.activeBlockGuid, 'top', numericOrUndefined(this.form.top))
+      store.change(this.activeBlockGuid, 'left', numericOrUndefined(this.form.left))
+      store.change(this.activeBlockGuid, 'right', numericOrUndefined(this.form.right))
+      store.change(this.activeBlockGuid, 'bottom', numericOrUndefined(this.form.bottom))
+      store.change(this.activeBlockGuid, 'sticky', this.form.sticky)
+      store.change(this.activeBlockGuid, 'isStretched', this.form.isStretched)
+      store.change(this.activeBlockGuid, 'isHidden', this.form.isHidden)
+
+      const stickyTo = this.form.stickyToGuid
+        ? {
+          guid: this.form.stickyToGuid,
+          type: this.form.stickyToType
+        }
+        : undefined
+      store.change(this.activeBlockGuid, 'stickyTo', stickyTo)
+
+      this.statusMessage = 'Свойства обновлены'
+      this.updateBlocksSnapshot()
+      this.onDesignerMutated()
+    },
+    resetForm (): void {
+      if (!this.activeBlock) return
+      const block = this.activeBlock
+      this.form.alias = block.alias || ''
+      this.form.width = block.width || 0
+      this.form.height = block.height || 0
+      this.form.top = block.top
+      this.form.left = block.left
+      this.form.right = block.right
+      this.form.bottom = block.bottom
+      this.form.sticky = block.sticky || Sticky.TL
+      this.form.stickyToGuid = block.stickyTo?.guid || ''
+      this.form.stickyToType = block.stickyTo?.type || StickyToType.TOP
+      this.form.isStretched = Boolean(block.isStretched)
+      this.form.isHidden = Boolean((block as any).isHidden)
+    },
     syncPreview (): void {
       const designer = this.getDesigner()
       const previewer = this.getPreviewer()
@@ -221,6 +440,7 @@ export default Vue.extend({
       }
       const blocks = cloneBlocks(designer.getBlocks())
       previewer.setBlocks(blocks)
+      this.updateBlocksSnapshot()
     },
     togglePreview (): void {
       this.showPreview = !this.showPreview
@@ -229,6 +449,7 @@ export default Vue.extend({
       }
     },
     onDesignerMutated (): void {
+      this.updateBlocksSnapshot()
       if (this.autoPreview) {
         this.$nextTick(() => this.syncPreview())
       }
@@ -282,7 +503,7 @@ export default Vue.extend({
 
 .controls {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: 2fr 1fr;
   gap: 16px;
   background: #fff;
   padding: 16px;
@@ -292,15 +513,13 @@ export default Vue.extend({
   margin-bottom: 16px;
 }
 
-.controls__scenario select {
-  width: 100%;
-  padding: 8px;
-  border-radius: 6px;
-  border: 1px solid #cfd8e3;
-  background: #f7f9fc;
+.controls__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.controls__actions,
+.controls__buttons,
 .controls__meta {
   display: flex;
   gap: 10px;
@@ -320,6 +539,77 @@ export default Vue.extend({
   border-radius: 6px;
   color: #2d4d80;
   font-size: 13px;
+}
+
+.inspector {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.inspector__panel {
+  background: #fff;
+  border: 1px solid #e3e8f0;
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.properties {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.properties__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.properties label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  color: #1f2933;
+}
+
+.properties input,
+.properties select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #cfd8e3;
+  background: #f7f9fc;
+  font-size: 14px;
+}
+
+.properties__toggles {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.properties__actions {
+  display: flex;
+  gap: 10px;
+}
+
+.json-viewer {
+  background: #0b1021;
+  color: #e1e7ff;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #0f172a;
+  min-height: 260px;
+  max-height: 420px;
+  overflow: auto;
+  font-size: 12px;
+  line-height: 1.45;
 }
 
 .workspace {
@@ -399,17 +689,12 @@ button:not(:disabled):hover {
   font-size: 12px;
 }
 
-.demo-block.header { background: #e6f0ff; }
-.demo-block.sidebar { background: #f9f1e7; }
-.demo-block.content { background: #e8f7ed; }
-.demo-block.sticky { background: #fff2d6; }
-.demo-block.tabs { background: #f6ecff; }
-.demo-block.footer { background: #e9eef5; }
-.demo-block.replication { background: #e1f5fe; }
-.demo-block.center { background: #f0f4ff; }
-
 @media (max-width: 1100px) {
   .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .inspector {
     grid-template-columns: 1fr;
   }
 }

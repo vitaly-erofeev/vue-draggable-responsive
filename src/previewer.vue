@@ -76,7 +76,11 @@ export default {
     tabSettings: {
       type: Object
     },
-    mainBlockSelector: String
+    mainBlockSelector: String,
+    blocksV2Props: {
+      type: Boolean,
+      default: false
+    }
   },
 
   data (): { store: BlockRepositoryInterface, tabSettingsService: TabSettings, activeBlockGuid: string } {
@@ -88,6 +92,9 @@ export default {
   },
 
   computed: {
+    isBlocksV2 () {
+      return this.blocksV2Props
+    },
     _blocks (): BlockDTO[] {
       return this.store.get().filter(item => (!item.blockV2 || !item.blockV2.isBlockV2)) as unknown as BlockDTO[]
     },
@@ -113,12 +120,20 @@ export default {
       return this.store
     },
     setBlocks (blocks: BlockProperties[]): void {
+      if (this.isBlocksV2) {
+        this.setBlocksV2(blocks as unknown as BlockDTOV2[])
+        return
+      }
       this.store.set([])
       this.$nextTick(() => {
         this.store.set(blocks)
       })
     },
     removeBlock (guid: string): void {
+      if (this.isBlocksV2) {
+        this.removeBlockV2(guid)
+        return
+      }
       this.store.remove(guid)
     },
     getRefByGuid (guid: string): Vue | undefined {

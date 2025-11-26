@@ -111,6 +111,10 @@ export default {
     },
     tabSettings: {
       type: Object
+    },
+    blocksV2Props: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -123,6 +127,9 @@ export default {
   },
 
   computed: {
+    isBlocksV2 () {
+      return this.blocksV2Props
+    },
     _blocks (): BlockDTO[] {
       return this.getStore().get().filter(item => (!item.blockV2 || !item.blockV2.isBlockV2)) as unknown as BlockDTO[]
     },
@@ -168,9 +175,17 @@ export default {
       })
     },
     setActiveBlock (guid: string): void {
+      if (this.isBlocksV2) {
+        this.setActiveBlockV2(guid)
+        return
+      }
       this.store.setActiveBlock(guid)
     },
     clearActiveBlock (): void {
+      if (this.isBlocksV2) {
+        this.clearActiveBlockV2()
+        return
+      }
       this.store.resetActiveBlock()
     },
     getStore (): BlockRepositoryInterface {
@@ -183,6 +198,10 @@ export default {
       return this.store.getMainParents(guid)
     },
     setBlocks (blocks: BlockProperties[]): void {
+      if (this.isBlocksV2) {
+        this.setBlocksV2(blocks as unknown as BlockDTOV2[])
+        return
+      }
       this.store.set([])
       this.$nextTick(() => {
         this.store.set(blocks)
@@ -272,6 +291,14 @@ export default {
           alias?: string
         }
     ): string {
+      if (this.isBlocksV2) {
+        return this.addBlockV2({
+          width,
+          height,
+          parentGuid: parentGuid || '',
+          alias: alias || ''
+        })
+      }
       if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
         const position: { top: number, right: number, bottom: number, left: number } = this.getMousePosition(event, sizeTypes)
         top = position.top
@@ -310,6 +337,10 @@ export default {
       return guid
     },
     removeBlock (guid: string): void {
+      if (this.isBlocksV2) {
+        this.removeBlockV2(guid)
+        return
+      }
       this.store.remove(guid)
     },
     getBlockStoreV1 (): BlockDTOV2[] {

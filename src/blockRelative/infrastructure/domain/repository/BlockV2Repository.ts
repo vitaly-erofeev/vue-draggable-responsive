@@ -30,7 +30,7 @@ export class BlockV2Repository implements InterfaceBlockV2 {
     const block: BlockDTOV2 = {
       guid,
       alias: alias || '',
-      parentGuid,
+      parentGuid: parentGuid || '',
       children: [],
       width,
       height,

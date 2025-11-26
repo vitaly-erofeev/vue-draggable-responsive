@@ -13,13 +13,16 @@ export type ParametersBlock = {
   parentGuid: string;
   alias: string;
 }
+type StylesBlock = {
+  style: string;
+  isHidden: boolean;
+}
 
-export type BlockDTOV2 = ParametersBlock & {
+export type BlockDTOV2 = ParametersBlock & StylesBlock & {
   guid: string;
   isStretched: boolean;
   isActive: boolean;
   isActiveAsParent: boolean;
-  isHidden: boolean;
   blockV2: PropertiesBlockV2;
   properties: PropertiesBlock;
   children: BlockDTOV2[];

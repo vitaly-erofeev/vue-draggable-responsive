@@ -36,6 +36,7 @@ export class BlockV2Repository implements InterfaceBlockV2 {
       height,
       isStretched: false,
       isActive: false,
+      style: '',
       isActiveAsParent: false,
       isHidden: false,
       properties: {
@@ -96,11 +97,13 @@ export class BlockV2Repository implements InterfaceBlockV2 {
 
   public setBlocks (blocksV2: BlockDTOV2[]): void {
     // this.resetActiveBlock()
-    const copy = JSON.parse(JSON.stringify(blocksV2))
-    copy.forEach((block: BlockDTOV2) => {
+    // const copy = JSON.parse(JSON.stringify(blocksV2))
+    this.rebuildCache()
+    blocksV2.forEach((block: BlockDTOV2) => {
+      if (this.blocksMap.get(block.guid)) return
       this.blocks.push(block)
     })
-    this.buildCache(this.blocks)
+    this.rebuildCache()
   }
   // private findBlocks (predicate: (block: BlockDTOV2) => boolean): BlockDTOV2[] {
   //   const results: BlockDTOV2[] = []

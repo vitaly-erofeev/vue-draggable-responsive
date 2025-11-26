@@ -4,18 +4,17 @@
       'block-relative': true,
       'active': block.isActive,
       'active_parent': block.isActiveAsParent,
+      'hidden': block.isHidden,
+      [block.className]: !!block.className
     }"
-    :style="{
-      width: block.width + 'px',
-      height: block.height + 'px',
-    }"
+    :style="blockContentStyle"
     @click.stop="setActiveBLock(block)"
   >
-   <div class="block_info">
+    <!-- <div class="block_info">
       <slot :block="block" name="help_text">
         <pre>{{ block }}</pre>
       </slot>
-    </div>
+    </div> -->
     <slot :block="block" name="content"></slot>
 
     <!-- Потомки -->
@@ -24,6 +23,7 @@
       :key="child.guid"
       :ref="child.guid"
       :block="child"
+      :show-hidden="showHidden"
       @set-active-block="$emit('set-active-block', $event)"
     >
       <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
@@ -51,12 +51,25 @@ export default {
     block: {
       type: Object as () => BlockDTOV2,
       required: true
+    },
+    showHidden: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
     setActiveBLock (block: BlockDTOV2) {
       console.log('set-active-block', block.guid)
       this.$emit('set-active-block', block)
+    }
+  },
+  computed: {
+    blockContentStyle () {
+      const blockStyle = this.block.style || ''
+      const width = `${this.block.width}px`
+      const height = `${this.block.height}px`
+
+      return `${blockStyle}; width: ${width}; height: ${height}`
     }
   }
 }
@@ -68,7 +81,8 @@ export default {
 .block-relative {
   position: relative;
   outline: 1px solid rgb(70 52 156 / 47%);
-  margin: 8px;
+  overflow: auto;
+  /* margin: 8px; */
   display: inline-block;
   cursor: pointer;
 }
@@ -76,11 +90,11 @@ export default {
   outline: 2px solid rgb(52, 156, 69);
 }
 .block-relative.active {
-  background: rgb(87 177 102);
+  /* background: rgb(87 177 102); */
   outline: 3px solid rgb(52, 156, 69);
 }
 .block-relative.active_parent {
-  background: rgba(37, 134, 179, 0.336);
+  /* background: rgba(37, 134, 179, 0.336); */
   outline: 2px solid rgb(37, 134, 179);
 }
 .block-relative .block_info {
@@ -93,15 +107,18 @@ export default {
   top: 3px;
   border-radius: 3px;
   padding: 3px;
-  color: rgb(0, 0, 0);
+  color: rgba(71, 135, 218, 0.116);
   font-weight: 400;
   z-index: 9999;
-  height: 350px;
-  width: 350px;
+  height: 90%;
+  width: 50%;
   overflow: auto;
 }
 
 .block-relative .block_info:empty {
   display: none;
+}
+.block-relative.hidden {
+  outline: 1px dashed #E94435;
 }
 </style>

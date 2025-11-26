@@ -18,6 +18,21 @@
         <slot :name="name" v-bind="data"></slot>
       </template>
     </preview-block>
+    <!-- _blocksRelative-preview
+<code>{{_blocksRelative}}</code> -->
+
+    <block-relative-preview
+     v-for="block in _blocksRelative"
+      v-show="!block.isHidden"
+      :ref="block.guid"
+      :key="block.guid"
+      :block="block"
+       @set-active-block="$emit('set-active-block', $event)"
+    >
+      <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
+        <slot :name="name" v-bind="data"></slot>
+      </template>
+    </block-relative-preview>
   </div>
 </template>
 
@@ -37,11 +52,17 @@ import { BlockProperties } from 'e:/vue-draggable-responsive/src/domain/model/Bl
 
 import TabSettings from 'e:/vue-draggable-responsive/src/application/service/TabSettings'
 
+// V2
+import BlockRelativePreview from 'e:/vue-draggable-responsive/src/blockRelative/infrastructure/components/BlockRelativePreview.vue'
+// eslint-disable-next-line no-unused-vars
+import { BlockDTOV2 } from 'e:/vue-draggable-responsive/src/blockRelative/model/types'
+import { BlockV2Repository } from 'e:/vue-draggable-responsive/src/blockRelative/infrastructure/domain/repository/BlockV2Repository'
+
 // const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 // export default Vue.extend({
 export default {
   name: 'VueDraggableResponsivePreviewer',
-  components: { PreviewBlock },
+  components: { PreviewBlock, BlockRelativePreview },
 
   provide (): { getStore: Function, mainBlockSelector: string } {
     return {
@@ -68,7 +89,10 @@ export default {
 
   computed: {
     _blocks (): BlockDTO[] {
-      return this.store.get()
+      return this.store.get().filter(item => (!item.blockV2 || !item.blockV2.isBlockV2)) as unknown as BlockDTO[]
+    },
+    _blocksRelative (): BlockDTOV2[] {
+      return this.store.get().filter(item => (item.blockV2 && item.blockV2.isBlockV2)) as unknown as BlockDTOV2[]
     }
   },
 
@@ -99,6 +123,24 @@ export default {
     },
     getRefByGuid (guid: string): Vue | undefined {
       return this.store.getRefByGuid(guid)
+    },
+    getBlockStoreV1 (): BlockDTOV2[] {
+      return this.store.get() as unknown as BlockDTOV2[]
+    },
+    setBlocksV2 (blocks: BlockDTOV2[]): void {
+      const externalBlocks: BlockDTOV2[] = this.getBlockStoreV1()
+      const repository = new BlockV2Repository(externalBlocks)
+      repository.setBlocks(blocks)
+    },
+    removeBlockV2 (guid: string): void {
+      const externalBlocks: BlockDTOV2[] = this.getBlockStoreV1()
+      const repository = new BlockV2Repository(externalBlocks)
+      repository.removeBlock(guid)
+    },
+    getByGuidV2 (guid: string): BlockDTOV2 | undefined {
+      const externalBlocks: BlockDTOV2[] = this.getBlockStoreV1()
+      const repository = new BlockV2Repository(externalBlocks)
+      return repository.getByGuid(guid)
     }
   }
 // })

@@ -29,19 +29,20 @@
         <slot :name="name" v-bind="data"></slot>
       </template>
     </block>
-_blocksRelative
-<code>{{_blocksRelative}}</code>
+<!-- _blocksRelative
+<code>{{_blocksRelative}}</code> -->
     <block-relative
      v-for="block in _blocksRelative"
       :ref="block.guid"
       :key="block.guid"
       :block="block"
+      :show-hidden="showHidden"
        @set-active-block="$emit('set-active-block', $event)"
     >
-        <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
-          <slot :name="name" v-bind="data"></slot>
-        </template>
-      </block-relative>
+      <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
+        <slot :name="name" v-bind="data"></slot>
+      </template>
+    </block-relative>
   </div>
 </template>
 
@@ -74,9 +75,9 @@ import { OnCenter } from 'e:/vue-draggable-responsive/src/domain/model/OnCenter'
 import SimpleRemoveListener from 'e:/vue-draggable-responsive/src/infrastructure/service/listeners/SimpleRemoveListener'
 
 import TabSettings from 'e:/vue-draggable-responsive/src/application/service/TabSettings'
-import BlockRelative from 'e:/vue-draggable-responsive/src/blockRelative/infrastructure/components/BlockRelative.vue'
 
 // V2
+import BlockRelative from 'e:/vue-draggable-responsive/src/blockRelative/infrastructure/components/BlockRelative.vue'
 // eslint-disable-next-line no-unused-vars
 import { BlockDTOV2, ParametersBlock } from 'e:/vue-draggable-responsive/src/blockRelative/model/types'
 import { BlockV2Repository } from 'e:/vue-draggable-responsive/src/blockRelative/infrastructure/domain/repository/BlockV2Repository'

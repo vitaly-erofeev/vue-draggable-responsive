@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <svg id="svg">
+    <svg id="svg" v-if="!isBlocksV2">
       <line class="line" v-for="(line, index) in stickyLines"
             :key="index"
             :x1="line.x1"
@@ -9,8 +9,7 @@
             :y2="line.y2"
       />
     </svg>
-  <!-- _blocks
-    <code>{{_blocks}}</code> -->
+  <template  v-if="!isBlocksV2">
     <block
       v-for="block in _blocks"
       :ref="block.guid"
@@ -29,8 +28,11 @@
         <slot :name="name" v-bind="data"></slot>
       </template>
     </block>
-<!-- _blocksRelative
-<code>{{_blocksRelative}}</code> -->
+  </template>
+<!-- _blocksRelative -->
+<!-- <code>{{_blocksRelative}}</code> -->
+<!-- <code>{{_blocks}}</code> -->
+  <template v-if="isBlocksV2">
     <block-relative
      v-for="block in _blocksRelative"
       :ref="block.guid"
@@ -43,6 +45,7 @@
         <slot :name="name" v-bind="data"></slot>
       </template>
     </block-relative>
+  </template>
   </div>
 </template>
 
@@ -131,7 +134,7 @@ export default {
       return this.blocksV2Props
     },
     _blocks (): BlockDTO[] {
-      return this.getStore().get().filter(item => (!item.blockV2 || !item.blockV2.isBlockV2)) as unknown as BlockDTO[]
+      return this.getStore().get()
     },
     _blocksRelative (): BlockDTOV2[] {
       return this.getStore().get().filter(item => (item.blockV2 && item.blockV2.isBlockV2)) as unknown as BlockDTOV2[]
@@ -293,8 +296,8 @@ export default {
     ): string {
       if (this.isBlocksV2) {
         return this.addBlockV2({
-          width,
-          height,
+          width: 500,
+          height: 200,
           parentGuid: parentGuid || '',
           alias: alias || ''
         })

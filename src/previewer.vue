@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+   <template v-if="!isBlocksV2">
     <preview-block
       v-for="block in _blocks"
       v-show="!block.isHidden"
@@ -18,21 +19,25 @@
         <slot :name="name" v-bind="data"></slot>
       </template>
     </preview-block>
+  </template>
     <!-- _blocksRelative-preview
 <code>{{_blocksRelative}}</code> -->
-
+ <!-- this.store.get
+<code>{{ this.store.get()}}</code> -->
+  <template v-if="isBlocksV2">
     <block-relative-preview
-     v-for="block in _blocksRelative"
+      v-for="block in _blocksRelative"
       v-show="!block.isHidden"
       :ref="block.guid"
       :key="block.guid"
       :block="block"
-       @set-active-block="$emit('set-active-block', $event)"
+      @set-active-block="$emit('set-active-block', $event)"
     >
       <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
         <slot :name="name" v-bind="data"></slot>
       </template>
     </block-relative-preview>
+  </template>
   </div>
 </template>
 
@@ -96,7 +101,7 @@ export default {
       return this.blocksV2Props
     },
     _blocks (): BlockDTO[] {
-      return this.store.get().filter(item => (!item.blockV2 || !item.blockV2.isBlockV2)) as unknown as BlockDTO[]
+      return this.store.get()
     },
     _blocksRelative (): BlockDTOV2[] {
       return this.store.get().filter(item => (item.blockV2 && item.blockV2.isBlockV2)) as unknown as BlockDTOV2[]

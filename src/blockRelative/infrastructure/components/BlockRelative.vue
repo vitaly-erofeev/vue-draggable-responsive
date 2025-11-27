@@ -1,5 +1,6 @@
 <template>
   <div
+    :style="blockContentStyle"
     :class="{
       'block-relative': true,
       'active': block.isActive,
@@ -7,7 +8,7 @@
       'hidden': block.isHidden,
       [block.className]: !!block.className
     }"
-    :style="blockContentStyle"
+    :data-guid="block.guid.slice(0, 8)"
     @click.stop="setActiveBLock(block)"
   >
     <!-- <div class="block_info">
@@ -24,6 +25,7 @@
       :ref="child.guid"
       :block="child"
       :show-hidden="showHidden"
+      :position-block="positionBlock"
       @set-active-block="$emit('set-active-block', $event)"
     >
       <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
@@ -31,7 +33,7 @@
       </template>
     </block-relative>
     <!-- Ресайзер -->
-    <Resizer :width.sync="block.width" :height.sync="block.height" />
+    <Resizer v-if="positionBlock === 'displayRelative'" :width.sync="block.width" :height.sync="block.height" />
   </div>
 
 </template>
@@ -55,6 +57,10 @@ export default {
     showHidden: {
       type: Boolean,
       default: false
+    },
+    positionBlock: {
+      type: String,
+      default: 'displayRelative'
     }
   },
   methods: {
@@ -66,6 +72,9 @@ export default {
   computed: {
     blockContentStyle () {
       const blockStyle = this.block.style || ''
+      if (this.positionBlock === 'displayGrid') {
+        return `${blockStyle}; width: 200px; height: 200px`
+      }
       const width = `${this.block.width}px`
       const height = `${this.block.height}px`
 

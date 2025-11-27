@@ -31,6 +31,7 @@
       :ref="block.guid"
       :key="block.guid"
       :block="block"
+      :position-block="positionBlock"
       @set-active-block="$emit('set-active-block', $event)"
     >
       <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
@@ -85,6 +86,10 @@ export default {
     blocksV2Props: {
       type: Boolean,
       default: false
+    },
+    positionBlock: {
+      type: String,
+      default: 'displayRelative'
     }
   },
 

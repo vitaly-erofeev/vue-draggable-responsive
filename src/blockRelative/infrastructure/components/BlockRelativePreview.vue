@@ -1,12 +1,13 @@
 <template>
-  <div
+  <!-- <div
     ref="draggableContainer"
     :class="['block-relative', block.className]"
-  >
+  > -->
     <div
       ref="container"
-      class="content custom_scrollbar"
+       :class="['content custom_scrollbar', block.className]"
       :style="blockContentStyle"
+      :data-guid="block.guid.slice(0, 8)"
       @click.stop="setActiveBLock(block)"
     >
       <!-- <div class="block_info">
@@ -22,6 +23,7 @@
         :key="child.guid"
         :ref="child.guid"
         :block="child"
+        :position-block="positionBlock"
         @set-active-block="$emit('set-active-block', $event)"
       >
         <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
@@ -29,7 +31,7 @@
         </template>
       </block-relative-preview>
     </div>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script lang="ts">
@@ -44,6 +46,10 @@ export default {
     block: {
       type: Object as () => BlockDTOV2,
       required: true
+    },
+    positionBlock: {
+      type: String,
+      default: 'displayRelative'
     }
   },
   methods: {
@@ -54,6 +60,9 @@ export default {
   computed: {
     blockContentStyle () {
       const blockStyle = this.block.style || ''
+      if (this.positionBlock === 'displayGrid') {
+        return `${blockStyle}; width: 200px; height: 200px`
+      }
       const width = `${this.block.width}px`
       const height = `${this.block.height}px`
 
@@ -69,10 +78,11 @@ export default {
 .block-relative {
   position: relative;
   overflow: auto;
-  /* outline: 1px solid rgb(70 52 156 / 47%); */
-  /* margin: 8px; */
-  /* display: inline-block; */
-  /* cursor: pointer; */
+}
+.content {
+  position: relative;
+  overflow: auto;
+  display: inline-block;
 }
 .block-relative .block_info {
   font-size: 16px;

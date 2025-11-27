@@ -39,7 +39,7 @@
       :key="block.guid"
       :block="block"
       :show-hidden="showHidden"
-      :position-block="positionBlock"
+      :position-block="blocksV2Props.displayPosition"
        @set-active-block="$emit('set-active-block', $event)"
     >
       <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
@@ -117,12 +117,11 @@ export default {
       type: Object
     },
     blocksV2Props: {
-      type: Boolean,
-      default: false
-    },
-    positionBlock: {
-      type: String,
-      default: 'displayRelative'
+      type: Object,
+      default: () => ({
+        isRelative: false,
+        displayPosition: 'displayRelative'
+      })
     }
   },
 
@@ -136,7 +135,7 @@ export default {
 
   computed: {
     isBlocksV2 () {
-      return this.blocksV2Props
+      return this.blocksV2Props.isRelative
     },
     _blocks (): BlockDTO[] {
       return this.getStore().get()

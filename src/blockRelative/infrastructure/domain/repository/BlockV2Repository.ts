@@ -1,6 +1,6 @@
-import { InterfaceBlockV2 } from 'e:/vue-draggable-responsive/src/blockRelative/domain/repository/RelativeBlock'
-import { BlockDTOV2, ParametersBlock, BlockMap } from 'e:/vue-draggable-responsive/src/blockRelative/model/types'
-import GuidGenerator from 'e:/vue-draggable-responsive/src/infrastructure/service/GuidGenerator'
+import { InterfaceBlockV2 } from '@/blockRelative/domain/repository/RelativeBlock'
+import { BlockDTOV2, ParametersBlock, BlockMap } from '@/blockRelative/model/types'
+import GuidGenerator from '@/infrastructure/service/GuidGenerator'
 
 export class BlockV2Repository implements InterfaceBlockV2 {
   private blocks: BlockDTOV2[]

@@ -1,4 +1,4 @@
-import { TabSettingType } from 'e:/vue-draggable-responsive/src/domain/model/TabSettingType'
+import { TabSettingType } from '@/domain/model/TabSettingType'
 
 export interface TabSettingsType {
   [index: string]: TabSettingType

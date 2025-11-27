@@ -8,8 +8,8 @@
 <script lang="ts">
 import Vue from 'vue'
 
-// export default Vue.extend({
-export default {
+export default Vue.extend({
+// export default {
   name: 'Resizer',
   props: {
     width: Number,
@@ -49,8 +49,8 @@ export default {
       document.removeEventListener('mouseup', this.stopResize)
     }
   }
-// })
-}
+})
+// }
 </script>
 
 <style scoped>

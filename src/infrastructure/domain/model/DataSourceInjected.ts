@@ -1,4 +1,4 @@
-import { BlockRepositoryInterface } from 'e:/vue-draggable-responsive/src/domain/repository/BlockRepositoryInterface'
+import { BlockRepositoryInterface } from '@/domain/repository/BlockRepositoryInterface'
 
 export interface DataSourceInjected {
   getStore: () => BlockRepositoryInterface,

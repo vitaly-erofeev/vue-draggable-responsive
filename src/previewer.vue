@@ -92,9 +92,10 @@ export default Vue.extend({
     }
   },
 
-  data (): { store: BlockRepositoryInterface, tabSettingsService: TabSettings, activeBlockGuid: string } {
+  data (): { store: BlockRepositoryInterface, tabSettingsService: TabSettings, activeBlockGuid: string, storeV2: InterfaceBlockV2 } {
     return {
       store: new BlockRepository([], true),
+      storeV2: new BlockV2Repository(),
       tabSettingsService: new TabSettings(this.tabSettings, this),
       activeBlockGuid: ''
     }
@@ -108,7 +109,7 @@ export default Vue.extend({
       return this.store.get()
     },
     _blocksRelative (): BlockDTOV2[] {
-      return this.store.get().filter(item => (item.blockV2 && item.blockV2.isBlockV2)) as unknown as BlockDTOV2[]
+      return this.getStoreV2().get()
     }
   },
 
@@ -148,23 +149,17 @@ export default Vue.extend({
     getRefByGuid (guid: string): Vue | undefined {
       return this.store.getRefByGuid(guid)
     },
-    getBlockStoreV1 (): BlockDTOV2[] {
-      return this.store.get() as unknown as BlockDTOV2[]
+    getStoreV2 (): InterfaceBlockV2 {
+      return this.storeV2
     },
     setBlocksV2 (blocks: BlockDTOV2[]): void {
-      const externalBlocks: BlockDTOV2[] = this.getBlockStoreV1()
-      const repository = new BlockV2Repository(externalBlocks)
-      repository.setBlocks(blocks)
+      this.storeV2.setBlocks(blocks)
     },
     removeBlockV2 (guid: string): void {
-      const externalBlocks: BlockDTOV2[] = this.getBlockStoreV1()
-      const repository = new BlockV2Repository(externalBlocks)
-      repository.removeBlock(guid)
+      this.storeV2.removeBlock(guid)
     },
     getByGuidV2 (guid: string): BlockDTOV2 | undefined {
-      const externalBlocks: BlockDTOV2[] = this.getBlockStoreV1()
-      const repository = new BlockV2Repository(externalBlocks)
-      return repository.getByGuid(guid)
+      return this.storeV2.getByGuid(guid)
     }
   }
 })

@@ -52,6 +52,9 @@ export class BlockV2Repository implements InterfaceBlockV2 {
     if (!guid) return undefined
     return this.blocksMap.get(guid)
   }
+  public get (): BlockDTOV2[] {
+    return this.blocks
+  }
 
   public addBlock (block: BlockDTOV2): string {
     if (block.parentGuid) {

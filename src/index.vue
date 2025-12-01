@@ -125,9 +125,10 @@ export default Vue.extend({
     }
   },
 
-  data (): { blocksArray: object[], store: BlockRepositoryInterface, tabSettingsService: TabSettings } {
+  data (): { blocksArray: object[], store: BlockRepositoryInterface, tabSettingsService: TabSettings, storeV2: InterfaceBlockV2 } {
     return {
       store: new BlockRepository(),
+      storeV2: new BlockV2Repository(),
       blocksArray: this.blocks,
       tabSettingsService: new TabSettings(this.tabSettings, this)
     }
@@ -141,7 +142,7 @@ export default Vue.extend({
       return this.getStore().get()
     },
     _blocksRelative (): BlockDTOV2[] {
-      return this.getStore().get().filter(item => (item.blockV2 && item.blockV2.isBlockV2)) as unknown as BlockDTOV2[]
+      return this.getStoreV2().get()
     },
     stickyLines () {
       // @ts-ignore
@@ -198,7 +199,10 @@ export default Vue.extend({
     getStore (): BlockRepositoryInterface {
       return this.store
     },
-    getBlocks (): BlockDTO[] {
+    getBlocks (): BlockDTO[] | BlockDTOV2[] {
+      if (this.isBlocksV2) {
+        return this.storeV2.get()
+      }
       return this.store.get()
     },
     getMainParents (guid: string): BlockDTO | {} {
@@ -353,36 +357,30 @@ export default Vue.extend({
     getBlockStoreV1 (): BlockDTOV2[] {
       return this.store.get() as unknown as BlockDTOV2[]
     },
+    getStoreV2 (): InterfaceBlockV2 {
+      return this.storeV2
+    },
+    getBlocksV2 (): BlockDTOV2[] {
+      return this.storeV2.get()
+    },
     addBlockV2 (parametersBlock: ParametersBlock): string {
-      const externalBlocks: BlockDTOV2[] = this.getBlockStoreV1()
-      const repository = new BlockV2Repository(externalBlocks)
-      const block = repository.createBlock(parametersBlock)
-      return repository.addBlock(block)
+      const block = this.storeV2.createBlock(parametersBlock)
+      return this.storeV2.addBlock(block)
     },
     setActiveBlockV2 (guid: string): void {
-      const externalBlocks: BlockDTOV2[] = this.getBlockStoreV1()
-      const repository = new BlockV2Repository(externalBlocks)
-      repository.setActiveBlock(guid)
+      this.storeV2.setActiveBlock(guid)
     },
     clearActiveBlockV2 (): void {
-      const externalBlocks: BlockDTOV2[] = this.getBlockStoreV1()
-      const repository = new BlockV2Repository(externalBlocks)
-      repository.resetActiveBlock()
+      this.storeV2.resetActiveBlock()
     },
     setBlocksV2 (blocks: BlockDTOV2[]): void {
-      const externalBlocks: BlockDTOV2[] = this.getBlockStoreV1()
-      const repository = new BlockV2Repository(externalBlocks)
-      repository.setBlocks(blocks)
+      this.storeV2.setBlocks(blocks)
     },
     removeBlockV2 (guid: string): void {
-      const externalBlocks: BlockDTOV2[] = this.getBlockStoreV1()
-      const repository = new BlockV2Repository(externalBlocks)
-      repository.removeBlock(guid)
+      this.storeV2.removeBlock(guid)
     },
     getByGuidV2 (guid: string): BlockDTOV2 | undefined {
-      const externalBlocks: BlockDTOV2[] = this.getBlockStoreV1()
-      const repository = new BlockV2Repository(externalBlocks)
-      return repository.getByGuid(guid)
+      return this.storeV2.getByGuid(guid)
     }
 
   }

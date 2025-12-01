@@ -1,6 +1,7 @@
 export type PropertiesBlockV2 = {
   isBlockV2: boolean;
 }
+type SizeTypes = 'px' | '%';
 export type PropertiesBlock = {
   contentType: string | null;
   showBreadcrumbs?: boolean;
@@ -16,6 +17,7 @@ export type ParametersBlock = {
 type StylesBlock = {
   style: string;
   isHidden: boolean;
+  sizeTypes: { width: SizeTypes; height: SizeTypes; }
 }
 
 export type BlockDTOV2 = ParametersBlock & StylesBlock & {

@@ -66,8 +66,8 @@ export default Vue.extend({
       if (this.positionBlock === 'displayGrid') {
         return `${blockStyle}; width: 200px; height: 200px`
       }
-      const width = `${this.block.width}px`
-      const height = `${this.block.height}px`
+      const width = `${this.block.width}${this.block.sizeTypes.width}`
+      const height = `${this.block.height}${this.block.sizeTypes.height}`
 
       return `${blockStyle}; width: ${width}; height: ${height}`
     }

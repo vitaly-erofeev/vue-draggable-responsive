@@ -32,6 +32,7 @@ export class BlockV2Repository implements InterfaceBlockV2 {
       alias: alias || '',
       parentGuid: parentGuid || '',
       children: [],
+      sizeTypes: { width: 'px', height: 'px' },
       width,
       height,
       isStretched: false,

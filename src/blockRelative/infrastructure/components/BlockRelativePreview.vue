@@ -23,7 +23,6 @@
         :key="child.guid"
         :ref="child.guid"
         :block="child"
-        :position-block="positionBlock"
         @set-active-block="$emit('set-active-block', $event)"
       >
         <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
@@ -49,10 +48,6 @@ export default Vue.extend({
     block: {
       type: Object as () => BlockDTOV2,
       required: true
-    },
-    positionBlock: {
-      type: String,
-      default: 'displayRelative'
     }
   },
   methods: {
@@ -63,9 +58,6 @@ export default Vue.extend({
   computed: {
     blockContentStyle () {
       const blockStyle = this.block.style || ''
-      if (this.positionBlock === 'displayGrid') {
-        return `${blockStyle}; width: 200px; height: 200px`
-      }
       const width = `${this.block.width}${this.block.sizeTypes.width}`
       const height = `${this.block.height}${this.block.sizeTypes.height}`
 

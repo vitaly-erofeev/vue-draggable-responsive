@@ -25,7 +25,6 @@
       :ref="child.guid"
       :block="child"
       :show-hidden="showHidden"
-      :position-block="positionBlock"
       @set-active-block="$emit('set-active-block', $event)"
     >
       <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
@@ -33,7 +32,7 @@
       </template>
     </block-relative>
     <!-- Ресайзер -->
-    <Resizer v-if="positionBlock === 'displayRelative'" :width.sync="block.width" :height.sync="block.height" />
+    <Resizer :width.sync="block.width" :height.sync="block.height" />
   </div>
 
 </template>
@@ -60,10 +59,6 @@ export default Vue.extend({
     showHidden: {
       type: Boolean,
       default: false
-    },
-    positionBlock: {
-      type: String,
-      default: 'displayRelative'
     }
   },
   methods: {
@@ -75,9 +70,6 @@ export default Vue.extend({
   computed: {
     blockContentStyle () {
       const blockStyle = this.block.style || ''
-      if (this.positionBlock === 'displayGrid') {
-        return `${blockStyle}; width: 200px; height: 200px`
-      }
       const width = `${this.block.width}${this.block.sizeTypes.width}`
       const height = `${this.block.height}${this.block.sizeTypes.height}`
 

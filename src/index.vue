@@ -32,14 +32,13 @@
 <!-- _blocksRelative -->
 <!-- <code>{{_blocksRelative}}</code> -->
 <!-- <code>{{_blocks}}</code> -->
-  <template v-if="isBlocksV2">
+  <template v-if="isBlocksV2 && isRelativeV2">
     <block-relative
      v-for="block in _blocksRelative"
       :ref="block.guid"
       :key="block.guid"
       :block="block"
       :show-hidden="showHidden"
-      :position-block="blocksV2Props.displayPosition"
        @set-active-block="$emit('set-active-block', $event)"
     >
       <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
@@ -137,6 +136,9 @@ export default Vue.extend({
   computed: {
     isBlocksV2 () {
       return this.blocksV2Props.isRelative
+    },
+    isRelativeV2 () {
+      return this.blocksV2Props.displayPosition === 'displayRelative'
     },
     _blocks (): BlockDTO[] {
       return this.getStore().get()

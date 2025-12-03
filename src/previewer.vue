@@ -24,7 +24,7 @@
 <code>{{_blocksRelative}}</code> -->
  <!-- this.store.get
 <code>{{ this.store.get()}}</code> -->
-  <template v-if="isBlocksV2 && isRelativeV2">
+  <template v-if="!isSetka">
     <block-relative-preview
       v-for="block in _blocksRelative"
       v-show="!block.isHidden"
@@ -37,6 +37,29 @@
         <slot :name="name" v-bind="data"></slot>
       </template>
     </block-relative-preview>
+  </template>
+
+  <template v-if="isSetka">
+    <block-grid-layout
+      ref="gridLayout"
+     @set-active-block="$emit('set-active-block', $event)"
+     >
+      <template v-slot:content="{ blocks }">
+        <block-relative-preview
+          v-for="block in blocks"
+          v-show="!block.isHidden"
+          :ref="block.guid"
+          :key="block.guid"
+          :block="block"
+          @set-active-block="$emit('set-active-block', $event)"
+        >
+          <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
+            <slot :name="name" v-bind="data"></slot>
+          </template>
+        </block-relative-preview>
+      </template>
+
+    </block-grid-layout>
   </template>
   </div>
 </template>
@@ -58,10 +81,13 @@ import { BlockProperties } from '@/domain/model/BlockProperties'
 import TabSettings from '@/application/service/TabSettings'
 
 // V2
-import BlockRelativePreview from '@/blockRelative/infrastructure/components/BlockRelativePreview.vue'
+import BlockRelativePreview from 'e:/vue-draggable-responsive/src/blockRelative/infrastructure/components/BlockRelativePreview.vue'
 // eslint-disable-next-line no-unused-vars
-import { BlockDTOV2 } from '@/blockRelative/model/types'
-import { BlockV2Repository } from '@/blockRelative/infrastructure/domain/repository/BlockV2Repository'
+import { InterfaceBlockV2 } from 'e:/vue-draggable-responsive/src/blockRelative/domain/repository/RelativeBlock'
+// eslint-disable-next-line no-unused-vars
+import { BlockDTOV2 } from 'e:/vue-draggable-responsive/src/blockRelative/model/types'
+import { BlockV2Repository } from 'e:/vue-draggable-responsive/src/blockRelative/infrastructure/domain/repository/BlockV2Repository'
+import BlockGridLayout from 'e:/vue-draggable-responsive/src/blockRelative/infrastructure/blockGrid/BlockGridLayout.vue'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 export default Vue.extend({
@@ -106,6 +132,9 @@ export default Vue.extend({
     },
     isRelativeV2 () {
       return this.blocksV2Props.displayPosition === 'displayRelative'
+    },
+    isSetka (): boolean {
+      return !this.isRelativeV2 && this.isBlocksV2
     },
     _blocks (): BlockDTO[] {
       return this.store.get()
@@ -155,6 +184,10 @@ export default Vue.extend({
       return this.storeV2
     },
     setBlocksV2 (blocks: BlockDTOV2[]): void {
+      if (this.isSetka) {
+        // @ts-ignore
+        this.$refs.gridLayout.loadLayout(blocks)
+      }
       this.storeV2.setBlocks(blocks)
     },
     removeBlockV2 (guid: string): void {

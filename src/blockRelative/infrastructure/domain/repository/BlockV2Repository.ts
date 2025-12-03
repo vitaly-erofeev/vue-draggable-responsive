@@ -25,12 +25,16 @@ export class BlockV2Repository implements InterfaceBlockV2 {
     }
   }
   public createBlock (parametersBlock: ParametersBlock): BlockDTOV2 {
-    const { alias, parentGuid, width, height } = parametersBlock
+    const { alias, parentGuid, width, height, isComponent } = parametersBlock
     const guid = GuidGenerator.generate()
     const block: BlockDTOV2 = {
       guid,
       alias: alias || '',
       parentGuid: parentGuid || '',
+      isComponent: isComponent || false,
+      gridArea: '',
+      widthArea: 0,
+      heightArea: 0,
       children: [],
       sizeTypes: { width: 'px', height: 'px' },
       width,

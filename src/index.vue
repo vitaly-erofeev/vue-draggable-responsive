@@ -32,7 +32,7 @@
 <!-- _blocksRelative -->
 <!-- <code>{{_blocksRelative}}</code> -->
 <!-- <code>{{_blocks}}</code> -->
-  <template v-if="isBlocksV2 && isRelativeV2">
+  <template v-if="!isSetka">
     <block-relative
      v-for="block in _blocksRelative"
       :ref="block.guid"
@@ -46,6 +46,30 @@
       </template>
     </block-relative>
   </template>
+
+  <template v-if="isSetka">
+    <block-grid-layout
+      ref="gridLayout"
+     @set-active-block="$emit('set-active-block', $event)"
+     >
+      <template v-slot:content="{ blocks }">
+        <block-relative
+          v-for="block in blocks"
+          :ref="block.guid"
+          :key="block.guid"
+          :block="block"
+          :show-hidden="showHidden"
+          @set-active-block="$emit('set-active-block', $event)"
+        >
+          <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
+            <slot :name="name" v-bind="data"></slot>
+          </template>
+        </block-relative>
+      </template>
+
+    </block-grid-layout>
+  </template>
+
   </div>
 </template>
 
@@ -90,7 +114,7 @@ const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 export default Vue.extend({
 // export default {
   name: 'VueDraggableResponsiveDesigner',
-  components: { Block, BlockRelative },
+  components: { Block, BlockRelative, BlockGridLayout },
 
   provide () {
     return {
@@ -134,11 +158,14 @@ export default Vue.extend({
   },
 
   computed: {
-    isBlocksV2 () {
+    isBlocksV2 ():boolean {
       return this.blocksV2Props.isRelative
     },
     isRelativeV2 () {
       return this.blocksV2Props.displayPosition === 'displayRelative'
+    },
+    isSetka (): boolean {
+      return !this.isRelativeV2 && this.isBlocksV2
     },
     _blocks (): BlockDTO[] {
       return this.getStore().get()
@@ -269,7 +296,8 @@ export default Vue.extend({
         pagination = undefined,
         minMax = undefined,
         onCenter = undefined,
-        alias = undefined
+        alias = undefined,
+        isComponent = false
       }: {
           width: number,
           height: number,
@@ -302,14 +330,16 @@ export default Vue.extend({
           minMax?: MinMax,
           onCenter?: OnCenter,
           alias?: string
+          isComponent?: boolean
         }
     ): string {
       if (this.isBlocksV2) {
         return this.addBlockV2({
-          width: 500,
+          width: 300,
           height: 200,
           parentGuid: parentGuid || '',
-          alias: alias || ''
+          alias: alias || '',
+          isComponent
         })
       }
       if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
@@ -367,6 +397,14 @@ export default Vue.extend({
     },
     addBlockV2 (parametersBlock: ParametersBlock): string {
       const block = this.storeV2.createBlock(parametersBlock)
+      if (this.isSetka && !parametersBlock.isComponent) {
+        // @ts-ignore
+        const container = this.$refs.gridLayout.addNewContainer(block)
+        if (container) {
+          return this.storeV2.addBlock(container)
+        }
+        return ''
+      }
       return this.storeV2.addBlock(block)
     },
     setActiveBlockV2 (guid: string): void {
@@ -376,6 +414,10 @@ export default Vue.extend({
       this.storeV2.resetActiveBlock()
     },
     setBlocksV2 (blocks: BlockDTOV2[]): void {
+      if (this.isSetka) {
+        // @ts-ignore
+        this.$refs.gridLayout.loadLayout(blocks)
+      }
       this.storeV2.setBlocks(blocks)
     },
     removeBlockV2 (guid: string): void {

@@ -50,21 +50,23 @@
   <template v-if="isSetka">
     <block-grid-layout
       ref="gridLayout"
+      :is-designer="true"
+      :store-v2="storeV2"
      @set-active-block="$emit('set-active-block', $event)"
      >
       <template v-slot:content="{ blocks }">
-        <block-relative
+          <block-relative
           v-for="block in blocks"
-          :ref="block.guid"
-          :key="block.guid"
-          :block="block"
-          :show-hidden="showHidden"
-          @set-active-block="$emit('set-active-block', $event)"
-        >
-          <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
-            <slot :name="name" v-bind="data"></slot>
-          </template>
-        </block-relative>
+            :ref="block.guid"
+            :key="block.guid"
+            :block="block"
+            :show-hidden="showHidden"
+            @set-active-block="$emit('set-active-block', $event)"
+          >
+            <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
+              <slot :name="name" v-bind="data"></slot>
+            </template>
+          </block-relative>
       </template>
 
     </block-grid-layout>
@@ -396,16 +398,16 @@ export default Vue.extend({
       return this.storeV2.get()
     },
     addBlockV2 (parametersBlock: ParametersBlock): string {
-      const block = this.storeV2.createBlock(parametersBlock)
-      if (this.isSetka && !parametersBlock.isComponent) {
+      const createBlock = this.storeV2.createBlock(parametersBlock)
+      if (this.isSetka) {
         // @ts-ignore
-        const container = this.$refs.gridLayout.addNewContainer(block)
-        if (container) {
-          return this.storeV2.addBlock(container)
+        const selectedContainer: BlockDTOV2 | null = this.$refs.gridLayout.getSelectionContainer()
+        if (selectedContainer) {
+          return this.storeV2.addBlock(createBlock)
         }
         return ''
       }
-      return this.storeV2.addBlock(block)
+      return this.storeV2.addBlock(createBlock)
     },
     setActiveBlockV2 (guid: string): void {
       this.storeV2.setActiveBlock(guid)
@@ -421,6 +423,10 @@ export default Vue.extend({
       this.storeV2.setBlocks(blocks)
     },
     removeBlockV2 (guid: string): void {
+      if (this.isSetka) {
+        // @ts-ignore
+        this.$refs.gridLayout.removeContainer(guid)
+      }
       this.storeV2.removeBlock(guid)
     },
     getByGuidV2 (guid: string): BlockDTOV2 | undefined {

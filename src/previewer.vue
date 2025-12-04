@@ -65,7 +65,7 @@
 </template>
 
 <script lang="ts">
-import PreviewBlock from '@/infrastructure/components/PreviewBlock.vue'
+import PreviewBlock from 'e:/vue-draggable-responsive/src/infrastructure/components/PreviewBlock.vue'
 // eslint-disable-next-line no-unused-vars
 import Vue_, { VueConstructor } from 'vue'
 import BlockRepository from '@/infrastructure/domain/repository/BlockRepository'
@@ -93,7 +93,7 @@ const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 export default Vue.extend({
 // export default {
   name: 'VueDraggableResponsivePreviewer',
-  components: { PreviewBlock, BlockRelativePreview },
+  components: { PreviewBlock, BlockRelativePreview, BlockGridLayout },
 
   provide (): { getStore: Function, mainBlockSelector: string } {
     return {

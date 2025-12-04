@@ -18,19 +18,21 @@
       <slot
         :blocks="container.children"
         name="content"
-        v-if="container.children"
       ></slot>
     </div>
 
-    <!-- Пустые ячейки (для наглядности) -->
-    <div
-      v-for="cell in emptyCells"
-      :key="`empty-${cell.row}-${cell.col}`"
-      class="empty-cell"
-      :style="getCellStyle(cell)"
-    >
-      <span class="cell-coords">{{ cell.row }}:{{ cell.col }}</span>
-    </div>
+    <template v-if="isDesigner">
+      <div
+        v-for="cell in emptyCells"
+        :key="`empty-${cell.row}-${cell.col}`"
+        class="empty-cell"
+        :style="getCellStyle(cell)"
+        @click.stop="addNewContainerAt(cell)"
+      >
+        <span class="cell-coords">{{ cell.row }}:{{ cell.col }}</span>
+      </div>
+    </template>
+
   </div>
 </template>
 
@@ -41,7 +43,15 @@ import { BlockDTOV2 } from 'e:/vue-draggable-responsive/src/blockRelative/model/
 // export default Vue.extend({
 export default {
   name: 'BlockGridLayout',
-  props: {},
+  props: {
+    isDesigner: {
+      type: Boolean,
+      default: false
+    },
+    storeV2: {
+      type: Object
+    }
+  },
   data (): {
     containers: BlockDTOV2[];
     gridConfig: { columns: number; rows: number };
@@ -119,6 +129,9 @@ export default {
     }
   },
   methods: {
+    getSelectionContainer () {
+      return this.selectedContainer
+    },
     attrGuid (container: BlockDTOV2) {
       return (container.guid && container.guid.slice(0, 8)) || ''
     },
@@ -257,32 +270,33 @@ export default {
       }
     },
 
-    // addNewContainerAt (cell) {
-    //   console.log('addNewContainerAt', cell)
-    //   const guid = GuidGenerator.generate()
-    //   const newContainer = {
-    //     guid,
-    //     // name: `Новый ${this.containers.length + 1}`,
-    //     gridArea: `${cell.row} / ${cell.col} / ${cell.row + 1} / ${
-    //       cell.col + 1
-    //     }`,
-    //     widthArea: 1,
-    //     heightArea: 1
-    //   }
-    //   this.containers.push(newContainer)
-    //   // this.saveLayout()
-    // },
-
-    removeContainer (container : BlockDTOV2) {
-      if (confirm(`Удалить контейнер ?`)) {
-        const index = this.containers.findIndex(
-          (c) => c.guid === container.guid
-        )
-        if (index > -1) {
-          this.containers.splice(index, 1)
-          // this.saveLayout()
-        }
+    addNewContainerAt (cell: { row: number; col: number; }) {
+      console.log('addNewContainerAt', cell)
+      const createBlock = this.storeV2.createBlock()
+      const newContainer: BlockDTOV2 = {
+        ...createBlock,
+        gridArea: `${cell.row} / ${cell.col} / ${cell.row + 1} / ${
+          cell.col + 1
+        }`,
+        widthArea: 1,
+        heightArea: 1
       }
+      this.containers.push(newContainer)
+      this.storeV2.addBlock(newContainer)
+      // return newContainer
+      // this.saveLayout()
+    },
+
+    removeContainer (guid: string) {
+      // if (confirm(`Удалить контейнер ?`)) {
+      const index = this.containers.findIndex(
+        (c) => c.guid === guid
+      )
+      if (index > -1) {
+        this.containers.splice(index, 1)
+        // this.saveLayout()
+      }
+      // }
     },
 
     adjustContainersToGrid () {

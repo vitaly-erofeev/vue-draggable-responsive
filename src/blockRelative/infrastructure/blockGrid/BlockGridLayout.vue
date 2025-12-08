@@ -13,14 +13,17 @@
       :style="getContainerStyle(container)"
       :data-guid="attrGuid(container)"
       @click.stop="setActiveContainer(container)"
-      @contextmenu.prevent="removeContainer(container)"
     >
+      <div class="container-header" v-if="isDesigner">
+        <button class="btn-edit" @click.prevent="openGridSelector(container)" title="Настройки размера"></button>
+      </div>
       <slot
         :blocks="container.children"
         name="content"
       ></slot>
     </div>
 
+    <!-- Пустые ячейки  -->
     <template v-if="isDesigner">
       <div
         v-for="cell in emptyCells"
@@ -32,6 +35,19 @@
         <span class="cell-coords">{{ cell.row }}:{{ cell.col }}</span>
       </div>
     </template>
+    <!-- Виджет для выбора/редактирования области -->
+    <div v-if="showGridSelector" class="modal-overlay">
+      <div class="modal-content">
+        <grid-area-selector
+          ref="gridSelector"
+          :container="selectedContainer"
+          :all-containers="containers"
+          :initial-config="gridConfig"
+          @apply="applyGridArea"
+          @cancel="closeGridSelector"
+        />
+      </div>
+    </div>
 
   </div>
 </template>
@@ -39,10 +55,14 @@
 <script lang="ts">
 // eslint-disable-next-line no-unused-vars
 import { BlockDTOV2 } from 'e:/vue-draggable-responsive/src/blockRelative/model/types'
+import GridAreaSelector from 'e:/vue-draggable-responsive/src/blockRelative/shared/ui/GridGenerator.vue'
 // import Vue_, { VueConstructor } from 'vue'
 // export default Vue.extend({
 export default {
   name: 'BlockGridLayout',
+  components: {
+    GridAreaSelector
+  },
   props: {
     isDesigner: {
       type: Boolean,
@@ -132,6 +152,9 @@ export default {
     getSelectionContainer () {
       return this.selectedContainer
     },
+    clearActiveContainer () {
+      this.selectedContainer = null
+    },
     attrGuid (container: BlockDTOV2) {
       return (container.guid && container.guid.slice(0, 8)) || ''
     },
@@ -187,13 +210,6 @@ export default {
     openGridSelector (container = null) {
       this.selectedContainer = container
       this.showGridSelector = true
-
-      // Даем время на отрисовку
-      this.$nextTick(() => {
-        if (this.$refs.gridSelector) {
-          // Виджет сам загрузит выделение контейнера
-        }
-      })
     },
 
     closeGridSelector () {
@@ -201,74 +217,66 @@ export default {
       this.selectedContainer = null
     },
 
-    // applyGridArea (gridAreaData) {
-    //   if (this.selectedContainer) {
-    //     // Обновляем существующий контейнер
-    //     this.selectedContainer.gridArea = `${gridAreaData.rowStart} / ${gridAreaData.colStart} / ${gridAreaData.rowEnd} / ${gridAreaData.colEnd}`
-    //     this.selectedContainer.widthArea =
-    //       gridAreaData.colEnd - gridAreaData.colStart
-    //     this.selectedContainer.heightArea =
-    //       gridAreaData.rowEnd - gridAreaData.rowStart
-    //   } else {
-    //     // Создаем новый контейнер
-    //     const newContainer = {
-    //       guid: Date.now(),
-    //       name: `Контейнер ${this.containers.length + 1}`,
-    //       gridArea: `${gridAreaData.rowStart} / ${gridAreaData.colStart} / ${gridAreaData.rowEnd} / ${gridAreaData.colEnd}`,
-    //       widthArea: gridAreaData.colEnd - gridAreaData.colStart,
-    //       heightArea: gridAreaData.rowEnd - gridAreaData.rowStart
+    applyGridArea (gridAreaData: {
+          rowStart: number;
+          rowEnd: number;
+          colStart: number;
+          colEnd: number;
+          cells: any;
+      }) {
+      if (this.selectedContainer) {
+        Object.assign(this.selectedContainer, {
+          gridArea: `${gridAreaData.rowStart} / ${gridAreaData.colStart} / ${gridAreaData.rowEnd} / ${gridAreaData.colEnd}`,
+          cells: gridAreaData.cells
+        })
+      }
+      this.closeGridSelector()
+    },
+
+    // addNewContainer (parametersBlock: BlockDTOV2): BlockDTOV2 | null {
+    //   // Находим первую свободную ячейку 1x1
+    //   let foundCell = null
+
+    //   for (let row = 1; row <= this.gridConfig.rows; row++) {
+    //     for (let col = 1; col <= this.gridConfig.columns; col++) {
+    //       const isOccupied = this.containers.some((container) => {
+    //         const { rowStart, rowEnd, colStart, colEnd } = this.parseGridArea(
+    //           container.gridArea || ''
+    //         )
+    //         return (
+    //           row >= rowStart && row < rowEnd && col >= colStart && col < colEnd
+    //         )
+    //       })
+
+    //       if (!isOccupied) {
+    //         foundCell = { row, col }
+    //         break
+    //       }
     //     }
-    //     this.containers.push(newContainer)
+    //     if (foundCell) break
     //   }
 
-    //   // this.saveLayout()
-    //   this.closeGridSelector()
+    //   if (foundCell) {
+    //     console.log('foundCell', parametersBlock)
+    //     const newContainer: BlockDTOV2 = {
+    //       ...parametersBlock,
+    //       gridArea: `${foundCell.row} / ${foundCell.col} / ${
+    //         foundCell.row + 1
+    //       } / ${foundCell.col + 1}`,
+    //       widthArea: 1,
+    //       heightArea: 1
+    //     }
+    //     this.containers.push(newContainer)
+    //     return newContainer
+
+    //     // this.saveLayout()
+    //   } else {
+    //     alert(
+    //       'Нет свободного места! Увеличьте grid или удалите некоторые контейнеры.'
+    //     )
+    //     return null
+    //   }
     // },
-
-    addNewContainer (parametersBlock: BlockDTOV2): BlockDTOV2 | null {
-      // Находим первую свободную ячейку 1x1
-      let foundCell = null
-
-      for (let row = 1; row <= this.gridConfig.rows; row++) {
-        for (let col = 1; col <= this.gridConfig.columns; col++) {
-          const isOccupied = this.containers.some((container) => {
-            const { rowStart, rowEnd, colStart, colEnd } = this.parseGridArea(
-              container.gridArea || ''
-            )
-            return (
-              row >= rowStart && row < rowEnd && col >= colStart && col < colEnd
-            )
-          })
-
-          if (!isOccupied) {
-            foundCell = { row, col }
-            break
-          }
-        }
-        if (foundCell) break
-      }
-
-      if (foundCell) {
-        console.log('foundCell', parametersBlock)
-        const newContainer: BlockDTOV2 = {
-          ...parametersBlock,
-          gridArea: `${foundCell.row} / ${foundCell.col} / ${
-            foundCell.row + 1
-          } / ${foundCell.col + 1}`,
-          widthArea: 1,
-          heightArea: 1
-        }
-        this.containers.push(newContainer)
-        return newContainer
-
-        // this.saveLayout()
-      } else {
-        alert(
-          'Нет свободного места! Увеличьте grid или удалите некоторые контейнеры.'
-        )
-        return null
-      }
-    },
 
     addNewContainerAt (cell: { row: number; col: number; }) {
       console.log('addNewContainerAt', cell)
@@ -283,20 +291,15 @@ export default {
       }
       this.containers.push(newContainer)
       this.storeV2.addBlock(newContainer)
-      // return newContainer
-      // this.saveLayout()
     },
 
     removeContainer (guid: string) {
-      // if (confirm(`Удалить контейнер ?`)) {
       const index = this.containers.findIndex(
         (c) => c.guid === guid
       )
       if (index > -1) {
         this.containers.splice(index, 1)
-        // this.saveLayout()
       }
-      // }
     },
 
     adjustContainersToGrid () {
@@ -321,21 +324,7 @@ export default {
           container.heightArea = newRowEnd - rowStart
         }
       })
-
-      // this.saveLayout()
     },
-
-    saveLayout () {
-      const layout = {
-        gridConfig: this.gridConfig,
-        containers: this.containers,
-        timestamp: new Date().toISOString()
-      }
-
-      localStorage.setItem('grid-layout-v2', JSON.stringify(layout))
-      console.log('Layout saved:', layout)
-    },
-
     loadLayout (blocks: BlockDTOV2[]) {
       // @ts-ignore
       this.gridConfig = blocks.gridConfig || this.gridConfig
@@ -367,12 +356,8 @@ export default {
 }
 
 .container-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #eee;
+  position: absolute;
+  right: 14px;
 }
 
 .container-name {
@@ -380,20 +365,16 @@ export default {
   color: #333;
 }
 
-.btn-remove {
-  background: #ff6b6b;
-  color: white;
+.btn-edit {
+  background: #5bb458;
   border: none;
   border-radius: 50%;
   width: 24px;
   height: 24px;
   cursor: pointer;
-  font-size: 16px;
-  line-height: 1;
-  opacity: 0.7;
 }
 
-.btn-remove:hover {
+.btn-edit:hover {
   opacity: 1;
   transform: scale(1.1);
 }
@@ -415,7 +396,7 @@ export default {
 }
 
 .modal-overlay {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -424,7 +405,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  /* z-index: 1000; */
   padding: 20px;
 }
 
@@ -435,7 +416,6 @@ export default {
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
 .control-panel {

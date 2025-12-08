@@ -337,8 +337,8 @@ export default Vue.extend({
     ): string {
       if (this.isBlocksV2) {
         return this.addBlockV2({
-          width: 300,
-          height: 200,
+          width: isComponent ? 200 : 300,
+          height: isComponent ? 100 : 300,
           parentGuid: parentGuid || '',
           alias: alias || '',
           isComponent
@@ -414,6 +414,10 @@ export default Vue.extend({
     },
     clearActiveBlockV2 (): void {
       this.storeV2.resetActiveBlock()
+      if (this.isSetka) {
+        // @ts-ignore
+        this.$refs.gridLayout.clearActiveContainer()
+      }
     },
     setBlocksV2 (blocks: BlockDTOV2[]): void {
       if (this.isSetka) {

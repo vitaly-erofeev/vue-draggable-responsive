@@ -25,16 +25,13 @@ export class BlockV2Repository implements InterfaceBlockV2 {
     }
   }
   public createBlock (parametersBlock: ParametersBlock): BlockDTOV2 {
-    const { alias, parentGuid, width, height, isComponent } = parametersBlock
+    const { alias, parentGuid, width, height, isComponent } = parametersBlock || {}
     const guid = GuidGenerator.generate()
     const block: BlockDTOV2 = {
       guid,
       alias: alias || '',
       parentGuid: parentGuid || '',
       isComponent: isComponent || false,
-      gridArea: '',
-      widthArea: 0,
-      heightArea: 0,
       children: [],
       sizeTypes: { width: 'px', height: 'px' },
       width,
@@ -49,7 +46,6 @@ export class BlockV2Repository implements InterfaceBlockV2 {
       },
       blockV2: { isBlockV2: true }
     }
-    this.blocksMap.set(block.guid, block)
     return block
   }
 
@@ -70,6 +66,7 @@ export class BlockV2Repository implements InterfaceBlockV2 {
     } else {
       this.blocks.push(block)
     }
+    this.blocksMap.set(block.guid, block)
     return block.guid
   }
 

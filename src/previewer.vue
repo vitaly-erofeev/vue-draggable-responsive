@@ -42,6 +42,7 @@
   <template v-if="isSetka">
     <block-grid-layout
       ref="gridLayout"
+      :grid-config="blocksV2Props.gridConfig"
      @set-active-block="$emit('set-active-block', $event)"
      >
       <template v-slot:content="{ blocks }">
@@ -112,7 +113,11 @@ export default Vue.extend({
       type: Object,
       default: () => ({
         isRelative: false,
-        displayPosition: 'displayRelative'
+        displayPosition: 'displayRelative',
+        gridConfig: {
+          columns: 3,
+          rows: 2
+        }
       })
     }
   },

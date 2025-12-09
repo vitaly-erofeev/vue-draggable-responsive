@@ -5,8 +5,8 @@
       :key="container.guid"
       :class="{
         'container-item': true,
-        active: container.isActive,
-        active_parent: container.isActiveAsParent,
+        active: isDesigner ? container.isActive : null,
+        active_parent: isDesigner ? container.isActiveAsParent : null,
         hidden: container.isHidden,
         [container.className]: !!container.className,
       }"
@@ -42,7 +42,7 @@
           ref="gridSelector"
           :container="selectedContainer"
           :all-containers="containers"
-          :initial-config="gridConfig"
+          :initial-config="localGridConfig"
           @apply="applyGridArea"
           @cancel="closeGridSelector"
         />
@@ -70,28 +70,24 @@ export default {
     },
     storeV2: {
       type: Object
+    },
+    gridConfig: {
+      type: Object,
+      default: () => ({
+        columns: 3,
+        rows: 2
+      })
     }
   },
   data (): {
     containers: BlockDTOV2[];
-    gridConfig: { columns: number; rows: number };
+    localGridConfig: { columns: number; rows: number };
     showGridSelector: boolean;
     selectedContainer: BlockDTOV2 | null;
     } {
     return {
-      gridConfig: {
-        columns: 3,
-        rows: 3
-      },
-      containers: [
-        // {
-        //   id: 1,
-        //   name: 'Шапка',
-        //   gridArea: '1 / 1 / 2 / 13', // row-start / col-start / row-end / col-end
-        //   widthArea: 12,
-        //   heightArea: 1
-        // },
-      ],
+      localGridConfig: this.gridConfig,
+      containers: [],
       showGridSelector: false,
       selectedContainer: null
     }
@@ -101,9 +97,9 @@ export default {
       return {
         display: 'grid',
         'box-sizing': 'border-box',
-        height: 'inherit',
-        'grid-template-columns': `repeat(${this.gridConfig.columns}, 1fr)`,
-        'grid-template-rows': `repeat(${this.gridConfig.rows}, minmax(100px, auto))`,
+        height: 'auto',
+        'grid-template-columns': `repeat(${this.localGridConfig.columns}, 1fr)`,
+        'grid-template-rows': `repeat(${this.localGridConfig.rows}, minmax(100px, auto))`,
         gap: '10px',
         padding: '20px',
         'background-color': '#f5f5f5',
@@ -129,8 +125,8 @@ export default {
 
       // Возвращаем все свободные ячейки
       const cells = []
-      for (let row = 1; row <= this.gridConfig.rows; row++) {
-        for (let col = 1; col <= this.gridConfig.columns; col++) {
+      for (let row = 1; row <= this.localGridConfig.rows; row++) {
+        for (let col = 1; col <= this.localGridConfig.columns; col++) {
           if (!occupied.has(`${row}-${col}`)) {
             cells.push({ row, col })
           }
@@ -144,6 +140,8 @@ export default {
     gridConfig: {
       deep: true,
       handler () {
+        console.log('gridConfig changed', this.gridConfig)
+        this.localGridConfig = this.gridConfig
         this.adjustContainersToGrid()
       }
     }
@@ -182,6 +180,7 @@ export default {
       }
 
       // Подсветка выбранного контейнера
+      if (this.isDesigner) return style
       if (
         this.selectedContainer &&
         this.selectedContainer.guid === container.guid
@@ -309,12 +308,12 @@ export default {
 
         // Если контейнер выходит за пределы новой сетки
         if (
-          rowEnd > this.gridConfig.rows + 1 ||
-          colEnd > this.gridConfig.columns + 1
+          rowEnd > this.localGridConfig.rows + 1 ||
+          colEnd > this.localGridConfig.columns + 1
         ) {
           // Автоматически уменьшаем или предлагаем пользователю исправить
-          const newRowEnd = Math.min(rowEnd, this.gridConfig.rows + 1)
-          const newColEnd = Math.min(colEnd, this.gridConfig.columns + 1)
+          const newRowEnd = Math.min(rowEnd, this.localGridConfig.rows + 1)
+          const newColEnd = Math.min(colEnd, this.localGridConfig.columns + 1)
 
           const [rowStartStr, colStartStr] = (container.gridArea || '').split('/')
           const rowStart = Number(rowStartStr)
@@ -326,15 +325,14 @@ export default {
       })
     },
     loadLayout (blocks: BlockDTOV2[]) {
-      // @ts-ignore
-      this.gridConfig = blocks.gridConfig || this.gridConfig
+      this.localGridConfig = this.gridConfig
       this.containers = blocks || []
     },
 
     resetLayout () {
       if (confirm('Сбросить весь макет? Все контейнеры будут удалены.')) {
         this.containers = []
-        this.gridConfig = { columns: 12, rows: 3 }
+        this.localGridConfig = { columns: 12, rows: 3 }
         localStorage.removeItem('grid-layout-v2')
       }
     }
@@ -357,7 +355,8 @@ export default {
 
 .container-header {
   position: absolute;
-  right: 14px;
+  z-index: 9999;
+  left: 14px;
 }
 
 .container-name {

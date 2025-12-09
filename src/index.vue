@@ -52,6 +52,7 @@
       ref="gridLayout"
       :is-designer="true"
       :store-v2="storeV2"
+      :grid-config="blocksV2Props.gridConfig"
      @set-active-block="$emit('set-active-block', $event)"
      >
       <template v-slot:content="{ blocks }">
@@ -106,10 +107,13 @@ import SimpleRemoveListener from '@/infrastructure/service/listeners/SimpleRemov
 import TabSettings from '@/application/service/TabSettings'
 
 // V2
-import BlockRelative from '@/blockRelative/infrastructure/components/BlockRelative.vue'
+import BlockRelative from 'e:/vue-draggable-responsive/src/blockRelative/infrastructure/components/BlockRelative.vue'
+import BlockGridLayout from 'e:/vue-draggable-responsive/src/blockRelative/infrastructure/blockGrid/BlockGridLayout.vue'
 // eslint-disable-next-line no-unused-vars
-import { BlockDTOV2, ParametersBlock } from '@/blockRelative/model/types'
-import { BlockV2Repository } from '@/blockRelative/infrastructure/domain/repository/BlockV2Repository'
+import { BlockDTOV2, ParametersBlock } from 'e:/vue-draggable-responsive/src/blockRelative/model/types'
+// eslint-disable-next-line no-unused-vars
+import { InterfaceBlockV2 } from 'e:/vue-draggable-responsive/src/blockRelative/domain/repository/RelativeBlock'
+import { BlockV2Repository } from 'e:/vue-draggable-responsive/src/blockRelative/infrastructure/domain/repository/BlockV2Repository'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 
@@ -145,7 +149,11 @@ export default Vue.extend({
       type: Object,
       default: () => ({
         isRelative: false,
-        displayPosition: 'displayRelative'
+        displayPosition: 'displayRelative',
+        gridConfig: {
+          columns: 3,
+          rows: 2
+        }
       })
     }
   },

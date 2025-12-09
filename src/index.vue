@@ -107,13 +107,13 @@ import SimpleRemoveListener from '@/infrastructure/service/listeners/SimpleRemov
 import TabSettings from '@/application/service/TabSettings'
 
 // V2
-import BlockRelative from 'e:/vue-draggable-responsive/src/blockRelative/infrastructure/components/BlockRelative.vue'
-import BlockGridLayout from 'e:/vue-draggable-responsive/src/blockRelative/infrastructure/blockGrid/BlockGridLayout.vue'
+import BlockRelative from '@/blockRelative/infrastructure/components/BlockRelative.vue'
+import BlockGridLayout from '@/blockRelative/infrastructure/blockGrid/BlockGridLayout.vue'
 // eslint-disable-next-line no-unused-vars
-import { BlockDTOV2, ParametersBlock } from 'e:/vue-draggable-responsive/src/blockRelative/model/types'
+import { BlockDTOV2, ParametersBlock } from '@/blockRelative/model/types'
 // eslint-disable-next-line no-unused-vars
-import { InterfaceBlockV2 } from 'e:/vue-draggable-responsive/src/blockRelative/domain/repository/RelativeBlock'
-import { BlockV2Repository } from 'e:/vue-draggable-responsive/src/blockRelative/infrastructure/domain/repository/BlockV2Repository'
+import { InterfaceBlockV2 } from '@/blockRelative/domain/repository/RelativeBlock'
+import { BlockV2Repository } from '@/blockRelative/infrastructure/domain/repository/BlockV2Repository'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 

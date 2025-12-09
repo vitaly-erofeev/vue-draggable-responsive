@@ -66,7 +66,7 @@
 </template>
 
 <script lang="ts">
-import PreviewBlock from 'e:/vue-draggable-responsive/src/infrastructure/components/PreviewBlock.vue'
+import PreviewBlock from '@/infrastructure/components/PreviewBlock.vue'
 // eslint-disable-next-line no-unused-vars
 import Vue_, { VueConstructor } from 'vue'
 import BlockRepository from '@/infrastructure/domain/repository/BlockRepository'
@@ -82,13 +82,13 @@ import { BlockProperties } from '@/domain/model/BlockProperties'
 import TabSettings from '@/application/service/TabSettings'
 
 // V2
-import BlockRelativePreview from 'e:/vue-draggable-responsive/src/blockRelative/infrastructure/components/BlockRelativePreview.vue'
+import BlockRelativePreview from '@/blockRelative/infrastructure/components/BlockRelativePreview.vue'
 // eslint-disable-next-line no-unused-vars
-import { InterfaceBlockV2 } from 'e:/vue-draggable-responsive/src/blockRelative/domain/repository/RelativeBlock'
+import { InterfaceBlockV2 } from '@/blockRelative/domain/repository/RelativeBlock'
 // eslint-disable-next-line no-unused-vars
-import { BlockDTOV2 } from 'e:/vue-draggable-responsive/src/blockRelative/model/types'
-import { BlockV2Repository } from 'e:/vue-draggable-responsive/src/blockRelative/infrastructure/domain/repository/BlockV2Repository'
-import BlockGridLayout from 'e:/vue-draggable-responsive/src/blockRelative/infrastructure/blockGrid/BlockGridLayout.vue'
+import { BlockDTOV2 } from '@/blockRelative/model/types'
+import { BlockV2Repository } from '@/blockRelative/infrastructure/domain/repository/BlockV2Repository'
+import BlockGridLayout from '@/blockRelative/infrastructure/blockGrid/BlockGridLayout.vue'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 export default Vue.extend({

@@ -54,11 +54,15 @@
 
 <script lang="ts">
 // eslint-disable-next-line no-unused-vars
-import { BlockDTOV2 } from 'e:/vue-draggable-responsive/src/blockRelative/model/types'
-import GridAreaSelector from 'e:/vue-draggable-responsive/src/blockRelative/shared/ui/GridGenerator.vue'
-// import Vue_, { VueConstructor } from 'vue'
-// export default Vue.extend({
-export default {
+import { BlockDTOV2 } from '@/blockRelative/model/types'
+import GridAreaSelector from '@/blockRelative/shared/ui/GridGenerator.vue'
+// eslint-disable-next-line no-unused-vars
+import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
+// eslint-disable-next-line no-unused-vars
+import Vue_, { VueConstructor } from 'vue'
+const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
+export default Vue.extend({
+// export default {
   name: 'BlockGridLayout',
   components: {
     GridAreaSelector
@@ -72,7 +76,10 @@ export default {
       type: Object
     },
     gridConfig: {
-      type: Object,
+      type: Object as () => {
+        columns: number,
+        rows: number
+      },
       default: () => ({
         columns: 3,
         rows: 2
@@ -93,7 +100,7 @@ export default {
     }
   },
   computed: {
-    gridStyle () {
+    gridStyle (): Record<string, string> {
       return {
         display: 'grid',
         'box-sizing': 'border-box',
@@ -147,7 +154,7 @@ export default {
     }
   },
   methods: {
-    getSelectionContainer () {
+    getSelectionContainer (): BlockDTOV2 | null {
       return this.selectedContainer
     },
     clearActiveContainer () {
@@ -337,8 +344,8 @@ export default {
       }
     }
   }
-}
-// })
+// }
+})
 </script>
 <style scoped>
 

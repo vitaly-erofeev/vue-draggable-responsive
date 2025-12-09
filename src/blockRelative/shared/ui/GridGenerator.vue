@@ -96,7 +96,10 @@
 </template>
 
 <script>
-export default {
+import Vue from 'vue'
+
+export default Vue.extend({
+// export default {
   name: 'GridAreaSelector',
 
   props: {
@@ -520,7 +523,8 @@ export default {
       }
     }
   }
-}
+// }
+})
 </script>
 
 <style scoped>

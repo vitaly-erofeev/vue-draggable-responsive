@@ -1,7 +1,7 @@
-import { Sticky } from '@/domain/model/Sticky'
-import { StickyToType } from '@/domain/model/StickyTo'
+import { Sticky } from 'e:/vue-draggable-responsive/src/domain/model/Sticky'
+import { StickyToType } from 'e:/vue-draggable-responsive/src/domain/model/StickyTo'
 import Vue from 'vue'
-import BlockDTO from '@/domain/model/BlockDTO'
+import BlockDTO from 'e:/vue-draggable-responsive/src/domain/model/BlockDTO'
 
 export default Vue.extend({
   props: {

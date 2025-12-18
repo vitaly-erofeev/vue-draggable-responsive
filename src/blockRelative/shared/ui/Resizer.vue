@@ -6,10 +6,10 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+// import Vue from 'vue'
 
-export default Vue.extend({
-// export default {
+// export default Vue.extend({
+export default {
   name: 'Resizer',
   props: {
     width: Number,
@@ -49,8 +49,8 @@ export default Vue.extend({
       document.removeEventListener('mouseup', this.stopResize)
     }
   }
-})
-// }
+// })
+}
 </script>
 
 <style scoped>

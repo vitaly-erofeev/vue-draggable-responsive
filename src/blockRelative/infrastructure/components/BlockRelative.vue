@@ -11,9 +11,10 @@
     :data-guid="block.guid.slice(0, 8)"
     @click.stop="setActiveBLock(block)"
   >
+  <pre>{{ block }}</pre>
     <!-- <div class="block_info">
       <slot :block="block" name="help_text">
-        <pre>{{ block }}</pre>
+        <pre>{{ block.width }}</pre>
       </slot>
     </div> -->
     <slot :block="block" name="content"></slot>
@@ -32,7 +33,12 @@
       </template>
     </block-relative>
     <!-- Ресайзер -->
-    <Resizer :width.sync="block.width" :height.sync="block.height" />
+    <Resizer
+      v-if="isShowResizer"
+      :width.sync="block.width"
+      :height.sync="block.height"
+      @update:width="block.width = $event"
+      @update:height="block.height = $event" />
   </div>
 
 </template>
@@ -41,13 +47,13 @@
 // eslint-disable-next-line no-unused-vars
 import Vue_, { VueConstructor } from 'vue'
 // eslint-disable-next-line no-unused-vars
-import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
+import { DataSourceInjected } from 'e:/vue-draggable-responsive/src/infrastructure/domain/model/DataSourceInjected'
 // eslint-disable-next-line no-unused-vars
-import { BlockDTOV2 } from '@/blockRelative/model/types'
-import Resizer from '@/blockRelative/shared/ui/Resizer.vue'
-const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
-export default Vue.extend({
-// export default {
+import { BlockDTOV2 } from 'e:/vue-draggable-responsive/src/blockRelative/model/types'
+import Resizer from 'e:/vue-draggable-responsive/src/blockRelative/shared/ui/Resizer.vue'
+// const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
+// export default Vue.extend({
+export default {
 
   name: 'BlockRelative',
   components: { Resizer },
@@ -68,17 +74,20 @@ export default Vue.extend({
     }
   },
   computed: {
+    isShowResizer () {
+      return this.block.sizeTypes.width === 'px' && this.block.sizeTypes.height === 'px'
+    },
     blockContentStyle () {
       const blockStyle = this.block.style || ''
-      const width = `${this.block.width}${this.block.sizeTypes.width}`
-      const height = `${this.block.height}${this.block.sizeTypes.height}`
+      const width = `${this.block.width}${this.block.sizeTypes.width === 'auto' ? '' : this.block.sizeTypes.width}`
+      const height = `${this.block.height}${this.block.sizeTypes.height === 'auto' ? '' : this.block.sizeTypes.height}`
 
       return `${blockStyle}; width: ${width}; height: ${height}`
     }
   }
-  // }
+}
 
-})
+// })
 </script>
 
 <style scoped>
@@ -104,7 +113,7 @@ export default Vue.extend({
 .block-relative .block_info {
   font-size: 16px;
   font-family: 'Roboto', sans-serif;
-  background: #e2e2e2;
+  /*background: #e2e2e2;*/
   display: inline-block;
   position: absolute;
   right: 3px;

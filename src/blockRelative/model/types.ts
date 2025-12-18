@@ -1,7 +1,7 @@
 export type PropertiesBlockV2 = {
   isBlockV2: boolean;
 };
-type SizeTypes = 'px' | '%';
+type SizeTypes = 'px' | '%' | 'auto';
 export type PropertiesBlock = {
   contentType: string | null;
   showBreadcrumbs?: boolean;

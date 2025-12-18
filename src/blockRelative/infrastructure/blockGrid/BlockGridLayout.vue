@@ -54,10 +54,10 @@
 
 <script lang="ts">
 // eslint-disable-next-line no-unused-vars
-import { BlockDTOV2 } from '@/blockRelative/model/types'
-import GridAreaSelector from '@/blockRelative/shared/ui/GridGenerator.vue'
+import { BlockDTOV2 } from 'e:/vue-draggable-responsive/src/blockRelative/model/types'
+import GridAreaSelector from 'e:/vue-draggable-responsive/src/blockRelative/shared/ui/GridGenerator.vue'
 // eslint-disable-next-line no-unused-vars
-import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
+import { DataSourceInjected } from 'e:/vue-draggable-responsive/src/infrastructure/domain/model/DataSourceInjected'
 // eslint-disable-next-line no-unused-vars
 import Vue_, { VueConstructor } from 'vue'
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>

@@ -37,12 +37,12 @@
 // eslint-disable-next-line no-unused-vars
 import Vue_, { VueConstructor } from 'vue'
 // eslint-disable-next-line no-unused-vars
-import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
+import { DataSourceInjected } from 'e:/vue-draggable-responsive/src/infrastructure/domain/model/DataSourceInjected'
 // eslint-disable-next-line no-unused-vars
-import { BlockDTOV2 } from '@/blockRelative/model/types'
+import { BlockDTOV2 } from 'e:/vue-draggable-responsive/src/blockRelative/model/types'
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
-export default Vue.extend({
-// export default {
+// export default Vue.extend({
+export default {
   name: 'blockRelativePreview',
   props: {
     block: {
@@ -64,9 +64,9 @@ export default Vue.extend({
       return `${blockStyle}; width: ${width}; height: ${height}`
     }
   }
-  // }
+}
 
-})
+// })
 </script>
 
 <style scoped>

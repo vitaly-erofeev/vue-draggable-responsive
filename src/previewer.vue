@@ -66,33 +66,33 @@
 </template>
 
 <script lang="ts">
-import PreviewBlock from '@/infrastructure/components/PreviewBlock.vue'
+import PreviewBlock from 'e:/vue-draggable-responsive/src/infrastructure/components/PreviewBlock.vue'
 // eslint-disable-next-line no-unused-vars
 import Vue_, { VueConstructor } from 'vue'
-import BlockRepository from '@/infrastructure/domain/repository/BlockRepository'
+import BlockRepository from 'e:/vue-draggable-responsive/src/infrastructure/domain/repository/BlockRepository'
 // eslint-disable-next-line no-unused-vars
-import { BlockRepositoryInterface } from '@/domain/repository/BlockRepositoryInterface'
+import { BlockRepositoryInterface } from 'e:/vue-draggable-responsive/src/domain/repository/BlockRepositoryInterface'
 // eslint-disable-next-line no-unused-vars
-import BlockDTO from '@/domain/model/BlockDTO'
+import BlockDTO from 'e:/vue-draggable-responsive/src/domain/model/BlockDTO'
 // eslint-disable-next-line no-unused-vars
-import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
+import { DataSourceInjected } from 'e:/vue-draggable-responsive/src/infrastructure/domain/model/DataSourceInjected'
 // eslint-disable-next-line no-unused-vars
-import { BlockProperties } from '@/domain/model/BlockProperties'
+import { BlockProperties } from 'e:/vue-draggable-responsive/src/domain/model/BlockProperties'
 
-import TabSettings from '@/application/service/TabSettings'
+import TabSettings from 'e:/vue-draggable-responsive/src/application/service/TabSettings'
 
 // V2
-import BlockRelativePreview from '@/blockRelative/infrastructure/components/BlockRelativePreview.vue'
+import BlockRelativePreview from 'e:/vue-draggable-responsive/src/blockRelative/infrastructure/components/BlockRelativePreview.vue'
+import BlockGridLayout from 'e:/vue-draggable-responsive/src/blockRelative/infrastructure/blockGrid/BlockGridLayout.vue'
 // eslint-disable-next-line no-unused-vars
-import { InterfaceBlockV2 } from '@/blockRelative/domain/repository/RelativeBlock'
+import { BlockDTOV2 } from 'e:/vue-draggable-responsive/src/blockRelative/model/types'
+import { BlockV2Repository } from 'e:/vue-draggable-responsive/src/blockRelative/infrastructure/domain/repository/BlockV2Repository'
 // eslint-disable-next-line no-unused-vars
-import { BlockDTOV2 } from '@/blockRelative/model/types'
-import { BlockV2Repository } from '@/blockRelative/infrastructure/domain/repository/BlockV2Repository'
-import BlockGridLayout from '@/blockRelative/infrastructure/blockGrid/BlockGridLayout.vue'
+import { InterfaceBlockV2 } from 'e:/vue-draggable-responsive/src/blockRelative/domain/repository/RelativeBlock'
 
-const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
-export default Vue.extend({
-// export default {
+// const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
+// export default Vue.extend({
+export default {
   name: 'VueDraggableResponsivePreviewer',
   components: { PreviewBlock, BlockRelativePreview, BlockGridLayout },
 
@@ -202,8 +202,8 @@ export default Vue.extend({
       return this.storeV2.getByGuid(guid)
     }
   }
-})
-// }
+// })
+}
 </script>
 
 <style scoped>

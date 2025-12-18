@@ -11,12 +11,7 @@
     :data-guid="block.guid.slice(0, 8)"
     @click.stop="setActiveBLock(block)"
   >
-  <pre>{{ block }}</pre>
-    <!-- <div class="block_info">
-      <slot :block="block" name="help_text">
-        <pre>{{ block.width }}</pre>
-      </slot>
-    </div> -->
+  <!-- <pre>{{ block }}</pre> -->
     <slot :block="block" name="content"></slot>
 
     <!-- Потомки -->
@@ -77,12 +72,24 @@ export default {
     isShowResizer () {
       return this.block.sizeTypes.width === 'px' && this.block.sizeTypes.height === 'px'
     },
+    objectStyle () {
+      return (this.block.style || '').split(';').reduce((acc, item) => {
+        const [key, value] = item.split(':')
+        acc[key] = value
+        return acc
+      }, {} as Record<string, string>)
+    },
     blockContentStyle () {
-      const blockStyle = this.block.style || ''
-      const width = `${this.block.width}${this.block.sizeTypes.width === 'auto' ? '' : this.block.sizeTypes.width}`
-      const height = `${this.block.height}${this.block.sizeTypes.height === 'auto' ? '' : this.block.sizeTypes.height}`
+      const result: Record<string, string> = {}
+      result.width = `${this.block.width}${this.block.sizeTypes.width === 'auto' ? '' : this.block.sizeTypes.width}`
+      result.height = `${this.block.height}${this.block.sizeTypes.height === 'auto' ? '' : this.block.sizeTypes.height}`
+      result.marginLeft = this.block.customStyles.marginLeft || '0px'
+      result.marginRight = this.block.customStyles.marginRight || '0px'
+      result.marginTop = this.block.customStyles.marginTop || '0px'
+      result.marginBottom = this.block.customStyles.marginBottom || '0px'
+      Object.assign(result, this.objectStyle)
 
-      return `${blockStyle}; width: ${width}; height: ${height}`
+      return result
     }
   }
 }

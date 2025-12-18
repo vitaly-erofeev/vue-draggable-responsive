@@ -5,15 +5,15 @@
   ></div>
 </template>
 
-<script lang="ts">
+<script>
 // import Vue from 'vue'
 
 // export default Vue.extend({
 export default {
   name: 'Resizer',
   props: {
-    width: Number,
-    height: Number
+    width: [ Number, String ],
+    height: [ Number, String ]
   },
   data () {
     return {
@@ -25,7 +25,7 @@ export default {
     }
   },
   methods: {
-    startResize (e: MouseEvent) {
+    startResize (e) {
       e.stopPropagation()
       this.resizing = true
       this.startX = e.clientX
@@ -36,7 +36,7 @@ export default {
       document.addEventListener('mousemove', this.resize)
       document.addEventListener('mouseup', this.stopResize)
     },
-    resize (e: MouseEvent) {
+    resize (e) {
       if (!this.resizing) return
       const newWidth = this.startWidth + (e.clientX - this.startX)
       const newHeight = this.startHeight + (e.clientY - this.startY)

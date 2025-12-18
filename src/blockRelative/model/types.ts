@@ -16,6 +16,12 @@ export type ParametersBlock = {
   isComponent: boolean;
 };
 
+type CustomStyles = {
+  marginLeft: string;
+  marginRight: string;
+  marginTop: string;
+  marginBottom: string;
+}
 export type BlockDTOV2Grid = {
   gridArea: string;
   widthArea: number;
@@ -24,6 +30,7 @@ export type BlockDTOV2Grid = {
 type StylesBlock = {
   style: string;
   isHidden: boolean;
+  customStyles: CustomStyles;
   sizeTypes: { width: SizeTypes; height: SizeTypes };
 };
 

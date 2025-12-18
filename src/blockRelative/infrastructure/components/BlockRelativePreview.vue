@@ -56,12 +56,24 @@ export default {
     }
   },
   computed: {
+    objectStyle () {
+      return (this.block.style || '').split(';').reduce((acc, item) => {
+        const [key, value] = item.split(':')
+        acc[key] = value
+        return acc
+      }, {} as Record<string, string>)
+    },
     blockContentStyle () {
-      const blockStyle = this.block.style || ''
-      const width = `${this.block.width}${this.block.sizeTypes.width}`
-      const height = `${this.block.height}${this.block.sizeTypes.height}`
+      const result: Record<string, string> = {}
+      result.width = `${this.block.width}${this.block.sizeTypes.width === 'auto' ? '' : this.block.sizeTypes.width}`
+      result.height = `${this.block.height}${this.block.sizeTypes.height === 'auto' ? '' : this.block.sizeTypes.height}`
+      result.marginLeft = this.block.customStyles.marginLeft || '0px'
+      result.marginRight = this.block.customStyles.marginRight || '0px'
+      result.marginTop = this.block.customStyles.marginTop || '0px'
+      result.marginBottom = this.block.customStyles.marginBottom || '0px'
+      Object.assign(result, this.objectStyle)
 
-      return `${blockStyle}; width: ${width}; height: ${height}`
+      return result
     }
   }
 }

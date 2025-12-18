@@ -34,6 +34,12 @@ export class BlockV2Repository implements InterfaceBlockV2 {
       isComponent: isComponent || false,
       children: [],
       sizeTypes: { width: 'px', height: 'px' },
+      customStyles: {
+        marginLeft: '',
+        marginRight: '',
+        marginTop: '',
+        marginBottom: ''
+      },
       width,
       height,
       isStretched: false,

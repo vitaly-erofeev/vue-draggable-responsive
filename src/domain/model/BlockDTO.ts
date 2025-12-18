@@ -124,7 +124,7 @@ export default class BlockDTO {
 
     this.sticky = sticky
     this.sizeTypes = sizeTypes
-    this.children = children
+    this.children = children as BlockDTO[]
     this.width = width
     this.height = height
     this.guid = guid

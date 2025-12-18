@@ -6,30 +6,31 @@ export default {
     return {
       scrollHeight: 0,
       scrollWidth: 0,
+      _resizeObserver: null,
+      _raf: null,
       setStretchedSize: () => {
       }
     }
   },
   mounted () {
-    this.$nextTick(() => {
-      this.setStretchedSize()
-    })
+    if (!this.block?.isStretched) return
 
-    if (this.block?.isStretched && this.$refs.container && this.$refs.container instanceof Element) {
-      let children = this.$refs.container.children
-      const observer = new ResizeObserver(() => {
+    this.$nextTick(() => {
+      const content = this.$el.querySelector('.content')
+      if (!content) return
+
+      this._resizeObserver = new ResizeObserver(() => {
         this.setStretchedSize()
       })
 
-      for (let item of children) {
-        observer.observe(item)
-      }
-      const observerInserted = new MutationObserver(mutationList => {
-        mutationList.filter(m => m.type === 'childList').forEach(m => {
-          m.addedNodes.forEach(node => node instanceof Element && observer.observe(node))
-        })
-      })
-      observerInserted.observe(this.$refs.container, { childList: true, subtree: true })
+      this._resizeObserver.observe(content)
+
+      this.setStretchedSize()
+    })
+  },
+  beforeDestroy () {
+    if (this._resizeObserver) {
+      this._resizeObserver.disconnect()
     }
   },
   created () {
@@ -37,27 +38,38 @@ export default {
   },
   methods: {
     _setStretchedSize () {
-      let parentNode
-      let parentScroll = 0
-      if (this.block.parentGuid) {
-        parentNode = this.$el.parentNode
-      } else if (this.mainBlockSelector) {
-        parentNode = this.$el.closest(this.mainBlockSelector)
-      }
-      parentScroll = parentNode?.scrollTop || 0
+      if (this._raf) return
 
-      this.scrollHeight = 0
-      this.scrollWidth = 0
-      this.$nextTick(() => {
-        this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
-        this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
-        if (parentNode && parentScroll) {
-          this.$nextTick(() => {
-            if (parentNode) {
-              parentNode.scrollTop = parentScroll
-            }
-          })
-        }
+      this._raf = requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          this._raf = null
+          let parentNode
+          let parentScroll = 0
+          if (this.block.parentGuid) {
+            parentNode = this.$el.parentNode
+          } else if (this.mainBlockSelector) {
+            parentNode = this.$el.closest(this.mainBlockSelector)
+          }
+          parentScroll = parentNode?.scrollTop || 0
+
+          this.scrollHeight = 0
+          this.scrollWidth = 0
+          const el = this.$el.getElementsByClassName('content')[0]
+          if (this.scrollHeight !== el.scrollHeight) {
+            this.scrollHeight = el.scrollHeight
+          }
+          if (this.scrollWidth !== el.scrollWidth) {
+            this.scrollWidth = el.scrollWidth
+          }
+
+          if (parentNode && parentScroll) {
+            this.$nextTick(() => {
+              if (parentNode) {
+                parentNode.scrollTop = parentScroll
+              }
+            })
+          }
+        })
       })
     }
   }

@@ -7,6 +7,7 @@
           Добавляйте блоки, меняйте их свойства и сразу проверяйте результат в превью.
         </p>
       </div>
+      <div class="status" v-if="statusMessage">{{ statusMessage }}</div>
       <div class="header__toggles">
         <label class="checkbox">
           <input v-model="autoPreview" type="checkbox"> Автообновление превью
@@ -22,7 +23,6 @@
 
     <section class="controls">
       <div class="controls__actions">
-        <div class="panel__title">Быстрое добавление</div>
         <div class="controls__buttons">
           <button type="button" @click="addContainer">+ Контейнер</button>
           <button type="button" :disabled="!activeBlockGuid" @click="addChildToActive">+ Дочерний блок</button>
@@ -32,7 +32,6 @@
       </div>
       <div class="controls__meta">
         <div>Активный блок: <strong>{{ activeBlockLabel }}</strong></div>
-        <div class="status" v-if="statusMessage">{{ statusMessage }}</div>
       </div>
     </section>
 
@@ -112,7 +111,10 @@
       </div>
     </section>
 
-    <section class="workspace">
+    <section :class="{
+      workspace: true,
+      hide_preview: !showPreview,
+    }">
       <div class="workspace__panel">
         <div class="panel__title">Designer</div>
         <vue-draggable-responsive-designer
@@ -162,13 +164,19 @@ import { TabPosition } from '@/domain/model/TabProperties'
 // eslint-disable-next-line no-unused-vars
 import type { BlockProperties } from '@/domain/model/BlockProperties'
 
-const percentSizeTypes = {
+const defaultSizeTypes = {
   width: SizeTypes.PERCENT,
-  height: SizeTypes.PERCENT,
-  top: SizeTypes.PERCENT,
+  height: SizeTypes.PIXEL,
+  top: SizeTypes.PIXEL,
   right: SizeTypes.PERCENT,
   bottom: SizeTypes.PERCENT,
   left: SizeTypes.PERCENT
+}
+const defaultSizes = {
+  width: 40,
+  height: 50,
+  top: 8,
+  left: 8
 }
 
 function cloneBlocks (blocks: BlockProperties[]): BlockProperties[] {
@@ -248,7 +256,10 @@ export default Vue.extend({
         { value: StickyToType.LEFT, label: 'left' }
       ]
     },
-    stickyTargets () {
+    stickyTargets (): {
+      guid: string | undefined,
+      label: string
+    }[] {
       const blocks = this.flattenBlocks(this.blocksSnapshot)
       return blocks
         .filter(block => block.guid !== this.activeBlockGuid)
@@ -327,12 +338,9 @@ export default Vue.extend({
         return
       }
       const guid = designer.addBlock({
-        width: 40,
-        height: 25,
-        top: 8,
-        left: 8,
+        ...defaultSizes,
         sticky: Sticky.TL,
-        sizeTypes: { ...percentSizeTypes },
+        sizeTypes: { ...defaultSizeTypes },
         isStretched: true,
         alias: 'Новый контейнер',
         tabs: {
@@ -354,12 +362,9 @@ export default Vue.extend({
         return
       }
       const guid = designer.addBlock({
-        width: 50,
-        height: 18,
-        top: 4,
-        left: 4,
+        ...defaultSizes,
         sticky: Sticky.TL,
-        sizeTypes: { ...percentSizeTypes },
+        sizeTypes: { ...defaultSizeTypes },
         isStretched: false,
         parentGuid: this.activeBlockGuid,
         alias: 'Дочерний блок'
@@ -373,10 +378,9 @@ export default Vue.extend({
         return
       }
       const guid = designer.addBlock({
-        width: 18,
-        height: 12,
+        ...defaultSizes,
         sticky: Sticky.TL,
-        sizeTypes: { ...percentSizeTypes },
+        sizeTypes: { ...defaultSizeTypes },
         isStretched: false,
         type: AddBlockType.INTERACTIVE,
         event,
@@ -503,7 +507,7 @@ export default Vue.extend({
 
 .controls {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
   background: #fff;
   padding: 16px;
@@ -616,6 +620,9 @@ export default Vue.extend({
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
+}
+.workspace.hide_preview {
+  grid-template-columns: 1fr;
 }
 
 .workspace__panel {

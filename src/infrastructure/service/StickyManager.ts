@@ -15,8 +15,7 @@ class StickyManager {
   private elementToGuidMap: Map<HTMLElement, string> = new Map()
   private resizeObservers: Map<HTMLElement, ResizeObserver> = new Map()
 
-  private initialized = false
-  private scheduleUpdateTimer?: number
+  private actualUpdatesRafMap: Map<string, boolean> = new Map()
 
   addBlock ({ element, stickyTo, type, offset, guid }: StickyBlock) {
     this.blocks.set(guid, { element, stickyTo, type, offset, guid })
@@ -48,23 +47,6 @@ class StickyManager {
     }
 
     this.updateOne(guid)
-    this.scheduleSmartUpdateAll()
-  }
-
-  private scheduleSmartUpdateAll () {
-    // Отменяем предыдущий таймер, чтобы дождаться конца добавлений
-    if (this.scheduleUpdateTimer) {
-      clearTimeout(this.scheduleUpdateTimer)
-    }
-
-    this.scheduleUpdateTimer = window.setTimeout(() => {
-      requestAnimationFrame(() => {
-        this.updateAll()
-        // Делаем повторный прогон — иногда первый расчет не попадает в правильные размеры
-        requestAnimationFrame(() => this.updateAll())
-        this.initialized = true
-      })
-    }, 0)
   }
 
   removeBlock (guid: string) {
@@ -114,28 +96,32 @@ class StickyManager {
   private updateDependentsRecursively (guid: string) {
     if (!guid) return
 
-    const stack = [guid]
-    const visited = new Set<string>()
+    if (this.actualUpdatesRafMap.has(guid)) {
+      return
+    }
+    this.actualUpdatesRafMap.set(guid, true)
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        this.actualUpdatesRafMap.delete(guid)
 
-    while (stack.length > 0) {
-      const current = stack.pop()!
-      if (visited.has(current)) continue
-      visited.add(current)
+        const stack = [guid]
+        const visited = new Set<string>()
 
-      const dependents = this.dependentsMap.get(current)
-      if (dependents) {
-        for (const dep of dependents) {
-          this.updateOne(dep)
-          stack.push(dep)
+        while (stack.length > 0) {
+          const current = stack.pop()!
+          if (visited.has(current)) continue
+          visited.add(current)
+
+          const dependents = this.dependentsMap.get(current)
+          if (dependents) {
+            for (const dep of dependents) {
+              this.updateOne(dep)
+              stack.push(dep)
+            }
+          }
         }
-      }
-    }
-  }
-
-  updateAll () {
-    for (const guid of this.blocks.keys()) {
-      this.updateOne(guid)
-    }
+      })
+    })
   }
 }
 

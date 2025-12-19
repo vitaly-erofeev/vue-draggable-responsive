@@ -21,6 +21,11 @@ type CustomStyles = {
   marginRight: string;
   marginTop: string;
   marginBottom: string;
+  paddingLeft: string;
+  paddingRight: string;
+  paddingTop: string;
+  paddingBottom: string;
+  display: string;
 }
 export type BlockDTOV2Grid = {
   gridArea: string;

@@ -57,7 +57,8 @@ export default {
   },
   computed: {
     objectStyle () {
-      return (this.block.style || '').split(';').reduce((acc, item) => {
+      const styleArray = (this.block.style || '').split(';').map(pair => pair.replace(/\n/g, '').trim())
+      return styleArray.reduce((acc, item) => {
         const [key, value] = item.split(':')
         acc[key] = value
         return acc
@@ -71,6 +72,11 @@ export default {
       result.marginRight = this.block.customStyles.marginRight || '0px'
       result.marginTop = this.block.customStyles.marginTop || '0px'
       result.marginBottom = this.block.customStyles.marginBottom || '0px'
+      result.paddingLeft = this.block.customStyles.paddingLeft || '0px'
+      result.paddingRight = this.block.customStyles.paddingRight || '0px'
+      result.paddingTop = this.block.customStyles.paddingTop || '0px'
+      result.paddingBottom = this.block.customStyles.paddingBottom || '0px'
+      result.display = this.block.customStyles.display || 'block'
       Object.assign(result, this.objectStyle)
 
       return result

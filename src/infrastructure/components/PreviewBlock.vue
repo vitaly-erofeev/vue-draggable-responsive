@@ -1,12 +1,12 @@
 <template>
   <div
-    :style="positionStyle"
-    ref="draggableContainer"
-    :class="['block', block.className]"
+      :style="positionStyle"
+      ref="draggableContainer"
+      :class="['block', block.className]"
   >
     <div
-      v-if="isTabsContainer"
-      :class="{
+        v-if="isTabsContainer"
+        :class="{
         'tabs_container' : true,
         'custom_scrollbar' : true,
         'position_top': block.tabs.position === 'top',
@@ -14,70 +14,71 @@
         'position_bottom': block.tabs.position === 'bottom',
         'position_left': block.tabs.position === 'left',
       }"
-      :style="block.tabs.containerStyle"
+        :style="block.tabs.containerStyle"
     >
       <font-awesome-icon
-        v-show="isShowArrows"
-        icon="chevron-left"
-        class="tabs_button"
-        @click="scrollPrevTab"
-        :class="{ [block.tabs.tabArrowsClass]: true }"
+          v-show="isShowArrows"
+          icon="chevron-left"
+          class="tabs_button"
+          @click="scrollPrevTab"
+          :class="{ [block.tabs.tabArrowsClass]: true }"
       ></font-awesome-icon>
       <div class="tabs_onScroll" ref="tabsScroll" :class="{ 'tabs_padding': isShowArrows, 'direction': directionTabs }">
         <div
-          v-for="tab in visibleTabs"
-          v-show="isShowTabs(tab)"
-          :key="tab.guid"
-          :style="blockTabStyle + getBlockTabStyle(tab)"
-          :class="{
+            v-for="tab in visibleTabs"
+            v-show="isShowTabs(tab)"
+            :key="tab.guid"
+            :style="blockTabStyle + getBlockTabStyle(tab)"
+            :class="{
             'tab': true,
             'active': tab.guid === activeTabGuid,
             [block.tabs.class]: true,
             'required_tab': block.tabs.requiredTabs && block.tabs.requiredTabs.includes(tab.guid),
             'positionTab': tab.data && tab.data.isChild
           }"
-          @click="onTabClick(tab.guid)"
+            @click="onTabClick(tab.guid)"
         >
-        <div @click="showChildTabs(tab.guid)" v-show="tab.data && tab.data.isChild">
-          <i class="plus" :class="{'el-icon-arrow-right': !tab.data.isExpanded, 'el-icon-arrow-down': tab.data.isExpanded}"></i>
-        </div>
+          <div @click="showChildTabs(tab.guid)" v-show="tab.data && tab.data.isChild">
+            <i class="plus"
+               :class="{'el-icon-arrow-right': !tab.data.isExpanded, 'el-icon-arrow-down': tab.data.isExpanded}"></i>
+          </div>
           <span class="label">{{ tab.name }}</span>
         </div>
       </div>
       <font-awesome-icon
-        v-show="isShowArrows"
-        icon="chevron-right"
-        :class="{ [block.tabs.tabArrowsClass]: true }"
-        class="tabs_button tabs_button_next"
-        @click="scrollNextTab"
+          v-show="isShowArrows"
+          icon="chevron-right"
+          :class="{ [block.tabs.tabArrowsClass]: true }"
+          class="tabs_button tabs_button_next"
+          @click="scrollNextTab"
       ></font-awesome-icon>
     </div>
 
     <div
-      ref="container"
-      class="content custom_scrollbar"
-      :class="{ 'scroll_hover': isActiveScrollHover }"
-      :style="blockContentStyle"
-      @mouseover="block.isHover = true"
-      @mouseleave="block.isHover = false"
-      @click="$emit('click', { block: $event.block || block, event: $event.event || $event })"
+        ref="container"
+        class="content custom_scrollbar"
+        :class="{ 'scroll_hover': isActiveScrollHover }"
+        :style="blockContentStyle"
+        @mouseover="block.isHover = true"
+        @mouseleave="block.isHover = false"
+        @click="$emit('click', { block: $event.block || block, event: $event.event || $event })"
     >
       <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
       <preview-block
-        v-for="_block in children"
-        v-show="(isShowChildren && !_block.isHidden )"
-        :class="[
+          v-for="_block in children"
+          v-show="(isShowChildren && !_block.isHidden )"
+          :class="[
           (_block.parentTabGuid === activeTabGuid) ? '' : 'visibility',
           { 'active_block': _block.guid === activeBlockGuid }
         ]"
-        :ref="_block.guid"
-        :key="_block.guid"
-        :is-showing="isShowChildren && _block.parentTabGuid === activeTabGuid && !_block.isHidden"
-        :block="_block"
-        :replication-callback="replicationCallback"
-        :tab-settings-service="tabSettingsService"
-        @click="handleClick({ block: $event.block || _block, event: $event.event || $event })"
-        @tab-click="$emit('tab-click', $event)"
+          :ref="_block.guid"
+          :key="_block.guid"
+          :is-showing="isShowChildren && _block.parentTabGuid === activeTabGuid && !_block.isHidden"
+          :block="_block"
+          :replication-callback="replicationCallback"
+          :tab-settings-service="tabSettingsService"
+          @click="handleClick({ block: $event.block || _block, event: $event.event || $event })"
+          @tab-click="$emit('tab-click', $event)"
       >
         <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
           <slot :name="name" v-bind="data"></slot>
@@ -88,29 +89,26 @@
 </template>
 
 <script lang="ts">
-import { Sticky } from '@/domain/model/Sticky'
 import BlockDTO from '../../domain/model/BlockDTO'
 // eslint-disable-next-line no-unused-vars
-import { Position } from '@/domain/model/PositionCss'
 import ResizeObserver from 'resize-observer-polyfill'
 // eslint-disable-next-line no-unused-vars
 import Vue_, { VueConstructor } from 'vue'
-import { SizeTypes } from '@/domain/model/SizeTypes'
-import BlockManager from '@/application/service/BlockManager'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faAngleDown, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 // eslint-disable-next-line no-unused-vars
 import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
-import { StickyToType } from '@/domain/model/StickyTo'
-import SimpleAddListener from '@/infrastructure/service/listeners/SimpleAddListener'
 
-import { debounce } from '@/infrastructure/service/utils'
+import StyleMixin from '@/infrastructure/components/mixins/StyleMixin'
+import ReplicationMixin from '@/infrastructure/components/mixins/ReplicationMixin'
+import StretchedMixin from '@/infrastructure/components/mixins/StretchedMixin'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 library.add(faAngleDown, faChevronRight, faChevronLeft)
 export default Vue.extend({
   name: 'PreviewBlock',
+  mixins: [StyleMixin, ReplicationMixin, StretchedMixin],
 
   components: {
     FontAwesomeIcon
@@ -118,7 +116,8 @@ export default Vue.extend({
 
   inject: {
     getStore: {
-      default: () => () => {}
+      default: () => () => {
+      }
     },
     mainBlockSelector: {
       default: null
@@ -140,48 +139,23 @@ export default Vue.extend({
   },
 
   data (): {
-    parentBlock?: BlockDTO,
-    parentElement?: Element,
-    scrollHeight?: number,
-    scrollWidth?: number,
     activeTabGuid?: string,
-    replicationIndex: number,
     tabsOffset: number,
     blockWidth: number,
     tabsWidth: number,
     isShowArrows: boolean,
     visitedTabGuids: string[],
-    stickyToBlock?: BlockDTO,
-    stickyToElement?: any,
-    prepareReplication: () => void,
     activeBlockGuid?: string
     } {
     return {
-      parentBlock: undefined,
-      parentElement: undefined,
-      scrollHeight: undefined,
-      scrollWidth: undefined,
       activeTabGuid: undefined,
-      replicationIndex: 0,
       tabsOffset: 0,
       blockWidth: 0,
       tabsWidth: 0,
       isShowArrows: false,
       visitedTabGuids: [],
-      stickyToBlock: undefined,
-      stickyToElement: undefined,
-      prepareReplication: () => {},
       activeBlockGuid: ''
     }
-  },
-  created () {
-    let me = this
-    this.prepareReplication = debounce(this._prepareReplication, 300, () => {
-      if (!this.block.replication?.function) {
-        return
-      }
-      me.block.isLoading = true
-    })
   },
   computed: {
     // список потомков у контейнера
@@ -287,212 +261,8 @@ export default Vue.extend({
       return (this.block.tabs?.position === 'left' || this.block.tabs?.position === 'right')
     },
 
-    zIndex (): number {
-      const startIndex = 101
-      if (!this.block.parentGuid) {
-        return startIndex + (this.block.tabs?.use ? 1 : 0)
-      }
-      let parentRef = this.getStore().getRefByGuid(this.block.parentGuid) as unknown as {
-        zIndex: number
-      }
-      if (!parentRef) {
-        return startIndex
-      }
-
-      return parentRef.zIndex + 1 + (this.block.tabs?.use ? 1 : 0)
-    },
-
     isTabsContainer (): boolean {
       return this.block.tabs?.use || false
-    },
-
-    positionStyle (): object {
-      let position: Position = {}
-      let top: string
-      let left: string
-      let height: string = this.block.height + this.block.sizeTypes.height
-      let width: string = this.block.width + this.block.sizeTypes.width
-
-      switch (this.block.sticky) {
-        case Sticky.TL:
-          top = this.block.top + this.block.sizeTypes.top
-          left = this.block.left + this.block.sizeTypes.left
-          if (this.block.parentGuid) {
-            if (typeof this.parentBlock !== 'undefined') {
-              if (this.parentBlock.isStretched && this.isTabsContainer) {
-                // Если this.isTabsContainer === false
-                // и чекбокс "Растягиваемый" включен у дочернего блока, то поля в дочернем блоке пропадают (width = 0px)
-                const parentSizes = BlockManager.getAbsoluteSizesByParent(this.parentBlock, this.parentElement as Element)
-                if (this.block.sizeTypes.top === SizeTypes.PERCENT) {
-                  top = `${parentSizes.height / 100 * (this.block.top || 0)}px`
-                  height = `${parentSizes.height / 100 * this.block.height}px`
-                }
-                if (this.block.sizeTypes.left === SizeTypes.PERCENT) {
-                  left = `${parentSizes.width / 100 * (this.block.left || 0)}px`
-                  width = `${parentSizes.width / 100 * this.block.width}px`
-                }
-              }
-            }
-          }
-          position = {
-            top: top,
-            left: left
-          }
-          break
-        case Sticky.TR:
-          position = {
-            top: this.block.top + this.block.sizeTypes.top,
-            right: this.block.right + this.block.sizeTypes.right
-          }
-          break
-        case Sticky.BL:
-          position = {
-            bottom: this.block.bottom + this.block.sizeTypes.bottom,
-            left: this.block.left + this.block.sizeTypes.left
-          }
-          break
-        case Sticky.BR:
-          position = {
-            bottom: this.block.bottom + this.block.sizeTypes.bottom,
-            right: this.block.right + this.block.sizeTypes.right
-          }
-          break
-        default:
-          position = {
-            top: this.block.top + this.block.sizeTypes.top,
-            left: this.block.left + this.block.sizeTypes.left
-          }
-          break
-      }
-
-      if (this.block.isHidden) {
-        if (this.block.stickyTo?.guid && this.block.stickyTo?.type) {
-          if (this.block.stickyTo.type === StickyToType.TOP) {
-            position.top = '0px'
-          } else if (this.block.stickyTo.type === StickyToType.LEFT) {
-            position.left = '0px'
-          }
-        }
-      }
-
-      if (this.block.replication?.topBlockGuid) {
-        const stickyToElement = this.getStore().getRefByGuid(this.block.replication?.topBlockGuid) as unknown as {
-          positionStyle: {
-            top: string, height: string
-          }
-        }
-        if (stickyToElement) {
-          position.top =
-              `calc(${stickyToElement.positionStyle.height} + ${stickyToElement.positionStyle.top} + ${this.block.replication?.verticalMargin})`
-        }
-      }
-      if (this.block.stickyTo?.guid && this.block.stickyTo?.type && this.stickyToBlock?.guid) {
-        const stickyToBlock = this.stickyToBlock
-        const stickyToElement = this.stickyToElement
-        if (stickyToBlock && stickyToBlock.parentGuid === this.block.parentGuid && stickyToElement) {
-          switch (this.block.stickyTo.type) {
-            case StickyToType.TOP:
-              position.top =
-                  `calc(${stickyToElement.positionStyle.height} + ${stickyToElement.positionStyle.top} + ${position.top})`
-              break
-            case StickyToType.LEFT:
-              position.left =
-                  `calc(${stickyToElement.positionStyle.width} + ${stickyToElement.positionStyle.left} + ${position.left})`
-              break
-          }
-        }
-      }
-
-      if (this.block.widthCalc && this.block.widthCalc.type && this.block.widthCalc.value) {
-        width = `calc(${width} ${this.block.widthCalc.type} ${this.block.widthCalc.value}px)`
-      }
-      if (this.block.heightCalc && this.block.heightCalc.type && this.block.heightCalc.value) {
-        height = `calc(${height} ${this.block.heightCalc.type} ${this.block.heightCalc.value}px)`
-      }
-
-      if (this.block.isStretched) {
-        position = Object.assign(position, {
-          minWidth: width,
-          minHeight: height,
-          height: this.scrollHeight + 'px',
-          width: this.scrollWidth + 'px'
-        })
-      } else {
-        if (this.block.minMax?.minWidth && this.block.sizeTypes.width === SizeTypes.PERCENT) {
-          position = Object.assign(position, {
-            minWidth: `${this.block.minMax.minWidth}px`
-          })
-        }
-        if (this.block.minMax?.maxWidth && this.block.sizeTypes.width === SizeTypes.PERCENT) {
-          position = Object.assign(position, {
-            maxWidth: `${this.block.minMax.maxWidth}px`
-          })
-        }
-        if (this.block.minMax?.minHeight && this.block.sizeTypes.height === SizeTypes.PERCENT) {
-          position = Object.assign(position, {
-            minHeight: `${this.block.minMax.minHeight}px`
-          })
-        }
-        if (this.block.minMax?.maxHeight && this.block.sizeTypes.height === SizeTypes.PERCENT) {
-          position = Object.assign(position, {
-            maxHeight: `${this.block.minMax.maxHeight}px`
-          })
-        }
-        position = Object.assign(position, {
-          width: width,
-          height: height
-        })
-      }
-
-      if (this.block.isHidden) {
-        position.width = '0px'
-        position.height = '0px'
-      }
-
-      if (!this.block.stickyTo?.guid && this.block.onCenter?.horizontal && this.isShowing) {
-        const refBlock = this.getStore().getRefByGuid(this.block.guid) as unknown as {
-          $el: HTMLElement
-        }
-        // Для элементов с display:none offsetWidth равен нулю
-        if (refBlock && refBlock.$el.offsetWidth) {
-          if (this.block.sticky === Sticky.BL || this.block.sticky === Sticky.TL) {
-            position.left = `calc(50% - calc(${refBlock.$el.offsetWidth}px / 2))`
-          } else {
-            position.right = `calc(50% - calc(${refBlock.$el.offsetWidth}px / 2))`
-          }
-        }
-      }
-      // центрировать горизонтально (адаптивно)
-      if (!this.block.stickyTo?.guid && this.block.onCenter?.horizontalAdaptive && this.isShowing) {
-        const refBlock = this.getStore().getRefByGuid(this.block.guid) as unknown as {
-          $el: HTMLElement
-        }
-        // Для элементов с display:none offsetWidth равен нулю
-        if (refBlock && refBlock.$el.offsetWidth) {
-          position.marginLeft = 'auto'
-          position.marginLeft = 'auto'
-          position.marginRight = 'auto'
-          position.left = '0'
-          position.right = '0'
-        }
-      }
-
-      if (!this.block.stickyTo?.guid && this.block.onCenter?.vertical && this.isShowing) {
-        const refBlock = this.getStore().getRefByGuid(this.block.guid) as unknown as {
-          $el: HTMLElement
-        }
-        if (refBlock) {
-          if (this.block.sticky === Sticky.TR || this.block.sticky === Sticky.TL) {
-            position.top = `calc(50% - calc(${refBlock.$el.offsetHeight}px / 2))`
-          } else {
-            position.bottom = `calc(50% - calc(${refBlock.$el.offsetHeight}px / 2))`
-          }
-        }
-      }
-
-      return Object.assign(position, {
-        zIndex: this.zIndex
-      })
     },
 
     blockTabStyle () {
@@ -557,10 +327,7 @@ export default Vue.extend({
   },
 
   mounted () {
-    this.setParent()
     this.$nextTick(() => {
-      this.setStretchedSize()
-      this.setSticky(this.block?.stickyTo?.guid)
       if (this.isTabsContainer) {
         this.setIsShowArrows()
       }
@@ -577,22 +344,6 @@ export default Vue.extend({
         this.onTabClick(defaultTab)
       }
     }
-    if (this.block?.isStretched && this.$refs.container && this.$refs.container instanceof Element) {
-      let children: HTMLCollection = this.$refs.container.children
-      const observer = new ResizeObserver(() => {
-        this.setStretchedSize()
-      })
-
-      for (let item of children) {
-        observer.observe(item)
-      }
-      const observerInserted = new MutationObserver(mutationList => {
-        mutationList.filter(m => m.type === 'childList').forEach(m => {
-          m.addedNodes.forEach(node => node instanceof Element && observer.observe(node as Element))
-        })
-      })
-      observerInserted.observe(this.$refs.container, { childList: true, subtree: true })
-    }
     this.block.isLoading = false
     this.prepareReplication()
     this.getStore().addRef(this.block.guid, this)
@@ -603,7 +354,7 @@ export default Vue.extend({
   },
 
   methods: {
-    handleClick (event: {block: any, event: Event}) {
+    handleClick (event: { block: any, event: Event }) {
       this.$emit('click', event)
       this.activeBlockGuid = event.block.guid
     },
@@ -644,135 +395,6 @@ export default Vue.extend({
       }
 
       return false
-    },
-    setSticky (guid?: string) {
-      if (guid) {
-        this.stickyToBlock = this.getStore().getByGuid(guid)
-        this.stickyToElement = this.getStore().getRefByGuid(guid) as unknown as {
-          positionStyle: {
-            top: string, height: string, left: string, width: string
-          }
-        }
-      } else {
-        this.stickyToBlock = undefined
-        this.stickyToElement = undefined
-      }
-    },
-    setStretchedSize () {
-      let parentNode: HTMLElement | undefined
-      let parentScroll = 0
-      if (this.block.parentGuid) {
-        parentNode = this.$el.parentNode as HTMLElement
-      } else if (this.mainBlockSelector) {
-        parentNode = this.$el.closest(this.mainBlockSelector) as HTMLElement
-      }
-      parentScroll = parentNode?.scrollTop || 0
-
-      this.scrollHeight = 0
-      this.scrollWidth = 0
-      this.$nextTick(() => {
-        this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
-        this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
-        if (parentNode && parentScroll) {
-          this.$nextTick(() => {
-            if (parentNode) {
-              parentNode.scrollTop = parentScroll
-            }
-          })
-        }
-      })
-    },
-    onReplicateBlock (event: {}) {
-      if (this.replicationCallback) {
-        this.replicationCallback(Object.assign({}, event, {
-          replicationBlockGuid: this.block.guid,
-          replicationIndex: this.replicationIndex
-        }))
-      }
-    },
-
-    async _prepareReplication (offset = {}): Promise<void> {
-      if (!this.block.replication?.function) {
-        this.block.isLoading = false
-        return
-      }
-      this.block.isLoading = true
-      this.block.isHidden = false
-      let blocksData: any[] = []
-      try {
-        blocksData = await this.block.replication?.function(offset)
-      } catch (e) {
-        console.log('Error in replication request', e)
-      }
-      if (blocksData.length === 0) {
-        this.block.isHidden = true
-        /* this.$nextTick(() => {
-          this.getStore().remove(this.block.guid)
-        }) */
-        this.block.isLoading = false
-        return
-      }
-      blocksData.shift()
-      let me = this
-      let lastGuid = me.block.guid
-      let columns = me.block.replication?.columns || 1
-      let rowGuids: { [index: string]: any; } = { 0: [me.block.guid] }
-      let row = 0
-      this.replicationIndex = 0
-      const listenerGuid = this.getStore().addListener(new SimpleAddListener(this.onReplicateBlock))
-      blocksData.forEach((item: object, index: number) => {
-        const newBlock = JSON.parse(JSON.stringify(me.block))
-        newBlock.replication = undefined
-        newBlock.isLoading = false
-        this.replicationIndex = this.replicationIndex + 1
-        if ((index + 1) % columns !== 0) {
-          if (me.block.replication?.horizontalMargin?.value) {
-            newBlock.left = me.block.replication?.horizontalMargin?.value
-            newBlock.sizeTypes.left = me.block.replication?.horizontalMargin?.type || SizeTypes.PIXEL
-          } else {
-            newBlock.left = 0
-          }
-
-          newBlock.stickyTo = {
-            type: 'left',
-            guid: lastGuid
-          }
-          if (row > 0) {
-            let previousRowBlockGuid = rowGuids[row - 1][(index % columns) + 1]
-            newBlock.replication = {}
-            newBlock.replication.topBlockGuid = previousRowBlockGuid
-            if (me.block.replication?.verticalMargin?.value) {
-              newBlock.replication.verticalMargin =
-                  `${me.block.replication?.verticalMargin?.value}${me.block.replication?.verticalMargin?.type || SizeTypes.PIXEL}`
-            }
-          }
-          lastGuid = me.getStore().add(newBlock)
-        } else {
-          row++
-          if (me.block.replication?.verticalMargin?.value) {
-            newBlock.top = me.block.replication?.verticalMargin?.value
-            newBlock.sizeTypes.top = me.block.replication?.verticalMargin?.type || SizeTypes.PIXEL
-          } else {
-            newBlock.top = 0
-          }
-          newBlock.stickyTo = {
-            type: 'top',
-            guid: lastGuid
-          }
-          lastGuid = me.getStore().add(newBlock)
-        }
-        if (typeof rowGuids[row] === 'undefined') {
-          rowGuids[row] = []
-        }
-        rowGuids[row].push(lastGuid)
-      })
-      this.getStore().removeListener(listenerGuid)
-      this.block.isLoading = false
-    },
-
-    setParent (): void {
-      this.parentBlock = this.block.parentGuid ? this.getStore().getByGuid(this.block.parentGuid) : undefined
-      this.parentElement = this.block.parentGuid ? this.$parent?.$refs.draggableContainer as Element : undefined
     },
 
     scrollPrevTab (): void {
@@ -891,6 +513,7 @@ export default Vue.extend({
   display: flex;
   overflow: hidden;
 }
+
 .tabs_onScroll.direction {
   flex-direction: column;
 }
@@ -916,6 +539,7 @@ export default Vue.extend({
   height: 100%;
   flex-direction: column;
 }
+
 .block .tab {
   width: 100px;
   cursor: pointer;
@@ -923,51 +547,60 @@ export default Vue.extend({
   text-align: center;
   /* flex: 1; */
 }
+
 .block .tabs_onScroll {
   display: flex;
   transition: 1s all;
 }
+
 .block .tabs_onScroll.tabs_padding {
   padding-left: 15px;
   padding-right: 15px;
 }
+
 .block .tabs_button {
-    display: block;
-    background: white;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    position: absolute;
-    width: 12px;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 5;
-    color: #909399;
-    box-sizing: border-box;
+  display: block;
+  background: white;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: absolute;
+  width: 12px;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  color: #909399;
+  box-sizing: border-box;
 }
+
 .block .tabs_button_next {
-    right: 0;
-    left: auto;
+  right: 0;
+  left: auto;
 }
+
 .block .visibility {
-    margin-left: -9999px;
-    visibility: hidden;
-    min-height: 0px !important;
-    height: 0px !important;
+  margin-left: -9999px;
+  visibility: hidden;
+  min-height: 0px !important;
+  height: 0px !important;
   /*opacity: 0;*/
   /* display: none; */
 }
+
 .block .scroll_hover {
   scrollbar-color: transparent white; /* thumb and track color  for fireFox*/
   transition: scrollbar-color 0.3s ease-out;
 }
+
 .block .scroll_hover:hover {
-  scrollbar-color: rgba(144,147,153,.3) white; /* thumb and track color  for fireFox*/
+  scrollbar-color: rgba(144, 147, 153, .3) white; /* thumb and track color  for fireFox*/
 }
+
 .block .scroll_hover:hover::-webkit-scrollbar-thumb {
-  background-color: rgba(144,147,153,.3);
+  background-color: rgba(144, 147, 153, .3);
 }
+
 .block .scroll_hover::-webkit-scrollbar-thumb {
   background-color: transparent;
   transition: background-color 0.3s ease-out; /* transition not working for chrome*/
@@ -983,11 +616,13 @@ export default Vue.extend({
   margin-left: 5px;
   border-radius: 4px;
 }
+
 .tabs_container .positionTab {
   position: relative;
   padding-left: 20px !important;
 }
-.tabs_container .positionTab>div:first-child {
+
+.tabs_container .positionTab > div:first-child {
   position: absolute;
   top: 50%;
   left: 4%;

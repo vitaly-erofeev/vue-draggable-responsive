@@ -1,18 +1,18 @@
 <template>
   <div class="container">
     <preview-block
-      v-for="block in _blocks"
-      v-show="!block.isHidden"
-      :ref="block.guid"
-      :key="block.guid"
-      :block="block"
-      :replication-callback="replicationCallback"
-      :tab-settings-service="tabSettingsService"
-      :class="{
+        v-for="block in _blocks"
+        v-show="!block.isHidden"
+        :ref="block.guid"
+        :key="block.guid"
+        :block="block"
+        :replication-callback="replicationCallback"
+        :tab-settings-service="tabSettingsService"
+        :class="{
           'active_block': block.guid === activeBlockGuid,
         }"
-      @click="handleClick"
-      @tab-click="$emit('tab-click', $event)"
+        @click="handleClick"
+        @tab-click="$emit('tab-click', $event)"
     >
       <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
         <slot :name="name" v-bind="data"></slot>
@@ -36,6 +36,7 @@ import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInje
 import { BlockProperties } from '@/domain/model/BlockProperties'
 
 import TabSettings from '@/application/service/TabSettings'
+import { StretchManager } from '@/infrastructure/service/StretchManager'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 export default Vue.extend({
@@ -57,11 +58,12 @@ export default Vue.extend({
     mainBlockSelector: String
   },
 
-  data (): { store: BlockRepositoryInterface, tabSettingsService: TabSettings, activeBlockGuid: string } {
+  data (): { store: BlockRepositoryInterface, tabSettingsService: TabSettings, activeBlockGuid: string, mObserver?: MutationObserver } {
     return {
       store: new BlockRepository([], true),
       tabSettingsService: new TabSettings(this.tabSettings, this),
-      activeBlockGuid: ''
+      activeBlockGuid: '',
+      mObserver: undefined
     }
   },
 
@@ -78,9 +80,24 @@ export default Vue.extend({
       }
     }
   },
+  mounted () {
+    const root = this.$el
+
+    this.mObserver = new MutationObserver(mutationList => {
+      mutationList.filter(m => m.type === 'childList').forEach(m => {
+        m.addedNodes.forEach(node => node instanceof Element && StretchManager.notify())
+      })
+    })
+
+    this.mObserver.observe(root, {
+      childList: true,
+      subtree: true,
+      attributes: true
+    })
+  },
 
   methods: {
-    handleClick (event: {block: any, event: Event}) {
+    handleClick (event: { block: any, event: Event }) {
       this.$emit('click', event)
       this.activeBlockGuid = event.block.guid
     },

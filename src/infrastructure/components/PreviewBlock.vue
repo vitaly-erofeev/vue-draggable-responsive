@@ -335,7 +335,7 @@ export default Vue.extend({
     if (this.block?.tabs?.use && this.block?.tabs?.list?.length > 0) {
       if (this.block.tabs.saveActiveTab && this.block.tabs.activeGuid) {
         this.onTabClick(this.block.tabs.activeGuid || this.availableTabs[0].guid)
-      } else {
+      } else if (this.availableTabs.length > 0) {
         this.onTabClick(this.availableTabs[0].guid)
       }
       // установлена вкладка по умолчанию

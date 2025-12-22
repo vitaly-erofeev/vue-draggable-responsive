@@ -1,17 +1,13 @@
 import ResizeObserver from 'resize-observer-polyfill'
-import { debounce } from '@/infrastructure/service/utils'
 
 export default {
   data () {
     return {
       scrollHeight: 0,
       scrollWidth: 0,
-      setStretchedSize: () => {
-      }
+      rObserver: null,
+      mObserver: null
     }
-  },
-  created () {
-    this.setStretchedSize = debounce(this._setStretchedSize.bind(this), 100)
   },
   mounted () {
     this.$nextTick(() => {
@@ -20,23 +16,38 @@ export default {
 
     if (this.block?.isStretched && this.$refs.container && this.$refs.container instanceof Element) {
       let children = this.$refs.container.children
-      const observer = new ResizeObserver(() => {
+      this.rObserver = new ResizeObserver(() => {
         this.setStretchedSize()
       })
 
       for (let item of children) {
-        observer.observe(item)
+        this.rObserver.observe(item)
       }
-      const observerInserted = new MutationObserver(mutationList => {
+      this.mObserver = new MutationObserver(mutationList => {
         mutationList.filter(m => m.type === 'childList').forEach(m => {
-          m.addedNodes.forEach(node => node instanceof Element && observer.observe(node))
+          m.addedNodes.forEach(node => node instanceof Element && this.rObserver.observe(node))
         })
       })
-      observerInserted.observe(this.$refs.container, { childList: true, subtree: true })
+      this.mObserver.observe(this.$refs.container, { childList: true, subtree: true })
+    }
+  },
+  beforeDestroy () {
+    if (this.rObserver) {
+      this.rObserver.disconnect()
+    }
+    if (this.mObserver) {
+      this.mObserver.disconnect()
     }
   },
   methods: {
-    _setStretchedSize () {
+    setStretchedSize () {
+      if (typeof window.__stretchStats === 'undefined') {
+        window.__stretchStats = {
+          resizeCalls: 0,
+          layoutReads: 0
+        }
+      }
+      window.__stretchStats.resizeCalls++
       let parentNode
       let parentScroll = 0
       if (this.block.parentGuid) {
@@ -49,8 +60,10 @@ export default {
       this.scrollHeight = 0
       this.scrollWidth = 0
       this.$nextTick(() => {
-        this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
-        this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
+        const el = this.$el.getElementsByClassName('content')[0]
+        this.scrollHeight = el.scrollHeight
+        this.scrollWidth = el.scrollWidth
+        window.__stretchStats.layoutReads++
         if (parentNode && parentScroll) {
           this.$nextTick(() => {
             if (parentNode) {

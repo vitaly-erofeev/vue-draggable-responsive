@@ -2298,6 +2298,8 @@ var BlockManager = __webpack_require__("c8f9");
   },
   methods: {
     setSticky(guid) {
+      this.block.stickyTo = undefined;
+      guid = undefined;
       if (guid) {
         this.stickyToBlock = this.getStore().getByGuid(guid);
         this.stickyToElement = this.getStore().getRefByGuid(guid);

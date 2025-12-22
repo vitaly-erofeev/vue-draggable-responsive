@@ -35,7 +35,7 @@ export interface BlockProperties {
   isScrollHover?: boolean,
   guid?: string,
   alias?: string,
-  children?: BlockDTO[],
+  children?: BlockProperties[],
   parentGuid?: string,
   style?: string,
   interactive?: InteractiveProperties,

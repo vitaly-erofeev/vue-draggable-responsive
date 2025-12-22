@@ -20,25 +20,21 @@ export default {
     this.$nextTick(() => {
       this.setSticky(this.block?.stickyTo?.guid)
     })
-    console.log(stickyManager)
   },
   computed: {
     zIndex () {
-      // console.count(`zIndex ${this.block.guid}`)
       const startIndex = 101
       if (!this.block.parentGuid) {
         return startIndex + (this.block.tabs?.use ? 1 : 0)
       }
-      let parentRef = this.getStore().getRefByGuid(this.block.parentGuid)
 
-      if (!parentRef) {
+      if (!this.parentElement) {
         return startIndex
       }
 
-      return parentRef.zIndex + 1 + (this.block.tabs?.use ? 1 : 0)
+      return parseInt(this.parentElement?.style.zIndex || startIndex) + 1 + (this.block.tabs?.use ? 1 : 0)
     },
     defaultPosition () {
-      // console.count(`defaultPosition ${this.block.guid}`)
       let position = {}
       let top
       let left
@@ -89,8 +85,6 @@ export default {
       return position
     },
     positionStyle: function () {
-      // console.count(`positionStyle ${this.block.guid}`)
-
       let height = this.block.height + this.block.sizeTypes.height
       let width = this.block.width + this.block.sizeTypes.width
       let position = { ...this.defaultPosition }
@@ -148,13 +142,8 @@ export default {
       if (this.block.isHidden) {
         position.width = '0px'
         position.height = '0px'
-        if (this.block.stickyTo?.guid && this.block.stickyTo?.type) {
-          if (this.block.stickyTo.type === StickyToType.TOP) {
-            position.top = '0px'
-          } else if (this.block.stickyTo.type === StickyToType.LEFT) {
-            position.left = '0px'
-          }
-        }
+        position.top = '0px'
+        position.left = '0px'
       }
 
       if (!this.block.stickyTo?.guid && this.block.onCenter?.horizontal && this.isShowing) {
@@ -192,11 +181,12 @@ export default {
         }
       }
 
+      // реализуется в stickyManager
       if (this.block.stickyTo?.guid) {
         if (this.block.stickyTo?.type === StickyToType.TOP) {
           delete position.top
         } else if (this.block.stickyTo?.type === StickyToType.LEFT) {
-          // delete position.left
+          delete position.left
         }
       }
 

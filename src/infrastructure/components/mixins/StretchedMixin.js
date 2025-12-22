@@ -1,4 +1,5 @@
 import { debounce } from '@/infrastructure/service/utils'
+import { StretchManager } from '@/infrastructure/service/StretchManager'
 import ResizeObserver from 'resize-observer-polyfill'
 
 export default {
@@ -6,30 +7,33 @@ export default {
     return {
       scrollHeight: 0,
       scrollWidth: 0,
+      _stretchItem: null,
       setStretchedSize: () => {
       }
     }
   },
   mounted () {
-    this.$nextTick(() => {
+    if (!this.block?.isStretched) return
+
+    let children = this.$refs.container.children
+    const observer = new ResizeObserver(() => {
       this.setStretchedSize()
     })
 
-    if (this.block?.isStretched && this.$refs.container && this.$refs.container instanceof Element) {
-      let children = this.$refs.container.children
-      const observer = new ResizeObserver(() => {
-        this.setStretchedSize()
+    for (let item of children) {
+      observer.observe(item)
+    }
+    const observerInserted = new MutationObserver(mutationList => {
+      mutationList.filter(m => m.type === 'childList').forEach(m => {
+        m.addedNodes.forEach(node => node instanceof Element && observer.observe(node))
       })
-
-      for (let item of children) {
-        observer.observe(item)
-      }
-      const observerInserted = new MutationObserver(mutationList => {
-        mutationList.filter(m => m.type === 'childList').forEach(m => {
-          m.addedNodes.forEach(node => node instanceof Element && observer.observe(node))
-        })
-      })
-      observerInserted.observe(this.$refs.container, { childList: true, subtree: true })
+    })
+    observerInserted.observe(this.$refs.container, { childList: true, subtree: true })
+  },
+  beforeDestroy () {
+    if (this._stretchItem) {
+      StretchManager.unregister(this._stretchItem)
+      this._stretchItem = null
     }
   },
   created () {

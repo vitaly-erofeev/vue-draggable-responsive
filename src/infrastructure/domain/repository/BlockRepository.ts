@@ -15,10 +15,7 @@ export default class BlockRepository implements BlockRepositoryInterface {
   private listeners: {
     [index: string]: ListenerInterface
   } = {}
-  private refs: {
-    guid: string,
-    element: Vue
-  }[] = []
+  private refs: Map<string, Vue> = new Map()
   private readonly isPreviewMode: boolean
 
   constructor (blocks: BlockDTO[] = [], isPreviewMode: boolean = false) {
@@ -215,10 +212,6 @@ export default class BlockRepository implements BlockRepositoryInterface {
     return this.blocks
   }
 
-  getFlat (): (BlockDTO | undefined)[] {
-    return this.refs.map(ref => this.getByGuid(ref.guid))
-  }
-
   remove (guid: string): void {
     const block = this.getByGuid(guid)
     if (!block) {
@@ -283,26 +276,15 @@ export default class BlockRepository implements BlockRepositoryInterface {
   }
 
   addRef (guid: string, ref: Vue): void {
-    this.refs.push({
-      guid: guid,
-      element: ref
-    })
+    this.refs.set(guid, ref)
   }
 
   getRefByGuid (guid: string): Vue | undefined {
-    const element = this.refs.find((item) => {
-      return item.guid === guid
-    })
-
-    if (element) {
-      return element.element
-    }
-
-    return undefined
+    return this.refs.get(guid)
   }
 
   removeRef (guid: string): void {
-    this.refs = this.refs.filter((item) => item.guid !== guid)
+    this.refs.delete(guid)
   }
 
   getStickyLines (guid?: string): {

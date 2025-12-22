@@ -2372,7 +2372,8 @@ var ResizeObserver_es = __webpack_require__("6dd8");
       scrollHeight: 0,
       scrollWidth: 0,
       rObserver: null,
-      mObserver: null
+      mObserver: null,
+      _raf: null
     };
   },
   mounted() {
@@ -2409,36 +2410,36 @@ var ResizeObserver_es = __webpack_require__("6dd8");
   },
   methods: {
     setStretchedSize() {
-      var _parentNode;
-      if (typeof window.__stretchStats === 'undefined') {
-        window.__stretchStats = {
-          resizeCalls: 0,
-          layoutReads: 0
-        };
+      if (this._raf) {
+        return;
       }
-      window.__stretchStats.resizeCalls++;
-      let parentNode;
-      let parentScroll = 0;
-      if (this.block.parentGuid) {
-        parentNode = this.$el.parentNode;
-      } else if (this.mainBlockSelector) {
-        parentNode = this.$el.closest(this.mainBlockSelector);
-      }
-      parentScroll = ((_parentNode = parentNode) === null || _parentNode === void 0 ? void 0 : _parentNode.scrollTop) || 0;
-      this.scrollHeight = 0;
-      this.scrollWidth = 0;
-      this.$nextTick(() => {
-        const el = this.$el.getElementsByClassName('content')[0];
-        this.scrollHeight = el.scrollHeight;
-        this.scrollWidth = el.scrollWidth;
-        window.__stretchStats.layoutReads++;
-        if (parentNode && parentScroll) {
+      this._raf = requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          var _parentNode;
+          this._raf = null;
+          let parentNode;
+          let parentScroll = 0;
+          if (this.block.parentGuid) {
+            parentNode = this.$el.parentNode;
+          } else if (this.mainBlockSelector) {
+            parentNode = this.$el.closest(this.mainBlockSelector);
+          }
+          parentScroll = ((_parentNode = parentNode) === null || _parentNode === void 0 ? void 0 : _parentNode.scrollTop) || 0;
+          this.scrollHeight = 0;
+          this.scrollWidth = 0;
           this.$nextTick(() => {
-            if (parentNode) {
-              parentNode.scrollTop = parentScroll;
+            const el = this.$el.getElementsByClassName('content')[0];
+            this.scrollHeight = el.scrollHeight;
+            this.scrollWidth = el.scrollWidth;
+            if (parentNode && parentScroll) {
+              this.$nextTick(() => {
+                if (parentNode) {
+                  parentNode.scrollTop = parentScroll;
+                }
+              });
             }
           });
-        }
+        });
       });
     }
   }

@@ -2124,7 +2124,14 @@ const StretchManager = {
     schedule();
   }
 };
+// EXTERNAL MODULE: ./node_modules/resize-observer-polyfill/dist/ResizeObserver.es.js
+var ResizeObserver_es = __webpack_require__("6dd8");
+
 // CONCATENATED MODULE: ./src/infrastructure/components/mixins/StretchedMixin.js
+
+
+
+
 
 
 /* harmony default export */ var StretchedMixin = ({
@@ -2139,11 +2146,22 @@ const StretchManager = {
   mounted() {
     var _this$block;
     if (!((_this$block = this.block) !== null && _this$block !== void 0 && _this$block.isStretched)) return;
-    this._stretchItem = {
-      el: this.$el,
-      update: this.setStretchedSize
-    };
-    StretchManager.register(this._stretchItem);
+    let children = this.$refs.container.children;
+    const observer = new ResizeObserver_es["a" /* default */](() => {
+      this.setStretchedSize();
+    });
+    for (let item of children) {
+      observer.observe(item);
+    }
+    const observerInserted = new MutationObserver(mutationList => {
+      mutationList.filter(m => m.type === 'childList').forEach(m => {
+        m.addedNodes.forEach(node => node instanceof Element && observer.observe(node));
+      });
+    });
+    observerInserted.observe(this.$refs.container, {
+      childList: true,
+      subtree: true
+    });
   },
   beforeDestroy() {
     if (this._stretchItem) {
@@ -2156,36 +2174,27 @@ const StretchManager = {
   },
   methods: {
     _setStretchedSize() {
-      if (this._raf) return;
-      this._raf = requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          var _parentNode;
-          this._raf = null;
-          let parentNode;
-          let parentScroll = 0;
-          if (this.block.parentGuid) {
-            parentNode = this.$el.parentNode;
-          } else if (this.mainBlockSelector) {
-            parentNode = this.$el.closest(this.mainBlockSelector);
-          }
-          parentScroll = ((_parentNode = parentNode) === null || _parentNode === void 0 ? void 0 : _parentNode.scrollTop) || 0;
-          this.scrollHeight = 0;
-          this.scrollWidth = 0;
-          const el = this.$el.getElementsByClassName('content')[0];
-          if (this.scrollHeight !== el.scrollHeight) {
-            this.scrollHeight = el.scrollHeight;
-          }
-          if (this.scrollWidth !== el.scrollWidth) {
-            this.scrollWidth = el.scrollWidth;
-          }
-          if (parentNode && parentScroll) {
-            this.$nextTick(() => {
-              if (parentNode) {
-                parentNode.scrollTop = parentScroll;
-              }
-            });
-          }
-        });
+      var _parentNode;
+      let parentNode;
+      let parentScroll = 0;
+      if (this.block.parentGuid) {
+        parentNode = this.$el.parentNode;
+      } else if (this.mainBlockSelector) {
+        parentNode = this.$el.closest(this.mainBlockSelector);
+      }
+      parentScroll = ((_parentNode = parentNode) === null || _parentNode === void 0 ? void 0 : _parentNode.scrollTop) || 0;
+      this.scrollHeight = 0;
+      this.scrollWidth = 0;
+      this.$nextTick(() => {
+        this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight;
+        this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth;
+        if (parentNode && parentScroll) {
+          this.$nextTick(() => {
+            if (parentNode) {
+              parentNode.scrollTop = parentScroll;
+            }
+          });
+        }
       });
     }
   }
@@ -2346,9 +2355,6 @@ var Sticky = __webpack_require__("e920");
 
 // EXTERNAL MODULE: ./src/domain/model/StickyTo.ts
 var StickyTo = __webpack_require__("1d16");
-
-// EXTERNAL MODULE: ./node_modules/resize-observer-polyfill/dist/ResizeObserver.es.js
-var ResizeObserver_es = __webpack_require__("6dd8");
 
 // CONCATENATED MODULE: ./src/infrastructure/service/StickyManager.ts
 

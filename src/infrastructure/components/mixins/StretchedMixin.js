@@ -1,13 +1,12 @@
 import { debounce } from '@/infrastructure/service/utils'
-import ResizeObserver from 'resize-observer-polyfill'
+import { StretchManager } from '@/infrastructure/service/StretchManager'
 
 export default {
   data () {
     return {
       scrollHeight: 0,
       scrollWidth: 0,
-      _resizeObserver: null,
-      _raf: null,
+      _stretchItem: null,
       setStretchedSize: () => {
       }
     }
@@ -15,22 +14,17 @@ export default {
   mounted () {
     if (!this.block?.isStretched) return
 
-    this.$nextTick(() => {
-      const content = this.$el.querySelector('.content')
-      if (!content) return
+    this._stretchItem = {
+      el: this.$el,
+      update: this.setStretchedSize
+    }
 
-      this._resizeObserver = new ResizeObserver(() => {
-        this.setStretchedSize()
-      })
-
-      this._resizeObserver.observe(content)
-
-      this.setStretchedSize()
-    })
+    StretchManager.register(this._stretchItem)
   },
   beforeDestroy () {
-    if (this._resizeObserver) {
-      this._resizeObserver.disconnect()
+    if (this._stretchItem) {
+      StretchManager.unregister(this._stretchItem)
+      this._stretchItem = null
     }
   },
   created () {

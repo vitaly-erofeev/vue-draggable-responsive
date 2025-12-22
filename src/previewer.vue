@@ -36,6 +36,8 @@ import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInje
 import { BlockProperties } from '@/domain/model/BlockProperties'
 
 import TabSettings from '@/application/service/TabSettings'
+import { StretchManager } from '@/infrastructure/service/StretchManager'
+import ResizeObserver from 'resize-observer-polyfill'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 export default Vue.extend({
@@ -77,6 +79,30 @@ export default Vue.extend({
         this.$set(this.tabSettingsService, 'tabSettings', this.tabSettings)
       }
     }
+  },
+
+  mounted () {
+    const root = this.$el
+    const resizeObserver = new ResizeObserver(() => {
+      StretchManager.notify()
+    })
+
+    resizeObserver.observe(root)
+
+    const mutationObserver = new MutationObserver(mutations => {
+      for (const m of mutations) {
+        if (m.type === 'childList' || m.type === 'attributes') {
+          StretchManager.notify()
+          break
+        }
+      }
+    })
+
+    mutationObserver.observe(root, {
+      childList: true,
+      subtree: true,
+      attributes: true
+    })
   },
 
   methods: {

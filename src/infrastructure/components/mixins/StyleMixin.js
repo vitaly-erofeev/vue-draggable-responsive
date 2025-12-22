@@ -92,14 +92,6 @@ export default {
           break
       }
 
-      if (this.block.stickyTo?.guid) {
-        if (this.block.stickyTo.type === StickyToType.TOP) {
-          delete position.top
-        } else if (this.block.stickyTo?.type === StickyToType.LEFT) {
-          delete position.left
-        }
-      }
-
       return position
     },
     positionStyle () {

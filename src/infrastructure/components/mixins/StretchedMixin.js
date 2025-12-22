@@ -6,7 +6,6 @@ export default {
     return {
       scrollHeight: 0,
       scrollWidth: 0,
-      _stretchItem: null,
       setStretchedSize: () => {
       }
     }

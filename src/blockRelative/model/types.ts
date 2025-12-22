@@ -26,6 +26,10 @@ type CustomStyles = {
   paddingTop: string;
   paddingBottom: string;
   display: string;
+  justifyContent: string;
+  alignItems: string;
+  flexWrap: string;
+  gap: string;
 }
 export type BlockDTOV2Grid = {
   gridArea: string;

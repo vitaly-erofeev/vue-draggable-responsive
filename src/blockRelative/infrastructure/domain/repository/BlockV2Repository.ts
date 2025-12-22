@@ -43,7 +43,11 @@ export class BlockV2Repository implements InterfaceBlockV2 {
         paddingRight: '',
         paddingTop: '',
         paddingBottom: '',
-        display: ''
+        display: '',
+        justifyContent: '',
+        alignItems: '',
+        flexWrap: '',
+        gap: ''
       },
       width,
       height,

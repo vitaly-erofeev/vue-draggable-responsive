@@ -93,6 +93,10 @@ export default {
       result.paddingTop = this.block.customStyles.paddingTop || '0px'
       result.paddingBottom = this.block.customStyles.paddingBottom || '0px'
       result.display = this.block.customStyles.display || 'block'
+      result.justifyContent = this.block.customStyles.justifyContent || ''
+      result.alignItems = this.block.customStyles.alignItems || ''
+      result.flexWrap = this.block.customStyles.flexWrap || ''
+      result.gap = this.block.customStyles.gap || ''
       Object.assign(result, this.objectStyle)
 
       return result

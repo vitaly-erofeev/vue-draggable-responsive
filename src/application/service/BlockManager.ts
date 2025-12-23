@@ -1,12 +1,12 @@
-import BlockDTO from 'e:/vue-draggable-responsive/src/domain/model/BlockDTO'
-import CustomMouseEvent from 'e:/vue-draggable-responsive/src/domain/model/CustomMouseEvent'
-import CustomDomRect from 'e:/vue-draggable-responsive/src/domain/model/CustomDomRect'
-import BreakpointsFactory from 'e:/vue-draggable-responsive/src/domain/service/BreakpointsFactory'
-import { Breakpoints } from 'e:/vue-draggable-responsive/src/domain/model/Breakpoints'
-import { BlockRepositoryInterface } from 'e:/vue-draggable-responsive/src/domain/repository/BlockRepositoryInterface'
-import { SizeTypes } from 'e:/vue-draggable-responsive/src/domain/model/SizeTypes'
-import { StickyToType } from 'e:/vue-draggable-responsive/src/domain/model/StickyTo'
-import { Sticky } from 'e:/vue-draggable-responsive/src/domain/model/Sticky'
+import BlockDTO from '@/domain/model/BlockDTO'
+import CustomMouseEvent from '@/domain/model/CustomMouseEvent'
+import CustomDomRect from '@/domain/model/CustomDomRect'
+import BreakpointsFactory from '@/domain/service/BreakpointsFactory'
+import { Breakpoints } from '@/domain/model/Breakpoints'
+import { BlockRepositoryInterface } from '@/domain/repository/BlockRepositoryInterface'
+import { SizeTypes } from '@/domain/model/SizeTypes'
+import { StickyToType } from '@/domain/model/StickyTo'
+import { Sticky } from '@/domain/model/Sticky'
 
 export default class BlockManager {
   [index: string]: any;

@@ -1,11 +1,11 @@
-import { BlockRepositoryInterface } from 'e:/vue-draggable-responsive/src/domain/repository/BlockRepositoryInterface'
-import BlockDTO from 'e:/vue-draggable-responsive/src/domain/model/BlockDTO'
-import GuidGenerator from 'e:/vue-draggable-responsive/src/infrastructure/service/GuidGenerator'
-import { BlockProperties } from 'e:/vue-draggable-responsive/src/domain/model/BlockProperties'
-import { StickyToType } from 'e:/vue-draggable-responsive/src/domain/model/StickyTo'
-import { Sticky } from 'e:/vue-draggable-responsive/src/domain/model/Sticky'
-import { ListenerInterface } from 'e:/vue-draggable-responsive/src/domain/service/ListenerInterface'
-import { EventTypes } from 'e:/vue-draggable-responsive/src/domain/model/EventTypes'
+import { BlockRepositoryInterface } from '@/domain/repository/BlockRepositoryInterface'
+import BlockDTO from '@/domain/model/BlockDTO'
+import GuidGenerator from '@/infrastructure/service/GuidGenerator'
+import { BlockProperties } from '@/domain/model/BlockProperties'
+import { StickyToType } from '@/domain/model/StickyTo'
+import { Sticky } from '@/domain/model/Sticky'
+import { ListenerInterface } from '@/domain/service/ListenerInterface'
+import { EventTypes } from '@/domain/model/EventTypes'
 
 export default class BlockRepository implements BlockRepositoryInterface {
   protected blocks: BlockDTO[] = []

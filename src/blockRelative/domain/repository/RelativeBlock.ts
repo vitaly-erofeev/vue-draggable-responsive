@@ -1,4 +1,4 @@
-import { BlockDTOV2, ParametersBlock } from 'e:/vue-draggable-responsive/src/blockRelative/model/types'
+import { BlockDTOV2, ParametersBlock } from '@/blockRelative/model/types'
 export interface InterfaceBlockV2 {
 
   createBlock(parametersBlock: ParametersBlock): BlockDTOV2

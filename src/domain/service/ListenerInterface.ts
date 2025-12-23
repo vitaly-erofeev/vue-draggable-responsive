@@ -1,4 +1,4 @@
-import { EventTypes } from 'e:/vue-draggable-responsive/src/domain/model/EventTypes'
+import { EventTypes } from '@/domain/model/EventTypes'
 
 export interface ListenerInterface {
   handle (event: object): void

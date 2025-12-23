@@ -42,13 +42,13 @@
 // eslint-disable-next-line no-unused-vars
 import Vue_, { VueConstructor } from 'vue'
 // eslint-disable-next-line no-unused-vars
-import { DataSourceInjected } from 'e:/vue-draggable-responsive/src/infrastructure/domain/model/DataSourceInjected'
+import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
 // eslint-disable-next-line no-unused-vars
-import { BlockDTOV2 } from 'e:/vue-draggable-responsive/src/blockRelative/model/types'
-import Resizer from 'e:/vue-draggable-responsive/src/blockRelative/shared/ui/Resizer.vue'
-// const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
-// export default Vue.extend({
-export default {
+import { BlockDTOV2 } from '@/blockRelative/model/types'
+import Resizer from '@/blockRelative/shared/ui/Resizer.vue'
+const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
+export default Vue.extend({
+// export default {
 
   name: 'BlockRelative',
   components: { Resizer },
@@ -102,9 +102,9 @@ export default {
       return result
     }
   }
-}
+  // }
 
-// })
+})
 </script>
 
 <style scoped>

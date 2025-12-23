@@ -2543,16 +2543,12 @@ const StretchManager = {
     setStretchedSize() {
       const content = this.$el.getElementsByClassName('content')[0];
       if (!content) return;
-
-      // Вычисляем максимальное дно среди прямых детей
-      const contentTop = content.getBoundingClientRect().top;
       let maxBottom = 0;
       Array.from(content.children).forEach(child => {
-        const rect = child.getBoundingClientRect();
-        const bottom = rect.top + rect.height;
+        const bottom = child.offsetTop + child.offsetHeight;
         if (bottom > maxBottom) maxBottom = bottom;
       });
-      const newScrollHeight = maxBottom - contentTop;
+      const newScrollHeight = maxBottom;
       const newScrollWidth = content.scrollWidth; // ширину можно оставить через scrollWidth
 
       if (newScrollHeight !== this.scrollHeight || newScrollWidth !== this.scrollWidth) {

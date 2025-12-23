@@ -4,12 +4,16 @@ import { StickyToType } from '@/domain/model/StickyTo'
 import BlockManager from '@/application/service/BlockManager'
 
 export default {
+  props: {
+    initialZindex: Number
+  },
   data () {
     return {
       parentBlock: undefined,
       parentElement: undefined,
       stickyToBlock: undefined,
-      stickyToElement: undefined
+      stickyToElement: undefined,
+      zIndex: this.initialZindex || 101
     }
   },
   mounted () {
@@ -19,18 +23,6 @@ export default {
     })
   },
   computed: {
-    zIndex () {
-      const startIndex = 101
-      if (!this.block.parentGuid) {
-        return startIndex + (this.block.tabs?.use ? 1 : 0)
-      }
-
-      if (!this.parentElement) {
-        return startIndex
-      }
-
-      return parseInt(this.parentElement?.style.zIndex || startIndex) + 1 + (this.block.tabs?.use ? 1 : 0)
-    },
     defaultPosition () {
       let position = {}
       let top

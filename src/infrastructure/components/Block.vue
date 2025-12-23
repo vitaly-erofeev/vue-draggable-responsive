@@ -129,6 +129,7 @@
         :tab-settings-service="tabSettingsService"
         :step="step"
         :show-hidden="showHidden"
+        :initial-zindex="zIndex + 1"
         @start-drag="$emit('start-drag', $event)"
         @stop-drag="$emit('stop-drag', $event)"
         @dragging="$emit('dragging', $event)"
@@ -195,6 +196,9 @@ export default Vue.extend({
     },
     tabSettingsService: {
       type: Object
+    },
+    initialZindex: {
+      type: Number
     }
   },
 
@@ -219,7 +223,8 @@ export default Vue.extend({
     isShowArrows: boolean,
     visitedTabs: string[],
     stickyToBlock?: BlockDTO,
-    stickyToElement?: any
+    stickyToElement?: any,
+    zIndex: number
     } {
     return {
       blockManager: undefined,
@@ -241,7 +246,8 @@ export default Vue.extend({
       isShowArrows: false,
       visitedTabs: [],
       stickyToBlock: undefined,
-      stickyToElement: undefined
+      stickyToElement: undefined,
+      zIndex: this.initialZindex || 101
     }
   },
 
@@ -342,21 +348,6 @@ export default Vue.extend({
 
     tabGuids () {
       return (this.block.tabs?.list || []).map((item) => item.guid)
-    },
-
-    zIndex (): number {
-      const startIndex = 101
-      if (!this.block.parentGuid) {
-        return startIndex + (this.block.tabs?.use ? 1 : 0)
-      }
-      let parentRef = this.getStore().getRefByGuid(this.block.parentGuid) as unknown as {
-        zIndex: number
-      }
-      if (!parentRef) {
-        return startIndex
-      }
-
-      return parentRef.zIndex + 1 + (this.block.tabs?.use ? 1 : 0)
     },
 
     isTabsContainer (): boolean {

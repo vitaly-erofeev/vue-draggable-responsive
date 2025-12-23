@@ -77,6 +77,7 @@
           :block="_block"
           :replication-callback="replicationCallback"
           :tab-settings-service="tabSettingsService"
+          :initial-zindex="zIndex + 1"
           @click="handleClick({ block: $event.block || _block, event: $event.event || $event })"
           @tab-click="$emit('tab-click', $event)"
       >
@@ -103,6 +104,8 @@ import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInje
 import StyleMixin from '@/infrastructure/components/mixins/StyleMixin'
 import ReplicationMixin from '@/infrastructure/components/mixins/ReplicationMixin'
 import StretchedMixin from '@/infrastructure/components/mixins/StretchedMixin'
+// eslint-disable-next-line no-unused-vars
+import { TabProperties } from '@/domain/model/TabProperties'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 library.add(faAngleDown, faChevronRight, faChevronLeft)
@@ -161,7 +164,7 @@ export default Vue.extend({
     // список потомков у контейнера
     children (): object[] {
       if (this.block?.tabs?.use) {
-        return this.block.children.filter(item => item.parentTabGuid && this.visitedTabGuids.includes(item.parentTabGuid))
+        return this.block.children.filter((item: BlockDTO) => item.parentTabGuid && this.visitedTabGuids.includes(item.parentTabGuid))
       } else {
         return this.block.children
       }
@@ -172,7 +175,7 @@ export default Vue.extend({
         return []
       }
 
-      return this.block.tabs.list.filter(tab => {
+      return (this.block.tabs as TabProperties).list.filter(tab => {
         if (this.tabSettingsService) {
           const isHidden = this.tabSettingsService.getIsHidden(tab.guid)
           const isBlocked = this.tabSettingsService.getIsBlocked(tab.guid)
@@ -237,7 +240,7 @@ export default Vue.extend({
         }
 
         const defaultData = { isChild: false, isExpanded: false, isShow: false, parentTabForTree: '' }
-        let result = this.block.tabs.list.filter(tab => {
+        let result = (this.block.tabs as TabProperties).list.filter(tab => {
           const isHidden = this.tabSettingsService.getIsHidden(tab.guid)
 
           if (isHidden) {

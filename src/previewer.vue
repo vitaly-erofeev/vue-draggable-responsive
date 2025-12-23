@@ -58,7 +58,12 @@ export default Vue.extend({
     mainBlockSelector: String
   },
 
-  data (): { store: BlockRepositoryInterface, tabSettingsService: TabSettings, activeBlockGuid: string, mObserver?: MutationObserver } {
+  data (): {
+    store: BlockRepositoryInterface,
+    tabSettingsService: TabSettings,
+    activeBlockGuid: string,
+    mObserver?: MutationObserver
+    } {
     return {
       store: new BlockRepository([], true),
       tabSettingsService: new TabSettings(this.tabSettings, this),
@@ -84,9 +89,11 @@ export default Vue.extend({
     const root = this.$el
 
     this.mObserver = new MutationObserver(mutationList => {
-      mutationList.filter(m => m.type === 'childList').forEach(m => {
-        m.addedNodes.forEach(node => node instanceof Element && StretchManager.notify())
-      })
+      const list = mutationList
+        .filter(m => m.type === 'childList' || (m.type === 'attributes' && m.attributeName === 'style'))
+      if (list.length > 0) {
+        StretchManager.notify()
+      }
     })
 
     this.mObserver.observe(root, {

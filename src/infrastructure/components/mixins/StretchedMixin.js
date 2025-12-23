@@ -30,29 +30,27 @@ export default {
   },
   methods: {
     setStretchedSize () {
-      let parentNode
-      let parentScroll = 0
-      if (this.block.parentGuid) {
-        parentNode = this.$el.parentNode
-      } else if (this.mainBlockSelector) {
-        parentNode = this.$el.closest(this.mainBlockSelector)
-      }
-      parentScroll = parentNode?.scrollTop || 0
-
-      requestAnimationFrame(() => {
-        const el = this.$el.getElementsByClassName('content')[0]
-        if (el.scrollWidth !== this.scrollWidth || el.scrollHeight !== this.scrollHeight) {
-          this.scrollHeight = el.scrollHeight
-          this.scrollWidth = el.scrollWidth
-          if (parentNode && parentScroll) {
-            this.$nextTick(() => {
-              if (parentNode) {
-                parentNode.scrollTop = parentScroll
-              }
-            })
-          }
+      const el = this.$el.getElementsByClassName('content')[0]
+      if (el.scrollWidth !== this.scrollWidth || el.scrollHeight !== this.scrollHeight) {
+        let parentNode
+        let parentScroll = 0
+        if (this.block.parentGuid) {
+          parentNode = this.$el.parentNode
+        } else if (this.mainBlockSelector) {
+          parentNode = this.$el.closest(this.mainBlockSelector)
         }
-      })
+        parentScroll = parentNode?.scrollTop || 0
+
+        this.scrollHeight = el.scrollHeight
+        this.scrollWidth = el.scrollWidth
+        if (parentNode && parentScroll) {
+          this.$nextTick(() => {
+            if (parentNode) {
+              parentNode.scrollTop = parentScroll
+            }
+          })
+        }
+      }
     }
   }
 }

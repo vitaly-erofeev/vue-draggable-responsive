@@ -289,6 +289,13 @@ export default Vue.extend({
           style += '; ' + block.interactive.containerHoverStyle
         }
       }
+      if ('minHeight' in this.positionStyle) {
+        // @ts-ignore
+        style += `;min-height: ${this.positionStyle.minHeight}`
+      } else {
+        // @ts-ignore
+        style += `;height: 100%`
+      }
 
       return style
     },
@@ -503,7 +510,7 @@ export default Vue.extend({
 
 .block .content {
   width: 100%;
-  height: 100%;
+  height: auto;
   position: absolute;
   overflow: auto;
 }

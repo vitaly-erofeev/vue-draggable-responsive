@@ -2298,8 +2298,6 @@ var BlockManager = __webpack_require__("c8f9");
   },
   methods: {
     setSticky(guid) {
-      this.block.stickyTo = undefined;
-      guid = undefined;
       if (guid) {
         this.stickyToBlock = this.getStore().getByGuid(guid);
         this.stickyToElement = this.getStore().getRefByGuid(guid);
@@ -2513,7 +2511,6 @@ function schedule() {
     raf = null;
     items.forEach(item => {
       if (!item.el.isConnected) return;
-      console.count('NOTIFY schedule');
       item.update();
     });
   });
@@ -2539,7 +2536,6 @@ const StretchManager = {
       scrollHeight: 0,
       scrollWidth: 0,
       rObserver: null,
-      mObserver: null,
       _stretchItem: null
     };
   },
@@ -2575,9 +2571,6 @@ const StretchManager = {
   beforeDestroy() {
     if (this.rObserver) {
       this.rObserver.disconnect();
-    }
-    if (this.mObserver) {
-      this.mObserver.disconnect();
     }
     if (this._stretchItem) {
       StretchManager.unregister(this._stretchItem);

@@ -15,7 +15,6 @@ function schedule () {
     raf = null
     items.forEach(item => {
       if (!item.el.isConnected) return
-      console.count('NOTIFY schedule')
       item.update()
     })
   })

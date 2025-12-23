@@ -7,7 +7,6 @@ export default {
       scrollHeight: 0,
       scrollWidth: 0,
       rObserver: null,
-      mObserver: null,
       _stretchItem: null
     }
   },
@@ -46,9 +45,7 @@ export default {
     if (this.rObserver) {
       this.rObserver.disconnect()
     }
-    if (this.mObserver) {
-      this.mObserver.disconnect()
-    }
+
     if (this._stretchItem) {
       StretchManager.unregister(this._stretchItem)
       this._stretchItem = null

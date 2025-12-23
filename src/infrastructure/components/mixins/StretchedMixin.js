@@ -5,7 +5,8 @@ export default {
     return {
       scrollHeight: 0,
       scrollWidth: 0,
-      _stretchItem: null
+      _stretchItem: null,
+      _minHeightParent: 0
     }
   },
   mounted () {
@@ -33,13 +34,18 @@ export default {
       const content = this.$el.getElementsByClassName('content')[0]
       if (!content) return
 
+      if (!this._minHeightParent) {
+        const style = window.getComputedStyle(content.parentElement)
+        this._minHeightParent = parseFloat(style.minHeight) || 0
+      }
+
       let maxBottom = 0
       Array.from(content.children).forEach(child => {
         const bottom = child.offsetTop + child.offsetHeight
         if (bottom > maxBottom) maxBottom = bottom
       })
 
-      const newScrollHeight = maxBottom
+      const newScrollHeight = Math.max(maxBottom, this._minHeightParent)
       const newScrollWidth = content.scrollWidth // ширину можно оставить через scrollWidth
 
       if (newScrollHeight !== this.scrollHeight || newScrollWidth !== this.scrollWidth) {

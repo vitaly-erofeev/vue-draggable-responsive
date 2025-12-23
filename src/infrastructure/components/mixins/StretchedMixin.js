@@ -30,8 +30,22 @@ export default {
   },
   methods: {
     setStretchedSize () {
-      const el = this.$el.getElementsByClassName('content')[0]
-      if (el.scrollWidth !== this.scrollWidth || el.scrollHeight !== this.scrollHeight) {
+      const content = this.$el.getElementsByClassName('content')[0]
+      if (!content) return
+
+      // Вычисляем максимальное дно среди прямых детей
+      const contentTop = content.getBoundingClientRect().top
+      let maxBottom = 0
+      Array.from(content.children).forEach(child => {
+        const rect = child.getBoundingClientRect()
+        const bottom = rect.top + rect.height
+        if (bottom > maxBottom) maxBottom = bottom
+      })
+
+      const newScrollHeight = maxBottom - contentTop
+      const newScrollWidth = content.scrollWidth // ширину можно оставить через scrollWidth
+
+      if (newScrollHeight !== this.scrollHeight || newScrollWidth !== this.scrollWidth) {
         let parentNode
         let parentScroll = 0
         if (this.block.parentGuid) {
@@ -41,13 +55,12 @@ export default {
         }
         parentScroll = parentNode?.scrollTop || 0
 
-        this.scrollHeight = el.scrollHeight
-        this.scrollWidth = el.scrollWidth
+        this.scrollHeight = newScrollHeight
+        this.scrollWidth = newScrollWidth
+
         if (parentNode && parentScroll) {
           this.$nextTick(() => {
-            if (parentNode) {
-              parentNode.scrollTop = parentScroll
-            }
+            if (parentNode) parentNode.scrollTop = parentScroll
           })
         }
       }

@@ -42,4 +42,6 @@ export interface BlockRepositoryInterface {
   removeListener (guid: string): void
 
   setRequiredTabs (blocks: string[]): void
+
+  setPosition (blockGuid: string, positionCss: PositionBlockCss): void
 }

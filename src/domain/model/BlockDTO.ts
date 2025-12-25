@@ -55,6 +55,7 @@ export default class BlockDTO {
   properties: {[index: string]: any;} = {}
   isLoading: boolean = false
   disabledMove: boolean = false
+  positionBlockCss: PositionBlockCss
 
   constructor (
     {
@@ -96,8 +97,9 @@ export default class BlockDTO {
       onCenter,
       properties = {},
       isLoading = false,
-      disabledMove = false
-    }: Partial<BlockProperties>
+      disabledMove = false,
+      positionBlockCss = 'absolute'
+    }: BlockProperties
   ) {
     this.widthCalc = widthCalc
     this.heightCalc = heightCalc
@@ -143,6 +145,7 @@ export default class BlockDTO {
     this.isLoading = isLoading
     this.disabledMove = disabledMove
     this.prepareSizesTypes()
+    this.positionBlockCss = positionBlockCss
   }
 
   private static getPreparedSizes ({

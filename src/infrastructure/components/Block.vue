@@ -7,6 +7,7 @@
       'active': block.isActive,
       'hidden': block.isHidden,
       'active_parent': block.isActiveAsParent,
+      'active_as_relative': block.positionBlockCss === 'relative',
       [block.className]: !!block.className
     }"
     ref="draggableContainer"
@@ -1250,5 +1251,8 @@ export default Vue.extend({
   top: 50%;
   left: 4%;
   transform: translate(0%, -50%);
+}
+.active_as_relative {
+   outline: 3px solid #18ec65;
 }
 </style>

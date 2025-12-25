@@ -358,4 +358,17 @@ export default class BlockRepository implements BlockRepositoryInterface {
       }
     })
   }
+
+  setPosition (blockGuid: string, positionCss: PositionBlockCss): void {
+    const block = this.getByGuid(blockGuid)
+    if (typeof block === 'undefined') {
+      return
+    }
+    const mapPosition: PositionBlockCss[] = ['absolute', 'relative']
+    if (mapPosition.includes(positionCss)) {
+      block.positionBlockCss = positionCss
+    } else {
+      console.error(`Position ${positionCss} is not supported`)
+    }
+  }
 }

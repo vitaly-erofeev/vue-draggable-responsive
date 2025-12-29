@@ -231,6 +231,12 @@ export default Vue.extend({
           }
         }
         for (const guid in tabs) {
+          // availableTabs - доступные вкладки БЛОКА. tabs - ВСЕ вкладки в настройках.
+          // цикл бежит по ВСЕМ вкладкам в настройках и сбрасывает состояние при открытие нового блока со вкладками
+          // пропускаем недоступные вкладки нового блока
+          if (!this.availableTabs.some(item => item.guid === guid)) {
+            continue
+          }
           if (Object.prototype.hasOwnProperty.call(tabs, guid)) {
             // изначально svg в плюсик
             tabs[guid].isExpanded = false

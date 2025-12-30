@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <svg id="svg" v-if="!isBlocksV2">
+    <svg id="svg">
       <line class="line" v-for="(line, index) in stickyLines"
             :key="index"
             :x1="line.x1"
@@ -9,7 +9,7 @@
             :y2="line.y2"
       />
     </svg>
-  <template  v-if="!isBlocksV2">
+  <template>
     <block
       v-for="block in _blocks"
       :ref="block.guid"
@@ -18,6 +18,7 @@
       :step="step"
       :show-hidden="showHidden"
       :tab-settings-service="tabSettingsService"
+      :is-relative-block-props="isRelativeV2"
       @start-drag="$emit('start-drag', $event)"
       @stop-drag="$emit('stop-drag', $event)"
       @dragging="$emit('dragging', $event)"
@@ -30,49 +31,9 @@
     </block>
   </template>
 <!-- _blocksRelative -->
-<!-- <code>{{_blocksRelative}}</code> -->
-<!-- <code>{{_blocks}}</code> -->
-  <template v-if="!isSetka">
-    <block-relative
-     v-for="block in _blocksRelative"
-      :ref="block.guid"
-      :key="block.guid"
-      :block="block"
-      :show-hidden="showHidden"
-       @set-active-block="$emit('set-active-block', $event)"
-    >
-      <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
-        <slot :name="name" v-bind="data"></slot>
-      </template>
-    </block-relative>
-  </template>
-
-  <template v-if="isSetka">
-    <block-grid-layout
-      ref="gridLayout"
-      :is-designer="true"
-      :store-v2="storeV2"
-      :grid-config="blocksV2Props.gridConfig"
-     @set-active-block="$emit('set-active-block', $event)"
-     >
-      <template v-slot:content="{ blocks }">
-          <block-relative
-          v-for="block in blocks"
-            :ref="block.guid"
-            :key="block.guid"
-            :block="block"
-            :show-hidden="showHidden"
-            @set-active-block="$emit('set-active-block', $event)"
-          >
-            <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
-              <slot :name="name" v-bind="data"></slot>
-            </template>
-          </block-relative>
-      </template>
-
-    </block-grid-layout>
-  </template>
-
+<!-- <pre>{{_blocks}}</pre> -->
+<!-- +++isRelativeV2 -->
+<!-- <code>{{isRelativeV2}}</code> -->
   </div>
 </template>
 
@@ -109,18 +70,13 @@ import TabSettings from '@/application/service/TabSettings'
 // V2
 import BlockRelative from '@/blockRelative/infrastructure/components/BlockRelative.vue'
 // eslint-disable-next-line no-unused-vars
-import { InterfaceBlockV2 } from '@/blockRelative/domain/repository/RelativeBlock'
-// eslint-disable-next-line no-unused-vars
-import { BlockDTOV2, ParametersBlock } from '@/blockRelative/model/types'
-import BlockGridLayout from '@/blockRelative/infrastructure/blockGrid/BlockGridLayout.vue'
-import { BlockV2Repository } from '@/blockRelative/infrastructure/domain/repository/BlockV2Repository'
-
+import { PositionBlockCss } from 'e:/vue-draggable-responsive/src/domain/model/PositionBlockCss'
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 
 export default Vue.extend({
 // export default {
   name: 'VueDraggableResponsiveDesigner',
-  components: { Block, BlockRelative, BlockGridLayout },
+  components: { Block },
 
   provide () {
     return {
@@ -145,43 +101,34 @@ export default Vue.extend({
     tabSettings: {
       type: Object
     },
-    blocksV2Props: {
+    activeBlock: {
       type: Object,
-      default: () => ({
-        isRelative: false,
-        displayPosition: 'displayRelative',
-        gridConfig: {
-          columns: 3,
-          rows: 2
-        }
-      })
+      default: () => ({})
     }
   },
 
-  data (): { blocksArray: object[], store: BlockRepositoryInterface, tabSettingsService: TabSettings, storeV2: InterfaceBlockV2 } {
+  data (): { blocksArray: object[], store: BlockRepositoryInterface, tabSettingsService: TabSettings } {
     return {
       store: new BlockRepository(),
-      storeV2: new BlockV2Repository(),
       blocksArray: this.blocks,
       tabSettingsService: new TabSettings(this.tabSettings, this)
     }
   },
 
   computed: {
-    isBlocksV2 ():boolean {
-      return this.blocksV2Props.isRelative
-    },
-    isRelativeV2 () {
-      return this.blocksV2Props.displayPosition === 'displayRelative'
+    isRelativeV2 (): boolean {
+      if (this.activeBlock?.parentGuid) {
+        const block = this.store.getByGuid(this.activeBlock.parentGuid)
+        return block?.positionBlockCss === 'relative'
+      }
+
+      return this.activeBlock?.positionBlockCss === 'relative'
     },
     isSetka (): boolean {
-      return !this.isRelativeV2 && this.isBlocksV2
+      return !this.isRelativeV2 && this.isRelativeV2
     },
     _blocks (): BlockDTO[] {
       return this.getStore().get()
-    },
-    _blocksRelative (): BlockDTOV2[] {
-      return this.getStoreV2().get()
     },
     stickyLines () {
       // @ts-ignore
@@ -222,36 +169,21 @@ export default Vue.extend({
       })
     },
     setActiveBlock (guid: string): void {
-      if (this.isBlocksV2) {
-        this.setActiveBlockV2(guid)
-        return
-      }
       this.store.setActiveBlock(guid)
     },
     clearActiveBlock (): void {
-      if (this.isBlocksV2) {
-        this.clearActiveBlockV2()
-        return
-      }
       this.store.resetActiveBlock()
     },
     getStore (): BlockRepositoryInterface {
       return this.store
     },
-    getBlocks (): BlockDTO[] | BlockDTOV2[] {
-      if (this.isBlocksV2) {
-        return this.storeV2.get()
-      }
+    getBlocks (): BlockDTO[] {
       return this.store.get()
     },
     getMainParents (guid: string): BlockDTO | {} {
       return this.store.getMainParents(guid)
     },
     setBlocks (blocks: BlockProperties[]): void {
-      if (this.isBlocksV2) {
-        this.setBlocksV2(blocks as unknown as BlockDTOV2[])
-        return
-      }
       this.store.set([])
       this.$nextTick(() => {
         this.store.set(blocks)
@@ -307,57 +239,22 @@ export default Vue.extend({
         minMax = undefined,
         onCenter = undefined,
         alias = undefined,
+        positionBlockCss = 'absolute',
         isComponent = false
-      }: {
-          width: number,
-          height: number,
-          sticky: Sticky,
-          stickyTo?: StickyTo,
-          parentGuid?: string,
-          top?: number,
-          right?: number,
-          bottom?: number,
-          left?: number,
-          sizeTypes?: {
-            width: SizeTypes,
-            height: SizeTypes,
-            top: SizeTypes,
-            right: SizeTypes,
-            bottom: SizeTypes,
-            left: SizeTypes
-          },
-          className?: string,
-          event?: MouseEvent,
-          type: AddBlockType,
-          isStretched: boolean,
-          tabs?: TabProperties,
-          replication?: ReplicationProperties,
-          pagination?: {
-            replicationGuid: string,
-            total: number,
-            limit: number
-          }
-          minMax?: MinMax,
-          onCenter?: OnCenter,
-          alias?: string
-          isComponent?: boolean
-        }
+      }: BlockProperties
     ): string {
-      if (this.isBlocksV2) {
-        return this.addBlockV2({
-          width: isComponent ? 200 : 300,
-          height: isComponent ? 100 : 300,
-          parentGuid: parentGuid || '',
-          alias: alias || '',
-          isComponent
-        })
-      }
+      if (!this.isRelativeV2) {
       if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
         const position: { top: number, right: number, bottom: number, left: number } = this.getMousePosition(event, sizeTypes)
         top = position.top
         right = position.right
         bottom = position.bottom
         left = position.left
+        }
+      }
+      let adjustPositionBlockCss = positionBlockCss
+      if (this.isRelativeV2) {
+        adjustPositionBlockCss = this.isRelativeV2 ? 'relative' : positionBlockCss
       }
 
       const guid = this.store.add({
@@ -378,76 +275,29 @@ export default Vue.extend({
         pagination,
         minMax,
         onCenter,
-        alias
+        alias,
+        positionBlockCss: adjustPositionBlockCss
       })
+      if (!this.isRelativeV2) {
       if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
         this.$nextTick(() => {
           const block: any = this.getAllBlockRefs()[guid]
           block.onDrag()
           block.dragStart(event, true)
         })
+        }
       }
       return guid
     },
     removeBlock (guid: string): void {
-      if (this.isBlocksV2) {
-        this.removeBlockV2(guid)
-        return
-      }
       this.store.remove(guid)
     },
-    getBlockStoreV1 (): BlockDTOV2[] {
-      return this.store.get() as unknown as BlockDTOV2[]
-    },
-    getStoreV2 (): InterfaceBlockV2 {
-      return this.storeV2
-    },
-    getBlocksV2 (): BlockDTOV2[] {
-      return this.storeV2.get()
-    },
-    addBlockV2 (parametersBlock: ParametersBlock): string {
-      const createBlock = this.storeV2.createBlock(parametersBlock)
-      if (this.isSetka) {
-        // @ts-ignore
-        const selectedContainer: BlockDTOV2 | null = this.$refs.gridLayout.getSelectionContainer()
-        if (selectedContainer) {
-          return this.storeV2.addBlock(createBlock)
-        }
-        return ''
-      }
-      return this.storeV2.addBlock(createBlock)
-    },
-    setActiveBlockV2 (guid: string): void {
-      this.storeV2.setActiveBlock(guid)
-    },
-    clearActiveBlockV2 (): void {
-      this.storeV2.resetActiveBlock()
-      if (this.isSetka) {
-        // @ts-ignore
-        this.$refs.gridLayout.clearActiveContainer()
-      }
-    },
-    setBlocksV2 (blocks: BlockDTOV2[]): void {
-      if (this.isSetka) {
-        // @ts-ignore
-        this.$refs.gridLayout.loadLayout(blocks)
-      }
-      this.storeV2.setBlocks(blocks)
-    },
-    removeBlockV2 (guid: string): void {
-      if (this.isSetka) {
-        // @ts-ignore
-        this.$refs.gridLayout.removeContainer(guid)
-      }
-      this.storeV2.removeBlock(guid)
-    },
-    getByGuidV2 (guid: string): BlockDTOV2 | undefined {
-      return this.storeV2.getByGuid(guid)
+    setPosition (guid: string, positionCss: PositionBlockCss): void {
+      this.store.setPosition(guid, positionCss)
     }
-
   }
-})
-// }
+// })
+}
 </script>
 
 <style scoped>

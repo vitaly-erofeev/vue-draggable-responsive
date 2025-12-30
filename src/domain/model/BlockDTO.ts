@@ -56,6 +56,7 @@ export default class BlockDTO {
   isLoading: boolean = false
   disabledMove: boolean = false
   positionBlockCss: PositionBlockCss
+  customStyles?: Partial<CustomStyles>
 
   constructor (
     {
@@ -146,6 +147,7 @@ export default class BlockDTO {
     this.disabledMove = disabledMove
     this.prepareSizesTypes()
     this.positionBlockCss = positionBlockCss
+    this.customStyles = this.createCustomStyles()
   }
 
   private static getPreparedSizes ({
@@ -188,5 +190,23 @@ export default class BlockDTO {
         this.sizeTypes[type] = SizeTypes.PERCENT
       }
     })
+  }
+  private createCustomStyles (): Partial<CustomStyles> {
+    if (this.positionBlockCss === 'absolute') return {}
+    return {
+      marginLeft: '0px',
+      marginRight: '0px',
+      marginTop: '0px',
+      marginBottom: '0px',
+      paddingLeft: '0px',
+      paddingRight: '0px',
+      paddingTop: '0px',
+      paddingBottom: '0px',
+      display: 'block',
+      justifyContent: '',
+      alignItems: '',
+      flexWrap: '',
+      gap: ''
+    }
   }
 }

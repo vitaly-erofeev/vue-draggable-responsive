@@ -16,7 +16,7 @@ export type ParametersBlock = {
   isComponent: boolean;
 };
 
-type CustomStyles = {
+export type CustomStyles = {
   marginLeft: string;
   marginRight: string;
   marginTop: string;

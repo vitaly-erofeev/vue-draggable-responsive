@@ -2,12 +2,13 @@
   <div
     :style="positionStyle"
     :class="{
-      'block': true,
+      'block': !isRelativeBlockProps,
+      'block-relative': isRelativeBlockProps,
       'highlight' : isResizing || isDragging,
       'active': block.isActive,
       'hidden': block.isHidden,
       'active_parent': block.isActiveAsParent,
-      'active_as_relative': block.positionBlockCss === 'relative',
+      'active_as_relative': isRelativeBlockProps,
       [block.className]: !!block.className
     }"
     ref="draggableContainer"
@@ -109,7 +110,7 @@
     >
       <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
       <slot :block="block" name="toolbar"></slot>
-      <svg id="svg" v-if="!block.isEditing && !isTabsContainer">
+      <svg  id="svg" v-if="!block.isEditing && !isTabsContainer && !isRelativeBlockProps">
         <line class="line" v-for="(line, index) in stickyLines"
               :class="{
                 [line.type]: true
@@ -121,6 +122,7 @@
               :y2="line.y2"
         />
       </svg>
+      <template>
       <block
         v-for="_block in children"
         v-show="isShowChildren && _block.parentTabGuid === activeTabGuid"
@@ -130,9 +132,10 @@
         :tab-settings-service="tabSettingsService"
         :step="step"
         :show-hidden="showHidden"
-        @start-drag="$emit('start-drag', $event)"
-        @stop-drag="$emit('stop-drag', $event)"
-        @dragging="$emit('dragging', $event)"
+          :is-relative-block-props="isRelativeBlock"
+          @start-drag="onStartDrag"
+          @stop-drag="onStopDrag"
+          @dragging="onDragging"
         @contextmenu="$emit('contextmenu', $event)"
         @click="$emit('click', { block: $event.block || _block, event: $event.event || $event })"
       >
@@ -140,9 +143,10 @@
           <slot :name="name" v-bind="data"></slot>
         </template>
       </block>
+      </template>
     </div>
     <font-awesome-icon
-      v-show="!block.disabledMove"
+      v-show="!block.disabledMove && !isRelativeBlockProps"
       icon="angle-down"
       :class="`resize-handler ${block.sticky}`"
       @mousedown.stop="resizeStart"
@@ -197,6 +201,10 @@ export default Vue.extend({
     },
     tabSettingsService: {
       type: Object
+    },
+    isRelativeBlockProps: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -368,9 +376,38 @@ export default Vue.extend({
     directionTabs (): boolean {
       return (this.block.tabs?.position === 'left' || this.block.tabs?.position === 'right')
     },
+    objectStyle () {
+      const styleArray = (this.block.style || '').split(';').map(pair => pair.replace(/\n/g, '').trim())
+      return styleArray.reduce((acc, item) => {
+        const [key, value] = item.split(':')
+        acc[key] = value
+        return acc
+      }, {} as Record<string, string>)
+    },
+    blockStyleRelative () {
+      const result: Record<string, string> = {}
+      result.width = `${this.block.width}${this.block.sizeTypes.width === 'auto' ? '' : this.block.sizeTypes.width}`
+      result.height = `${this.block.height}${this.block.sizeTypes.height === 'auto' ? '' : this.block.sizeTypes.height}`
+      result.marginLeft = this.block.customStyles?.marginLeft || '0px'
+      result.marginRight = this.block.customStyles?.marginRight || '0px'
+      result.marginTop = this.block.customStyles?.marginTop || '0px'
+      result.marginBottom = this.block.customStyles?.marginBottom || '0px'
+      result.paddingLeft = this.block.customStyles?.paddingLeft || '0px'
+      result.paddingRight = this.block.customStyles?.paddingRight || '0px'
+      result.paddingTop = this.block.customStyles?.paddingTop || '0px'
+      result.paddingBottom = this.block.customStyles?.paddingBottom || '0px'
+      result.display = this.block.customStyles?.display || 'block'
+      result.justifyContent = this.block.customStyles?.justifyContent || ''
+      result.alignItems = this.block.customStyles?.alignItems || ''
+      result.flexWrap = this.block.customStyles?.flexWrap || ''
+      result.gap = this.block.customStyles?.gap || ''
+      Object.assign(result, this.objectStyle)
 
-    positionStyle (): object {
+      return result
+    },
+    positionStyle (): object | string {
       let position: Position = {}
+      if (this.isRelativeBlockProps) return this.blockStyleRelative
 
       switch (this.block.sticky) {
         case Sticky.TL:
@@ -517,6 +554,9 @@ export default Vue.extend({
       }
 
       return isShow
+    },
+    isRelativeBlock () {
+      return this.block.positionBlockCss === 'relative'
     }
   },
 
@@ -782,6 +822,18 @@ export default Vue.extend({
   },
 
   methods: {
+    onStartDrag (event: MouseEvent) {
+      if (this.isRelativeBlockProps) return
+      this.$emit('start-drag', event)
+    },
+    onStopDrag (event: MouseEvent) {
+      if (this.isRelativeBlockProps) return
+      this.$emit('stop-drag', event)
+    },
+    onDragging (event: MouseEvent) {
+      if (this.isRelativeBlockProps) return
+      this.$emit('dragging', event)
+    },
     showChildTabs (guid: string) {
       if (this.block.tabs) {
         this.visibleTabs.forEach(tab => {
@@ -910,6 +962,7 @@ export default Vue.extend({
 
     dragStart (event: MouseEvent, isInteractive: boolean = false): void {
       this.$emit('start-drag', this.block)
+      if (this.isRelativeBlockProps) return
       if (this.block.isEditing || this.block.disabledMove) {
         this.dragStop()
         return
@@ -1007,6 +1060,10 @@ export default Vue.extend({
 </script>
 
 <style scoped>
+.block-relative {
+  position: relative;
+  outline: 1px solid rgb(70 52 156 / 47%);
+}
 .resize-handler {
   position: absolute;
   transform: rotate(-45deg);

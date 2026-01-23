@@ -58,6 +58,7 @@
       class="content custom_scrollbar"
       :class="{ 'scroll_hover': isActiveScrollHover }"
       :style="blockContentStyle"
+      :title="blockHoverTitle"
       @mouseover="block.isHover = true"
       @mouseleave="block.isHover = false"
       @click="$emit('click', { block: $event.block || block, event: $event.event || $event })"
@@ -527,6 +528,13 @@ export default Vue.extend({
       }
 
       return style
+    },
+    blockHoverTitle () {
+      if (this.block.isHover) {
+        return this.block.interactive?.containerTitleHover || ''
+      }
+
+      return ''
     },
 
     isShowChildren () {

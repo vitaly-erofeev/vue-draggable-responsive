@@ -3,4 +3,5 @@ export interface InteractiveProperties {
   pluginName?: string
 
   containerHoverStyle?: string
+  containerTitleHover?: string
 }

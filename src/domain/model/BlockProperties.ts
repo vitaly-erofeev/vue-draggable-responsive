@@ -1,13 +1,16 @@
-import { Sticky } from '@/domain/model/Sticky'
-import BlockDTO from '@/domain/model/BlockDTO'
-import { SizeTypes } from '@/domain/model/SizeTypes'
-import { InteractiveProperties } from '@/domain/model/InteractiveProperties'
-import { TabProperties } from '@/domain/model/TabProperties'
-import { CalcProperties } from '@/domain/model/CalcProperties'
-import { StickyTo } from '@/domain/model/StickyTo'
-import { ReplicationProperties } from '@/domain/model/ReplicationProperties'
-import { MinMax } from '@/domain/model/MinMax'
-import { OnCenter } from '@/domain/model/OnCenter'
+import { Sticky } from 'e:/vue-draggable-responsive/src/domain/model/Sticky'
+import BlockDTO from 'e:/vue-draggable-responsive/src/domain/model/BlockDTO'
+import { SizeTypes } from 'e:/vue-draggable-responsive/src/domain/model/SizeTypes'
+import { InteractiveProperties } from 'e:/vue-draggable-responsive/src/domain/model/InteractiveProperties'
+import { TabProperties } from 'e:/vue-draggable-responsive/src/domain/model/TabProperties'
+import { CalcProperties } from 'e:/vue-draggable-responsive/src/domain/model/CalcProperties'
+import { StickyTo } from 'e:/vue-draggable-responsive/src/domain/model/StickyTo'
+import { ReplicationProperties } from 'e:/vue-draggable-responsive/src/domain/model/ReplicationProperties'
+import { MinMax } from 'e:/vue-draggable-responsive/src/domain/model/MinMax'
+import { OnCenter } from 'e:/vue-draggable-responsive/src/domain/model/OnCenter'
+import { PositionBlockCss } from 'e:/vue-draggable-responsive/src/domain/model/PositionBlockCss'
+import { AddBlockType } from 'e:/vue-draggable-responsive/src/domain/model/AddBlockType'
+import { CustomStyles } from 'e:/vue-draggable-responsive/src/blockRelative/model/types'
 
 export interface BlockProperties {
   widthCalc?: CalcProperties
@@ -52,5 +55,10 @@ export interface BlockProperties {
   isHighlight?: boolean,
   properties?: {},
   isLoading?: boolean,
-  disabledMove?: boolean
+  disabledMove?: boolean,
+  event?: MouseEvent,
+  type?: AddBlockType,
+  isComponent?: boolean
+  positionBlockCss: PositionBlockCss,
+  customStyles?: Partial<CustomStyles>;
 }

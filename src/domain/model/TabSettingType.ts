@@ -1,4 +1,4 @@
-import { InteractiveProperties } from '@/domain/model/InteractiveProperties'
+import { InteractiveProperties } from 'e:/vue-draggable-responsive/src/domain/model/InteractiveProperties'
 
 export interface TabSettingType {
   isHidden: boolean,

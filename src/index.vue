@@ -38,43 +38,43 @@
 </template>
 
 <script lang="ts">
-import Block from '@/infrastructure/components/Block.vue'
+import Block from 'e:/vue-draggable-responsive/src/infrastructure/components/Block.vue'
 // eslint-disable-next-line no-unused-vars
 import Vue_, { VueConstructor } from 'vue'
-import { Sticky } from '@/domain/model/Sticky'
-import { SizeTypes } from '@/domain/model/SizeTypes'
-import { AddBlockType } from '@/domain/model/AddBlockType'
+import { Sticky } from 'e:/vue-draggable-responsive/src/domain/model/Sticky'
+import { SizeTypes } from 'e:/vue-draggable-responsive/src/domain/model/SizeTypes'
+import { AddBlockType } from 'e:/vue-draggable-responsive/src/domain/model/AddBlockType'
 // eslint-disable-next-line no-unused-vars
-import { BlockRepositoryInterface } from '@/domain/repository/BlockRepositoryInterface'
-import BlockRepository from '@/infrastructure/domain/repository/BlockRepository'
+import { BlockRepositoryInterface } from 'e:/vue-draggable-responsive/src/domain/repository/BlockRepositoryInterface'
+import BlockRepository from 'e:/vue-draggable-responsive/src/infrastructure/domain/repository/BlockRepository'
 // eslint-disable-next-line no-unused-vars
-import BlockDTO from '@/domain/model/BlockDTO'
+import BlockDTO from 'e:/vue-draggable-responsive/src/domain/model/BlockDTO'
 // eslint-disable-next-line no-unused-vars
-import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
+import { DataSourceInjected } from 'e:/vue-draggable-responsive/src/infrastructure/domain/model/DataSourceInjected'
 // eslint-disable-next-line no-unused-vars
-import { BlockProperties } from '@/domain/model/BlockProperties'
+import { BlockProperties } from 'e:/vue-draggable-responsive/src/domain/model/BlockProperties'
 // eslint-disable-next-line no-unused-vars
-import { TabProperties } from '@/domain/model/TabProperties'
+import { TabProperties } from 'e:/vue-draggable-responsive/src/domain/model/TabProperties'
 // eslint-disable-next-line no-unused-vars
-import { StickyTo } from '@/domain/model/StickyTo'
+import { StickyTo } from 'e:/vue-draggable-responsive/src/domain/model/StickyTo'
 // eslint-disable-next-line no-unused-vars
-import { ReplicationProperties } from '@/domain/model/ReplicationProperties'
+import { ReplicationProperties } from 'e:/vue-draggable-responsive/src/domain/model/ReplicationProperties'
 // eslint-disable-next-line no-unused-vars
-import { MinMax } from '@/domain/model/MinMax'
+import { MinMax } from 'e:/vue-draggable-responsive/src/domain/model/MinMax'
 // eslint-disable-next-line no-unused-vars
-import { OnCenter } from '@/domain/model/OnCenter'
-import SimpleRemoveListener from '@/infrastructure/service/listeners/SimpleRemoveListener'
+import { OnCenter } from 'e:/vue-draggable-responsive/src/domain/model/OnCenter'
+import SimpleRemoveListener from 'e:/vue-draggable-responsive/src/infrastructure/service/listeners/SimpleRemoveListener'
 
-import TabSettings from '@/application/service/TabSettings'
+import TabSettings from 'e:/vue-draggable-responsive/src/application/service/TabSettings'
 
 // V2
-import BlockRelative from '@/blockRelative/infrastructure/components/BlockRelative.vue'
+import BlockRelative from 'e:/vue-draggable-responsive/src/blockRelative/infrastructure/components/BlockRelative.vue'
 // eslint-disable-next-line no-unused-vars
 import { PositionBlockCss } from 'e:/vue-draggable-responsive/src/domain/model/PositionBlockCss'
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 
-export default Vue.extend({
-// export default {
+// export default Vue.extend({
+export default {
   name: 'VueDraggableResponsiveDesigner',
   components: { Block },
 
@@ -243,17 +243,18 @@ export default Vue.extend({
         isComponent = false
       }: BlockProperties
     ): string {
+      console.log('iscomponent', isComponent)
       if (!this.isRelativeV2) {
-      if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
-        const position: { top: number, right: number, bottom: number, left: number } = this.getMousePosition(event, sizeTypes)
-        top = position.top
-        right = position.right
-        bottom = position.bottom
-        left = position.left
+        if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
+          const position: { top: number, right: number, bottom: number, left: number } = this.getMousePosition(event, sizeTypes)
+          top = position.top
+          right = position.right
+          bottom = position.bottom
+          left = position.left
         }
       }
       let adjustPositionBlockCss = positionBlockCss
-      if (this.isRelativeV2) {
+      if (this.isRelativeV2 && !isComponent) {
         adjustPositionBlockCss = this.isRelativeV2 ? 'relative' : positionBlockCss
       }
 
@@ -276,15 +277,16 @@ export default Vue.extend({
         minMax,
         onCenter,
         alias,
-        positionBlockCss: adjustPositionBlockCss
+        positionBlockCss: adjustPositionBlockCss,
+        isComponent
       })
       if (!this.isRelativeV2) {
-      if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
-        this.$nextTick(() => {
-          const block: any = this.getAllBlockRefs()[guid]
-          block.onDrag()
-          block.dragStart(event, true)
-        })
+        if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
+          this.$nextTick(() => {
+            const block: any = this.getAllBlockRefs()[guid]
+            block.onDrag()
+            block.dragStart(event, true)
+          })
         }
       }
       return guid

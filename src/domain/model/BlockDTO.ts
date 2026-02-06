@@ -1,13 +1,15 @@
 import { Sticky } from './Sticky'
-import { BlockProperties } from '@/domain/model/BlockProperties'
-import { SizeTypes } from '@/domain/model/SizeTypes'
-import { InteractiveProperties } from '@/domain/model/InteractiveProperties'
-import { TabPosition, TabProperties } from '@/domain/model/TabProperties'
-import { CalcProperties } from '@/domain/model/CalcProperties'
-import { StickyTo } from '@/domain/model/StickyTo'
-import { ReplicationProperties } from '@/domain/model/ReplicationProperties'
-import { MinMax } from '@/domain/model/MinMax'
-import { OnCenter } from '@/domain/model/OnCenter'
+import { BlockProperties } from 'e:/vue-draggable-responsive/src/domain/model/BlockProperties'
+import { SizeTypes } from 'e:/vue-draggable-responsive/src/domain/model/SizeTypes'
+import { InteractiveProperties } from 'e:/vue-draggable-responsive/src/domain/model/InteractiveProperties'
+import { TabPosition, TabProperties } from 'e:/vue-draggable-responsive/src/domain/model/TabProperties'
+import { CalcProperties } from 'e:/vue-draggable-responsive/src/domain/model/CalcProperties'
+import { StickyTo } from 'e:/vue-draggable-responsive/src/domain/model/StickyTo'
+import { ReplicationProperties } from 'e:/vue-draggable-responsive/src/domain/model/ReplicationProperties'
+import { MinMax } from 'e:/vue-draggable-responsive/src/domain/model/MinMax'
+import { OnCenter } from 'e:/vue-draggable-responsive/src/domain/model/OnCenter'
+import { PositionBlockCss } from 'e:/vue-draggable-responsive/src/domain/model/PositionBlockCss'
+import { CustomStyles } from 'e:/vue-draggable-responsive/src/blockRelative/model/types'
 
 export default class BlockDTO {
   [index: string]: any;
@@ -56,6 +58,7 @@ export default class BlockDTO {
   isLoading: boolean = false
   disabledMove: boolean = false
   positionBlockCss: PositionBlockCss
+  isComponent: boolean = false
   customStyles?: Partial<CustomStyles>
 
   constructor (
@@ -99,6 +102,7 @@ export default class BlockDTO {
       properties = {},
       isLoading = false,
       disabledMove = false,
+      isComponent = false,
       positionBlockCss = 'absolute'
     }: BlockProperties
   ) {
@@ -147,6 +151,7 @@ export default class BlockDTO {
     this.disabledMove = disabledMove
     this.prepareSizesTypes()
     this.positionBlockCss = positionBlockCss
+    this.isComponent = isComponent
     this.customStyles = this.createCustomStyles()
   }
 
@@ -192,21 +197,24 @@ export default class BlockDTO {
     })
   }
   private createCustomStyles (): Partial<CustomStyles> {
+    console.log('createCustomStyles надо ли', this.positionBlockCss)
     if (this.positionBlockCss === 'absolute') return {}
-    return {
-      marginLeft: '0px',
-      marginRight: '0px',
-      marginTop: '0px',
-      marginBottom: '0px',
-      paddingLeft: '0px',
-      paddingRight: '0px',
-      paddingTop: '0px',
-      paddingBottom: '0px',
-      display: 'block',
-      justifyContent: '',
-      alignItems: '',
-      flexWrap: '',
-      gap: ''
-    }
+    if (this.isComponent) return {}
+    return {}
+    // return {
+    //   marginLeft: '0px',
+    //   marginRight: '0px',
+    //   marginTop: '0px',
+    //   marginBottom: '0px',
+    //   paddingLeft: '0px',
+    //   paddingRight: '0px',
+    //   paddingTop: '0px',
+    //   paddingBottom: '0px',
+    //   display: 'block',
+    //   justifyContent: '',
+    //   alignItems: '',
+    //   flexWrap: '',
+    //   gap: ''
+    // }
   }
 }

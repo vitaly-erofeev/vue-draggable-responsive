@@ -88,29 +88,29 @@
 </template>
 
 <script lang="ts">
-import { Sticky } from '@/domain/model/Sticky'
+import { Sticky } from 'e:/vue-draggable-responsive/src/domain/model/Sticky'
 import BlockDTO from '../../domain/model/BlockDTO'
 // eslint-disable-next-line no-unused-vars
-import { Position } from '@/domain/model/PositionCss'
+import { Position } from 'e:/vue-draggable-responsive/src/domain/model/PositionCss'
 import ResizeObserver from 'resize-observer-polyfill'
 // eslint-disable-next-line no-unused-vars
 import Vue_, { VueConstructor } from 'vue'
-import { SizeTypes } from '@/domain/model/SizeTypes'
-import BlockManager from '@/application/service/BlockManager'
+import { SizeTypes } from 'e:/vue-draggable-responsive/src/domain/model/SizeTypes'
+import BlockManager from 'e:/vue-draggable-responsive/src/application/service/BlockManager'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faAngleDown, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 // eslint-disable-next-line no-unused-vars
-import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
-import { StickyToType } from '@/domain/model/StickyTo'
-import SimpleAddListener from '@/infrastructure/service/listeners/SimpleAddListener'
+import { DataSourceInjected } from 'e:/vue-draggable-responsive/src/infrastructure/domain/model/DataSourceInjected'
+import { StickyToType } from 'e:/vue-draggable-responsive/src/domain/model/StickyTo'
+import SimpleAddListener from 'e:/vue-draggable-responsive/src/infrastructure/service/listeners/SimpleAddListener'
 
-import { debounce } from '@/infrastructure/service/utils'
+import { debounce } from 'e:/vue-draggable-responsive/src/infrastructure/service/utils'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 library.add(faAngleDown, faChevronRight, faChevronLeft)
-export default Vue.extend({
-// export default {
+// export default Vue.extend({
+export default {
   name: 'PreviewBlock',
 
   components: {
@@ -872,8 +872,8 @@ export default Vue.extend({
       this.activeTabGuid = guid
     }
   }
-})
-// }
+// })
+}
 </script>
 
 <style scoped>

@@ -2,8 +2,9 @@
   <div
     :style="positionStyle"
     :class="{
-      'block': !isRelativeBlockProps,
+      'block': true,
       'block-relative': isRelativeBlockProps,
+      'block-component': block.isComponent,
       'highlight' : isResizing || isDragging,
       'active': block.isActive,
       'hidden': block.isHidden,
@@ -16,6 +17,8 @@
     @mousedown.stop="dragStart"
     @contextmenu.stop="$emit('contextmenu', { block: block, event: $event })"
   >
+ <!-- + isRelativeBlockProps {{isRelativeBlockProps}} -->
+  <!-- {{block.isComponent}} -->
     <div
       v-if="isTabsContainer"
       ref="tabsContainer"
@@ -103,6 +106,9 @@
     </slot>
     <div
       class="content custom_scrollbar"
+      :class="{
+        'block-parent-relative': !block.isComponent && isRelativeBlockProps,
+      }"
       :style="blockContentStyle"
       @mouseover="block.isHover = true"
       @mouseleave="block.isHover = false"
@@ -122,7 +128,6 @@
               :y2="line.y2"
         />
       </svg>
-      <template>
       <block
         v-for="_block in children"
         v-show="isShowChildren && _block.parentTabGuid === activeTabGuid"
@@ -132,10 +137,11 @@
         :tab-settings-service="tabSettingsService"
         :step="step"
         :show-hidden="showHidden"
-          :is-relative-block-props="isRelativeBlock"
-          @start-drag="onStartDrag"
-          @stop-drag="onStopDrag"
-          @dragging="onDragging"
+        :is-relative-block-props="isRelativeBlock"
+        :is-parent-relative-block-props="isParentRelativeBlock"
+        @start-drag="onStartDrag"
+        @stop-drag="onStopDrag"
+        @dragging="onDragging"
         @contextmenu="$emit('contextmenu', $event)"
         @click="$emit('click', { block: $event.block || _block, event: $event.event || $event })"
       >
@@ -143,7 +149,6 @@
           <slot :name="name" v-bind="data"></slot>
         </template>
       </block>
-      </template>
     </div>
     <font-awesome-icon
       v-show="!block.disabledMove && !isRelativeBlockProps"
@@ -159,23 +164,23 @@
 import Vue_, { VueConstructor } from 'vue'
 import BlockDTO from '../../domain/model/BlockDTO'
 // eslint-disable-next-line no-unused-vars
-import { Position } from '@/domain/model/PositionCss'
-import BlockManager from '@/application/service/BlockManager'
+import { Position } from 'e:/vue-draggable-responsive/src/domain/model/PositionCss'
+import BlockManager from 'e:/vue-draggable-responsive/src/application/service/BlockManager'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faAngleDown, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
-import { Sticky } from '@/domain/model/Sticky'
+import { Sticky } from 'e:/vue-draggable-responsive/src/domain/model/Sticky'
 // eslint-disable-next-line no-unused-vars
-import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
-import { StickyToType } from '@/domain/model/StickyTo'
-import { SizeTypes } from '@/domain/model/SizeTypes'
-import stickyLinesMixin from '@/infrastructure/service/stickyLinesMixin'
+import { DataSourceInjected } from 'e:/vue-draggable-responsive/src/infrastructure/domain/model/DataSourceInjected'
+import { StickyToType } from 'e:/vue-draggable-responsive/src/domain/model/StickyTo'
+import { SizeTypes } from 'e:/vue-draggable-responsive/src/domain/model/SizeTypes'
+import stickyLinesMixin from 'e:/vue-draggable-responsive/src/infrastructure/service/stickyLinesMixin'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 library.add(faAngleDown, faChevronRight, faChevronLeft)
 
-export default Vue.extend({
-// export default {
+// export default Vue.extend({
+export default {
   name: 'Block',
   mixins: [stickyLinesMixin],
   components: {
@@ -203,6 +208,10 @@ export default Vue.extend({
       type: Object
     },
     isRelativeBlockProps: {
+      type: Boolean,
+      default: false
+    },
+    isParentRelativeBlockProps: {
       type: Boolean,
       default: false
     }
@@ -379,6 +388,7 @@ export default Vue.extend({
     objectStyle () {
       const styleArray = (this.block.style || '').split(';').map(pair => pair.replace(/\n/g, '').trim())
       return styleArray.reduce((acc, item) => {
+        if (!item) return acc
         const [key, value] = item.split(':')
         acc[key] = value
         return acc
@@ -386,16 +396,16 @@ export default Vue.extend({
     },
     blockStyleRelative () {
       const result: Record<string, string> = {}
-      result.width = `${this.block.width}${this.block.sizeTypes.width === 'auto' ? '' : this.block.sizeTypes.width}`
-      result.height = `${this.block.height}${this.block.sizeTypes.height === 'auto' ? '' : this.block.sizeTypes.height}`
-      result.marginLeft = this.block.customStyles?.marginLeft || '0px'
-      result.marginRight = this.block.customStyles?.marginRight || '0px'
-      result.marginTop = this.block.customStyles?.marginTop || '0px'
-      result.marginBottom = this.block.customStyles?.marginBottom || '0px'
-      result.paddingLeft = this.block.customStyles?.paddingLeft || '0px'
-      result.paddingRight = this.block.customStyles?.paddingRight || '0px'
-      result.paddingTop = this.block.customStyles?.paddingTop || '0px'
-      result.paddingBottom = this.block.customStyles?.paddingBottom || '0px'
+      // result.width = `${this.block.width}${this.block.sizeTypes.width === 'auto' ? '' : this.block.sizeTypes.width}`
+      // result.height = `${this.block.height}${this.block.sizeTypes.height === 'auto' ? '' : this.block.sizeTypes.height}`
+      // result.marginLeft = this.block.customStyles?.marginLeft || '0px'
+      // result.marginRight = this.block.customStyles?.marginRight || '0px'
+      // result.marginTop = this.block.customStyles?.marginTop || '0px'
+      // result.marginBottom = this.block.customStyles?.marginBottom || '0px'
+      // result.paddingLeft = this.block.customStyles?.paddingLeft || '0px'
+      // result.paddingRight = this.block.customStyles?.paddingRight || '0px'
+      // result.paddingTop = this.block.customStyles?.paddingTop || '0px'
+      // result.paddingBottom = this.block.customStyles?.paddingBottom || '0px'
       result.display = this.block.customStyles?.display || 'block'
       result.justifyContent = this.block.customStyles?.justifyContent || ''
       result.alignItems = this.block.customStyles?.alignItems || ''
@@ -407,7 +417,6 @@ export default Vue.extend({
     },
     positionStyle (): object | string {
       let position: Position = {}
-      if (this.isRelativeBlockProps) return this.blockStyleRelative
 
       switch (this.block.sticky) {
         case Sticky.TL:
@@ -508,12 +517,22 @@ export default Vue.extend({
           position.bottom = `calc(50% - calc(${height} / 2))`
         }
       }
-
-      return Object.assign(position, {
+      const someStyles = {
         width: width,
         height: height,
         zIndex: this.zIndex
-      })
+      }
+
+      if (this.isRelativeBlockProps && !this.block.isComponent) {
+        const blockStyleRelative = this.blockStyleRelative
+        Object.assign(someStyles, blockStyleRelative)
+      }
+      console.log('someStyles', someStyles)
+      if (this.isParentRelativeBlockProps && this.block.isComponent) {
+        return someStyles
+      }
+
+      return Object.assign(position, someStyles)
     },
 
     blockTabStyle () {
@@ -556,6 +575,9 @@ export default Vue.extend({
       return isShow
     },
     isRelativeBlock () {
+      return (this.block.isComponent && this.block.positionBlockCss === 'relative')
+    },
+    isParentRelativeBlock () {
       return this.block.positionBlockCss === 'relative'
     }
   },
@@ -1055,15 +1077,11 @@ export default Vue.extend({
       tabsScroll.style.transform = `translateX(-${this.tabsOffset}px)`
     }
   }
-})
-// }
+// })
+}
 </script>
 
 <style scoped>
-.block-relative {
-  position: relative;
-  outline: 1px solid rgb(70 52 156 / 47%);
-}
 .resize-handler {
   position: absolute;
   transform: rotate(-45deg);
@@ -1098,6 +1116,16 @@ export default Vue.extend({
 .block {
   outline: 1px dashed #539FFF;
   position: absolute;
+}
+.block.block-relative {
+  outline: 1px dashed #53ff53;
+}
+.block.block-relative .block-component {
+  outline: 2px dashed #53fff6;
+  position: relative;
+}
+.block-parent-relative {
+  display: contents;
 }
 .block.hidden {
   outline: 1px dashed #E94435;
@@ -1196,6 +1224,9 @@ export default Vue.extend({
 
 .block.active {
   outline: 3px solid #539FFF;
+}
+.block.block-relative.active {
+  outline: 3px solid #53ff53;
 }
 
 .block.active.hidden {

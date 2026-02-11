@@ -18,8 +18,8 @@ export default class BlockDTO {
   widthCalc?: CalcProperties
   heightCalc?: CalcProperties
   minMax?: MinMax
-  width: number
-  height: number
+  width: number | string
+  height: number | string
   top?: number
   right?: number
   bottom?: number

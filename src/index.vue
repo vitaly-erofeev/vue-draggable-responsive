@@ -18,7 +18,6 @@
       :step="step"
       :show-hidden="showHidden"
       :tab-settings-service="tabSettingsService"
-      :is-relative-block-props="isRelativeV2"
       @start-drag="$emit('start-drag', $event)"
       @stop-drag="$emit('stop-drag', $event)"
       @dragging="$emit('dragging', $event)"

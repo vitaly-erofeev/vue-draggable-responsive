@@ -3,13 +3,12 @@
     :style="positionStyle"
     :class="{
       'block': true,
-      'block-relative': isRelativeBlockProps,
+      'block-relative': isRelativeBlock,
       'block-component': block.isComponent,
       'highlight' : isResizing || isDragging,
       'active': block.isActive,
       'hidden': block.isHidden,
       'active_parent': block.isActiveAsParent,
-      'active_as_relative': isRelativeBlockProps,
       [block.className]: !!block.className
     }"
     ref="draggableContainer"
@@ -17,8 +16,11 @@
     @mousedown.stop="dragStart"
     @contextmenu.stop="$emit('contextmenu', { block: block, event: $event })"
   >
- <!-- + isRelativeBlockProps {{isRelativeBlockProps}} -->
-  <!-- {{block.isComponent}} -->
+ <!-- + block {{block.height}}<br>!!!! -->
+ <!-- + positionStyle {{positionStyle}}<br>! -->
+ <!-- + isParentRelativeBlock {{isParentRelativeBlock}}<br> -->
+ <!-- + isRelativeBlock {{isRelativeBlock}}<br>! -->
+  <!-- +isComponent {{block.isComponent}} -->
     <div
       v-if="isTabsContainer"
       ref="tabsContainer"
@@ -107,7 +109,7 @@
     <div
       class="content custom_scrollbar"
       :class="{
-        'block-parent-relative': !block.isComponent && isRelativeBlockProps,
+        'block-parent-relative': !block.isComponent && isRelativeBlock,
       }"
       :style="blockContentStyle"
       @mouseover="block.isHover = true"
@@ -116,7 +118,7 @@
     >
       <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
       <slot :block="block" name="toolbar"></slot>
-      <svg  id="svg" v-if="!block.isEditing && !isTabsContainer && !isRelativeBlockProps">
+      <svg  id="svg" v-if="!block.isEditing && !isTabsContainer && !isRelativeBlock">
         <line class="line" v-for="(line, index) in stickyLines"
               :class="{
                 [line.type]: true
@@ -137,8 +139,7 @@
         :tab-settings-service="tabSettingsService"
         :step="step"
         :show-hidden="showHidden"
-        :is-relative-block-props="isRelativeBlock"
-        :is-parent-relative-block-props="isParentRelativeBlock"
+        :is-parent-relative-block="isRelativeBlock"
         @start-drag="onStartDrag"
         @stop-drag="onStopDrag"
         @dragging="onDragging"
@@ -151,7 +152,7 @@
       </block>
     </div>
     <font-awesome-icon
-      v-show="!block.disabledMove && !isRelativeBlockProps"
+      v-show="!block.disabledMove"
       icon="angle-down"
       :class="`resize-handler ${block.sticky}`"
       @mousedown.stop="resizeStart"
@@ -207,11 +208,7 @@ export default {
     tabSettingsService: {
       type: Object
     },
-    isRelativeBlockProps: {
-      type: Boolean,
-      default: false
-    },
-    isParentRelativeBlockProps: {
+    isParentRelativeBlock: {
       type: Boolean,
       default: false
     }
@@ -386,7 +383,7 @@ export default {
       return (this.block.tabs?.position === 'left' || this.block.tabs?.position === 'right')
     },
     objectStyle () {
-      const styleArray = (this.block.style || '').split(';').map(pair => pair.replace(/\n/g, '').trim())
+      const styleArray = (this.block.style || '').split(';').map(pair => pair.replace(/\n/g, '').trim()) || []
       return styleArray.reduce((acc, item) => {
         if (!item) return acc
         const [key, value] = item.split(':')
@@ -396,17 +393,9 @@ export default {
     },
     blockStyleRelative () {
       const result: Record<string, string> = {}
-      // result.width = `${this.block.width}${this.block.sizeTypes.width === 'auto' ? '' : this.block.sizeTypes.width}`
-      // result.height = `${this.block.height}${this.block.sizeTypes.height === 'auto' ? '' : this.block.sizeTypes.height}`
-      // result.marginLeft = this.block.customStyles?.marginLeft || '0px'
-      // result.marginRight = this.block.customStyles?.marginRight || '0px'
-      // result.marginTop = this.block.customStyles?.marginTop || '0px'
-      // result.marginBottom = this.block.customStyles?.marginBottom || '0px'
-      // result.paddingLeft = this.block.customStyles?.paddingLeft || '0px'
-      // result.paddingRight = this.block.customStyles?.paddingRight || '0px'
-      // result.paddingTop = this.block.customStyles?.paddingTop || '0px'
-      // result.paddingBottom = this.block.customStyles?.paddingBottom || '0px'
-      result.display = this.block.customStyles?.display || 'block'
+      result.width = `${this.block.width}${this.block.sizeTypes.width === 'auto' ? '' : this.block.sizeTypes.width}`
+      result.height = `${this.block.height}${this.block.sizeTypes.height === 'auto' ? '' : this.block.sizeTypes.height}`
+      result.display = this.block.customStyles?.display || 'flex'
       result.justifyContent = this.block.customStyles?.justifyContent || ''
       result.alignItems = this.block.customStyles?.alignItems || ''
       result.flexWrap = this.block.customStyles?.flexWrap || ''
@@ -479,8 +468,11 @@ export default {
         }
       }
 
-      let width = this.block.width + this.block.sizeTypes.width
-      let height = this.block.height + this.block.sizeTypes.height
+      // let width = this.block.width + this.block.sizeTypes.width
+      let width = `${this.block.width}${this.block.sizeTypes.width === 'auto' ? '' : this.block.sizeTypes.width}`
+
+      // let height = this.block.height + this.block.sizeTypes.height
+      let height = `${this.block.height}${this.block.sizeTypes.height === 'auto' ? '' : this.block.sizeTypes.height}`
 
       if (this.block.widthCalc && this.block.widthCalc.type && this.block.widthCalc.value) {
         width = `calc(${width} ${this.block.widthCalc.type} ${this.block.widthCalc.value}px)`
@@ -522,16 +514,31 @@ export default {
         height: height,
         zIndex: this.zIndex
       }
-
-      if (this.isRelativeBlockProps && !this.block.isComponent) {
-        const blockStyleRelative = this.blockStyleRelative
-        Object.assign(someStyles, blockStyleRelative)
+      const isBlockStyleRelative = this.isRelativeBlock && !this.block.isComponent
+      const isComponentAndParentRelative = this.isParentRelativeBlock && this.block.isComponent
+      if (isBlockStyleRelative) {
+        const result = {
+          ...position,
+          ...this.blockStyleRelative,
+          ...someStyles
+        }
+        console.log('blockStyleRelative', this.blockStyleRelative)
+        console.log('position', position)
+        if (this.blockStyleRelative?.height === 'auto') {
+          someStyles.height = 'auto'
+        }
+        console.log('someStyles00', someStyles)
+        console.log('result', result)
+        return result
       }
-      console.log('someStyles', someStyles)
-      if (this.isParentRelativeBlockProps && this.block.isComponent) {
-        return someStyles
+      if (isComponentAndParentRelative) {
+        console.log('someStyles1', someStyles)
+        const result = {
+          ...someStyles
+        }
+        return result
       }
-
+      console.log('someStyles2', someStyles)
       return Object.assign(position, someStyles)
     },
 
@@ -575,9 +582,6 @@ export default {
       return isShow
     },
     isRelativeBlock () {
-      return (this.block.isComponent && this.block.positionBlockCss === 'relative')
-    },
-    isParentRelativeBlock () {
       return this.block.positionBlockCss === 'relative'
     }
   },
@@ -710,6 +714,9 @@ export default {
         }
         let parentSize = this.$el.parentElement.offsetWidth
         const oldValue = this.block.width
+        if (value === SizeTypes.AUTO || typeof oldValue !== 'number') {
+          return
+        }
         this.block.width = this.calcSwitchedSizes(value, parentSize, oldValue)
       },
       deep: true
@@ -725,6 +732,9 @@ export default {
         }
         let parentSize = this.$el.parentElement.offsetHeight
         const oldValue = this.block.height
+        if (value === SizeTypes.AUTO || typeof oldValue !== 'number') {
+          return
+        }
         this.block.height = this.calcSwitchedSizes(value, parentSize, oldValue)
       },
       deep: true
@@ -845,15 +855,12 @@ export default {
 
   methods: {
     onStartDrag (event: MouseEvent) {
-      if (this.isRelativeBlockProps) return
       this.$emit('start-drag', event)
     },
     onStopDrag (event: MouseEvent) {
-      if (this.isRelativeBlockProps) return
       this.$emit('stop-drag', event)
     },
     onDragging (event: MouseEvent) {
-      if (this.isRelativeBlockProps) return
       this.$emit('dragging', event)
     },
     showChildTabs (guid: string) {
@@ -984,7 +991,6 @@ export default {
 
     dragStart (event: MouseEvent, isInteractive: boolean = false): void {
       this.$emit('start-drag', this.block)
-      if (this.isRelativeBlockProps) return
       if (this.block.isEditing || this.block.disabledMove) {
         this.dragStop()
         return
@@ -1339,8 +1345,5 @@ export default {
   top: 50%;
   left: 4%;
   transform: translate(0%, -50%);
-}
-.active_as_relative {
-   outline: 3px solid #18ec65;
 }
 </style>

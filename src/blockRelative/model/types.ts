@@ -17,15 +17,12 @@ export type ParametersBlock = {
 };
 
 export type CustomStyles = {
-  marginLeft: string;
-  marginRight: string;
-  marginTop: string;
-  marginBottom: string;
   paddingLeft: string;
   paddingRight: string;
   paddingTop: string;
   paddingBottom: string;
   display: string;
+  flexDirection: string;
   justifyContent: string;
   alignItems: string;
   flexWrap: string;

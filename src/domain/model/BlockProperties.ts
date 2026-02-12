@@ -17,8 +17,8 @@ export interface BlockProperties {
   heightCalc?: CalcProperties
   onCenter?: OnCenter
   minMax?: MinMax
-  width: number,
-  height: number,
+  width: number | string,
+  height: number | string,
   top?: number,
   right?: number,
   bottom?: number,

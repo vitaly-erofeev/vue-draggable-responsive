@@ -103,6 +103,7 @@ export default class BlockDTO {
       isLoading = false,
       disabledMove = false,
       isComponent = false,
+      customStyles = {},
       positionBlockCss = 'absolute'
     }: BlockProperties
   ) {
@@ -152,7 +153,7 @@ export default class BlockDTO {
     this.prepareSizesTypes()
     this.positionBlockCss = positionBlockCss
     this.isComponent = isComponent
-    this.customStyles = this.createCustomStyles()
+    this.customStyles = customStyles
   }
 
   private static getPreparedSizes ({
@@ -195,26 +196,5 @@ export default class BlockDTO {
         this.sizeTypes[type] = SizeTypes.PERCENT
       }
     })
-  }
-  private createCustomStyles (): Partial<CustomStyles> {
-    console.log('createCustomStyles надо ли', this.positionBlockCss)
-    if (this.positionBlockCss === 'absolute') return {}
-    if (this.isComponent) return {}
-    return {}
-    // return {
-    //   marginLeft: '0px',
-    //   marginRight: '0px',
-    //   marginTop: '0px',
-    //   marginBottom: '0px',
-    //   paddingLeft: '0px',
-    //   paddingRight: '0px',
-    //   paddingTop: '0px',
-    //   paddingBottom: '0px',
-    //   display: 'block',
-    //   justifyContent: '',
-    //   alignItems: '',
-    //   flexWrap: '',
-    //   gap: ''
-    // }
   }
 }

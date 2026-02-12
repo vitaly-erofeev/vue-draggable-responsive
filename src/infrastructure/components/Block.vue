@@ -395,7 +395,13 @@ export default {
       const result: Record<string, string> = {}
       result.width = `${this.block.width}${this.block.sizeTypes.width === 'auto' ? '' : this.block.sizeTypes.width}`
       result.height = `${this.block.height}${this.block.sizeTypes.height === 'auto' ? '' : this.block.sizeTypes.height}`
-      result.display = this.block.customStyles?.display || 'flex'
+      result.paddingLeft = this.block.customStyles?.paddingLeft || '0px'
+      result.paddingRight = this.block.customStyles?.paddingRight || '0px'
+      result.paddingTop = this.block.customStyles?.paddingTop || '0px'
+      result.paddingBottom = this.block.customStyles?.paddingBottom || '0px'
+      result.display = 'flex'
+      result.flexDirection = this.block.customStyles?.flexDirection || 'row'
+      result.flexGrow = this.block.customStyles?.flexGrow || '0'
       result.justifyContent = this.block.customStyles?.justifyContent || ''
       result.alignItems = this.block.customStyles?.alignItems || ''
       result.flexWrap = this.block.customStyles?.flexWrap || ''
@@ -534,7 +540,8 @@ export default {
       if (isComponentAndParentRelative) {
         console.log('someStyles1', someStyles)
         const result = {
-          ...someStyles
+          ...someStyles,
+          ...this.blockStyleRelative
         }
         return result
       }

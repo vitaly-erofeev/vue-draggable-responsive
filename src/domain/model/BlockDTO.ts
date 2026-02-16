@@ -9,7 +9,7 @@ import { ReplicationProperties } from 'e:/vue-draggable-responsive/src/domain/mo
 import { MinMax } from 'e:/vue-draggable-responsive/src/domain/model/MinMax'
 import { OnCenter } from 'e:/vue-draggable-responsive/src/domain/model/OnCenter'
 import { PositionBlockCss } from 'e:/vue-draggable-responsive/src/domain/model/PositionBlockCss'
-import { CustomStyles } from 'e:/vue-draggable-responsive/src/blockRelative/model/types'
+import { CustomStyles, StylesComponent } from 'e:/vue-draggable-responsive/src/blockRelative/model/types'
 
 export default class BlockDTO {
   [index: string]: any;
@@ -60,6 +60,7 @@ export default class BlockDTO {
   positionBlockCss: PositionBlockCss
   isComponent: boolean = false
   customStyles?: Partial<CustomStyles>
+  stylesComponent?: Partial<StylesComponent>
 
   constructor (
     {
@@ -104,6 +105,7 @@ export default class BlockDTO {
       disabledMove = false,
       isComponent = false,
       customStyles = {},
+      stylesComponent = {},
       positionBlockCss = 'absolute'
     }: BlockProperties
   ) {
@@ -154,6 +156,7 @@ export default class BlockDTO {
     this.positionBlockCss = positionBlockCss
     this.isComponent = isComponent
     this.customStyles = customStyles
+    this.stylesComponent = stylesComponent
   }
 
   private static getPreparedSizes ({

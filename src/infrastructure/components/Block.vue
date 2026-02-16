@@ -20,7 +20,7 @@
  <!-- + positionStyle {{positionStyle}}<br>! -->
  <!-- + isParentRelativeBlock {{isParentRelativeBlock}}<br> -->
  <!-- + isRelativeBlock {{isRelativeBlock}}<br>! -->
-  <!-- +isComponent {{block.isComponent}} -->
+  <!-- +isComponent {{block.customStyles}} -->
     <div
       v-if="isTabsContainer"
       ref="tabsContainer"
@@ -391,17 +391,27 @@ export default {
         return acc
       }, {} as Record<string, string>)
     },
+    componentStyleFlex () {
+      const result: Record<string, string> = {}
+      result.minWidth = `${this.block.stylesComponent?.minWidth || 'auto'}`
+      result.maxWidth = `${this.block.stylesComponent?.maxWidth || 'auto'}`
+      result.flexGrow = `${this.block.stylesComponent?.flexGrow || '0'}`
+      result.flexShrink = `${this.block.stylesComponent?.flexShrink || '1'}`
+
+      return result
+    },
     blockStyleRelative () {
       const result: Record<string, string> = {}
       result.width = `${this.block.width}${this.block.sizeTypes.width === 'auto' ? '' : this.block.sizeTypes.width}`
       result.height = `${this.block.height}${this.block.sizeTypes.height === 'auto' ? '' : this.block.sizeTypes.height}`
+      result.minHeight = this.block.customStyles?.minHeight || 'auto'
+      result.maxHeight = this.block.customStyles?.maxHeight || 'auto'
       result.paddingLeft = this.block.customStyles?.paddingLeft || '0px'
       result.paddingRight = this.block.customStyles?.paddingRight || '0px'
       result.paddingTop = this.block.customStyles?.paddingTop || '0px'
       result.paddingBottom = this.block.customStyles?.paddingBottom || '0px'
       result.display = 'flex'
       result.flexDirection = this.block.customStyles?.flexDirection || 'row'
-      result.flexGrow = this.block.customStyles?.flexGrow || '0'
       result.justifyContent = this.block.customStyles?.justifyContent || ''
       result.alignItems = this.block.customStyles?.alignItems || ''
       result.flexWrap = this.block.customStyles?.flexWrap || ''
@@ -528,21 +538,21 @@ export default {
           ...this.blockStyleRelative,
           ...someStyles
         }
-        console.log('blockStyleRelative', this.blockStyleRelative)
-        console.log('position', position)
+        // console.log('blockStyleRelative', this.blockStyleRelative)
+        // console.log('position', position)
         if (this.blockStyleRelative?.height === 'auto') {
           someStyles.height = 'auto'
         }
-        console.log('someStyles00', someStyles)
-        console.log('result', result)
+        // console.log('someStyles00', someStyles)
+        console.log('isBlockStyleRelative', result)
         return result
       }
       if (isComponentAndParentRelative) {
-        console.log('someStyles1', someStyles)
         const result = {
           ...someStyles,
-          ...this.blockStyleRelative
+          ...this.componentStyleFlex
         }
+        console.log('isComponentAndParentRelative', result)
         return result
       }
       console.log('someStyles2', someStyles)

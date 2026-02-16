@@ -21,6 +21,8 @@ export type CustomStyles = {
   paddingRight: string;
   paddingTop: string;
   paddingBottom: string;
+  minHeight: string;
+  maxHeight: string;
   display: string;
   flexDirection: string;
   justifyContent: string;
@@ -33,10 +35,17 @@ export type BlockDTOV2Grid = {
   widthArea: number;
   heightArea: number;
 };
+export type StylesComponent = {
+  minWidth: string;
+  maxWidth: string;
+  flexGrow: string;
+  flexShrink: string;
+};
 type StylesBlock = {
   style: string;
   isHidden: boolean;
   customStyles: CustomStyles;
+  stylesComponent: StylesComponent
   sizeTypes: { width: SizeTypes; height: SizeTypes };
 };
 

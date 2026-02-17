@@ -67,7 +67,6 @@ import SimpleRemoveListener from 'e:/vue-draggable-responsive/src/infrastructure
 import TabSettings from 'e:/vue-draggable-responsive/src/application/service/TabSettings'
 
 // V2
-import BlockRelative from 'e:/vue-draggable-responsive/src/blockRelative/infrastructure/components/BlockRelative.vue'
 // eslint-disable-next-line no-unused-vars
 import { PositionBlockCss } from 'e:/vue-draggable-responsive/src/domain/model/PositionBlockCss'
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
@@ -122,9 +121,6 @@ export default {
       }
 
       return this.activeBlock?.positionBlockCss === 'relative'
-    },
-    isSetka (): boolean {
-      return !this.isRelativeV2 && this.isRelativeV2
     },
     _blocks (): BlockDTO[] {
       return this.getStore().get()

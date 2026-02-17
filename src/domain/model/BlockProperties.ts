@@ -10,7 +10,7 @@ import { MinMax } from 'e:/vue-draggable-responsive/src/domain/model/MinMax'
 import { OnCenter } from 'e:/vue-draggable-responsive/src/domain/model/OnCenter'
 import { PositionBlockCss } from 'e:/vue-draggable-responsive/src/domain/model/PositionBlockCss'
 import { AddBlockType } from 'e:/vue-draggable-responsive/src/domain/model/AddBlockType'
-import { CustomStyles, StylesComponent } from 'e:/vue-draggable-responsive/src/blockRelative/model/types'
+import { CustomStyles, StylesComponent } from './RelativeTypes'
 
 export interface BlockProperties {
   widthCalc?: CalcProperties

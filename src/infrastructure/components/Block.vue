@@ -533,15 +533,15 @@ export default {
       const isBlockStyleRelative = this.isRelativeBlock && !this.block.isComponent
       const isComponentAndParentRelative = this.isParentRelativeBlock && this.block.isComponent
       if (isBlockStyleRelative) {
-        const result = {
-          ...position,
-          ...this.blockStyleRelative,
-          ...someStyles
-        }
         // console.log('blockStyleRelative', this.blockStyleRelative)
         // console.log('position', position)
         if (this.blockStyleRelative?.height === 'auto') {
           someStyles.height = 'auto'
+        }
+        const result = {
+          ...position,
+          ...this.blockStyleRelative,
+          ...someStyles
         }
         // console.log('someStyles00', someStyles)
         console.log('isBlockStyleRelative', result)
@@ -599,7 +599,7 @@ export default {
       return isShow
     },
     isRelativeBlock () {
-      return this.block.positionBlockCss === 'relative'
+      return this.block?.positionBlockCss === 'relative'
     }
   },
 

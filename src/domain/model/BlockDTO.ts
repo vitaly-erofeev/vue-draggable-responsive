@@ -9,7 +9,7 @@ import { ReplicationProperties } from 'e:/vue-draggable-responsive/src/domain/mo
 import { MinMax } from 'e:/vue-draggable-responsive/src/domain/model/MinMax'
 import { OnCenter } from 'e:/vue-draggable-responsive/src/domain/model/OnCenter'
 import { PositionBlockCss } from 'e:/vue-draggable-responsive/src/domain/model/PositionBlockCss'
-import { CustomStyles, StylesComponent } from 'e:/vue-draggable-responsive/src/blockRelative/model/types'
+import { CustomStyles, StylesComponent } from './RelativeTypes'
 
 export default class BlockDTO {
   [index: string]: any;

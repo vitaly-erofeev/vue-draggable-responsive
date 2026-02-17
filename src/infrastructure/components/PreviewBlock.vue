@@ -97,29 +97,29 @@
 </template>
 
 <script lang="ts">
-import { Sticky } from 'e:/vue-draggable-responsive/src/domain/model/Sticky'
+import { Sticky } from '@/domain/model/Sticky'
 import BlockDTO from '../../domain/model/BlockDTO'
 // eslint-disable-next-line no-unused-vars
-import { Position } from 'e:/vue-draggable-responsive/src/domain/model/PositionCss'
+import { Position } from '@/domain/model/PositionCss'
 import ResizeObserver from 'resize-observer-polyfill'
 // eslint-disable-next-line no-unused-vars
 import Vue_, { VueConstructor } from 'vue'
-import { SizeTypes } from 'e:/vue-draggable-responsive/src/domain/model/SizeTypes'
-import BlockManager from 'e:/vue-draggable-responsive/src/application/service/BlockManager'
+import { SizeTypes } from '@/domain/model/SizeTypes'
+import BlockManager from '@/application/service/BlockManager'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faAngleDown, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 // eslint-disable-next-line no-unused-vars
-import { DataSourceInjected } from 'e:/vue-draggable-responsive/src/infrastructure/domain/model/DataSourceInjected'
-import { StickyToType } from 'e:/vue-draggable-responsive/src/domain/model/StickyTo'
-import SimpleAddListener from 'e:/vue-draggable-responsive/src/infrastructure/service/listeners/SimpleAddListener'
+import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInjected'
+import { StickyToType } from '@/domain/model/StickyTo'
+import SimpleAddListener from '@/infrastructure/service/listeners/SimpleAddListener'
 
-import { debounce } from 'e:/vue-draggable-responsive/src/infrastructure/service/utils'
+import { debounce } from '@/infrastructure/service/utils'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 library.add(faAngleDown, faChevronRight, faChevronLeft)
-// export default Vue.extend({
-export default {
+export default Vue.extend({
+// export default {
   name: 'PreviewBlock',
 
   components: {
@@ -377,11 +377,11 @@ export default {
                 // Если this.isTabsContainer === false
                 // и чекбокс "Растягиваемый" включен у дочернего блока, то поля в дочернем блоке пропадают (width = 0px)
                 const parentSizes = BlockManager.getAbsoluteSizesByParent(this.parentBlock, this.parentElement as Element)
-                if (this.block.sizeTypes.top === SizeTypes.PERCENT) {
+                if (this.block.sizeTypes.top === SizeTypes.PERCENT && typeof this.block.height === 'number') {
                   top = `${parentSizes.height / 100 * (this.block.top || 0)}px`
                   height = `${parentSizes.height / 100 * this.block.height}px`
                 }
-                if (this.block.sizeTypes.left === SizeTypes.PERCENT) {
+                if (this.block.sizeTypes.left === SizeTypes.PERCENT && typeof this.block.width === 'number') {
                   left = `${parentSizes.width / 100 * (this.block.left || 0)}px`
                   width = `${parentSizes.width / 100 * this.block.width}px`
                 }
@@ -949,8 +949,8 @@ export default {
       this.activeTabGuid = guid
     }
   }
-// })
-}
+})
+// }
 </script>
 
 <style scoped>

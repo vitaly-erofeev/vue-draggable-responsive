@@ -1,4 +1,4 @@
-import { SizeTypes } from 'e:/vue-draggable-responsive/src/domain/model/SizeTypes'
+import { SizeTypes } from '@/domain/model/SizeTypes'
 
 export interface ReplicationProperties {
   columns?: number

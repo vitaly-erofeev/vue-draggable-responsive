@@ -1,12 +1,12 @@
-import BlockDTO from 'e:/vue-draggable-responsive/src/domain/model/BlockDTO'
-import CustomMouseEvent from 'e:/vue-draggable-responsive/src/domain/model/CustomMouseEvent'
-import CustomDomRect from 'e:/vue-draggable-responsive/src/domain/model/CustomDomRect'
-import BreakpointsFactory from 'e:/vue-draggable-responsive/src/domain/service/BreakpointsFactory'
-import { Breakpoints } from 'e:/vue-draggable-responsive/src/domain/model/Breakpoints'
-import { BlockRepositoryInterface } from 'e:/vue-draggable-responsive/src/domain/repository/BlockRepositoryInterface'
-import { SizeTypes } from 'e:/vue-draggable-responsive/src/domain/model/SizeTypes'
-import { StickyToType } from 'e:/vue-draggable-responsive/src/domain/model/StickyTo'
-import { Sticky } from 'e:/vue-draggable-responsive/src/domain/model/Sticky'
+import BlockDTO from '@/domain/model/BlockDTO'
+import CustomMouseEvent from '@/domain/model/CustomMouseEvent'
+import CustomDomRect from '@/domain/model/CustomDomRect'
+import BreakpointsFactory from '@/domain/service/BreakpointsFactory'
+import { Breakpoints } from '@/domain/model/Breakpoints'
+import { BlockRepositoryInterface } from '@/domain/repository/BlockRepositoryInterface'
+import { SizeTypes } from '@/domain/model/SizeTypes'
+import { StickyToType } from '@/domain/model/StickyTo'
+import { Sticky } from '@/domain/model/Sticky'
 
 export default class BlockManager {
   [index: string]: any;
@@ -115,8 +115,10 @@ export default class BlockManager {
       return blockRect
     }
     const parentElementRect = parentElement.getBoundingClientRect()
-    blockRect.height = parentElementRect.height / 100 * block.height
-    blockRect.width = parentElementRect.width / 100 * block.width
+    if (typeof block.height === 'number' && typeof block.width === 'number') {
+      blockRect.height = parentElementRect.height / 100 * block.height
+      blockRect.width = parentElementRect.width / 100 * block.width
+    }
 
     return blockRect
   }

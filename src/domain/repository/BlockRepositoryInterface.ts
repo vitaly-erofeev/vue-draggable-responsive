@@ -1,7 +1,7 @@
-import BlockDTO from 'e:/vue-draggable-responsive/src/domain/model/BlockDTO'
-import { BlockProperties } from 'e:/vue-draggable-responsive/src/domain/model/BlockProperties'
-import { ListenerInterface } from 'e:/vue-draggable-responsive/src/domain/service/ListenerInterface'
-import { PositionBlockCss } from 'e:/vue-draggable-responsive/src/domain/model/PositionBlockCss'
+import BlockDTO from '@/domain/model/BlockDTO'
+import { BlockProperties } from '@/domain/model/BlockProperties'
+import { ListenerInterface } from '@/domain/service/ListenerInterface'
+import { PositionBlockCss } from '@/domain/model/PositionBlockCss'
 
 export interface BlockRepositoryInterface {
   change (guid: string, property: string, value: any): void

@@ -93,7 +93,7 @@ import { Sticky } from '@/domain/model/Sticky'
 import BlockDTO from '../../domain/model/BlockDTO'
 // eslint-disable-next-line no-unused-vars
 import { Position } from '@/domain/model/PositionCss'
-import ResizeObserver from 'resize-observer-polyfill'
+import { StretchManager } from '@/infrastructure/service/StretchManager'
 // eslint-disable-next-line no-unused-vars
 import Vue_, { VueConstructor } from 'vue'
 import { SizeTypes } from '@/domain/model/SizeTypes'
@@ -155,7 +155,9 @@ export default Vue.extend({
     stickyToBlock?: BlockDTO,
     stickyToElement?: any,
     prepareReplication: () => void,
-    activeBlockGuid?: string
+    activeBlockGuid?: string,
+    stretchItem?: { el: Element, update: () => void } | null,
+    minHeightParent: number
     } {
     return {
       parentBlock: undefined,
@@ -172,7 +174,9 @@ export default Vue.extend({
       stickyToBlock: undefined,
       stickyToElement: undefined,
       prepareReplication: () => {},
-      activeBlockGuid: ''
+      activeBlockGuid: '',
+      stretchItem: null,
+      minHeightParent: 0
     }
   },
   created () {
@@ -592,20 +596,11 @@ export default Vue.extend({
       }
     }
     if (this.block?.isStretched && this.$refs.container && this.$refs.container instanceof Element) {
-      let children: HTMLCollection = this.$refs.container.children
-      const observer = new ResizeObserver(() => {
-        this.setStretchedSize()
-      })
-
-      for (let item of children) {
-        observer.observe(item)
+      this.stretchItem = {
+        el: this.$el,
+        update: this.setStretchedSize
       }
-      const observerInserted = new MutationObserver(mutationList => {
-        mutationList.filter(m => m.type === 'childList').forEach(m => {
-          m.addedNodes.forEach(node => node instanceof Element && observer.observe(node as Element))
-        })
-      })
-      observerInserted.observe(this.$refs.container, { childList: true, subtree: true })
+      StretchManager.register(this.stretchItem)
     }
     this.block.isLoading = false
     this.prepareReplication()
@@ -613,6 +608,10 @@ export default Vue.extend({
   },
 
   beforeDestroy () {
+    if (this.stretchItem) {
+      StretchManager.unregister(this.stretchItem)
+      this.stretchItem = null
+    }
     this.getStore().removeRef(this.block.guid)
   },
 
@@ -673,20 +672,38 @@ export default Vue.extend({
       }
     },
     setStretchedSize () {
-      let parentNode: HTMLElement | undefined
-      let parentScroll = 0
-      if (this.block.parentGuid) {
-        parentNode = this.$el.parentNode as HTMLElement
-      } else if (this.mainBlockSelector) {
-        parentNode = this.$el.closest(this.mainBlockSelector) as HTMLElement
-      }
-      parentScroll = parentNode?.scrollTop || 0
+      const content = this.$el.getElementsByClassName('content')[0]
+      if (!content) return
 
-      this.scrollHeight = 0
-      this.scrollWidth = 0
-      this.$nextTick(() => {
-        this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
-        this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
+      if (!this.minHeightParent) {
+        const style = window.getComputedStyle(content.parentElement as Element)
+        this.minHeightParent = parseFloat(style.minHeight) || 0
+      }
+
+      let maxBottom = 0
+      const children = content.children
+      for (let i = 0; i < children.length; i++) {
+        const child = children[i] as HTMLElement
+        const bottom = child.offsetTop + child.offsetHeight
+        if (bottom > maxBottom) maxBottom = bottom
+      }
+
+      const newScrollHeight = Math.max(maxBottom, this.minHeightParent)
+      const newScrollWidth = content.scrollWidth
+
+      if (newScrollHeight !== this.scrollHeight || newScrollWidth !== this.scrollWidth) {
+        let parentNode: HTMLElement | undefined
+        let parentScroll = 0
+        if (this.block.parentGuid) {
+          parentNode = this.$el.parentNode as HTMLElement
+        } else if (this.mainBlockSelector) {
+          parentNode = this.$el.closest(this.mainBlockSelector) as HTMLElement
+        }
+        parentScroll = parentNode?.scrollTop || 0
+
+        this.scrollHeight = newScrollHeight
+        this.scrollWidth = newScrollWidth
+
         if (parentNode && parentScroll) {
           this.$nextTick(() => {
             if (parentNode) {
@@ -694,7 +711,7 @@ export default Vue.extend({
             }
           })
         }
-      })
+      }
     },
     onReplicateBlock (event: {}) {
       if (this.replicationCallback) {

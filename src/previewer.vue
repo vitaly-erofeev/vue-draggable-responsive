@@ -36,6 +36,7 @@ import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInje
 import { BlockProperties } from '@/domain/model/BlockProperties'
 
 import TabSettings from '@/application/service/TabSettings'
+import { StretchManager } from '@/infrastructure/service/StretchManager'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 export default Vue.extend({
@@ -57,11 +58,17 @@ export default Vue.extend({
     mainBlockSelector: String
   },
 
-  data (): { store: BlockRepositoryInterface, tabSettingsService: TabSettings, activeBlockGuid: string } {
+  data (): {
+    store: BlockRepositoryInterface,
+    tabSettingsService: TabSettings,
+    activeBlockGuid: string,
+    mObserver?: MutationObserver
+    } {
     return {
       store: new BlockRepository([], true),
       tabSettingsService: new TabSettings(this.tabSettings, this),
-      activeBlockGuid: ''
+      activeBlockGuid: '',
+      mObserver: undefined
     }
   },
 
@@ -77,6 +84,24 @@ export default Vue.extend({
         this.$set(this.tabSettingsService, 'tabSettings', this.tabSettings)
       }
     }
+  },
+
+  mounted () {
+    const root = this.$el
+
+    this.mObserver = new MutationObserver(mutationList => {
+      const list = mutationList
+        .filter(m => m.type === 'childList' || (m.type === 'attributes' && m.attributeName === 'style'))
+      if (list.length > 0) {
+        StretchManager.notify()
+      }
+    })
+
+    this.mObserver.observe(root, {
+      childList: true,
+      subtree: true,
+      attributes: true
+    })
   },
 
   methods: {

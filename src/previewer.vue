@@ -62,13 +62,15 @@ export default Vue.extend({
     store: BlockRepositoryInterface,
     tabSettingsService: TabSettings,
     activeBlockGuid: string,
-    mObserver?: MutationObserver
+    mObserver?: MutationObserver,
+    stretchObserver?: { disconnect: () => void, observe: () => void }
     } {
     return {
       store: new BlockRepository([], true),
       tabSettingsService: new TabSettings(this.tabSettings, this),
       activeBlockGuid: '',
-      mObserver: undefined
+      mObserver: undefined,
+      stretchObserver: undefined
     }
   },
 
@@ -88,6 +90,11 @@ export default Vue.extend({
 
   mounted () {
     const root = this.$el
+    const observeOptions: MutationObserverInit = {
+      childList: true,
+      subtree: true,
+      attributes: true
+    }
 
     this.mObserver = new MutationObserver(mutationList => {
       const list = mutationList
@@ -96,13 +103,23 @@ export default Vue.extend({
         StretchManager.notify()
       }
     })
-    console.log(StretchManager)
 
-    this.mObserver.observe(root, {
-      childList: true,
-      subtree: true,
-      attributes: true
-    })
+    this.mObserver.observe(root, observeOptions)
+
+    this.stretchObserver = {
+      disconnect: () => this.mObserver?.disconnect(),
+      observe: () => this.mObserver?.observe(root, observeOptions)
+    }
+    StretchManager.registerObserver(this.stretchObserver)
+  },
+
+  beforeDestroy () {
+    if (this.mObserver) {
+      this.mObserver.disconnect()
+    }
+    if (this.stretchObserver) {
+      StretchManager.unregisterObserver(this.stretchObserver)
+    }
   },
 
   methods: {

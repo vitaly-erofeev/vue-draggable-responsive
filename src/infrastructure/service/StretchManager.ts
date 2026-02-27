@@ -4,7 +4,13 @@ type Stretchable = {
   update: () => void
 }
 
+type Observer = {
+  disconnect: () => void
+  observe: () => void
+}
+
 const items = new Set<Stretchable>()
+const observers = new Set<Observer>()
 
 let raf: number | null = null
 
@@ -13,10 +19,15 @@ function schedule () {
 
   raf = requestAnimationFrame(() => {
     raf = null
+
+    observers.forEach(o => o.disconnect())
+
     items.forEach(item => {
       if (!item.el.isConnected) return
       item.update()
     })
+
+    observers.forEach(o => o.observe())
   })
 }
 
@@ -30,7 +41,16 @@ export const StretchManager = {
     items.delete(item)
   },
 
+  registerObserver (observer: Observer) {
+    observers.add(observer)
+  },
+
+  unregisterObserver (observer: Observer) {
+    observers.delete(observer)
+  },
+
   notify () {
+    console.log('NOTIFY StretchManager', items)
     schedule()
   }
 }

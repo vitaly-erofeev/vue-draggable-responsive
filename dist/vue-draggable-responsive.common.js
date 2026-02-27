@@ -1518,7 +1518,7 @@ function ensureObservers() {
       const item = elementToItem.get(entry.target)
       if (item) toUpdate.add(item)
     } */
-    Array.from(elementToItem.values()).forEach(item => item.update());
+    Array.from(items).forEach(item => item.update());
   });
   mo = new MutationObserver(mutations => {
     for (const m of mutations) {

@@ -14,6 +14,16 @@ const itemElements = new Map<Stretchable, Set<Element>>()
 let ro: ResizeObserver | null = null
 let mo: MutationObserver | null = null
 
+function getDepth (el: Element): number {
+  let depth = 0
+  let node = el.parentElement
+  while (node) {
+    depth++
+    node = node.parentElement
+  }
+  return depth
+}
+
 function ensureObservers () {
   if (ro) return
 
@@ -23,7 +33,6 @@ function ensureObservers () {
       const item = elementToItem.get(entry.target)
       if (item) toUpdate.add(item)
     }
-    console.log(toUpdate)
     toUpdate.forEach(item => item.update())
   })
 
@@ -61,6 +70,47 @@ function observeElement (el: Element, item: Stretchable) {
   ro!.observe(el)
 }
 
+// Каскадное обновление: от самых глубоких к корневым, по одному уровню за кадр
+let cascadeRaf: number | null = null
+
+function scheduleCascadeUpdate () {
+  if (cascadeRaf !== null) cancelAnimationFrame(cascadeRaf)
+  cascadeRaf = requestAnimationFrame(() => {
+    cascadeRaf = null
+    runCascadeUpdate()
+  })
+}
+
+function runCascadeUpdate () {
+  // Группируем по глубине DOM
+  const byDepth = new Map<number, Stretchable[]>()
+  items.forEach(item => {
+    const d = getDepth(item.container)
+    let arr = byDepth.get(d)
+    if (!arr) {
+      arr = []
+      byDepth.set(d, arr)
+    }
+    arr.push(item)
+  })
+
+  const depths = [...byDepth.keys()].sort((a, b) => b - a) // самые глубокие первыми
+  let level = 0
+
+  function processLevel () {
+    if (level >= depths.length) return
+    const levelItems = byDepth.get(depths[level])!
+    levelItems.forEach(item => item.update())
+    level++
+    if (level < depths.length) {
+      // Следующий уровень в следующем кадре — Vue успеет обновить DOM
+      requestAnimationFrame(processLevel)
+    }
+  }
+
+  processLevel()
+}
+
 export const StretchManager = {
   register (item: Stretchable) {
     ensureObservers()
@@ -75,6 +125,9 @@ export const StretchManager = {
 
     // Следить за добавлением новых дочерних элементов
     mo!.observe(item.container, { childList: true, subtree: true })
+
+    // Запланировать каскадное обновление (debounce — последний register выиграет)
+    scheduleCascadeUpdate()
   },
 
   unregister (item: Stretchable) {

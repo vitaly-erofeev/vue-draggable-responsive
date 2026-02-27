@@ -56,20 +56,13 @@ function runCascade () {
   })
   pendingUpdates.clear()
 
-  const depths = [...byDepth.keys()].sort((a, b) => b - a) // самые глубокие первыми
-  let level = 0
-
-  function processLevel () {
-    if (level >= depths.length) return
-    byDepth.get(depths[level])!.forEach(item => item.update())
-    level++
-    if (level < depths.length) {
-      // Следующий уровень в следующем кадре — Vue успеет обновить DOM
-      requestAnimationFrame(processLevel)
-    }
+  // Обновляем все уровни в одном кадре: от глубоких к корневым.
+  // update() теперь синхронный — каждый уровень сразу имеет правильный размер
+  // к моменту, когда обрабатывается родительский уровень.
+  const depths = [...byDepth.keys()].sort((a, b) => b - a)
+  for (const depth of depths) {
+    byDepth.get(depth)!.forEach(item => item.update())
   }
-
-  processLevel()
 }
 
 // --- Observers ---

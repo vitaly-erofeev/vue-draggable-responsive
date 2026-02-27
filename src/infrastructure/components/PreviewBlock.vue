@@ -672,28 +672,41 @@ export default Vue.extend({
       }
     },
     setStretchedSize () {
+      const el = this.$el as HTMLElement
+      const content = el.getElementsByClassName('content')[0]
+      if (!content) return
+
       let parentNode: HTMLElement | undefined
       let parentScroll = 0
       if (this.block.parentGuid) {
-        parentNode = this.$el.parentNode as HTMLElement
+        parentNode = el.parentNode as HTMLElement
       } else if (this.mainBlockSelector) {
-        parentNode = this.$el.closest(this.mainBlockSelector) as HTMLElement
+        parentNode = el.closest(this.mainBlockSelector) as HTMLElement
       }
       parentScroll = parentNode?.scrollTop || 0
 
-      this.scrollHeight = 0
-      this.scrollWidth = 0
-      this.$nextTick(() => {
-        this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
-        this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
-        if (parentNode && parentScroll) {
-          this.$nextTick(() => {
-            if (parentNode) {
-              parentNode.scrollTop = parentScroll
-            }
-          })
-        }
-      })
+      // Схлопываем через DOM напрямую — браузер не рисует промежуточные состояния
+      el.style.height = '0px'
+      el.style.width = '0px'
+      el.style.minHeight = '0px'
+      el.style.minWidth = '0px'
+
+      // Чтение scrollHeight форсирует синхронный reflow
+      const h = content.scrollHeight
+      const w = content.scrollWidth
+
+      // Ставим финальный размер в DOM сразу
+      el.style.height = h + 'px'
+      el.style.width = w + 'px'
+
+      // Обновляем реактивные данные — Vue при рендере вычислит те же значения,
+      // DOM не изменится, поэтому ResizeObserver не перестреливает
+      this.scrollHeight = h
+      this.scrollWidth = w
+
+      if (parentNode && parentScroll) {
+        parentNode.scrollTop = parentScroll
+      }
     },
     onReplicateBlock (event: {}) {
       if (this.replicationCallback) {

@@ -36,7 +36,6 @@ import { DataSourceInjected } from '@/infrastructure/domain/model/DataSourceInje
 import { BlockProperties } from '@/domain/model/BlockProperties'
 
 import TabSettings from '@/application/service/TabSettings'
-import { StretchManager } from '@/infrastructure/service/StretchManager'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 export default Vue.extend({
@@ -58,19 +57,11 @@ export default Vue.extend({
     mainBlockSelector: String
   },
 
-  data (): {
-    store: BlockRepositoryInterface,
-    tabSettingsService: TabSettings,
-    activeBlockGuid: string,
-    mObserver?: MutationObserver,
-    stretchObserver?: { disconnect: () => void, observe: () => void }
-    } {
+  data (): { store: BlockRepositoryInterface, tabSettingsService: TabSettings, activeBlockGuid: string } {
     return {
       store: new BlockRepository([], true),
       tabSettingsService: new TabSettings(this.tabSettings, this),
-      activeBlockGuid: '',
-      mObserver: undefined,
-      stretchObserver: undefined
+      activeBlockGuid: ''
     }
   },
 
@@ -85,40 +76,6 @@ export default Vue.extend({
       handler () {
         this.$set(this.tabSettingsService, 'tabSettings', this.tabSettings)
       }
-    }
-  },
-
-  mounted () {
-    const root = this.$el
-    const observeOptions: MutationObserverInit = {
-      childList: true,
-      subtree: true,
-      attributes: true
-    }
-
-    this.mObserver = new MutationObserver(mutationList => {
-      const list = mutationList
-        .filter(m => m.type === 'childList' || (m.type === 'attributes' && m.attributeName === 'style'))
-      if (list.length > 0) {
-        StretchManager.notify()
-      }
-    })
-
-    this.mObserver.observe(root, observeOptions)
-
-    this.stretchObserver = {
-      disconnect: () => this.mObserver?.disconnect(),
-      observe: () => this.mObserver?.observe(root, observeOptions)
-    }
-    StretchManager.registerObserver(this.stretchObserver)
-  },
-
-  beforeDestroy () {
-    if (this.mObserver) {
-      this.mObserver.disconnect()
-    }
-    if (this.stretchObserver) {
-      StretchManager.unregisterObserver(this.stretchObserver)
     }
   },
 

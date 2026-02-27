@@ -1513,12 +1513,13 @@ let mo = null;
 function ensureObservers() {
   if (ro) return;
   ro = new ResizeObserver_es["a" /* default */](entries => {
-    /* const toUpdate = new Set<Stretchable>() */
-    /* for (const entry of entries) {
-      const item = elementToItem.get(entry.target)
-      if (item) toUpdate.add(item)
-    } */
-    Array.from(items).forEach(item => item.update());
+    const toUpdate = new Set();
+    for (const entry of entries) {
+      const item = elementToItem.get(entry.target);
+      if (item) toUpdate.add(item);
+    }
+    console.log(toUpdate);
+    toUpdate.forEach(item => item.update());
   });
   mo = new MutationObserver(mutations => {
     for (const m of mutations) {

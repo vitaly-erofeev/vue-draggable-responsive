@@ -579,7 +579,7 @@ export default Vue.extend({
     if (this.block?.isStretched && this.$refs.container && this.$refs.container instanceof Element) {
       this.stretchItem = {
         container: this.$refs.container as Element,
-        update: this.setS
+        update: this.setStretchedSize
       }
       StretchManager.register(this.stretchItem)
     }
@@ -694,48 +694,6 @@ export default Vue.extend({
           })
         }
       })
-    },
-    setS () {
-      const el = this.$el as HTMLElement
-      const content = el.getElementsByClassName('content')[0]
-      if (!content) return
-
-      let parentNode: HTMLElement | undefined
-      let parentScroll = 0
-      if (this.block.parentGuid) {
-        parentNode = el.parentNode as HTMLElement
-      } else if (this.mainBlockSelector) {
-        parentNode = el.closest(this.mainBlockSelector) as HTMLElement
-      }
-      parentScroll = parentNode?.scrollTop || 0
-
-      // Сохраняем min-значения (задаются из свойств блока)
-      const prevMinH = el.style.minHeight
-      const prevMinW = el.style.minWidth
-
-      // Схлопываем через DOM для измерения естественного размера контента
-      el.style.height = '0px'
-      el.style.width = '0px'
-      el.style.minHeight = '0px'
-      el.style.minWidth = '0px'
-
-      // Чтение scrollHeight форсирует синхронный reflow
-      const h = content.scrollHeight
-      const w = content.scrollWidth
-
-      // Ставим финальный размер + восстанавливаем min-значения
-      el.style.height = h + 'px'
-      el.style.width = w + 'px'
-      el.style.minHeight = prevMinH
-      el.style.minWidth = prevMinW
-
-      // Обновляем реактивные данные — Vue при рендере вычислит те же значения
-      this.scrollHeight = h
-      this.scrollWidth = w
-
-      if (parentNode && parentScroll) {
-        parentNode.scrollTop = parentScroll
-      }
     },
     onReplicateBlock (event: {}) {
       if (this.replicationCallback) {

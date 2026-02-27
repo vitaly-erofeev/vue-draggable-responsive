@@ -24,19 +24,19 @@ function getDepth (el: Element): number {
   return depth
 }
 
-// --- Каскадное обновление по глубине ---
+// --- Каскадное обновление по глубине через setTimeout ---
 const pendingUpdates = new Set<Stretchable>()
-let cascadeRaf: number | null = null
+let cascadeTimer: ReturnType<typeof setTimeout> | null = null
 
 function scheduleCascadeUpdate (source: Iterable<Stretchable>) {
   for (const item of source) {
     pendingUpdates.add(item)
   }
-  if (cascadeRaf !== null) cancelAnimationFrame(cascadeRaf)
-  cascadeRaf = requestAnimationFrame(() => {
-    cascadeRaf = null
+  if (cascadeTimer !== null) clearTimeout(cascadeTimer)
+  cascadeTimer = setTimeout(() => {
+    cascadeTimer = null
     runCascade()
-  })
+  }, 0)
 }
 
 function runCascade () {
@@ -45,7 +45,7 @@ function runCascade () {
   // Группируем по глубине DOM
   const byDepth = new Map<number, Stretchable[]>()
   pendingUpdates.forEach(item => {
-    if (!items.has(item)) return // item был удалён
+    if (!items.has(item)) return
     const d = getDepth(item.container)
     let arr = byDepth.get(d)
     if (!arr) {
@@ -56,13 +56,22 @@ function runCascade () {
   })
   pendingUpdates.clear()
 
-  // Обновляем все уровни в одном кадре: от глубоких к корневым.
-  // update() теперь синхронный — каждый уровень сразу имеет правильный размер
-  // к моменту, когда обрабатывается родительский уровень.
-  const depths = [...byDepth.keys()].sort((a, b) => b - a)
-  for (const depth of depths) {
-    byDepth.get(depth)!.forEach(item => item.update())
+  const depths = [...byDepth.keys()].sort((a, b) => b - a) // самые глубокие первыми
+
+  // Обрабатываем по уровню за setTimeout — между уровнями
+  // микротаски (Vue $nextTick) успевают отработать
+  let level = 0
+
+  function processLevel () {
+    if (level >= depths.length) return
+    byDepth.get(depths[level])!.forEach(item => item.update())
+    level++
+    if (level < depths.length) {
+      setTimeout(processLevel, 0)
+    }
   }
+
+  processLevel()
 }
 
 // --- Observers ---
@@ -84,7 +93,6 @@ function ensureObservers () {
     for (const m of mutations) {
       if (m.type !== 'childList') continue
 
-      // Найти Stretchable-владельца через ближайший зарегистрированный контейнер
       let el: Element | null = m.target as Element
       let item: Stretchable | undefined
       while (el) {
@@ -120,16 +128,13 @@ export const StretchManager = {
     items.add(item)
     containerToItem.set(item.container, item)
 
-    // Наблюдать за существующими дочерними элементами
     const children = item.container.children
     for (let i = 0; i < children.length; i++) {
       observeElement(children[i], item)
     }
 
-    // Следить за добавлением новых дочерних элементов
     mo!.observe(item.container, { childList: true, subtree: true })
 
-    // Запланировать каскадное обновление всех items
     scheduleCascadeUpdate(items)
   },
 
@@ -137,7 +142,6 @@ export const StretchManager = {
     items.delete(item)
     containerToItem.delete(item.container)
 
-    // Отписать все элементы этого item от ResizeObserver
     const elements = itemElements.get(item)
     if (elements) {
       elements.forEach(el => {
@@ -147,7 +151,6 @@ export const StretchManager = {
       itemElements.delete(item)
     }
 
-    // Переподключить MutationObserver для оставшихся контейнеров
     mo!.disconnect()
     containerToItem.forEach((_, container) => {
       mo!.observe(container, { childList: true, subtree: true })

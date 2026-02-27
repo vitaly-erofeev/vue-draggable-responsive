@@ -199,6 +199,17 @@ module.exports = function (argument) {
 
 /***/ }),
 
+/***/ "1046":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_436d2860_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("6f72");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_436d2860_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_436d2860_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+
+
+/***/ }),
+
 /***/ "1212":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1275,8 +1286,8 @@ var staticRenderFns = [];
 
 // CONCATENATED MODULE: ./src/previewer.vue?vue&type=template&id=9d7644ce&scoped=true
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a1f175e6-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/PreviewBlock.vue?vue&type=template&id=0ca46fa2&scoped=true
-var PreviewBlockvue_type_template_id_0ca46fa2_scoped_true_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a1f175e6-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/PreviewBlock.vue?vue&type=template&id=436d2860&scoped=true
+var PreviewBlockvue_type_template_id_436d2860_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
@@ -1446,9 +1457,9 @@ var PreviewBlockvue_type_template_id_0ca46fa2_scoped_true_render = function rend
     });
   })], 2)]);
 };
-var PreviewBlockvue_type_template_id_0ca46fa2_scoped_true_staticRenderFns = [];
+var PreviewBlockvue_type_template_id_436d2860_scoped_true_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=template&id=0ca46fa2&scoped=true
+// CONCATENATED MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=template&id=436d2860&scoped=true
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.push.js
 var es_array_push = __webpack_require__("14d9");
@@ -1509,25 +1520,25 @@ function getDepth(el) {
   }
   return depth;
 }
-// --- Каскадное обновление по глубине ---
+// --- Каскадное обновление по глубине через setTimeout ---
 const pendingUpdates = new Set();
-let cascadeRaf = null;
+let cascadeTimer = null;
 function scheduleCascadeUpdate(source) {
   for (const item of source) {
     pendingUpdates.add(item);
   }
-  if (cascadeRaf !== null) cancelAnimationFrame(cascadeRaf);
-  cascadeRaf = requestAnimationFrame(() => {
-    cascadeRaf = null;
+  if (cascadeTimer !== null) clearTimeout(cascadeTimer);
+  cascadeTimer = setTimeout(() => {
+    cascadeTimer = null;
     runCascade();
-  });
+  }, 0);
 }
 function runCascade() {
   if (pendingUpdates.size === 0) return;
   // Группируем по глубине DOM
   const byDepth = new Map();
   pendingUpdates.forEach(item => {
-    if (!items.has(item)) return; // item был удалён
+    if (!items.has(item)) return;
     const d = getDepth(item.container);
     let arr = byDepth.get(d);
     if (!arr) {
@@ -1537,13 +1548,19 @@ function runCascade() {
     arr.push(item);
   });
   pendingUpdates.clear();
-  // Обновляем все уровни в одном кадре: от глубоких к корневым.
-  // update() теперь синхронный — каждый уровень сразу имеет правильный размер
-  // к моменту, когда обрабатывается родительский уровень.
-  const depths = [...byDepth.keys()].sort((a, b) => b - a);
-  for (const depth of depths) {
-    byDepth.get(depth).forEach(item => item.update());
+  const depths = [...byDepth.keys()].sort((a, b) => b - a); // самые глубокие первыми
+  // Обрабатываем по уровню за setTimeout — между уровнями
+  // микротаски (Vue $nextTick) успевают отработать
+  let level = 0;
+  function processLevel() {
+    if (level >= depths.length) return;
+    byDepth.get(depths[level]).forEach(item => item.update());
+    level++;
+    if (level < depths.length) {
+      setTimeout(processLevel, 0);
+    }
   }
+  processLevel();
 }
 // --- Observers ---
 function ensureObservers() {
@@ -1561,7 +1578,6 @@ function ensureObservers() {
   mo = new MutationObserver(mutations => {
     for (const m of mutations) {
       if (m.type !== 'childList') continue;
-      // Найти Stretchable-владельца через ближайший зарегистрированный контейнер
       let el = m.target;
       let item;
       while (el) {
@@ -1593,23 +1609,19 @@ const StretchManager = {
     ensureObservers();
     items.add(item);
     containerToItem.set(item.container, item);
-    // Наблюдать за существующими дочерними элементами
     const children = item.container.children;
     for (let i = 0; i < children.length; i++) {
       observeElement(children[i], item);
     }
-    // Следить за добавлением новых дочерних элементов
     mo.observe(item.container, {
       childList: true,
       subtree: true
     });
-    // Запланировать каскадное обновление всех items
     scheduleCascadeUpdate(items);
   },
   unregister(item) {
     items.delete(item);
     containerToItem.delete(item.container);
-    // Отписать все элементы этого item от ResizeObserver
     const elements = itemElements.get(item);
     if (elements) {
       elements.forEach(el => {
@@ -1618,7 +1630,6 @@ const StretchManager = {
       });
       itemElements.delete(item);
     }
-    // Переподключить MutationObserver для оставшихся контейнеров
     mo.disconnect();
     containerToItem.forEach((_, container) => {
       mo.observe(container, {
@@ -2111,7 +2122,7 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
     if ((_this$block7 = this.block) !== null && _this$block7 !== void 0 && _this$block7.isStretched && this.$refs.container && this.$refs.container instanceof Element) {
       this.stretchItem = {
         container: this.$refs.container,
-        update: this.setS
+        update: this.setStretchedSize
       };
       StretchManager.register(this.stretchItem);
     }
@@ -2223,42 +2234,6 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
           });
         }
       });
-    },
-    setS() {
-      var _parentNode2;
-      const el = this.$el;
-      const content = el.getElementsByClassName('content')[0];
-      if (!content) return;
-      let parentNode;
-      let parentScroll = 0;
-      if (this.block.parentGuid) {
-        parentNode = el.parentNode;
-      } else if (this.mainBlockSelector) {
-        parentNode = el.closest(this.mainBlockSelector);
-      }
-      parentScroll = ((_parentNode2 = parentNode) === null || _parentNode2 === void 0 ? void 0 : _parentNode2.scrollTop) || 0;
-      // Сохраняем min-значения (задаются из свойств блока)
-      const prevMinH = el.style.minHeight;
-      const prevMinW = el.style.minWidth;
-      // Схлопываем через DOM для измерения естественного размера контента
-      el.style.height = '0px';
-      el.style.width = '0px';
-      el.style.minHeight = '0px';
-      el.style.minWidth = '0px';
-      // Чтение scrollHeight форсирует синхронный reflow
-      const h = content.scrollHeight;
-      const w = content.scrollWidth;
-      // Ставим финальный размер + восстанавливаем min-значения
-      el.style.height = h + 'px';
-      el.style.width = w + 'px';
-      el.style.minHeight = prevMinH;
-      el.style.minWidth = prevMinW;
-      // Обновляем реактивные данные — Vue при рендере вычислит те же значения
-      this.scrollHeight = h;
-      this.scrollWidth = w;
-      if (parentNode && parentScroll) {
-        parentNode.scrollTop = parentScroll;
-      }
     },
     onReplicateBlock(event) {
       if (this.replicationCallback) {
@@ -2449,8 +2424,8 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
 }));
 // CONCATENATED MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=script&lang=ts
  /* harmony default export */ var components_PreviewBlockvue_type_script_lang_ts = (PreviewBlockvue_type_script_lang_ts); 
-// EXTERNAL MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=style&index=0&id=0ca46fa2&prod&scoped=true&lang=css
-var PreviewBlockvue_type_style_index_0_id_0ca46fa2_prod_scoped_true_lang_css = __webpack_require__("93aa");
+// EXTERNAL MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=style&index=0&id=436d2860&prod&scoped=true&lang=css
+var PreviewBlockvue_type_style_index_0_id_436d2860_prod_scoped_true_lang_css = __webpack_require__("1046");
 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__("2877");
@@ -2466,11 +2441,11 @@ var componentNormalizer = __webpack_require__("2877");
 
 var component = Object(componentNormalizer["a" /* default */])(
   components_PreviewBlockvue_type_script_lang_ts,
-  PreviewBlockvue_type_template_id_0ca46fa2_scoped_true_render,
-  PreviewBlockvue_type_template_id_0ca46fa2_scoped_true_staticRenderFns,
+  PreviewBlockvue_type_template_id_436d2860_scoped_true_render,
+  PreviewBlockvue_type_template_id_436d2860_scoped_true_staticRenderFns,
   false,
   null,
-  "0ca46fa2",
+  "436d2860",
   null
   
 )
@@ -2802,13 +2777,6 @@ module.exports = function (argument) {
   throw new $TypeError(tryToString(argument) + ' is not a function');
 };
 
-
-/***/ }),
-
-/***/ "5ba3":
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -4158,6 +4126,13 @@ var index = (function () {
 
 /***/ }),
 
+/***/ "6f72":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "7234":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4549,17 +4524,6 @@ var SizeTypes;
   SizeTypes["PERCENT"] = "%";
   SizeTypes["PIXEL"] = "px";
 })(SizeTypes || (SizeTypes = {}));
-
-/***/ }),
-
-/***/ "93aa":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_0ca46fa2_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("5ba3");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_0ca46fa2_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_0ca46fa2_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
-
 
 /***/ }),
 

@@ -50,7 +50,7 @@ export const StretchManager = {
   },
 
   notify () {
-    console.log('NOTIFY StretchManager', items)
+    console.log('NOTIFY StretchManager')
     schedule()
   }
 }

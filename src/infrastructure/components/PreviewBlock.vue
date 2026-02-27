@@ -579,7 +579,7 @@ export default Vue.extend({
     if (this.block?.isStretched && this.$refs.container && this.$refs.container instanceof Element) {
       this.stretchItem = {
         container: this.$refs.container as Element,
-        update: this.setStretchedSize
+        update: this.setS
       }
       StretchManager.register(this.stretchItem)
     }
@@ -672,6 +672,30 @@ export default Vue.extend({
       }
     },
     setStretchedSize () {
+      let parentNode: HTMLElement | undefined
+      let parentScroll = 0
+      if (this.block.parentGuid) {
+        parentNode = this.$el.parentNode as HTMLElement
+      } else if (this.mainBlockSelector) {
+        parentNode = this.$el.closest(this.mainBlockSelector) as HTMLElement
+      }
+      parentScroll = parentNode?.scrollTop || 0
+
+      this.scrollHeight = 0
+      this.scrollWidth = 0
+      this.$nextTick(() => {
+        this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
+        this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
+        if (parentNode && parentScroll) {
+          this.$nextTick(() => {
+            if (parentNode) {
+              parentNode.scrollTop = parentScroll
+            }
+          })
+        }
+      })
+    },
+    setS () {
       const el = this.$el as HTMLElement
       const content = el.getElementsByClassName('content')[0]
       if (!content) return
@@ -685,7 +709,11 @@ export default Vue.extend({
       }
       parentScroll = parentNode?.scrollTop || 0
 
-      // Схлопываем через DOM напрямую — браузер не рисует промежуточные состояния
+      // Сохраняем min-значения (задаются из свойств блока)
+      const prevMinH = el.style.minHeight
+      const prevMinW = el.style.minWidth
+
+      // Схлопываем через DOM для измерения естественного размера контента
       el.style.height = '0px'
       el.style.width = '0px'
       el.style.minHeight = '0px'
@@ -694,14 +722,14 @@ export default Vue.extend({
       // Чтение scrollHeight форсирует синхронный reflow
       const h = content.scrollHeight
       const w = content.scrollWidth
-      console.log('w', w, 'h', h)
 
-      // Ставим финальный размер в DOM сразу
+      // Ставим финальный размер + восстанавливаем min-значения
       el.style.height = h + 'px'
       el.style.width = w + 'px'
+      el.style.minHeight = prevMinH
+      el.style.minWidth = prevMinW
 
-      // Обновляем реактивные данные — Vue при рендере вычислит те же значения,
-      // DOM не изменится, поэтому ResizeObserver не перестреливает
+      // Обновляем реактивные данные — Vue при рендере вычислит те же значения
       this.scrollHeight = h
       this.scrollWidth = w
 

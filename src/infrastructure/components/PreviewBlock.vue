@@ -685,7 +685,11 @@ export default Vue.extend({
       }
       parentScroll = parentNode?.scrollTop || 0
 
-      // Схлопываем через DOM напрямую — браузер не рисует промежуточные состояния
+      // Сохраняем min-значения (задаются из свойств блока)
+      const prevMinH = el.style.minHeight
+      const prevMinW = el.style.minWidth
+
+      // Схлопываем через DOM для измерения естественного размера контента
       el.style.height = '0px'
       el.style.width = '0px'
       el.style.minHeight = '0px'
@@ -695,12 +699,13 @@ export default Vue.extend({
       const h = content.scrollHeight
       const w = content.scrollWidth
 
-      // Ставим финальный размер в DOM сразу
+      // Ставим финальный размер + восстанавливаем min-значения
       el.style.height = h + 'px'
       el.style.width = w + 'px'
+      el.style.minHeight = prevMinH
+      el.style.minWidth = prevMinW
 
-      // Обновляем реактивные данные — Vue при рендере вычислит те же значения,
-      // DOM не изменится, поэтому ResizeObserver не перестреливает
+      // Обновляем реактивные данные — Vue при рендере вычислит те же значения
       this.scrollHeight = h
       this.scrollWidth = w
 

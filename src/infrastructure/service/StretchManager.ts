@@ -24,6 +24,55 @@ function getDepth (el: Element): number {
   return depth
 }
 
+// --- Каскадное обновление по глубине ---
+const pendingUpdates = new Set<Stretchable>()
+let cascadeRaf: number | null = null
+
+function scheduleCascadeUpdate (source: Iterable<Stretchable>) {
+  for (const item of source) {
+    pendingUpdates.add(item)
+  }
+  if (cascadeRaf !== null) cancelAnimationFrame(cascadeRaf)
+  cascadeRaf = requestAnimationFrame(() => {
+    cascadeRaf = null
+    runCascade()
+  })
+}
+
+function runCascade () {
+  if (pendingUpdates.size === 0) return
+
+  // Группируем по глубине DOM
+  const byDepth = new Map<number, Stretchable[]>()
+  pendingUpdates.forEach(item => {
+    if (!items.has(item)) return // item был удалён
+    const d = getDepth(item.container)
+    let arr = byDepth.get(d)
+    if (!arr) {
+      arr = []
+      byDepth.set(d, arr)
+    }
+    arr.push(item)
+  })
+  pendingUpdates.clear()
+
+  const depths = [...byDepth.keys()].sort((a, b) => b - a) // самые глубокие первыми
+  let level = 0
+
+  function processLevel () {
+    if (level >= depths.length) return
+    byDepth.get(depths[level])!.forEach(item => item.update())
+    level++
+    if (level < depths.length) {
+      // Следующий уровень в следующем кадре — Vue успеет обновить DOM
+      requestAnimationFrame(processLevel)
+    }
+  }
+
+  processLevel()
+}
+
+// --- Observers ---
 function ensureObservers () {
   if (ro) return
 
@@ -33,7 +82,9 @@ function ensureObservers () {
       const item = elementToItem.get(entry.target)
       if (item) toUpdate.add(item)
     }
-    toUpdate.forEach(item => item.update())
+    if (toUpdate.size > 0) {
+      scheduleCascadeUpdate(toUpdate)
+    }
   })
 
   mo = new MutationObserver(mutations => {
@@ -70,47 +121,6 @@ function observeElement (el: Element, item: Stretchable) {
   ro!.observe(el)
 }
 
-// Каскадное обновление: от самых глубоких к корневым, по одному уровню за кадр
-let cascadeRaf: number | null = null
-
-function scheduleCascadeUpdate () {
-  if (cascadeRaf !== null) cancelAnimationFrame(cascadeRaf)
-  cascadeRaf = requestAnimationFrame(() => {
-    cascadeRaf = null
-    runCascadeUpdate()
-  })
-}
-
-function runCascadeUpdate () {
-  // Группируем по глубине DOM
-  const byDepth = new Map<number, Stretchable[]>()
-  items.forEach(item => {
-    const d = getDepth(item.container)
-    let arr = byDepth.get(d)
-    if (!arr) {
-      arr = []
-      byDepth.set(d, arr)
-    }
-    arr.push(item)
-  })
-
-  const depths = [...byDepth.keys()].sort((a, b) => b - a) // самые глубокие первыми
-  let level = 0
-
-  function processLevel () {
-    if (level >= depths.length) return
-    const levelItems = byDepth.get(depths[level])!
-    levelItems.forEach(item => item.update())
-    level++
-    if (level < depths.length) {
-      // Следующий уровень в следующем кадре — Vue успеет обновить DOM
-      requestAnimationFrame(processLevel)
-    }
-  }
-
-  processLevel()
-}
-
 export const StretchManager = {
   register (item: Stretchable) {
     ensureObservers()
@@ -126,8 +136,8 @@ export const StretchManager = {
     // Следить за добавлением новых дочерних элементов
     mo!.observe(item.container, { childList: true, subtree: true })
 
-    // Запланировать каскадное обновление (debounce — последний register выиграет)
-    scheduleCascadeUpdate()
+    // Запланировать каскадное обновление всех items
+    scheduleCascadeUpdate(items)
   },
 
   unregister (item: Stretchable) {

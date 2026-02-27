@@ -92,11 +92,11 @@ export default Vue.extend({
     this.mObserver = new MutationObserver(mutationList => {
       const list = mutationList
         .filter(m => m.type === 'childList' || (m.type === 'attributes' && m.attributeName === 'style'))
-      console.log(mutationList)
       if (list.length > 0) {
         StretchManager.notify()
       }
     })
+    console.log(StretchManager)
 
     this.mObserver.observe(root, {
       childList: true,

@@ -672,38 +672,20 @@ export default Vue.extend({
       }
     },
     setStretchedSize () {
-      const content = this.$el.getElementsByClassName('content')[0]
-      if (!content) return
-
-      if (!this.minHeightParent) {
-        const style = window.getComputedStyle(content.parentElement as Element)
-        this.minHeightParent = parseFloat(style.minHeight) || 0
+      let parentNode: HTMLElement | undefined
+      let parentScroll = 0
+      if (this.block.parentGuid) {
+        parentNode = this.$el.parentNode as HTMLElement
+      } else if (this.mainBlockSelector) {
+        parentNode = this.$el.closest(this.mainBlockSelector) as HTMLElement
       }
+      parentScroll = parentNode?.scrollTop || 0
 
-      let maxBottom = 0
-      const children = content.children
-      for (let i = 0; i < children.length; i++) {
-        const child = children[i] as HTMLElement
-        const bottom = child.offsetTop + child.offsetHeight
-        if (bottom > maxBottom) maxBottom = bottom
-      }
-
-      const newScrollHeight = Math.max(maxBottom, this.minHeightParent)
-      const newScrollWidth = content.scrollWidth
-
-      if (newScrollHeight !== this.scrollHeight || newScrollWidth !== this.scrollWidth) {
-        let parentNode: HTMLElement | undefined
-        let parentScroll = 0
-        if (this.block.parentGuid) {
-          parentNode = this.$el.parentNode as HTMLElement
-        } else if (this.mainBlockSelector) {
-          parentNode = this.$el.closest(this.mainBlockSelector) as HTMLElement
-        }
-        parentScroll = parentNode?.scrollTop || 0
-
-        this.scrollHeight = newScrollHeight
-        this.scrollWidth = newScrollWidth
-
+      this.scrollHeight = 0
+      this.scrollWidth = 0
+      this.$nextTick(() => {
+        this.scrollHeight = this.$el.getElementsByClassName('content')[0].scrollHeight
+        this.scrollWidth = this.$el.getElementsByClassName('content')[0].scrollWidth
         if (parentNode && parentScroll) {
           this.$nextTick(() => {
             if (parentNode) {
@@ -711,7 +693,7 @@ export default Vue.extend({
             }
           })
         }
-      }
+      })
     },
     onReplicateBlock (event: {}) {
       if (this.replicationCallback) {

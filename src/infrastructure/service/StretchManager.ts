@@ -18,12 +18,12 @@ function ensureObservers () {
   if (ro) return
 
   ro = new ResizeObserver(entries => {
-    const toUpdate = new Set<Stretchable>()
-    for (const entry of entries) {
+    /* const toUpdate = new Set<Stretchable>() */
+    /* for (const entry of entries) {
       const item = elementToItem.get(entry.target)
       if (item) toUpdate.add(item)
-    }
-    toUpdate.forEach(item => item.update())
+    } */
+    Array.from(elementToItem.values()).forEach(item => item.update())
   })
 
   mo = new MutationObserver(mutations => {

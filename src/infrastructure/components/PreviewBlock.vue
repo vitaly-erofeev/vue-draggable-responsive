@@ -341,6 +341,8 @@ export default Vue.extend({
       result.maxWidth = `${this.block.stylesComponent?.maxWidth || 'auto'}`
       result.flexGrow = `${this.block.stylesComponent?.flexGrow || '0'}`
       result.flexShrink = `${this.block.stylesComponent?.flexShrink || '1'}`
+      result.alignSelf = `${this.block.stylesComponent?.alignSelf || 'auto'}`
+      result.order = `${this.block.stylesComponent?.order || '0'}`
 
       return result
     },

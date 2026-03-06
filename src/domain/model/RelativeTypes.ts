@@ -17,4 +17,6 @@ export type StylesComponent = {
   maxWidth: string;
   flexGrow: string;
   flexShrink: string;
+  alignSelf: string;
+  order: string;
 };

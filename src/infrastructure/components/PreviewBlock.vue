@@ -75,6 +75,7 @@
         :key="_block.guid"
         :is-showing="isShowChildren && _block.parentTabGuid === activeTabGuid && !_block.isHidden"
         :block="_block"
+        :parent-z-index="zIndex"
         :replication-callback="replicationCallback"
         :tab-settings-service="tabSettingsService"
         @click="handleClick({ block: $event.block || _block, event: $event.event || $event })"
@@ -137,6 +138,10 @@ export default Vue.extend({
     },
     tabSettingsService: {
       type: Object
+    },
+    parentZIndex: {
+      type: Number,
+      default: undefined
     }
   },
 
@@ -300,17 +305,8 @@ export default Vue.extend({
 
     zIndex (): number {
       const startIndex = 101
-      if (!this.block.parentGuid) {
-        return startIndex + (this.block.tabs?.use ? 1 : 0)
-      }
-      let parentRef = this.getStore().getRefByGuid(this.block.parentGuid) as unknown as {
-        zIndex: number
-      }
-      if (!parentRef) {
-        return startIndex
-      }
-
-      return parentRef.zIndex + 1 + (this.block.tabs?.use ? 1 : 0)
+      const base = (this.parentZIndex ?? startIndex) + (this.block.parentGuid ? 1 : 0)
+      return base + (this.block.tabs?.use ? 1 : 0)
     },
 
     isTabsContainer (): boolean {

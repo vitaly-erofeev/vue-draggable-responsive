@@ -127,6 +127,7 @@
         :ref="_block.guid"
         :key="_block.guid"
         :block="_block"
+        :parent-z-index="zIndex"
         :tab-settings-service="tabSettingsService"
         :step="step"
         :show-hidden="showHidden"
@@ -196,6 +197,10 @@ export default Vue.extend({
     },
     tabSettingsService: {
       type: Object
+    },
+    parentZIndex: {
+      type: Number,
+      default: undefined
     }
   },
 
@@ -347,17 +352,8 @@ export default Vue.extend({
 
     zIndex (): number {
       const startIndex = 101
-      if (!this.block.parentGuid) {
-        return startIndex + (this.block.tabs?.use ? 1 : 0)
-      }
-      let parentRef = this.getStore().getRefByGuid(this.block.parentGuid) as unknown as {
-        zIndex: number
-      }
-      if (!parentRef) {
-        return startIndex
-      }
-
-      return parentRef.zIndex + 1 + (this.block.tabs?.use ? 1 : 0)
+      const base = (this.parentZIndex ?? startIndex) + (this.block.parentGuid ? 1 : 0)
+      return base + (this.block.tabs?.use ? 1 : 0)
     },
 
     isTabsContainer (): boolean {
@@ -630,7 +626,7 @@ export default Vue.extend({
             this.setIsShowArrows()
           }, 0)
         }
-        if (this.block.tabs?.list.length === 1) {
+        if (this.block.tabs?.list?.length === 1) {
           this.block.children.forEach(el => {
             el.parentTabGuid = this.block.tabs?.list[0].guid
           })

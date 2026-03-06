@@ -1183,6 +1183,14 @@ class BlockRepository_BlockRepository {
   getRefByGuid(guid) {
     return this.refs.get(guid);
   }
+  getRefs() {
+    return Array.from(this.refs.keys()).map(guid => {
+      return {
+        guid: guid,
+        element: this.getRefByGuid(guid)
+      };
+    });
+  }
   removeRef(guid) {
     this.refs.delete(guid);
   }

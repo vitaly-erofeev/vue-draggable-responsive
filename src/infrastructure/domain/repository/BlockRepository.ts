@@ -283,6 +283,18 @@ export default class BlockRepository implements BlockRepositoryInterface {
     return this.refs.get(guid)
   }
 
+  getRefs (): {
+    guid: string,
+    element: Vue
+  }[] {
+    return Array.from(this.refs.keys()).map((guid) => {
+      return {
+        guid: guid,
+        element: this.getRefByGuid(guid)!
+      }
+    })
+  }
+
   removeRef (guid: string): void {
     this.refs.delete(guid)
   }

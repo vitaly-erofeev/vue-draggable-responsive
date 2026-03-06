@@ -295,6 +295,10 @@ export default class BlockRepository implements BlockRepositoryInterface {
     })
   }
 
+  getFlat (): (BlockDTO | undefined)[] {
+    return Array.from(this.refs.keys()).map(guid => this.getByGuid(guid))
+  }
+
   removeRef (guid: string): void {
     this.refs.delete(guid)
   }

@@ -1172,7 +1172,17 @@ class BlockRepository_BlockRepository {
     });
   }
   getFlat() {
-    return Array.from(this.refs.keys()).map(guid => this.getByGuid(guid));
+    const result = [];
+    const stack = [...this.blocks];
+    while (stack.length) {
+      const block = stack.pop();
+      if (!block) continue;
+      result.push(block);
+      if (block.children && block.children.length) {
+        stack.push(...block.children);
+      }
+    }
+    return result;
   }
   removeRef(guid) {
     this.refs.delete(guid);

@@ -295,8 +295,18 @@ export default class BlockRepository implements BlockRepositoryInterface {
     })
   }
 
-  getFlat (): (BlockDTO | undefined)[] {
-    return Array.from(this.refs.keys()).map(guid => this.getByGuid(guid))
+  getFlat (): BlockDTO[] {
+    const result: BlockDTO[] = []
+    const stack = [...this.blocks]
+    while (stack.length) {
+      const block = stack.pop()
+      if (!block) continue
+      result.push(block)
+      if (block.children && block.children.length) {
+        stack.push(...block.children)
+      }
+    }
+    return result
   }
 
   removeRef (guid: string): void {

@@ -53,7 +53,7 @@
         :replication-callback="cl"
     >
       <template v-slot:content="{ block }">
-        {{ block.guid }}
+        <textarea :value="block"></textarea>
       </template>
     </vue-draggable-responsive-previewer>
   </div>

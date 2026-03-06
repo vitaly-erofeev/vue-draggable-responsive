@@ -376,6 +376,17 @@ $({ target: 'Array', proto: true, arity: 1, forced: FORCED }, {
 
 /***/ }),
 
+/***/ "1598":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Block_vue_vue_type_style_index_0_id_4d59f6c2_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("2be4");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Block_vue_vue_type_style_index_0_id_4d59f6c2_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Block_vue_vue_type_style_index_0_id_4d59f6c2_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+
+
+/***/ }),
+
 /***/ "1626":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -446,6 +457,42 @@ module.exports = function (it) {
   if (isNullOrUndefined(it)) throw new $TypeError("Can't call method on " + it);
   return it;
 };
+
+
+/***/ }),
+
+/***/ "1e5a":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__("23e7");
+var symmetricDifference = __webpack_require__("9961");
+var setMethodAcceptSetLike = __webpack_require__("dad2");
+
+// `Set.prototype.symmetricDifference` method
+// https://github.com/tc39/proposal-set-methods
+$({ target: 'Set', proto: true, real: true, forced: !setMethodAcceptSetLike('symmetricDifference') }, {
+  symmetricDifference: symmetricDifference
+});
+
+
+/***/ }),
+
+/***/ "1e70":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__("23e7");
+var difference = __webpack_require__("a5f7");
+var setMethodAcceptSetLike = __webpack_require__("dad2");
+
+// `Set.prototype.difference` method
+// https://github.com/tc39/proposal-set-methods
+$({ target: 'Set', proto: true, real: true, forced: !setMethodAcceptSetLike('difference') }, {
+  difference: difference
+});
 
 
 /***/ }),
@@ -550,17 +597,6 @@ var hiddenKeys = enumBugKeys.concat('length', 'prototype');
 exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
   return internalObjectKeys(O, hiddenKeys);
 };
-
-
-/***/ }),
-
-/***/ "2565":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_99c91fce_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("9a15");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_99c91fce_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_99c91fce_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
 
 
 /***/ }),
@@ -670,7 +706,39 @@ function normalizeComponent(
 
 /***/ }),
 
-/***/ "3060":
+/***/ "2a62":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var call = __webpack_require__("c65b");
+var anObject = __webpack_require__("825a");
+var getMethod = __webpack_require__("dc4a");
+
+module.exports = function (iterator, kind, value) {
+  var innerResult, innerError;
+  anObject(iterator);
+  try {
+    innerResult = getMethod(iterator, 'return');
+    if (!innerResult) {
+      if (kind === 'throw') throw value;
+      return value;
+    }
+    innerResult = call(innerResult, iterator);
+  } catch (error) {
+    innerError = true;
+    innerResult = error;
+  }
+  if (kind === 'throw') throw value;
+  if (innerError) throw innerResult;
+  anObject(innerResult);
+  return value;
+};
+
+
+/***/ }),
+
+/***/ "2be4":
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
@@ -688,6 +756,66 @@ var MAX_SAFE_INTEGER = 0x1FFFFFFFFFFFFF; // 2 ** 53 - 1 == 9007199254740991
 module.exports = function (it) {
   if (it > MAX_SAFE_INTEGER) throw $TypeError('Maximum allowed index exceeded');
   return it;
+};
+
+
+/***/ }),
+
+/***/ "36b1":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_previewer_vue_vue_type_style_index_0_id_9d7644ce_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("a2b9");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_previewer_vue_vue_type_style_index_0_id_9d7644ce_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_previewer_vue_vue_type_style_index_0_id_9d7644ce_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+
+
+/***/ }),
+
+/***/ "384f":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var uncurryThis = __webpack_require__("e330");
+var iterateSimple = __webpack_require__("5388");
+var SetHelpers = __webpack_require__("cb27");
+
+var Set = SetHelpers.Set;
+var SetPrototype = SetHelpers.proto;
+var forEach = uncurryThis(SetPrototype.forEach);
+var keys = uncurryThis(SetPrototype.keys);
+var next = keys(new Set()).next;
+
+module.exports = function (set, fn, interruptible) {
+  return interruptible ? iterateSimple({ iterator: keys(set), next: next }, fn) : forEach(set, fn);
+};
+
+
+/***/ }),
+
+/***/ "395e":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var aSet = __webpack_require__("dc19");
+var has = __webpack_require__("cb27").has;
+var size = __webpack_require__("8e16");
+var getSetRecord = __webpack_require__("7f65");
+var iterateSimple = __webpack_require__("5388");
+var iteratorClose = __webpack_require__("2a62");
+
+// `Set.prototype.isSupersetOf` method
+// https://tc39.github.io/proposal-set-methods/#Set.prototype.isSupersetOf
+module.exports = function isSupersetOf(other) {
+  var O = aSet(this);
+  var otherRec = getSetRecord(other);
+  if (size(O) < otherRec.size) return false;
+  var iterator = otherRec.getIterator();
+  return iterateSimple(iterator, function (e) {
+    if (!has(O, e)) return iteratorClose(iterator, 'normal', false);
+  }) !== false;
 };
 
 
@@ -737,13 +865,6 @@ var uncurryThis = __webpack_require__("e330");
 
 module.exports = uncurryThis({}.isPrototypeOf);
 
-
-/***/ }),
-
-/***/ "404a":
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -801,6 +922,10 @@ var Sticky = __webpack_require__("e920");
 // EXTERNAL MODULE: ./src/domain/model/EventTypes.ts
 var EventTypes = __webpack_require__("f2d8");
 
+// EXTERNAL MODULE: ./node_modules/lodash.clonedeep/index.js
+var lodash_clonedeep = __webpack_require__("cd3f");
+var lodash_clonedeep_default = /*#__PURE__*/__webpack_require__.n(lodash_clonedeep);
+
 // CONCATENATED MODULE: ./src/infrastructure/domain/repository/BlockRepository.ts
 
 
@@ -808,12 +933,14 @@ var EventTypes = __webpack_require__("f2d8");
 
 
 
+// @ts-ignore
+
 class BlockRepository_BlockRepository {
   constructor(blocks = [], isPreviewMode = false) {
     this.blocks = [];
     this.previousRequiredBlocks = [];
     this.listeners = {};
-    this.refs = [];
+    this.refs = new Map();
     this.blocks = blocks;
     this.isPreviewMode = isPreviewMode;
   }
@@ -833,7 +960,7 @@ class BlockRepository_BlockRepository {
         var _block$replication2;
         replicationFunction = (_block$replication2 = block.replication) === null || _block$replication2 === void 0 ? void 0 : _block$replication2.function;
       }
-      block = JSON.parse(JSON.stringify(block));
+      block = lodash_clonedeep_default()(block);
       block.isHidden = false;
       if (replicationFunction && block.replication) {
         block.replication.function = replicationFunction;
@@ -849,14 +976,18 @@ class BlockRepository_BlockRepository {
     }
   }
   getByGuid(guid) {
-    let answer;
-    JSON.stringify(this.blocks, (_, nestedValue) => {
-      if (nestedValue && nestedValue.guid === guid && typeof nestedValue.sticky !== 'undefined') {
-        answer = nestedValue;
+    const stack = [...this.blocks];
+    while (stack.length) {
+      const block = stack.pop();
+      if (!block) continue;
+      if (block.guid === guid) {
+        return block;
       }
-      return nestedValue;
-    });
-    return answer;
+      if (block.children && block.children.length) {
+        stack.push(...block.children);
+      }
+    }
+    return undefined;
   }
   getByTabGuid(tabGuid) {
     let answer = [];
@@ -869,14 +1000,18 @@ class BlockRepository_BlockRepository {
     return answer;
   }
   getByAlias(alias) {
-    let answer;
-    JSON.stringify(this.blocks, (_, nestedValue) => {
-      if (nestedValue && nestedValue.alias === alias && typeof nestedValue.sticky !== 'undefined') {
-        answer = nestedValue;
+    const stack = [...this.blocks];
+    while (stack.length) {
+      const block = stack.pop();
+      if (!block) continue;
+      if (block.alias === alias) {
+        return block;
       }
-      return nestedValue;
-    });
-    return answer;
+      if (block.children && block.children.length) {
+        stack.push(...block.children);
+      }
+    }
+    return undefined;
   }
   getMainParents(guid) {
     let block;
@@ -981,9 +1116,6 @@ class BlockRepository_BlockRepository {
   get() {
     return this.blocks;
   }
-  getFlat() {
-    return this.refs.map(ref => this.getByGuid(ref.guid));
-  }
   remove(guid) {
     var _block$children;
     const block = this.getByGuid(guid);
@@ -1007,13 +1139,18 @@ class BlockRepository_BlockRepository {
     });
   }
   resetActiveBlock() {
-    JSON.stringify(this.blocks, (_, nestedValue) => {
-      if (nestedValue && typeof nestedValue.isActive !== 'undefined') {
-        nestedValue.isActive = false;
-        nestedValue.isActiveAsParent = false;
+    const stack = [...this.blocks];
+    while (stack.length) {
+      const block = stack.pop();
+      if (!block) continue;
+      if (typeof block.isActive !== 'undefined') {
+        block.isActive = false;
+        block.isActiveAsParent = false;
       }
-      return nestedValue;
-    });
+      if (block.children && block.children.length) {
+        stack.push(...block.children);
+      }
+    }
   }
   setActiveBlock(guid) {
     this.resetActiveBlock();
@@ -1039,22 +1176,21 @@ class BlockRepository_BlockRepository {
     }
   }
   addRef(guid, ref) {
-    this.refs.push({
-      guid: guid,
-      element: ref
-    });
+    this.refs.set(guid, ref);
   }
   getRefByGuid(guid) {
-    const element = this.refs.find(item => {
-      return item.guid === guid;
+    return this.refs.get(guid);
+  }
+  getRefs() {
+    return Array.from(this.refs.keys()).map(guid => {
+      return {
+        guid: guid,
+        element: this.getRefByGuid(guid)
+      };
     });
-    if (element) {
-      return element.element;
-    }
-    return undefined;
   }
   removeRef(guid) {
-    this.refs = this.refs.filter(item => item.guid !== guid);
+    this.refs.delete(guid);
   }
   getStickyLines(guid) {
     var _this$getByGuid;
@@ -1109,18 +1245,6 @@ class BlockRepository_BlockRepository {
       }
     });
   }
-  setPosition(blockGuid, positionCss) {
-    const block = this.getByGuid(blockGuid);
-    if (typeof block === 'undefined') {
-      return;
-    }
-    const mapPosition = ['absolute', 'relative'];
-    if (mapPosition.includes(positionCss)) {
-      block.positionBlockCss = positionCss;
-    } else {
-      console.error(`Position ${positionCss} is not supported`);
-    }
-  }
 }
 
 /***/ }),
@@ -1130,7 +1254,7 @@ class BlockRepository_BlockRepository {
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e0f1e030-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/previewer.vue?vue&type=template&id=159e7ed6&scoped=true
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a1f175e6-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/previewer.vue?vue&type=template&id=9d7644ce&scoped=true
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c,
@@ -1175,21 +1299,16 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/previewer.vue?vue&type=template&id=159e7ed6&scoped=true
+// CONCATENATED MODULE: ./src/previewer.vue?vue&type=template&id=9d7644ce&scoped=true
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e0f1e030-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/PreviewBlock.vue?vue&type=template&id=c4f9c9e6&scoped=true
-var PreviewBlockvue_type_template_id_c4f9c9e6_scoped_true_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a1f175e6-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/PreviewBlock.vue?vue&type=template&id=2b644cad&scoped=true
+var PreviewBlockvue_type_template_id_2b644cad_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
   return _c('div', {
     ref: "draggableContainer",
-    class: {
-      'block': true,
-      'block-relative': _vm.isRelativeBlock,
-      'block-component': _vm.block.isComponent,
-      [_vm.block.className]: !!_vm.block.className
-    },
+    class: ['block', _vm.block.className],
     style: _vm.positionStyle
   }, [_vm.isTabsContainer ? _c('div', {
     class: {
@@ -1289,10 +1408,12 @@ var PreviewBlockvue_type_template_id_c4f9c9e6_scoped_true_render = function rend
     ref: "container",
     staticClass: "content custom_scrollbar",
     class: {
-      'scroll_hover': _vm.isActiveScrollHover,
-      'block-parent-relative': !_vm.block.isComponent && _vm.isRelativeBlock
+      'scroll_hover': _vm.isActiveScrollHover
     },
     style: _vm.blockContentStyle,
+    attrs: {
+      "title": _vm.blockHoverTitle
+    },
     on: {
       "mouseover": function ($event) {
         _vm.block.isHover = true;
@@ -1326,9 +1447,9 @@ var PreviewBlockvue_type_template_id_c4f9c9e6_scoped_true_render = function rend
       attrs: {
         "is-showing": _vm.isShowChildren && _block.parentTabGuid === _vm.activeTabGuid && !_block.isHidden,
         "block": _block,
+        "parent-z-index": _vm.zIndex,
         "replication-callback": _vm.replicationCallback,
-        "tab-settings-service": _vm.tabSettingsService,
-        "is-parent-relative-block": _vm.isRelativeBlock
+        "tab-settings-service": _vm.tabSettingsService
       },
       on: {
         "click": function ($event) {
@@ -1352,15 +1473,12 @@ var PreviewBlockvue_type_template_id_c4f9c9e6_scoped_true_render = function rend
     });
   })], 2)]);
 };
-var PreviewBlockvue_type_template_id_c4f9c9e6_scoped_true_staticRenderFns = [];
+var PreviewBlockvue_type_template_id_2b644cad_scoped_true_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=template&id=c4f9c9e6&scoped=true
+// CONCATENATED MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=template&id=2b644cad&scoped=true
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.push.js
 var es_array_push = __webpack_require__("14d9");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.reduce.js
-var es_array_reduce = __webpack_require__("13d5");
 
 // EXTERNAL MODULE: ./src/domain/model/Sticky.ts
 var Sticky = __webpack_require__("e920");
@@ -1368,9 +1486,175 @@ var Sticky = __webpack_require__("e920");
 // EXTERNAL MODULE: ./src/domain/model/BlockDTO.ts + 1 modules
 var BlockDTO = __webpack_require__("ccb2");
 
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.set.difference.v2.js
+var es_set_difference_v2 = __webpack_require__("1e70");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.set.intersection.v2.js
+var es_set_intersection_v2 = __webpack_require__("79a4");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.set.is-disjoint-from.v2.js
+var es_set_is_disjoint_from_v2 = __webpack_require__("c1a1");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.set.is-subset-of.v2.js
+var es_set_is_subset_of_v2 = __webpack_require__("8b00");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.set.is-superset-of.v2.js
+var es_set_is_superset_of_v2 = __webpack_require__("a4e7");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.set.symmetric-difference.v2.js
+var es_set_symmetric_difference_v2 = __webpack_require__("1e5a");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.set.union.v2.js
+var es_set_union_v2 = __webpack_require__("72c3");
+
 // EXTERNAL MODULE: ./node_modules/resize-observer-polyfill/dist/ResizeObserver.es.js
 var ResizeObserver_es = __webpack_require__("6dd8");
 
+// CONCATENATED MODULE: ./src/infrastructure/service/StretchManager.ts
+
+
+
+
+
+
+
+
+// stretchManager.ts
+
+const items = new Set();
+const containerToItem = new Map();
+const elementToItem = new Map();
+const itemElements = new Map();
+let ro = null;
+let mo = null;
+function getDepth(el) {
+  let depth = 0;
+  let node = el.parentElement;
+  while (node) {
+    depth++;
+    node = node.parentElement;
+  }
+  return depth;
+}
+// --- Каскадное обновление по глубине через setTimeout ---
+const pendingUpdates = new Set();
+let cascadeTimer = null;
+function scheduleCascadeUpdate(source) {
+  for (const item of source) {
+    pendingUpdates.add(item);
+  }
+  if (cascadeTimer !== null) clearTimeout(cascadeTimer);
+  cascadeTimer = setTimeout(() => {
+    cascadeTimer = null;
+    runCascade();
+  }, 0);
+}
+function runCascade() {
+  if (pendingUpdates.size === 0) return;
+  // Группируем по глубине DOM
+  const byDepth = new Map();
+  pendingUpdates.forEach(item => {
+    if (!items.has(item)) return;
+    const d = getDepth(item.container);
+    let arr = byDepth.get(d);
+    if (!arr) {
+      arr = [];
+      byDepth.set(d, arr);
+    }
+    arr.push(item);
+  });
+  pendingUpdates.clear();
+  const depths = [...byDepth.keys()].sort((a, b) => b - a); // самые глубокие первыми
+  // Обрабатываем по уровню за setTimeout — между уровнями
+  // микротаски (Vue $nextTick) успевают отработать
+  let level = 0;
+  function processLevel() {
+    if (level >= depths.length) return;
+    byDepth.get(depths[level]).forEach(item => item.update());
+    level++;
+    if (level < depths.length) {
+      setTimeout(processLevel, 0);
+    }
+  }
+  processLevel();
+}
+// --- Observers ---
+function ensureObservers() {
+  if (ro) return;
+  ro = new ResizeObserver_es["a" /* default */](entries => {
+    const toUpdate = new Set();
+    for (const entry of entries) {
+      const item = elementToItem.get(entry.target);
+      if (item) toUpdate.add(item);
+    }
+    if (toUpdate.size > 0) {
+      scheduleCascadeUpdate(toUpdate);
+    }
+  });
+  mo = new MutationObserver(mutations => {
+    for (const m of mutations) {
+      if (m.type !== 'childList') continue;
+      let el = m.target;
+      let item;
+      while (el) {
+        item = containerToItem.get(el);
+        if (item) break;
+        el = el.parentElement;
+      }
+      if (!item) continue;
+      m.addedNodes.forEach(node => {
+        if (node instanceof Element) {
+          observeElement(node, item);
+        }
+      });
+    }
+  });
+}
+function observeElement(el, item) {
+  elementToItem.set(el, item);
+  let elements = itemElements.get(item);
+  if (!elements) {
+    elements = new Set();
+    itemElements.set(item, elements);
+  }
+  elements.add(el);
+  ro.observe(el);
+}
+const StretchManager = {
+  register(item) {
+    ensureObservers();
+    items.add(item);
+    containerToItem.set(item.container, item);
+    const children = item.container.children;
+    for (let i = 0; i < children.length; i++) {
+      observeElement(children[i], item);
+    }
+    mo.observe(item.container, {
+      childList: true,
+      subtree: true
+    });
+    scheduleCascadeUpdate(items);
+  },
+  unregister(item) {
+    items.delete(item);
+    containerToItem.delete(item.container);
+    const elements = itemElements.get(item);
+    if (elements) {
+      elements.forEach(el => {
+        elementToItem.delete(el);
+        ro.unobserve(el);
+      });
+      itemElements.delete(item);
+    }
+    mo.disconnect();
+    containerToItem.forEach((_, container) => {
+      mo.observe(container, {
+        childList: true,
+        subtree: true
+      });
+    });
+  }
+};
 // EXTERNAL MODULE: external {"commonjs":"vue","commonjs2":"vue","root":"Vue"}
 var external_commonjs_vue_commonjs2_vue_root_Vue_ = __webpack_require__("8bbf");
 var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpack_require__.n(external_commonjs_vue_commonjs2_vue_root_Vue_);
@@ -1425,7 +1709,6 @@ function debounce(cb, wait = 20, additionalCb = () => {}) {
 
 
 
-
 // eslint-disable-next-line no-unused-vars
 
 
@@ -1439,7 +1722,6 @@ function debounce(cb, wait = 20, additionalCb = () => {}) {
 const Vue = external_commonjs_vue_commonjs2_vue_root_Vue_default.a;
 fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_es["a" /* faAngleDown */], free_solid_svg_icons_index_es["c" /* faChevronRight */], free_solid_svg_icons_index_es["b" /* faChevronLeft */]);
 /* harmony default export */ var PreviewBlockvue_type_script_lang_ts = (Vue.extend({
-  // export default {
   name: 'PreviewBlock',
   components: {
     FontAwesomeIcon: index_es["a" /* FontAwesomeIcon */]
@@ -1464,9 +1746,9 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
     tabSettingsService: {
       type: Object
     },
-    isParentRelativeBlock: {
-      type: Boolean,
-      default: false
+    parentZIndex: {
+      type: Number,
+      default: undefined
     }
   },
   data() {
@@ -1485,7 +1767,9 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
       stickyToBlock: undefined,
       stickyToElement: undefined,
       prepareReplication: () => {},
-      activeBlockGuid: ''
+      activeBlockGuid: '',
+      stretchItem: null,
+      minHeightParent: 0
     };
   },
   created() {
@@ -1542,6 +1826,12 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
           }
         }
         for (const guid in tabs) {
+          // availableTabs - доступные вкладки БЛОКА. tabs - ВСЕ вкладки в настройках.
+          // цикл бежит по ВСЕМ вкладкам в настройках и сбрасывает состояние при открытие нового блока со вкладками
+          // пропускаем недоступные вкладки нового блока
+          if (!this.availableTabs.some(item => item.guid === guid)) {
+            continue;
+          }
           if (Object.prototype.hasOwnProperty.call(tabs, guid)) {
             // изначально svg в плюсик
             tabs[guid].isExpanded = false;
@@ -1601,69 +1891,22 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
       return ((_this$block$tabs = this.block.tabs) === null || _this$block$tabs === void 0 ? void 0 : _this$block$tabs.position) === 'left' || ((_this$block$tabs2 = this.block.tabs) === null || _this$block$tabs2 === void 0 ? void 0 : _this$block$tabs2.position) === 'right';
     },
     zIndex() {
-      var _this$block$tabs4;
+      var _this$parentZIndex, _this$block$tabs3;
       const startIndex = 101;
-      if (!this.block.parentGuid) {
-        var _this$block$tabs3;
-        return startIndex + ((_this$block$tabs3 = this.block.tabs) !== null && _this$block$tabs3 !== void 0 && _this$block$tabs3.use ? 1 : 0);
-      }
-      let parentRef = this.getStore().getRefByGuid(this.block.parentGuid);
-      if (!parentRef) {
-        return startIndex;
-      }
-      return parentRef.zIndex + 1 + ((_this$block$tabs4 = this.block.tabs) !== null && _this$block$tabs4 !== void 0 && _this$block$tabs4.use ? 1 : 0);
+      const base = ((_this$parentZIndex = this.parentZIndex) !== null && _this$parentZIndex !== void 0 ? _this$parentZIndex : startIndex) + (this.block.parentGuid ? 1 : 0);
+      return base + ((_this$block$tabs3 = this.block.tabs) !== null && _this$block$tabs3 !== void 0 && _this$block$tabs3.use ? 1 : 0);
     },
     isTabsContainer() {
-      var _this$block$tabs5;
-      return ((_this$block$tabs5 = this.block.tabs) === null || _this$block$tabs5 === void 0 ? void 0 : _this$block$tabs5.use) || false;
-    },
-    objectStyle() {
-      const styleArray = (this.block.style || '').split(';').map(pair => pair.replace(/\n/g, '').trim()) || [];
-      return styleArray.reduce((acc, item) => {
-        if (!item) return acc;
-        const [key, value] = item.split(':');
-        acc[key] = value;
-        return acc;
-      }, {});
-    },
-    componentStyleFlex() {
-      var _this$block$stylesCom, _this$block$stylesCom2, _this$block$stylesCom3, _this$block$stylesCom4;
-      const result = {};
-      result.minWidth = `${((_this$block$stylesCom = this.block.stylesComponent) === null || _this$block$stylesCom === void 0 ? void 0 : _this$block$stylesCom.minWidth) || 'auto'}`;
-      result.maxWidth = `${((_this$block$stylesCom2 = this.block.stylesComponent) === null || _this$block$stylesCom2 === void 0 ? void 0 : _this$block$stylesCom2.maxWidth) || 'auto'}`;
-      result.flexGrow = `${((_this$block$stylesCom3 = this.block.stylesComponent) === null || _this$block$stylesCom3 === void 0 ? void 0 : _this$block$stylesCom3.flexGrow) || '0'}`;
-      result.flexShrink = `${((_this$block$stylesCom4 = this.block.stylesComponent) === null || _this$block$stylesCom4 === void 0 ? void 0 : _this$block$stylesCom4.flexShrink) || '1'}`;
-      return result;
-    },
-    blockStyleRelative() {
-      var _this$block$customSty, _this$block$customSty2, _this$block$customSty3, _this$block$customSty4, _this$block$customSty5, _this$block$customSty6, _this$block$customSty7, _this$block$customSty8, _this$block$customSty9, _this$block$customSty10, _this$block$customSty11;
-      const result = {};
-      result.width = `${this.block.width}${this.block.sizeTypes.width === 'auto' ? '' : this.block.sizeTypes.width}`;
-      result.height = `${this.block.height}${this.block.sizeTypes.height === 'auto' ? '' : this.block.sizeTypes.height}`;
-      result.minHeight = ((_this$block$customSty = this.block.customStyles) === null || _this$block$customSty === void 0 ? void 0 : _this$block$customSty.minHeight) || 'auto';
-      result.maxHeight = ((_this$block$customSty2 = this.block.customStyles) === null || _this$block$customSty2 === void 0 ? void 0 : _this$block$customSty2.maxHeight) || 'auto';
-      result.paddingLeft = ((_this$block$customSty3 = this.block.customStyles) === null || _this$block$customSty3 === void 0 ? void 0 : _this$block$customSty3.paddingLeft) || '0px';
-      result.paddingRight = ((_this$block$customSty4 = this.block.customStyles) === null || _this$block$customSty4 === void 0 ? void 0 : _this$block$customSty4.paddingRight) || '0px';
-      result.paddingTop = ((_this$block$customSty5 = this.block.customStyles) === null || _this$block$customSty5 === void 0 ? void 0 : _this$block$customSty5.paddingTop) || '0px';
-      result.paddingBottom = ((_this$block$customSty6 = this.block.customStyles) === null || _this$block$customSty6 === void 0 ? void 0 : _this$block$customSty6.paddingBottom) || '0px';
-      result.display = 'flex';
-      result.flexDirection = ((_this$block$customSty7 = this.block.customStyles) === null || _this$block$customSty7 === void 0 ? void 0 : _this$block$customSty7.flexDirection) || 'row';
-      result.justifyContent = ((_this$block$customSty8 = this.block.customStyles) === null || _this$block$customSty8 === void 0 ? void 0 : _this$block$customSty8.justifyContent) || '';
-      result.alignItems = ((_this$block$customSty9 = this.block.customStyles) === null || _this$block$customSty9 === void 0 ? void 0 : _this$block$customSty9.alignItems) || '';
-      result.flexWrap = ((_this$block$customSty10 = this.block.customStyles) === null || _this$block$customSty10 === void 0 ? void 0 : _this$block$customSty10.flexWrap) || '';
-      result.gap = ((_this$block$customSty11 = this.block.customStyles) === null || _this$block$customSty11 === void 0 ? void 0 : _this$block$customSty11.gap) || '';
-      Object.assign(result, this.objectStyle);
-      return result;
+      var _this$block$tabs4;
+      return ((_this$block$tabs4 = this.block.tabs) === null || _this$block$tabs4 === void 0 ? void 0 : _this$block$tabs4.use) || false;
     },
     positionStyle() {
       var _this$block$replicati2, _this$block$stickyTo3, _this$block$stickyTo4, _this$stickyToBlock, _this$block$stickyTo5, _this$block$onCenter, _this$block$stickyTo6, _this$block$onCenter2, _this$block$stickyTo7, _this$block$onCenter3;
       let position = {};
       let top;
       let left;
-      // let height: string = this.block.height + this.block.sizeTypes.height
-      // let width: string = this.block.width + this.block.sizeTypes.width
-      let width = `${this.block.width}${this.block.sizeTypes.width === 'auto' ? '' : this.block.sizeTypes.width}`;
-      let height = `${this.block.height}${this.block.sizeTypes.height === 'auto' ? '' : this.block.sizeTypes.height}`;
+      let height = this.block.height + this.block.sizeTypes.height;
+      let width = this.block.width + this.block.sizeTypes.width;
       switch (this.block.sticky) {
         case Sticky["a" /* Sticky */].TL:
           top = this.block.top + this.block.sizeTypes.top;
@@ -1674,11 +1917,11 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
                 // Если this.isTabsContainer === false
                 // и чекбокс "Растягиваемый" включен у дочернего блока, то поля в дочернем блоке пропадают (width = 0px)
                 const parentSizes = BlockManager["a" /* default */].getAbsoluteSizesByParent(this.parentBlock, this.parentElement);
-                if (this.block.sizeTypes.top === SizeTypes["a" /* SizeTypes */].PERCENT && typeof this.block.height === 'number') {
+                if (this.block.sizeTypes.top === SizeTypes["a" /* SizeTypes */].PERCENT) {
                   top = `${parentSizes.height / 100 * (this.block.top || 0)}px`;
                   height = `${parentSizes.height / 100 * this.block.height}px`;
                 }
-                if (this.block.sizeTypes.left === SizeTypes["a" /* SizeTypes */].PERCENT && typeof this.block.width === 'number') {
+                if (this.block.sizeTypes.left === SizeTypes["a" /* SizeTypes */].PERCENT) {
                   left = `${parentSizes.width / 100 * (this.block.left || 0)}px`;
                   width = `${parentSizes.width / 100 * this.block.width}px`;
                 }
@@ -1824,28 +2067,6 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
           }
         }
       }
-      const isBlockStyleRelative = this.isRelativeBlock && !this.block.isComponent;
-      const isComponentAndParentRelative = this.isParentRelativeBlock && this.block.isComponent;
-      if (isBlockStyleRelative) {
-        var _this$blockStyleRelat;
-        if (((_this$blockStyleRelat = this.blockStyleRelative) === null || _this$blockStyleRelat === void 0 ? void 0 : _this$blockStyleRelat.height) === 'auto') {
-          position.height = 'auto';
-        }
-        const result = {
-          ...position,
-          ...this.blockStyleRelative,
-          zIndex: this.zIndex
-        };
-        return result;
-      }
-      if (isComponentAndParentRelative) {
-        const result = {
-          zIndex: this.zIndex,
-          ...position,
-          ...this.componentStyleFlex
-        };
-        return result;
-      }
       return Object.assign(position, {
         zIndex: this.zIndex
       });
@@ -1871,6 +2092,13 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
       }
       return style;
     },
+    blockHoverTitle() {
+      if (this.block.isHover) {
+        var _this$block$interacti;
+        return ((_this$block$interacti = this.block.interactive) === null || _this$block$interacti === void 0 ? void 0 : _this$block$interacti.containerTitleHover) || '';
+      }
+      return '';
+    },
     isShowChildren() {
       var _block$properties;
       let isShow = true;
@@ -1883,10 +2111,6 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
     isActiveScrollHover() {
       var _this$block6;
       return !!((_this$block6 = this.block) !== null && _this$block6 !== void 0 && _this$block6.isScrollHover);
-    },
-    isRelativeBlock() {
-      var _this$block7;
-      return ((_this$block7 = this.block) === null || _this$block7 === void 0 ? void 0 : _this$block7.positionBlockCss) === 'relative';
     }
   },
   watch: {
@@ -1906,8 +2130,15 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
     }
   },
   mounted() {
-    var _this$block9, _this$block10, _this$block11;
+    var _this$block7, _this$block9, _this$block10;
     this.setParent();
+    if ((_this$block7 = this.block) !== null && _this$block7 !== void 0 && _this$block7.isStretched && this.$refs.container && this.$refs.container instanceof Element) {
+      this.stretchItem = {
+        container: this.$refs.container,
+        update: this.setStretchedSize
+      };
+      StretchManager.register(this.stretchItem);
+    }
     this.$nextTick(() => {
       var _this$block8;
       this.setStretchedSize();
@@ -1928,29 +2159,15 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
         this.onTabClick(defaultTab);
       }
     }
-    if ((_this$block11 = this.block) !== null && _this$block11 !== void 0 && _this$block11.isStretched && this.$refs.container && this.$refs.container instanceof Element) {
-      let children = this.$refs.container.children;
-      const observer = new ResizeObserver_es["a" /* default */](() => {
-        this.setStretchedSize();
-      });
-      for (let item of children) {
-        observer.observe(item);
-      }
-      const observerInserted = new MutationObserver(mutationList => {
-        mutationList.filter(m => m.type === 'childList').forEach(m => {
-          m.addedNodes.forEach(node => node instanceof Element && observer.observe(node));
-        });
-      });
-      observerInserted.observe(this.$refs.container, {
-        childList: true,
-        subtree: true
-      });
-    }
     this.block.isLoading = false;
     this.prepareReplication();
     this.getStore().addRef(this.block.guid, this);
   },
   beforeDestroy() {
+    if (this.stretchItem) {
+      StretchManager.unregister(this.stretchItem);
+      this.stretchItem = null;
+    }
     this.getStore().removeRef(this.block.guid);
   },
   methods: {
@@ -2191,8 +2408,8 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
       return style;
     },
     getDefaultTab() {
-      var _this$block12, _this$block13;
-      if (!((_this$block12 = this.block) !== null && _this$block12 !== void 0 && (_this$block12 = _this$block12.tabs) !== null && _this$block12 !== void 0 && _this$block12.use) || ((_this$block13 = this.block) === null || _this$block13 === void 0 || (_this$block13 = _this$block13.tabs) === null || _this$block13 === void 0 || (_this$block13 = _this$block13.list) === null || _this$block13 === void 0 ? void 0 : _this$block13.length) === 1) {
+      var _this$block11, _this$block12;
+      if (!((_this$block11 = this.block) !== null && _this$block11 !== void 0 && (_this$block11 = _this$block11.tabs) !== null && _this$block11 !== void 0 && _this$block11.use) || ((_this$block12 = this.block) === null || _this$block12 === void 0 || (_this$block12 = _this$block12.tabs) === null || _this$block12 === void 0 || (_this$block12 = _this$block12.list) === null || _this$block12 === void 0 ? void 0 : _this$block12.length) === 1) {
         return null;
       }
       let tabs = this.block.tabs.list;
@@ -2218,11 +2435,10 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
     }
   }
 }));
-// }
 // CONCATENATED MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=script&lang=ts
  /* harmony default export */ var components_PreviewBlockvue_type_script_lang_ts = (PreviewBlockvue_type_script_lang_ts); 
-// EXTERNAL MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=style&index=0&id=c4f9c9e6&prod&scoped=true&lang=css
-var PreviewBlockvue_type_style_index_0_id_c4f9c9e6_prod_scoped_true_lang_css = __webpack_require__("878a");
+// EXTERNAL MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=style&index=0&id=2b644cad&prod&scoped=true&lang=css
+var PreviewBlockvue_type_style_index_0_id_2b644cad_prod_scoped_true_lang_css = __webpack_require__("bb1a");
 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__("2877");
@@ -2238,11 +2454,11 @@ var componentNormalizer = __webpack_require__("2877");
 
 var component = Object(componentNormalizer["a" /* default */])(
   components_PreviewBlockvue_type_script_lang_ts,
-  PreviewBlockvue_type_template_id_c4f9c9e6_scoped_true_render,
-  PreviewBlockvue_type_template_id_c4f9c9e6_scoped_true_staticRenderFns,
+  PreviewBlockvue_type_template_id_2b644cad_scoped_true_render,
+  PreviewBlockvue_type_template_id_2b644cad_scoped_true_staticRenderFns,
   false,
   null,
-  "c4f9c9e6",
+  "2b644cad",
   null
   
 )
@@ -2262,7 +2478,6 @@ var TabSettings = __webpack_require__("6b0c");
 
 const previewervue_type_script_lang_ts_Vue = external_commonjs_vue_commonjs2_vue_root_Vue_default.a;
 /* harmony default export */ var previewervue_type_script_lang_ts = (previewervue_type_script_lang_ts_Vue.extend({
-  // export default {
   name: 'VueDraggableResponsivePreviewer',
   components: {
     PreviewBlock: PreviewBlock
@@ -2321,11 +2536,10 @@ const previewervue_type_script_lang_ts_Vue = external_commonjs_vue_commonjs2_vue
     }
   }
 }));
-// }
 // CONCATENATED MODULE: ./src/previewer.vue?vue&type=script&lang=ts
  /* harmony default export */ var src_previewervue_type_script_lang_ts = (previewervue_type_script_lang_ts); 
-// EXTERNAL MODULE: ./src/previewer.vue?vue&type=style&index=0&id=159e7ed6&prod&scoped=true&lang=css
-var previewervue_type_style_index_0_id_159e7ed6_prod_scoped_true_lang_css = __webpack_require__("90cb");
+// EXTERNAL MODULE: ./src/previewer.vue?vue&type=style&index=0&id=9d7644ce&prod&scoped=true&lang=css
+var previewervue_type_style_index_0_id_9d7644ce_prod_scoped_true_lang_css = __webpack_require__("36b1");
 
 // CONCATENATED MODULE: ./src/previewer.vue
 
@@ -2342,7 +2556,7 @@ var previewer_component = Object(componentNormalizer["a" /* default */])(
   staticRenderFns,
   false,
   null,
-  "159e7ed6",
+  "9d7644ce",
   null
   
 )
@@ -2371,6 +2585,24 @@ module.exports = fails(function () {
 }) ? function (it) {
   return classof(it) === 'String' ? split(it, '') : $Object(it);
 } : $Object;
+
+
+/***/ }),
+
+/***/ "46c4":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// `GetIteratorDirect(obj)` abstract operation
+// https://tc39.es/proposal-iterator-helpers/#sec-getiteratordirect
+module.exports = function (obj) {
+  return {
+    iterator: obj,
+    next: obj.next,
+    done: false
+  };
+};
 
 
 /***/ }),
@@ -2457,6 +2689,33 @@ module.exports = function (argument) {
   return len > 0 ? min(len, 0x1FFFFFFFFFFFFF) : 0; // 2 ** 53 - 1 == 9007199254740991
 };
 
+
+/***/ }),
+
+/***/ "5388":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var call = __webpack_require__("c65b");
+
+module.exports = function (record, fn, ITERATOR_INSTEAD_OF_RECORD) {
+  var iterator = ITERATOR_INSTEAD_OF_RECORD ? record : record.iterator;
+  var next = record.next;
+  var step, result;
+  while (!(step = call(next, iterator)).done) {
+    result = fn(step.value);
+    if (result !== undefined) return result;
+  }
+};
+
+
+/***/ }),
+
+/***/ "556b":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -2577,6 +2836,35 @@ module.exports = {
 
 /***/ }),
 
+/***/ "62e4":
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if (!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if (!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+
 /***/ "6374":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2598,10 +2886,27 @@ module.exports = function (key, value) {
 
 /***/ }),
 
-/***/ "6793":
+/***/ "68df":
 /***/ (function(module, exports, __webpack_require__) {
 
-// extracted by mini-css-extract-plugin
+"use strict";
+
+var aSet = __webpack_require__("dc19");
+var size = __webpack_require__("8e16");
+var iterate = __webpack_require__("384f");
+var getSetRecord = __webpack_require__("7f65");
+
+// `Set.prototype.isSubsetOf` method
+// https://tc39.github.io/proposal-set-methods/#Set.prototype.isSubsetOf
+module.exports = function isSubsetOf(other) {
+  var O = aSet(this);
+  var otherRec = getSetRecord(other);
+  if (size(O) > otherRec.size) return false;
+  return iterate(O, function (e) {
+    if (!otherRec.includes(e)) return false;
+  }, true) !== false;
+};
+
 
 /***/ }),
 
@@ -3848,6 +4153,42 @@ module.exports = function (it) {
 
 /***/ }),
 
+/***/ "7282":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var uncurryThis = __webpack_require__("e330");
+var aCallable = __webpack_require__("59ed");
+
+module.exports = function (object, key, method) {
+  try {
+    // eslint-disable-next-line es/no-object-getownpropertydescriptor -- safe
+    return uncurryThis(aCallable(Object.getOwnPropertyDescriptor(object, key)[method]));
+  } catch (error) { /* empty */ }
+};
+
+
+/***/ }),
+
+/***/ "72c3":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__("23e7");
+var union = __webpack_require__("e9bc");
+var setMethodAcceptSetLike = __webpack_require__("dad2");
+
+// `Set.prototype.union` method
+// https://github.com/tc39/proposal-set-methods
+$({ target: 'Set', proto: true, real: true, forced: !setMethodAcceptSetLike('union') }, {
+  union: union
+});
+
+
+/***/ }),
+
 /***/ "7418":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3878,6 +4219,30 @@ module.exports = [
 
 /***/ }),
 
+/***/ "79a4":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__("23e7");
+var fails = __webpack_require__("d039");
+var intersection = __webpack_require__("953b");
+var setMethodAcceptSetLike = __webpack_require__("dad2");
+
+var INCORRECT = !setMethodAcceptSetLike('intersection') || fails(function () {
+  // eslint-disable-next-line es/no-array-from, es/no-set -- testing
+  return String(Array.from(new Set([1, 2, 3]).intersection(new Set([3, 2])))) !== '3,2';
+});
+
+// `Set.prototype.intersection` method
+// https://github.com/tc39/proposal-set-methods
+$({ target: 'Set', proto: true, real: true, forced: INCORRECT }, {
+  intersection: intersection
+});
+
+
+/***/ }),
+
 /***/ "7b0b":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3891,6 +4256,54 @@ var $Object = Object;
 // https://tc39.es/ecma262/#sec-toobject
 module.exports = function (argument) {
   return $Object(requireObjectCoercible(argument));
+};
+
+
+/***/ }),
+
+/***/ "7f65":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var aCallable = __webpack_require__("59ed");
+var anObject = __webpack_require__("825a");
+var call = __webpack_require__("c65b");
+var toIntegerOrInfinity = __webpack_require__("5926");
+var getIteratorDirect = __webpack_require__("46c4");
+
+var INVALID_SIZE = 'Invalid size';
+var $RangeError = RangeError;
+var $TypeError = TypeError;
+var max = Math.max;
+
+var SetRecord = function (set, intSize) {
+  this.set = set;
+  this.size = max(intSize, 0);
+  this.has = aCallable(set.has);
+  this.keys = aCallable(set.keys);
+};
+
+SetRecord.prototype = {
+  getIterator: function () {
+    return getIteratorDirect(anObject(call(this.keys, this.set)));
+  },
+  includes: function (it) {
+    return call(this.has, this.set, it);
+  }
+};
+
+// `GetSetRecord` abstract operation
+// https://tc39.es/proposal-set-methods/#sec-getsetrecord
+module.exports = function (obj) {
+  anObject(obj);
+  var numSize = +obj.size;
+  // NOTE: If size is undefined, then numSize will be NaN
+  // eslint-disable-next-line no-self-compare -- NaN check
+  if (numSize !== numSize) throw new $TypeError(INVALID_SIZE);
+  var intSize = toIntegerOrInfinity(numSize);
+  if (intSize < 0) throw new $RangeError(INVALID_SIZE);
+  return new SetRecord(obj, intSize);
 };
 
 
@@ -3927,6 +4340,28 @@ module.exports = !fails(function () {
   // eslint-disable-next-line es/no-object-defineproperty -- required for testing
   return Object.defineProperty({}, 1, { get: function () { return 7; } })[1] !== 7;
 });
+
+
+/***/ }),
+
+/***/ "83b9":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var SetHelpers = __webpack_require__("cb27");
+var iterate = __webpack_require__("384f");
+
+var Set = SetHelpers.Set;
+var add = SetHelpers.add;
+
+module.exports = function (set) {
+  var result = new Set();
+  iterate(set, function (it) {
+    add(result, it);
+  });
+  return result;
+};
 
 
 /***/ }),
@@ -3974,17 +4409,6 @@ module.exports = function (it) {
 
 /***/ }),
 
-/***/ "878a":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_c4f9c9e6_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("3060");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_c4f9c9e6_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_c4f9c9e6_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
-
-
-/***/ }),
-
 /***/ "8925":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4008,6 +4432,24 @@ module.exports = store.inspectSource;
 
 /***/ }),
 
+/***/ "8b00":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__("23e7");
+var isSubsetOf = __webpack_require__("68df");
+var setMethodAcceptSetLike = __webpack_require__("dad2");
+
+// `Set.prototype.isSubsetOf` method
+// https://github.com/tc39/proposal-set-methods
+$({ target: 'Set', proto: true, real: true, forced: !setMethodAcceptSetLike('isSubsetOf') }, {
+  isSubsetOf: isSubsetOf
+});
+
+
+/***/ }),
+
 /***/ "8bbf":
 /***/ (function(module, exports) {
 
@@ -4015,13 +4457,17 @@ module.exports = require("vue");
 
 /***/ }),
 
-/***/ "90cb":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "8e16":
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_previewer_vue_vue_type_style_index_0_id_159e7ed6_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("6793");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_previewer_vue_vue_type_style_index_0_id_159e7ed6_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_previewer_vue_vue_type_style_index_0_id_159e7ed6_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
+
+var uncurryThisAccessor = __webpack_require__("7282");
+var SetHelpers = __webpack_require__("cb27");
+
+module.exports = uncurryThisAccessor(SetHelpers.proto, 'size', 'get') || function (set) {
+  return set.size;
+};
 
 
 /***/ }),
@@ -4072,7 +4518,6 @@ var SizeTypes;
 (function (SizeTypes) {
   SizeTypes["PERCENT"] = "%";
   SizeTypes["PIXEL"] = "px";
-  SizeTypes["AUTO"] = "auto";
 })(SizeTypes || (SizeTypes = {}));
 
 /***/ }),
@@ -4108,10 +4553,73 @@ module.exports = isForced;
 
 /***/ }),
 
-/***/ "9a15":
+/***/ "953b":
 /***/ (function(module, exports, __webpack_require__) {
 
-// extracted by mini-css-extract-plugin
+"use strict";
+
+var aSet = __webpack_require__("dc19");
+var SetHelpers = __webpack_require__("cb27");
+var size = __webpack_require__("8e16");
+var getSetRecord = __webpack_require__("7f65");
+var iterateSet = __webpack_require__("384f");
+var iterateSimple = __webpack_require__("5388");
+
+var Set = SetHelpers.Set;
+var add = SetHelpers.add;
+var has = SetHelpers.has;
+
+// `Set.prototype.intersection` method
+// https://github.com/tc39/proposal-set-methods
+module.exports = function intersection(other) {
+  var O = aSet(this);
+  var otherRec = getSetRecord(other);
+  var result = new Set();
+
+  if (size(O) > otherRec.size) {
+    iterateSimple(otherRec.getIterator(), function (e) {
+      if (has(O, e)) add(result, e);
+    });
+  } else {
+    iterateSet(O, function (e) {
+      if (otherRec.includes(e)) add(result, e);
+    });
+  }
+
+  return result;
+};
+
+
+/***/ }),
+
+/***/ "9961":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var aSet = __webpack_require__("dc19");
+var SetHelpers = __webpack_require__("cb27");
+var clone = __webpack_require__("83b9");
+var getSetRecord = __webpack_require__("7f65");
+var iterateSimple = __webpack_require__("5388");
+
+var add = SetHelpers.add;
+var has = SetHelpers.has;
+var remove = SetHelpers.remove;
+
+// `Set.prototype.symmetricDifference` method
+// https://github.com/tc39/proposal-set-methods
+module.exports = function symmetricDifference(other) {
+  var O = aSet(this);
+  var keysIter = getSetRecord(other).getIterator();
+  var result = clone(O);
+  iterateSimple(keysIter, function (e) {
+    if (has(O, e)) remove(result, e);
+    else add(result, e);
+  });
+  return result;
+};
+
 
 /***/ }),
 
@@ -4184,7 +4692,7 @@ exports.f = DESCRIPTORS ? V8_PROTOTYPE_DEFINE_BUG ? function defineProperty(O, P
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e0f1e030-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/index.vue?vue&type=template&id=99c91fce&scoped=true
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a1f175e6-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/index.vue?vue&type=template&id=683d5d5c&scoped=true
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c,
@@ -4247,10 +4755,10 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/index.vue?vue&type=template&id=99c91fce&scoped=true
+// CONCATENATED MODULE: ./src/index.vue?vue&type=template&id=683d5d5c&scoped=true
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"e0f1e030-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/Block.vue?vue&type=template&id=45539925&scoped=true
-var Blockvue_type_template_id_45539925_scoped_true_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a1f175e6-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/Block.vue?vue&type=template&id=4d59f6c2&scoped=true
+var Blockvue_type_template_id_4d59f6c2_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
@@ -4264,8 +4772,6 @@ var Blockvue_type_template_id_45539925_scoped_true_render = function render() {
     ref: "draggableContainer",
     class: {
       'block': true,
-      'block-relative': _vm.isRelativeBlock,
-      'block-component': _vm.block.isComponent,
       'highlight': _vm.isResizing || _vm.isDragging,
       'active': _vm.block.isActive,
       'hidden': _vm.block.isHidden,
@@ -4431,10 +4937,10 @@ var Blockvue_type_template_id_45539925_scoped_true_render = function render() {
     "isDragging": _vm.isDragging
   }), _c('div', {
     staticClass: "content custom_scrollbar",
-    class: {
-      'block-parent-relative': !_vm.block.isComponent && _vm.isRelativeBlock
-    },
     style: _vm.blockContentStyle,
+    attrs: {
+      "title": _vm.blockHoverTitle
+    },
     on: {
       "mouseover": function ($event) {
         _vm.block.isHover = true;
@@ -4454,7 +4960,7 @@ var Blockvue_type_template_id_45539925_scoped_true_render = function render() {
     "block": _vm.block
   }) : _vm._e(), _vm._t("toolbar", null, {
     "block": _vm.block
-  }), !_vm.block.isEditing && !_vm.isTabsContainer && !_vm.isRelativeBlock ? _c('svg', {
+  }), !_vm.block.isEditing && !_vm.isTabsContainer ? _c('svg', {
     attrs: {
       "id": "svg"
     }
@@ -4485,15 +4991,21 @@ var Blockvue_type_template_id_45539925_scoped_true_render = function render() {
       refInFor: true,
       attrs: {
         "block": _block,
+        "parent-z-index": _vm.zIndex,
         "tab-settings-service": _vm.tabSettingsService,
         "step": _vm.step,
-        "show-hidden": _vm.showHidden,
-        "is-parent-relative-block": _vm.isRelativeBlock
+        "show-hidden": _vm.showHidden
       },
       on: {
-        "start-drag": _vm.onStartDrag,
-        "stop-drag": _vm.onStopDrag,
-        "dragging": _vm.onDragging,
+        "start-drag": function ($event) {
+          return _vm.$emit('start-drag', $event);
+        },
+        "stop-drag": function ($event) {
+          return _vm.$emit('stop-drag', $event);
+        },
+        "dragging": function ($event) {
+          return _vm.$emit('dragging', $event);
+        },
         "contextmenu": function ($event) {
           return _vm.$emit('contextmenu', $event);
         },
@@ -4532,9 +5044,9 @@ var Blockvue_type_template_id_45539925_scoped_true_render = function render() {
     }
   })], 2);
 };
-var Blockvue_type_template_id_45539925_scoped_true_staticRenderFns = [];
+var Blockvue_type_template_id_4d59f6c2_scoped_true_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/infrastructure/components/Block.vue?vue&type=template&id=45539925&scoped=true
+// CONCATENATED MODULE: ./src/infrastructure/components/Block.vue?vue&type=template&id=4d59f6c2&scoped=true
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.push.js
 var es_array_push = __webpack_require__("14d9");
@@ -4645,7 +5157,6 @@ var SizeTypes = __webpack_require__("9338");
 const Vue = external_commonjs_vue_commonjs2_vue_root_Vue_default.a;
 fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_es["a" /* faAngleDown */], free_solid_svg_icons_index_es["c" /* faChevronRight */], free_solid_svg_icons_index_es["b" /* faChevronLeft */]);
 /* harmony default export */ var Blockvue_type_script_lang_ts = (Vue.extend({
-  // export default {
   name: 'Block',
   mixins: [stickyLinesMixin],
   components: {
@@ -4670,9 +5181,9 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
     tabSettingsService: {
       type: Object
     },
-    isParentRelativeBlock: {
-      type: Boolean,
-      default: false
+    parentZIndex: {
+      type: Number,
+      default: undefined
     }
   },
   data() {
@@ -4793,63 +5304,18 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
       return (((_this$block$tabs = this.block.tabs) === null || _this$block$tabs === void 0 ? void 0 : _this$block$tabs.list) || []).map(item => item.guid);
     },
     zIndex() {
-      var _this$block$tabs3;
+      var _this$parentZIndex, _this$block$tabs2;
       const startIndex = 101;
-      if (!this.block.parentGuid) {
-        var _this$block$tabs2;
-        return startIndex + ((_this$block$tabs2 = this.block.tabs) !== null && _this$block$tabs2 !== void 0 && _this$block$tabs2.use ? 1 : 0);
-      }
-      let parentRef = this.getStore().getRefByGuid(this.block.parentGuid);
-      if (!parentRef) {
-        return startIndex;
-      }
-      return parentRef.zIndex + 1 + ((_this$block$tabs3 = this.block.tabs) !== null && _this$block$tabs3 !== void 0 && _this$block$tabs3.use ? 1 : 0);
+      const base = ((_this$parentZIndex = this.parentZIndex) !== null && _this$parentZIndex !== void 0 ? _this$parentZIndex : startIndex) + (this.block.parentGuid ? 1 : 0);
+      return base + ((_this$block$tabs2 = this.block.tabs) !== null && _this$block$tabs2 !== void 0 && _this$block$tabs2.use ? 1 : 0);
     },
     isTabsContainer() {
-      var _this$block$tabs4;
-      return ((_this$block$tabs4 = this.block.tabs) === null || _this$block$tabs4 === void 0 ? void 0 : _this$block$tabs4.use) || false;
+      var _this$block$tabs3;
+      return ((_this$block$tabs3 = this.block.tabs) === null || _this$block$tabs3 === void 0 ? void 0 : _this$block$tabs3.use) || false;
     },
     directionTabs() {
-      var _this$block$tabs5, _this$block$tabs6;
-      return ((_this$block$tabs5 = this.block.tabs) === null || _this$block$tabs5 === void 0 ? void 0 : _this$block$tabs5.position) === 'left' || ((_this$block$tabs6 = this.block.tabs) === null || _this$block$tabs6 === void 0 ? void 0 : _this$block$tabs6.position) === 'right';
-    },
-    objectStyle() {
-      const styleArray = (this.block.style || '').split(';').map(pair => pair.replace(/\n/g, '').trim()) || [];
-      return styleArray.reduce((acc, item) => {
-        if (!item) return acc;
-        const [key, value] = item.split(':');
-        acc[key] = value;
-        return acc;
-      }, {});
-    },
-    componentStyleFlex() {
-      var _this$block$stylesCom, _this$block$stylesCom2, _this$block$stylesCom3, _this$block$stylesCom4;
-      const result = {};
-      result.minWidth = `${((_this$block$stylesCom = this.block.stylesComponent) === null || _this$block$stylesCom === void 0 ? void 0 : _this$block$stylesCom.minWidth) || 'auto'}`;
-      result.maxWidth = `${((_this$block$stylesCom2 = this.block.stylesComponent) === null || _this$block$stylesCom2 === void 0 ? void 0 : _this$block$stylesCom2.maxWidth) || 'auto'}`;
-      result.flexGrow = `${((_this$block$stylesCom3 = this.block.stylesComponent) === null || _this$block$stylesCom3 === void 0 ? void 0 : _this$block$stylesCom3.flexGrow) || '0'}`;
-      result.flexShrink = `${((_this$block$stylesCom4 = this.block.stylesComponent) === null || _this$block$stylesCom4 === void 0 ? void 0 : _this$block$stylesCom4.flexShrink) || '1'}`;
-      return result;
-    },
-    blockStyleRelative() {
-      var _this$block$customSty, _this$block$customSty2, _this$block$customSty3, _this$block$customSty4, _this$block$customSty5, _this$block$customSty6, _this$block$customSty7, _this$block$customSty8, _this$block$customSty9, _this$block$customSty10, _this$block$customSty11;
-      const result = {};
-      result.width = `${this.block.width}${this.block.sizeTypes.width === 'auto' ? '' : this.block.sizeTypes.width}`;
-      result.height = `${this.block.height}${this.block.sizeTypes.height === 'auto' ? '' : this.block.sizeTypes.height}`;
-      result.minHeight = ((_this$block$customSty = this.block.customStyles) === null || _this$block$customSty === void 0 ? void 0 : _this$block$customSty.minHeight) || 'auto';
-      result.maxHeight = ((_this$block$customSty2 = this.block.customStyles) === null || _this$block$customSty2 === void 0 ? void 0 : _this$block$customSty2.maxHeight) || 'auto';
-      result.paddingLeft = ((_this$block$customSty3 = this.block.customStyles) === null || _this$block$customSty3 === void 0 ? void 0 : _this$block$customSty3.paddingLeft) || '0px';
-      result.paddingRight = ((_this$block$customSty4 = this.block.customStyles) === null || _this$block$customSty4 === void 0 ? void 0 : _this$block$customSty4.paddingRight) || '0px';
-      result.paddingTop = ((_this$block$customSty5 = this.block.customStyles) === null || _this$block$customSty5 === void 0 ? void 0 : _this$block$customSty5.paddingTop) || '0px';
-      result.paddingBottom = ((_this$block$customSty6 = this.block.customStyles) === null || _this$block$customSty6 === void 0 ? void 0 : _this$block$customSty6.paddingBottom) || '0px';
-      result.display = 'flex';
-      result.flexDirection = ((_this$block$customSty7 = this.block.customStyles) === null || _this$block$customSty7 === void 0 ? void 0 : _this$block$customSty7.flexDirection) || 'row';
-      result.justifyContent = ((_this$block$customSty8 = this.block.customStyles) === null || _this$block$customSty8 === void 0 ? void 0 : _this$block$customSty8.justifyContent) || '';
-      result.alignItems = ((_this$block$customSty9 = this.block.customStyles) === null || _this$block$customSty9 === void 0 ? void 0 : _this$block$customSty9.alignItems) || '';
-      result.flexWrap = ((_this$block$customSty10 = this.block.customStyles) === null || _this$block$customSty10 === void 0 ? void 0 : _this$block$customSty10.flexWrap) || '';
-      result.gap = ((_this$block$customSty11 = this.block.customStyles) === null || _this$block$customSty11 === void 0 ? void 0 : _this$block$customSty11.gap) || '';
-      Object.assign(result, this.objectStyle);
-      return result;
+      var _this$block$tabs4, _this$block$tabs5;
+      return ((_this$block$tabs4 = this.block.tabs) === null || _this$block$tabs4 === void 0 ? void 0 : _this$block$tabs4.position) === 'left' || ((_this$block$tabs5 = this.block.tabs) === null || _this$block$tabs5 === void 0 ? void 0 : _this$block$tabs5.position) === 'right';
     },
     positionStyle() {
       var _this$block$stickyTo3, _this$block$stickyTo4, _this$block$stickyTo5, _this$block$onCenter, _this$block$stickyTo6, _this$block$onCenter2, _this$block$stickyTo7, _this$block$onCenter3;
@@ -4910,10 +5376,8 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
           }
         }
       }
-      // let width = this.block.width + this.block.sizeTypes.width
-      let width = `${this.block.width}${this.block.sizeTypes.width === 'auto' ? '' : this.block.sizeTypes.width}`;
-      // let height = this.block.height + this.block.sizeTypes.height
-      let height = `${this.block.height}${this.block.sizeTypes.height === 'auto' ? '' : this.block.sizeTypes.height}`;
+      let width = this.block.width + this.block.sizeTypes.width;
+      let height = this.block.height + this.block.sizeTypes.height;
       if (this.block.widthCalc && this.block.widthCalc.type && this.block.widthCalc.value) {
         width = `calc(${width} ${this.block.widthCalc.type} ${this.block.widthCalc.value}px)`;
       }
@@ -4946,39 +5410,11 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
           position.bottom = `calc(50% - calc(${height} / 2))`;
         }
       }
-      const someStyles = {
+      return Object.assign(position, {
         width: width,
         height: height,
         zIndex: this.zIndex
-      };
-      const isBlockStyleRelative = this.isRelativeBlock && !this.block.isComponent;
-      const isComponentAndParentRelative = this.isParentRelativeBlock && this.block.isComponent;
-      if (isBlockStyleRelative) {
-        var _this$blockStyleRelat;
-        // console.log('blockStyleRelative', this.blockStyleRelative)
-        // console.log('position', position)
-        if (((_this$blockStyleRelat = this.blockStyleRelative) === null || _this$blockStyleRelat === void 0 ? void 0 : _this$blockStyleRelat.height) === 'auto') {
-          someStyles.height = 'auto';
-        }
-        const result = {
-          ...position,
-          ...this.blockStyleRelative,
-          ...someStyles
-        };
-        // console.log('someStyles00', someStyles)
-        console.log('isBlockStyleRelative', result);
-        return result;
-      }
-      if (isComponentAndParentRelative) {
-        const result = {
-          ...someStyles,
-          ...this.componentStyleFlex
-        };
-        console.log('isComponentAndParentRelative', result);
-        return result;
-      }
-      console.log('someStyles2', someStyles);
-      return Object.assign(position, someStyles);
+      });
     },
     blockTabStyle() {
       let style = '';
@@ -5001,6 +5437,13 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
       }
       return style;
     },
+    blockHoverTitle() {
+      if (this.block.isHover) {
+        var _this$block$interacti;
+        return ((_this$block$interacti = this.block.interactive) === null || _this$block$interacti === void 0 ? void 0 : _this$block$interacti.containerTitleHover) || '';
+      }
+      return '';
+    },
     isShowChildren() {
       var _block$properties;
       let isShow = true;
@@ -5009,10 +5452,6 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
         isShow = false;
       }
       return isShow;
-    },
-    isRelativeBlock() {
-      var _this$block5;
-      return ((_this$block5 = this.block) === null || _this$block5 === void 0 ? void 0 : _this$block5.positionBlockCss) === 'relative';
     }
   },
   watch: {
@@ -5096,21 +5535,21 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
     },
     'block.tabs.list': {
       handler() {
-        var _this$block$tabs7, _this$block$tabs9;
+        var _this$block$tabs6, _this$block$tabs8;
         if (this.isTabsContainer) {
           setTimeout(() => {
             this.setIsShowArrows();
           }, 0);
         }
-        if (((_this$block$tabs7 = this.block.tabs) === null || _this$block$tabs7 === void 0 ? void 0 : _this$block$tabs7.list.length) === 1) {
+        if (((_this$block$tabs6 = this.block.tabs) === null || _this$block$tabs6 === void 0 || (_this$block$tabs6 = _this$block$tabs6.list) === null || _this$block$tabs6 === void 0 ? void 0 : _this$block$tabs6.length) === 1) {
           this.block.children.forEach(el => {
-            var _this$block$tabs8;
-            el.parentTabGuid = (_this$block$tabs8 = this.block.tabs) === null || _this$block$tabs8 === void 0 ? void 0 : _this$block$tabs8.list[0].guid;
+            var _this$block$tabs7;
+            el.parentTabGuid = (_this$block$tabs7 = this.block.tabs) === null || _this$block$tabs7 === void 0 ? void 0 : _this$block$tabs7.list[0].guid;
           });
         }
-        if (!((_this$block$tabs9 = this.block.tabs) !== null && _this$block$tabs9 !== void 0 && _this$block$tabs9.list.find(item => item.guid === this.activeTabGuid))) {
-          var _this$block$tabs10;
-          if ((_this$block$tabs10 = this.block.tabs) !== null && _this$block$tabs10 !== void 0 && (_this$block$tabs10 = _this$block$tabs10.list[0]) !== null && _this$block$tabs10 !== void 0 && _this$block$tabs10.guid) {
+        if (!((_this$block$tabs8 = this.block.tabs) !== null && _this$block$tabs8 !== void 0 && _this$block$tabs8.list.find(item => item.guid === this.activeTabGuid))) {
+          var _this$block$tabs9;
+          if ((_this$block$tabs9 = this.block.tabs) !== null && _this$block$tabs9 !== void 0 && (_this$block$tabs9 = _this$block$tabs9.list[0]) !== null && _this$block$tabs9 !== void 0 && _this$block$tabs9.guid) {
             this.onTabClick(this.block.tabs.list[0].guid);
           }
         }
@@ -5127,9 +5566,6 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
         }
         let parentSize = this.$el.parentElement.offsetWidth;
         const oldValue = this.block.width;
-        if (value === SizeTypes["a" /* SizeTypes */].AUTO || typeof oldValue !== 'number') {
-          return;
-        }
         this.block.width = this.calcSwitchedSizes(value, parentSize, oldValue);
       },
       deep: true
@@ -5144,9 +5580,6 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
         }
         let parentSize = this.$el.parentElement.offsetHeight;
         const oldValue = this.block.height;
-        if (value === SizeTypes["a" /* SizeTypes */].AUTO || typeof oldValue !== 'number') {
-          return;
-        }
         this.block.height = this.calcSwitchedSizes(value, parentSize, oldValue);
       },
       deep: true
@@ -5240,33 +5673,24 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
     }
   },
   mounted() {
-    var _this$block6, _this$block7;
-    if ((_this$block6 = this.block) !== null && _this$block6 !== void 0 && (_this$block6 = _this$block6.tabs) !== null && _this$block6 !== void 0 && _this$block6.use && ((_this$block7 = this.block) === null || _this$block7 === void 0 || (_this$block7 = _this$block7.tabs) === null || _this$block7 === void 0 || (_this$block7 = _this$block7.list) === null || _this$block7 === void 0 ? void 0 : _this$block7.length) > 0) {
+    var _this$block5, _this$block6;
+    if ((_this$block5 = this.block) !== null && _this$block5 !== void 0 && (_this$block5 = _this$block5.tabs) !== null && _this$block5 !== void 0 && _this$block5.use && ((_this$block6 = this.block) === null || _this$block6 === void 0 || (_this$block6 = _this$block6.tabs) === null || _this$block6 === void 0 || (_this$block6 = _this$block6.list) === null || _this$block6 === void 0 ? void 0 : _this$block6.length) > 0) {
       this.onTabClick(this.block.tabs.list[0].guid);
     }
     this.getStore().addRef(this.block.guid, this);
     this.$nextTick(() => {
-      var _this$block8;
+      var _this$block7;
       this.onDrag();
       if (this.isTabsContainer) {
         this.setIsShowArrows();
       }
-      this.setSticky((_this$block8 = this.block) === null || _this$block8 === void 0 || (_this$block8 = _this$block8.stickyTo) === null || _this$block8 === void 0 ? void 0 : _this$block8.guid);
+      this.setSticky((_this$block7 = this.block) === null || _this$block7 === void 0 || (_this$block7 = _this$block7.stickyTo) === null || _this$block7 === void 0 ? void 0 : _this$block7.guid);
     });
   },
   beforeDestroy() {
     this.getStore().removeRef(this.block.guid);
   },
   methods: {
-    onStartDrag(event) {
-      this.$emit('start-drag', event);
-    },
-    onStopDrag(event) {
-      this.$emit('stop-drag', event);
-    },
-    onDragging(event) {
-      this.$emit('dragging', event);
-    },
     showChildTabs(guid) {
       if (this.block.tabs) {
         this.visibleTabs.forEach(tab => {
@@ -5289,7 +5713,7 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
       }
     },
     setIsShowArrows() {
-      var _this$block$tabs11, _this$block$tabs12;
+      var _this$block$tabs10, _this$block$tabs11;
       if (!this.$refs.draggableContainer) return;
       const tabsScroll = this.$refs.tabsScroll;
       const draggableContainer = this.$refs.draggableContainer;
@@ -5297,7 +5721,7 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
       this.tabsWidth = tabsScroll.offsetWidth;
       const blockWidth = draggableContainer.offsetWidth;
       this.blockWidth = draggableContainer.offsetWidth;
-      if (tabsWidth > blockWidth && ((_this$block$tabs11 = this.block.tabs) === null || _this$block$tabs11 === void 0 ? void 0 : _this$block$tabs11.position) !== 'left' && ((_this$block$tabs12 = this.block.tabs) === null || _this$block$tabs12 === void 0 ? void 0 : _this$block$tabs12.position) !== 'right') {
+      if (tabsWidth > blockWidth && ((_this$block$tabs10 = this.block.tabs) === null || _this$block$tabs10 === void 0 ? void 0 : _this$block$tabs10.position) !== 'left' && ((_this$block$tabs11 = this.block.tabs) === null || _this$block$tabs11 === void 0 ? void 0 : _this$block$tabs11.position) !== 'right') {
         this.isShowArrows = true;
       } else {
         this.isShowArrows = false;
@@ -5459,11 +5883,10 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
     }
   }
 }));
-// }
 // CONCATENATED MODULE: ./src/infrastructure/components/Block.vue?vue&type=script&lang=ts
  /* harmony default export */ var components_Blockvue_type_script_lang_ts = (Blockvue_type_script_lang_ts); 
-// EXTERNAL MODULE: ./src/infrastructure/components/Block.vue?vue&type=style&index=0&id=45539925&prod&scoped=true&lang=css
-var Blockvue_type_style_index_0_id_45539925_prod_scoped_true_lang_css = __webpack_require__("b022");
+// EXTERNAL MODULE: ./src/infrastructure/components/Block.vue?vue&type=style&index=0&id=4d59f6c2&prod&scoped=true&lang=css
+var Blockvue_type_style_index_0_id_4d59f6c2_prod_scoped_true_lang_css = __webpack_require__("1598");
 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__("2877");
@@ -5479,11 +5902,11 @@ var componentNormalizer = __webpack_require__("2877");
 
 var component = Object(componentNormalizer["a" /* default */])(
   components_Blockvue_type_script_lang_ts,
-  Blockvue_type_template_id_45539925_scoped_true_render,
-  Blockvue_type_template_id_45539925_scoped_true_staticRenderFns,
+  Blockvue_type_template_id_4d59f6c2_scoped_true_render,
+  Blockvue_type_template_id_4d59f6c2_scoped_true_staticRenderFns,
   false,
   null,
-  "45539925",
+  "4d59f6c2",
   null
   
 )
@@ -5529,14 +5952,12 @@ var TabSettings = __webpack_require__("6b0c");
 
 const lib_vue_loader_options_srcvue_type_script_lang_ts_Vue = external_commonjs_vue_commonjs2_vue_root_Vue_default.a;
 /* harmony default export */ var lib_vue_loader_options_srcvue_type_script_lang_ts = (lib_vue_loader_options_srcvue_type_script_lang_ts_Vue.extend({
-  // export default {
   name: 'VueDraggableResponsiveDesigner',
   components: {
     Block: Block
   },
   provide() {
     return {
-      // @ts-ignore
       getStore: this.getStore
     };
   },
@@ -5555,10 +5976,6 @@ const lib_vue_loader_options_srcvue_type_script_lang_ts_Vue = external_commonjs_
     },
     tabSettings: {
       type: Object
-    },
-    activeBlock: {
-      type: Object,
-      default: () => ({})
     }
   },
   data() {
@@ -5569,19 +5986,10 @@ const lib_vue_loader_options_srcvue_type_script_lang_ts_Vue = external_commonjs_
     };
   },
   computed: {
-    isRelativeV2() {
-      var _this$activeBlock, _this$activeBlock2;
-      if ((_this$activeBlock = this.activeBlock) !== null && _this$activeBlock !== void 0 && _this$activeBlock.parentGuid) {
-        const block = this.store.getByGuid(this.activeBlock.parentGuid);
-        return (block === null || block === void 0 ? void 0 : block.positionBlockCss) === 'relative';
-      }
-      return ((_this$activeBlock2 = this.activeBlock) === null || _this$activeBlock2 === void 0 ? void 0 : _this$activeBlock2.positionBlockCss) === 'relative';
-    },
     _blocks() {
       return this.getStore().get();
     },
     stickyLines() {
-      // @ts-ignore
       return this.getStore().getStickyLines();
     }
   },
@@ -5676,23 +6084,14 @@ const lib_vue_loader_options_srcvue_type_script_lang_ts_Vue = external_commonjs_
       pagination = undefined,
       minMax = undefined,
       onCenter = undefined,
-      alias = undefined,
-      positionBlockCss = 'absolute',
-      isComponent = false
+      alias = undefined
     }) {
-      console.log('iscomponent', isComponent);
-      if (!this.isRelativeV2) {
-        if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
-          const position = this.getMousePosition(event, sizeTypes);
-          top = position.top;
-          right = position.right;
-          bottom = position.bottom;
-          left = position.left;
-        }
-      }
-      let adjustPositionBlockCss = positionBlockCss;
-      if (this.isRelativeV2 && !isComponent) {
-        adjustPositionBlockCss = this.isRelativeV2 ? 'relative' : positionBlockCss;
+      if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
+        const position = this.getMousePosition(event, sizeTypes);
+        top = position.top;
+        right = position.right;
+        bottom = position.bottom;
+        left = position.left;
       }
       const guid = this.store.add({
         width,
@@ -5712,34 +6111,26 @@ const lib_vue_loader_options_srcvue_type_script_lang_ts_Vue = external_commonjs_
         pagination,
         minMax,
         onCenter,
-        alias,
-        positionBlockCss: adjustPositionBlockCss,
-        isComponent
+        alias
       });
-      if (!this.isRelativeV2) {
-        if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
-          this.$nextTick(() => {
-            const block = this.getAllBlockRefs()[guid];
-            block.onDrag();
-            block.dragStart(event, true);
-          });
-        }
+      if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
+        this.$nextTick(() => {
+          const block = this.getAllBlockRefs()[guid];
+          block.onDrag();
+          block.dragStart(event, true);
+        });
       }
       return guid;
     },
     removeBlock(guid) {
       this.store.remove(guid);
-    },
-    setPosition(guid, positionCss) {
-      this.store.setPosition(guid, positionCss);
     }
   }
 }));
-// }
 // CONCATENATED MODULE: ./src/index.vue?vue&type=script&lang=ts
  /* harmony default export */ var srcvue_type_script_lang_ts = (lib_vue_loader_options_srcvue_type_script_lang_ts); 
-// EXTERNAL MODULE: ./src/index.vue?vue&type=style&index=0&id=99c91fce&prod&scoped=true&lang=css
-var srcvue_type_style_index_0_id_99c91fce_prod_scoped_true_lang_css = __webpack_require__("2565");
+// EXTERNAL MODULE: ./src/index.vue?vue&type=style&index=0&id=683d5d5c&prod&scoped=true&lang=css
+var srcvue_type_style_index_0_id_683d5d5c_prod_scoped_true_lang_css = __webpack_require__("e8dd");
 
 // CONCATENATED MODULE: ./src/index.vue
 
@@ -5756,7 +6147,7 @@ var src_component = Object(componentNormalizer["a" /* default */])(
   staticRenderFns,
   false,
   null,
-  "99c91fce",
+  "683d5d5c",
   null
   
 )
@@ -5783,6 +6174,65 @@ module.exports = function (argument) {
 
 /***/ }),
 
+/***/ "a2b9":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "a4e7":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__("23e7");
+var isSupersetOf = __webpack_require__("395e");
+var setMethodAcceptSetLike = __webpack_require__("dad2");
+
+// `Set.prototype.isSupersetOf` method
+// https://github.com/tc39/proposal-set-methods
+$({ target: 'Set', proto: true, real: true, forced: !setMethodAcceptSetLike('isSupersetOf') }, {
+  isSupersetOf: isSupersetOf
+});
+
+
+/***/ }),
+
+/***/ "a5f7":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var aSet = __webpack_require__("dc19");
+var SetHelpers = __webpack_require__("cb27");
+var clone = __webpack_require__("83b9");
+var size = __webpack_require__("8e16");
+var getSetRecord = __webpack_require__("7f65");
+var iterateSet = __webpack_require__("384f");
+var iterateSimple = __webpack_require__("5388");
+
+var has = SetHelpers.has;
+var remove = SetHelpers.remove;
+
+// `Set.prototype.difference` method
+// https://github.com/tc39/proposal-set-methods
+module.exports = function difference(other) {
+  var O = aSet(this);
+  var otherRec = getSetRecord(other);
+  var result = clone(O);
+  if (size(O) <= otherRec.size) iterateSet(O, function (e) {
+    if (otherRec.includes(e)) remove(result, e);
+  });
+  else iterateSimple(otherRec.getIterator(), function (e) {
+    if (has(O, e)) remove(result, e);
+  });
+  return result;
+};
+
+
+/***/ }),
+
 /***/ "a640":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5798,6 +6248,13 @@ module.exports = function (METHOD_NAME, argument) {
   });
 };
 
+
+/***/ }),
+
+/***/ "ad39":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -6462,17 +6919,6 @@ module.exports = DESCRIPTORS && fails(function () {
 
 /***/ }),
 
-/***/ "b022":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Block_vue_vue_type_style_index_0_id_45539925_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("404a");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Block_vue_vue_type_style_index_0_id_45539925_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Block_vue_vue_type_style_index_0_id_45539925_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
-
-
-/***/ }),
-
 /***/ "b42e":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -6487,6 +6933,36 @@ var floor = Math.floor;
 module.exports = Math.trunc || function trunc(x) {
   var n = +x;
   return (n > 0 ? floor : ceil)(n);
+};
+
+
+/***/ }),
+
+/***/ "b4bc":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var aSet = __webpack_require__("dc19");
+var has = __webpack_require__("cb27").has;
+var size = __webpack_require__("8e16");
+var getSetRecord = __webpack_require__("7f65");
+var iterateSet = __webpack_require__("384f");
+var iterateSimple = __webpack_require__("5388");
+var iteratorClose = __webpack_require__("2a62");
+
+// `Set.prototype.isDisjointFrom` method
+// https://tc39.github.io/proposal-set-methods/#Set.prototype.isDisjointFrom
+module.exports = function isDisjointFrom(other) {
+  var O = aSet(this);
+  var otherRec = getSetRecord(other);
+  if (size(O) <= otherRec.size) return iterateSet(O, function (e) {
+    if (otherRec.includes(e)) return false;
+  }, true) !== false;
+  var iterator = otherRec.getIterator();
+  return iterateSimple(iterator, function (e) {
+    if (has(O, e)) return iteratorClose(iterator, 'normal', false);
+  }) !== false;
 };
 
 
@@ -6573,6 +7049,17 @@ if (GlobalVue) {
 /* harmony default export */ __webpack_exports__["c"] = (VueDraggableResponsive);
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("c8ba")))
+
+/***/ }),
+
+/***/ "bb1a":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_2b644cad_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("ad39");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_2b644cad_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_2b644cad_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+
 
 /***/ }),
 
@@ -13643,6 +14130,24 @@ var _iconsCache = {
 
 /***/ }),
 
+/***/ "c1a1":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__("23e7");
+var isDisjointFrom = __webpack_require__("b4bc");
+var setMethodAcceptSetLike = __webpack_require__("dad2");
+
+// `Set.prototype.isDisjointFrom` method
+// https://github.com/tc39/proposal-set-methods
+$({ target: 'Set', proto: true, real: true, forced: !setMethodAcceptSetLike('isDisjointFrom') }, {
+  isDisjointFrom: isDisjointFrom
+});
+
+
+/***/ }),
+
 /***/ "c430":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13988,10 +14493,8 @@ class BlockManager_BlockManager {
       return blockRect;
     }
     const parentElementRect = parentElement.getBoundingClientRect();
-    if (typeof block.height === 'number' && typeof block.width === 'number') {
-      blockRect.height = parentElementRect.height / 100 * block.height;
-      blockRect.width = parentElementRect.width / 100 * block.width;
-    }
+    blockRect.height = parentElementRect.height / 100 * block.height;
+    blockRect.width = parentElementRect.width / 100 * block.width;
     return blockRect;
   }
   // TODO: учитывать sticky
@@ -14141,6 +14644,28 @@ module.exports = function (object, names) {
 
 /***/ }),
 
+/***/ "cb27":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var uncurryThis = __webpack_require__("e330");
+
+// eslint-disable-next-line es/no-set -- safe
+var SetPrototype = Set.prototype;
+
+module.exports = {
+  // eslint-disable-next-line es/no-set -- safe
+  Set: Set,
+  add: uncurryThis(SetPrototype.add),
+  has: uncurryThis(SetPrototype.has),
+  remove: uncurryThis(SetPrototype['delete']),
+  proto: SetPrototype
+};
+
+
+/***/ }),
+
 /***/ "cb2d":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14244,7 +14769,7 @@ class BlockDTO_BlockDTO {
     guid = 'guid',
     alias,
     parentGuid,
-    isStretched = false,
+    isStretched,
     isScrollHover,
     style,
     interactive,
@@ -14262,11 +14787,7 @@ class BlockDTO_BlockDTO {
     onCenter,
     properties = {},
     isLoading = false,
-    disabledMove = false,
-    isComponent = false,
-    customStyles = {},
-    stylesComponent = {},
-    positionBlockCss = 'absolute'
+    disabledMove = false
   }) {
     this.isStretched = false;
     this.isActive = false;
@@ -14283,7 +14804,6 @@ class BlockDTO_BlockDTO {
     this.properties = {};
     this.isLoading = false;
     this.disabledMove = false;
-    this.isComponent = false;
     this.widthCalc = widthCalc;
     this.heightCalc = heightCalc;
     this.stickyTo = stickyTo;
@@ -14330,10 +14850,6 @@ class BlockDTO_BlockDTO {
     this.isLoading = isLoading;
     this.disabledMove = disabledMove;
     this.prepareSizesTypes();
-    this.positionBlockCss = positionBlockCss;
-    this.isComponent = isComponent;
-    this.customStyles = customStyles;
-    this.stylesComponent = stylesComponent;
   }
   static getPreparedSizes({
     top,
@@ -14367,6 +14883,1762 @@ class BlockDTO_BlockDTO {
     });
   }
 }
+
+/***/ }),
+
+/***/ "cd3f":
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global, module) {/**
+ * lodash (Custom Build) <https://lodash.com/>
+ * Build: `lodash modularize exports="npm" -o ./`
+ * Copyright jQuery Foundation and other contributors <https://jquery.org/>
+ * Released under MIT license <https://lodash.com/license>
+ * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+ * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ */
+
+/** Used as the size to enable large array optimizations. */
+var LARGE_ARRAY_SIZE = 200;
+
+/** Used to stand-in for `undefined` hash values. */
+var HASH_UNDEFINED = '__lodash_hash_undefined__';
+
+/** Used as references for various `Number` constants. */
+var MAX_SAFE_INTEGER = 9007199254740991;
+
+/** `Object#toString` result references. */
+var argsTag = '[object Arguments]',
+    arrayTag = '[object Array]',
+    boolTag = '[object Boolean]',
+    dateTag = '[object Date]',
+    errorTag = '[object Error]',
+    funcTag = '[object Function]',
+    genTag = '[object GeneratorFunction]',
+    mapTag = '[object Map]',
+    numberTag = '[object Number]',
+    objectTag = '[object Object]',
+    promiseTag = '[object Promise]',
+    regexpTag = '[object RegExp]',
+    setTag = '[object Set]',
+    stringTag = '[object String]',
+    symbolTag = '[object Symbol]',
+    weakMapTag = '[object WeakMap]';
+
+var arrayBufferTag = '[object ArrayBuffer]',
+    dataViewTag = '[object DataView]',
+    float32Tag = '[object Float32Array]',
+    float64Tag = '[object Float64Array]',
+    int8Tag = '[object Int8Array]',
+    int16Tag = '[object Int16Array]',
+    int32Tag = '[object Int32Array]',
+    uint8Tag = '[object Uint8Array]',
+    uint8ClampedTag = '[object Uint8ClampedArray]',
+    uint16Tag = '[object Uint16Array]',
+    uint32Tag = '[object Uint32Array]';
+
+/**
+ * Used to match `RegExp`
+ * [syntax characters](http://ecma-international.org/ecma-262/7.0/#sec-patterns).
+ */
+var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
+
+/** Used to match `RegExp` flags from their coerced string values. */
+var reFlags = /\w*$/;
+
+/** Used to detect host constructors (Safari). */
+var reIsHostCtor = /^\[object .+?Constructor\]$/;
+
+/** Used to detect unsigned integer values. */
+var reIsUint = /^(?:0|[1-9]\d*)$/;
+
+/** Used to identify `toStringTag` values supported by `_.clone`. */
+var cloneableTags = {};
+cloneableTags[argsTag] = cloneableTags[arrayTag] =
+cloneableTags[arrayBufferTag] = cloneableTags[dataViewTag] =
+cloneableTags[boolTag] = cloneableTags[dateTag] =
+cloneableTags[float32Tag] = cloneableTags[float64Tag] =
+cloneableTags[int8Tag] = cloneableTags[int16Tag] =
+cloneableTags[int32Tag] = cloneableTags[mapTag] =
+cloneableTags[numberTag] = cloneableTags[objectTag] =
+cloneableTags[regexpTag] = cloneableTags[setTag] =
+cloneableTags[stringTag] = cloneableTags[symbolTag] =
+cloneableTags[uint8Tag] = cloneableTags[uint8ClampedTag] =
+cloneableTags[uint16Tag] = cloneableTags[uint32Tag] = true;
+cloneableTags[errorTag] = cloneableTags[funcTag] =
+cloneableTags[weakMapTag] = false;
+
+/** Detect free variable `global` from Node.js. */
+var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+
+/** Detect free variable `self`. */
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+/** Used as a reference to the global object. */
+var root = freeGlobal || freeSelf || Function('return this')();
+
+/** Detect free variable `exports`. */
+var freeExports =  true && exports && !exports.nodeType && exports;
+
+/** Detect free variable `module`. */
+var freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module;
+
+/** Detect the popular CommonJS extension `module.exports`. */
+var moduleExports = freeModule && freeModule.exports === freeExports;
+
+/**
+ * Adds the key-value `pair` to `map`.
+ *
+ * @private
+ * @param {Object} map The map to modify.
+ * @param {Array} pair The key-value pair to add.
+ * @returns {Object} Returns `map`.
+ */
+function addMapEntry(map, pair) {
+  // Don't return `map.set` because it's not chainable in IE 11.
+  map.set(pair[0], pair[1]);
+  return map;
+}
+
+/**
+ * Adds `value` to `set`.
+ *
+ * @private
+ * @param {Object} set The set to modify.
+ * @param {*} value The value to add.
+ * @returns {Object} Returns `set`.
+ */
+function addSetEntry(set, value) {
+  // Don't return `set.add` because it's not chainable in IE 11.
+  set.add(value);
+  return set;
+}
+
+/**
+ * A specialized version of `_.forEach` for arrays without support for
+ * iteratee shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @returns {Array} Returns `array`.
+ */
+function arrayEach(array, iteratee) {
+  var index = -1,
+      length = array ? array.length : 0;
+
+  while (++index < length) {
+    if (iteratee(array[index], index, array) === false) {
+      break;
+    }
+  }
+  return array;
+}
+
+/**
+ * Appends the elements of `values` to `array`.
+ *
+ * @private
+ * @param {Array} array The array to modify.
+ * @param {Array} values The values to append.
+ * @returns {Array} Returns `array`.
+ */
+function arrayPush(array, values) {
+  var index = -1,
+      length = values.length,
+      offset = array.length;
+
+  while (++index < length) {
+    array[offset + index] = values[index];
+  }
+  return array;
+}
+
+/**
+ * A specialized version of `_.reduce` for arrays without support for
+ * iteratee shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @param {*} [accumulator] The initial value.
+ * @param {boolean} [initAccum] Specify using the first element of `array` as
+ *  the initial value.
+ * @returns {*} Returns the accumulated value.
+ */
+function arrayReduce(array, iteratee, accumulator, initAccum) {
+  var index = -1,
+      length = array ? array.length : 0;
+
+  if (initAccum && length) {
+    accumulator = array[++index];
+  }
+  while (++index < length) {
+    accumulator = iteratee(accumulator, array[index], index, array);
+  }
+  return accumulator;
+}
+
+/**
+ * The base implementation of `_.times` without support for iteratee shorthands
+ * or max array length checks.
+ *
+ * @private
+ * @param {number} n The number of times to invoke `iteratee`.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @returns {Array} Returns the array of results.
+ */
+function baseTimes(n, iteratee) {
+  var index = -1,
+      result = Array(n);
+
+  while (++index < n) {
+    result[index] = iteratee(index);
+  }
+  return result;
+}
+
+/**
+ * Gets the value at `key` of `object`.
+ *
+ * @private
+ * @param {Object} [object] The object to query.
+ * @param {string} key The key of the property to get.
+ * @returns {*} Returns the property value.
+ */
+function getValue(object, key) {
+  return object == null ? undefined : object[key];
+}
+
+/**
+ * Checks if `value` is a host object in IE < 9.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a host object, else `false`.
+ */
+function isHostObject(value) {
+  // Many host objects are `Object` objects that can coerce to strings
+  // despite having improperly defined `toString` methods.
+  var result = false;
+  if (value != null && typeof value.toString != 'function') {
+    try {
+      result = !!(value + '');
+    } catch (e) {}
+  }
+  return result;
+}
+
+/**
+ * Converts `map` to its key-value pairs.
+ *
+ * @private
+ * @param {Object} map The map to convert.
+ * @returns {Array} Returns the key-value pairs.
+ */
+function mapToArray(map) {
+  var index = -1,
+      result = Array(map.size);
+
+  map.forEach(function(value, key) {
+    result[++index] = [key, value];
+  });
+  return result;
+}
+
+/**
+ * Creates a unary function that invokes `func` with its argument transformed.
+ *
+ * @private
+ * @param {Function} func The function to wrap.
+ * @param {Function} transform The argument transform.
+ * @returns {Function} Returns the new function.
+ */
+function overArg(func, transform) {
+  return function(arg) {
+    return func(transform(arg));
+  };
+}
+
+/**
+ * Converts `set` to an array of its values.
+ *
+ * @private
+ * @param {Object} set The set to convert.
+ * @returns {Array} Returns the values.
+ */
+function setToArray(set) {
+  var index = -1,
+      result = Array(set.size);
+
+  set.forEach(function(value) {
+    result[++index] = value;
+  });
+  return result;
+}
+
+/** Used for built-in method references. */
+var arrayProto = Array.prototype,
+    funcProto = Function.prototype,
+    objectProto = Object.prototype;
+
+/** Used to detect overreaching core-js shims. */
+var coreJsData = root['__core-js_shared__'];
+
+/** Used to detect methods masquerading as native. */
+var maskSrcKey = (function() {
+  var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || '');
+  return uid ? ('Symbol(src)_1.' + uid) : '';
+}());
+
+/** Used to resolve the decompiled source of functions. */
+var funcToString = funcProto.toString;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var objectToString = objectProto.toString;
+
+/** Used to detect if a method is native. */
+var reIsNative = RegExp('^' +
+  funcToString.call(hasOwnProperty).replace(reRegExpChar, '\\$&')
+  .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
+);
+
+/** Built-in value references. */
+var Buffer = moduleExports ? root.Buffer : undefined,
+    Symbol = root.Symbol,
+    Uint8Array = root.Uint8Array,
+    getPrototype = overArg(Object.getPrototypeOf, Object),
+    objectCreate = Object.create,
+    propertyIsEnumerable = objectProto.propertyIsEnumerable,
+    splice = arrayProto.splice;
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeGetSymbols = Object.getOwnPropertySymbols,
+    nativeIsBuffer = Buffer ? Buffer.isBuffer : undefined,
+    nativeKeys = overArg(Object.keys, Object);
+
+/* Built-in method references that are verified to be native. */
+var DataView = getNative(root, 'DataView'),
+    Map = getNative(root, 'Map'),
+    Promise = getNative(root, 'Promise'),
+    Set = getNative(root, 'Set'),
+    WeakMap = getNative(root, 'WeakMap'),
+    nativeCreate = getNative(Object, 'create');
+
+/** Used to detect maps, sets, and weakmaps. */
+var dataViewCtorString = toSource(DataView),
+    mapCtorString = toSource(Map),
+    promiseCtorString = toSource(Promise),
+    setCtorString = toSource(Set),
+    weakMapCtorString = toSource(WeakMap);
+
+/** Used to convert symbols to primitives and strings. */
+var symbolProto = Symbol ? Symbol.prototype : undefined,
+    symbolValueOf = symbolProto ? symbolProto.valueOf : undefined;
+
+/**
+ * Creates a hash object.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
+function Hash(entries) {
+  var index = -1,
+      length = entries ? entries.length : 0;
+
+  this.clear();
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
+}
+
+/**
+ * Removes all key-value entries from the hash.
+ *
+ * @private
+ * @name clear
+ * @memberOf Hash
+ */
+function hashClear() {
+  this.__data__ = nativeCreate ? nativeCreate(null) : {};
+}
+
+/**
+ * Removes `key` and its value from the hash.
+ *
+ * @private
+ * @name delete
+ * @memberOf Hash
+ * @param {Object} hash The hash to modify.
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
+function hashDelete(key) {
+  return this.has(key) && delete this.__data__[key];
+}
+
+/**
+ * Gets the hash value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf Hash
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
+function hashGet(key) {
+  var data = this.__data__;
+  if (nativeCreate) {
+    var result = data[key];
+    return result === HASH_UNDEFINED ? undefined : result;
+  }
+  return hasOwnProperty.call(data, key) ? data[key] : undefined;
+}
+
+/**
+ * Checks if a hash value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf Hash
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function hashHas(key) {
+  var data = this.__data__;
+  return nativeCreate ? data[key] !== undefined : hasOwnProperty.call(data, key);
+}
+
+/**
+ * Sets the hash `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf Hash
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the hash instance.
+ */
+function hashSet(key, value) {
+  var data = this.__data__;
+  data[key] = (nativeCreate && value === undefined) ? HASH_UNDEFINED : value;
+  return this;
+}
+
+// Add methods to `Hash`.
+Hash.prototype.clear = hashClear;
+Hash.prototype['delete'] = hashDelete;
+Hash.prototype.get = hashGet;
+Hash.prototype.has = hashHas;
+Hash.prototype.set = hashSet;
+
+/**
+ * Creates an list cache object.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
+function ListCache(entries) {
+  var index = -1,
+      length = entries ? entries.length : 0;
+
+  this.clear();
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
+}
+
+/**
+ * Removes all key-value entries from the list cache.
+ *
+ * @private
+ * @name clear
+ * @memberOf ListCache
+ */
+function listCacheClear() {
+  this.__data__ = [];
+}
+
+/**
+ * Removes `key` and its value from the list cache.
+ *
+ * @private
+ * @name delete
+ * @memberOf ListCache
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
+function listCacheDelete(key) {
+  var data = this.__data__,
+      index = assocIndexOf(data, key);
+
+  if (index < 0) {
+    return false;
+  }
+  var lastIndex = data.length - 1;
+  if (index == lastIndex) {
+    data.pop();
+  } else {
+    splice.call(data, index, 1);
+  }
+  return true;
+}
+
+/**
+ * Gets the list cache value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf ListCache
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
+function listCacheGet(key) {
+  var data = this.__data__,
+      index = assocIndexOf(data, key);
+
+  return index < 0 ? undefined : data[index][1];
+}
+
+/**
+ * Checks if a list cache value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf ListCache
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function listCacheHas(key) {
+  return assocIndexOf(this.__data__, key) > -1;
+}
+
+/**
+ * Sets the list cache `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf ListCache
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the list cache instance.
+ */
+function listCacheSet(key, value) {
+  var data = this.__data__,
+      index = assocIndexOf(data, key);
+
+  if (index < 0) {
+    data.push([key, value]);
+  } else {
+    data[index][1] = value;
+  }
+  return this;
+}
+
+// Add methods to `ListCache`.
+ListCache.prototype.clear = listCacheClear;
+ListCache.prototype['delete'] = listCacheDelete;
+ListCache.prototype.get = listCacheGet;
+ListCache.prototype.has = listCacheHas;
+ListCache.prototype.set = listCacheSet;
+
+/**
+ * Creates a map cache object to store key-value pairs.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
+function MapCache(entries) {
+  var index = -1,
+      length = entries ? entries.length : 0;
+
+  this.clear();
+  while (++index < length) {
+    var entry = entries[index];
+    this.set(entry[0], entry[1]);
+  }
+}
+
+/**
+ * Removes all key-value entries from the map.
+ *
+ * @private
+ * @name clear
+ * @memberOf MapCache
+ */
+function mapCacheClear() {
+  this.__data__ = {
+    'hash': new Hash,
+    'map': new (Map || ListCache),
+    'string': new Hash
+  };
+}
+
+/**
+ * Removes `key` and its value from the map.
+ *
+ * @private
+ * @name delete
+ * @memberOf MapCache
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
+function mapCacheDelete(key) {
+  return getMapData(this, key)['delete'](key);
+}
+
+/**
+ * Gets the map value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf MapCache
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
+function mapCacheGet(key) {
+  return getMapData(this, key).get(key);
+}
+
+/**
+ * Checks if a map value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf MapCache
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function mapCacheHas(key) {
+  return getMapData(this, key).has(key);
+}
+
+/**
+ * Sets the map `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf MapCache
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the map cache instance.
+ */
+function mapCacheSet(key, value) {
+  getMapData(this, key).set(key, value);
+  return this;
+}
+
+// Add methods to `MapCache`.
+MapCache.prototype.clear = mapCacheClear;
+MapCache.prototype['delete'] = mapCacheDelete;
+MapCache.prototype.get = mapCacheGet;
+MapCache.prototype.has = mapCacheHas;
+MapCache.prototype.set = mapCacheSet;
+
+/**
+ * Creates a stack cache object to store key-value pairs.
+ *
+ * @private
+ * @constructor
+ * @param {Array} [entries] The key-value pairs to cache.
+ */
+function Stack(entries) {
+  this.__data__ = new ListCache(entries);
+}
+
+/**
+ * Removes all key-value entries from the stack.
+ *
+ * @private
+ * @name clear
+ * @memberOf Stack
+ */
+function stackClear() {
+  this.__data__ = new ListCache;
+}
+
+/**
+ * Removes `key` and its value from the stack.
+ *
+ * @private
+ * @name delete
+ * @memberOf Stack
+ * @param {string} key The key of the value to remove.
+ * @returns {boolean} Returns `true` if the entry was removed, else `false`.
+ */
+function stackDelete(key) {
+  return this.__data__['delete'](key);
+}
+
+/**
+ * Gets the stack value for `key`.
+ *
+ * @private
+ * @name get
+ * @memberOf Stack
+ * @param {string} key The key of the value to get.
+ * @returns {*} Returns the entry value.
+ */
+function stackGet(key) {
+  return this.__data__.get(key);
+}
+
+/**
+ * Checks if a stack value for `key` exists.
+ *
+ * @private
+ * @name has
+ * @memberOf Stack
+ * @param {string} key The key of the entry to check.
+ * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
+ */
+function stackHas(key) {
+  return this.__data__.has(key);
+}
+
+/**
+ * Sets the stack `key` to `value`.
+ *
+ * @private
+ * @name set
+ * @memberOf Stack
+ * @param {string} key The key of the value to set.
+ * @param {*} value The value to set.
+ * @returns {Object} Returns the stack cache instance.
+ */
+function stackSet(key, value) {
+  var cache = this.__data__;
+  if (cache instanceof ListCache) {
+    var pairs = cache.__data__;
+    if (!Map || (pairs.length < LARGE_ARRAY_SIZE - 1)) {
+      pairs.push([key, value]);
+      return this;
+    }
+    cache = this.__data__ = new MapCache(pairs);
+  }
+  cache.set(key, value);
+  return this;
+}
+
+// Add methods to `Stack`.
+Stack.prototype.clear = stackClear;
+Stack.prototype['delete'] = stackDelete;
+Stack.prototype.get = stackGet;
+Stack.prototype.has = stackHas;
+Stack.prototype.set = stackSet;
+
+/**
+ * Creates an array of the enumerable property names of the array-like `value`.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @param {boolean} inherited Specify returning inherited property names.
+ * @returns {Array} Returns the array of property names.
+ */
+function arrayLikeKeys(value, inherited) {
+  // Safari 8.1 makes `arguments.callee` enumerable in strict mode.
+  // Safari 9 makes `arguments.length` enumerable in strict mode.
+  var result = (isArray(value) || isArguments(value))
+    ? baseTimes(value.length, String)
+    : [];
+
+  var length = result.length,
+      skipIndexes = !!length;
+
+  for (var key in value) {
+    if ((inherited || hasOwnProperty.call(value, key)) &&
+        !(skipIndexes && (key == 'length' || isIndex(key, length)))) {
+      result.push(key);
+    }
+  }
+  return result;
+}
+
+/**
+ * Assigns `value` to `key` of `object` if the existing value is not equivalent
+ * using [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+ * for equality comparisons.
+ *
+ * @private
+ * @param {Object} object The object to modify.
+ * @param {string} key The key of the property to assign.
+ * @param {*} value The value to assign.
+ */
+function assignValue(object, key, value) {
+  var objValue = object[key];
+  if (!(hasOwnProperty.call(object, key) && eq(objValue, value)) ||
+      (value === undefined && !(key in object))) {
+    object[key] = value;
+  }
+}
+
+/**
+ * Gets the index at which the `key` is found in `array` of key-value pairs.
+ *
+ * @private
+ * @param {Array} array The array to inspect.
+ * @param {*} key The key to search for.
+ * @returns {number} Returns the index of the matched value, else `-1`.
+ */
+function assocIndexOf(array, key) {
+  var length = array.length;
+  while (length--) {
+    if (eq(array[length][0], key)) {
+      return length;
+    }
+  }
+  return -1;
+}
+
+/**
+ * The base implementation of `_.assign` without support for multiple sources
+ * or `customizer` functions.
+ *
+ * @private
+ * @param {Object} object The destination object.
+ * @param {Object} source The source object.
+ * @returns {Object} Returns `object`.
+ */
+function baseAssign(object, source) {
+  return object && copyObject(source, keys(source), object);
+}
+
+/**
+ * The base implementation of `_.clone` and `_.cloneDeep` which tracks
+ * traversed objects.
+ *
+ * @private
+ * @param {*} value The value to clone.
+ * @param {boolean} [isDeep] Specify a deep clone.
+ * @param {boolean} [isFull] Specify a clone including symbols.
+ * @param {Function} [customizer] The function to customize cloning.
+ * @param {string} [key] The key of `value`.
+ * @param {Object} [object] The parent object of `value`.
+ * @param {Object} [stack] Tracks traversed objects and their clone counterparts.
+ * @returns {*} Returns the cloned value.
+ */
+function baseClone(value, isDeep, isFull, customizer, key, object, stack) {
+  var result;
+  if (customizer) {
+    result = object ? customizer(value, key, object, stack) : customizer(value);
+  }
+  if (result !== undefined) {
+    return result;
+  }
+  if (!isObject(value)) {
+    return value;
+  }
+  var isArr = isArray(value);
+  if (isArr) {
+    result = initCloneArray(value);
+    if (!isDeep) {
+      return copyArray(value, result);
+    }
+  } else {
+    var tag = getTag(value),
+        isFunc = tag == funcTag || tag == genTag;
+
+    if (isBuffer(value)) {
+      return cloneBuffer(value, isDeep);
+    }
+    if (tag == objectTag || tag == argsTag || (isFunc && !object)) {
+      if (isHostObject(value)) {
+        return object ? value : {};
+      }
+      result = initCloneObject(isFunc ? {} : value);
+      if (!isDeep) {
+        return copySymbols(value, baseAssign(result, value));
+      }
+    } else {
+      if (!cloneableTags[tag]) {
+        return object ? value : {};
+      }
+      result = initCloneByTag(value, tag, baseClone, isDeep);
+    }
+  }
+  // Check for circular references and return its corresponding clone.
+  stack || (stack = new Stack);
+  var stacked = stack.get(value);
+  if (stacked) {
+    return stacked;
+  }
+  stack.set(value, result);
+
+  if (!isArr) {
+    var props = isFull ? getAllKeys(value) : keys(value);
+  }
+  arrayEach(props || value, function(subValue, key) {
+    if (props) {
+      key = subValue;
+      subValue = value[key];
+    }
+    // Recursively populate clone (susceptible to call stack limits).
+    assignValue(result, key, baseClone(subValue, isDeep, isFull, customizer, key, value, stack));
+  });
+  return result;
+}
+
+/**
+ * The base implementation of `_.create` without support for assigning
+ * properties to the created object.
+ *
+ * @private
+ * @param {Object} prototype The object to inherit from.
+ * @returns {Object} Returns the new object.
+ */
+function baseCreate(proto) {
+  return isObject(proto) ? objectCreate(proto) : {};
+}
+
+/**
+ * The base implementation of `getAllKeys` and `getAllKeysIn` which uses
+ * `keysFunc` and `symbolsFunc` to get the enumerable property names and
+ * symbols of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {Function} keysFunc The function to get the keys of `object`.
+ * @param {Function} symbolsFunc The function to get the symbols of `object`.
+ * @returns {Array} Returns the array of property names and symbols.
+ */
+function baseGetAllKeys(object, keysFunc, symbolsFunc) {
+  var result = keysFunc(object);
+  return isArray(object) ? result : arrayPush(result, symbolsFunc(object));
+}
+
+/**
+ * The base implementation of `getTag`.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
+function baseGetTag(value) {
+  return objectToString.call(value);
+}
+
+/**
+ * The base implementation of `_.isNative` without bad shim checks.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a native function,
+ *  else `false`.
+ */
+function baseIsNative(value) {
+  if (!isObject(value) || isMasked(value)) {
+    return false;
+  }
+  var pattern = (isFunction(value) || isHostObject(value)) ? reIsNative : reIsHostCtor;
+  return pattern.test(toSource(value));
+}
+
+/**
+ * The base implementation of `_.keys` which doesn't treat sparse arrays as dense.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ */
+function baseKeys(object) {
+  if (!isPrototype(object)) {
+    return nativeKeys(object);
+  }
+  var result = [];
+  for (var key in Object(object)) {
+    if (hasOwnProperty.call(object, key) && key != 'constructor') {
+      result.push(key);
+    }
+  }
+  return result;
+}
+
+/**
+ * Creates a clone of  `buffer`.
+ *
+ * @private
+ * @param {Buffer} buffer The buffer to clone.
+ * @param {boolean} [isDeep] Specify a deep clone.
+ * @returns {Buffer} Returns the cloned buffer.
+ */
+function cloneBuffer(buffer, isDeep) {
+  if (isDeep) {
+    return buffer.slice();
+  }
+  var result = new buffer.constructor(buffer.length);
+  buffer.copy(result);
+  return result;
+}
+
+/**
+ * Creates a clone of `arrayBuffer`.
+ *
+ * @private
+ * @param {ArrayBuffer} arrayBuffer The array buffer to clone.
+ * @returns {ArrayBuffer} Returns the cloned array buffer.
+ */
+function cloneArrayBuffer(arrayBuffer) {
+  var result = new arrayBuffer.constructor(arrayBuffer.byteLength);
+  new Uint8Array(result).set(new Uint8Array(arrayBuffer));
+  return result;
+}
+
+/**
+ * Creates a clone of `dataView`.
+ *
+ * @private
+ * @param {Object} dataView The data view to clone.
+ * @param {boolean} [isDeep] Specify a deep clone.
+ * @returns {Object} Returns the cloned data view.
+ */
+function cloneDataView(dataView, isDeep) {
+  var buffer = isDeep ? cloneArrayBuffer(dataView.buffer) : dataView.buffer;
+  return new dataView.constructor(buffer, dataView.byteOffset, dataView.byteLength);
+}
+
+/**
+ * Creates a clone of `map`.
+ *
+ * @private
+ * @param {Object} map The map to clone.
+ * @param {Function} cloneFunc The function to clone values.
+ * @param {boolean} [isDeep] Specify a deep clone.
+ * @returns {Object} Returns the cloned map.
+ */
+function cloneMap(map, isDeep, cloneFunc) {
+  var array = isDeep ? cloneFunc(mapToArray(map), true) : mapToArray(map);
+  return arrayReduce(array, addMapEntry, new map.constructor);
+}
+
+/**
+ * Creates a clone of `regexp`.
+ *
+ * @private
+ * @param {Object} regexp The regexp to clone.
+ * @returns {Object} Returns the cloned regexp.
+ */
+function cloneRegExp(regexp) {
+  var result = new regexp.constructor(regexp.source, reFlags.exec(regexp));
+  result.lastIndex = regexp.lastIndex;
+  return result;
+}
+
+/**
+ * Creates a clone of `set`.
+ *
+ * @private
+ * @param {Object} set The set to clone.
+ * @param {Function} cloneFunc The function to clone values.
+ * @param {boolean} [isDeep] Specify a deep clone.
+ * @returns {Object} Returns the cloned set.
+ */
+function cloneSet(set, isDeep, cloneFunc) {
+  var array = isDeep ? cloneFunc(setToArray(set), true) : setToArray(set);
+  return arrayReduce(array, addSetEntry, new set.constructor);
+}
+
+/**
+ * Creates a clone of the `symbol` object.
+ *
+ * @private
+ * @param {Object} symbol The symbol object to clone.
+ * @returns {Object} Returns the cloned symbol object.
+ */
+function cloneSymbol(symbol) {
+  return symbolValueOf ? Object(symbolValueOf.call(symbol)) : {};
+}
+
+/**
+ * Creates a clone of `typedArray`.
+ *
+ * @private
+ * @param {Object} typedArray The typed array to clone.
+ * @param {boolean} [isDeep] Specify a deep clone.
+ * @returns {Object} Returns the cloned typed array.
+ */
+function cloneTypedArray(typedArray, isDeep) {
+  var buffer = isDeep ? cloneArrayBuffer(typedArray.buffer) : typedArray.buffer;
+  return new typedArray.constructor(buffer, typedArray.byteOffset, typedArray.length);
+}
+
+/**
+ * Copies the values of `source` to `array`.
+ *
+ * @private
+ * @param {Array} source The array to copy values from.
+ * @param {Array} [array=[]] The array to copy values to.
+ * @returns {Array} Returns `array`.
+ */
+function copyArray(source, array) {
+  var index = -1,
+      length = source.length;
+
+  array || (array = Array(length));
+  while (++index < length) {
+    array[index] = source[index];
+  }
+  return array;
+}
+
+/**
+ * Copies properties of `source` to `object`.
+ *
+ * @private
+ * @param {Object} source The object to copy properties from.
+ * @param {Array} props The property identifiers to copy.
+ * @param {Object} [object={}] The object to copy properties to.
+ * @param {Function} [customizer] The function to customize copied values.
+ * @returns {Object} Returns `object`.
+ */
+function copyObject(source, props, object, customizer) {
+  object || (object = {});
+
+  var index = -1,
+      length = props.length;
+
+  while (++index < length) {
+    var key = props[index];
+
+    var newValue = customizer
+      ? customizer(object[key], source[key], key, object, source)
+      : undefined;
+
+    assignValue(object, key, newValue === undefined ? source[key] : newValue);
+  }
+  return object;
+}
+
+/**
+ * Copies own symbol properties of `source` to `object`.
+ *
+ * @private
+ * @param {Object} source The object to copy symbols from.
+ * @param {Object} [object={}] The object to copy symbols to.
+ * @returns {Object} Returns `object`.
+ */
+function copySymbols(source, object) {
+  return copyObject(source, getSymbols(source), object);
+}
+
+/**
+ * Creates an array of own enumerable property names and symbols of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names and symbols.
+ */
+function getAllKeys(object) {
+  return baseGetAllKeys(object, keys, getSymbols);
+}
+
+/**
+ * Gets the data for `map`.
+ *
+ * @private
+ * @param {Object} map The map to query.
+ * @param {string} key The reference key.
+ * @returns {*} Returns the map data.
+ */
+function getMapData(map, key) {
+  var data = map.__data__;
+  return isKeyable(key)
+    ? data[typeof key == 'string' ? 'string' : 'hash']
+    : data.map;
+}
+
+/**
+ * Gets the native function at `key` of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {string} key The key of the method to get.
+ * @returns {*} Returns the function if it's native, else `undefined`.
+ */
+function getNative(object, key) {
+  var value = getValue(object, key);
+  return baseIsNative(value) ? value : undefined;
+}
+
+/**
+ * Creates an array of the own enumerable symbol properties of `object`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of symbols.
+ */
+var getSymbols = nativeGetSymbols ? overArg(nativeGetSymbols, Object) : stubArray;
+
+/**
+ * Gets the `toStringTag` of `value`.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
+var getTag = baseGetTag;
+
+// Fallback for data views, maps, sets, and weak maps in IE 11,
+// for data views in Edge < 14, and promises in Node.js.
+if ((DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag) ||
+    (Map && getTag(new Map) != mapTag) ||
+    (Promise && getTag(Promise.resolve()) != promiseTag) ||
+    (Set && getTag(new Set) != setTag) ||
+    (WeakMap && getTag(new WeakMap) != weakMapTag)) {
+  getTag = function(value) {
+    var result = objectToString.call(value),
+        Ctor = result == objectTag ? value.constructor : undefined,
+        ctorString = Ctor ? toSource(Ctor) : undefined;
+
+    if (ctorString) {
+      switch (ctorString) {
+        case dataViewCtorString: return dataViewTag;
+        case mapCtorString: return mapTag;
+        case promiseCtorString: return promiseTag;
+        case setCtorString: return setTag;
+        case weakMapCtorString: return weakMapTag;
+      }
+    }
+    return result;
+  };
+}
+
+/**
+ * Initializes an array clone.
+ *
+ * @private
+ * @param {Array} array The array to clone.
+ * @returns {Array} Returns the initialized clone.
+ */
+function initCloneArray(array) {
+  var length = array.length,
+      result = array.constructor(length);
+
+  // Add properties assigned by `RegExp#exec`.
+  if (length && typeof array[0] == 'string' && hasOwnProperty.call(array, 'index')) {
+    result.index = array.index;
+    result.input = array.input;
+  }
+  return result;
+}
+
+/**
+ * Initializes an object clone.
+ *
+ * @private
+ * @param {Object} object The object to clone.
+ * @returns {Object} Returns the initialized clone.
+ */
+function initCloneObject(object) {
+  return (typeof object.constructor == 'function' && !isPrototype(object))
+    ? baseCreate(getPrototype(object))
+    : {};
+}
+
+/**
+ * Initializes an object clone based on its `toStringTag`.
+ *
+ * **Note:** This function only supports cloning values with tags of
+ * `Boolean`, `Date`, `Error`, `Number`, `RegExp`, or `String`.
+ *
+ * @private
+ * @param {Object} object The object to clone.
+ * @param {string} tag The `toStringTag` of the object to clone.
+ * @param {Function} cloneFunc The function to clone values.
+ * @param {boolean} [isDeep] Specify a deep clone.
+ * @returns {Object} Returns the initialized clone.
+ */
+function initCloneByTag(object, tag, cloneFunc, isDeep) {
+  var Ctor = object.constructor;
+  switch (tag) {
+    case arrayBufferTag:
+      return cloneArrayBuffer(object);
+
+    case boolTag:
+    case dateTag:
+      return new Ctor(+object);
+
+    case dataViewTag:
+      return cloneDataView(object, isDeep);
+
+    case float32Tag: case float64Tag:
+    case int8Tag: case int16Tag: case int32Tag:
+    case uint8Tag: case uint8ClampedTag: case uint16Tag: case uint32Tag:
+      return cloneTypedArray(object, isDeep);
+
+    case mapTag:
+      return cloneMap(object, isDeep, cloneFunc);
+
+    case numberTag:
+    case stringTag:
+      return new Ctor(object);
+
+    case regexpTag:
+      return cloneRegExp(object);
+
+    case setTag:
+      return cloneSet(object, isDeep, cloneFunc);
+
+    case symbolTag:
+      return cloneSymbol(object);
+  }
+}
+
+/**
+ * Checks if `value` is a valid array-like index.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
+ * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
+ */
+function isIndex(value, length) {
+  length = length == null ? MAX_SAFE_INTEGER : length;
+  return !!length &&
+    (typeof value == 'number' || reIsUint.test(value)) &&
+    (value > -1 && value % 1 == 0 && value < length);
+}
+
+/**
+ * Checks if `value` is suitable for use as unique object key.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is suitable, else `false`.
+ */
+function isKeyable(value) {
+  var type = typeof value;
+  return (type == 'string' || type == 'number' || type == 'symbol' || type == 'boolean')
+    ? (value !== '__proto__')
+    : (value === null);
+}
+
+/**
+ * Checks if `func` has its source masked.
+ *
+ * @private
+ * @param {Function} func The function to check.
+ * @returns {boolean} Returns `true` if `func` is masked, else `false`.
+ */
+function isMasked(func) {
+  return !!maskSrcKey && (maskSrcKey in func);
+}
+
+/**
+ * Checks if `value` is likely a prototype object.
+ *
+ * @private
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a prototype, else `false`.
+ */
+function isPrototype(value) {
+  var Ctor = value && value.constructor,
+      proto = (typeof Ctor == 'function' && Ctor.prototype) || objectProto;
+
+  return value === proto;
+}
+
+/**
+ * Converts `func` to its source code.
+ *
+ * @private
+ * @param {Function} func The function to process.
+ * @returns {string} Returns the source code.
+ */
+function toSource(func) {
+  if (func != null) {
+    try {
+      return funcToString.call(func);
+    } catch (e) {}
+    try {
+      return (func + '');
+    } catch (e) {}
+  }
+  return '';
+}
+
+/**
+ * This method is like `_.clone` except that it recursively clones `value`.
+ *
+ * @static
+ * @memberOf _
+ * @since 1.0.0
+ * @category Lang
+ * @param {*} value The value to recursively clone.
+ * @returns {*} Returns the deep cloned value.
+ * @see _.clone
+ * @example
+ *
+ * var objects = [{ 'a': 1 }, { 'b': 2 }];
+ *
+ * var deep = _.cloneDeep(objects);
+ * console.log(deep[0] === objects[0]);
+ * // => false
+ */
+function cloneDeep(value) {
+  return baseClone(value, true, true);
+}
+
+/**
+ * Performs a
+ * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
+ * comparison between two values to determine if they are equivalent.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to compare.
+ * @param {*} other The other value to compare.
+ * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
+ * @example
+ *
+ * var object = { 'a': 1 };
+ * var other = { 'a': 1 };
+ *
+ * _.eq(object, object);
+ * // => true
+ *
+ * _.eq(object, other);
+ * // => false
+ *
+ * _.eq('a', 'a');
+ * // => true
+ *
+ * _.eq('a', Object('a'));
+ * // => false
+ *
+ * _.eq(NaN, NaN);
+ * // => true
+ */
+function eq(value, other) {
+  return value === other || (value !== value && other !== other);
+}
+
+/**
+ * Checks if `value` is likely an `arguments` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+ *  else `false`.
+ * @example
+ *
+ * _.isArguments(function() { return arguments; }());
+ * // => true
+ *
+ * _.isArguments([1, 2, 3]);
+ * // => false
+ */
+function isArguments(value) {
+  // Safari 8.1 makes `arguments.callee` enumerable in strict mode.
+  return isArrayLikeObject(value) && hasOwnProperty.call(value, 'callee') &&
+    (!propertyIsEnumerable.call(value, 'callee') || objectToString.call(value) == argsTag);
+}
+
+/**
+ * Checks if `value` is classified as an `Array` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an array, else `false`.
+ * @example
+ *
+ * _.isArray([1, 2, 3]);
+ * // => true
+ *
+ * _.isArray(document.body.children);
+ * // => false
+ *
+ * _.isArray('abc');
+ * // => false
+ *
+ * _.isArray(_.noop);
+ * // => false
+ */
+var isArray = Array.isArray;
+
+/**
+ * Checks if `value` is array-like. A value is considered array-like if it's
+ * not a function and has a `value.length` that's an integer greater than or
+ * equal to `0` and less than or equal to `Number.MAX_SAFE_INTEGER`.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is array-like, else `false`.
+ * @example
+ *
+ * _.isArrayLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isArrayLike(document.body.children);
+ * // => true
+ *
+ * _.isArrayLike('abc');
+ * // => true
+ *
+ * _.isArrayLike(_.noop);
+ * // => false
+ */
+function isArrayLike(value) {
+  return value != null && isLength(value.length) && !isFunction(value);
+}
+
+/**
+ * This method is like `_.isArrayLike` except that it also checks if `value`
+ * is an object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an array-like object,
+ *  else `false`.
+ * @example
+ *
+ * _.isArrayLikeObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isArrayLikeObject(document.body.children);
+ * // => true
+ *
+ * _.isArrayLikeObject('abc');
+ * // => false
+ *
+ * _.isArrayLikeObject(_.noop);
+ * // => false
+ */
+function isArrayLikeObject(value) {
+  return isObjectLike(value) && isArrayLike(value);
+}
+
+/**
+ * Checks if `value` is a buffer.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.3.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a buffer, else `false`.
+ * @example
+ *
+ * _.isBuffer(new Buffer(2));
+ * // => true
+ *
+ * _.isBuffer(new Uint8Array(2));
+ * // => false
+ */
+var isBuffer = nativeIsBuffer || stubFalse;
+
+/**
+ * Checks if `value` is classified as a `Function` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a function, else `false`.
+ * @example
+ *
+ * _.isFunction(_);
+ * // => true
+ *
+ * _.isFunction(/abc/);
+ * // => false
+ */
+function isFunction(value) {
+  // The use of `Object#toString` avoids issues with the `typeof` operator
+  // in Safari 8-9 which returns 'object' for typed array and other constructors.
+  var tag = isObject(value) ? objectToString.call(value) : '';
+  return tag == funcTag || tag == genTag;
+}
+
+/**
+ * Checks if `value` is a valid array-like length.
+ *
+ * **Note:** This method is loosely based on
+ * [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+ * @example
+ *
+ * _.isLength(3);
+ * // => true
+ *
+ * _.isLength(Number.MIN_VALUE);
+ * // => false
+ *
+ * _.isLength(Infinity);
+ * // => false
+ *
+ * _.isLength('3');
+ * // => false
+ */
+function isLength(value) {
+  return typeof value == 'number' &&
+    value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+}
+
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */
+function isObject(value) {
+  var type = typeof value;
+  return !!value && (type == 'object' || type == 'function');
+}
+
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return !!value && typeof value == 'object';
+}
+
+/**
+ * Creates an array of the own enumerable property names of `object`.
+ *
+ * **Note:** Non-object values are coerced to objects. See the
+ * [ES spec](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
+ * for more details.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Object
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ * @example
+ *
+ * function Foo() {
+ *   this.a = 1;
+ *   this.b = 2;
+ * }
+ *
+ * Foo.prototype.c = 3;
+ *
+ * _.keys(new Foo);
+ * // => ['a', 'b'] (iteration order is not guaranteed)
+ *
+ * _.keys('hi');
+ * // => ['0', '1']
+ */
+function keys(object) {
+  return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
+}
+
+/**
+ * This method returns a new empty array.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.13.0
+ * @category Util
+ * @returns {Array} Returns the new empty array.
+ * @example
+ *
+ * var arrays = _.times(2, _.stubArray);
+ *
+ * console.log(arrays);
+ * // => [[], []]
+ *
+ * console.log(arrays[0] === arrays[1]);
+ * // => false
+ */
+function stubArray() {
+  return [];
+}
+
+/**
+ * This method returns `false`.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.13.0
+ * @category Util
+ * @returns {boolean} Returns `false`.
+ * @example
+ *
+ * _.times(2, _.stubFalse);
+ * // => [false, false]
+ */
+function stubFalse() {
+  return false;
+}
+
+module.exports = cloneDeep;
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("c8ba"), __webpack_require__("62e4")(module)))
 
 /***/ }),
 
@@ -14553,6 +16825,65 @@ module.exports = USE_SYMBOL_AS_UID ? function (it) {
 
 /***/ }),
 
+/***/ "dad2":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var getBuiltIn = __webpack_require__("d066");
+
+var createSetLike = function (size) {
+  return {
+    size: size,
+    has: function () {
+      return false;
+    },
+    keys: function () {
+      return {
+        next: function () {
+          return { done: true };
+        }
+      };
+    }
+  };
+};
+
+module.exports = function (name) {
+  var Set = getBuiltIn('Set');
+  try {
+    new Set()[name](createSetLike(0));
+    try {
+      // late spec change, early WebKit ~ Safari 17.0 beta implementation does not pass it
+      // https://github.com/tc39/proposal-set-methods/pull/88
+      new Set()[name](createSetLike(-1));
+      return false;
+    } catch (error2) {
+      return true;
+    }
+  } catch (error) {
+    return false;
+  }
+};
+
+
+/***/ }),
+
+/***/ "dc19":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var has = __webpack_require__("cb27").has;
+
+// Perform ? RequireInternalSlot(M, [[SetData]])
+module.exports = function (it) {
+  has(it);
+  return it;
+};
+
+
+/***/ }),
+
 /***/ "dc4a":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14633,6 +16964,17 @@ module.exports = Array.isArray || function isArray(argument) {
 
 /***/ }),
 
+/***/ "e8dd":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_683d5d5c_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("556b");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_683d5d5c_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_683d5d5c_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+
+
+/***/ }),
+
 /***/ "e920":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14645,6 +16987,32 @@ var Sticky;
   Sticky["BL"] = "bl";
   Sticky["BR"] = "br";
 })(Sticky || (Sticky = {}));
+
+/***/ }),
+
+/***/ "e9bc":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var aSet = __webpack_require__("dc19");
+var add = __webpack_require__("cb27").add;
+var clone = __webpack_require__("83b9");
+var getSetRecord = __webpack_require__("7f65");
+var iterateSimple = __webpack_require__("5388");
+
+// `Set.prototype.union` method
+// https://github.com/tc39/proposal-set-methods
+module.exports = function union(other) {
+  var O = aSet(this);
+  var keysIter = getSetRecord(other).getIterator();
+  var result = clone(O);
+  iterateSimple(keysIter, function (it) {
+    add(result, it);
+  });
+  return result;
+};
+
 
 /***/ }),
 

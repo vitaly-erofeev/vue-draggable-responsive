@@ -66,6 +66,7 @@
         'block-parent-relative': !block.isComponent && isRelativeBlock,
        }"
       :style="blockContentStyle"
+      :title="blockHoverTitle"
       @mouseover="block.isHover = true"
       @mouseleave="block.isHover = false"
       @click="$emit('click', { block: $event.block || block, event: $event.event || $event })"
@@ -82,6 +83,7 @@
         :key="_block.guid"
         :is-showing="isShowChildren && _block.parentTabGuid === activeTabGuid && !_block.isHidden"
         :block="_block"
+        :parent-z-index="zIndex"
         :replication-callback="replicationCallback"
         :tab-settings-service="tabSettingsService"
         :is-parent-relative-block="isRelativeBlock"
@@ -101,7 +103,7 @@ import { Sticky } from '@/domain/model/Sticky'
 import BlockDTO from '../../domain/model/BlockDTO'
 // eslint-disable-next-line no-unused-vars
 import { Position } from '@/domain/model/PositionCss'
-import ResizeObserver from 'resize-observer-polyfill'
+import { StretchManager } from '@/infrastructure/service/StretchManager'
 // eslint-disable-next-line no-unused-vars
 import Vue_, { VueConstructor } from 'vue'
 import { SizeTypes } from '@/domain/model/SizeTypes'
@@ -147,6 +149,10 @@ export default Vue.extend({
     tabSettingsService: {
       type: Object
     },
+    parentZIndex: {
+      type: Number,
+      default: undefined
+    },
     isParentRelativeBlock: {
       type: Boolean,
       default: false
@@ -168,7 +174,9 @@ export default Vue.extend({
     stickyToBlock?: BlockDTO,
     stickyToElement?: any,
     prepareReplication: () => void,
-    activeBlockGuid?: string
+    activeBlockGuid?: string,
+    stretchItem?: { container: Element, update: () => void } | null,
+    minHeightParent: number
     } {
     return {
       parentBlock: undefined,
@@ -185,7 +193,9 @@ export default Vue.extend({
       stickyToBlock: undefined,
       stickyToElement: undefined,
       prepareReplication: () => {},
-      activeBlockGuid: ''
+      activeBlockGuid: '',
+      stretchItem: null,
+      minHeightParent: 0
     }
   },
   created () {
@@ -245,6 +255,12 @@ export default Vue.extend({
           }
         }
         for (const guid in tabs) {
+          // availableTabs - доступные вкладки БЛОКА. tabs - ВСЕ вкладки в настройках.
+          // цикл бежит по ВСЕМ вкладкам в настройках и сбрасывает состояние при открытие нового блока со вкладками
+          // пропускаем недоступные вкладки нового блока
+          if (!this.availableTabs.some(item => item.guid === guid)) {
+            continue
+          }
           if (Object.prototype.hasOwnProperty.call(tabs, guid)) {
             // изначально svg в плюсик
             tabs[guid].isExpanded = false
@@ -303,17 +319,8 @@ export default Vue.extend({
 
     zIndex (): number {
       const startIndex = 101
-      if (!this.block.parentGuid) {
-        return startIndex + (this.block.tabs?.use ? 1 : 0)
-      }
-      let parentRef = this.getStore().getRefByGuid(this.block.parentGuid) as unknown as {
-        zIndex: number
-      }
-      if (!parentRef) {
-        return startIndex
-      }
-
-      return parentRef.zIndex + 1 + (this.block.tabs?.use ? 1 : 0)
+      const base = (this.parentZIndex ?? startIndex) + (this.block.parentGuid ? 1 : 0)
+      return base + (this.block.tabs?.use ? 1 : 0)
     },
 
     isTabsContainer (): boolean {
@@ -597,6 +604,13 @@ export default Vue.extend({
 
       return style
     },
+    blockHoverTitle () {
+      if (this.block.isHover) {
+        return this.block.interactive?.containerTitleHover || ''
+      }
+
+      return ''
+    },
 
     isShowChildren () {
       let isShow = true
@@ -636,6 +650,13 @@ export default Vue.extend({
 
   mounted () {
     this.setParent()
+    if (this.block?.isStretched && this.$refs.container && this.$refs.container instanceof Element) {
+      this.stretchItem = {
+        container: this.$refs.container as Element,
+        update: this.setStretchedSize
+      }
+      StretchManager.register(this.stretchItem)
+    }
     this.$nextTick(() => {
       this.setStretchedSize()
       this.setSticky(this.block?.stickyTo?.guid)
@@ -655,28 +676,16 @@ export default Vue.extend({
         this.onTabClick(defaultTab)
       }
     }
-    if (this.block?.isStretched && this.$refs.container && this.$refs.container instanceof Element) {
-      let children: HTMLCollection = this.$refs.container.children
-      const observer = new ResizeObserver(() => {
-        this.setStretchedSize()
-      })
-
-      for (let item of children) {
-        observer.observe(item)
-      }
-      const observerInserted = new MutationObserver(mutationList => {
-        mutationList.filter(m => m.type === 'childList').forEach(m => {
-          m.addedNodes.forEach(node => node instanceof Element && observer.observe(node as Element))
-        })
-      })
-      observerInserted.observe(this.$refs.container, { childList: true, subtree: true })
-    }
     this.block.isLoading = false
     this.prepareReplication()
     this.getStore().addRef(this.block.guid, this)
   },
 
   beforeDestroy () {
+    if (this.stretchItem) {
+      StretchManager.unregister(this.stretchItem)
+      this.stretchItem = null
+    }
     this.getStore().removeRef(this.block.guid)
   },
 

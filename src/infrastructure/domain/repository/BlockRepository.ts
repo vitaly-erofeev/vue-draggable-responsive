@@ -6,6 +6,8 @@ import { StickyToType } from '@/domain/model/StickyTo'
 import { Sticky } from '@/domain/model/Sticky'
 import { ListenerInterface } from '@/domain/service/ListenerInterface'
 import { EventTypes } from '@/domain/model/EventTypes'
+// @ts-ignore
+import cloneDeep from 'lodash.clonedeep'
 import { PositionBlockCss } from '@/domain/model/PositionBlockCss'
 
 export default class BlockRepository implements BlockRepositoryInterface {
@@ -14,10 +16,7 @@ export default class BlockRepository implements BlockRepositoryInterface {
   private listeners: {
     [index: string]: ListenerInterface
   } = {}
-  private refs: {
-    guid: string,
-    element: Vue
-  }[] = []
+  private refs: Map<string, Vue> = new Map()
   private readonly isPreviewMode: boolean
 
   constructor (blocks: BlockDTO[] = [], isPreviewMode: boolean = false) {
@@ -41,7 +40,7 @@ export default class BlockRepository implements BlockRepositoryInterface {
       if (block.replication?.function) {
         replicationFunction = block.replication?.function
       }
-      block = JSON.parse(JSON.stringify(block))
+      block = cloneDeep(block)
       block.isHidden = false
       if (replicationFunction && block.replication) {
         block.replication.function = replicationFunction
@@ -60,16 +59,18 @@ export default class BlockRepository implements BlockRepositoryInterface {
   }
 
   getByGuid (guid: string): BlockDTO | undefined {
-    let answer: BlockDTO | undefined
-    JSON.stringify(this.blocks, (_, nestedValue) => {
-      if (nestedValue && nestedValue.guid === guid &&
-        typeof nestedValue.sticky !== 'undefined') {
-        answer = nestedValue
+    const stack = [...this.blocks]
+    while (stack.length) {
+      const block = stack.pop()
+      if (!block) continue
+      if (block.guid === guid) {
+        return block
       }
-      return nestedValue
-    })
-
-    return answer
+      if (block.children && block.children.length) {
+        stack.push(...block.children)
+      }
+    }
+    return undefined
   }
 
   getByTabGuid (tabGuid: string): BlockDTO[] {
@@ -87,16 +88,18 @@ export default class BlockRepository implements BlockRepositoryInterface {
   }
 
   getByAlias (alias: string): BlockDTO | undefined {
-    let answer: BlockDTO | undefined
-    JSON.stringify(this.blocks, (_, nestedValue) => {
-      if (nestedValue && nestedValue.alias === alias &&
-        typeof nestedValue.sticky !== 'undefined') {
-        answer = nestedValue
+    const stack = [...this.blocks]
+    while (stack.length) {
+      const block = stack.pop()
+      if (!block) continue
+      if (block.alias === alias) {
+        return block
       }
-      return nestedValue
-    })
-
-    return answer
+      if (block.children && block.children.length) {
+        stack.push(...block.children)
+      }
+    }
+    return undefined
   }
 
   getMainParents (guid: string): BlockDTO | {} {
@@ -210,10 +213,6 @@ export default class BlockRepository implements BlockRepositoryInterface {
     return this.blocks
   }
 
-  getFlat (): (BlockDTO | undefined)[] {
-    return this.refs.map(ref => this.getByGuid(ref.guid))
-  }
-
   remove (guid: string): void {
     const block = this.getByGuid(guid)
     if (!block) {
@@ -237,13 +236,18 @@ export default class BlockRepository implements BlockRepositoryInterface {
   }
 
   resetActiveBlock (): void {
-    JSON.stringify(this.blocks, (_, nestedValue) => {
-      if (nestedValue && typeof nestedValue.isActive !== 'undefined') {
-        nestedValue.isActive = false
-        nestedValue.isActiveAsParent = false
+    const stack = [...this.blocks]
+    while (stack.length) {
+      const block = stack.pop()
+      if (!block) continue
+      if (typeof block.isActive !== 'undefined') {
+        block.isActive = false
+        block.isActiveAsParent = false
       }
-      return nestedValue
-    })
+      if (block.children && block.children.length) {
+        stack.push(...block.children)
+      }
+    }
   }
 
   setActiveBlock (guid: string): void {
@@ -273,26 +277,27 @@ export default class BlockRepository implements BlockRepositoryInterface {
   }
 
   addRef (guid: string, ref: Vue): void {
-    this.refs.push({
-      guid: guid,
-      element: ref
-    })
+    this.refs.set(guid, ref)
   }
 
   getRefByGuid (guid: string): Vue | undefined {
-    const element = this.refs.find((item) => {
-      return item.guid === guid
+    return this.refs.get(guid)
+  }
+
+  getRefs (): {
+    guid: string,
+    element: Vue
+  }[] {
+    return Array.from(this.refs.keys()).map((guid) => {
+      return {
+        guid: guid,
+        element: this.getRefByGuid(guid)!
+      }
     })
-
-    if (element) {
-      return element.element
-    }
-
-    return undefined
   }
 
   removeRef (guid: string): void {
-    this.refs = this.refs.filter((item) => item.guid !== guid)
+    this.refs.delete(guid)
   }
 
   getStickyLines (guid?: string): {

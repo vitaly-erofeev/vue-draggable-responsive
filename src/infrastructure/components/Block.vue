@@ -446,8 +446,7 @@ export default Vue.extend({
       // центрировать горизонтально
       if (
         !this.block.stickyTo?.guid &&
-          (this.block.onCenter?.horizontalAdaptive || this.block.onCenter?.horizontal) &&
-          this.isShowing
+          (this.block.onCenter?.horizontalAdaptive || this.block.onCenter?.horizontal)
       ) {
         position.marginLeft = 'auto'
         position.marginRight = 'auto'
@@ -458,8 +457,7 @@ export default Vue.extend({
       // центрировать вертикально
       if (
         !this.block.stickyTo?.guid &&
-          this.block.onCenter?.vertical &&
-          this.isShowing
+          this.block.onCenter?.vertical
       ) {
         position.marginTop = 'auto'
         position.marginBottom = 'auto'

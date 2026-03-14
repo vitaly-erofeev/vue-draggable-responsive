@@ -469,15 +469,18 @@ export default Vue.extend({
       }
       // центрировать горизонтально (адаптивно)
       if (!this.block.stickyTo?.guid && this.block.onCenter?.horizontalAdaptive && this.isShowing) {
-        const refBlock: HTMLElement = this.$el as HTMLElement
+        position.marginLeft = 'auto'
+        position.marginRight = 'auto'
+        position.left = '0'
+        position.right = '0'
+        /* const refBlock: HTMLElement = this.$el as HTMLElement
         // Для элементов с display:none offsetWidth равен нулю
         if (refBlock && refBlock.offsetWidth) {
-          position.marginLeft = 'auto'
           position.marginLeft = 'auto'
           position.marginRight = 'auto'
           position.left = '0'
           position.right = '0'
-        }
+        } */
       }
 
       if (!this.block.stickyTo?.guid && this.block.onCenter?.vertical && this.isShowing) {

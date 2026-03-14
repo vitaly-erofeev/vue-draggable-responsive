@@ -443,28 +443,28 @@ export default Vue.extend({
         height = '0px'
       }
 
-      if (!this.block.stickyTo?.guid && this.block.onCenter?.horizontal) {
-        if (this.block.sticky === Sticky.BL || this.block.sticky === Sticky.TL) {
-          position.left = `calc(50% - calc(${width} / 2))`
-        } else {
-          position.right = `calc(50% - calc(${width} / 2))`
-        }
-      }
-      // центрировать горизонтально (адаптивно)
-      if (!this.block.stickyTo?.guid && this.block.onCenter?.horizontalAdaptive) {
-        position.marginLeft = 'auto'
+      // центрировать горизонтально
+      if (
+        !this.block.stickyTo?.guid &&
+          (this.block.onCenter?.horizontalAdaptive || this.block.onCenter?.horizontal) &&
+          this.isShowing
+      ) {
         position.marginLeft = 'auto'
         position.marginRight = 'auto'
         position.left = '0'
         position.right = '0'
       }
 
-      if (!this.block.stickyTo?.guid && this.block.onCenter?.vertical) {
-        if (this.block.sticky === Sticky.TR || this.block.sticky === Sticky.TL) {
-          position.top = `calc(50% - calc(${height} / 2))`
-        } else {
-          position.bottom = `calc(50% - calc(${height} / 2))`
-        }
+      // центрировать вертикально
+      if (
+        !this.block.stickyTo?.guid &&
+          this.block.onCenter?.vertical &&
+          this.isShowing
+      ) {
+        position.marginTop = 'auto'
+        position.marginBottom = 'auto'
+        position.top = '0'
+        position.bottom = '0'
       }
 
       return Object.assign(position, {

@@ -6,5 +6,7 @@ export interface Position {
     width?: string;
     height?: string;
     marginLeft?: string;
-    marginRight?: string
+    marginRight?: string;
+    marginTop?: string;
+    marginBottom?: string;
 }

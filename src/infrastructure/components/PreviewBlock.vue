@@ -1,12 +1,12 @@
 <template>
   <div
-    :style="positionStyle"
-    ref="draggableContainer"
-    :class="['block', block.className]"
+      :style="positionStyle"
+      ref="draggableContainer"
+      :class="['block', block.className]"
   >
     <div
-      v-if="isTabsContainer"
-      :class="{
+        v-if="isTabsContainer"
+        :class="{
         'tabs_container' : true,
         'custom_scrollbar' : true,
         'position_top': block.tabs.position === 'top',
@@ -14,72 +14,73 @@
         'position_bottom': block.tabs.position === 'bottom',
         'position_left': block.tabs.position === 'left',
       }"
-      :style="block.tabs.containerStyle"
+        :style="block.tabs.containerStyle"
     >
       <font-awesome-icon
-        v-show="isShowArrows"
-        icon="chevron-left"
-        class="tabs_button"
-        @click="scrollPrevTab"
-        :class="{ [block.tabs.tabArrowsClass]: true }"
+          v-show="isShowArrows"
+          icon="chevron-left"
+          class="tabs_button"
+          @click="scrollPrevTab"
+          :class="{ [block.tabs.tabArrowsClass]: true }"
       ></font-awesome-icon>
       <div class="tabs_onScroll" ref="tabsScroll" :class="{ 'tabs_padding': isShowArrows, 'direction': directionTabs }">
         <div
-          v-for="tab in visibleTabs"
-          v-show="isShowTabs(tab)"
-          :key="tab.guid"
-          :style="blockTabStyle + getBlockTabStyle(tab)"
-          :class="{
+            v-for="tab in visibleTabs"
+            v-show="isShowTabs(tab)"
+            :key="tab.guid"
+            :style="blockTabStyle + getBlockTabStyle(tab)"
+            :class="{
             'tab': true,
             'active': tab.guid === activeTabGuid,
             [block.tabs.class]: true,
             'required_tab': block.tabs.requiredTabs && block.tabs.requiredTabs.includes(tab.guid),
             'positionTab': tab.data && tab.data.isChild
           }"
-          @click="onTabClick(tab.guid)"
+            @click="onTabClick(tab.guid)"
         >
-        <div @click="showChildTabs(tab.guid)" v-show="tab.data && tab.data.isChild">
-          <i class="plus" :class="{'el-icon-arrow-right': !tab.data.isExpanded, 'el-icon-arrow-down': tab.data.isExpanded}"></i>
-        </div>
+          <div @click="showChildTabs(tab.guid)" v-show="tab.data && tab.data.isChild">
+            <i class="plus"
+               :class="{'el-icon-arrow-right': !tab.data.isExpanded, 'el-icon-arrow-down': tab.data.isExpanded}"></i>
+          </div>
           <span class="label">{{ tab.name }}</span>
         </div>
       </div>
       <font-awesome-icon
-        v-show="isShowArrows"
-        icon="chevron-right"
-        :class="{ [block.tabs.tabArrowsClass]: true }"
-        class="tabs_button tabs_button_next"
-        @click="scrollNextTab"
+          v-show="isShowArrows"
+          icon="chevron-right"
+          :class="{ [block.tabs.tabArrowsClass]: true }"
+          class="tabs_button tabs_button_next"
+          @click="scrollNextTab"
       ></font-awesome-icon>
     </div>
 
     <div
-      ref="container"
-      class="content custom_scrollbar"
-      :class="{ 'scroll_hover': isActiveScrollHover }"
-      :style="blockContentStyle"
-      :title="blockHoverTitle"
-      @mouseover="block.isHover = true"
-      @mouseleave="block.isHover = false"
-      @click="$emit('click', { block: $event.block || block, event: $event.event || $event })"
+        ref="container"
+        class="content custom_scrollbar"
+        :class="{ 'scroll_hover': isActiveScrollHover }"
+        :style="blockContentStyle"
+        :title="blockHoverTitle"
+        @mouseover="block.isHover = true"
+        @mouseleave="block.isHover = false"
+        @click="$emit('click', { block: $event.block || block, event: $event.event || $event })"
     >
       <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
       <preview-block
-        v-for="_block in children"
-        v-show="(isShowChildren && !_block.isHidden )"
-        :class="[
+          v-for="_block in children"
+          v-show="(isShowChildren && !_block.isHidden )"
+          :class="[
           (_block.parentTabGuid === activeTabGuid) ? '' : 'visibility',
           { 'active_block': _block.guid === activeBlockGuid }
         ]"
-        :ref="_block.guid"
-        :key="_block.guid"
-        :is-showing="isShowChildren && _block.parentTabGuid === activeTabGuid && !_block.isHidden"
-        :block="_block"
-        :parent-z-index="zIndex"
-        :replication-callback="replicationCallback"
-        :tab-settings-service="tabSettingsService"
-        @click="handleClick({ block: $event.block || _block, event: $event.event || $event })"
-        @tab-click="$emit('tab-click', $event)"
+          :ref="_block.guid"
+          :key="_block.guid"
+          :is-showing="isShowChildren && _block.parentTabGuid === activeTabGuid && !_block.isHidden"
+          :block="_block"
+          :parent-z-index="zIndex"
+          :replication-callback="replicationCallback"
+          :tab-settings-service="tabSettingsService"
+          @click="handleClick({ block: $event.block || _block, event: $event.event || $event })"
+          @tab-click="$emit('tab-click', $event)"
       >
         <template v-for="(index, name) in $scopedSlots" v-slot:[name]="data">
           <slot :name="name" v-bind="data"></slot>
@@ -120,7 +121,8 @@ export default Vue.extend({
 
   inject: {
     getStore: {
-      default: () => () => {}
+      default: () => () => {
+      }
     },
     mainBlockSelector: {
       default: null
@@ -178,7 +180,8 @@ export default Vue.extend({
       visitedTabGuids: [],
       stickyToBlock: undefined,
       stickyToElement: undefined,
-      prepareReplication: () => {},
+      prepareReplication: () => {
+      },
       activeBlockGuid: '',
       stretchItem: null,
       minHeightParent: 0
@@ -456,42 +459,28 @@ export default Vue.extend({
         position.height = '0px'
       }
 
-      if (!this.block.stickyTo?.guid && this.block.onCenter?.horizontal && this.isShowing) {
-        const refBlock: HTMLElement = this.$el as HTMLElement
-        // Для элементов с display:none offsetWidth равен нулю
-        if (refBlock && refBlock.offsetWidth) {
-          if (this.block.sticky === Sticky.BL || this.block.sticky === Sticky.TL) {
-            position.left = `calc(50% - calc(${refBlock.offsetWidth}px / 2))`
-          } else {
-            position.right = `calc(50% - calc(${refBlock.offsetWidth}px / 2))`
-          }
-        }
-      }
-      // центрировать горизонтально (адаптивно)
-      if (!this.block.stickyTo?.guid && this.block.onCenter?.horizontalAdaptive && this.isShowing) {
+      // центрировать горизонтально
+      if (
+        !this.block.stickyTo?.guid &&
+          (this.block.onCenter?.horizontalAdaptive || this.block.onCenter?.horizontal) &&
+          this.isShowing
+      ) {
         position.marginLeft = 'auto'
         position.marginRight = 'auto'
         position.left = '0'
         position.right = '0'
-        /* const refBlock: HTMLElement = this.$el as HTMLElement
-        // Для элементов с display:none offsetWidth равен нулю
-        if (refBlock && refBlock.offsetWidth) {
-          position.marginLeft = 'auto'
-          position.marginRight = 'auto'
-          position.left = '0'
-          position.right = '0'
-        } */
       }
 
-      if (!this.block.stickyTo?.guid && this.block.onCenter?.vertical && this.isShowing) {
-        const refBlock: HTMLElement = this.$el as HTMLElement
-        if (refBlock) {
-          if (this.block.sticky === Sticky.TR || this.block.sticky === Sticky.TL) {
-            position.top = `calc(50% - calc(${refBlock.offsetHeight}px / 2))`
-          } else {
-            position.bottom = `calc(50% - calc(${refBlock.offsetHeight}px / 2))`
-          }
-        }
+      // центрировать вертикально
+      if (
+        !this.block.stickyTo?.guid &&
+          this.block.onCenter?.vertical &&
+          this.isShowing
+      ) {
+        position.marginTop = 'auto'
+        position.marginBottom = 'auto'
+        position.top = '0'
+        position.bottom = '0'
       }
 
       return Object.assign(position, {
@@ -609,7 +598,7 @@ export default Vue.extend({
   },
 
   methods: {
-    handleClick (event: {block: any, event: Event}) {
+    handleClick (event: { block: any, event: Event }) {
       this.$emit('click', event)
       this.activeBlockGuid = event.block.guid
     },
@@ -897,6 +886,7 @@ export default Vue.extend({
   display: flex;
   overflow: hidden;
 }
+
 .tabs_onScroll.direction {
   flex-direction: column;
 }
@@ -922,6 +912,7 @@ export default Vue.extend({
   height: 100%;
   flex-direction: column;
 }
+
 .block .tab {
   width: 100px;
   cursor: pointer;
@@ -929,51 +920,60 @@ export default Vue.extend({
   text-align: center;
   /* flex: 1; */
 }
+
 .block .tabs_onScroll {
   display: flex;
   transition: 1s all;
 }
+
 .block .tabs_onScroll.tabs_padding {
   padding-left: 15px;
   padding-right: 15px;
 }
+
 .block .tabs_button {
-    display: block;
-    background: white;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    position: absolute;
-    width: 12px;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 5;
-    color: #909399;
-    box-sizing: border-box;
+  display: block;
+  background: white;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: absolute;
+  width: 12px;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  color: #909399;
+  box-sizing: border-box;
 }
+
 .block .tabs_button_next {
-    right: 0;
-    left: auto;
+  right: 0;
+  left: auto;
 }
+
 .block .visibility {
-    margin-left: -9999px;
-    visibility: hidden;
-    min-height: 0px !important;
-    height: 0px !important;
+  margin-left: -9999px;
+  visibility: hidden;
+  min-height: 0px !important;
+  height: 0px !important;
   /*opacity: 0;*/
   /* display: none; */
 }
+
 .block .scroll_hover {
   scrollbar-color: transparent white; /* thumb and track color  for fireFox*/
   transition: scrollbar-color 0.3s ease-out;
 }
+
 .block .scroll_hover:hover {
-  scrollbar-color: rgba(144,147,153,.3) white; /* thumb and track color  for fireFox*/
+  scrollbar-color: rgba(144, 147, 153, .3) white; /* thumb and track color  for fireFox*/
 }
+
 .block .scroll_hover:hover::-webkit-scrollbar-thumb {
-  background-color: rgba(144,147,153,.3);
+  background-color: rgba(144, 147, 153, .3);
 }
+
 .block .scroll_hover::-webkit-scrollbar-thumb {
   background-color: transparent;
   transition: background-color 0.3s ease-out; /* transition not working for chrome*/
@@ -989,11 +989,13 @@ export default Vue.extend({
   margin-left: 5px;
   border-radius: 4px;
 }
+
 .tabs_container .positionTab {
   position: relative;
   padding-left: 20px !important;
 }
-.tabs_container .positionTab>div:first-child {
+
+.tabs_container .positionTab > div:first-child {
   position: absolute;
   top: 50%;
   left: 4%;

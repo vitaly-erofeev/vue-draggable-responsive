@@ -457,25 +457,21 @@ export default Vue.extend({
       }
 
       if (!this.block.stickyTo?.guid && this.block.onCenter?.horizontal && this.isShowing) {
-        const refBlock = this.getStore().getRefByGuid(this.block.guid) as unknown as {
-          $el: HTMLElement
-        }
+        const refBlock: HTMLElement = this.$el as HTMLElement
         // Для элементов с display:none offsetWidth равен нулю
-        if (refBlock && refBlock.$el.offsetWidth) {
+        if (refBlock && refBlock.offsetWidth) {
           if (this.block.sticky === Sticky.BL || this.block.sticky === Sticky.TL) {
-            position.left = `calc(50% - calc(${refBlock.$el.offsetWidth}px / 2))`
+            position.left = `calc(50% - calc(${refBlock.offsetWidth}px / 2))`
           } else {
-            position.right = `calc(50% - calc(${refBlock.$el.offsetWidth}px / 2))`
+            position.right = `calc(50% - calc(${refBlock.offsetWidth}px / 2))`
           }
         }
       }
       // центрировать горизонтально (адаптивно)
       if (!this.block.stickyTo?.guid && this.block.onCenter?.horizontalAdaptive && this.isShowing) {
-        const refBlock = this.getStore().getRefByGuid(this.block.guid) as unknown as {
-          $el: HTMLElement
-        }
+        const refBlock: HTMLElement = this.$el as HTMLElement
         // Для элементов с display:none offsetWidth равен нулю
-        if (refBlock && refBlock.$el.offsetWidth) {
+        if (refBlock && refBlock.offsetWidth) {
           position.marginLeft = 'auto'
           position.marginLeft = 'auto'
           position.marginRight = 'auto'
@@ -485,14 +481,12 @@ export default Vue.extend({
       }
 
       if (!this.block.stickyTo?.guid && this.block.onCenter?.vertical && this.isShowing) {
-        const refBlock = this.getStore().getRefByGuid(this.block.guid) as unknown as {
-          $el: HTMLElement
-        }
+        const refBlock: HTMLElement = this.$el as HTMLElement
         if (refBlock) {
           if (this.block.sticky === Sticky.TR || this.block.sticky === Sticky.TL) {
-            position.top = `calc(50% - calc(${refBlock.$el.offsetHeight}px / 2))`
+            position.top = `calc(50% - calc(${refBlock.offsetHeight}px / 2))`
           } else {
-            position.bottom = `calc(50% - calc(${refBlock.$el.offsetHeight}px / 2))`
+            position.bottom = `calc(50% - calc(${refBlock.offsetHeight}px / 2))`
           }
         }
       }

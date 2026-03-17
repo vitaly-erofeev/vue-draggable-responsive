@@ -39,13 +39,19 @@
           v-for="tab in visibleTabs"
           :key="tab.guid"
           :style="blockTabStyle + getBlockTabStyle(tab)"
-          :class="{
-            'tab': true,
-            'active': tab.guid === activeTabGuid,
-            [block.tabs.class]: true,
-            'required_tab': block.tabs.requiredTabs && block.tabs.requiredTabs.includes(tab.guid),
-            'positionTab': tab.data && tab.data.isChild
-          }"
+          :depth="getTabDepth(tab)"
+          :class="[
+            {
+              'tab': true,
+              'active': tab.guid === activeTabGuid,
+              'required_tab': block.tabs.requiredTabs && block.tabs.requiredTabs.includes(tab.guid),
+              'positionTab': tab.data && tab.data.isChild,
+              'is-parent': tab.data && tab.data.isChild,
+              'is-child': tab.data && !!tab.data.parentTabForTree
+            },
+            block.tabs && block.tabs.class ? block.tabs.class : '',
+            tab.data && tab.data.classItem ? tab.data.classItem : ''
+          ]"
           @click="onTabClick(tab.guid)"
         >
           <div @click="showChildTabs(tab.guid)" v-show="tab.data && tab.data.isChild">
@@ -830,6 +836,21 @@ export default Vue.extend({
       } else {
         return Math.round(oldValue / (parentSize / 100))
       }
+    },
+
+    getTabDepth (tab: any): number {
+      const tabs = this.tabSettingsService?.tabSettings || {}
+      let depth = 1
+      let parentGuid = tab?.data?.parentTabForTree
+      const visited = new Set<string>()
+
+      while (parentGuid && !visited.has(parentGuid)) {
+        visited.add(parentGuid)
+        depth += 1
+        parentGuid = tabs[parentGuid]?.parentTabForTree
+      }
+
+      return depth
     },
 
     getBlockTabStyle (tab: any): string {

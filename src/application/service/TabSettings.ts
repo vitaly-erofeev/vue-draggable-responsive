@@ -19,6 +19,7 @@ export default class TabSettings {
       isExpanded: false,
       parentTabForTree: '',
       style: '',
+      classItem: '',
       interactive: {},
       expandChildrenByDefault: false
     }
@@ -93,6 +94,10 @@ export default class TabSettings {
 
     if (!('styledConditions' in tabSetting)) {
       this.context.$set(tabSetting, 'styledConditions', { type: 'always' })
+    }
+
+    if (!('classItem' in tabSetting)) {
+      this.context.$set(tabSetting, 'classItem', '')
     }
   }
 
@@ -212,6 +217,21 @@ export default class TabSettings {
     const tabSetting = this.getTabSettingByGuid(tabGuid) || this.createTabSetting(tabGuid)
 
     this.context.$set(tabSetting, 'style', value)
+  }
+
+  getClassItem (tabGuid: string): string {
+    const tabSetting: TabSettingType | void = this.getTabSettingByGuid(tabGuid)
+    if (tabSetting && ('classItem' in tabSetting)) {
+      return tabSetting.classItem
+    }
+
+    return ''
+  }
+
+  setClassItem (tabGuid: string, value: string): void {
+    const tabSetting = this.getTabSettingByGuid(tabGuid) || this.createTabSetting(tabGuid)
+
+    this.context.$set(tabSetting, 'classItem', value)
   }
 
   getIsDefaultTab (tabGuid: string): boolean {

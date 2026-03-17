@@ -15,5 +15,6 @@ export interface TabSettingType {
 
   interactive?: InteractiveProperties,
 
-  style: string
+  style: string,
+  classItem: string
 }

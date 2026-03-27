@@ -302,54 +302,41 @@ export default Vue.extend({
       if (!this.block?.tabs?.use || this.block?.tabs?.list?.length < 1) {
         return []
       }
-      let tabs = this.tabSettingsService.tabSettings || {}
 
-      if (this.tabSettingsService) {
+      if (!this.tabSettingsService) {
+        return []
+      }
+
+      const tabs = this.tabSettingsService.tabSettings || {}
         const parentKeys: { [key: string]: boolean } = {}
 
-        // Заполняем parentKeys ключами, используемыми в parentTabForTree
+      // Собираем guid родительских вкладок
         for (const key in tabs) {
           if (Object.prototype.hasOwnProperty.call(tabs, key)) {
-            const parentKey = tabs[key].parentTabForTree
+          const parentKey = tabs[key]?.parentTabForTree
             if (parentKey) {
               parentKeys[parentKey] = true
             }
           }
         }
 
-        for (const guid in tabs) {
-          if (Object.prototype.hasOwnProperty.call(tabs, guid)) {
-            // изначально svg в плюсик
-            tabs[guid].isExpanded = false
-            // является первым уровнем и есть потомок - вкладку показывать при иницилизации
-            if (!tabs[guid].parentTabForTree && parentKeys[guid]) {
-              tabs[guid].isShow = true
-            }
-            // есть родитель, является потомком - вкладку не показывать при иницилизации
-            if (tabs[guid].parentTabForTree) {
-              tabs[guid].isShow = false
-            }
-            // есть потомок - показать плюсик
-            if (parentKeys[guid]) {
-              tabs[guid].isChild = true
-            } else {
-              tabs[guid].isChild = false
-            }
-          }
-        }
-        const defaultData = { isChild: false, isExpanded: false, isShow: false, parentTabForTree: '' }
-        let result = this.block.tabs.list
-          .map(tab => {
+      return this.block.tabs.list.map(tab => {
+        const sourceData = tabs[tab.guid] || {}
+        const hasParent = !!sourceData.parentTabForTree
+        const hasChildren = !!parentKeys[tab.guid]
+
             return {
               guid: tab.guid,
               name: tab.name,
-              data: tabs[tab.guid] || defaultData
+          data: {
+            ...sourceData,
+            parentTabForTree: sourceData.parentTabForTree || '',
+            isExpanded: sourceData.isExpanded ?? false,
+            isShow: sourceData.isShow ?? (!hasParent && hasChildren),
+            isChild: hasChildren
+          }
             }
           })
-
-        return result
-      }
-      return []
     },
 
     tabGuids () {
@@ -575,7 +562,7 @@ export default Vue.extend({
         }
         this.setSticky(value)
         if (oldValue && !value) {
-          const el = this.getStore().getRefByGuid(oldValue) as unknown as {
+          const el = (this as any).getStore().getRefByGuid(oldValue) as unknown as {
             $el: {
               offsetTop: number, offsetLeft: number, offsetHeight: number, offsetWidth: number
             }
@@ -598,7 +585,7 @@ export default Vue.extend({
         if (!value || !this.block.stickyTo?.guid) {
           return
         }
-        const el = this.getStore().getRefByGuid(this.block.stickyTo?.guid) as unknown as {
+        const el = (this as any).getStore().getRefByGuid(this.block.stickyTo?.guid) as unknown as {
           $el: {
             offsetTop: number, offsetLeft: number, offsetHeight: number, offsetWidth: number
           }
@@ -620,7 +607,7 @@ export default Vue.extend({
     },
 
     activeTabGuid (guid) {
-      this.getStore().setActiveTab(this.block.guid, guid)
+      (this as any).getStore().setActiveTab(this.block.guid, guid)
     },
 
     'block.tabs.list': {
@@ -761,7 +748,7 @@ export default Vue.extend({
           this.block.children
             .forEach((item) => {
               if (item.parentTabGuid === removedTab) {
-                this.getStore().remove(item.guid)
+                (this as any).getStore().remove(item.guid)
               }
             })
         }
@@ -773,7 +760,7 @@ export default Vue.extend({
     if (this.block?.tabs?.use && this.block?.tabs?.list?.length > 0) {
       this.onTabClick(this.block.tabs.list[0].guid)
     }
-    this.getStore().addRef(this.block.guid, this)
+    (this as any).getStore().addRef(this.block.guid, this)
     this.$nextTick(() => {
       this.onDrag()
       if (this.isTabsContainer) {
@@ -784,26 +771,49 @@ export default Vue.extend({
   },
 
   beforeDestroy () {
-    this.getStore().removeRef(this.block.guid)
+    (this as any).getStore().removeRef(this.block.guid)
   },
 
   methods: {
-    showChildTabs (guid: string) {
-      if (this.block.tabs) {
-        this.visibleTabs.forEach(tab => {
-          if (tab.guid === guid) {
-            tab.data.isExpanded = !tab.data.isExpanded
-          }
-          if (tab.data.parentTabForTree === guid) {
-            tab.data.isShow = !tab.data.isShow
-          }
+    ensureTabSettingsEntry (guid: string): any {
+      if (!this.tabSettingsService) {
+        return undefined
+      }
+
+      const tabs = this.tabSettingsService.tabSettings || {}
+      if (!tabs[guid]) {
+        this.$set(tabs, guid, {
+          parentTabForTree: '',
+          isExpanded: false,
+          isShow: false,
+          isChild: false
         })
       }
+
+      return tabs[guid]
+    },
+
+    showChildTabs (guid: string) {
+      if (!this.block.tabs || !this.tabSettingsService) {
+        return
+      }
+
+      const parent = this.ensureTabSettingsEntry(guid)
+      if (parent) {
+        parent.isExpanded = !parent.isExpanded
+          }
+
+      this.block.tabs.list.forEach(tab => {
+        const entry = this.ensureTabSettingsEntry(tab.guid)
+        if (entry && entry.parentTabForTree === guid) {
+          entry.isShow = !entry.isShow
+          }
+        })
     },
     setSticky (guid?: string) {
       if (guid) {
-        this.stickyToBlock = this.getStore().getByGuid(guid)
-        this.stickyToElement = this.getStore().getRefByGuid(guid) as unknown as {
+        this.stickyToBlock = (this as any).getStore().getByGuid(guid)
+        this.stickyToElement = (this as any).getStore().getRefByGuid(guid) as unknown as {
           positionStyle: {
             top: string, height: string, left: string, width: string
           }
@@ -912,7 +922,7 @@ export default Vue.extend({
       if (typeof this.blockManager === 'undefined') {
         this.blockManager = new BlockManager(
           this.block,
-          this.getStore(),
+          (this as any).getStore(),
             this.$refs.draggableContainer as Element,
             this.step
         )

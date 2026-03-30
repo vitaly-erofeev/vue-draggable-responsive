@@ -8,6 +8,8 @@ import { StickyTo } from '@/domain/model/StickyTo'
 import { ReplicationProperties } from '@/domain/model/ReplicationProperties'
 import { MinMax } from '@/domain/model/MinMax'
 import { OnCenter } from '@/domain/model/OnCenter'
+import { PositionBlockCss } from '@/domain/model/PositionBlockCss'
+import { CustomStyles, StylesComponent } from '@/domain/model/RelativeTypes'
 
 export default class BlockDTO {
   [index: string]: any;
@@ -16,8 +18,8 @@ export default class BlockDTO {
   widthCalc?: CalcProperties
   heightCalc?: CalcProperties
   minMax?: MinMax
-  width: number
-  height: number
+  width: number | string
+  height: number | string
   top?: number
   right?: number
   bottom?: number
@@ -55,6 +57,10 @@ export default class BlockDTO {
   properties: {[index: string]: any;} = {}
   isLoading: boolean = false
   disabledMove: boolean = false
+  positionBlockCss: PositionBlockCss
+  isComponent: boolean = false
+  customStyles?: Partial<CustomStyles>
+  stylesComponent?: Partial<StylesComponent>
 
   constructor (
     {
@@ -78,7 +84,7 @@ export default class BlockDTO {
       guid = 'guid',
       alias,
       parentGuid,
-      isStretched,
+      isStretched = false,
       isScrollHover,
       style,
       interactive,
@@ -96,7 +102,11 @@ export default class BlockDTO {
       onCenter,
       properties = {},
       isLoading = false,
-      disabledMove = false
+      disabledMove = false,
+      isComponent = false,
+      customStyles = {},
+      stylesComponent = {},
+      positionBlockCss = 'absolute'
     }: BlockProperties
   ) {
     this.widthCalc = widthCalc
@@ -143,6 +153,10 @@ export default class BlockDTO {
     this.isLoading = isLoading
     this.disabledMove = disabledMove
     this.prepareSizesTypes()
+    this.positionBlockCss = positionBlockCss
+    this.isComponent = isComponent
+    this.customStyles = customStyles
+    this.stylesComponent = stylesComponent
   }
 
   private static getPreparedSizes ({

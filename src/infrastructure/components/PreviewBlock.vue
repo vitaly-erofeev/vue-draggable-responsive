@@ -2,7 +2,12 @@
   <div
       :style="positionStyle"
       ref="draggableContainer"
-      :class="['block', block.className]"
+    :class="{
+      'block': true,
+      'block-relative': isRelativeBlock,
+      'block-component': block.isComponent,
+      [block.className]: !!block.className
+    }"
   >
     <div
         v-if="isTabsContainer"
@@ -63,7 +68,10 @@
     <div
         ref="container"
         class="content custom_scrollbar"
-        :class="{ 'scroll_hover': isActiveScrollHover }"
+        :class="{
+          'scroll_hover': isActiveScrollHover,
+          'block-parent-relative': !block.isComponent && isRelativeBlock,
+          }"
         :style="blockContentStyle"
         :title="blockHoverTitle"
         @mouseover="block.isHover = true"
@@ -85,6 +93,7 @@
           :parent-z-index="zIndex"
           :replication-callback="replicationCallback"
           :tab-settings-service="tabSettingsService"
+          :is-parent-relative-block="isRelativeBlock"
           @click="handleClick({ block: $event.block || _block, event: $event.event || $event })"
           @tab-click="$emit('tab-click', $event)"
       >
@@ -98,6 +107,7 @@
 
 <script lang="ts">
 import { Sticky } from '@/domain/model/Sticky'
+
 import BlockDTO from '../../domain/model/BlockDTO'
 // eslint-disable-next-line no-unused-vars
 import { Position } from '@/domain/model/PositionCss'
@@ -106,6 +116,7 @@ import { StretchManager } from '@/infrastructure/service/StretchManager'
 import Vue_, { VueConstructor } from 'vue'
 import { SizeTypes } from '@/domain/model/SizeTypes'
 import BlockManager from '@/application/service/BlockManager'
+
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faAngleDown, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -119,6 +130,7 @@ import { debounce } from '@/infrastructure/service/utils'
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 library.add(faAngleDown, faChevronRight, faChevronLeft)
 export default Vue.extend({
+// export default {
   name: 'PreviewBlock',
 
   components: {
@@ -127,8 +139,7 @@ export default Vue.extend({
 
   inject: {
     getStore: {
-      default: () => () => {
-      }
+      default: () => () => {}
     },
     mainBlockSelector: {
       default: null
@@ -150,6 +161,10 @@ export default Vue.extend({
     parentZIndex: {
       type: Number,
       default: undefined
+    },
+    isParentRelativeBlock: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -186,8 +201,7 @@ export default Vue.extend({
       visitedTabGuids: [],
       stickyToBlock: undefined,
       stickyToElement: undefined,
-      prepareReplication: () => {
-      },
+      prepareReplication: () => {},
       activeBlockGuid: '',
       stretchItem: null,
       minHeightParent: 0
@@ -321,13 +335,55 @@ export default Vue.extend({
     isTabsContainer (): boolean {
       return this.block.tabs?.use || false
     },
+    objectStyle () {
+      const styleArray = (this.block.style || '').split(';').map(pair => pair.replace(/\n/g, '').trim()) || []
+      return styleArray.reduce((acc, item) => {
+        if (!item) return acc
+        const [key, value] = item.split(':')
+        acc[key] = value
+        return acc
+      }, {} as Record<string, string>)
+    },
+    componentStyleFlex () {
+      const result: Record<string, string> = {}
+      result.minWidth = `${this.block.stylesComponent?.minWidth || 'auto'}`
+      result.maxWidth = `${this.block.stylesComponent?.maxWidth || 'auto'}`
+      result.flexGrow = `${this.block.stylesComponent?.flexGrow || '0'}`
+      result.flexShrink = `${this.block.stylesComponent?.flexShrink || '1'}`
+      result.alignSelf = `${this.block.stylesComponent?.alignSelf || 'auto'}`
+      result.order = `${this.block.stylesComponent?.order || '0'}`
+
+      return result
+    },
+    blockStyleRelative () {
+      const result: Record<string, string> = {}
+      result.width = `${this.block.width}${this.block.sizeTypes.width === 'auto' ? '' : this.block.sizeTypes.width}`
+      result.height = `${this.block.height}${this.block.sizeTypes.height === 'auto' ? '' : this.block.sizeTypes.height}`
+      result.minHeight = this.block.customStyles?.minHeight || 'auto'
+      result.maxHeight = this.block.customStyles?.maxHeight || 'auto'
+      result.paddingLeft = this.block.customStyles?.paddingLeft || '0px'
+      result.paddingRight = this.block.customStyles?.paddingRight || '0px'
+      result.paddingTop = this.block.customStyles?.paddingTop || '0px'
+      result.paddingBottom = this.block.customStyles?.paddingBottom || '0px'
+      result.display = 'flex'
+      result.flexDirection = this.block.customStyles?.flexDirection || 'row'
+      result.justifyContent = this.block.customStyles?.justifyContent || ''
+      result.alignItems = this.block.customStyles?.alignItems || ''
+      result.flexWrap = this.block.customStyles?.flexWrap || ''
+      result.gap = this.block.customStyles?.gap || ''
+      Object.assign(result, this.objectStyle)
+
+      return result
+    },
 
     positionStyle (): object {
       let position: Position = {}
       let top: string
       let left: string
-      let height: string = this.block.height + this.block.sizeTypes.height
-      let width: string = this.block.width + this.block.sizeTypes.width
+      // let height: string = this.block.height + this.block.sizeTypes.height
+      // let width: string = this.block.width + this.block.sizeTypes.width
+      let width = `${this.block.width}${this.block.sizeTypes.width === 'auto' ? '' : this.block.sizeTypes.width}`
+      let height = `${this.block.height}${this.block.sizeTypes.height === 'auto' ? '' : this.block.sizeTypes.height}`
 
       switch (this.block.sticky) {
         case Sticky.TL:
@@ -339,11 +395,11 @@ export default Vue.extend({
                 // Если this.isTabsContainer === false
                 // и чекбокс "Растягиваемый" включен у дочернего блока, то поля в дочернем блоке пропадают (width = 0px)
                 const parentSizes = BlockManager.getAbsoluteSizesByParent(this.parentBlock, this.parentElement as Element)
-                if (this.block.sizeTypes.top === SizeTypes.PERCENT) {
+                if (this.block.sizeTypes.top === SizeTypes.PERCENT && typeof this.block.height === 'number') {
                   top = `${parentSizes.height / 100 * (this.block.top || 0)}px`
                   height = `${parentSizes.height / 100 * this.block.height}px`
                 }
-                if (this.block.sizeTypes.left === SizeTypes.PERCENT) {
+                if (this.block.sizeTypes.left === SizeTypes.PERCENT && typeof this.block.width === 'number') {
                   left = `${parentSizes.width / 100 * (this.block.left || 0)}px`
                   width = `${parentSizes.width / 100 * this.block.width}px`
                 }
@@ -488,6 +544,27 @@ export default Vue.extend({
         position.top = '0'
         position.bottom = '0'
       }
+      const isBlockStyleRelative = this.isRelativeBlock && !this.block.isComponent
+      const isComponentAndParentRelative = this.isParentRelativeBlock && this.block.isComponent
+      if (isBlockStyleRelative) {
+        if (this.blockStyleRelative?.height === 'auto') {
+          position.height = 'auto'
+        }
+        const result = {
+          ...position,
+          ...this.blockStyleRelative,
+          zIndex: this.zIndex
+        }
+        return result
+      }
+      if (isComponentAndParentRelative) {
+        const result = {
+          zIndex: this.zIndex,
+          ...position,
+          ...this.componentStyleFlex
+        }
+        return result
+      }
 
       return Object.assign(position, {
         zIndex: this.zIndex
@@ -542,6 +619,9 @@ export default Vue.extend({
     },
     isActiveScrollHover (): boolean {
       return !!this.block?.isScrollHover
+    },
+    isRelativeBlock () {
+      return this.block?.positionBlockCss === 'relative'
     }
   },
 
@@ -604,7 +684,7 @@ export default Vue.extend({
   },
 
   methods: {
-    handleClick (event: { block: any, event: Event }) {
+    handleClick (event: {block: any, event: Event}) {
       this.$emit('click', event)
       this.activeBlockGuid = event.block.guid
     },
@@ -888,6 +968,7 @@ export default Vue.extend({
     }
   }
 })
+// }
 </script>
 
 <style scoped>
@@ -901,7 +982,12 @@ export default Vue.extend({
   position: absolute;
   overflow: auto;
 }
-
+.block.block-relative .block-component {
+  position: relative;
+}
+.block-parent-relative {
+  display: contents;
+}
 .block .tabs_container {
   position: absolute;
   display: flex;

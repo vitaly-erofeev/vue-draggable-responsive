@@ -115,8 +115,10 @@ export default class BlockManager {
       return blockRect
     }
     const parentElementRect = parentElement.getBoundingClientRect()
-    blockRect.height = parentElementRect.height / 100 * block.height
-    blockRect.width = parentElementRect.width / 100 * block.width
+    if (typeof block.height === 'number' && typeof block.width === 'number') {
+      blockRect.height = parentElementRect.height / 100 * block.height
+      blockRect.width = parentElementRect.width / 100 * block.width
+    }
 
     return blockRect
   }

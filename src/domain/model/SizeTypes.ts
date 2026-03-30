@@ -1,3 +1,3 @@
 export enum SizeTypes {
-  PERCENT = '%', PIXEL = 'px'
+  PERCENT = '%', PIXEL = 'px', AUTO = 'auto'
 }

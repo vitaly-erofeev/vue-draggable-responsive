@@ -27,6 +27,10 @@
         <slot :name="name" v-bind="data"></slot>
       </template>
     </block>
+<!-- _blocksRelative -->
+<!-- <pre>{{_blocks}}</pre> -->
+<!-- +++isRelativeV2 -->
+<!-- <code>{{isRelativeV2}}</code> -->
   </div>
 </template>
 
@@ -60,14 +64,18 @@ import SimpleRemoveListener from '@/infrastructure/service/listeners/SimpleRemov
 
 import TabSettings from '@/application/service/TabSettings'
 
+// eslint-disable-next-line no-unused-vars
+import { PositionBlockCss } from '@/domain/model/PositionBlockCss'
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 
 export default Vue.extend({
+// export default {
   name: 'VueDraggableResponsiveDesigner',
   components: { Block },
 
   provide () {
     return {
+      // @ts-ignore
       getStore: this.getStore
     }
   },
@@ -87,6 +95,10 @@ export default Vue.extend({
     },
     tabSettings: {
       type: Object
+    },
+    activeBlock: {
+      type: Object,
+      default: () => ({})
     }
   },
 
@@ -99,10 +111,19 @@ export default Vue.extend({
   },
 
   computed: {
+    isRelativeV2 (): boolean {
+      if (this.activeBlock?.parentGuid) {
+        const block = this.store.getByGuid(this.activeBlock.parentGuid)
+        return block?.positionBlockCss === 'relative'
+      }
+
+      return this.activeBlock?.positionBlockCss === 'relative'
+    },
     _blocks (): BlockDTO[] {
       return this.getStore().get()
     },
     stickyLines () {
+      // @ts-ignore
       return this.getStore().getStickyLines()
     }
   },
@@ -209,47 +230,24 @@ export default Vue.extend({
         pagination = undefined,
         minMax = undefined,
         onCenter = undefined,
-        alias = undefined
-      }: {
-          width: number,
-          height: number,
-          sticky: Sticky,
-          stickyTo?: StickyTo,
-          parentGuid?: string,
-          top?: number,
-          right?: number,
-          bottom?: number,
-          left?: number,
-          sizeTypes?: {
-            width: SizeTypes,
-            height: SizeTypes,
-            top: SizeTypes,
-            right: SizeTypes,
-            bottom: SizeTypes,
-            left: SizeTypes
-          },
-          className?: string,
-          event?: MouseEvent,
-          type: AddBlockType,
-          isStretched: boolean,
-          tabs?: TabProperties,
-          replication?: ReplicationProperties,
-          pagination?: {
-            replicationGuid: string,
-            total: number,
-            limit: number
-          }
-          minMax?: MinMax,
-          onCenter?: OnCenter,
-          alias?: string
-        }
+        alias = undefined,
+        positionBlockCss = 'absolute',
+        isComponent = false
+      }: BlockProperties
     ): string {
-      if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
-        const position: { top: number, right: number, bottom: number, left: number } = this.getMousePosition(event, sizeTypes)
-        top = position.top
-        right = position.right
-        bottom = position.bottom
-        left = position.left
+      console.log('iscomponent', isComponent)
+      if (!this.isRelativeV2) {
+        if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
+          const position: { top: number, right: number, bottom: number, left: number } = this.getMousePosition(event, sizeTypes)
+          top = position.top
+          right = position.right
+          bottom = position.bottom
+          left = position.left
+        }
+      }
+      let adjustPositionBlockCss = positionBlockCss
+      if (this.isRelativeV2 && !isComponent) {
+        adjustPositionBlockCss = this.isRelativeV2 ? 'relative' : positionBlockCss
       }
 
       const guid = this.store.add({
@@ -270,22 +268,30 @@ export default Vue.extend({
         pagination,
         minMax,
         onCenter,
-        alias
+        alias,
+        positionBlockCss: adjustPositionBlockCss,
+        isComponent
       })
-      if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
-        this.$nextTick(() => {
-          const block: any = this.getAllBlockRefs()[guid]
-          block.onDrag()
-          block.dragStart(event, true)
-        })
+      if (!this.isRelativeV2) {
+        if (type === AddBlockType.INTERACTIVE && typeof event !== 'undefined') {
+          this.$nextTick(() => {
+            const block: any = this.getAllBlockRefs()[guid]
+            block.onDrag()
+            block.dragStart(event, true)
+          })
+        }
       }
       return guid
     },
     removeBlock (guid: string): void {
       this.store.remove(guid)
+    },
+    setPosition (guid: string, positionCss: PositionBlockCss): void {
+      this.store.setPosition(guid, positionCss)
     }
   }
 })
+// }
 </script>
 
 <style scoped>

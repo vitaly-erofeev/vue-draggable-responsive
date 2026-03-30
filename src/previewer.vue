@@ -39,6 +39,7 @@ import TabSettings from '@/application/service/TabSettings'
 
 const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 export default Vue.extend({
+// export default {
   name: 'VueDraggableResponsivePreviewer',
   components: { PreviewBlock },
 
@@ -101,6 +102,7 @@ export default Vue.extend({
     }
   }
 })
+// }
 </script>
 
 <style scoped>

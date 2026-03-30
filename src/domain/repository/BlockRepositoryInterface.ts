@@ -1,6 +1,7 @@
 import BlockDTO from '@/domain/model/BlockDTO'
 import { BlockProperties } from '@/domain/model/BlockProperties'
 import { ListenerInterface } from '@/domain/service/ListenerInterface'
+import { PositionBlockCss } from '@/domain/model/PositionBlockCss'
 
 export interface BlockRepositoryInterface {
   change (guid: string, property: string, value: any): void
@@ -42,4 +43,6 @@ export interface BlockRepositoryInterface {
   removeListener (guid: string): void
 
   setRequiredTabs (blocks: string[]): void
+
+  setPosition (blockGuid: string, positionCss: PositionBlockCss): void
 }

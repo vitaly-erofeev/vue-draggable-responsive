@@ -8,20 +8,23 @@ import { StickyTo } from '@/domain/model/StickyTo'
 import { ReplicationProperties } from '@/domain/model/ReplicationProperties'
 import { MinMax } from '@/domain/model/MinMax'
 import { OnCenter } from '@/domain/model/OnCenter'
+import { PositionBlockCss } from '@/domain/model/PositionBlockCss'
+import { AddBlockType } from '@/domain/model/AddBlockType'
+import { CustomStyles, StylesComponent } from '@/domain/model/RelativeTypes'
 
 export interface BlockProperties {
   widthCalc?: CalcProperties
   heightCalc?: CalcProperties
   onCenter?: OnCenter
   minMax?: MinMax
-  width: number,
-  height: number,
+  width: number | string,
+  height: number | string,
   top?: number,
   right?: number,
   bottom?: number,
   left?: number,
-  sticky: Sticky,
-  sizeTypes: {
+  sticky?: Sticky,
+  sizeTypes?: {
     width: SizeTypes,
     height: SizeTypes,
     top: SizeTypes,
@@ -52,5 +55,11 @@ export interface BlockProperties {
   isHighlight?: boolean,
   properties?: {},
   isLoading?: boolean,
-  disabledMove?: boolean
+  disabledMove?: boolean,
+  event?: MouseEvent,
+  type?: AddBlockType,
+  isComponent?: boolean
+  positionBlockCss: PositionBlockCss,
+  customStyles?: Partial<CustomStyles>
+  stylesComponent?: Partial<StylesComponent>
 }

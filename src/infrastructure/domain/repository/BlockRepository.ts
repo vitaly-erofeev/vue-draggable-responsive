@@ -8,6 +8,7 @@ import { ListenerInterface } from '@/domain/service/ListenerInterface'
 import { EventTypes } from '@/domain/model/EventTypes'
 // @ts-ignore
 import cloneDeep from 'lodash.clonedeep'
+import { PositionBlockCss } from '@/domain/model/PositionBlockCss'
 
 export default class BlockRepository implements BlockRepositoryInterface {
   private blocks: BlockDTO[] = []
@@ -376,5 +377,18 @@ export default class BlockRepository implements BlockRepositoryInterface {
         listener.handle(event)
       }
     })
+  }
+
+  setPosition (blockGuid: string, positionCss: PositionBlockCss): void {
+    const block = this.getByGuid(blockGuid)
+    if (typeof block === 'undefined') {
+      return
+    }
+    const mapPosition: PositionBlockCss[] = ['absolute', 'relative']
+    if (mapPosition.includes(positionCss)) {
+      block.positionBlockCss = positionCss
+    } else {
+      console.error(`Position ${positionCss} is not supported`)
+    }
   }
 }

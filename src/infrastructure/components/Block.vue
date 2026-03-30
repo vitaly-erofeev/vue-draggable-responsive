@@ -3,6 +3,8 @@
     :style="positionStyle"
     :class="{
       'block': true,
+      'block-relative': isRelativeBlock,
+      'block-component': block.isComponent,
       'highlight' : isResizing || isDragging,
       'active': block.isActive,
       'hidden': block.isHidden,
@@ -14,6 +16,11 @@
     @mousedown.stop="dragStart"
     @contextmenu.stop="$emit('contextmenu', { block: block, event: $event })"
   >
+ <!-- + block {{block.height}}<br>!!!! -->
+ <!-- + positionStyle {{positionStyle}}<br>! -->
+ <!-- + isParentRelativeBlock {{isParentRelativeBlock}}<br> -->
+ <!-- + isRelativeBlock {{isRelativeBlock}}<br>! -->
+  <!-- +isComponent {{block.customStyles}} -->
     <div
       v-if="isTabsContainer"
       ref="tabsContainer"
@@ -107,6 +114,9 @@
     </slot>
     <div
       class="content custom_scrollbar"
+      :class="{
+        'block-parent-relative': !block.isComponent && isRelativeBlock,
+      }"
       :style="blockContentStyle"
       :title="blockHoverTitle"
       @mouseover="block.isHover = true"
@@ -115,7 +125,7 @@
     >
       <slot :block="block" v-if="!isTabsContainer" name="content"></slot>
       <slot :block="block" name="toolbar"></slot>
-      <svg id="svg" v-if="!block.isEditing && !isTabsContainer">
+      <svg  id="svg" v-if="!block.isEditing && !isTabsContainer && !isRelativeBlock">
         <line class="line" v-for="(line, index) in stickyLines"
               :class="{
                 [line.type]: true
@@ -137,9 +147,10 @@
         :tab-settings-service="tabSettingsService"
         :step="step"
         :show-hidden="showHidden"
-        @start-drag="$emit('start-drag', $event)"
-        @stop-drag="$emit('stop-drag', $event)"
-        @dragging="$emit('dragging', $event)"
+        :is-parent-relative-block="isRelativeBlock"
+        @start-drag="onStartDrag"
+        @stop-drag="onStopDrag"
+        @dragging="onDragging"
         @contextmenu="$emit('contextmenu', $event)"
         @click="$emit('click', { block: $event.block || _block, event: $event.event || $event })"
       >
@@ -178,6 +189,7 @@ const Vue = Vue_ as VueConstructor<Vue_ & DataSourceInjected>
 library.add(faAngleDown, faChevronRight, faChevronLeft)
 
 export default Vue.extend({
+// export default {
   name: 'Block',
   mixins: [stickyLinesMixin],
   components: {
@@ -207,6 +219,10 @@ export default Vue.extend({
     parentZIndex: {
       type: Number,
       default: undefined
+    },
+    isParentRelativeBlock: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -369,8 +385,47 @@ export default Vue.extend({
     directionTabs (): boolean {
       return (this.block.tabs?.position === 'left' || this.block.tabs?.position === 'right')
     },
+    objectStyle () {
+      const styleArray = (this.block.style || '').split(';').map(pair => pair.replace(/\n/g, '').trim()) || []
+      return styleArray.reduce((acc, item) => {
+        if (!item) return acc
+        const [key, value] = item.split(':')
+        acc[key] = value
+        return acc
+      }, {} as Record<string, string>)
+    },
+    componentStyleFlex () {
+      const result: Record<string, string> = {}
+      result.minWidth = `${this.block.stylesComponent?.minWidth || 'auto'}`
+      result.maxWidth = `${this.block.stylesComponent?.maxWidth || 'auto'}`
+      result.flexGrow = `${this.block.stylesComponent?.flexGrow || '0'}`
+      result.flexShrink = `${this.block.stylesComponent?.flexShrink || '1'}`
+      result.alignSelf = `${this.block.stylesComponent?.alignSelf || 'auto'}`
+      result.order = `${this.block.stylesComponent?.order || '0'}`
 
-    positionStyle (): object {
+      return result
+    },
+    blockStyleRelative () {
+      const result: Record<string, string> = {}
+      result.width = `${this.block.width}${this.block.sizeTypes.width === 'auto' ? '' : this.block.sizeTypes.width}`
+      result.height = `${this.block.height}${this.block.sizeTypes.height === 'auto' ? '' : this.block.sizeTypes.height}`
+      result.minHeight = this.block.customStyles?.minHeight || 'auto'
+      result.maxHeight = this.block.customStyles?.maxHeight || 'auto'
+      result.paddingLeft = this.block.customStyles?.paddingLeft || '0px'
+      result.paddingRight = this.block.customStyles?.paddingRight || '0px'
+      result.paddingTop = this.block.customStyles?.paddingTop || '0px'
+      result.paddingBottom = this.block.customStyles?.paddingBottom || '0px'
+      result.display = 'flex'
+      result.flexDirection = this.block.customStyles?.flexDirection || 'row'
+      result.justifyContent = this.block.customStyles?.justifyContent || ''
+      result.alignItems = this.block.customStyles?.alignItems || ''
+      result.flexWrap = this.block.customStyles?.flexWrap || ''
+      result.gap = this.block.customStyles?.gap || ''
+      Object.assign(result, this.objectStyle)
+
+      return result
+    },
+    positionStyle (): object | string {
       let position: Position = {}
 
       switch (this.block.sticky) {
@@ -434,8 +489,11 @@ export default Vue.extend({
         }
       }
 
-      let width = this.block.width + this.block.sizeTypes.width
-      let height = this.block.height + this.block.sizeTypes.height
+      // let width = this.block.width + this.block.sizeTypes.width
+      let width = `${this.block.width}${this.block.sizeTypes.width === 'auto' ? '' : this.block.sizeTypes.width}`
+
+      // let height = this.block.height + this.block.sizeTypes.height
+      let height = `${this.block.height}${this.block.sizeTypes.height === 'auto' ? '' : this.block.sizeTypes.height}`
 
       if (this.block.widthCalc && this.block.widthCalc.type && this.block.widthCalc.value) {
         width = `calc(${width} ${this.block.widthCalc.type} ${this.block.widthCalc.value}px)`
@@ -470,12 +528,38 @@ export default Vue.extend({
         position.top = '0'
         position.bottom = '0'
       }
-
-      return Object.assign(position, {
+      const someStyles = {
         width: width,
         height: height,
         zIndex: this.zIndex
-      })
+      }
+      const isBlockStyleRelative = this.isRelativeBlock && !this.block.isComponent
+      const isComponentAndParentRelative = this.isParentRelativeBlock && this.block.isComponent
+      if (isBlockStyleRelative) {
+        // console.log('blockStyleRelative', this.blockStyleRelative)
+        // console.log('position', position)
+        if (this.blockStyleRelative?.height === 'auto') {
+          someStyles.height = 'auto'
+        }
+        const result = {
+          ...position,
+          ...this.blockStyleRelative,
+          ...someStyles
+        }
+        // console.log('someStyles00', someStyles)
+        // console.log('isBlockStyleRelative', result)
+        return result
+      }
+      if (isComponentAndParentRelative) {
+        const result = {
+          ...someStyles,
+          ...this.componentStyleFlex
+        }
+        // console.log('isComponentAndParentRelative', result)
+        return result
+      }
+      // console.log('someStyles2', someStyles)
+      return Object.assign(position, someStyles)
     },
 
     blockTabStyle () {
@@ -523,6 +607,9 @@ export default Vue.extend({
       }
 
       return isShow
+    },
+    isRelativeBlock () {
+      return this.block?.positionBlockCss === 'relative'
     }
   },
 
@@ -654,6 +741,9 @@ export default Vue.extend({
         }
         let parentSize = this.$el.parentElement.offsetWidth
         const oldValue = this.block.width
+        if (value === SizeTypes.AUTO || typeof oldValue !== 'number') {
+          return
+        }
         this.block.width = this.calcSwitchedSizes(value, parentSize, oldValue)
       },
       deep: true
@@ -669,6 +759,9 @@ export default Vue.extend({
         }
         let parentSize = this.$el.parentElement.offsetHeight
         const oldValue = this.block.height
+        if (value === SizeTypes.AUTO || typeof oldValue !== 'number') {
+          return
+        }
         this.block.height = this.calcSwitchedSizes(value, parentSize, oldValue)
       },
       deep: true
@@ -788,6 +881,15 @@ export default Vue.extend({
   },
 
   methods: {
+    onStartDrag (event: MouseEvent) {
+      this.$emit('start-drag', event)
+    },
+    onStopDrag (event: MouseEvent) {
+      this.$emit('stop-drag', event)
+    },
+    onDragging (event: MouseEvent) {
+      this.$emit('dragging', event)
+    },
     showChildTabs (guid: string) {
       if (this.block.tabs) {
         this.visibleTabs.forEach(tab => {
@@ -831,10 +933,11 @@ export default Vue.extend({
     },
 
     calcSwitchedSizes (type: SizeTypes, parentSize: number, oldValue: number): number {
+      const normalizedValue = Number(oldValue) || 0
       if (type === SizeTypes.PIXEL) {
-        return Math.round(parentSize / 100 * oldValue)
+        return Math.round(parentSize / 100 * normalizedValue)
       } else {
-        return Math.round(oldValue / (parentSize / 100))
+        return Math.round(normalizedValue / (parentSize / 100))
       }
     },
 
@@ -1024,6 +1127,7 @@ export default Vue.extend({
     }
   }
 })
+// }
 </script>
 
 <style scoped>
@@ -1061,6 +1165,16 @@ export default Vue.extend({
 .block {
   outline: 1px dashed #539FFF;
   position: absolute;
+}
+.block.block-relative {
+  outline: 1px dashed #53ff53;
+}
+.block.block-relative .block-component {
+  outline: 2px dashed #53fff6;
+  position: relative;
+}
+.block-parent-relative {
+  display: contents;
 }
 .block.hidden {
   outline: 1px dashed #E94435;
@@ -1159,6 +1273,9 @@ export default Vue.extend({
 
 .block.active {
   outline: 3px solid #539FFF;
+}
+.block.block-relative.active {
+  outline: 3px solid #53ff53;
 }
 
 .block.active.hidden {

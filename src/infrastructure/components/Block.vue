@@ -3,6 +3,7 @@
     :style="positionStyle"
     :class="{
       'block': true,
+      'custom_scrollbar': true,
       'block-relative': isRelativeBlock,
       'block-component': block.isComponent,
       'highlight' : isResizing || isDragging,
@@ -1167,7 +1168,11 @@ export default Vue.extend({
   position: absolute;
 }
 .block.block-relative {
-  outline: 1px dashed #53ff53;
+  outline: 1px dashed #62d162;
+}
+.block.block-relative .resize-handler.tl {
+  bottom: 2px;
+  right: 3px;
 }
 .block.block-relative .block-component {
   outline: 2px dashed #53fff6;
@@ -1275,7 +1280,7 @@ export default Vue.extend({
   outline: 3px solid #539FFF;
 }
 .block.block-relative.active {
-  outline: 3px solid #53ff53;
+  outline: 3px solid #62d162;
 }
 
 .block.active.hidden {

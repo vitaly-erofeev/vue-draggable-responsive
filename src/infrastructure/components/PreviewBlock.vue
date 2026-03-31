@@ -4,6 +4,7 @@
       ref="draggableContainer"
     :class="{
       'block': true,
+      'custom_scrollbar': true,
       'block-relative': isRelativeBlock,
       'block-component': block.isComponent,
       [block.className]: !!block.className

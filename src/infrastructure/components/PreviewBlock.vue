@@ -347,10 +347,11 @@ export default Vue.extend({
     },
     componentStyleFlex () {
       const result: Record<string, string> = {}
+      result.width = `${this.block.stylesComponent?.width || '250px'}`
       result.minWidth = `${this.block.stylesComponent?.minWidth || 'auto'}`
       result.maxWidth = `${this.block.stylesComponent?.maxWidth || 'auto'}`
       result.flexGrow = `${this.block.stylesComponent?.flexGrow || '0'}`
-      result.flexShrink = `${this.block.stylesComponent?.flexShrink || '1'}`
+      result.flexShrink = `${this.block.stylesComponent?.flexShrink || '0'}`
       result.alignSelf = `${this.block.stylesComponent?.alignSelf || 'auto'}`
       result.order = `${this.block.stylesComponent?.order || '0'}`
 
@@ -546,7 +547,6 @@ export default Vue.extend({
         position.bottom = '0'
       }
       const isBlockStyleRelative = this.isRelativeBlock && !this.block.isComponent
-      const isComponentAndParentRelative = this.isParentRelativeBlock && this.block.isComponent
       if (isBlockStyleRelative) {
         if (this.blockStyleRelative?.height === 'auto') {
           position.height = 'auto'
@@ -558,11 +558,12 @@ export default Vue.extend({
         }
         return result
       }
-      if (isComponentAndParentRelative) {
+      if (this.isComponentAndParentRelative) {
         const result = {
           zIndex: this.zIndex,
           ...position,
-          ...this.componentStyleFlex
+          ...this.componentStyleFlex,
+          ...(this.block.isHidden ? { width: '0px' } : {})
         }
         return result
       }
@@ -623,6 +624,9 @@ export default Vue.extend({
     },
     isRelativeBlock () {
       return this.block?.positionBlockCss === 'relative'
+    },
+    isComponentAndParentRelative () {
+      return this.isParentRelativeBlock && this.block.isComponent
     }
   },
 

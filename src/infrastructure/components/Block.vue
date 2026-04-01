@@ -17,11 +17,6 @@
     @mousedown.stop="dragStart"
     @contextmenu.stop="$emit('contextmenu', { block: block, event: $event })"
   >
- <!-- + block {{block.height}}<br>!!!! -->
- <!-- + positionStyle {{positionStyle}}<br>! -->
- <!-- + isParentRelativeBlock {{isParentRelativeBlock}}<br> -->
- <!-- + isRelativeBlock {{isRelativeBlock}}<br>! -->
-  <!-- +isComponent {{block.customStyles}} -->
     <div
       v-if="isTabsContainer"
       ref="tabsContainer"
@@ -397,10 +392,11 @@ export default Vue.extend({
     },
     componentStyleFlex () {
       const result: Record<string, string> = {}
+      result.width = `${this.block.stylesComponent?.width || '250px'}`
       result.minWidth = `${this.block.stylesComponent?.minWidth || 'auto'}`
       result.maxWidth = `${this.block.stylesComponent?.maxWidth || 'auto'}`
       result.flexGrow = `${this.block.stylesComponent?.flexGrow || '0'}`
-      result.flexShrink = `${this.block.stylesComponent?.flexShrink || '1'}`
+      result.flexShrink = `${this.block.stylesComponent?.flexShrink || '0'}`
       result.alignSelf = `${this.block.stylesComponent?.alignSelf || 'auto'}`
       result.order = `${this.block.stylesComponent?.order || '0'}`
 
@@ -535,10 +531,7 @@ export default Vue.extend({
         zIndex: this.zIndex
       }
       const isBlockStyleRelative = this.isRelativeBlock && !this.block.isComponent
-      const isComponentAndParentRelative = this.isParentRelativeBlock && this.block.isComponent
       if (isBlockStyleRelative) {
-        // console.log('blockStyleRelative', this.blockStyleRelative)
-        // console.log('position', position)
         if (this.blockStyleRelative?.height === 'auto') {
           someStyles.height = 'auto'
         }
@@ -547,19 +540,19 @@ export default Vue.extend({
           ...this.blockStyleRelative,
           ...someStyles
         }
-        // console.log('someStyles00', someStyles)
-        // console.log('isBlockStyleRelative', result)
+
         return result
       }
-      if (isComponentAndParentRelative) {
+      if (this.isComponentAndParentRelative) {
         const result = {
           ...someStyles,
-          ...this.componentStyleFlex
+          ...this.componentStyleFlex,
+          ...(this.block.isHidden && !this.showHidden ? { width: '0px' } : {})
         }
-        // console.log('isComponentAndParentRelative', result)
+
         return result
       }
-      // console.log('someStyles2', someStyles)
+
       return Object.assign(position, someStyles)
     },
 
@@ -611,6 +604,9 @@ export default Vue.extend({
     },
     isRelativeBlock () {
       return this.block?.positionBlockCss === 'relative'
+    },
+    isComponentAndParentRelative () {
+      return this.isParentRelativeBlock && this.block.isComponent
     }
   },
 

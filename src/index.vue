@@ -27,10 +27,6 @@
         <slot :name="name" v-bind="data"></slot>
       </template>
     </block>
-<!-- _blocksRelative -->
-<!-- <pre>{{_blocks}}</pre> -->
-<!-- +++isRelativeV2 -->
-<!-- <code>{{isRelativeV2}}</code> -->
   </div>
 </template>
 

@@ -13,6 +13,7 @@ export type CustomStyles = {
   gap: string;
 }
 export type StylesComponent = {
+  width: string;
   minWidth: string;
   maxWidth: string;
   flexGrow: string;

@@ -715,10 +715,8 @@ export default Vue.extend({
       }
       blocksData.shift()
       let me = this
-      let lastGuid = me.block.guid
       let columns = me.block.replication?.columns || 1
       let rowGuids: { [index: string]: any; } = { 0: [me.block.guid] }
-      let row = 0
       this.replicationIndex = 0
       const listenerGuid = this.getStore().addListener(new SimpleAddListener(this.onReplicateBlock))
       blocksData.forEach((item: object, index: number) => {
@@ -726,7 +724,31 @@ export default Vue.extend({
         newBlock.replication = undefined
         newBlock.isLoading = false
         this.replicationIndex = this.replicationIndex + 1
-        if ((index + 1) % columns !== 0) {
+
+        // Индекс блока в общей сетке (0-й уже занят исходным блоком)
+        const gridIndex = index + 1
+        const row = Math.floor(gridIndex / columns)
+        const col = gridIndex % columns
+
+        if (typeof rowGuids[row] === 'undefined') {
+          rowGuids[row] = []
+        }
+
+        if (col === 0) {
+          // Первый блок в строке: ставим под первый блок предыдущей строки
+          if (me.block.replication?.verticalMargin?.value) {
+            newBlock.top = me.block.replication?.verticalMargin?.value
+            newBlock.sizeTypes.top = me.block.replication?.verticalMargin?.type || SizeTypes.PIXEL
+          } else {
+            newBlock.top = 0
+          }
+
+          newBlock.stickyTo = {
+            type: 'top',
+            guid: rowGuids[row - 1][0]
+          }
+        } else {
+          // Остальные блоки строки: ставим справа от предыдущего блока в текущей строке
           if (me.block.replication?.horizontalMargin?.value) {
             newBlock.left = me.block.replication?.horizontalMargin?.value
             newBlock.sizeTypes.left = me.block.replication?.horizontalMargin?.type || SizeTypes.PIXEL
@@ -736,36 +758,22 @@ export default Vue.extend({
 
           newBlock.stickyTo = {
             type: 'left',
-            guid: lastGuid
+            guid: rowGuids[row][col - 1]
           }
+
+          // Для строк ниже первой добавляем вертикальную привязку к блоку над текущей колонкой
           if (row > 0) {
-            let previousRowBlockGuid = rowGuids[row - 1][(index % columns) + 1]
+            const previousRowBlockGuid = rowGuids[row - 1][col]
             newBlock.replication = {}
             newBlock.replication.topBlockGuid = previousRowBlockGuid
-            if (me.block.replication?.verticalMargin?.value) {
-              newBlock.replication.verticalMargin =
-                  `${me.block.replication?.verticalMargin?.value}${me.block.replication?.verticalMargin?.type || SizeTypes.PIXEL}`
-            }
+            const verticalMarginValue = me.block.replication?.verticalMargin?.value || 0
+            const verticalMarginType = me.block.replication?.verticalMargin?.type || SizeTypes.PIXEL
+            newBlock.replication.verticalMargin = `${verticalMarginValue}${verticalMarginType}`
           }
-          lastGuid = me.getStore().add(newBlock)
-        } else {
-          row++
-          if (me.block.replication?.verticalMargin?.value) {
-            newBlock.top = me.block.replication?.verticalMargin?.value
-            newBlock.sizeTypes.top = me.block.replication?.verticalMargin?.type || SizeTypes.PIXEL
-          } else {
-            newBlock.top = 0
-          }
-          newBlock.stickyTo = {
-            type: 'top',
-            guid: lastGuid
-          }
-          lastGuid = me.getStore().add(newBlock)
         }
-        if (typeof rowGuids[row] === 'undefined') {
-          rowGuids[row] = []
-        }
-        rowGuids[row].push(lastGuid)
+
+        const newGuid = me.getStore().add(newBlock)
+        rowGuids[row][col] = newGuid
       })
       this.getStore().removeListener(listenerGuid)
       this.block.isLoading = false

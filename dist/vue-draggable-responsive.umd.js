@@ -1305,8 +1305,8 @@ var staticRenderFns = [];
 
 // CONCATENATED MODULE: ./src/previewer.vue?vue&type=template&id=9d7644ce&scoped=true
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a1f175e6-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/PreviewBlock.vue?vue&type=template&id=5e58ca58&scoped=true
-var PreviewBlockvue_type_template_id_5e58ca58_scoped_true_render = function render() {
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"a1f175e6-vue-loader-template"}!./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/vue-loader/lib??vue-loader-options!./src/infrastructure/components/PreviewBlock.vue?vue&type=template&id=df1a4b2a&scoped=true
+var PreviewBlockvue_type_template_id_df1a4b2a_scoped_true_render = function render() {
   var _vm = this,
     _c = _vm._self._c,
     _setup = _vm._self._setupProxy;
@@ -1481,9 +1481,9 @@ var PreviewBlockvue_type_template_id_5e58ca58_scoped_true_render = function rend
     });
   })], 2)]);
 };
-var PreviewBlockvue_type_template_id_5e58ca58_scoped_true_staticRenderFns = [];
+var PreviewBlockvue_type_template_id_df1a4b2a_scoped_true_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=template&id=5e58ca58&scoped=true
+// CONCATENATED MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=template&id=df1a4b2a&scoped=true
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.push.js
 var es_array_push = __webpack_require__("14d9");
@@ -2277,12 +2277,10 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
       }
       blocksData.shift();
       let me = this;
-      let lastGuid = me.block.guid;
       let columns = ((_me$block$replication = me.block.replication) === null || _me$block$replication === void 0 ? void 0 : _me$block$replication.columns) || 1;
       let rowGuids = {
         0: [me.block.guid]
       };
-      let row = 0;
       this.replicationIndex = 0;
       const listenerGuid = this.getStore().addListener(new SimpleAddListener_SimpleAddListener(this.onReplicateBlock));
       blocksData.forEach((item, index) => {
@@ -2290,50 +2288,54 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
         newBlock.replication = undefined;
         newBlock.isLoading = false;
         this.replicationIndex = this.replicationIndex + 1;
-        if ((index + 1) % columns !== 0) {
+        // Индекс блока в общей сетке (0-й уже занят исходным блоком)
+        const gridIndex = index + 1;
+        const row = Math.floor(gridIndex / columns);
+        const col = gridIndex % columns;
+        if (typeof rowGuids[row] === 'undefined') {
+          rowGuids[row] = [];
+        }
+        if (col === 0) {
           var _me$block$replication2;
-          if ((_me$block$replication2 = me.block.replication) !== null && _me$block$replication2 !== void 0 && (_me$block$replication2 = _me$block$replication2.horizontalMargin) !== null && _me$block$replication2 !== void 0 && _me$block$replication2.value) {
+          // Первый блок в строке: ставим под первый блок предыдущей строки
+          if ((_me$block$replication2 = me.block.replication) !== null && _me$block$replication2 !== void 0 && (_me$block$replication2 = _me$block$replication2.verticalMargin) !== null && _me$block$replication2 !== void 0 && _me$block$replication2.value) {
             var _me$block$replication3, _me$block$replication4;
-            newBlock.left = (_me$block$replication3 = me.block.replication) === null || _me$block$replication3 === void 0 || (_me$block$replication3 = _me$block$replication3.horizontalMargin) === null || _me$block$replication3 === void 0 ? void 0 : _me$block$replication3.value;
-            newBlock.sizeTypes.left = ((_me$block$replication4 = me.block.replication) === null || _me$block$replication4 === void 0 || (_me$block$replication4 = _me$block$replication4.horizontalMargin) === null || _me$block$replication4 === void 0 ? void 0 : _me$block$replication4.type) || SizeTypes["a" /* SizeTypes */].PIXEL;
-          } else {
-            newBlock.left = 0;
-          }
-          newBlock.stickyTo = {
-            type: 'left',
-            guid: lastGuid
-          };
-          if (row > 0) {
-            var _me$block$replication5;
-            let previousRowBlockGuid = rowGuids[row - 1][index % columns + 1];
-            newBlock.replication = {};
-            newBlock.replication.topBlockGuid = previousRowBlockGuid;
-            if ((_me$block$replication5 = me.block.replication) !== null && _me$block$replication5 !== void 0 && (_me$block$replication5 = _me$block$replication5.verticalMargin) !== null && _me$block$replication5 !== void 0 && _me$block$replication5.value) {
-              var _me$block$replication6, _me$block$replication7;
-              newBlock.replication.verticalMargin = `${(_me$block$replication6 = me.block.replication) === null || _me$block$replication6 === void 0 || (_me$block$replication6 = _me$block$replication6.verticalMargin) === null || _me$block$replication6 === void 0 ? void 0 : _me$block$replication6.value}${((_me$block$replication7 = me.block.replication) === null || _me$block$replication7 === void 0 || (_me$block$replication7 = _me$block$replication7.verticalMargin) === null || _me$block$replication7 === void 0 ? void 0 : _me$block$replication7.type) || SizeTypes["a" /* SizeTypes */].PIXEL}`;
-            }
-          }
-          lastGuid = me.getStore().add(newBlock);
-        } else {
-          var _me$block$replication8;
-          row++;
-          if ((_me$block$replication8 = me.block.replication) !== null && _me$block$replication8 !== void 0 && (_me$block$replication8 = _me$block$replication8.verticalMargin) !== null && _me$block$replication8 !== void 0 && _me$block$replication8.value) {
-            var _me$block$replication9, _me$block$replication10;
-            newBlock.top = (_me$block$replication9 = me.block.replication) === null || _me$block$replication9 === void 0 || (_me$block$replication9 = _me$block$replication9.verticalMargin) === null || _me$block$replication9 === void 0 ? void 0 : _me$block$replication9.value;
-            newBlock.sizeTypes.top = ((_me$block$replication10 = me.block.replication) === null || _me$block$replication10 === void 0 || (_me$block$replication10 = _me$block$replication10.verticalMargin) === null || _me$block$replication10 === void 0 ? void 0 : _me$block$replication10.type) || SizeTypes["a" /* SizeTypes */].PIXEL;
+            newBlock.top = (_me$block$replication3 = me.block.replication) === null || _me$block$replication3 === void 0 || (_me$block$replication3 = _me$block$replication3.verticalMargin) === null || _me$block$replication3 === void 0 ? void 0 : _me$block$replication3.value;
+            newBlock.sizeTypes.top = ((_me$block$replication4 = me.block.replication) === null || _me$block$replication4 === void 0 || (_me$block$replication4 = _me$block$replication4.verticalMargin) === null || _me$block$replication4 === void 0 ? void 0 : _me$block$replication4.type) || SizeTypes["a" /* SizeTypes */].PIXEL;
           } else {
             newBlock.top = 0;
           }
           newBlock.stickyTo = {
             type: 'top',
-            guid: lastGuid
+            guid: rowGuids[row - 1][0]
           };
-          lastGuid = me.getStore().add(newBlock);
+        } else {
+          var _me$block$replication5;
+          // Остальные блоки строки: ставим справа от предыдущего блока в текущей строке
+          if ((_me$block$replication5 = me.block.replication) !== null && _me$block$replication5 !== void 0 && (_me$block$replication5 = _me$block$replication5.horizontalMargin) !== null && _me$block$replication5 !== void 0 && _me$block$replication5.value) {
+            var _me$block$replication6, _me$block$replication7;
+            newBlock.left = (_me$block$replication6 = me.block.replication) === null || _me$block$replication6 === void 0 || (_me$block$replication6 = _me$block$replication6.horizontalMargin) === null || _me$block$replication6 === void 0 ? void 0 : _me$block$replication6.value;
+            newBlock.sizeTypes.left = ((_me$block$replication7 = me.block.replication) === null || _me$block$replication7 === void 0 || (_me$block$replication7 = _me$block$replication7.horizontalMargin) === null || _me$block$replication7 === void 0 ? void 0 : _me$block$replication7.type) || SizeTypes["a" /* SizeTypes */].PIXEL;
+          } else {
+            newBlock.left = 0;
+          }
+          newBlock.stickyTo = {
+            type: 'left',
+            guid: rowGuids[row][col - 1]
+          };
+          // Для строк ниже первой добавляем вертикальную привязку к блоку над текущей колонкой
+          if (row > 0) {
+            var _me$block$replication8, _me$block$replication9;
+            const previousRowBlockGuid = rowGuids[row - 1][col];
+            newBlock.replication = {};
+            newBlock.replication.topBlockGuid = previousRowBlockGuid;
+            const verticalMarginValue = ((_me$block$replication8 = me.block.replication) === null || _me$block$replication8 === void 0 || (_me$block$replication8 = _me$block$replication8.verticalMargin) === null || _me$block$replication8 === void 0 ? void 0 : _me$block$replication8.value) || 0;
+            const verticalMarginType = ((_me$block$replication9 = me.block.replication) === null || _me$block$replication9 === void 0 || (_me$block$replication9 = _me$block$replication9.verticalMargin) === null || _me$block$replication9 === void 0 ? void 0 : _me$block$replication9.type) || SizeTypes["a" /* SizeTypes */].PIXEL;
+            newBlock.replication.verticalMargin = `${verticalMarginValue}${verticalMarginType}`;
+          }
         }
-        if (typeof rowGuids[row] === 'undefined') {
-          rowGuids[row] = [];
-        }
-        rowGuids[row].push(lastGuid);
+        const newGuid = me.getStore().add(newBlock);
+        rowGuids[row][col] = newGuid;
       });
       this.getStore().removeListener(listenerGuid);
       this.block.isLoading = false;
@@ -2447,8 +2449,8 @@ fontawesome_svg_core_index_es["c" /* library */].add(free_solid_svg_icons_index_
 }));
 // CONCATENATED MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=script&lang=ts
  /* harmony default export */ var components_PreviewBlockvue_type_script_lang_ts = (PreviewBlockvue_type_script_lang_ts); 
-// EXTERNAL MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=style&index=0&id=5e58ca58&prod&scoped=true&lang=css
-var PreviewBlockvue_type_style_index_0_id_5e58ca58_prod_scoped_true_lang_css = __webpack_require__("8cd1");
+// EXTERNAL MODULE: ./src/infrastructure/components/PreviewBlock.vue?vue&type=style&index=0&id=df1a4b2a&prod&scoped=true&lang=css
+var PreviewBlockvue_type_style_index_0_id_df1a4b2a_prod_scoped_true_lang_css = __webpack_require__("8f6d");
 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__("2877");
@@ -2464,11 +2466,11 @@ var componentNormalizer = __webpack_require__("2877");
 
 var component = Object(componentNormalizer["a" /* default */])(
   components_PreviewBlockvue_type_script_lang_ts,
-  PreviewBlockvue_type_template_id_5e58ca58_scoped_true_render,
-  PreviewBlockvue_type_template_id_5e58ca58_scoped_true_staticRenderFns,
+  PreviewBlockvue_type_template_id_df1a4b2a_scoped_true_render,
+  PreviewBlockvue_type_template_id_df1a4b2a_scoped_true_staticRenderFns,
   false,
   null,
-  "5e58ca58",
+  "df1a4b2a",
   null
   
 )
@@ -4500,17 +4502,6 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__8bbf__;
 
 /***/ }),
 
-/***/ "8cd1":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_5e58ca58_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("fae5");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_5e58ca58_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_5e58ca58_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
-
-
-/***/ }),
-
 /***/ "8e16":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4522,6 +4513,17 @@ var SetHelpers = __webpack_require__("cb27");
 module.exports = uncurryThisAccessor(SetHelpers.proto, 'size', 'get') || function (set) {
   return set.size;
 };
+
+
+/***/ }),
+
+/***/ "8f6d":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_df1a4b2a_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("f683");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_df1a4b2a_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PreviewBlock_vue_vue_type_style_index_0_id_df1a4b2a_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
 
 
 /***/ }),
@@ -19558,6 +19560,13 @@ var EventTypes;
 
 /***/ }),
 
+/***/ "f683":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "f772":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19572,13 +19581,6 @@ module.exports = function (key) {
   return keys[key] || (keys[key] = uid(key));
 };
 
-
-/***/ }),
-
-/***/ "fae5":
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
 
 /***/ }),
 
